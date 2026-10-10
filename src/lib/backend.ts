@@ -115,12 +115,38 @@ async function rawInsert(table: string, rows: object[]) {
   const { error } = await sb().from(table).insert(rows);
   if (error) throw error;
 }
-// Write now, or queue for later. Never both: a failure is queued and reported, not retried by the caller.
+// A Postgres error code means the database looked at the rows and said no (say, a question retired from the
+// catalogue). Sending them again won't change that. Connection, rollback and capacity classes are worth a retry.
+const rejected = (e: unknown) => {
+  const c = (e as { code?: unknown } | null)?.code;
+  return typeof c === 'string' && /^[0-9A-Z]{5}$/.test(c) && !/^(08|40|53|57)/.test(c);
+};
+// Send what the database will take. A rejected batch is retried row by row and only the rows it refuses are
+// dropped, so one bad row can't hold the rest back. Stops at the first network error: rows[0..done) are handled
+// (sent or dropped), the rest are untouched and still to send.
+type Sent = { done: number; sent: number; error?: unknown };
+async function send(table: string, rows: object[]): Promise<Sent> {
+  try { await rawInsert(table, rows); return { done: rows.length, sent: rows.length }; }
+  catch (e) {
+    if (!rejected(e)) return { done: 0, sent: 0, error: e };
+    if (rows.length === 1) { console.warn(`dropped a ${table} row the database refused`, e); return { done: 1, sent: 0 }; }
+  }
+  let sent = 0;
+  for (let i = 0; i < rows.length; i++) {
+    const r = await send(table, [rows[i]]);
+    if (r.error) return { done: i, sent, error: r.error };
+    sent += r.sent;
+  }
+  return { done: rows.length, sent };
+}
+// Write now, or queue what didn't go for later. Never both: a failure is queued and reported, not retried by the caller.
 async function insert(table: string, rows: object[]) {
   if (!rows.length || !currentUser) return;
   const tagged = rows.map(r => ({ ...r, user_id: currentUser }));
-  try { await rawInsert(table, tagged); }
-  catch (e) { store.set(PKEY, [...store.get<Pending[]>(PKEY, []), { user: currentUser, table, rows: tagged }]); throw e; }
+  const r = await send(table, tagged);
+  if (!r.error) return;
+  store.set(PKEY, [...store.get<Pending[]>(PKEY, []), { user: currentUser, table, rows: tagged.slice(r.done) }]);
+  throw r.error;
 }
 let flushing: Promise<number> | null = null;
 export function flushPending(): Promise<number> {
@@ -131,12 +157,17 @@ export function flushPending(): Promise<number> {
       const mine = store.get<Pending[]>(PKEY, []).filter(p => p.user === user);
       if (!mine.length) return 0;
       const done = new Set<string>();
+      const left: Pending[] = [];
       let sent = 0;
       for (const p of mine) {
-        try { await rawInsert(p.table, p.rows); sent += p.rows.length; done.add(JSON.stringify(p)); } catch { /* stays queued */ }
+        const r = await send(p.table, p.rows);
+        sent += r.sent;
+        if (!r.done) continue; // untouched, stays queued
+        done.add(JSON.stringify(p));
+        if (r.done < p.rows.length) left.push({ ...p, rows: p.rows.slice(r.done) });
       }
       // re-read: writes that failed while we were sending were queued meanwhile and must survive
-      store.set(PKEY, store.get<Pending[]>(PKEY, []).filter(p => !done.has(JSON.stringify(p))));
+      store.set(PKEY, [...store.get<Pending[]>(PKEY, []).filter(p => !done.has(JSON.stringify(p))), ...left]);
       return sent;
     } finally { flushing = null; }
   })());
@@ -279,36 +310,36 @@ export async function pickBackend(): Promise<Backend> {
 // starts for an account with no history (so a second person on a shared device doesn't absorb the first one's
 // records), and once started for an account it finishes for that account.
 const UKEY = 'kcbfbla:uploading';
+// accounts that already had history when this device's records were offered: don't ask the database again
+const SKEY = 'kcbfbla:upload-skip';
 export async function uploadLocal(b: Backend, id: string) {
   if (!hasLocalData()) { store.del(UKEY); return 0; }
   if (store.get<string | null>(UKEY, null) !== id) {
+    if (store.get<string[]>(SKEY, []).includes(id)) return 0;
     const mine = await b.logs(id);
-    if (mine.answers.length || mine.reviews.length || mine.papers.length) return 0;
+    if (mine.answers.length || mine.reviews.length || mine.papers.length) {
+      store.set(SKEY, [...store.get<string[]>(SKEY, []), id]);
+      return 0;
+    }
     store.set(UKEY, id);
   }
   currentUser = id;
   const tag = <T extends object>(rows: T[]) => rows.map(r => ({ ...r, user_id: id }));
   let moved = 0;
-  let d = readLocal();
-  if (d.answers.length) {
-    await rawInsert('fbla_answers', tag(d.answers.map(answerRow)));
-    moved += d.answers.length; d = readLocal(); writeLocal({ ...d, answers: [] });
-  }
-  d = readLocal();
-  if (d.reviews.length) {
-    await rawInsert('fbla_reviews', tag(d.reviews.map(reviewRow)));
-    moved += d.reviews.length; d = readLocal(); writeLocal({ ...d, reviews: [] });
-  }
-  d = readLocal();
-  if (d.papers.length) {
-    await rawInsert('fbla_papers', tag(d.papers.map(paperRow)));
-    d = readLocal(); writeLocal({ ...d, papers: [] });
-  }
-  d = readLocal();
-  if (d.words.length) {
-    await rawInsert('fbla_words', tag(d.words.map(w => ({ term: w.term, def: w.def, ref: w.ref }))));
-    d = readLocal(); writeLocal({ ...d, words: [] });
-  }
+  // each stage clears what it handled; a network error keeps the rest (and UKEY) so the next sign-in resumes
+  const stage = async <K extends 'answers' | 'reviews' | 'papers' | 'words'>(key: K, table: string, row: (x: LocalDB[K][number]) => object) => {
+    const list = readLocal()[key] as LocalDB[K][number][];
+    if (!list.length) return;
+    const r = await send(table, tag(list.map(row)));
+    const d = readLocal();
+    writeLocal({ ...d, [key]: (d[key] as unknown[]).slice(r.done) });
+    if (key === 'answers' || key === 'reviews') moved += r.sent;
+    if (r.error) throw r.error;
+  };
+  await stage('answers', 'fbla_answers', answerRow);
+  await stage('reviews', 'fbla_reviews', reviewRow);
+  await stage('papers', 'fbla_papers', paperRow);
+  await stage('words', 'fbla_words', w => ({ term: w.term, def: w.def, ref: w.ref }));
   store.del(UKEY);
   return moved;
 }

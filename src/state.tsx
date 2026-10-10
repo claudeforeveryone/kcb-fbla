@@ -175,6 +175,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // from the answer log a beat after answering stops (members can't write those columns themselves)
   const syncTimer = useRef<number | undefined>(undefined);
   const syncedAt = useRef<number>(-1);
+  // a failed recount tries again a little later instead of waiting for the next answer
+  const [syncTry, setSyncTry] = useState(0);
   // queued answers that finally went up: recount on the server
   const [flushed, setFlushed] = useState(0);
   useEffect(() => {
@@ -209,9 +211,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           setMe((m) => (m ? { ...m, ...stats } : m));
           setProfiles((ps) => ps.map((p) => (p.id === me.id ? { ...p, ...stats } : p)));
         })
-        .catch(() => 0);
+        .catch(() => {
+          if (syncedAt.current !== n) return;
+          syncedAt.current = -2;
+          window.setTimeout(() => setSyncTry((t) => t + 1), 30000);
+        });
     }, 1500);
-  }, [d, backend, me, phase, logs.answers]);
+  }, [d, backend, me, phase, logs.answers, syncTry]);
 
   const recordAnswers = useCallback(
     (list: Graded[], mode: string) => {
