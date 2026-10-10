@@ -1,19 +1,7 @@
 // Admin > Members: search, roles, remove, ban/unban, add by username, invites.
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Ban,
-  BarChart3,
-  ChevronDown,
-  GraduationCap,
-  Search,
-  ShieldCheck,
-  ShieldOff,
-  User,
-  UserMinus,
-  UserPlus,
-  Users,
-} from 'lucide-react';
+import { ChevronDown, Search } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -137,20 +125,19 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
       .filter((r) => r !== m.role && (r !== 'executive' || myRole === 'president'))
       .map((r) => ({
         label: r === 'member' ? 'Make member' : `Make ${ROLE_LABELS[r].toLowerCase()}`,
-        icon: r === 'executive' ? <ShieldCheck className="size-4" /> : r === 'trainer' ? <GraduationCap className="size-4" /> : <User className="size-4" />,
         hint: r === 'member' && m.role === 'trainer' ? 'Clears event assignments' : undefined,
         onSelect: () => void changeRole(m, r),
       }));
     return [
-      { label: 'View stats', icon: <BarChart3 className="size-4" />, to: `/chapter/member/${m.user_id}` },
+      { label: 'View stats', to: `/chapter/member/${m.user_id}` },
       ...(canManage(m)
         ? ([
             { type: 'separator' },
             { type: 'label', label: 'Role' },
             ...roleItems,
             { type: 'separator' },
-            { label: 'Remove from chapter', icon: <UserMinus className="size-4" />, danger: true, onSelect: () => setRemoveT(m) },
-            { label: 'Ban', icon: <Ban className="size-4" />, danger: true, onSelect: () => setBanT(m) },
+            { label: 'Remove from chapter', danger: true, onSelect: () => setRemoveT(m) },
+            { label: 'Ban', danger: true, onSelect: () => setBanT(m) },
           ] as DropdownItem[])
         : []),
     ];
@@ -165,11 +152,10 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <CardHeader
               className="mb-0"
-              icon={<Users className="size-5" />}
               title="Members"
               subtitle={members ? `${members.length} in ${chapterName}` : undefined}
             />
-            <Button variant="primary" leftIcon={<UserPlus className="size-4" />} onClick={() => setAddOpen(true)}>
+            <Button variant="primary" onClick={() => setAddOpen(true)}>
               Add by username
             </Button>
           </div>
@@ -182,7 +168,7 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search name or @username"
                 aria-label="Search members"
-                className="h-10 w-full rounded-[10px] border border-line-strong bg-surface pl-9 pr-3 text-[0.9375rem] outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/15"
+                className="h-10 w-full rounded-[4px] border border-line-strong bg-surface pl-9 pr-3 text-[0.9375rem] outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/15"
               />
             </div>
             <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1 md:pb-0">
@@ -204,7 +190,6 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
         ) : rows.length === 0 ? (
           <EmptyState
             compact
-            icon={<Search />}
             title="No one matches"
             description={q ? `Nobody called "${q}" in this filter.` : 'No members with this role yet.'}
             action={
@@ -248,7 +233,7 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
                     )}
                   </TD>
                   <TD align="right">
-                    <EloBadge elo={m.profile.elo} size="sm" showTier={false} />
+                    <EloBadge elo={m.profile.elo} size="sm" />
                   </TD>
                   <TD className="max-md:hidden text-sm text-muted">{relativeDay(m.profile.last_active_date)}</TD>
                   <TD className="max-lg:hidden text-sm text-muted">
@@ -350,7 +335,7 @@ function RolePicker({ m, myRole, onPick }: { m: RosterMember; myRole: ChapterRol
       trigger={({ open: _open, ...p }) => (
         <button
           {...p}
-          className="inline-flex items-center gap-1 rounded-full transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+          className="inline-flex items-center gap-1 rounded-[2px] transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
           aria-label={`Change role for ${m.profile.display_name}, currently ${ROLE_LABELS[m.role]}`}
         >
           <RoleBadge role={m.role} />
@@ -359,7 +344,6 @@ function RolePicker({ m, myRole, onPick }: { m: RosterMember; myRole: ChapterRol
       )}
       items={options.map((r) => ({
         label: ROLE_LABELS[r],
-        icon: r === 'executive' ? <ShieldCheck className="size-4" /> : r === 'trainer' ? <GraduationCap className="size-4" /> : <User className="size-4" />,
         hint:
           r === m.role
             ? 'Current'
@@ -381,7 +365,6 @@ function BansCard({ bans, loading, onUnban }: { bans: BanWithProfile[] | undefin
   return (
     <Card as="section">
       <CardHeader
-        icon={<Ban className="size-5" />}
         title="Banned players"
         subtitle="Banned players are removed and can't rejoin with the code or a link."
         action={bans && bans.length > 0 ? <Badge tone="red">{bans.length}</Badge> : undefined}
@@ -407,7 +390,7 @@ function BansCard({ bans, loading, onUnban }: { bans: BanWithProfile[] | undefin
                   </div>
                 </div>
               </div>
-              <Button size="sm" variant="secondary" leftIcon={<ShieldOff className="size-4" />} onClick={() => onUnban(b)}>
+              <Button size="sm" variant="secondary" onClick={() => onUnban(b)}>
                 Unban
               </Button>
             </li>
@@ -449,7 +432,7 @@ function BanModal({ target, onClose, onBan }: { target: RosterMember | null; onC
           <Button variant="ghost" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
-          <Button variant="accent" type="submit" form="ban-form" loading={busy} leftIcon={<Ban className="size-4" />}>
+          <Button variant="accent" type="submit" form="ban-form" loading={busy}>
             Ban member
           </Button>
         </>
@@ -521,7 +504,7 @@ function AddMemberModal({ open, onClose, chapterId, onAdded }: { open: boolean; 
   const exact = q.trim().replace(/^@/, '').toLowerCase();
 
   return (
-    <Modal open={open} onClose={onClose} title="Add a member" description="Search by username or name. Players must already have a KCB FBLA account and not be in another chapter." size="md">
+    <Modal open={open} onClose={onClose} title="Add a member" description="Search by username or name. Players must already have a FBLC account and not be in another chapter." size="md">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -545,7 +528,7 @@ function AddMemberModal({ open, onClose, chapterId, onAdded }: { open: boolean; 
             <Skeleton className="h-12 w-full" />
           </div>
         ) : results.length > 0 ? (
-          <ul className="divide-y divide-line rounded-lg border border-line">
+          <ul className="divide-y divide-line rounded-[2px] border border-line">
             {results.map((p) => {
               const taken = p.chapter_id != null;
               return (
@@ -563,7 +546,7 @@ function AddMemberModal({ open, onClose, chapterId, onAdded }: { open: boolean; 
                   ) : taken ? (
                     <Badge>In a chapter</Badge>
                   ) : (
-                    <Button size="sm" loading={adding === p.username} onClick={() => void add(p.username)} leftIcon={<UserPlus className="size-4" />}>
+                    <Button size="sm" loading={adding === p.username} onClick={() => void add(p.username)}>
                       Add
                     </Button>
                   )}

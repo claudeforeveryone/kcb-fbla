@@ -31,13 +31,13 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-xs font-semibold ring-1 ring-inset',
+        'inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-[2px] px-2 text-xs font-semibold ring-1 ring-inset',
         isSolid ? solid[tone] : soft[tone],
         className,
       )}
       {...rest}
     >
-      {dot && <span className="size-1.5 rounded-full bg-current" aria-hidden />}
+      {dot && <span className="size-1.5 bg-current" aria-hidden />}
       {children}
     </span>
   );

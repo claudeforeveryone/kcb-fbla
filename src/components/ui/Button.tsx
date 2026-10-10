@@ -7,31 +7,31 @@ export type ButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost' | 'dang
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'icon' | 'icon-sm';
 
 const base =
-  'relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-[10px] font-display font-semibold tracking-[-0.005em] ' +
-  'transition-[background-color,color,box-shadow,transform,border-color] duration-200 ease-out ' +
+  'relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-[2px] font-display font-semibold tracking-[-0.005em] ' +
+  'transition-[background-color,color,transform,border-color] duration-200 ease-out ' +
   'active:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50';
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'bg-navy text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.08),0_1px_2px_rgb(0_30_96/0.25)] hover:bg-navy-2 dark:bg-blue dark:hover:bg-[#4b7cc2]',
+    'bg-navy text-white hover:bg-navy-2 dark:bg-blue dark:hover:bg-[#4b7cc2]',
   accent:
-    'bg-red text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.12),0_1px_2px_rgb(191_13_62/0.3)] hover:bg-red-2',
+    'bg-red text-white hover:bg-red-2',
   secondary:
     'bg-blue/10 text-blue hover:bg-blue/16 dark:bg-blue/20 dark:text-link dark:hover:bg-blue/28',
   outline:
     'border border-line-strong bg-surface text-ink hover:border-blue/50 hover:bg-surface-2',
   ghost: 'text-ink hover:bg-surface-2',
   danger: 'bg-danger/10 text-danger hover:bg-danger hover:text-white',
-  inverse: 'bg-white text-navy hover:bg-white/90 shadow-[0_1px_2px_rgb(0_0_0/0.2)]',
+  inverse: 'bg-white text-navy hover:bg-white/90',
 };
 
 const sizes: Record<ButtonSize, string> = {
-  xs: 'h-7 px-2.5 text-xs rounded-lg',
+  xs: 'h-7 px-2.5 text-xs',
   sm: 'h-8 px-3 text-sm',
   md: 'h-10 px-4 text-[0.9375rem]',
   lg: 'h-12 px-6 text-base',
   icon: 'size-10',
-  'icon-sm': 'size-8 rounded-lg',
+  'icon-sm': 'size-8',
 };
 
 export function buttonClasses(

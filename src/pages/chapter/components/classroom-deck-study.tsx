@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Check, PartyPopper, RotateCcw, Shuffle, Undo2, X } from 'lucide-react';
+import { Check, RotateCcw, Shuffle, Undo2, X } from 'lucide-react';
 import { Button, Kbd, Modal, ProgressBar, ProgressRing, cn, errorMessage, useToast } from '../../../components/ui';
 import type { DeckCard } from '../../../lib/types';
 import { completeDeckAssignment, type ClassAssignment, type ClassDeck } from '../../../api/classroom';
@@ -150,12 +150,12 @@ export function DeckStudy({
                 flipped && '[transform:rotateY(180deg)]',
               )}
             >
-              <div className="facets absolute inset-0 flex flex-col items-center justify-center rounded-2xl p-6 text-center text-white shadow-lift [backface-visibility:hidden]">
+              <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[2px] border-b-4 border-red bg-navy p-6 text-center text-white [backface-visibility:hidden]">
                 <span className="absolute left-5 top-4 text-[11px] font-bold uppercase tracking-[0.16em] text-white/60">Term</span>
                 <span className="font-display text-2xl font-bold leading-tight sm:text-3xl">{card.term}</span>
                 <span className="absolute bottom-4 text-xs text-white/60">Tap or press Space to flip</span>
               </div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-2xl border border-line bg-surface p-6 text-center shadow-lift [backface-visibility:hidden] [transform:rotateY(180deg)]">
+              <div className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-[2px] border border-line bg-surface p-6 text-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
                 <span className="absolute left-5 top-4 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">Definition</span>
                 <span className="text-lg leading-relaxed text-ink sm:text-xl">{card.def}</span>
               </div>
@@ -187,10 +187,10 @@ export function DeckStudy({
               <span className="text-base text-muted">/{order.length}</span>
             </span>
           </ProgressRing>
-          <h3 className="mt-4 flex items-center gap-2 text-xl font-bold">
+          <h3 className="mt-4 text-xl font-bold">
             {knownCount === order.length ? (
               <>
-                <PartyPopper className="size-5 text-red" /> Every card, nailed
+                Every card, nailed
               </>
             ) : (
               'Round complete'

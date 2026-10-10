@@ -1,4 +1,4 @@
-import { useId, useMemo, useState, type PointerEvent, type ReactNode } from 'react';
+import { useMemo, useState, type PointerEvent, type ReactNode } from 'react';
 import { chartColor, fmtNum, niceTicks, toX, useWidth } from './shared';
 
 export type LinePoint = { x: number | string | Date; y: number };
@@ -38,7 +38,6 @@ export function LineChart({
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
-  const gid = useId().replace(/:/g, '');
 
   const prepared = useMemo(
     () =>
@@ -67,7 +66,7 @@ export function LineChart({
   if (!all.length) {
     return (
       <div ref={ref} className={className} style={{ height }} role="img" aria-label={`${title}: no data`}>
-        <div className="grid h-full place-items-center rounded-lg border border-dashed border-line text-sm text-muted">
+        <div className="grid h-full place-items-center rounded-[4px] border border-dashed border-line text-sm text-muted">
           {emptyLabel}
         </div>
       </div>
@@ -133,12 +132,6 @@ export function LineChart({
         className="block touch-pan-y select-none overflow-visible"
       >
         <title>{title}</title>
-        <defs>
-          <linearGradient id={`lc-${gid}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor={primary.color} stopOpacity="0.22" />
-            <stop offset="1" stopColor={primary.color} stopOpacity="0" />
-          </linearGradient>
-        </defs>
         {ticks.map((t) => (
           <g key={t}>
             <line x1={pad.l} x2={W - pad.r} y1={sy(t)} y2={sy(t)} stroke="var(--line)" strokeDasharray={t === y0 ? undefined : '3 4'} />
@@ -164,7 +157,8 @@ export function LineChart({
         {area && primary.pts.length > 1 && (
           <path
             d={`M${sx(primary.pts[0].x)},${sy(y0)} ${primary.pts.map((p) => `L${sx(p.x)},${sy(p.y)}`).join(' ')} L${sx(last.x)},${sy(y0)}Z`}
-            fill={`url(#lc-${gid})`}
+            fill={primary.color}
+            fillOpacity={0.08}
           />
         )}
         {prepared.map((s) => (
@@ -194,7 +188,7 @@ export function LineChart({
       {hp && (
         <div className="pointer-events-none relative h-0">
           <div
-            className="absolute bottom-[calc(100%+var(--h))] z-10 -translate-x-1/2 whitespace-nowrap rounded-lg bg-[#0b1638] px-2.5 py-1.5 text-xs text-white shadow-pop"
+            className="absolute bottom-[calc(100%+var(--h))] z-10 -translate-x-1/2 whitespace-nowrap rounded-[2px] bg-[#0b1638] px-2.5 py-1.5 text-xs text-white"
             style={{ left: Math.min(W - 60, Math.max(60, sx(hp.x))), ['--h' as string]: `${H - sy(hp.y) + 12}px` }}
           >
             <div className="text-white/65">{fx(hp.x)}</div>
@@ -202,7 +196,7 @@ export function LineChart({
               const p = s.pts.reduce((b, q) => (Math.abs(q.x - hp.x) < Math.abs(b.x - hp.x) ? q : b), s.pts[0]);
               return (
                 <div key={s.name} className="tabular flex items-center gap-1.5 font-semibold">
-                  <span className="size-2 rounded-full" style={{ background: s.color }} />
+                  <span className="size-2" style={{ background: s.color }} />
                   {prepared.length > 1 && <span className="font-normal text-white/75">{s.name}</span>}
                   {formatY(p.y)}
                 </div>
@@ -215,7 +209,7 @@ export function LineChart({
         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
           {prepared.map((s) => (
             <span key={s.name} className="inline-flex items-center gap-1.5">
-              <span className="h-0.5 w-3.5 rounded-full" style={{ background: s.color }} />
+              <span className="h-0.5 w-3.5" style={{ background: s.color }} />
               {s.name}
             </span>
           ))}

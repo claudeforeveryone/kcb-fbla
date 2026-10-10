@@ -1,7 +1,7 @@
 // Shared Arena UI: player lines, duel cards, outcome badges, the players cache.
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, Clock, Crown, Hourglass, Play, RotateCcw, Shuffle, Swords, X } from 'lucide-react';
+import { Check, RotateCcw, X } from 'lucide-react';
 import { Avatar, Badge, Button, ButtonLink, EloBadge, cn, formatUntil } from '../../components/ui';
 import { eventInfo, eventName, type ProfileCard } from '../../lib/types';
 import {
@@ -77,7 +77,7 @@ export function PlayerLine({
     return (
       <div className={cn('flex min-w-0 items-center gap-3', className)}>
         <span className={cn('shrink-0 animate-pulse rounded-full bg-surface-3', size === 'sm' ? 'size-8' : 'size-10')} />
-        <span className="h-3.5 w-28 animate-pulse rounded bg-surface-3" />
+        <span className="h-3.5 w-28 animate-pulse rounded-[2px] bg-surface-3" />
       </div>
     );
   const name = (
@@ -120,8 +120,7 @@ export function OutcomeBadge({ outcome, className }: { outcome: DuelOutcome; cla
 
 export function EventChip({ event }: { event: string }) {
   return (
-    <span className="inline-flex h-6 items-center gap-1 rounded-md bg-surface-2 px-2 text-[11px] font-bold tracking-wide text-muted ring-1 ring-inset ring-line">
-      {event === 'mixed' && <Shuffle className="size-3" aria-hidden />}
+    <span className="inline-flex h-6 items-center rounded-[2px] bg-surface-2 px-2 text-[11px] font-bold uppercase tracking-wide text-muted ring-1 ring-inset ring-line">
       {arenaEventShort(event)}
     </span>
   );
@@ -193,8 +192,7 @@ export function DuelCard({
   const meta = (
     <div className="flex flex-wrap items-center gap-1.5">
       <EventChip event={duel.event} />
-      <span className="inline-flex h-6 items-center gap-1 rounded-md px-1.5 text-[11px] font-semibold text-muted">
-        <Clock className="size-3" aria-hidden />
+      <span className="inline-flex h-6 items-center px-1.5 text-[11px] font-semibold text-muted">
         {clockLabel(duel.time_limit_sec)}
       </span>
     </div>
@@ -205,7 +203,7 @@ export function DuelCard({
   let accent = 'border-line';
 
   if (bucket === 'incoming') {
-    accent = 'border-red/40 ring-1 ring-red/15';
+    accent = 'border-line border-l-4 border-l-red';
     status = (
       <span className="text-xs font-semibold text-red dark:text-danger">
         Challenged you · expires in {formatUntil(duel.expires_at, now)}
@@ -237,8 +235,8 @@ export function DuelCard({
     );
   } else if (bucket === 'outgoing') {
     status = (
-      <span className="inline-flex items-center gap-1 text-xs text-muted">
-        <Hourglass className="size-3" aria-hidden /> Waiting for a reply · {formatUntil(duel.expires_at, now)} left
+      <span className="text-xs text-muted">
+        Waiting for a reply · {formatUntil(duel.expires_at, now)} left
       </span>
     );
     action = (
@@ -247,14 +245,14 @@ export function DuelCard({
       </Button>
     );
   } else if (bucket === 'your-move') {
-    accent = 'border-blue/40 ring-1 ring-blue/15';
+    accent = 'border-line border-l-4 border-l-blue';
     status = (
       <span className="text-xs font-semibold text-blue dark:text-link">
         {side.theyPlayed ? 'They have played. Your move.' : 'Accepted. Your move.'} · {formatUntil(duel.expires_at, now)} left
       </span>
     );
     action = (
-      <ButtonLink to={`/arena/${duel.id}`} size="sm" variant="primary" leftIcon={<Play className="size-4" />}>
+      <ButtonLink to={`/arena/${duel.id}`} size="sm" variant="primary">
         Play
       </ButtonLink>
     );
@@ -322,14 +320,14 @@ export function DuelCard({
   return (
     <div
       className={cn(
-        'rounded-[12px] border bg-surface p-4 shadow-card transition-[box-shadow,border-color] duration-200 hover:shadow-lift',
+        'rounded-[2px] border bg-surface p-4 transition-colors duration-200 hover:border-navy/40',
         accent,
         fresh && 'animate-pop',
       )}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="flex min-w-0 flex-1 items-center gap-3">
-          <PlayerLine player={opp} sub={opp && <EloBadge elo={opp.elo} size="sm" showTier={false} className="h-5" />} />
+          <PlayerLine player={opp} sub={opp && <EloBadge elo={opp.elo} size="sm" className="h-5" />} />
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2 sm:justify-end">
           {meta}
@@ -373,8 +371,8 @@ export function VersusBanner({
         <div className="relative">
           <Avatar src={p?.avatar_url} name={p?.display_name || p?.username} size="xl" ring className="max-sm:size-14 max-sm:text-lg" />
           {won && (
-            <span className="exam-pop absolute -top-3 left-1/2 grid size-8 -translate-x-1/2 place-items-center rounded-full bg-warning text-white shadow-lg ring-2 ring-white">
-              <Crown className="size-4" aria-label="Winner" />
+            <span className="exam-pop absolute -top-3 left-1/2 -translate-x-1/2 rounded-[2px] bg-red px-1.5 py-0.5 font-display text-[10px] font-black uppercase tracking-widest text-white">
+              Winner
             </span>
           )}
         </div>
@@ -387,8 +385,9 @@ export function VersusBanner({
           <div className={cn('flex flex-col items-center', align === 'l' ? 'sm:items-center' : 'sm:items-center')}>
             <span
               className={cn(
-                'tabular font-display text-5xl font-black leading-none sm:text-6xl',
-                score == null ? 'text-white/35' : won ? 'text-white' : 'text-white/85',
+                'tabular min-w-[4.5rem] border-b-4 px-3 py-2 text-center font-display text-5xl font-black leading-none sm:min-w-24 sm:text-6xl',
+                won ? 'border-red bg-white text-navy' : 'border-transparent bg-navy-2 text-white',
+                score == null && 'text-white/35',
               )}
             >
               {score ?? '?'}
@@ -403,10 +402,10 @@ export function VersusBanner({
     <div className="flex items-start gap-2 sm:gap-6">
       {side(left, leftScore, leftMs, 'l')}
       <div className="flex shrink-0 flex-col items-center justify-center gap-2 self-center pt-2">
-        <span className="grid size-11 place-items-center rounded-full bg-red font-display text-sm font-black text-white shadow-[0_0_0_6px_rgb(191_13_62/0.25)] sm:size-14 sm:text-base">
-          <Swords className="size-5 sm:size-6" aria-hidden />
-          <span className="sr-only">versus</span>
+        <span className="grid h-10 w-12 place-items-center rounded-none bg-red font-display text-base font-black tracking-wider text-white sm:h-12 sm:w-16 sm:text-xl">
+          VS
         </span>
+
         {center}
       </div>
       {side(right, rightScore, rightMs, 'r')}

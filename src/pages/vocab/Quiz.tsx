@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
-import { ArrowRight, Check, ListChecks, Play, RefreshCw, RotateCcw, X } from 'lucide-react';
+import { ArrowRight, Check, Play, RefreshCw, RotateCcw, X } from 'lucide-react';
 import { Button, Kbd, ProgressRing, SegmentedControl, cn } from '../../components/ui';
 import type { StudyDeck, VocabTerm } from '../../api/vocab';
 import { distractors, shuffled } from './leitner';
 import { recordReview } from './store';
-import { Burst, SessionPanel, useHotkeys } from './parts';
+import { SessionPanel, useHotkeys } from './parts';
 
 type Direction = 'term' | 'def';
 type Q = { term: VocabTerm; options: VocabTerm[] };
@@ -21,7 +21,6 @@ export function Quiz({ deck }: { deck: StudyDeck }) {
     const sizes = [10, 20, 30].filter((n) => n <= deck.terms.length);
     return (
       <SessionPanel
-        icon={<ListChecks />}
         eyebrow="Quiz"
         title="Test yourself"
         actions={
@@ -132,7 +131,6 @@ function Run({
     const pct = Math.round((right / answers.length) * 100);
     return (
       <div className="relative grid gap-5">
-        {pct === 100 && <Burst />}
         <SessionPanel
           eyebrow="Quiz complete"
           title={pct === 100 ? 'Perfect score' : pct >= 80 ? 'Strong work' : pct >= 60 ? 'Getting there' : 'Keep at it'}
@@ -166,7 +164,7 @@ function Run({
         {missed.length > 0 && (
           <div className="mx-auto w-full max-w-2xl">
             <h3 className="mb-2 text-sm font-bold uppercase tracking-[0.12em] text-muted">Review what you missed</h3>
-            <ul className="divide-y divide-line overflow-hidden rounded-[12px] border border-line bg-surface">
+            <ul className="divide-y divide-line overflow-hidden rounded-[4px] border border-line bg-surface">
               {missed.map((m) => (
                 <li key={m.q.term.id} className="p-4">
                   <div className="font-display font-bold text-heading">{m.q.term.term}</div>
@@ -200,7 +198,7 @@ function Run({
             <span
               key={k}
               className={cn(
-                'h-1.5 flex-1 rounded-full transition-colors duration-200',
+                'h-1 flex-1 rounded-none transition-colors duration-200',
                 k < answers.length ? (answers[k].correct ? 'bg-success' : 'bg-red') : k === i ? 'bg-blue/50' : 'bg-surface-3',
               )}
             />
@@ -212,7 +210,7 @@ function Run({
         </Button>
       </div>
 
-      <div key={i} className="animate-slide-in rounded-[18px] border border-line bg-surface p-5 shadow-card sm:p-7">
+      <div key={i} className="animate-slide-in rounded-[4px] border border-line bg-surface p-5 sm:p-7">
         <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
           {dir === 'term' ? 'Which definition matches?' : 'Which term is this?'}
         </span>
@@ -232,9 +230,9 @@ function Run({
                 disabled={picked !== null}
                 onClick={() => choose(idx)}
                 className={cn(
-                  'flex w-full items-start gap-3 rounded-xl border px-3.5 py-3 text-left leading-snug transition-[border-color,background-color,opacity,transform] duration-150',
+                  'flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left leading-snug transition-[border-color,background-color,opacity] duration-150',
                   dir === 'def' ? 'font-display font-semibold text-heading' : 'text-[0.9375rem]',
-                  state === 'idle' && 'border-line-strong bg-surface hover:-translate-y-px hover:border-blue/60 hover:bg-blue/5',
+                  state === 'idle' && 'border-line-strong bg-surface hover:border-blue/60 hover:bg-surface-2',
                   state === 'right' && 'border-success bg-success/10',
                   state === 'wrong' && 'border-red bg-red/8 [animation:vocab-shake_320ms_ease-in-out]',
                   state === 'dim' && 'border-line opacity-55',
@@ -242,7 +240,7 @@ function Run({
               >
                 <span
                   className={cn(
-                    'tabular mt-px grid size-6 shrink-0 place-items-center rounded-md font-sans text-xs font-bold',
+                    'tabular mt-px grid size-6 shrink-0 place-items-center rounded-[2px] font-sans text-xs font-bold',
                     state === 'right' ? 'bg-success text-white' : state === 'wrong' ? 'bg-red text-white' : 'bg-surface-2 text-muted',
                   )}
                 >

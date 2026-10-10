@@ -1,20 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import {
-  ArrowRight,
-  CalendarDays,
-  CheckCircle2,
-  ClipboardList,
-  Crosshair,
-  FileText,
-  Flame,
-  Infinity as InfinityIcon,
-  ListRestart,
-  Target,
-  Timer,
-  Users,
-  Zap,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import {
   Badge,
   ButtonLink,
@@ -126,10 +112,10 @@ export default function PlayPage() {
         actions={<EloBadge elo={profile.elo} size="lg" onDark />}
       >
         <div className="flex flex-wrap gap-2">
-          <HeaderChip icon={<Target className="size-3.5" />} label="Answered" value={answered.toLocaleString()} />
-          <HeaderChip icon={<CheckCircle2 className="size-3.5" />} label="Accuracy" value={answered ? pctText(acc) : '--'} />
-          <HeaderChip icon={<Flame className="size-3.5" />} label="Day streak" value={String(profile.current_streak ?? 0)} />
-          <HeaderChip icon={<Zap className="size-3.5" />} label="Best answer streak" value={String(profile.best_answer_streak ?? 0)} />
+          <HeaderChip label="Answered" value={answered.toLocaleString()} />
+          <HeaderChip label="Accuracy" value={answered ? pctText(acc) : '--'} />
+          <HeaderChip label="Day streak" value={String(profile.current_streak ?? 0)} />
+          <HeaderChip label="Best answer streak" value={String(profile.best_answer_streak ?? 0)} />
         </div>
       </PageHeader>
 
@@ -178,7 +164,7 @@ export default function PlayPage() {
                     const seen = seenByEvent.get(e.slug)?.size ?? 0;
                     const mine = profile.main_event === e.slug;
                     return (
-                      <Link key={e.slug} to={`/play/${e.slug}`} className="group block rounded-[12px] focus-visible:outline-offset-4">
+                      <Link key={e.slug} to={`/play/${e.slug}`} className="group block rounded-[4px] focus-visible:outline-offset-4">
                         <Card interactive className={cn('flex h-full flex-col p-4', mine && 'border-red/40')}>
                           <div className="flex items-start gap-3">
                             <div className="min-w-0 flex-1">
@@ -207,9 +193,9 @@ export default function PlayPage() {
                                 {seen}/{t?.questions ?? 100} seen
                               </span>
                             </div>
-                            <div className="h-1.5 overflow-hidden rounded-full bg-surface-3">
+                            <div className="h-1 overflow-hidden rounded-none bg-surface-3">
                               <div
-                                className="h-full rounded-full bg-blue transition-[width] duration-500 group-hover:bg-navy dark:group-hover:bg-link"
+                                className="h-full bg-blue transition-[width] duration-500 group-hover:bg-navy dark:group-hover:bg-link"
                                 style={{ width: `${(seen / (t?.questions || 100)) * 100}%` }}
                               />
                             </div>
@@ -237,7 +223,6 @@ export default function PlayPage() {
               ) : (
                 <EmptyState
                   compact
-                  icon={<Zap />}
                   title="No attempts yet"
                   description="Your first Quick 10 takes about five minutes. Every answer moves your Elo."
                   action={
@@ -276,10 +261,9 @@ export default function PlayPage() {
   );
 }
 
-function HeaderChip({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
+function HeaderChip({ label, value }: { label: string; value: string }) {
   return (
-    <span className="inline-flex h-9 items-center gap-2 rounded-full bg-white/10 px-3.5 text-sm text-white ring-1 ring-inset ring-white/15">
-      <span className="text-white/70">{icon}</span>
+    <span className="inline-flex h-9 items-center gap-2 rounded-[2px] border border-white/20 px-3 text-sm text-white">
       <span className="text-white/70">{label}</span>
       <span className="tabular font-display font-bold">{value}</span>
     </span>
@@ -291,30 +275,18 @@ function DailyCard({ history }: { history: PlayHistory }) {
   const streak = dailyStreak(history);
   const until = useUntilReset();
   return (
-    <div className="relative mb-8 overflow-hidden rounded-[14px] border border-line bg-surface shadow-card">
-      <div className="absolute inset-y-0 left-0 w-1.5 bg-red" aria-hidden />
-      <div
-        className="pointer-events-none absolute -right-10 -top-16 size-56 rotate-12 rounded-[40px] bg-gradient-to-br from-blue/15 to-transparent"
-        aria-hidden
-      />
-      <div className="relative flex flex-col gap-5 p-5 pl-7 md:flex-row md:items-center md:p-6 md:pl-8">
-        <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-red text-white shadow-[0_8px_20px_-8px_rgb(191_13_62/0.7)]">
-          <CalendarDays className="size-7" />
-        </span>
+    <div className="relative mb-8 overflow-hidden rounded-[4px] border border-line bg-surface">
+      <div className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />
+      <div className="flex flex-col gap-4 p-5 pl-6 md:flex-row md:items-center md:gap-6 md:p-6 md:pl-7">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-xl font-extrabold">Daily challenge</h2>
-            {streak > 1 && (
-              <Badge tone="warning">
-                <Flame className="size-3" /> {streak}-day daily streak
-              </Badge>
-            )}
-            {done && (
-              <Badge tone="success">
-                <CheckCircle2 className="size-3" /> Done today
-              </Badge>
-            )}
+            <span className="font-display text-[11px] font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
+              {DAILY_SIZE} questions · same for everyone
+            </span>
+            {streak > 1 && <Badge tone="warning">{streak}-day daily streak</Badge>}
+            {done && <Badge tone="success">Done today</Badge>}
           </div>
+          <h2 className="mt-1 text-xl font-extrabold">Daily challenge</h2>
           <p className="mt-1 text-sm text-muted">
             {done ? (
               <>
@@ -369,26 +341,23 @@ function ModeGrid({
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       <ModeCard
-        icon={<Zap />}
-        tone="blue"
+        accent="blue"
         title="Quick 10"
         text="Ten questions, new ones first. The fastest way to keep your streak alive."
-        meta="About 5 minutes"
+        meta="10 questions · about 5 min"
         to={runHref({ mode: 'quick', event: ev })}
         cta="Play"
       />
       <ModeCard
-        icon={<InfinityIcon />}
-        tone="red"
+        accent="red"
         title="Endless"
         text="Keep answering until your third miss. How long can your run go?"
-        meta={best ? `Best run: ${best.correct}` : 'No run yet'}
+        meta={best ? `Best run ${best.correct}` : 'No run yet'}
         to={runHref({ mode: 'endless', event: ev })}
         cta="Start a run"
       />
       <ModeCard
-        icon={<Crosshair />}
-        tone="warning"
+        accent="red"
         title="Weak spots"
         text="Your misses plus your lowest-scoring competency areas, in one set."
         meta={misses ? `${misses} open ${misses === 1 ? 'miss' : 'misses'}` : history.log.length ? 'No open misses' : 'Needs some history'}
@@ -397,34 +366,31 @@ function ModeGrid({
         extra={
           misses > 0 ? (
             <Link to={runHref({ redo: 'wrong', event: ev })} className="link inline-flex items-center gap-1 text-sm">
-              <ListRestart className="size-3.5" /> Redo just the misses
+              Redo just the misses <ArrowRight className="size-3.5" />
             </Link>
           ) : null
         }
       />
       <ModeCard
-        icon={<Target />}
-        tone="navy"
+        accent="navy"
         title="Area drill"
         text="Pick one competency area and drill ten questions from it."
-        meta={ev ? eventName(ev) : 'Choose an event'}
+        meta={ev ? `10 questions · ${eventName(ev)}` : '10 questions · choose an event'}
         onClick={onArea}
         cta="Pick an area"
       />
       <ModeCard
-        icon={<FileText />}
-        tone="navy"
+        accent="navy"
         title="Mock exam"
         text="100 questions in 50 minutes, weighted like the real test. Results at the end."
-        meta={ev ? eventName(ev) : 'Choose an event'}
+        meta={ev ? `100 questions · ${eventName(ev)}` : '100 questions · 50 min'}
         onClick={onMock}
         cta="Set it up"
-        badge={<Badge tone="navy"><Timer className="size-3" /> Official format</Badge>}
+        badge={<Badge tone="navy">Official format</Badge>}
       />
       {assignments ? (
         <ModeCard
-          icon={<ClipboardList />}
-          tone="success"
+          accent="blue"
           title="Assigned"
           text="Tests and question sets your chapter leaders assigned to you."
           meta={open ? `${open} to do` : assignments.length ? 'All caught up' : 'Nothing assigned yet'}
@@ -434,8 +400,7 @@ function ModeGrid({
         />
       ) : (
         <ModeCard
-          icon={<Users />}
-          tone="success"
+          accent="blue"
           title="Assigned"
           text="Join your school's chapter to get tests and question sets from your leaders."
           meta="Not in a chapter"
@@ -447,17 +412,14 @@ function ModeGrid({
   );
 }
 
-const TONES = {
-  blue: 'bg-blue/12 text-blue dark:text-link',
-  red: 'bg-red/10 text-red dark:text-danger',
-  warning: 'bg-warning/15 text-[#8a5f00] dark:text-warning',
-  navy: 'bg-navy/8 text-navy dark:bg-blue/20 dark:text-link',
-  success: 'bg-success/12 text-success',
+const ACCENTS = {
+  navy: 'bg-navy dark:bg-link',
+  red: 'bg-red',
+  blue: 'bg-blue',
 };
 
 function ModeCard({
-  icon,
-  tone,
+  accent,
   title,
   text,
   meta,
@@ -468,8 +430,7 @@ function ModeCard({
   badge,
   highlight,
 }: {
-  icon: ReactNode;
-  tone: keyof typeof TONES;
+  accent: keyof typeof ACCENTS;
   title: string;
   text: string;
   meta: string;
@@ -482,15 +443,17 @@ function ModeCard({
 }) {
   const inner = (
     <>
+      <span className={cn('absolute inset-x-0 top-0 h-[3px]', ACCENTS[accent])} aria-hidden />
       <div className="flex items-start justify-between gap-3">
-        <span className={cn('grid size-11 place-items-center rounded-xl [&>svg]:size-5', TONES[tone])}>{icon}</span>
-        {badge}
-        {highlight && <span className="mt-1 size-2.5 animate-pulse rounded-full bg-red" aria-label="Has work to do" />}
+        <h3 className="font-display text-lg font-extrabold leading-tight">{title}</h3>
+        <div className="flex shrink-0 items-center gap-2">
+          {badge}
+          {highlight && <span className="size-2 rounded-full bg-red" aria-label="Has work to do" />}
+        </div>
       </div>
-      <h3 className="mt-3 text-lg font-bold">{title}</h3>
-      <p className="mt-1 text-sm text-muted">{text}</p>
-      <div className="mt-auto flex items-center justify-between gap-2 pt-4">
-        <span className="tabular truncate text-xs font-semibold text-muted">{meta}</span>
+      <p className="mt-1.5 text-sm text-muted">{text}</p>
+      <div className="mt-auto flex items-center justify-between gap-2 border-t border-line pt-3">
+        <span className="tabular truncate text-xs font-bold uppercase tracking-wide text-heading">{meta}</span>
         <span className="inline-flex shrink-0 items-center gap-1 font-display text-sm font-bold text-blue transition-transform group-hover:translate-x-0.5 dark:text-link">
           {cta} <ArrowRight className="size-4" />
         </span>
@@ -498,7 +461,7 @@ function ModeCard({
     </>
   );
   const cls =
-    'group flex h-full w-full flex-col rounded-[12px] border border-line bg-surface p-5 text-left shadow-card transition-[box-shadow,transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong hover:shadow-lift';
+    'group relative flex h-full w-full flex-col overflow-hidden rounded-[2px] border border-line bg-surface p-5 pt-6 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2';
   return (
     <div className="flex flex-col">
       {to ? (
@@ -533,7 +496,6 @@ function Assigned({ assignments }: { assignments: MyAssignment[] | null }) {
       {items.length === 0 ? (
         <EmptyState
           compact
-          icon={<ClipboardList />}
           title="No assignments right now"
           description="When a leader assigns a test or question set, it shows up here with its due date."
           action={
@@ -571,18 +533,17 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
   const soon = due && !a.done && due.getTime() - Date.now() < 2 * 86400_000 && due.getTime() > Date.now();
   const size = a.kind === 'test' ? (a.questionCount != null ? `${a.questionCount} questions` : 'Chapter test') : '25 official questions';
   return (
-    <li className={cn('flex flex-col gap-3 rounded-[12px] border bg-surface p-4 sm:flex-row sm:items-center', a.overdue ? 'border-red/40' : 'border-line')}>
-      <span
-        className={cn(
-          'grid size-10 shrink-0 place-items-center rounded-[10px]',
-          a.done ? 'bg-success/12 text-success' : 'bg-navy/8 text-navy dark:bg-blue/20 dark:text-link',
-        )}
-      >
-        {a.done ? <CheckCircle2 className="size-5" /> : <ClipboardList className="size-5" />}
-      </span>
+    <li
+      className={cn(
+        'relative flex flex-col gap-3 overflow-hidden rounded-[2px] border bg-surface p-4 pl-5 sm:flex-row sm:items-center',
+        a.overdue ? 'border-red/40' : 'border-line',
+      )}
+    >
+      <span className={cn('absolute inset-y-0 left-0 w-[3px]', a.done ? 'bg-success' : a.overdue ? 'bg-red' : 'bg-navy dark:bg-link')} aria-hidden />
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-semibold text-heading">{a.title}</span>
+          {a.done && <Badge tone="success">Done</Badge>}
           {a.event && <Badge tone="blue">{eventInfo(a.event)?.short ?? a.event}</Badge>}
           {a.overdue && <Badge tone="red">Overdue</Badge>}
           {soon && <Badge tone="warning">Due soon</Badge>}
@@ -610,7 +571,7 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
 function LoadingPlay() {
   return (
     <div role="status" aria-label="Loading">
-      <Skeleton className="mb-8 h-28 w-full" rounded="rounded-[14px]" />
+      <Skeleton className="mb-8 h-28 w-full" rounded="rounded-[4px]" />
       <Skeleton className="mb-4 h-6 w-32" />
       <SkeletonCards count={6} />
       <Skeleton className="mb-4 mt-8 h-6 w-48" />

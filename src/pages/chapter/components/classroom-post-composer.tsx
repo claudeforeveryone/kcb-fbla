@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Bold, Eye, Heading2, Italic, Link2, List, ListOrdered, Mail, PenLine, Quote } from 'lucide-react';
+import { Bold, Heading2, Italic, Link2, List, ListOrdered, Quote } from 'lucide-react';
 import { Button, Input, Modal, SegmentedControl, Select, Switch, cn, errorMessage, useToast } from '../../../components/ui';
 import type { PostKind } from '../../../lib/types';
 import {
@@ -190,7 +190,16 @@ export function PostComposer({
             onChange={switchKind}
             options={kinds.map((k) => {
               const M = POST_META[k];
-              return { value: k, label: <span className="hidden min-[420px]:inline">{M.label}</span>, icon: <M.icon /> };
+              const short = k === 'announcement' ? 'News' : k === 'newsletter' ? 'Letter' : M.label;
+              return {
+                value: k,
+                label: (
+                  <>
+                    <span className="min-[420px]:hidden">{short}</span>
+                    <span className="hidden min-[420px]:inline">{M.label}</span>
+                  </>
+                ),
+              };
             })}
           />
         )}
@@ -222,7 +231,6 @@ export function PostComposer({
             label={kind === 'link' ? 'Link' : 'Link (optional)'}
             value={url}
             inputMode="url"
-            leftIcon={<Link2 />}
             placeholder="https://"
             onChange={(e) => setUrl(e.target.value)}
             error={errors.url}
@@ -238,19 +246,19 @@ export function PostComposer({
               value={tab}
               onChange={setTab}
               options={[
-                { value: 'write', label: 'Write', icon: <PenLine /> },
-                { value: 'preview', label: 'Preview', icon: <Eye /> },
+                { value: 'write', label: 'Write' },
+                { value: 'preview', label: 'Preview' },
               ]}
             />
           </div>
           {tab === 'write' ? (
             <div
               className={cn(
-                'overflow-hidden rounded-[10px] border bg-surface transition-[border-color,box-shadow] focus-within:border-blue focus-within:ring-4 focus-within:ring-blue/15',
+                'overflow-hidden rounded-[2px] border bg-surface transition-[border-color,box-shadow] focus-within:border-blue focus-within:ring-4 focus-within:ring-blue/15',
                 errors.body ? 'border-danger' : 'border-line-strong',
               )}
             >
-              <div className="flex flex-wrap gap-0.5 border-b border-line bg-surface-2/60 px-1.5 py-1" role="toolbar" aria-label="Formatting">
+              <div className="flex flex-wrap gap-0.5 border-b border-line bg-surface-2 px-1.5 py-1" role="toolbar" aria-label="Formatting">
                 {[
                   { label: 'Bold', icon: Bold, run: () => wrap('**') },
                   { label: 'Italic', icon: Italic, run: () => wrap('*') },
@@ -266,7 +274,7 @@ export function PostComposer({
                     onClick={b.run}
                     title={b.label}
                     aria-label={b.label}
-                    className="grid size-8 place-items-center rounded-md text-muted transition-colors hover:bg-surface hover:text-heading"
+                    className="grid size-8 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface hover:text-heading"
                   >
                     <b.icon className="size-4" />
                   </button>
@@ -285,7 +293,7 @@ export function PostComposer({
               />
             </div>
           ) : (
-            <div className="min-h-40 rounded-[10px] border border-line bg-surface-2/40 px-4 py-3">
+            <div className="min-h-40 rounded-[2px] border border-line bg-surface-2 px-4 py-3">
               {body.trim() ? <Markdown text={body} size={kind === 'newsletter' ? 'md' : 'sm'} /> : <p className="text-sm text-muted">Nothing to preview yet.</p>}
             </div>
           )}
@@ -308,9 +316,9 @@ export function PostComposer({
         />
 
         {kind === 'newsletter' && !editing && (
-          <div className="flex items-start gap-3 rounded-[10px] border border-blue/25 bg-blue/[0.06] px-3.5 py-3 text-sm">
-            <Mail className="mt-0.5 size-4 shrink-0 text-blue dark:text-link" />
-            <p className="text-ink/90">
+          <div className="rounded-[2px] border border-line border-l-4 border-l-blue bg-surface-2 px-3.5 py-3 text-sm">
+            <p
+ className="text-ink/90">
               Every member gets a notification, and members who allow email receive the newsletter in their inbox.
             </p>
           </div>

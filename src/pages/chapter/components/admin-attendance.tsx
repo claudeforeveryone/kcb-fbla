@@ -1,7 +1,7 @@
 // Admin > Attendance: meetings, quick marking, per-member rates and history.
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarCheck, CalendarPlus, Check, Clock, Pencil, ShieldQuestion, Trash2, X } from 'lucide-react';
+import { Pencil, Trash2 } from 'lucide-react';
 import {
   Avatar,
   Button,
@@ -41,11 +41,11 @@ import {
 } from '../../../api/chapter';
 import { pct, useLoad } from './admin-shared';
 
-const STATUS_STYLE: Record<AttendanceStatus, { on: string; dot: string; icon: typeof Check; key: string }> = {
-  present: { on: 'bg-success text-white ring-success', dot: 'bg-success', icon: Check, key: 'P' },
-  late: { on: 'bg-warning text-white ring-warning', dot: 'bg-warning', icon: Clock, key: 'L' },
-  absent: { on: 'bg-red text-white ring-red', dot: 'bg-red', icon: X, key: 'A' },
-  excused: { on: 'bg-blue text-white ring-blue', dot: 'bg-blue', icon: ShieldQuestion, key: 'E' },
+const STATUS_STYLE: Record<AttendanceStatus, { on: string; dot: string; key: string }> = {
+  present: { on: 'bg-success text-white ring-success', dot: 'bg-success', key: 'P' },
+  late: { on: 'bg-warning text-white ring-warning', dot: 'bg-warning', key: 'L' },
+  absent: { on: 'bg-red text-white ring-red', dot: 'bg-red', key: 'A' },
+  excused: { on: 'bg-blue text-white ring-blue', dot: 'bg-blue', key: 'E' },
 };
 
 const fmtDate = (d: string, long = false) =>
@@ -189,7 +189,7 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
             onChange={(e) => setTitle(e.target.value)}
           />
           <Input className="md:w-48" label="Date" type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-          <Button type="submit" loading={creating} leftIcon={<CalendarPlus className="size-4" />}>
+          <Button type="submit" loading={creating}>
             Add meeting
           </Button>
         </form>
@@ -197,12 +197,11 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
 
       {sessions.loading && !sessions.data ? (
         <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-          <Skeleton className="h-72 w-full" rounded="rounded-[12px]" />
-          <Skeleton className="h-72 w-full" rounded="rounded-[12px]" />
+          <Skeleton className="h-72 w-full" rounded="rounded-[4px]" />
+          <Skeleton className="h-72 w-full" rounded="rounded-[4px]" />
         </div>
       ) : !sessions.data?.length ? (
         <EmptyState
-          icon={<CalendarCheck />}
           title="No meetings yet"
           description="Add your first meeting above, then mark each member present, late, absent or excused. Rates update as you go."
         />
@@ -225,10 +224,10 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                         aria-current={active ? 'true' : undefined}
                         className={cn(
                           'flex w-full items-center gap-3 border-l-[3px] px-4 py-3 text-left transition-colors max-lg:min-w-[200px] max-lg:border-b-[3px] max-lg:border-l-0',
-                          active ? 'border-red bg-red/[0.05]' : 'border-transparent hover:bg-surface-2/70',
+                          active ? 'border-red bg-surface-2' : 'border-transparent hover:bg-surface-2',
                         )}
                       >
-                        <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-surface-2 text-center leading-none">
+                        <span className="grid size-10 shrink-0 place-items-center rounded-[2px] border border-line bg-surface text-center leading-none">
                           <span>
                             <span className="block text-[0.625rem] font-bold uppercase text-muted">
                               {new Date(`${s.held_on}T12:00:00`).toLocaleDateString(undefined, { month: 'short' })}
@@ -267,7 +266,7 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                     </Button>
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line bg-surface-2/40 px-4 py-3 text-sm sm:px-5">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line bg-surface-2 px-4 py-3 text-sm sm:px-5">
                   {ATTENDANCE_STATUSES.map((s) => (
                     <span key={s} className="inline-flex items-center gap-1.5">
                       <span className={cn('size-2.5 rounded-full', STATUS_STYLE[s].dot)} aria-hidden />
@@ -304,7 +303,6 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                           <div role="radiogroup" aria-label={`Attendance for ${m.profile.display_name}`} className="grid grid-cols-4 gap-1.5 sm:flex">
                             {ATTENDANCE_STATUSES.map((s) => {
                               const on = cur === s;
-                              const Icon = STATUS_STYLE[s].icon;
                               return (
                                 <button
                                   key={s}
@@ -314,11 +312,11 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                                   title={on ? `${ATTENDANCE_LABELS[s]} (click to clear)` : ATTENDANCE_LABELS[s]}
                                   onClick={() => void set(session.id, m.user_id, on ? null : s)}
                                   className={cn(
-                                    'inline-flex h-8 items-center justify-center gap-1 rounded-lg px-2.5 text-xs font-semibold ring-1 ring-inset transition-colors',
+                                    'inline-flex h-8 items-center justify-center rounded-[2px] px-2.5 text-xs font-semibold ring-1 ring-inset transition-colors',
                                     on ? STATUS_STYLE[s].on : 'bg-surface text-muted ring-line hover:bg-surface-2 hover:text-ink',
                                   )}
                                 >
-                                  <Icon className="size-3.5" aria-hidden />
+
                                   {ATTENDANCE_LABELS[s]}
                                 </button>
                               );
@@ -337,7 +335,6 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
             <div className="p-4 sm:p-5">
               <CardHeader
                 className="mb-0"
-                icon={<CalendarCheck className="size-5" />}
                 title="Attendance by member"
                 subtitle="Present and late count as attended. Excused meetings don't count against anyone. Lowest first."
               />

@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { cn } from '../../components/ui';
 import { STATUS_LABEL, type DeckStats, type TermStatus } from './leitner';
 
@@ -50,7 +50,7 @@ export function DeckRing({
           fill="none"
           stroke={inverse ? 'rgb(127 163 221 / 0.75)' : 'color-mix(in srgb, var(--blue) 45%, transparent)'}
           strokeWidth={stroke}
-          strokeLinecap="round"
+          strokeLinecap="butt"
           style={arc(studied)}
         />
         <circle
@@ -60,7 +60,7 @@ export function DeckRing({
           fill="none"
           stroke="var(--success)"
           strokeWidth={stroke}
-          strokeLinecap="round"
+          strokeLinecap="butt"
           style={arc(mastered)}
           opacity={mastered > 0 ? 1 : 0}
         />
@@ -90,7 +90,7 @@ export function DeckRing({
 export function MixBar({ stats, className }: { stats: DeckStats; className?: string }) {
   const seg = (n: number) => `${stats.total ? (n / stats.total) * 100 : 0}%`;
   return (
-    <div className={cn('flex h-1.5 w-full overflow-hidden rounded-full bg-surface-3', className)} aria-hidden>
+    <div className={cn('flex h-1.5 w-full overflow-hidden rounded-none bg-surface-3', className)} aria-hidden>
       <span className="h-full bg-success transition-[width] duration-500" style={{ width: seg(stats.mastered) }} />
       <span className="h-full bg-blue transition-[width] duration-500" style={{ width: seg(stats.review) }} />
       <span className="h-full bg-warning/80 transition-[width] duration-500" style={{ width: seg(stats.learning) }} />
@@ -109,7 +109,7 @@ export function StatusChip({ status, className }: { status: TermStatus; classNam
   return (
     <span
       className={cn(
-        'inline-flex h-5 shrink-0 items-center gap-1 rounded-full px-2 text-[11px] font-semibold ring-1 ring-inset',
+        'inline-flex h-5 shrink-0 items-center gap-1 rounded-[2px] px-2 text-[11px] font-semibold ring-1 ring-inset',
         STATUS_STYLE[status],
         className,
       )}
@@ -170,28 +170,26 @@ export function useHotkeys(handler: (e: KeyboardEvent) => void, enabled = true) 
 
 /** Big centred result panel used at the end of every mode. */
 export function SessionPanel({
-  icon,
   eyebrow,
   title,
   children,
   actions,
   tone = 'navy',
 }: {
-  icon?: ReactNode;
   eyebrow?: ReactNode;
   title: ReactNode;
   children?: ReactNode;
   actions?: ReactNode;
   tone?: 'navy' | 'success' | 'red';
 }) {
-  const ring = {
-    navy: 'bg-navy/8 text-navy dark:bg-blue/20 dark:text-link',
-    success: 'bg-success/12 text-success',
-    red: 'bg-red/10 text-red dark:text-danger',
+  const bar = {
+    navy: 'bg-navy dark:bg-link',
+    success: 'bg-success',
+    red: 'bg-red',
   }[tone];
   return (
-    <div className="animate-pop mx-auto flex max-w-xl flex-col items-center rounded-[16px] border border-line bg-surface px-5 py-9 text-center shadow-card sm:px-10">
-      {icon && <div className={cn('mb-4 grid size-14 place-items-center rounded-2xl [&>svg]:size-7', ring)}>{icon}</div>}
+    <div className="animate-pop relative mx-auto flex max-w-xl flex-col items-center overflow-hidden rounded-[4px] border border-line bg-surface px-5 py-9 text-center sm:px-10">
+      <span className={cn('absolute inset-x-0 top-0 h-[3px]', bar)} aria-hidden />
       {eyebrow && <div className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">{eyebrow}</div>}
       <h2 className="text-2xl font-extrabold md:text-3xl">{title}</h2>
       {children && <div className="mt-3 w-full text-[0.9375rem] text-muted">{children}</div>}
@@ -202,7 +200,7 @@ export function SessionPanel({
 
 export function MiniStat({ label, value, tone }: { label: ReactNode; value: ReactNode; tone?: 'success' | 'red' | 'blue' }) {
   return (
-    <div className="rounded-xl bg-surface-2 px-3 py-2.5 text-center">
+    <div className="rounded-[2px] bg-surface-2 px-3 py-2.5 text-center">
       <div
         className={cn(
           'tabular font-display text-2xl font-extrabold leading-none',
@@ -230,43 +228,7 @@ export function VocabStyles() {
 @keyframes vocab-shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(2px)} }
 @keyframes vocab-match-out { 0%{transform:scale(1);opacity:1} 35%{transform:scale(1.06);opacity:1} 100%{transform:scale(.6);opacity:0} }
 @keyframes vocab-float-up { 0%{transform:translate(-50%,0);opacity:0} 15%{opacity:1} 100%{transform:translate(-50%,-36px);opacity:0} }
-@keyframes vocab-burst { 0%{transform:translate(0,0) rotate(0) scale(1);opacity:1} 100%{transform:translate(var(--bx),var(--by)) rotate(var(--br)) scale(.6);opacity:0} }
-@media (prefers-reduced-motion: reduce) { .vocab-burst { display:none } }
 `}</style>
   );
 }
 
-/** A short celebratory burst of facet shards (decorative). */
-export function Burst({ seed = 0 }: { seed?: number }) {
-  const colors = ['var(--red)', 'var(--blue)', 'var(--success)', 'var(--warning)', 'var(--navy)'];
-  const bits = Array.from({ length: 22 }, (_, i) => {
-    const a = (i / 22) * Math.PI * 2 + seed;
-    const d = 90 + ((i * 37) % 70);
-    return {
-      bx: `${Math.cos(a) * d}px`,
-      by: `${Math.sin(a) * d - 30}px`,
-      br: `${(i * 67) % 360}deg`,
-      c: colors[i % colors.length],
-      delay: (i % 5) * 25,
-    };
-  });
-  return (
-    <div className="vocab-burst pointer-events-none absolute left-1/2 top-10 size-0" aria-hidden>
-      {bits.map((b, i) => (
-        <span
-          key={i}
-          className="absolute block h-2.5 w-1.5 rounded-[1px]"
-          style={
-            {
-              background: b.c,
-              '--bx': b.bx,
-              '--by': b.by,
-              '--br': b.br,
-              animation: `vocab-burst 900ms cubic-bezier(0.22,1,0.36,1) ${b.delay}ms both`,
-            } as CSSProperties
-          }
-        />
-      ))}
-    </div>
-  );
-}

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowDownToLine, Flame, Search, SearchX, Trophy, Users, X } from 'lucide-react';
+import { ArrowDownToLine, Search, X } from 'lucide-react';
 import {
   Avatar,
   Button,
@@ -12,7 +12,6 @@ import {
   Select,
   Spinner,
   cn,
-  tierFor,
 } from '../../components/ui';
 import { EVENTS, EVENT_GROUPS, eventName, type PlayerLeaderboardRow } from '../../lib/types';
 import { SCAN_CAP, fmt, normalize, ordinal, pct, useDebounced, useMyStanding, usePlayerBoard, type MyStanding } from './data';
@@ -123,7 +122,6 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
     avatar: r.avatar_url,
     score: r.elo,
     scoreLabel: eloLabel,
-    tierElo: r.elo,
     me: r.is_me,
     to: `/u/${r.username}`,
   }));
@@ -136,7 +134,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
   return (
     <div className="space-y-5">
       {/* Filters */}
-      <div className="flex flex-col gap-3 rounded-[12px] border border-line bg-surface p-3 shadow-card sm:p-4 lg:flex-row lg:items-end">
+      <div className="flex flex-col gap-3 rounded-[4px] border border-line bg-surface p-3 shadow-card sm:p-4 lg:flex-row lg:items-end">
         <Input
           className="lg:flex-1"
           label="Search players"
@@ -188,16 +186,15 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
               value={scope}
               onChange={onScope}
               options={[
-                { value: 'all', label: 'Everyone', icon: <Trophy /> },
-                { value: 'chapter', label: 'My chapter', icon: <Users /> },
+                { value: 'all', label: 'Everyone' },
+                { value: 'chapter', label: 'My chapter' },
               ]}
             />
           ) : (
             <Link
               to="/chapter"
-              className="inline-flex h-10 items-center gap-2 rounded-[10px] border border-dashed border-line-strong px-3 text-sm font-semibold text-link hover:border-blue hover:bg-blue/5"
+              className="inline-flex h-10 items-center gap-2 rounded-[4px] border border-dashed border-line-strong px-3 text-sm font-semibold text-link hover:border-blue hover:bg-blue/5"
             >
-              <Users className="size-4" />
               Join a chapter to compare
             </Link>
           )}
@@ -240,11 +237,11 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
       ) : board.loading ? (
         <>
           {!searching && (
-            <div className="rounded-[12px] border border-line bg-surface px-3 pb-0 pt-10 shadow-card sm:px-8">
+            <div className="rounded-[4px] border border-line bg-surface px-3 pb-0 pt-10 shadow-card sm:px-8">
               <PodiumSkeleton />
             </div>
           )}
-          <div className="overflow-hidden rounded-[12px] border border-line bg-surface shadow-card">
+          <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
             <RowsSkeleton />
           </div>
         </>
@@ -257,12 +254,8 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
               aria-label="Podium"
               ref={podium.some((r) => r.is_me) ? attachMe : undefined}
               tabIndex={podium.some((r) => r.is_me) ? -1 : undefined}
-              className="relative overflow-hidden outline-none rounded-[12px] border border-line bg-surface px-2 pt-10 shadow-card sm:px-8"
+              className="relative overflow-hidden outline-none rounded-[4px] border border-line bg-surface px-2 pt-10 shadow-card sm:px-8"
             >
-              <span
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_100%,rgb(63_111_179/0.12),transparent_70%)]"
-                aria-hidden
-              />
               <div className="relative mx-auto max-w-2xl">
                 <Podium entries={podiumEntries} />
               </div>
@@ -271,7 +264,6 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
 
           {searching && filtered.length === 0 && !board.loadingMore ? (
             <EmptyState
-              icon={<SearchX />}
               title={`No players match "${query.trim()}"`}
               description="Try a first name, a username or a school."
               action={
@@ -281,7 +273,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
               }
             />
           ) : list.length > 0 || board.loadingMore ? (
-            <div className="overflow-hidden rounded-[12px] border border-line bg-surface shadow-card">
+            <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
               <div
                 className={cn(
                   GRID,
@@ -363,7 +355,6 @@ function PlayerRow({
   rowRef?: (el: HTMLElement | null) => void | (() => void);
   eloLabel: string;
 }) {
-  const tier = tierFor(r.elo);
   return (
     <li>
       <Link
@@ -389,11 +380,10 @@ function PlayerRow({
               )}
               {r.current_streak >= 3 && (
                 <span
-                  className="inline-flex shrink-0 items-center gap-0.5 text-xs font-semibold text-warning"
+                  className="tabular inline-flex h-5 shrink-0 items-center rounded-[2px] border border-line px-1.5 text-[10px] font-bold uppercase tracking-wider text-muted"
                   title={`${r.current_streak}-day streak`}
                 >
-                  <Flame className="size-3.5" aria-hidden />
-                  <span className="tabular">{r.current_streak}</span>
+                  {r.current_streak}d streak
                 </span>
               )}
             </span>
@@ -416,9 +406,7 @@ function PlayerRow({
         <span className="tabular hidden text-right text-sm text-ink md:block">{fmt.format(r.questions_answered)}</span>
         <span className="flex flex-col items-end">
           <EloCell elo={r.elo} />
-          <span className="text-[11px] font-semibold dark:!text-white/70" style={{ color: tier.ink }}>
-            {tier.name}
-          </span>
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted md:hidden">{eloLabel}</span>
         </span>
       </Link>
     </li>
@@ -446,14 +434,11 @@ function PinnedMe({
 }) {
   if (hidden || standing.status === 'loading' || standing.status === 'unknown') return null;
   const shell =
-    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-[14px] border border-red/30 bg-surface/95 shadow-pop backdrop-blur-md md:bottom-4';
+    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-[4px] border border-red/30 border-l-[3px] border-l-red bg-surface shadow-pop md:bottom-4';
 
   if (standing.status === 'unranked') {
     return (
       <div className={cn(shell, 'flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:p-4')} role="status">
-        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-red/10 text-red">
-          <Trophy className="size-5" />
-        </span>
         <div className="min-w-0 flex-1">
           <p className="font-display font-semibold text-heading">You are not on this board yet</p>
           <p className="text-sm text-muted">
@@ -471,7 +456,7 @@ function PinnedMe({
   const gap = above ? above.elo - r.elo : null;
   return (
     <div className={cn(shell, 'flex items-center gap-3 px-3 py-2.5 sm:px-4')} aria-label="Your position">
-      <span className="tabular grid h-10 min-w-10 shrink-0 place-items-center rounded-full bg-red px-2 font-display text-sm font-extrabold text-white">
+      <span className="tabular grid h-10 min-w-10 shrink-0 place-items-center rounded-[2px] bg-red px-2 font-display text-sm font-extrabold text-white">
         {r.rank}
       </span>
       <Avatar src={r.avatar_url} name={r.display_name} size="md" className="max-sm:hidden" />
@@ -510,7 +495,6 @@ function BoardEmpty({ event, scope }: { event: string | null; scope: Scope }) {
   if (event)
     return (
       <EmptyState
-        icon={<Trophy />}
         title={`No one is ranked in ${eventName(event)} yet`}
         description={
           scope === 'chapter'
@@ -526,7 +510,6 @@ function BoardEmpty({ event, scope }: { event: string | null; scope: Scope }) {
     );
   return (
     <EmptyState
-      icon={<Trophy />}
       title={scope === 'chapter' ? 'Your chapter board is empty' : 'The leaderboard is wide open'}
       description="Every question you answer moves your Elo. Play a practice paper to claim the top spot."
       action={

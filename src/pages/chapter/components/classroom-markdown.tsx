@@ -120,7 +120,7 @@ function Block({ b, size, first }: { b: B; size: 'sm' | 'md' | 'lg'; first: bool
         <ul className={cn(gap, 'space-y-1.5 pl-1')}>
           {b.items.map((it, i) => (
             <li key={i} className="flex gap-2.5">
-              <span className="mt-[0.6em] size-1.5 shrink-0 rotate-45 bg-red" aria-hidden />
+              <span className="mt-[0.6em] size-1.5 shrink-0 bg-red" aria-hidden />
               <span className="min-w-0">{inline(it)}</span>
             </li>
           ))}
@@ -139,7 +139,7 @@ function Block({ b, size, first }: { b: B; size: 'sm' | 'md' | 'lg'; first: bool
       );
     case 'quote':
       return (
-        <blockquote className={cn(gap, 'rounded-r-lg border-l-[3px] border-red bg-surface-2/70 py-2 pl-4 pr-3 italic text-ink/90')}>
+        <blockquote className={cn(gap, 'border-l-[3px] border-red bg-surface-2 py-2 pl-4 pr-3 italic text-ink/90')}>
           {inline(b.text)}
         </blockquote>
       );

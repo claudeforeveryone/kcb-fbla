@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ArrowRight, Brain, CalendarCheck, Check, Eye, Sparkles, Target, X } from 'lucide-react';
+import { ArrowRight, Check, Eye, X } from 'lucide-react';
 import { Button, ButtonLink, Kbd, cn } from '../../components/ui';
 import type { StudyDeck, VocabTerm } from '../../api/vocab';
 import {
@@ -46,14 +46,13 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
     if (!plan.length) {
       return (
         <SessionPanel
-          icon={<CalendarCheck />}
           tone="success"
           eyebrow="All caught up"
           title="Nothing due right now"
           actions={
             <>
               {stats.total - stats.fresh > 0 && (
-                <Button leftIcon={<Target className="size-4" />} onClick={() => setMode('drill')}>
+                <Button onClick={() => setMode('drill')}>
                   Drill my weakest {Math.min(10, stats.total - stats.fresh)}
                 </Button>
               )}
@@ -76,12 +75,9 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
     }
     return (
       <div className="mx-auto grid max-w-2xl gap-4">
-        <div className="relative overflow-hidden rounded-[16px] border border-line bg-surface p-6 shadow-card sm:p-8">
-          <div className="absolute inset-y-0 left-0 w-1 bg-red" aria-hidden />
+        <div className="relative overflow-hidden rounded-[4px] border border-line bg-surface p-6 sm:p-8">
+          <div className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />
           <div className="flex items-start gap-4">
-            <div className="grid size-12 shrink-0 place-items-center rounded-xl bg-navy/8 text-navy dark:bg-blue/20 dark:text-link">
-              <Brain className="size-6" />
-            </div>
             <div className="min-w-0 flex-1">
               <h2 className="text-xl font-extrabold">Today's session</h2>
               <p className="mt-1 text-[0.9375rem] text-muted">
@@ -128,16 +124,16 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
 function HowItWorks() {
   const steps = BOX_DAYS.slice(1).map((d, i) => ({ box: i + 1, d }));
   return (
-    <div className="rounded-[12px] border border-line bg-surface-2/60 p-4 text-sm text-muted">
+    <div className="rounded-[4px] border border-line bg-surface-2/60 p-4 text-sm text-muted">
       <div className="mb-3 flex items-center gap-2 font-display font-semibold text-heading">
-        <Sparkles className="size-4 text-red" /> How the schedule works
+        How the schedule works
       </div>
       <div className="flex flex-wrap items-center gap-1.5">
         {steps.map((s, i) => (
           <span key={s.box} className="flex items-center gap-1.5">
             <span
               className={cn(
-                'tabular rounded-md px-2 py-1 text-xs font-semibold',
+                'tabular rounded-[2px] px-2 py-1 text-xs font-semibold',
                 s.box >= MASTERED_BOX ? 'bg-success/12 text-success' : 'bg-surface text-ink ring-1 ring-line',
               )}
             >
@@ -251,7 +247,6 @@ function Session({
     const missed = out.missed.size;
     return (
       <SessionPanel
-        icon={<Check />}
         tone="success"
         eyebrow={drill ? 'Drill complete' : 'Session complete'}
         title={missed ? `${total - missed} of ${total} first try` : `All ${total} on the first try`}
@@ -284,15 +279,15 @@ function Session({
         <span className="tabular font-display font-bold text-heading">
           {cleared} <span className="font-semibold text-muted">/ {total} cleared</span>
         </span>
-        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface-3">
-          <div className="h-full rounded-full bg-success transition-[width] duration-300" style={{ width: `${(cleared / total) * 100}%` }} />
+        <div className="h-1 flex-1 overflow-hidden rounded-none bg-surface-3">
+          <div className="h-full bg-success transition-[width] duration-300" style={{ width: `${(cleared / total) * 100}%` }} />
         </div>
         <Button variant="ghost" size="xs" onClick={onExit}>
           End
         </Button>
       </div>
 
-      <div key={pos} className="animate-slide-in rounded-[18px] border border-line bg-surface p-5 shadow-card sm:p-7">
+      <div key={pos} className="animate-slide-in rounded-[4px] border border-line bg-surface p-5 sm:p-7">
         <div className="mb-4 flex items-center justify-between gap-2">
           <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
             {card.mc ? 'Pick the definition' : 'Do you remember?'}
@@ -319,8 +314,8 @@ function Session({
                   disabled={picked !== null}
                   onClick={() => choose(idx)}
                   className={cn(
-                    'group flex w-full items-start gap-3 rounded-xl border px-3.5 py-3 text-left text-[0.9375rem] leading-snug transition-[border-color,background-color,opacity,transform] duration-150',
-                    state === 'idle' && 'border-line-strong bg-surface hover:-translate-y-px hover:border-blue/60 hover:bg-blue/5',
+                    'group flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left text-[0.9375rem] leading-snug transition-[border-color,background-color,opacity] duration-150',
+                    state === 'idle' && 'border-line-strong bg-surface hover:border-blue/60 hover:bg-surface-2',
                     state === 'right' && 'border-success bg-success/10 text-ink',
                     state === 'wrong' && 'animate-[vocab-shake_320ms_ease-in-out] border-red bg-red/8 text-ink',
                     state === 'dim' && 'border-line opacity-55',
@@ -328,7 +323,7 @@ function Session({
                 >
                   <span
                     className={cn(
-                      'tabular mt-px grid size-6 shrink-0 place-items-center rounded-md text-xs font-bold',
+                      'tabular mt-px grid size-6 shrink-0 place-items-center rounded-[2px] text-xs font-bold',
                       state === 'right' ? 'bg-success text-white' : state === 'wrong' ? 'bg-red text-white' : 'bg-surface-2 text-muted',
                     )}
                   >
@@ -340,11 +335,11 @@ function Session({
             })}
           </div>
         ) : revealed ? (
-          <div className="animate-fade-in mt-6 rounded-xl bg-surface-2 p-4 text-center text-[1.0625rem] leading-relaxed text-ink">
+          <div className="animate-fade-in mt-6 rounded-[2px] bg-surface-2 p-4 text-center text-[1.0625rem] leading-relaxed text-ink">
             {item.term.def}
           </div>
         ) : (
-          <div className="mt-6 grid place-items-center rounded-xl border border-dashed border-line-strong px-4 py-8 text-sm text-muted">
+          <div className="mt-6 grid place-items-center rounded-[2px] border border-dashed border-line-strong px-4 py-8 text-sm text-muted">
             Say the definition in your head, then check.
           </div>
         )}

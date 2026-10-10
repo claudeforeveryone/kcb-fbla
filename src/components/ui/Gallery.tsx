@@ -1,6 +1,6 @@
 // Dev-only component gallery at /dev/ui (registered in App.tsx only when import.meta.env.DEV).
 import { useState } from 'react';
-import { Bell, Flame, Inbox, Plus, Target, Trophy } from 'lucide-react';
+import { Bell, Inbox, Plus } from 'lucide-react';
 import { Page, Section } from '../layout/Page';
 import { BarChart, Donut, LineChart, RadarChart, Sparkline } from '../charts';
 import {
@@ -37,7 +37,6 @@ import {
   Tabs,
   Textarea,
   Tooltip,
-  TIERS,
   useToast,
 } from '.';
 
@@ -85,7 +84,7 @@ export default function Gallery() {
             <Button size="icon" variant="outline" aria-label="Bell"><Bell className="size-4" /></Button>
           </div>
         </Section>
-        <Section title="Badges, avatars, tiers">
+        <Section title="Badges, avatars, Elo">
           <div className="flex flex-wrap items-center gap-2">
             {(['neutral', 'navy', 'red', 'blue', 'success', 'warning'] as const).map((t) => (
               <Badge key={t} tone={t} dot>{t}</Badge>
@@ -94,15 +93,15 @@ export default function Gallery() {
             <Avatar name="Maya Chen" size="sm" />
             <Avatar name="Jordan Lee" />
             <Avatar name="Sam Patel" size="lg" />
-            {TIERS.map((t) => <EloBadge key={t.name} elo={t.min + 50} size="sm" />)}
+            {[612, 845, 1120].map((e) => <EloBadge key={e} elo={e} size="sm" />)}
             <Tooltip content="Press K to search"><Kbd>K</Kbd></Tooltip>
           </div>
         </Section>
         <Section title="Stats">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatTile label="Elo" value="742" delta={18} icon={<Trophy />} chart={<Sparkline values={[600, 640, 630, 700, 742]} />} />
-            <StatTile label="Accuracy" value="81%" sub="last 7 days" delta={-3} deltaSuffix="%" icon={<Target />} />
-            <StatTile label="Streak" value="12" sub="days" icon={<Flame />} tone="navy" />
+            <StatTile label="Elo" value="742" delta={18} chart={<Sparkline values={[600, 640, 630, 700, 742]} />} />
+            <StatTile label="Accuracy" value="81%" sub="last 7 days" delta={-3} deltaSuffix="%" />
+            <StatTile label="Streak" value="12" sub="days" tone="navy" />
             <Card className="flex items-center gap-4">
               <ProgressRing value={72} />
               <div className="flex-1"><ProgressBar value={36} max={50} label="Paper A" showValue tone="red" /></div>

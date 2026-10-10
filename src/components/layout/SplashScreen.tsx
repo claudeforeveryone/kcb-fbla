@@ -3,11 +3,11 @@ import { LOGO_WHITE } from './Brand';
 /** Full-screen navy loader shown while the session is restored. */
 export function SplashScreen() {
   return (
-    <div className="facets fixed inset-0 z-[100] grid place-items-center" role="status" aria-label="Loading KCB FBLA">
+    <div className="fixed inset-0 bg-navy z-[100] grid place-items-center" role="status" aria-label="Loading FBLC">
       <div className="flex flex-col items-center gap-5">
         <img src={LOGO_WHITE} alt="" className="h-16 w-auto animate-pulse" />
-        <div className="h-1 w-28 overflow-hidden rounded-full bg-white/15">
-          <div className="animate-shimmer h-full w-full bg-[length:200%_100%] bg-[linear-gradient(90deg,transparent,rgb(255_255_255/0.85),transparent)]" />
+        <div className="h-1 w-28 overflow-hidden bg-white/15">
+          <div className="h-full w-1/3 animate-[splash-bar_1.1s_ease-in-out_infinite] bg-white/85 motion-reduce:animate-none" />
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@ export function RouteFallback() {
         {[0, 1, 2].map((i) => (
           <span
             key={i}
-            className="size-2 animate-bounce rounded-full bg-navy dark:bg-link"
+            className="size-2 animate-bounce bg-navy dark:bg-link"
             style={{ animationDelay: `${i * 120}ms` }}
           />
         ))}

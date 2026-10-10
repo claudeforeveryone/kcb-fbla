@@ -1,4 +1,4 @@
-// Shared helpers for the KCB FBLA email edge functions (weekly-digest, send-newsletter, email-unsubscribe).
+// Shared helpers for the FBLC email edge functions (weekly-digest, send-newsletter, email-unsubscribe).
 // Brand: FBLC palette (navy #001E60, red #BF0D3E, blue #3F6FB3), Work Sans headings, Open Sans body.
 
 export const NAVY = '#001E60';
@@ -205,8 +205,8 @@ export function mdLite(src: string | null | undefined): string {
 export function button(label: string, href: string, tone: 'red' | 'navy' = 'red'): string {
   const bg = tone === 'red' ? RED : NAVY;
   return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 4px;"><tr>
-<td align="center" bgcolor="${bg}" style="border-radius:10px;background:${bg};">
-<a href="${esc(href)}" style="display:inline-block;padding:13px 26px;font-family:${FONT_HEAD};font-size:15px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:10px;">${esc(label)}&nbsp;&rarr;</a>
+<td align="center" bgcolor="${bg}" style="border-radius:4px;background:${bg};">
+<a href="${esc(href)}" style="display:inline-block;padding:13px 26px;font-family:${FONT_HEAD};font-size:15px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:4px;">${esc(label)}&nbsp;&rarr;</a>
 </td></tr></table>`;
 }
 
@@ -221,7 +221,7 @@ export function statGrid(stats: { label: string; value: string; tone?: 'up' | 'd
     if (!s) return '<td width="50%" style="padding:6px;"></td>';
     const color = s.tone === 'up' ? SUCCESS : s.tone === 'down' ? RED : NAVY;
     return `<td width="50%" valign="top" style="padding:6px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${LINE};border-radius:12px;background:#FFFFFF;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${LINE};border-radius:4px;background:#FFFFFF;">
 <tr><td style="padding:16px 18px;">
 <div style="font-family:${FONT_HEAD};font-size:28px;line-height:1.1;font-weight:800;color:${color};font-variant-numeric:tabular-nums;">${esc(s.value)}</div>
 <div style="margin-top:4px;font-family:${FONT_BODY};font-size:13px;color:${MUTED};">${esc(s.label)}</div>
@@ -233,7 +233,7 @@ export function statGrid(stats: { label: string; value: string; tone?: 'up' | 'd
 }
 
 export function card(inner: string, accent: string = BLUE): string {
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${LINE};border-left:4px solid ${accent};border-radius:12px;background:#FFFFFF;">
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${LINE};border-left:4px solid ${accent};border-radius:4px;background:#FFFFFF;">
 <tr><td style="padding:16px 18px;">${inner}</td></tr></table>`;
 }
 
@@ -277,12 +277,12 @@ export function layout(opts: {
 <table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;">
 
 <!-- brand bar -->
-<tr><td bgcolor="${NAVY}" style="background:${NAVY};background-image:linear-gradient(135deg,${NAVY} 0%,${NAVY} 58%,#0B2C78 58%,#0B2C78 74%,#123A8F 74%);border-radius:14px 14px 0 0;">
+<tr><td bgcolor="${NAVY}" style="background:${NAVY};border-radius:0;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr><td class="pad" style="padding:22px 32px 0;">
   <a href="${esc(site)}" style="text-decoration:none;">
   <img src="${esc(logo)}" width="40" height="40" alt="" style="display:inline-block;vertical-align:middle;border:0;height:40px;width:auto;">
-  <span style="display:inline-block;vertical-align:middle;margin-left:10px;font-family:${FONT_HEAD};font-size:19px;font-weight:800;letter-spacing:0.4px;color:#FFFFFF;">KCB FBLA</span>
+  <span style="display:inline-block;vertical-align:middle;margin-left:10px;font-family:${FONT_HEAD};font-size:19px;font-weight:800;letter-spacing:0.4px;color:#FFFFFF;">FBLC</span>
   </a>
 </td></tr>
 <tr><td class="pad" style="padding:26px 32px 30px;">
@@ -308,8 +308,8 @@ ${opts.body}
   &nbsp;&middot;&nbsp;
   <a href="${esc(site)}/me/settings" style="color:${MUTED};text-decoration:underline;">Email settings</a>
   &nbsp;&middot;&nbsp;
-  <a href="${esc(site)}" style="color:${MUTED};text-decoration:underline;">Open KCB FBLA</a>
-  <div style="margin-top:10px;font-family:${FONT_HEAD};font-weight:700;letter-spacing:0.4px;color:${NAVY};">KCB FBLA &middot; Future Business Leaders</div>
+  <a href="${esc(site)}" style="color:${MUTED};text-decoration:underline;">Open FBLC</a>
+  <div style="margin-top:10px;font-family:${FONT_HEAD};font-weight:700;letter-spacing:0.4px;color:${NAVY};">FBLC &middot; Future Business Leaders</div>
 </td></tr>
 
 </table>
@@ -319,5 +319,5 @@ ${opts.body}
 
 /** Plain-text footer shared by every email. */
 export function textFooter(reason: string, unsub: string, site: string): string {
-  return `\n\n--\n${reason}\nUnsubscribe: ${unsub}\nEmail settings: ${site}/me/settings\nKCB FBLA`;
+  return `\n\n--\n${reason}\nUnsubscribe: ${unsub}\nEmail settings: ${site}/me/settings\nFBLC`;
 }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Clock, Pencil, X } from 'lucide-react';
+import { Pencil, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { Avatar, Badge, Button, FacetArt } from '../../../components/ui';
 import { ROLE_LABELS, type ChapterRole } from '../../../lib/types';
@@ -52,13 +52,13 @@ export function PostReader({
 
   return createPortal(
     <div className="fixed inset-0 z-[85] flex justify-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="reader-title">
-      <div className="animate-fade-in absolute inset-0 bg-[#00143f]/60 backdrop-blur-[3px]" onClick={onClose} aria-hidden />
-      <article className="animate-pop relative flex h-full w-full max-w-3xl flex-col overflow-hidden bg-surface shadow-pop sm:h-auto sm:max-h-[94dvh] sm:rounded-2xl sm:border sm:border-line">
+      <div className="animate-fade-in absolute inset-0 bg-[#00143f]/70" onClick={onClose} aria-hidden />
+      <article className="animate-pop relative flex h-full w-full max-w-3xl flex-col overflow-hidden bg-surface shadow-pop sm:h-auto sm:max-h-[94dvh] sm:rounded-[2px] sm:border sm:border-line">
         <header className="facets relative isolate shrink-0 overflow-hidden px-5 pb-7 pt-5 text-white sm:px-10 sm:pb-9 sm:pt-7">
           <FacetArt className="opacity-80" />
           <div className="relative flex items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/75">
-              <span className="h-[3px] w-5 rounded-full bg-red" aria-hidden />
+              <span className="h-[3px] w-5 bg-red" aria-hidden />
               {isNews ? `${chapterName} newsletter` : meta.label}
             </div>
             <div className="flex items-center gap-1">
@@ -72,7 +72,7 @@ export function PostReader({
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="grid size-9 place-items-center rounded-lg text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                className="grid size-9 place-items-center rounded-[2px] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <X className="size-5" />
               </button>
@@ -94,8 +94,7 @@ export function PostReader({
             </span>
             {!isNews && <span className="text-white/60">{formatDate(post.created_at, true)}</span>}
             {isNews && (
-              <span className="inline-flex items-center gap-1 text-white/70">
-                <Clock className="size-3.5" />
+              <span className="text-white/70">
                 {readingMinutes(post.body)} min read
               </span>
             )}
@@ -121,7 +120,7 @@ export function PostReader({
             )}
             {isNews && (
               <div className="mt-10 flex items-center gap-3 border-t border-line pt-5 text-sm text-muted">
-                <span className="h-[3px] w-6 rounded-full bg-red" aria-hidden />
+                <span className="h-[3px] w-6 bg-red" aria-hidden />
                 From the {chapterName} executive team
               </div>
             )}

@@ -8,12 +8,10 @@ import {
   Grid3x3,
   Heart,
   HelpCircle,
-  Lightbulb,
   LogOut,
   Send,
   X,
   XCircle,
-  Zap,
 } from 'lucide-react';
 import { Badge, Button, CountdownTimer, Kbd, Modal, cn } from '../ui';
 import { DIFFICULTY_LABELS } from '../../lib/types';
@@ -286,7 +284,7 @@ export function ExamRunner({
     <div className={cn('relative', className)}>
       <ExamStyles />
       {/* toolbar */}
-      <div className="sticky top-16 z-30 border-b border-line bg-surface/92 backdrop-blur-md">
+      <div className="sticky top-16 z-30 border-b border-line bg-surface">
         <div className="mx-auto flex h-14 w-full max-w-6xl items-center gap-3 px-4 sm:px-6">
           <div className="min-w-0 flex-1">
             <div className="truncate font-display text-sm font-bold text-heading">{title}</div>
@@ -371,7 +369,7 @@ export function ExamRunner({
               )}
               {instant && streak >= 3 && (
                 <Badge tone="warning" className="exam-pop">
-                  <Zap className="size-3" /> {streak} in a row
+                  {streak} in a row
                 </Badge>
               )}
               {mode === 'exam' && s.flags[s.index] && (
@@ -406,19 +404,19 @@ export function ExamRunner({
                     disabled={(instant && revealed) || submitting}
                     onClick={() => pick(i)}
                     className={cn(
-                      'group flex w-full items-start gap-3 rounded-[12px] border px-3.5 py-3 text-left transition-[border-color,background-color,box-shadow,opacity,transform] duration-150 ease-out md:px-4 md:py-3.5',
+                      'group flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left transition-[border-color,background-color,opacity] duration-150 ease-out md:px-4 md:py-3.5',
                       'disabled:cursor-default',
                       state === 'idle' &&
-                        'border-line bg-surface hover:-translate-y-px hover:border-blue/60 hover:bg-surface-2 hover:shadow-card active:translate-y-0',
+                        'border-line bg-surface hover:border-blue/60 hover:bg-surface-2',
                       state === 'chosen' && 'border-navy bg-navy/[0.05] ring-2 ring-navy/80 dark:border-link dark:bg-blue/15 dark:ring-link/70',
-                      state === 'right' && 'exam-glow border-success bg-success/10 ring-1 ring-success/50',
+                      state === 'right' && 'border-success bg-success/10 ring-1 ring-success/50',
                       state === 'wrong' && 'border-red bg-red/[0.07] ring-1 ring-red/40',
                       state === 'dim' && 'border-line bg-surface opacity-55',
                     )}
                   >
                     <span
                       className={cn(
-                        'mt-px grid size-7 shrink-0 place-items-center rounded-lg font-display text-sm font-bold transition-colors',
+                        'mt-px grid size-7 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold transition-colors',
                         state === 'idle' && 'bg-surface-2 text-muted ring-1 ring-inset ring-line group-hover:bg-blue/10 group-hover:text-blue',
                         state === 'chosen' && 'bg-navy text-white dark:bg-link dark:text-navy',
                         state === 'right' && 'exam-pop bg-success text-white',
@@ -442,7 +440,7 @@ export function ExamRunner({
             {instant && revealed && (
               <div
                 className={cn(
-                  'exam-rise mt-4 rounded-[12px] border p-4',
+                  'exam-rise mt-4 rounded-[4px] border p-4',
                   chosen === q.answer ? 'border-success/30 bg-success/[0.06]' : 'border-red/25 bg-red/[0.04]',
                 )}
                 role="status"
@@ -468,8 +466,7 @@ export function ExamRunner({
                   )}
                 </div>
                 {q.explain && (
-                  <p className="mt-2 flex gap-2 text-sm leading-relaxed text-ink/90">
-                    <Lightbulb className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden />
+                  <p className="mt-2 text-sm leading-relaxed text-ink/90">
                     <span>{q.explain}</span>
                   </p>
                 )}
@@ -478,7 +475,7 @@ export function ExamRunner({
           </div>
 
           {/* actions */}
-          <div className="sticky bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 -mx-4 mt-6 border-t border-line bg-bg/92 px-4 py-3 backdrop-blur-md sm:mx-0 sm:rounded-[12px] sm:border sm:bg-surface/92 md:bottom-4">
+          <div className="sticky bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 -mx-4 mt-6 border-t border-line bg-bg px-4 py-3 sm:mx-0 sm:rounded-[2px] sm:border sm:bg-surface md:bottom-4">
             {instant ? (
               <div className="flex items-center gap-2">
                 {!revealed ? (
@@ -564,7 +561,7 @@ export function ExamRunner({
 
         {showNav && (
           <aside className="hidden lg:block">
-            <div className="sticky top-[136px] rounded-[12px] border border-line bg-surface p-4 shadow-card">
+            <div className="sticky top-[136px] rounded-[2px] border border-line bg-surface p-4">
               <Navigator s={s} n={n} onGo={go} />
               <Button block variant="accent" className="mt-4" onClick={() => setReviewOpen(true)} leftIcon={<Send className="size-4" />}>
                 Review & submit
@@ -685,7 +682,7 @@ export function ExamRunner({
 
 function SummaryTile({ label, value, tone }: { label: string; value: number; tone: 'navy' | 'red' | 'warning' | 'muted' }) {
   return (
-    <div className="rounded-[10px] border border-line bg-surface-2 px-2 py-2.5">
+    <div className="rounded-[4px] border border-line bg-surface-2 px-2 py-2.5">
       <div
         className={cn(
           'tabular font-display text-2xl font-extrabold',
@@ -707,10 +704,10 @@ function Navigator({ s, n, onGo }: { s: RunnerSnapshot; n: number; onGo: (i: num
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
         <span className="inline-flex items-center gap-1.5">
-          <span className="size-2.5 rounded-sm bg-navy dark:bg-link" /> Answered
+          <span className="size-2.5 rounded-[1px] bg-navy dark:bg-link" /> Answered
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="size-2.5 rounded-sm border border-line-strong bg-surface" /> Blank
+          <span className="size-2.5 rounded-[1px] border border-line-strong bg-surface" /> Blank
         </span>
         <span className="inline-flex items-center gap-1.5">
           <span className="size-2.5 rounded-full bg-red" /> Flagged
@@ -729,7 +726,7 @@ function Navigator({ s, n, onGo }: { s: RunnerSnapshot; n: number; onGo: (i: num
               aria-label={`Question ${i + 1}${done ? ', answered' : ', blank'}${s.flags[i] ? ', flagged' : ''}`}
               aria-current={cur ? 'step' : undefined}
               className={cn(
-                'tabular relative grid h-8 place-items-center rounded-md text-xs font-bold transition-colors',
+                'tabular relative grid h-8 place-items-center rounded-[2px] text-xs font-bold transition-colors',
                 done
                   ? 'bg-navy text-white hover:bg-navy-2 dark:bg-link dark:text-navy'
                   : 'border border-line-strong bg-surface text-muted hover:border-blue hover:text-heading',

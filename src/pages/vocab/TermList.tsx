@@ -73,7 +73,6 @@ export function TermList({
       {rows.length === 0 ? (
         <EmptyState
           compact
-          icon={<Search />}
           title="No terms here"
           description={q ? `Nothing matches "${q}".` : 'No terms in this group yet.'}
           action={
@@ -89,7 +88,7 @@ export function TermList({
           }
         />
       ) : (
-        <ul className="divide-y divide-line overflow-hidden rounded-[12px] border border-line bg-surface">
+        <ul className="divide-y divide-line overflow-hidden rounded-[4px] border border-line bg-surface">
           {rows.map((t) => {
             const p = progress.get(t.id);
             const st = statusOf(p);

@@ -1,13 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, Crown, Link2, Users } from 'lucide-react';
 import {
   Avatar,
   Button,
   ButtonLink,
   Card,
   EmptyState,
-  FacetArt,
   Input,
   PageHeader,
   Select,
@@ -65,12 +63,11 @@ export default function CreatePage() {
       <Page>
         {mine.loading ? (
           <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-            <Skeleton className="h-[420px] w-full" rounded="rounded-[12px]" />
-            <Skeleton className="h-[260px] w-full" rounded="rounded-[12px]" />
+            <Skeleton className="h-[420px] w-full" rounded="rounded-[4px]" />
+            <Skeleton className="h-[260px] w-full" rounded="rounded-[4px]" />
           </div>
         ) : mine.data ? (
           <EmptyState
-            icon={<Users />}
             title={`You're already in ${mine.data.chapter.name}`}
             description="A player can belong to one chapter at a time. Leave your current chapter first if you want to register a new one."
             action={<ButtonLink to="/chapter">Go to my chapter</ButtonLink>}
@@ -118,7 +115,7 @@ export default function CreatePage() {
                 />
                 <div className="flex flex-col-reverse gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-sm text-muted">You'll become president and can add executives right after.</p>
-                  <Button type="submit" variant="accent" size="lg" loading={busy} leftIcon={<Crown className="size-5" />}>
+                  <Button type="submit" variant="accent" size="lg" loading={busy}>
                     Register chapter
                   </Button>
                 </div>
@@ -127,8 +124,7 @@ export default function CreatePage() {
 
             <aside className="space-y-4">
               <div className="text-xs font-bold uppercase tracking-wider text-muted">Preview</div>
-              <div className="facets relative overflow-hidden rounded-[12px] p-5 text-white shadow-lg">
-                <FacetArt className="opacity-80" />
+              <div className="relative overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-5 text-white">
                 <div className="relative">
                   <div className="text-xs font-bold uppercase tracking-[0.14em] text-white/70">{region}</div>
                   <div className="mt-2 break-words font-display text-2xl font-extrabold leading-tight">
@@ -146,12 +142,13 @@ export default function CreatePage() {
               </div>
               <Card padded className="space-y-3 text-sm">
                 {[
-                  { icon: <Link2 className="size-4" />, text: 'Members join with a 6-character code or an invite link.' },
-                  { icon: <Users className="size-4" />, text: 'Everyone starts at 0 Elo. Practice moves your chapter up the rankings.' },
-                  { icon: <CheckCircle2 className="size-4" />, text: 'Track attendance, assign trainers per event and see who needs help.' },
+                  { text: 'Members join with a 6-character code or an invite link.' },
+                  { text: 'Everyone starts at 0 Elo. Practice moves your chapter up the rankings.' },
+                  { text: 'Track attendance, assign trainers per event and see who needs help.' },
                 ].map((r, i) => (
                   <div key={i} className="flex gap-3">
-                    <span className="mt-0.5 text-blue dark:text-link">{r.icon}</span>
+                    <span className="mt-[0.5em] size-1.5 shrink-0 bg-blue" aria-hidden />
+
                     <span className="text-ink">{r.text}</span>
                   </div>
                 ))}

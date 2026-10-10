@@ -1,19 +1,6 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import {
-  CalendarClock,
-  ChevronDown,
-  ChevronRight,
-  ClipboardCheck,
-  Filter,
-  Library,
-  Megaphone,
-  Newspaper,
-  PenSquare,
-  Send,
-  Sparkles,
-  Users,
-} from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import {
   Avatar,
   Button,
@@ -280,7 +267,6 @@ export default function ClassroomPage() {
         <PageHeader title="Classroom" subtitle="Posts, newsletters, tests and assignments from your chapter." />
         <Page width="narrow">
           <EmptyState
-            icon={<Users />}
             title="Join a chapter to open its classroom"
             description="Your executives share announcements, weekly newsletters, practice tests and flashcards here."
             action={
@@ -302,14 +288,14 @@ export default function ClassroomPage() {
     .filter((k) => k !== 'newsletter' || canWriteNewsletter(ctx))
     .map((k) => {
       const M = POST_META[k];
-      return { label: M.label, icon: <M.icon className="size-4" />, onSelect: () => setComposer({ kind: k, editing: null }) };
+      return { label: M.label, onSelect: () => setComposer({ kind: k, editing: null }) };
     });
 
   const tabItems = [
-    { value: 'stream' as Tab, label: 'Stream', icon: <Megaphone /> },
-    { value: 'assignments' as Tab, label: 'Assignments', icon: <ClipboardCheck />, count: mine.todo.length || undefined },
-    { value: 'newsletters' as Tab, label: 'Newsletters', icon: <Newspaper /> },
-    { value: 'library' as Tab, label: 'Tests & decks', icon: <Library /> },
+    { value: 'stream' as Tab, label: 'Stream' },
+    { value: 'assignments' as Tab, label: 'Assignments', count: mine.todo.length || undefined },
+    { value: 'newsletters' as Tab, label: 'Newsletters' },
+    { value: 'library' as Tab, label: 'Tests & decks' },
   ];
 
   return (
@@ -326,12 +312,12 @@ export default function ClassroomPage() {
                 width="w-52"
                 items={newPostItems}
                 trigger={({ open: _o, ...p }) => (
-                  <Button {...p} variant="inverse" leftIcon={<PenSquare className="size-4" />} rightIcon={<ChevronDown className="size-4" />}>
+                  <Button {...p} variant="inverse" rightIcon={<ChevronDown className="size-4" />}>
                     New post
                   </Button>
                 )}
               />
-              <Button variant="accent" leftIcon={<Send className="size-4" />} onClick={() => setAssign({ preset: null, editing: null })}>
+              <Button variant="accent" onClick={() => setAssign({ preset: null, editing: null })}>
                 Assign
               </Button>
             </>
@@ -340,15 +326,14 @@ export default function ClassroomPage() {
       >
         <div className="flex flex-wrap gap-2">
           <HeaderChip
-            icon={<ClipboardCheck className="size-4" />}
             onClick={() => setParam({ tab: 'assignments', post: null })}
             label={mine.todo.length ? `${pluralize(mine.todo.length, 'assignment')} to do` : 'All caught up'}
             alert={mine.overdue > 0 ? `${mine.overdue} overdue` : undefined}
           />
           {newsletters[0] && (
-            <HeaderChip icon={<Newspaper className="size-4" />} onClick={() => setParam({ post: newsletters[0].id })} label={`Latest: ${newsletters[0].title}`} />
+            <HeaderChip onClick={() => setParam({ post: newsletters[0].id })} label={`Latest: ${newsletters[0].title}`} />
           )}
-          <HeaderChip icon={<Users className="size-4" />} label={pluralize(ctx.members.length, 'member')} />
+          <HeaderChip label={pluralize(ctx.members.length, 'member')} />
         </div>
       </PageHeader>
 
@@ -369,7 +354,7 @@ export default function ClassroomPage() {
                   <button
                     type="button"
                     onClick={() => setComposer({ kind: 'announcement', editing: null })}
-                    className="mb-5 flex w-full items-center gap-3 rounded-[12px] border border-line bg-surface px-4 py-3 text-left shadow-card transition-[border-color,box-shadow] hover:border-blue/40 hover:shadow-lift"
+                    className="mb-5 flex w-full items-center gap-3 rounded-[2px] border border-line bg-surface px-4 py-3 text-left transition-colors hover:border-blue"
                   >
                     <Avatar src={ctx.members.find((m) => m.user_id === ctx.me.id)?.profile.avatar_url} name={ctx.members.find((m) => m.user_id === ctx.me.id)?.profile.display_name} size="sm" />
                     <span className="flex-1 text-[0.9375rem] text-muted">Share something with your chapter…</span>
@@ -386,14 +371,13 @@ export default function ClassroomPage() {
                       const M = POST_META[k];
                       const n = data.posts.filter((p) => p.kind === k && (!eventFilter || p.event === eventFilter)).length;
                       return (
-                        <Pill key={k} active={kindFilter === k} onClick={() => setParam({ kind: kindFilter === k ? null : k })} icon={<M.icon />} count={n}>
+                        <Pill key={k} active={kindFilter === k} onClick={() => setParam({ kind: kindFilter === k ? null : k })} count={n}>
                           {M.plural}
                         </Pill>
                       );
                     })}
                   </div>
                   <div className="flex items-center gap-2 sm:w-60">
-                    <Filter className="size-4 shrink-0 text-muted" aria-hidden />
                     <Select
                       aria-label="Filter by event"
                       className="flex-1"
@@ -549,18 +533,17 @@ export default function ClassroomPage() {
 
 // ------------------------------------------------------------------------------------------------ pieces
 
-function HeaderChip({ icon, label, alert, onClick }: { icon: ReactNode; label: string; alert?: string; onClick?: () => void }) {
+function HeaderChip({ label, alert, onClick }: { label: string; alert?: string; onClick?: () => void }) {
   const cls =
-    'inline-flex h-9 max-w-full items-center gap-2 rounded-full bg-white/10 px-3.5 text-sm font-semibold text-white ring-1 ring-inset ring-white/15 backdrop-blur-sm transition-colors';
+    'inline-flex h-9 max-w-full items-center gap-2 rounded-[2px] border border-white/15 bg-navy-2 px-3.5 text-sm font-semibold text-white transition-colors';
   const inner = (
     <>
-      {icon}
       <span className="truncate">{label}</span>
-      {alert && <span className="rounded-full bg-red px-2 py-0.5 text-[11px] font-bold">{alert}</span>}
+      {alert && <span className="rounded-[2px] bg-red px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide">{alert}</span>}
     </>
   );
   return onClick ? (
-    <button type="button" onClick={onClick} className={cn(cls, 'hover:bg-white/18')}>
+    <button type="button" onClick={onClick} className={cn(cls, 'hover:border-white/40')}>
       {inner}
     </button>
   ) : (
@@ -601,7 +584,6 @@ function Stream({
   if (!data.posts.length)
     return (
       <EmptyState
-        icon={<Sparkles />}
         title="The classroom is quiet"
         description={
           onCompose
@@ -615,7 +597,6 @@ function Stream({
     return (
       <EmptyState
         compact
-        icon={<Filter />}
         title="Nothing matches these filters"
         description={`No ${kindFilter ? POST_META[kindFilter].plural.toLowerCase() : 'posts'}${eventFilter ? ` for ${eventName(eventFilter)}` : ''} yet.`}
         action={
@@ -677,13 +658,10 @@ function UpNext({ todo, decks, onOpen, onSeeAll }: { todo: ClassAssignment[]; de
             const deckMissing = a.kind === 'deck' && !decks.some((d) => d.id === a.ref);
             return (
               <div key={a.id} className="flex items-center gap-3 px-4 py-3">
-                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-navy/8 text-navy dark:bg-blue/20 dark:text-link">
-                  <M.icon className="size-4" />
-                </span>
                 <button type="button" onClick={() => onOpen(a)} className="min-w-0 flex-1 text-left">
+                  <span className="block text-[10px] font-bold uppercase tracking-wider text-muted">{M.short}</span>
                   <span className="block truncate text-sm font-semibold text-heading hover:text-blue">{a.title}</span>
-                  <span className={cn('flex items-center gap-1 text-xs', due.tone === 'danger' ? 'font-semibold text-red dark:text-danger' : due.tone === 'warning' ? 'font-semibold text-[#8a5f00] dark:text-warning' : 'text-muted')}>
-                    <CalendarClock className="size-3" />
+                  <span className={cn('block text-xs', due.tone === 'danger' ? 'font-semibold text-red dark:text-danger' : due.tone === 'warning' ? 'font-semibold text-[#8a5f00] dark:text-warning' : 'text-muted')}>
                     {due.text}
                   </span>
                 </button>
@@ -701,10 +679,7 @@ function UpNext({ todo, decks, onOpen, onSeeAll }: { todo: ClassAssignment[]; de
           })}
         </Card>
       ) : (
-        <Card className="flex items-center gap-3 py-4">
-          <span className="grid size-9 place-items-center rounded-full bg-success/12 text-success">
-            <ClipboardCheck className="size-4" />
-          </span>
+        <Card className="border-l-4 border-l-success py-4">
           <div className="text-sm">
             <p className="font-semibold text-heading">You&apos;re all caught up</p>
             <p className="text-muted">No open assignments.</p>
@@ -719,7 +694,7 @@ function LatestNewsletter({ post, issue, onOpen }: { post: ClassPost; issue: num
   return (
     <section>
       <SectionLabel>Latest newsletter</SectionLabel>
-      <button type="button" onClick={onOpen} className="facets group relative block w-full overflow-hidden rounded-[12px] p-5 text-left text-white shadow-card transition-shadow hover:shadow-lift">
+      <button type="button" onClick={onOpen} className="group relative block w-full overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-5 text-left text-white transition-colors hover:bg-navy-2">
         <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/65">
           Issue {issue} · {formatDate(post.created_at)}
         </div>
@@ -741,9 +716,6 @@ function LibraryTeaser({ tests, decks, onOpen }: { tests: number; decks: number;
       <SectionLabel>Study library</SectionLabel>
       <Card interactive padded={false}>
         <button type="button" onClick={onOpen} className="flex w-full items-center gap-3 p-4 text-left">
-          <span className="grid size-10 place-items-center rounded-[10px] bg-blue/10 text-blue dark:text-link">
-            <Library className="size-5" />
-          </span>
           <span className="min-w-0 flex-1 text-sm">
             <span className="block font-semibold text-heading">Chapter tests and flashcards</span>
             <span className="text-muted">
@@ -761,10 +733,9 @@ function NewsletterShelf({ items, canWrite, onOpen, onWrite }: { items: ClassPos
   if (!items.length)
     return (
       <EmptyState
-        icon={<Newspaper />}
         title="No newsletters yet"
         description={canWrite ? 'A short weekly letter keeps everyone in the loop. Members get it as a notification and by email.' : 'Your executive team’s weekly newsletters will collect here.'}
-        action={canWrite ? <Button onClick={onWrite} leftIcon={<PenSquare className="size-4" />}>Write the first issue</Button> : undefined}
+        action={canWrite ? <Button onClick={onWrite}>Write the first issue</Button> : undefined}
       />
     );
   const [latest, ...older] = items;
@@ -772,15 +743,15 @@ function NewsletterShelf({ items, canWrite, onOpen, onWrite }: { items: ClassPos
     <div>
       {canWrite && (
         <div className="mb-5 flex justify-end">
-          <Button onClick={onWrite} leftIcon={<PenSquare className="size-4" />}>
+          <Button onClick={onWrite}>
             Write this week&apos;s issue
           </Button>
         </div>
       )}
-      <button type="button" onClick={() => onOpen(latest)} className="facets group relative block w-full overflow-hidden rounded-2xl p-6 text-left text-white shadow-card transition-shadow hover:shadow-lift sm:p-9">
+      <button type="button" onClick={() => onOpen(latest)} className="group relative block w-full overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-6 text-left text-white transition-colors hover:bg-navy-2 sm:p-9">
         <div className="relative max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
-            <span className="h-[3px] w-5 rounded-full bg-red" aria-hidden />
+            <span className="h-[3px] w-5 bg-red" aria-hidden />
             Latest · Issue {items.length}
           </div>
           <h2 className="mt-3 text-2xl font-extrabold leading-tight text-white sm:text-3xl">{latest.title}</h2>
@@ -791,7 +762,8 @@ function NewsletterShelf({ items, canWrite, onOpen, onWrite }: { items: ClassPos
             <span>{formatDate(latest.created_at)}</span>
             <span>{readingMinutes(latest.body)} min read</span>
           </div>
-          <span className="mt-6 inline-flex h-10 items-center gap-1.5 rounded-[10px] bg-white px-4 font-display text-sm font-semibold text-navy transition-transform group-hover:translate-x-0.5">
+          <span className="mt-6 inline-flex h-10 items-center gap-1.5 rounded-[2px] bg-white
+ px-4 font-display text-sm font-semibold text-navy transition-transform group-hover:translate-x-0.5">
             Read the issue <ChevronRight className="size-4" />
           </span>
         </div>

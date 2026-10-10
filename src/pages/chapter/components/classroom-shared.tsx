@@ -1,15 +1,13 @@
 import type { ReactNode } from 'react';
-import { BookOpen, FileText, Layers, Link2, Megaphone, Newspaper, ScrollText, type LucideIcon } from 'lucide-react';
 import { cn, type BadgeTone, type SelectOption } from '../../../components/ui';
 import { EVENTS, EVENT_GROUPS, eventInfo, type AssignmentKind, type PostKind } from '../../../lib/types';
 import type { ClassroomContext } from '../../../api/classroom';
 import { canManage } from '../../../api/classroom';
 
-export const POST_META: Record<PostKind, { label: string; plural: string; icon: LucideIcon; tone: BadgeTone; accent: string; blurb: string }> = {
+export const POST_META: Record<PostKind, { label: string; plural: string; tone: BadgeTone; accent: string; blurb: string }> = {
   announcement: {
     label: 'Announcement',
     plural: 'Announcements',
-    icon: Megaphone,
     tone: 'red',
     accent: 'bg-red text-white',
     blurb: 'News, reminders and meeting changes for the whole chapter.',
@@ -17,7 +15,6 @@ export const POST_META: Record<PostKind, { label: string; plural: string; icon: 
   newsletter: {
     label: 'Newsletter',
     plural: 'Newsletters',
-    icon: Newspaper,
     tone: 'navy',
     accent: 'bg-navy text-white dark:bg-blue',
     blurb: 'A weekly letter from the executive team. Members get it by email too.',
@@ -25,7 +22,6 @@ export const POST_META: Record<PostKind, { label: string; plural: string; icon: 
   link: {
     label: 'Link',
     plural: 'Links',
-    icon: Link2,
     tone: 'blue',
     accent: 'bg-blue text-white',
     blurb: 'Share a useful page: guidelines, a video, a sign-up form.',
@@ -33,17 +29,16 @@ export const POST_META: Record<PostKind, { label: string; plural: string; icon: 
   resource: {
     label: 'Resource',
     plural: 'Resources',
-    icon: BookOpen,
     tone: 'success',
     accent: 'bg-success text-white',
     blurb: 'Study notes, tips and materials members can come back to.',
   },
 };
 
-export const ASSIGNMENT_META: Record<AssignmentKind, { label: string; icon: LucideIcon; verb: string }> = {
-  test: { label: 'Chapter test', icon: FileText, verb: 'Take test' },
-  deck: { label: 'Flashcards', icon: Layers, verb: 'Study deck' },
-  official: { label: 'Official questions', icon: ScrollText, verb: 'Start' },
+export const ASSIGNMENT_META: Record<AssignmentKind, { label: string; short: string; verb: string }> = {
+  test: { label: 'Chapter test', short: 'Test', verb: 'Take test' },
+  deck: { label: 'Flashcards', short: 'Deck', verb: 'Study deck' },
+  official: { label: 'Official questions', short: 'Official', verb: 'Start' },
 };
 
 /** Grouped event options; `only` limits to the events the caller may manage. */
@@ -63,13 +58,13 @@ export function EventTag({ event, className, onClick }: { event: string | null |
   const info = eventInfo(event);
   if (!info) return null;
   const cls = cn(
-    'inline-flex h-6 items-center gap-1.5 rounded-md border border-line bg-surface-2 px-2 text-[11px] font-bold uppercase tracking-wider text-muted',
+    'inline-flex h-6 items-center gap-1.5 rounded-[2px] border border-line bg-surface-2 px-2 text-[11px] font-bold uppercase tracking-wider text-muted',
     onClick && 'transition-colors hover:border-blue/50 hover:text-heading',
     className,
   );
   const inner = (
     <>
-      <span className={cn('size-1.5 rounded-full', info.group === 'objective' ? 'bg-blue' : 'bg-red')} aria-hidden />
+      <span className={cn('size-1.5', info.group === 'objective' ? 'bg-blue' : 'bg-red')} aria-hidden />
       <span title={info.name}>{info.short}</span>
     </>
   );
@@ -130,18 +125,17 @@ export function toLocalInput(d: Date): string {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
-/** A coloured square icon for a post or assignment kind. */
-export function KindIcon({ icon: Icon, accent, size = 'md' }: { icon: LucideIcon; accent: string; size?: 'sm' | 'md' | 'lg' }) {
+/** A small flat uppercase label for a post or assignment kind. */
+export function KindLabel({ label, accent, className }: { label: string; accent: string; className?: string }) {
   return (
     <span
       className={cn(
-        'grid shrink-0 place-items-center rounded-[10px] shadow-[inset_0_1px_0_rgb(255_255_255/0.15)]',
-        size === 'lg' ? 'size-12 [&>svg]:size-6' : size === 'sm' ? 'size-8 [&>svg]:size-4' : 'size-10 [&>svg]:size-5',
+        'inline-flex h-5 shrink-0 items-center rounded-[2px] px-1.5 text-[10px] font-bold uppercase tracking-wider',
         accent,
+        className,
       )}
-      aria-hidden
     >
-      <Icon />
+      {label}
     </span>
   );
 }
@@ -150,7 +144,8 @@ export function SectionLabel({ children, action }: { children: ReactNode; action
   return (
     <div className="mb-3 flex items-center justify-between gap-3">
       <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
-        <span className="h-[3px] w-4 rounded-full bg-red" aria-hidden />
+        <span className="h-[3px] w-4 bg-red" aria-hidden />
+
         {children}
       </h2>
       {action}

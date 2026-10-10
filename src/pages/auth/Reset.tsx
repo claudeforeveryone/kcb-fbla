@@ -50,10 +50,8 @@ export default function Reset() {
       }
     >
       {sent ? (
-        <div className="animate-rise rounded-2xl border border-line bg-surface p-6 text-center shadow-card">
-          <span className="mx-auto mb-4 grid size-14 place-items-center rounded-2xl bg-blue/10 text-navy dark:text-link">
-            <MailCheck className="size-7" />
-          </span>
+        <div className="animate-rise rounded-[4px] border border-line bg-surface p-6 text-center">
+          <MailCheck className="mx-auto mb-4 size-6 text-muted" aria-hidden />
           <p className="text-[0.9375rem]">
             If an account exists for <strong className="text-heading">{email.trim()}</strong>, a reset link is on its way.
             It expires in one hour.
@@ -65,7 +63,7 @@ export default function Reset() {
       ) : (
         <form onSubmit={submit} noValidate className="space-y-4">
           {error && (
-            <div role="alert" className="rounded-[10px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
+            <div role="alert" className="rounded-[4px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
               {error}
             </div>
           )}

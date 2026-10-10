@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpenCheck, CheckCircle2, ChevronRight, ClipboardList, FileText, Inbox as InboxIcon, Swords } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { Avatar, Badge, ButtonLink, Card, CardHeader, EmptyState, ErrorState, Skeleton, cn, formatUntil } from '../../components/ui';
 import { eventInfo, eventName } from '../../lib/types';
 import { dueLabel, type AssignmentItem, type DuelItem } from './homeData';
@@ -27,7 +27,6 @@ export function Inbox({
   return (
     <Card>
       <CardHeader
-        icon={<InboxIcon className="size-[18px]" />}
         title={
           <span className="inline-flex items-center gap-2">
             Waiting on you
@@ -62,7 +61,6 @@ export function Inbox({
       ) : d.length === 0 && a.length === 0 ? (
         <EmptyState
           compact
-          icon={<Swords />}
           title="All caught up"
           description={
             hasChapter
@@ -71,7 +69,7 @@ export function Inbox({
           }
           action={
             <>
-              <ButtonLink to="/arena" size="sm" leftIcon={<Swords className="size-4" />}>
+              <ButtonLink to="/arena" size="sm">
                 Start a duel
               </ButtonLink>
               {!hasChapter && (
@@ -120,12 +118,7 @@ function DuelRow({ item }: { item: DuelItem }) {
         to={`/arena/${duel.id}`}
         className="group flex items-center gap-3 rounded-xl px-2 py-3 transition-colors hover:bg-surface-2"
       >
-        <span className="relative">
-          <Avatar src={opponent?.avatar_url} name={name} size="md" />
-          <span className="absolute -bottom-1 -right-1 grid size-5 place-items-center rounded-full bg-red text-white ring-2 ring-surface">
-            <Swords className="size-3" />
-          </span>
-        </span>
+        <Avatar src={opponent?.avatar_url} name={name} size="md" />
         <div className="min-w-0 flex-1">
           <div className="truncate text-sm">{copy}</div>
           <div className="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs text-muted">
@@ -139,7 +132,7 @@ function DuelRow({ item }: { item: DuelItem }) {
         ) : (
           <span
             className={cn(
-              'inline-flex h-8 shrink-0 items-center rounded-lg px-3 text-sm font-bold text-white transition-colors',
+              'inline-flex h-8 shrink-0 items-center rounded-[2px] px-3 text-sm font-bold text-white transition-colors',
               state === 'incoming' ? 'bg-red group-hover:bg-red-2' : 'bg-navy group-hover:bg-navy-2 dark:bg-blue',
             )}
           >
@@ -151,11 +144,9 @@ function DuelRow({ item }: { item: DuelItem }) {
   );
 }
 
-const KIND_ICON = { test: ClipboardList, deck: BookOpenCheck, official: FileText } as const;
 const KIND_LABEL = { test: 'Chapter test', deck: 'Flashcard deck', official: 'Official practice' } as const;
 
 function AssignmentRow({ item }: { item: AssignmentItem }) {
-  const Icon = KIND_ICON[item.kind] ?? ClipboardList;
   const due = dueLabel(item.due_at);
   return (
     <li>
@@ -163,14 +154,7 @@ function AssignmentRow({ item }: { item: AssignmentItem }) {
         to={`/chapter/classroom?assignment=${item.id}`}
         className={cn('group flex items-center gap-3 rounded-xl px-2 py-3 transition-colors hover:bg-surface-2', item.done && 'opacity-70')}
       >
-        <span
-          className={cn(
-            'grid size-10 shrink-0 place-items-center rounded-xl',
-            item.done ? 'bg-success/12 text-success' : 'bg-blue/10 text-blue dark:text-link',
-          )}
-        >
-          {item.done ? <CheckCircle2 className="size-5" /> : <Icon className="size-5" />}
-        </span>
+        <span aria-hidden className={cn('h-10 w-[3px] shrink-0', item.done ? 'bg-success' : 'bg-blue')} />
         <div className="min-w-0 flex-1">
           <div className={cn('truncate text-sm font-semibold text-heading', item.done && 'line-through decoration-muted/60')}>
             {item.title}
@@ -195,7 +179,7 @@ function AssignmentRow({ item }: { item: AssignmentItem }) {
         <ChevronRight className="size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5" />
       </Link>
       {!item.done && (
-        <div className="-mt-2 pb-2 pl-[3.75rem] sm:hidden">
+        <div className="-mt-2 pb-2 pl-[1.45rem] sm:hidden">
           <Badge tone={due.tone === 'neutral' ? 'neutral' : due.tone}>{due.text}</Badge>
         </div>
       )}

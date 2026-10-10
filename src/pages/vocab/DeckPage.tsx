@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { Brain, ClipboardList, Layers, ListChecks, Pencil, SearchX, Target, Zap } from 'lucide-react';
+import { Pencil } from 'lucide-react';
 import { Button, ButtonLink, EmptyState, ErrorState, PageHeader, Skeleton, Tabs, type TabItem } from '../../components/ui';
 import { Page } from '../../components/layout/Page';
 import { useAuth } from '../../lib/auth';
@@ -67,7 +67,7 @@ export default function DeckPage() {
   );
 
   useEffect(() => {
-    if (deck) document.title = `${deck.title} vocab · KCB FBLA`;
+    if (deck) document.title = `${deck.title} vocab · FBLC`;
   }, [deck]);
 
   const loading = s.status === 'idle' || s.status === 'loading';
@@ -89,7 +89,6 @@ export default function DeckPage() {
         <PageHeader title="Deck not found" back={{ to: '/vocab', label: 'All decks' }} size="sm" />
         <Page>
           <EmptyState
-            icon={<SearchX />}
             title="We couldn't find that deck"
             description="It may have been deleted, or it belongs to a chapter you're not in."
             action={<ButtonLink to="/vocab">Browse all decks</ButtonLink>}
@@ -107,11 +106,11 @@ export default function DeckPage() {
     key === REVIEW_KEY ? 'Review' : deck.kind === 'chapter' ? `Chapter deck${deck.event ? ` · ${eventName(deck.event)}` : ''}` : group;
 
   const tabs: TabItem<Mode>[] = [
-    { value: 'learn', label: 'Learn', icon: <Brain />, count: stats.due || undefined },
-    { value: 'cards', label: 'Flashcards', icon: <Layers /> },
-    { value: 'match', label: 'Match', icon: <Zap />, disabled: n < 3 },
-    { value: 'quiz', label: 'Quiz', icon: <ListChecks />, disabled: n < 4 },
-    { value: 'terms', label: 'Terms', icon: <ClipboardList />, count: n },
+    { value: 'learn', label: 'Learn', count: stats.due || undefined },
+    { value: 'cards', label: 'Flashcards' },
+    { value: 'match', label: 'Match', disabled: n < 3 },
+    { value: 'quiz', label: 'Quiz', disabled: n < 4 },
+    { value: 'terms', label: 'Terms', count: n },
   ];
   const active = tabs.find((t) => t.value === mode)?.disabled ? 'learn' : mode;
 
@@ -119,7 +118,6 @@ export default function DeckPage() {
   if (n === 0) {
     body = (
       <EmptyState
-        icon={<Target />}
         title={key === REVIEW_KEY ? 'Nothing is due' : 'This deck has no cards yet'}
         description={key === REVIEW_KEY ? 'You are all caught up. Pick a deck to learn something new.' : 'Cards added by your chapter staff will show up here.'}
         action={<ButtonLink to="/vocab">Browse decks</ButtonLink>}
@@ -214,10 +212,10 @@ function HeaderCount({ label, value, dot }: { label: string; value: number; dot:
 function LoadingDeck() {
   return (
     <>
-      <PageHeader title={<span className="inline-block h-9 w-56 animate-pulse rounded-lg bg-white/15" />} back={{ to: '/vocab', label: 'All decks' }} />
+      <PageHeader title={<span className="inline-block h-9 w-56 animate-pulse rounded-[2px] bg-white/15" />} back={{ to: '/vocab', label: 'All decks' }} />
       <Page>
         <Skeleton className="mb-6 h-11 w-full max-w-lg" />
-        <Skeleton className="mx-auto h-80 w-full max-w-2xl" rounded="rounded-[18px]" />
+        <Skeleton className="mx-auto h-80 w-full max-w-2xl" rounded="rounded-[4px]" />
       </Page>
     </>
   );

@@ -53,7 +53,7 @@ export function Tabs<T extends string>({
       aria-label={ariaLabel}
       className={cn(
         'scrollbar-none flex max-w-full overflow-x-auto',
-        variant === 'underline' ? 'gap-1 border-b border-line' : 'gap-1 rounded-xl bg-surface-2 p-1',
+        variant === 'underline' ? 'gap-1 border-b border-line' : 'gap-0 rounded-[2px] border border-line bg-surface-2',
         className,
       )}
     >
@@ -78,12 +78,12 @@ export function Tabs<T extends string>({
               'relative inline-flex shrink-0 items-center gap-2 font-display text-sm font-semibold transition-colors duration-150 disabled:opacity-40 [&>svg]:size-4',
               variant === 'underline'
                 ? cn(
-                    'h-11 px-3 after:absolute after:inset-x-2 after:-bottom-px after:h-[3px] after:rounded-full after:transition-colors',
+                    'h-11 px-3 after:absolute after:inset-x-2 after:-bottom-px after:h-[3px] after:transition-colors',
                     active ? 'text-heading after:bg-red' : 'text-muted hover:text-ink after:bg-transparent',
                   )
                 : cn(
-                    'h-9 rounded-lg px-3.5',
-                    active ? 'bg-surface text-heading shadow-[0_1px_3px_rgb(0_30_96/0.12)]' : 'text-muted hover:text-ink',
+                    'h-9 px-3.5',
+                    active ? 'bg-navy text-white dark:bg-blue' : 'text-muted hover:bg-surface-3 hover:text-ink',
                   ),
             )}
           >
@@ -92,7 +92,7 @@ export function Tabs<T extends string>({
             {t.count != null && (
               <span
                 className={cn(
-                  'tabular min-w-5 rounded-full px-1.5 text-center text-[11px] leading-5',
+                  'tabular min-w-5 rounded-[2px] px-1.5 text-center text-[11px] leading-5',
                   active ? 'bg-red text-white' : 'bg-surface-3 text-muted',
                 )}
               >

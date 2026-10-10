@@ -213,7 +213,7 @@ export default function Onboarding() {
       aside={
         <div className="lg:max-w-md">
           <p className="mb-4 hidden items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/65 lg:flex">
-            <span className="h-[3px] w-6 rounded-full bg-red" />
+            <span className="h-[3px] w-6 bg-red" />
             Step {step} of 2
           </p>
           <h2 className="text-2xl font-extrabold leading-tight tracking-tight text-white lg:text-4xl">
@@ -229,7 +229,7 @@ export default function Onboarding() {
       <StepDots step={step} />
 
       {error && (
-        <div role="alert" className="animate-rise mb-4 rounded-[10px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
+        <div role="alert" className="animate-rise mb-4 rounded-[4px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
           {error}
         </div>
       )}
@@ -247,7 +247,7 @@ export default function Onboarding() {
               <span className="absolute inset-0 grid place-items-center rounded-full bg-[#00143f]/0 text-white opacity-0 transition-all group-hover:bg-[#00143f]/45 group-hover:opacity-100 group-focus-visible:bg-[#00143f]/45 group-focus-visible:opacity-100">
                 <Camera className="size-6" />
               </span>
-              <span className="absolute -bottom-0.5 -right-0.5 grid size-7 place-items-center rounded-full bg-red text-white ring-[3px] ring-bg">
+              <span className="absolute -bottom-0.5 -right-0.5 grid size-7 place-items-center rounded-[2px] bg-red text-white ring-2 ring-bg">
                 <Camera className="size-3.5" />
               </span>
             </button>
@@ -344,13 +344,13 @@ export default function Onboarding() {
           <fieldset>
             <legend className="mb-2 text-sm font-semibold text-ink">Main event</legend>
             {topicsErr ? (
-              <p className="rounded-lg bg-surface-2 p-3 text-sm text-muted">
+              <p className="rounded-[2px] bg-surface-2 p-3 text-sm text-muted">
                 Events could not load right now. You can pick one later in Settings.
               </p>
             ) : !topics ? (
               <div className="grid gap-2 sm:grid-cols-2">
                 {Array.from({ length: 6 }, (_, i) => (
-                  <Skeleton key={i} className="h-14" rounded="rounded-[10px]" />
+                  <Skeleton key={i} className="h-14" rounded="rounded-[4px]" />
                 ))}
               </div>
             ) : (
@@ -374,9 +374,9 @@ export default function Onboarding() {
                             disabled={!allowed}
                             onClick={() => setEvent(active ? null : t.slug)}
                             className={cn(
-                              'flex min-h-14 items-center gap-3 rounded-[10px] border px-3 py-2 text-left transition-all duration-150',
+                              'flex min-h-14 items-center gap-3 rounded-[4px] border px-3 py-2 text-left transition-all duration-150',
                               active
-                                ? 'border-navy bg-navy text-white shadow-lift dark:border-blue dark:bg-blue'
+                                ? 'border-navy bg-navy text-white dark:border-blue dark:bg-blue'
                                 : 'border-line-strong bg-surface hover:border-blue/60 hover:bg-surface-2',
                               !allowed && 'cursor-not-allowed opacity-45',
                             )}
@@ -393,7 +393,7 @@ export default function Onboarding() {
                             </span>
                             <span
                               className={cn(
-                                'grid size-5 shrink-0 place-items-center rounded-full border transition-colors',
+                                'grid size-5 shrink-0 place-items-center rounded-[2px] border transition-colors',
                                 active ? 'border-white bg-white text-navy' : 'border-line-strong',
                               )}
                               aria-hidden
@@ -435,7 +435,7 @@ function StepDots({ step }: { step: 1 | 2 }) {
       {[1, 2].map((s) => (
         <span
           key={s}
-          className={cn('h-1.5 rounded-full transition-all duration-300 ease-out', s === step ? 'w-10 bg-red' : s < step ? 'w-6 bg-navy dark:bg-link' : 'w-6 bg-surface-3')}
+          className={cn('h-1.5 transition-all duration-300 ease-out', s === step ? 'w-10 bg-red' : s < step ? 'w-6 bg-navy dark:bg-link' : 'w-6 bg-surface-3')}
         />
       ))}
       <span className="ml-1 text-xs font-semibold text-muted">Step {step} of 2</span>
@@ -477,8 +477,8 @@ function PlayerCardPreview({
   eventName?: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-white/[0.14] to-white/[0.04] p-5 text-white shadow-pop backdrop-blur-md max-lg:border-line max-lg:bg-none max-lg:bg-surface max-lg:text-ink max-lg:shadow-card">
-      <div className="absolute -right-10 -top-10 size-36 rotate-12 rounded-3xl bg-red/25 blur-2xl max-lg:hidden" aria-hidden />
+    <div className="relative overflow-hidden rounded-[4px] border border-white/20 bg-navy-deep p-5 text-white max-lg:border-line max-lg:bg-surface max-lg:text-ink">
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-red" aria-hidden />
       <div className="relative flex items-center gap-4">
         <Avatar src={avatar} name={name} size="lg" ring />
         <div className="min-w-0 flex-1">
@@ -494,10 +494,10 @@ function PlayerCardPreview({
           <EloBadge elo={0} size="sm" />
         </span>
         {grade != null && (
-          <span className="rounded-full bg-white/12 px-2.5 py-1 text-xs font-semibold max-lg:bg-surface-2 max-lg:text-ink">Grade {grade}</span>
+          <span className="rounded-[2px] bg-white/12 px-2 py-1 text-xs font-semibold max-lg:bg-surface-2 max-lg:text-ink">Grade {grade}</span>
         )}
         {eventName && (
-          <span className="rounded-full bg-red px-2.5 py-1 text-xs font-semibold text-white">{eventName}</span>
+          <span className="rounded-[2px] bg-red px-2 py-1 text-xs font-semibold text-white">{eventName}</span>
         )}
       </div>
       {school && <div className="relative mt-3 truncate text-sm text-white/70 max-lg:text-muted">{school}</div>}

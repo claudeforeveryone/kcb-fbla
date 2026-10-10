@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Copy, FileText, Layers, MoreHorizontal, Pencil, Play, Plus, Search, Send, Timer, Trash2 } from 'lucide-react';
+import { MoreHorizontal, Pencil, Plus, Search } from 'lucide-react';
 import {
   Badge,
   Button,
@@ -28,7 +28,7 @@ import {
   type ClassroomContext,
 } from '../../../api/classroom';
 import type { AssignPreset } from './classroom-assign-modal';
-import { EventTag, SectionLabel, eventOptions, pluralize, timeAgo } from './classroom-shared';
+import { EventTag, KindLabel, SectionLabel, eventOptions, pluralize, timeAgo } from './classroom-shared';
 
 export function LibraryPanel({
   ctx,
@@ -100,20 +100,18 @@ export function LibraryPanel({
             const manage = canManage(ctx, t.event);
             const items: DropdownItem[] = manage
               ? [
-                  { label: 'Edit questions', icon: <Pencil className="size-4" />, to: `/chapter/tests/${t.id}/edit` },
-                  ...(t.questions.length ? [{ label: 'Assign', icon: <Send className="size-4" />, onSelect: () => onAssign({ kind: 'test', ref: t.id }) }] : []),
-                  { label: 'Duplicate', icon: <Copy className="size-4" />, onSelect: () => void duplicate(t) },
+                  { label: 'Edit questions', to: `/chapter/tests/${t.id}/edit` },
+                  ...(t.questions.length ? [{ label: 'Assign', onSelect: () => onAssign({ kind: 'test', ref: t.id }) }] : []),
+                  { label: 'Duplicate', onSelect: () => void duplicate(t) },
                   { type: 'separator' },
-                  { label: 'Delete', icon: <Trash2 className="size-4" />, danger: true, onSelect: () => onDeleteTest(t) },
+                  { label: 'Delete', danger: true, onSelect: () => onDeleteTest(t) },
                 ]
               : [];
             return (
               <Card key={t.id} padded={false} className="flex flex-col p-4">
                 <div className="flex items-start gap-3">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-[10px] bg-blue/10 text-blue dark:text-link">
-                    <FileText className="size-5" />
-                  </span>
                   <div className="min-w-0 flex-1">
+                    <KindLabel label="Test" accent="bg-blue text-white" className="mb-1.5" />
                     <h3 className="line-clamp-2 text-base font-bold leading-snug">{t.title}</h3>
                     <div className="mt-1 flex flex-wrap items-center gap-1.5">
                       <EventTag event={t.event} />
@@ -138,15 +136,14 @@ export function LibraryPanel({
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.8125rem] text-muted">
                     <span className="tabular font-semibold text-ink">{pluralize(t.questions.length, 'question')}</span>
                     {t.time_limit_sec ? (
-                      <span className="inline-flex items-center gap-1">
-                        <Timer className="size-3.5" />
+                      <span>
                         {Math.round(t.time_limit_sec / 60)} min
                       </span>
                     ) : null}
                     <span>{timeAgo(t.updated_at)}</span>
                   </div>
                   {t.published && t.questions.length > 0 ? (
-                    <ButtonLink to={customTestHref(t.id)} size="sm" variant="secondary" leftIcon={<Play className="size-3.5" />}>
+                    <ButtonLink to={customTestHref(t.id)} size="sm" variant="secondary">
                       Take
                     </ButtonLink>
                   ) : manage ? (
@@ -162,7 +159,6 @@ export function LibraryPanel({
       ) : (
         <EmptyState
           compact
-          icon={<FileText />}
           title={tests.length ? 'No tests match' : 'No chapter tests yet'}
           description={
             staff
@@ -181,20 +177,17 @@ export function LibraryPanel({
               const manage = canManage(ctx, d.event);
               const items: DropdownItem[] = manage
                 ? [
-                    { label: 'Edit cards', icon: <Pencil className="size-4" />, onSelect: () => onEditDeck(d) },
-                    ...(d.cards.length ? [{ label: 'Assign', icon: <Send className="size-4" />, onSelect: () => onAssign({ kind: 'deck', ref: d.id }) }] : []),
+                    { label: 'Edit cards', onSelect: () => onEditDeck(d) },
+                    ...(d.cards.length ? [{ label: 'Assign', onSelect: () => onAssign({ kind: 'deck', ref: d.id }) }] : []),
                     { type: 'separator' },
-                    { label: 'Delete', icon: <Trash2 className="size-4" />, danger: true, onSelect: () => onDeleteDeck(d) },
+                    { label: 'Delete', danger: true, onSelect: () => onDeleteDeck(d) },
                   ]
                 : [];
               return (
                 <Card key={d.id} padded={false} className="group relative flex flex-col overflow-hidden p-4">
-                  <div className="pointer-events-none absolute -right-6 -top-6 size-24 rotate-12 rounded-2xl bg-success/8" aria-hidden />
                   <div className="relative flex items-start gap-3">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-[10px] bg-success/12 text-success">
-                      <Layers className="size-5" />
-                    </span>
                     <div className="min-w-0 flex-1">
+                      <KindLabel label="Deck" accent="bg-success text-white" className="mb-1.5" />
                       <h3 className="line-clamp-2 text-base font-bold leading-snug">{d.title}</h3>
                       <div className="mt-1">
                         <EventTag event={d.event} />
@@ -213,13 +206,14 @@ export function LibraryPanel({
                     )}
                   </div>
                   {d.cards[0] && (
-                    <p className="relative mt-3 line-clamp-2 rounded-lg bg-surface-2/70 px-3 py-2 text-[0.8125rem] text-muted">
+                    <p className="relative mt-3 line-clamp-2 rounded-[2px] border-l-2 border-line-strong bg-surface-2 px-3 py-2
+ text-[0.8125rem] text-muted">
                       <span className="font-semibold text-ink">{d.cards[0].term}</span> · {d.cards[0].def}
                     </p>
                   )}
                   <div className="relative mt-auto flex items-center justify-between gap-3 pt-4">
                     <span className="tabular text-[0.8125rem] font-semibold text-ink">{pluralize(d.cards.length, 'card')}</span>
-                    <Button size="sm" variant="secondary" onClick={() => onStudyDeck(d)} disabled={!d.cards.length} leftIcon={<Play className="size-3.5" />}>
+                    <Button size="sm" variant="secondary" onClick={() => onStudyDeck(d)} disabled={!d.cards.length}>
                       Study
                     </Button>
                   </div>
@@ -230,7 +224,6 @@ export function LibraryPanel({
         ) : (
           <EmptyState
             compact
-            icon={<Layers />}
             title={decks.length ? 'No decks match' : 'No flashcard decks yet'}
             description={staff ? 'Make a deck from scratch, paste a list, or pick terms from the official vocab.' : 'Decks your trainers make show up here for you to study.'}
             action={staff && !decks.length ? <Button variant="outline" onClick={onNewDeck} leftIcon={<Plus className="size-4" />}>Make a deck</Button> : undefined}

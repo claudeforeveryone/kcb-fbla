@@ -1,19 +1,6 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {
-  AlertTriangle,
-  ArrowRight,
-  BookOpen,
-  Crosshair,
-  FileText,
-  Gauge,
-  History,
-  Infinity as InfinityIcon,
-  ListRestart,
-  SearchX,
-  Target,
-  Zap,
-} from 'lucide-react';
+import { AlertTriangle, ArrowRight } from 'lucide-react';
 import {
   Badge,
   ButtonLink,
@@ -79,7 +66,6 @@ export default function EventPage() {
     return (
       <Page width="narrow">
         <EmptyState
-          icon={<SearchX />}
           title="We don't know that event"
           description="It may have been renamed. Pick one from the full list."
           action={<ButtonLink to="/play">All events</ButtonLink>}
@@ -106,10 +92,10 @@ export default function EventPage() {
         }
         actions={
           <>
-            <ButtonLink to={runHref({ mode: 'quick', event: info.slug })} variant="accent" leftIcon={<Zap className="size-4" />}>
+            <ButtonLink to={runHref({ mode: 'quick', event: info.slug })} variant="accent">
               Quick 10
             </ButtonLink>
-            <ButtonLink to={runHref({ mode: 'mock', event: info.slug })} variant="inverse" leftIcon={<FileText className="size-4" />}>
+            <ButtonLink to={runHref({ mode: 'mock', event: info.slug })} variant="inverse">
               Mock exam
             </ButtonLink>
           </>
@@ -130,7 +116,7 @@ export default function EventPage() {
 
       <Page>
         {ineligible && (
-          <div className="mb-6 flex items-start gap-3 rounded-[12px] border border-warning/40 bg-warning/10 p-4 text-sm">
+          <div className="mb-6 flex items-start gap-3 rounded-[4px] border border-warning/40 bg-warning/10 p-4 text-sm">
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" />
             <span>
               Introduction to Business Concepts is for grades 9 and 10 only. You can still practise it, but you
@@ -147,7 +133,6 @@ export default function EventPage() {
             <div className="space-y-6 lg:col-span-2">
               <Card>
                 <CardHeader
-                  icon={<Target className="size-4" />}
                   title="Competency areas"
                   subtitle="Your accuracy in each area of the official guide. Drill any area for 10 focused questions."
                 />
@@ -206,7 +191,6 @@ export default function EventPage() {
                 ) : (
                   <EmptyState
                     compact
-                    icon={<History />}
                     title={`No ${info.name} attempts yet`}
                     description="Start with a Quick 10 to see where you stand in each area."
                     action={
@@ -221,7 +205,7 @@ export default function EventPage() {
 
             <div className="space-y-6">
               <Card>
-                <CardHeader icon={<Gauge className="size-4" />} title="Predicted score" subtitle="From your first tries, weighted by area." />
+                <CardHeader title="Predicted score" subtitle="From your first tries, weighted by area." />
                 {stats.ready?.ready ? (
                   <div className="flex items-center gap-4">
                     <AccuracyRing accuracy={stats.ready.score / 100} answered={1} size={84} />
@@ -259,45 +243,38 @@ export default function EventPage() {
                 <ul className="divide-y divide-line">
                   <ModeRow
                     to={runHref({ mode: 'quick', event: info.slug })}
-                    icon={<Zap />}
                     title="Quick 10"
                     sub="New questions first"
                   />
                   <ModeRow
                     to={runHref({ mode: 'practice', event: info.slug, n: 25 })}
-                    icon={<BookOpen />}
                     title="Practice 25"
                     sub="A longer set with instant feedback"
                   />
                   <ModeRow
                     to={runHref({ mode: 'endless', event: info.slug })}
-                    icon={<InfinityIcon />}
                     title="Endless"
                     sub={stats.best ? `Best run ${stats.best.correct}` : 'Three lives, no limit'}
                   />
                   <ModeRow
                     to={runHref({ mode: 'weak', event: info.slug })}
-                    icon={<Crosshair />}
                     title="Weak spots"
                     sub={stats.weakest ? `Starts with ${stats.weakest}` : 'Your misses and lowest areas'}
                   />
                   {stats.misses > 0 && (
                     <ModeRow
                       to={runHref({ redo: 'wrong', event: info.slug })}
-                      icon={<ListRestart />}
                       title="Redo missed"
                       sub={`${stats.misses} open ${stats.misses === 1 ? 'miss' : 'misses'}`}
                     />
                   )}
                   <ModeRow
                     to={runHref({ mode: 'mock', event: info.slug })}
-                    icon={<FileText />}
                     title="Full mock exam"
                     sub="100 questions / 50 minutes"
                   />
                   <ModeRow
                     to={runHref({ mode: 'mock', event: info.slug, n: 50 })}
-                    icon={<FileText />}
                     title="Half mock"
                     sub="50 questions / 25 minutes"
                   />
@@ -313,20 +290,17 @@ export default function EventPage() {
 
 function Chip({ label, value }: { label: string; value: string }) {
   return (
-    <span className="inline-flex h-9 items-center gap-2 rounded-full bg-white/10 px-3.5 text-sm text-white ring-1 ring-inset ring-white/15">
+    <span className="inline-flex h-9 items-center gap-2 rounded-[2px] border border-white/20 px-3 text-sm text-white">
       <span className="text-white/70">{label}</span>
       <span className="tabular font-display font-bold">{value}</span>
     </span>
   );
 }
 
-function ModeRow({ to, icon, title, sub }: { to: string; icon: ReactNode; title: string; sub: string }) {
+function ModeRow({ to, title, sub }: { to: string; title: string; sub: string }) {
   return (
     <li>
       <Link to={to} className="group flex items-center gap-3 px-5 py-3 transition-colors hover:bg-surface-2/70">
-        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-navy/8 text-navy dark:bg-blue/20 dark:text-link [&>svg]:size-4">
-          {icon}
-        </span>
         <span className="min-w-0 flex-1">
           <span className="block text-sm font-semibold text-heading">{title}</span>
           <span className="block truncate text-xs text-muted">{sub}</span>
@@ -341,7 +315,7 @@ function EventSkeleton() {
   return (
     <div className="grid gap-6 lg:grid-cols-3" role="status" aria-label="Loading">
       <div className="space-y-6 lg:col-span-2">
-        <div className="rounded-[12px] border border-line bg-surface p-5">
+        <div className="rounded-[4px] border border-line bg-surface p-5">
           <Skeleton className="h-5 w-48" />
           <div className="mt-5 space-y-5">
             {Array.from({ length: 6 }, (_, i) => (
@@ -354,10 +328,10 @@ function EventSkeleton() {
         </div>
       </div>
       <div className="space-y-6">
-        <div className="rounded-[12px] border border-line bg-surface p-5">
+        <div className="rounded-[4px] border border-line bg-surface p-5">
           <SkeletonText lines={3} />
         </div>
-        <div className="rounded-[12px] border border-line bg-surface p-5">
+        <div className="rounded-[4px] border border-line bg-surface p-5">
           <SkeletonText lines={6} />
         </div>
       </div>

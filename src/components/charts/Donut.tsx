@@ -82,7 +82,7 @@ export function Donut({
               onPointerEnter={() => setHover(i)}
               onPointerLeave={() => setHover(null)}
             >
-              <span className="size-2.5 shrink-0 rounded-sm" style={{ background: s.color ?? chartColor(i) }} />
+              <span className="size-2.5 shrink-0" style={{ background: s.color ?? chartColor(i) }} />
               <span className="min-w-0 flex-1 truncate text-ink">{s.label}</span>
               <span className="tabular font-semibold text-heading">{formatValue(s.value, total)}</span>
             </li>

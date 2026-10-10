@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ChevronRight, Flag, Search, SearchX, Users, X } from 'lucide-react';
+import { ChevronRight, Search, X } from 'lucide-react';
 import { Avatar, Button, ButtonLink, EmptyState, ErrorState, Input, Spinner, cn } from '../../components/ui';
 import type { ChapterLeaderboardRow } from '../../lib/types';
 import { ChapterDrawer } from './ChapterDrawer';
@@ -48,7 +48,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-3 rounded-[12px] border border-line bg-surface p-3 shadow-card sm:flex-row sm:items-end sm:p-4">
+      <div className="flex flex-col gap-3 rounded-[4px] border border-line bg-surface p-3 shadow-card sm:flex-row sm:items-end sm:p-4">
         <Input
           className="sm:flex-1"
           label="Search chapters"
@@ -72,11 +72,11 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
           }
         />
         {mine ? (
-          <Button variant="outline" onClick={() => setOpen(mine)} leftIcon={<Flag className="size-4" />}>
+          <Button variant="outline" onClick={() => setOpen(mine)}>
             My chapter is {ordinal(mine.rank)}
           </Button>
         ) : !myChapterId ? (
-          <ButtonLink to="/chapter" variant="outline" leftIcon={<Users className="size-4" />}>
+          <ButtonLink to="/chapter" variant="outline">
             Join or start a chapter
           </ButtonLink>
         ) : null}
@@ -101,16 +101,15 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
         <ErrorState title="Could not load chapters" error={board.error} onRetry={board.reload} />
       ) : board.loading ? (
         <>
-          <div className="rounded-[12px] border border-line bg-surface px-3 pt-10 shadow-card sm:px-8">
+          <div className="rounded-[4px] border border-line bg-surface px-3 pt-10 shadow-card sm:px-8">
             <PodiumSkeleton />
           </div>
-          <div className="overflow-hidden rounded-[12px] border border-line bg-surface shadow-card">
+          <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
             <RowsSkeleton rows={6} />
           </div>
         </>
       ) : board.rows.length === 0 ? (
         <EmptyState
-          icon={<Flag />}
           title="No chapters yet"
           description="Register your school's chapter, invite your members and climb this board together."
           action={
@@ -124,12 +123,8 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
           {showPodium && (
             <section
               aria-label="Podium"
-              className="relative overflow-hidden rounded-[12px] border border-line bg-surface px-2 pt-10 shadow-card sm:px-8"
+              className="relative overflow-hidden rounded-[4px] border border-line bg-surface px-2 pt-10 shadow-card sm:px-8"
             >
-              <span
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_100%,rgb(191_13_62/0.08),transparent_70%)]"
-                aria-hidden
-              />
               <div className="relative mx-auto max-w-2xl">
                 <Podium entries={podium} />
               </div>
@@ -138,7 +133,6 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
 
           {searching && filtered.length === 0 && !board.loadingMore ? (
             <EmptyState
-              icon={<SearchX />}
               title={`No chapters match "${query.trim()}"`}
               action={
                 <Button variant="outline" onClick={() => setQuery('')}>
@@ -147,7 +141,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
               }
             />
           ) : list.length > 0 ? (
-            <div className="overflow-hidden rounded-[12px] border border-line bg-surface shadow-card">
+            <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
               <div
                 className={cn(
                   GRID,
@@ -240,7 +234,7 @@ function ChapterRow({ row: r, onOpen }: { row: ChapterLeaderboardRow; onOpen: ()
           )}
         </span>
         <span className="flex items-center justify-end gap-1">
-          <EloCell elo={r.total_elo} label="Total Elo" gem={false} />
+          <EloCell elo={r.total_elo} label="Total Elo" />
           <ChevronRight className="size-4 text-muted transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden />
         </span>
       </button>

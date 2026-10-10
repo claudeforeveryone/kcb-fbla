@@ -26,7 +26,6 @@ export { Tooltip } from './Tooltip';
 export { SegmentedControl, Pill } from './Segmented';
 export type { SegmentOption } from './Segmented';
 export { PageHeader, FacetArt } from './PageHeader';
-export { EloBadge, TierGem, tierFor, tierProgress, TIERS } from './EloBadge';
-export type { Tier, TierName } from './EloBadge';
+export { EloBadge } from './EloBadge';
 export { CountdownTimer, formatClock, formatUntil } from './CountdownTimer';
 export { Kbd } from './Kbd';

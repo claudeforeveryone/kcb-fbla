@@ -63,7 +63,7 @@ export default function Signup() {
     >
       <form onSubmit={submit} noValidate className="space-y-4">
         {error && (
-          <div role="alert" className="animate-rise rounded-[10px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
+          <div role="alert" className="animate-rise rounded-[4px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
             {error}{' '}
             {error.includes('already exists') && (
               <Link to="/login" className="link">
@@ -144,21 +144,17 @@ function CheckInbox({ email, onBack }: { email: string; onBack: () => void }) {
 
   return (
     <AuthLayout title="Check your inbox" subtitle="One quick step to confirm it is really you.">
-      <div className="rounded-2xl border border-line bg-surface p-6 text-center shadow-card">
-        <div className="relative mx-auto mb-5 grid size-16 place-items-center">
-          <span className="absolute inset-0 rotate-6 rounded-2xl bg-blue/12" />
-          <span className="absolute inset-0 -rotate-6 rounded-2xl bg-red/10" />
-          <MailCheck className="relative size-7 text-navy dark:text-link" />
-        </div>
+      <div className="rounded-[4px] border border-line bg-surface p-6 text-center">
+        <MailCheck className="mx-auto mb-4 size-6 text-muted" aria-hidden />
         <p className="text-[0.9375rem] text-ink">
           We sent a confirmation link to
           <br />
           <strong className="font-semibold text-heading">{email}</strong>
         </p>
         <ol className="mx-auto mt-5 max-w-xs space-y-2 text-left text-sm text-muted">
-          {['Open the email from KCB FBLA', 'Tap "Confirm your email"', 'Set up your player card'].map((s, i) => (
+          {['Open the email from FBLC', 'Tap "Confirm your email"', 'Set up your player card'].map((s, i) => (
             <li key={s} className="flex items-center gap-2.5">
-              <span className="tabular grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[11px] font-bold text-white dark:bg-blue">
+              <span className="tabular grid size-5 shrink-0 place-items-center rounded-[2px] bg-navy text-[11px] font-bold text-white dark:bg-blue">
                 {i + 1}
               </span>
               {s}

@@ -1,22 +1,6 @@
 import { useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
-  Activity,
-  Award,
-  BookOpen,
-  CalendarCheck,
-  Clock,
-  ExternalLink,
-  Flame,
-  History,
-  Lock,
-  Settings2,
-  Target,
-  TrendingDown,
-  TrendingUp,
-  UserRound,
-} from 'lucide-react';
-import {
   Avatar,
   Badge,
   ButtonLink,
@@ -89,7 +73,8 @@ export default function MemberPage() {
       <>
         <PageHeader
           back={{ to: '/chapter/admin', label: 'Admin' }}
-          leading={<Skeleton className="size-20 rounded-full bg-white/15" />}
+          leading={<Skeleton className="size-20 bg-white/15" rounded="rounded-full" />
+}
           title={<Skeleton className="h-10 w-56 bg-white/15" />}
         />
         <Page>
@@ -112,7 +97,7 @@ export default function MemberPage() {
       <>
         <PageHeader title="Member not found" back={{ to: '/chapter', label: 'Chapter' }} />
         <Page>
-          <EmptyState icon={<UserRound />} title="This player doesn't exist" description="They may have deleted their account." action={<ButtonLink to="/chapter">Back to chapter</ButtonLink>} />
+          <EmptyState title="This player doesn't exist" description="They may have deleted their account." action={<ButtonLink to="/chapter">Back to chapter</ButtonLink>} />
         </Page>
       </>
     );
@@ -126,7 +111,6 @@ export default function MemberPage() {
         <PageHeader title={p.display_name} back={back} leading={<Avatar src={p.avatar_url} name={p.display_name} size="xl" ring />} />
         <Page>
           <EmptyState
-            icon={<Lock />}
             title="Chapter staff only"
             description={`Detailed stats, weak spots and attendance are visible to ${p.display_name}'s chapter president, executives and trainers.`}
             action={<ButtonLink to={`/u/${p.username}`}>View public profile</ButtonLink>}
@@ -150,11 +134,11 @@ export default function MemberPage() {
         subtitle={[`@${p.username}`, p.grade ? `Grade ${p.grade}` : null, p.main_event ? eventName(p.main_event) : null].filter(Boolean).join(' · ')}
         actions={
           <>
-            <ButtonLink to={`/u/${p.username}`} variant="inverse" leftIcon={<ExternalLink className="size-4" />}>
+            <ButtonLink to={`/u/${p.username}`} variant="inverse">
               Public profile
             </ButtonLink>
             {viewerIsAdmin && !isSelf && (
-              <ButtonLink to="/chapter/admin" variant="accent" leftIcon={<Settings2 className="size-4" />}>
+              <ButtonLink to="/chapter/admin" variant="accent">
                 Manage
               </ButtonLink>
             )}
@@ -172,24 +156,23 @@ export default function MemberPage() {
 
       <Page>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
-          <StatTile icon={<Target />} label="Accuracy" value={s.questions_answered ? pct(s.accuracy) : '–'} sub={`${fmt(s.questions_correct)}/${fmt(s.questions_answered)}`} />
-          <StatTile icon={<Activity />} label="Last 30 days" value={fmt(last30)} sub="questions" chart={<Sparkline values={weekly} title="Questions per week, last 26 weeks" />} />
-          <StatTile icon={<Flame />} label="Streak" value={`${s.current_streak}d`} sub={`best ${s.best_streak}d`} />
-          <StatTile icon={<Clock />} label="Time studied" value={fmtDuration(s.time_spent_ms)} sub={`${fmt(s.attempts_count)} ${s.attempts_count === 1 ? "set" : "sets"}`} />
-          <StatTile icon={<CalendarCheck />} label="Attendance" value={pct(attRate.rate)} sub={attRate.counted ? `${attRate.attended}/${attRate.counted} meetings` : 'No marks yet'} />
-          <StatTile icon={<Award />} label="Achievements" value={fmt(s.achievements.length)} sub={s.best_paper ? `best ${pct(s.best_paper.accuracy)}` : 'no full set yet'} />
+          <StatTile label="Accuracy" value={s.questions_answered ? pct(s.accuracy) : '–'} sub={`${fmt(s.questions_correct)}/${fmt(s.questions_answered)}`} />
+          <StatTile label="Last 30 days" value={fmt(last30)} sub="questions" chart={<Sparkline values={weekly} title="Questions per week, last 26 weeks" />} />
+          <StatTile label="Streak" value={`${s.current_streak}d`} sub={`best ${s.best_streak}d`} />
+          <StatTile label="Time studied" value={fmtDuration(s.time_spent_ms)} sub={`${fmt(s.attempts_count)} ${s.attempts_count === 1 ? "set" : "sets"}`} />
+          <StatTile label="Attendance" value={pct(attRate.rate)} sub={attRate.counted ? `${attRate.attended}/${attRate.counted} meetings` : 'No marks yet'} />
+          <StatTile label="Achievements" value={fmt(s.achievements.length)} sub={s.best_paper ? `best ${pct(s.best_paper.accuracy)}` : 'no full set yet'} />
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div className="min-w-0 space-y-6">
             <Card as="section">
-              <CardHeader icon={<TrendingUp className="size-5" />} title="Elo over time" subtitle="Rating at the end of each day" />
+              <CardHeader title="Elo over time" subtitle="Rating at the end of each day" />
               <LineChart title="Elo history" series={[{ name: 'Elo', data: eloSeries, color: 'var(--blue)' }]} height={200} area yMin={0} emptyLabel="No rated practice yet" />
             </Card>
 
             <Card as="section">
               <CardHeader
-                icon={<TrendingDown className="size-5" />}
                 title="Weak spots"
                 subtitle="Accuracy by area, worst first. These are the areas to drill before competition."
               />
@@ -230,7 +213,7 @@ export default function MemberPage() {
             </Card>
 
             <Card as="section">
-              <CardHeader icon={<Target className="size-5" />} title="Accuracy by event" />
+              <CardHeader title="Accuracy by event" />
               <BarChart
                 title="Accuracy by event"
                 data={s.by_event.map((e) => ({
@@ -249,7 +232,6 @@ export default function MemberPage() {
               <div className="p-4 sm:p-5">
                 <CardHeader
                   className="mb-0"
-                  icon={<History className="size-5" />}
                   title="Recent attempts"
                   subtitle={attempts.data ? `${fmt(attempts.data.count)} in total` : undefined}
                 />
@@ -307,7 +289,7 @@ export default function MemberPage() {
 
           <aside className="min-w-0 space-y-6">
             <Card as="section">
-              <CardHeader icon={<UserRound className="size-5" />} title="Profile" />
+              <CardHeader title="Profile" />
               {p.bio && <p className="mb-4 whitespace-pre-line text-[0.9375rem]">{p.bio}</p>}
               <dl className="space-y-2.5 text-sm">
                 {[
@@ -319,7 +301,7 @@ export default function MemberPage() {
                   ['Last seen', relativeDay(p.last_seen_at)],
                   ['Best answer streak', `${p.best_answer_streak} in a row`],
                   ['Arena', `${p.duel_wins}W ${p.duel_losses}L ${p.duel_draws}D`],
-                  ['Joined KCB FBLA', new Date(p.created_at).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })],
+                  ['Joined FBLC', new Date(p.created_at).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })],
                 ].map(([k, v]) => (
                   <div key={k as string} className="flex items-center justify-between gap-3">
                     <dt className="text-muted">{k}</dt>
@@ -332,7 +314,6 @@ export default function MemberPage() {
             {(viewerIsAdmin || isSelf) && (
               <Card as="section">
                 <CardHeader
-                  icon={<CalendarCheck className="size-5" />}
                   title="Attendance"
                   subtitle={attRate.counted ? `${attRate.attended} of ${attRate.counted} counted meetings` : undefined}
                   action={<span className="tabular font-display text-2xl font-extrabold text-heading">{pct(attRate.rate)}</span>}
@@ -359,10 +340,7 @@ export default function MemberPage() {
             )}
 
             {p.main_event && (
-              <Card as="section" className="flex items-center gap-3">
-                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-navy text-white dark:bg-surface-3">
-                  <BookOpen className="size-5" aria-hidden />
-                </span>
+              <Card as="section" className="flex items-center gap-3 border-l-4 border-l-navy">
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-semibold text-heading">{eventName(p.main_event)}</div>
                   <div className="text-xs text-muted">Their main event</div>

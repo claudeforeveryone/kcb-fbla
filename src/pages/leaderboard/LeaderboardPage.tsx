@@ -1,6 +1,6 @@
 import { useCallback, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Flag, Info, Swords, Trophy } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { Page } from '../../components/layout/Page';
 import {
   Button,
@@ -9,12 +9,8 @@ import {
   Modal,
   PageHeader,
   Skeleton,
-  TIERS,
-  TierGem,
   Tabs,
   tabPanelProps,
-  tierFor,
-  tierProgress,
 } from '../../components/ui';
 import { useProfile } from '../../lib/auth';
 import { isEventSlug } from '../../lib/types';
@@ -67,13 +63,13 @@ export default function LeaderboardPage() {
             <Button variant="inverse" onClick={() => setHowOpen(true)} leftIcon={<Info className="size-4" />}>
               How ranking works
             </Button>
-            <ButtonLink to="/play" variant="accent" leftIcon={<Swords className="size-4" />}>
+            <ButtonLink to="/play" variant="accent">
               Climb the board
             </ButtonLink>
           </>
         }
       >
-        <Standing elo={profile.elo} overall={overall} inChapter={profile.chapter_id ? inChapter : null} />
+        <Standing elo={profile.elo} peak={profile.peak_elo} overall={overall} inChapter={profile.chapter_id ? inChapter : null} />
       </PageHeader>
 
       <Page>
@@ -84,8 +80,8 @@ export default function LeaderboardPage() {
           value={tab}
           onChange={(t) => patch({ tab: t === 'players' ? null : t })}
           items={[
-            { value: 'players', label: 'Players', icon: <Trophy /> },
-            { value: 'chapters', label: 'Chapters', icon: <Flag /> },
+            { value: 'players', label: 'Players' },
+            { value: 'chapters', label: 'Chapters' },
           ]}
         />
         <div {...tabPanelProps('lb', tab)} className="outline-none">
@@ -111,34 +107,21 @@ export default function LeaderboardPage() {
 }
 
 /** "Your standing" strip inside the navy header. */
-function Standing({ elo, overall, inChapter }: { elo: number; overall: MyStanding; inChapter: MyStanding | null }) {
-  const tier = tierFor(elo);
-  const next = tier.next != null ? TIERS.find((t) => t.min === tier.next) : undefined;
-  const progress = tierProgress(elo);
+function Standing({ elo, peak, overall, inChapter }: { elo: number; peak: number; overall: MyStanding; inChapter: MyStanding | null }) {
   return (
     <div className={inChapter ? 'grid grid-cols-2 gap-2 lg:max-w-4xl lg:grid-cols-[1fr_1fr_1.5fr]' : 'grid grid-cols-2 gap-2 lg:max-w-2xl lg:grid-cols-[1fr_1.5fr]'}>
-      <Chip label="Overall rank">
+      <Chip label="Overall position">
         <RankValue standing={overall} />
       </Chip>
       {inChapter && (
-        <Chip label="In my chapter">
+        <Chip label="Chapter position">
           <RankValue standing={inChapter} />
         </Chip>
       )}
       <Chip label="Your Elo" wide={!!inChapter}>
-        <div className="flex items-center gap-3">
+        <div className="flex items-baseline justify-between gap-3">
           <EloBadge elo={elo} onDark size="md" />
-          <div className="min-w-0 flex-1">
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/15">
-              <div
-                className="h-full rounded-full transition-[width] duration-500 ease-out"
-                style={{ width: `${Math.round(progress * 100)}%`, background: `linear-gradient(90deg, ${tier.from}, ${tier.to})` }}
-              />
-            </div>
-            <p className="mt-1 truncate text-[11px] text-white/70">
-              {next ? `${fmt.format(next.min - Math.round(elo))} to ${next.name}` : 'Top tier reached'}
-            </p>
-          </div>
+          <span className="tabular truncate text-[11px] text-white/70">Peak {fmt.format(Math.round(Math.max(peak, elo)))}</span>
         </div>
       </Chip>
     </div>
@@ -147,7 +130,7 @@ function Standing({ elo, overall, inChapter }: { elo: number; overall: MyStandin
 
 function Chip({ label, children, wide }: { label: string; children: ReactNode; wide?: boolean }) {
   return (
-    <div className={`rounded-xl bg-white/[0.08] px-3.5 py-2.5 ring-1 ring-inset ring-white/15 backdrop-blur-sm ${wide ? 'col-span-2 lg:col-span-1' : ''}`}>
+    <div className={`rounded-[4px] border border-white/15 bg-white/10 px-3.5 py-2.5 ${wide ? 'col-span-2 lg:col-span-1' : ''}`}>
       <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/60">{label}</div>
       {children}
     </div>
@@ -199,22 +182,6 @@ function HowRankingWorks({ open, onClose }: { open: boolean; onClose: () => void
             <li>Pick an event to rank players by the Elo they have gained from that event's questions alone.</li>
             <li>Chapters are ranked by the total Elo of all their members, so every member's practice counts.</li>
           </ul>
-        </section>
-        <section>
-          <h3 className="mb-2 font-display text-base font-bold text-heading">Tiers</h3>
-          <ol className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {TIERS.map((t) => (
-              <li key={t.name} className="flex items-center gap-2 rounded-lg border border-line px-2.5 py-2">
-                <TierGem elo={t.min} size={22} />
-                <span className="min-w-0">
-                  <span className="block font-display text-sm font-bold" style={{ color: t.ink }}>
-                    <span className="dark:text-white">{t.name}</span>
-                  </span>
-                  <span className="tabular block text-xs text-muted">{t.next != null ? `${t.min} to ${t.next - 1}` : `${t.min}+`}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
         </section>
       </div>
     </Modal>

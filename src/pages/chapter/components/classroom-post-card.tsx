@@ -1,9 +1,9 @@
-import { ArrowUpRight, Clock, ExternalLink, MoreHorizontal, Pencil, Pin, PinOff, Trash2 } from 'lucide-react';
-import { Avatar, Badge, Button, Card, Dropdown, cn, type DropdownItem } from '../../../components/ui';
+import { ArrowUpRight, MoreHorizontal } from 'lucide-react';
+import { Avatar, Button, Card, Dropdown, cn, type DropdownItem } from '../../../components/ui';
 import { ROLE_LABELS } from '../../../lib/types';
 import { canDeletePost, canEditPost, type ClassPost, type ClassroomContext } from '../../../api/classroom';
 import { excerpt, Markdown, readingMinutes } from './classroom-markdown';
-import { EventTag, KindIcon, POST_META, timeAgo } from './classroom-shared';
+import { EventTag, KindLabel, POST_META, timeAgo } from './classroom-shared';
 
 export function hostOf(url: string): string {
   try {
@@ -20,13 +20,10 @@ export function LinkPreview({ url, compact }: { url: string; compact?: boolean }
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'group/link flex min-w-0 items-center gap-3 rounded-[10px] border border-line bg-surface-2/60 transition-colors hover:border-blue/50 hover:bg-surface-2',
+        'group/link flex min-w-0 items-center gap-3 rounded-[2px] border border-line border-l-4 border-l-blue bg-surface-2 transition-colors hover:border-blue',
         compact ? 'px-3 py-2' : 'px-3.5 py-3',
       )}
     >
-      <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-surface text-blue ring-1 ring-line dark:text-link">
-        <ExternalLink className="size-4" />
-      </span>
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-semibold text-heading">{hostOf(url)}</span>
         <span className="block truncate text-xs text-muted">{url.replace(/^https?:\/\//, '')}</span>
@@ -63,12 +60,12 @@ export function PostCard({
   const canDelete = canDeletePost(ctx, post);
   const items: DropdownItem[] = [];
   if (canEdit) {
-    items.push({ label: post.pinned ? 'Unpin' : 'Pin to top', icon: post.pinned ? <PinOff className="size-4" /> : <Pin className="size-4" />, onSelect: onTogglePin });
-    items.push({ label: 'Edit', icon: <Pencil className="size-4" />, onSelect: onEdit });
+    items.push({ label: post.pinned ? 'Unpin' : 'Pin to top', onSelect: onTogglePin });
+    items.push({ label: 'Edit', onSelect: onEdit });
   }
   if (canDelete) {
     if (items.length) items.push({ type: 'separator' });
-    items.push({ label: 'Delete', icon: <Trash2 className="size-4" />, onSelect: onDelete, danger: true });
+    items.push({ label: 'Delete', onSelect: onDelete, danger: true });
   }
   const isNewsletter = post.kind === 'newsletter';
   const long = (post.body?.length ?? 0) > 420 || (post.body?.split('\n').length ?? 0) > 8;
@@ -81,15 +78,12 @@ export function PostCard({
       id={`post-${post.id}`}
       className={cn(
         'relative overflow-hidden transition-[box-shadow,border-color] duration-200',
-        post.pinned && 'border-navy/25 dark:border-blue/40',
-        highlight && 'ring-2 ring-blue/60',
+        post.pinned && 'border-navy/40 dark:border-blue/40',
+        highlight && 'ring-2 ring-blue',
       )}
     >
       {post.pinned && <span className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />}
       <div className="flex gap-3.5 p-4 sm:p-5">
-        <div className="hidden sm:block">
-          <KindIcon icon={meta.icon} accent={meta.accent} />
-        </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-start gap-2">
             <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem] text-muted">
@@ -118,16 +112,8 @@ export function PostCard({
           </div>
 
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            <Badge tone={meta.tone}>
-              <meta.icon className="size-3 sm:hidden" />
-              {meta.label}
-            </Badge>
-            {post.pinned && (
-              <Badge tone="red" solid>
-                <Pin className="size-3" />
-                Pinned
-              </Badge>
-            )}
+            <KindLabel label={meta.label} accent={meta.accent} />
+            {post.pinned && <KindLabel label="Pinned" accent="border border-red text-red dark:text-danger" />}
             <EventTag event={post.event} onClick={post.event ? () => onFilterEvent(post.event!) : undefined} />
           </div>
 
@@ -143,7 +129,7 @@ export function PostCard({
             ) : (
               <div className={cn('relative mt-1.5', long && 'max-h-52 overflow-hidden')}>
                 <Markdown text={post.body} size="sm" />
-                {long && <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface to-transparent" />}
+                {long && <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-line" />}
               </div>
             )
           )}
@@ -160,9 +146,9 @@ export function PostCard({
                 {isNewsletter ? 'Read newsletter' : 'Read more'}
               </Button>
               {isNewsletter && (
-                <span className="inline-flex items-center gap-1 text-xs text-muted">
-                  <Clock className="size-3.5" />
-                  {readingMinutes(post.body)} min read
+                <span className="text-xs text-muted">
+                  {readingMinutes
+(post.body)} min read
                 </span>
               )}
             </div>

@@ -1,4 +1,4 @@
-// Shared types for the KCB FBLA database (supabase/migrations/0006..0009) and the static event catalogue.
+// Shared types for the FBLC database (supabase/migrations/0006..0009) and the static event catalogue.
 // Rows mirror public.fbla_* exactly; RPC results mirror the core functions in 0007_core_rpcs.sql.
 
 // ------------------------------------------------------------------------------------------------ events

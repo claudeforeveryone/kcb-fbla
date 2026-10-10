@@ -85,7 +85,7 @@ export function Modal({
   return createPortal(
     <div className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-6">
       <div
-        className="animate-fade-in absolute inset-0 bg-[#00143f]/55 backdrop-blur-[2px]"
+        className="animate-fade-in absolute inset-0 bg-[#00143f]/60"
         onClick={dismissible ? onClose : undefined}
         aria-hidden
       />
@@ -97,7 +97,7 @@ export function Modal({
         aria-describedby={description ? descId : undefined}
         tabIndex={-1}
         className={cn(
-          'animate-pop relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-2xl border border-line bg-surface shadow-pop outline-none sm:rounded-2xl',
+          'animate-pop relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-[4px] border border-line bg-surface shadow-lift outline-none sm:rounded-[4px]',
           widths[size],
         )}
       >
@@ -119,7 +119,7 @@ export function Modal({
               <button
                 type="button"
                 onClick={onClose}
-                className="-mr-1.5 -mt-1 grid size-9 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+                className="-mr-1.5 -mt-1 grid size-9 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface-2 hover:text-ink"
                 aria-label="Close"
               >
                 <X className="size-5" />

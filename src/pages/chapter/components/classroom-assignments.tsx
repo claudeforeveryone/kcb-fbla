@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarClock, CheckCircle2, ChevronRight, ClipboardCheck, ClipboardList, Pencil, Plus, RotateCcw, Trash2, Trophy, Users } from 'lucide-react';
+import { ChevronRight, Pencil, Plus, RotateCcw, Trash2 } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -34,7 +34,7 @@ import {
   type ClassroomContext,
 } from '../../../api/classroom';
 import { excerpt } from './classroom-markdown';
-import { ASSIGNMENT_META, EventTag, KindIcon, dueLabel, formatDate, pluralize, timeAgo } from './classroom-shared';
+import { ASSIGNMENT_META, EventTag, KindLabel, dueLabel, formatDate, pluralize, timeAgo } from './classroom-shared';
 
 const KIND_ACCENT = { test: 'bg-blue text-white', deck: 'bg-success text-white', official: 'bg-navy text-white dark:bg-blue' } as const;
 
@@ -67,8 +67,8 @@ export function AssignmentsPanel(props: Common & { staff: boolean }) {
             value={view}
             onChange={setView}
             options={[
-              { value: 'manage', label: 'Track progress', icon: <Users /> },
-              { value: 'mine', label: 'My to-do', icon: <ClipboardList /> },
+              { value: 'manage', label: 'Track progress' },
+              { value: 'mine', label: 'My to-do' },
             ]}
           />
           <Button variant="accent" leftIcon={<Plus className="size-4" />} onClick={props.onNew}>
@@ -109,7 +109,6 @@ function MyList({ ctx, assignments, attempts, tests, decks, onStudyDeck }: Commo
   if (!assignments.length)
     return (
       <EmptyState
-        icon={<ClipboardCheck />}
         title="No assignments yet"
         description="When your executives or trainers assign a test or a deck, it shows up here with its due date."
         action={<ButtonLink to="/play" variant="outline">Practise on your own</ButtonLink>}
@@ -135,7 +134,6 @@ function MyList({ ctx, assignments, attempts, tests, decks, onStudyDeck }: Commo
         {!shown.length && (
           <EmptyState
             compact
-            icon={filter === 'done' ? <ClipboardList /> : <CheckCircle2 />}
             title={filter === 'todo' ? 'All caught up' : filter === 'overdue' ? 'Nothing overdue' : 'Nothing finished yet'}
             description={filter === 'done' ? 'Finished assignments and your scores collect here.' : 'Nice work. Keep your streak going with a quick practice set.'}
             action={filter !== 'done' ? <ButtonLink to="/play" variant="outline" size="sm">Quick practice</ButtonLink> : undefined}
@@ -148,7 +146,7 @@ function MyList({ ctx, assignments, attempts, tests, decks, onStudyDeck }: Commo
 
 function Count({ n, danger }: { n: number; danger?: boolean }) {
   return (
-    <span className={cn('tabular ml-1 rounded-full px-1.5 text-[11px]', danger && n ? 'bg-red text-white' : 'bg-surface-3 text-muted')}>{n}</span>
+    <span className={cn('tabular ml-1 rounded-[2px] px-1.5 text-[11px]', danger && n ? 'bg-red text-white' : 'bg-surface-3 text-muted')}>{n}</span>
   );
 }
 
@@ -199,18 +197,16 @@ function MyCard({
   return (
     <Card padded={false} id={`assignment-${a.id}`} className={cn('flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:p-5', status === 'overdue' && 'border-red/30')}>
       <div className="flex min-w-0 flex-1 gap-3.5">
-        <KindIcon icon={meta.icon} accent={KIND_ACCENT[a.kind]} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted">
-            {meta.label}
+            <KindLabel label={meta.label} accent={KIND_ACCENT[a.kind]} />
             <EventTag event={a.event} />
           </div>
           <h3 className="mt-1 text-base font-bold leading-snug">{a.title}</h3>
           {a.instructions && <p className="mt-1 text-sm text-ink/80">{excerpt(a.instructions, 200)}</p>}
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.8125rem]">
             {status !== 'done' && (
-              <span className={cn('inline-flex items-center gap-1 font-semibold', due.tone === 'danger' ? 'text-red dark:text-danger' : due.tone === 'warning' ? 'text-[#8a5f00] dark:text-warning' : 'text-muted')}>
-                <CalendarClock className="size-3.5" />
+              <span className={cn('font-semibold', due.tone === 'danger' ? 'text-red dark:text-danger' : due.tone === 'warning' ? 'text-[#8a5f00] dark:text-warning' : 'text-muted')}>
                 {due.text}
               </span>
             )}
@@ -271,7 +267,6 @@ function ManageList({ ctx, assignments, attempts, onFocus, onNew }: Common) {
   if (!assignments.length)
     return (
       <EmptyState
-        icon={<ClipboardCheck />}
         title="Assign your first piece of work"
         description="Pick a chapter test, a flashcard deck or a set of official questions, give it a due date, and watch completion roll in."
         action={
@@ -305,15 +300,13 @@ function ManageList({ ctx, assignments, attempts, onFocus, onNew }: Common) {
             <Card key={a.id} interactive padded={false} className="cursor-pointer">
               <button type="button" onClick={() => onFocus(a.id)} className="flex w-full flex-col gap-4 p-4 text-left sm:flex-row sm:items-center sm:p-5">
                 <div className="flex min-w-0 flex-1 gap-3.5">
-                  <KindIcon icon={meta.icon} accent={KIND_ACCENT[a.kind]} />
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted">
-                      {meta.label}
+                      <KindLabel label={meta.label} accent={KIND_ACCENT[a.kind]} />
                       <EventTag event={a.event} />
                     </div>
                     <h3 className="mt-1 truncate text-base font-bold">{a.title}</h3>
-                    <span className={cn('mt-1 inline-flex items-center gap-1 text-[0.8125rem] font-semibold', isPast(a) ? 'text-muted' : due.tone === 'warning' ? 'text-[#8a5f00] dark:text-warning' : 'text-muted')}>
-                      <CalendarClock className="size-3.5" />
+                    <span className={cn('mt-1 block text-[0.8125rem] font-semibold', isPast(a) ? 'text-muted' : due.tone === 'warning' ? 'text-[#8a5f00] dark:text-warning' : 'text-muted')}>
                       {isPast(a) ? `Was due ${formatDate(a.due_at!, true)}` : due.text}
                     </span>
                   </div>
@@ -342,7 +335,7 @@ function ManageList({ ctx, assignments, attempts, onFocus, onNew }: Common) {
           );
         })}
         {!shown.length && (
-          <EmptyState compact icon={<ClipboardList />} title={filter === 'open' ? 'No open assignments' : 'Nothing past due'} description="Switch the filter to see the rest." />
+          <EmptyState compact title={filter === 'open' ? 'No open assignments' : 'Nothing past due'} description="Switch the filter to see the rest." />
         )}
       </div>
     </div>
@@ -420,7 +413,7 @@ function AssignmentDetail({ ctx, assignments, attempts, tests, decks, focusId, o
         </>
       }
     >
-      {a.instructions && <p className="mb-4 whitespace-pre-line rounded-[10px] bg-surface-2/70 px-4 py-3 text-sm text-ink/90">{a.instructions}</p>}
+      {a.instructions && <p className="mb-4 whitespace-pre-line rounded-[2px] border-l-4 border-navy bg-surface-2 px-4 py-3 text-sm text-ink/90">{a.instructions}</p>}
       {staffView ? (
         <>
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -429,8 +422,7 @@ function AssignmentDetail({ ctx, assignments, attempts, tests, decks, focusId, o
             <Stat label={a.due_at && new Date(a.due_at).getTime() < Date.now() ? 'Missed' : 'Not started'} value={String(rows.length - done.length)} />
           </div>
           {top && top.best && (
-            <p className="mt-3 flex items-center gap-2 text-sm text-muted">
-              <Trophy className="size-4 text-warning" />
+            <p className="mt-3 text-sm text-muted">
               Top score: <span className="font-semibold text-ink">{top.m.profile.display_name}</span> with {pct(top.best.correct, top.best.total)}%
             </p>
           )}
@@ -500,7 +492,7 @@ function AssignmentDetail({ ctx, assignments, attempts, tests, decks, focusId, o
 function MemberSummary({ attempts, kind }: { attempts: AttemptLite[]; kind: ClassAssignment['kind'] }) {
   if (!attempts.length) return <p className="text-sm text-muted">You haven&apos;t started this one yet.</p>;
   return (
-    <ul className="divide-y divide-line rounded-[10px] border border-line">
+    <ul className="divide-y divide-line rounded-[4px] border border-line">
       {attempts.map((t) => (
         <li key={t.id} className="flex items-center justify-between px-4 py-2.5 text-sm">
           <span className="text-muted">{formatDate(t.created_at, true)}</span>
@@ -515,7 +507,8 @@ function MemberSummary({ attempts, kind }: { attempts: AttemptLite[]; kind: Clas
 
 function Stat({ label, value, tone }: { label: string; value: string; tone?: string }) {
   return (
-    <div className="rounded-[10px] border border-line bg-surface-2/50 px-3 py-2.5">
+    <div className="rounded-[2px] border border-line bg-surface-2 px-3 py-2.5">
+
       <div className="text-[11px] font-bold uppercase tracking-wider text-muted">{label}</div>
       <div className={cn('tabular mt-0.5 font-display text-xl font-extrabold text-heading sm:text-2xl', tone)}>{value}</div>
     </div>

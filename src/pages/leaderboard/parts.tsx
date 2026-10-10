@@ -1,23 +1,22 @@
 // Small presentational pieces shared by the player and chapter boards.
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Crown } from 'lucide-react';
-import { Avatar, Skeleton, TierGem, cn, tierFor } from '../../components/ui';
+import { Avatar, Skeleton, cn } from '../../components/ui';
 import { fmt } from './data';
 
 const MEDAL: Record<number, { ring: string; chip: string; label: string }> = {
-  1: { ring: 'ring-[#E7B416]', chip: 'bg-gradient-to-br from-[#FFE58A] to-[#D9A400] text-[#5A4100]', label: 'Gold' },
-  2: { ring: 'ring-[#AEB8C8]', chip: 'bg-gradient-to-br from-[#F1F4F8] to-[#A3AEBF] text-[#3B4454]', label: 'Silver' },
-  3: { ring: 'ring-[#C9824B]', chip: 'bg-gradient-to-br from-[#F2B98C] to-[#A9612E] text-[#4A2508]', label: 'Bronze' },
+  1: { ring: 'ring-red', chip: 'bg-red text-white', label: '1st place' },
+  2: { ring: 'ring-navy dark:ring-blue', chip: 'bg-navy text-white dark:bg-blue', label: '2nd place' },
+  3: { ring: 'ring-navy dark:ring-blue', chip: 'bg-navy text-white dark:bg-blue', label: '3rd place' },
 };
 
-/** Rank number; medal chip for the top three. */
+/** Position number; solid square chip for the top three. */
 export function RankMark({ rank, me, className }: { rank: number; me?: boolean; className?: string }) {
   const m = MEDAL[rank];
   if (m)
     return (
       <span
-        className={cn('tabular grid size-8 shrink-0 place-items-center rounded-full font-display text-sm font-extrabold shadow-sm', m.chip, className)}
+        className={cn('tabular grid size-8 shrink-0 place-items-center rounded-[2px] font-display text-sm font-extrabold', m.chip, className)}
         aria-label={`Rank ${rank}`}
       >
         {rank}
@@ -26,7 +25,7 @@ export function RankMark({ rank, me, className }: { rank: number; me?: boolean; 
   return (
     <span
       className={cn(
-        'tabular grid h-8 min-w-8 shrink-0 place-items-center rounded-full px-1.5 font-display text-sm font-bold',
+        'tabular grid h-8 min-w-8 shrink-0 place-items-center rounded-[2px] px-1.5 font-display text-sm font-bold',
         me ? 'bg-red text-white' : 'text-muted',
         className,
       )}
@@ -44,20 +43,18 @@ export function AccuracyMeter({ value, answered, className }: { value: number; a
   const tone = p >= 80 ? 'bg-success' : p >= 60 ? 'bg-blue' : p >= 40 ? 'bg-warning' : 'bg-red';
   return (
     <span className={cn('inline-flex items-center gap-2', className)} title={`${p}% correct`}>
-      <span className="h-1.5 w-12 overflow-hidden rounded-full bg-surface-3" aria-hidden>
-        <span className={cn('block h-full rounded-full', tone)} style={{ width: `${Math.max(4, p)}%` }} />
+      <span className="h-1.5 w-12 overflow-hidden bg-surface-3" aria-hidden>
+        <span className={cn('block h-full', tone)} style={{ width: `${Math.max(4, p)}%` }} />
       </span>
       <span className="tabular w-9 text-right text-sm font-semibold text-ink">{p}%</span>
     </span>
   );
 }
 
-/** Elo number with a tier gem, compact for table rows. */
-export function EloCell({ elo, label, gem = true }: { elo: number; label?: string; gem?: boolean }) {
-  const t = tierFor(elo);
+/** Elo number, compact for table rows. */
+export function EloCell({ elo, label }: { elo: number; label?: string }) {
   return (
-    <span className="inline-flex items-center justify-end gap-1.5" title={label ?? `${t.name} tier`}>
-      {gem && <TierGem elo={elo} size={16} />}
+    <span className="inline-flex items-center justify-end" title={label ?? `${Math.round(elo)} Elo`}>
       <span className="tabular font-display text-base font-bold text-heading">{fmt.format(Math.round(elo))}</span>
     </span>
   );
@@ -72,8 +69,6 @@ export type PodiumEntry = {
   /** Shown big under the name. */
   score: number;
   scoreLabel: string;
-  /** Elo used for the tier gem; omit to hide. */
-  tierElo?: number;
   me?: boolean;
   to?: string;
   onClick?: () => void;
@@ -94,7 +89,7 @@ export function Podium({ entries }: { entries: PodiumEntry[] }) {
         if (!e)
           return (
             <li key={`empty-${p}`} className="flex flex-col items-center opacity-60" aria-hidden>
-              <div className="mb-2 grid size-14 place-items-center rounded-full border-2 border-dashed border-line-strong text-sm font-bold text-muted md:size-16">
+              <div className="mb-2 grid size-14 place-items-center rounded-[2px] border-2 border-dashed border-line-strong text-sm font-bold text-muted md:size-16">
                 {p}
               </div>
               <div className={cn('w-full rounded-t-xl border border-b-0 border-dashed border-line-strong', PLINTH[p])} />
@@ -104,12 +99,6 @@ export function Podium({ entries }: { entries: PodiumEntry[] }) {
         const inner = (
           <>
             <div className="relative mb-2">
-              {p === 1 && (
-                <Crown
-                  className="animate-rise absolute -top-6 left-1/2 size-6 -translate-x-1/2 fill-[#F5C842] text-[#C79A00] md:-top-7 md:size-7"
-                  aria-hidden
-                />
-              )}
               {e.icon ?? (
                 <Avatar
                   src={e.avatar}
@@ -120,8 +109,8 @@ export function Podium({ entries }: { entries: PodiumEntry[] }) {
               )}
               <span
                 className={cn(
-                  'tabular absolute grid size-7 place-items-center rounded-full font-display text-xs font-extrabold shadow ring-2 ring-surface',
-                  e.icon ? '-right-2 -top-2' : '-bottom-1.5 left-1/2 -translate-x-1/2',
+                  'tabular absolute grid size-7 place-items-center rounded-[2px] font-display text-xs font-extrabold ring-2 ring-surface',
+                  e.icon ? '-right-2 -top-2' : '-bottom-2 -right-2',
                   medal.chip,
                 )}
               >
@@ -139,13 +128,11 @@ export function Podium({ entries }: { entries: PodiumEntry[] }) {
               className={cn(
                 'relative mt-2 flex w-full flex-col items-center justify-start overflow-hidden rounded-t-xl pt-2.5 text-white',
                 PLINTH[p],
-                p === 1 ? 'bg-navy' : 'bg-navy/85 dark:bg-navy-2',
-                e.me && 'shadow-[inset_0_3px_0_var(--red)]',
+                p === 1 ? 'bg-navy dark:bg-blue' : 'bg-navy/90 dark:bg-navy-2',
+                p === 1 ? 'border-t-4 border-red' : e.me && 'border-t-4 border-red',
               )}
             >
-              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgb(255_255_255/0.14)_0%,transparent_45%,rgb(63_111_179/0.35)_100%)]" aria-hidden />
               <span className="relative inline-flex items-center gap-1 font-display text-lg font-extrabold tabular md:text-2xl">
-                {e.tierElo != null && <TierGem elo={e.tierElo} size={18} />}
                 {fmt.format(Math.round(e.score))}
               </span>
               <span className="relative text-[10px] font-semibold uppercase tracking-wider text-white/65 md:text-[11px]">
@@ -200,7 +187,7 @@ export function RowsSkeleton({ rows = 8 }: { rows?: number }) {
     <div className="divide-y divide-line" role="status" aria-label="Loading">
       {Array.from({ length: rows }, (_, i) => (
         <div key={i} className="flex items-center gap-3 px-4 py-3">
-          <Skeleton className="size-8" rounded="rounded-full" />
+          <Skeleton className="size-8" rounded="rounded-[2px]" />
           <Skeleton className="size-10" rounded="rounded-full" />
           <div className="flex-1 space-y-2">
             <Skeleton className="h-3.5 w-40 max-w-full" />
@@ -226,13 +213,12 @@ export function ChapterCrest({ name, size = 'md', className }: { name: string; s
       .map((w) => w[0])
       .join('')
       .toUpperCase() || name.slice(0, 2).toUpperCase();
-  const s = { sm: 'size-8 text-[11px] rounded-lg', md: 'size-10 text-sm rounded-xl', lg: 'size-14 text-lg rounded-2xl', xl: 'size-20 text-2xl rounded-2xl' }[size];
+  const s = { sm: 'size-8 text-[11px] rounded-[2px]', md: 'size-10 text-sm rounded-[2px]', lg: 'size-14 text-lg rounded-[4px]', xl: 'size-20 text-2xl rounded-[4px]' }[size];
   return (
     <span
       className={cn('relative grid shrink-0 place-items-center overflow-hidden bg-navy font-display font-extrabold text-white', s, className)}
       aria-hidden
     >
-      <span className="absolute inset-0 bg-[linear-gradient(135deg,transparent_52%,rgb(63_111_179/0.7)_52%,rgb(63_111_179/0.25))]" />
       <span className="absolute -right-1 top-0 h-[140%] w-[3px] rotate-[22deg] bg-red/90" />
       <span className="relative">{letters}</span>
     </span>
@@ -242,7 +228,7 @@ export function ChapterCrest({ name, size = 'md', className }: { name: string; s
 /** Small solid red "You" / "Yours" tag. */
 export function YouTag({ children = 'You' }: { children?: ReactNode }) {
   return (
-    <span className="inline-flex h-5 shrink-0 items-center rounded-full bg-red px-2 text-[10px] font-bold uppercase tracking-wider text-white">
+    <span className="inline-flex h-5 shrink-0 items-center rounded-[2px] bg-red px-2 text-[10px] font-bold uppercase tracking-wider text-white">
       {children}
     </span>
   );

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Search, Send, Shuffle, Swords, UserRound, X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { Avatar, Button, EloBadge, Input, Modal, SegmentedControl, Select, Spinner, cn, useToast } from '../../components/ui';
 import { EVENTS, EVENT_GROUPS, type ProfileCard } from '../../lib/types';
 import {
@@ -128,7 +128,7 @@ export function ChallengeModal({
       <button
         type="button"
         onClick={() => setOpponent(p)}
-        className="flex w-full items-center gap-3 rounded-[10px] px-2.5 py-2 text-left transition-colors hover:bg-surface-2 focus-visible:bg-surface-2"
+        className="flex w-full items-center gap-3 rounded-[2px] px-2.5 py-2 text-left transition-colors hover:bg-surface-2 focus-visible:bg-surface-2"
       >
         <Avatar src={p.avatar_url} name={p.display_name || p.username} size="sm" />
         <span className="min-w-0 flex-1">
@@ -136,7 +136,7 @@ export function ChallengeModal({
           <span className="block truncate text-xs text-muted">@{p.username}</span>
         </span>
         {tag && <span className="text-[11px] font-semibold uppercase tracking-wide text-muted">{tag}</span>}
-        <EloBadge elo={p.elo} size="sm" showTier={false} />
+        <EloBadge elo={p.elo} size="sm" />
       </button>
     </li>
   );
@@ -158,7 +158,7 @@ export function ChallengeModal({
             onClick={send}
             loading={sending}
             disabled={!opponent}
-            leftIcon={<Send className="size-4" />}
+
           >
             Send challenge
           </Button>
@@ -172,7 +172,7 @@ export function ChallengeModal({
             Opponent
           </h3>
           {opponent ? (
-            <div className="flex items-center gap-3 rounded-[12px] border border-blue/30 bg-blue/[0.05] p-3">
+            <div className="flex items-center gap-3 rounded-[2px] border border-line border-l-4 border-l-blue bg-surface-2 p-3">
               <Avatar src={opponent.avatar_url} name={opponent.display_name || opponent.username} size="md" />
               <div className="min-w-0 flex-1">
                 <div className="truncate font-display font-bold text-heading">{displayName(opponent)}</div>
@@ -210,8 +210,8 @@ export function ChallengeModal({
                     <ul className="space-y-0.5">{results.map((p) => pickRow(p))}</ul>
                   ) : (
                     !searching && (
-                      <p className="flex items-center gap-2 px-2.5 py-4 text-sm text-muted">
-                        <UserRound className="size-4" /> No players match "{query.trim()}".
+                      <p className="px-2.5 py-4 text-sm text-muted">
+                        No players match "{query.trim()}".
                       </p>
                     )
                   )
@@ -223,7 +223,7 @@ export function ChallengeModal({
                     <ul className="space-y-0.5">{quick.map(({ p, tag }) => pickRow(p, tag))}</ul>
                   </>
                 ) : (
-                  <p className="px-2.5 py-3 text-sm text-muted">Type at least 2 letters to find anyone on KCB FBLA.</p>
+                  <p className="px-2.5 py-3 text-sm text-muted">Type at least 2 letters to find anyone on FBLC.</p>
                 )}
               </div>
             </div>
@@ -239,9 +239,7 @@ export function ChallengeModal({
             options={eventOptions}
             hint={
               event === 'mixed' ? (
-                <span className="inline-flex items-center gap-1">
-                  <Shuffle className="size-3" /> 10 questions drawn from every event.
-                </span>
+                '10 questions drawn from every event.'
               ) : (
                 '10 random questions from this event.'
               )
@@ -284,9 +282,9 @@ export function ChallengeModal({
         />
 
         {opponent && (
-          <p className="flex items-center gap-2 rounded-[10px] bg-surface-2 px-3 py-2.5 text-xs text-muted">
-            <Swords className="size-4 shrink-0 text-red" aria-hidden />
-            {displayName(opponent)} gets a notification and has 24 hours to accept. Once accepted, you each have 48
+          <p className="rounded-[2px] border-l-2 border-red bg-surface-2 px-3 py-2.5 text-xs text-muted">
+            {displayName
+(opponent)} gets a notification and has 24 hours to accept. Once accepted, you each have 48
             hours to play.
           </p>
         )}

@@ -1,5 +1,4 @@
 import { Navigate, useSearchParams } from 'react-router-dom';
-import { BarChart3, BookOpen, CalendarCheck, GraduationCap, Settings, ShieldAlert, Users } from 'lucide-react';
 import {
   ButtonLink,
   EmptyState,
@@ -52,7 +51,6 @@ export default function AdminPage() {
         <PageHeader eyebrow="Chapter admin" title={ctx.data.chapter.name} back={{ to: '/chapter', label: 'Chapter' }} />
         <Page>
           <EmptyState
-            icon={<ShieldAlert />}
             title="Presidents and executives only"
             description="The admin dashboard manages members, roles, attendance and trainers. Ask your president if you need access."
             action={<ButtonLink to="/chapter">Back to chapter</ButtonLink>}
@@ -81,11 +79,11 @@ function Dashboard({ ctx, reloadCtx, setCtx }: { ctx: MyChapter; reloadCtx: () =
   };
 
   const items: TabItem<Tab>[] = [
-    { value: 'members', label: 'Members', icon: <Users className="size-4" />, count: members.data?.length },
-    { value: 'trainers', label: 'Trainers', icon: <GraduationCap className="size-4" /> },
-    { value: 'attendance', label: 'Attendance', icon: <CalendarCheck className="size-4" /> },
-    { value: 'analytics', label: 'Analytics', icon: <BarChart3 className="size-4" /> },
-    { value: 'settings', label: 'Settings', icon: <Settings className="size-4" /> },
+    { value: 'members', label: 'Members', count: members.data?.length },
+    { value: 'trainers', label: 'Trainers' },
+    { value: 'attendance', label: 'Attendance' },
+    { value: 'analytics', label: 'Analytics' },
+    { value: 'settings', label: 'Settings' },
   ];
 
   return (
@@ -96,12 +94,12 @@ function Dashboard({ ctx, reloadCtx, setCtx }: { ctx: MyChapter; reloadCtx: () =
         subtitle="Members, roles, trainers, attendance and how everyone is doing."
         back={{ to: '/chapter', label: 'Chapter' }}
         actions={
-          <ButtonLink to="/chapter/classroom" variant="inverse" leftIcon={<BookOpen className="size-4" />}>
+          <ButtonLink to="/chapter/classroom" variant="inverse">
             Classroom
           </ButtonLink>
         }
       />
-      <div className="sticky top-16 z-20 border-b border-line bg-bg/90 backdrop-blur">
+      <div className="sticky top-16 z-20 border-b border-line bg-bg">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Tabs id="admin" items={items} value={tab} onChange={setTab} aria-label="Admin sections" className="border-b-0" />
         </div>

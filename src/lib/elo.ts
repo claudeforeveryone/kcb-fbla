@@ -67,16 +67,3 @@ export function replayElo(
 }
 
 /** Named bands for badges. Thresholds match the elo_300/500/700 achievements. */
-export const ELO_TIERS = [
-  { min: 0, name: 'Rookie' },
-  { min: 150, name: 'Bronze' },
-  { min: 300, name: 'Silver' },
-  { min: 500, name: 'Gold' },
-  { min: 700, name: 'Elite' },
-] as const;
-
-export function eloTier(rating: number): (typeof ELO_TIERS)[number] {
-  let tier: (typeof ELO_TIERS)[number] = ELO_TIERS[0];
-  for (const t of ELO_TIERS) if (rating >= t.min) tier = t;
-  return tier;
-}

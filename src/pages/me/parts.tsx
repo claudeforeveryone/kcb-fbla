@@ -1,38 +1,9 @@
 // Building blocks shared by the Me pages: data hook, activity heatmap, achievements, mini leaderboard, friends.
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  BadgeCheck,
-  BookOpen,
-  CalendarCheck,
-  Check,
-  Compass,
-  Crown,
-  Flame,
-  Footprints,
-  Gem,
-  GraduationCap,
-  Layers,
-  Lock,
-  Mountain,
-  Sparkles,
-  Star,
-  Swords,
-  Target,
-  Timer,
-  TrendingUp,
-  Trophy,
-  UserCheck,
-  UserMinus,
-  UserPlus,
-  Users,
-  UserX,
-  X,
-  Zap,
-  type LucideIcon,
-} from 'lucide-react';
+import { UserCheck, UserMinus, UserPlus, UserX, X } from 'lucide-react';
 import { Avatar, Button, Dropdown, EloBadge, ProgressBar, Tooltip, cn, errorMessage, useToast } from '../../components/ui';
-import { ACHIEVEMENTS, EVENTS, type AchievementCode, type AchievementDef, type ProfileStats } from '../../lib/types';
+import { ACHIEVEMENTS, EVENTS, type AchievementCode, type ProfileStats } from '../../lib/types';
 import {
   acceptFriend,
   addFriend,
@@ -206,29 +177,6 @@ function Row({
 
 // ------------------------------------------------------------------------------------------------ achievements
 
-const ICONS: Record<string, LucideIcon> = {
-  Footprints,
-  Target,
-  Layers,
-  Mountain,
-  BadgeCheck,
-  Flame,
-  CalendarCheck,
-  Crown,
-  Zap,
-  Sparkles,
-  Star,
-  TrendingUp,
-  Gem,
-  Swords,
-  Trophy,
-  Compass,
-  GraduationCap,
-  Timer,
-  Users,
-  BookOpen,
-};
-
 /** How hard each achievement is; the hardest earned ones are showcased. */
 const PRESTIGE: Record<AchievementCode, number> = {
   first_steps: 1,
@@ -289,37 +237,6 @@ function progressFor(code: AchievementCode, s: ProfileStats): { value: number; m
   }
 }
 
-const TONES: Record<AchievementDef['category'], string> = {
-  practice: 'from-[#3F6FB3] to-[#001E60]',
-  streaks: 'from-[#FF7A59] to-[#BF0D3E]',
-  rating: 'from-[#F5C451] to-[#C98A00]',
-  arena: 'from-[#E0466F] to-[#7A0A2A]',
-  chapter: 'from-[#3CC68A] to-[#1E8E5A]',
-  vocab: 'from-[#8E7CF0] to-[#4B36B0]',
-};
-
-function Medal({ def, earned, size = 'md' }: { def: AchievementDef; earned: boolean; size?: 'md' | 'lg' }) {
-  const Icon = ICONS[def.icon] ?? Trophy;
-  return (
-    <span
-      className={cn(
-        'relative grid shrink-0 place-items-center rounded-2xl',
-        size === 'lg' ? 'size-16' : 'size-12',
-        earned
-          ? cn('bg-gradient-to-br text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_4px_14px_-4px_rgb(0_30_96/0.45)]', TONES[def.category])
-          : 'bg-surface-2 text-muted ring-1 ring-inset ring-line',
-      )}
-    >
-      <Icon className={size === 'lg' ? 'size-7' : 'size-5'} strokeWidth={2.2} />
-      {!earned && (
-        <span className="absolute -bottom-1 -right-1 grid size-5 place-items-center rounded-full bg-surface text-muted ring-1 ring-line">
-          <Lock className="size-3" />
-        </span>
-      )}
-    </span>
-  );
-}
-
 export function AchievementsSection({ stats }: { stats: ProfileStats }) {
   const [filter, setFilter] = useState<'all' | 'earned' | 'locked'>('all');
   const earnedAt = useMemo(() => new Map(stats.achievements.map((a) => [a.code, a.earned_at])), [stats.achievements]);
@@ -345,11 +262,10 @@ export function AchievementsSection({ stats }: { stats: ProfileStats }) {
           {showcase.map((def, i) => (
             <div
               key={def.code}
-              className="facets relative overflow-hidden rounded-[12px] p-4 text-white"
+              className="facets relative overflow-hidden rounded-[4px] border-l-[3px] border-red p-4 text-white"
               style={{ animationDelay: `${i * 60}ms` }}
             >
-              <div className="flex items-center gap-3">
-                <Medal def={def} earned size="lg" />
+              <div>
                 <div className="min-w-0">
                   <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/60">
                     {i === 0 ? 'Top achievement' : 'Highlight'}
@@ -376,7 +292,7 @@ export function AchievementsSection({ stats }: { stats: ProfileStats }) {
               aria-pressed={filter === f}
               onClick={() => setFilter(f)}
               className={cn(
-                'h-8 rounded-full px-3 text-xs font-semibold capitalize transition-colors',
+                'h-8 rounded-[2px] px-3 text-xs font-semibold capitalize transition-colors',
                 filter === f ? 'bg-navy text-white dark:bg-blue' : 'bg-surface-2 text-muted hover:text-ink',
               )}
             >
@@ -394,17 +310,16 @@ export function AchievementsSection({ stats }: { stats: ProfileStats }) {
             <li
               key={def.code}
               className={cn(
-                'flex items-center gap-3 rounded-[12px] border p-3 transition-colors',
-                at ? 'border-line bg-surface' : 'border-dashed border-line bg-surface/50',
+                'flex items-start gap-3 rounded-[4px] border border-l-[3px] p-3 transition-colors',
+                at ? 'border-line border-l-red bg-surface' : 'border-line border-l-line-strong bg-surface/50',
               )}
             >
-              <Medal def={def} earned={!!at} />
               <div className="min-w-0 flex-1">
                 <div className={cn('truncate text-sm font-bold', at ? 'text-heading' : 'text-ink/80')}>{def.title}</div>
                 <div className="text-xs text-muted">{def.description}</div>
                 {at ? (
                   <div className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-success">
-                    <Check className="size-3" /> {formatDate(at, true)}
+                    Earned {formatDate(at, true)}
                   </div>
                 ) : prog ? (
                   <ProgressBar
@@ -445,7 +360,7 @@ export function MiniLeaderboard({ board, userId }: { board: MiniBoard; userId: s
           <span
             className={cn(
               'tabular w-7 shrink-0 text-center font-display text-sm font-extrabold',
-              r.rank === 1 ? 'text-[#C98A00]' : r.rank === 2 ? 'text-[#8C97A8]' : r.rank === 3 ? 'text-[#9A5A2B]' : 'text-muted',
+              r.rank <= 3 ? 'text-heading' : 'text-muted',
             )}
           >
             {r.rank}
@@ -457,7 +372,7 @@ export function MiniLeaderboard({ board, userId }: { board: MiniBoard; userId: s
             </span>
             <span className="block truncate text-xs text-muted">@{r.username}</span>
           </span>
-          <EloBadge elo={r.elo} size="sm" showTier={false} />
+          <EloBadge elo={r.elo} size="sm" />
         </Link>
       </li>
     );
@@ -585,7 +500,7 @@ export function Panel({
   icon?: ReactNode;
 }) {
   return (
-    <section className={cn('rounded-[12px] border border-line bg-surface p-4 sm:p-5', className)}>
+    <section className={cn('rounded-[4px] border border-line bg-surface p-4 sm:p-5', className)}>
       <div className="mb-3 flex items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-base font-bold [&>svg]:size-4 [&>svg]:text-muted">
           {icon}

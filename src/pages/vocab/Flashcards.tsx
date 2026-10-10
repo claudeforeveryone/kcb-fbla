@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
-import { Check, Layers, RefreshCw, RotateCcw, Shuffle, Undo2, X } from 'lucide-react';
+import { Check, RefreshCw, RotateCcw, Shuffle, Undo2, X } from 'lucide-react';
 import { Button, Kbd, SegmentedControl, cn } from '../../components/ui';
 import type { StudyDeck, VocabTerm } from '../../api/vocab';
 import { shuffled, statusOf, type ProgressLike } from './leitner';
@@ -189,7 +189,6 @@ function Session({
     const pct = queue.length ? Math.round((known.length / queue.length) * 100) : 0;
     return (
       <SessionPanel
-        icon={<Layers />}
         tone={again.length ? 'navy' : 'success'}
         eyebrow="Round complete"
         title={again.length ? `${known.length} of ${queue.length} known` : 'You knew every card'}
@@ -228,8 +227,8 @@ function Session({
         <span className="tabular font-display font-bold text-heading">
           {i + 1} <span className="font-semibold text-muted">/ {queue.length}</span>
         </span>
-        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface-3">
-          <div className="h-full rounded-full bg-blue transition-[width] duration-300" style={{ width: `${(i / queue.length) * 100}%` }} />
+        <div className="h-1 flex-1 overflow-hidden rounded-none bg-surface-3">
+          <div className="h-full bg-blue transition-[width] duration-300" style={{ width: `${(i / queue.length) * 100}%` }} />
         </div>
         <span className="tabular flex items-center gap-2 text-xs font-semibold">
           <span className="text-success">{known.length} known</span>
@@ -241,7 +240,7 @@ function Session({
         {/* the next card peeking underneath */}
         {queue[i + 1] && (
           <div
-            className="absolute inset-0 translate-y-2 scale-[0.97] rounded-[18px] border border-line bg-surface opacity-70 shadow-card"
+            className="absolute inset-0 translate-y-2 scale-[0.97] rounded-[4px] border border-line bg-surface opacity-70"
             aria-hidden
           />
         )}
@@ -258,7 +257,7 @@ function Session({
             setDragging(false);
             setDx(0);
           }}
-          className="relative h-[min(58vh,360px)] cursor-grab touch-pan-y select-none rounded-[18px] active:cursor-grabbing"
+          className="relative h-[min(58vh,360px)] cursor-grab touch-pan-y select-none rounded-[4px] active:cursor-grabbing"
           style={{
             transform: `translateX(${tilt}px) rotate(${tilt / 22}deg)`,
             transition: dragging ? 'none' : 'transform 230ms cubic-bezier(0.22,1,0.36,1), opacity 230ms ease-out',
@@ -278,20 +277,20 @@ function Session({
           </div>
           {/* swipe verdict overlays */}
           <div
-            className="pointer-events-none absolute inset-0 grid place-items-center rounded-[18px] border-2 border-success bg-success/10"
+            className="pointer-events-none absolute inset-0 grid place-items-center rounded-[4px] border-2 border-success bg-success/10"
             style={{ opacity: dx > 0 ? hint : leaving === 'right' ? 1 : 0 }}
             aria-hidden
           >
-            <span className="rotate-[-8deg] rounded-lg border-2 border-success px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-success">
+            <span className="rounded-[2px] border-2 border-success px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-success">
               Know it
             </span>
           </div>
           <div
-            className="pointer-events-none absolute inset-0 grid place-items-center rounded-[18px] border-2 border-red bg-red/10"
+            className="pointer-events-none absolute inset-0 grid place-items-center rounded-[4px] border-2 border-red bg-red/10"
             style={{ opacity: dx < 0 ? hint : leaving === 'left' ? 1 : 0 }}
             aria-hidden
           >
-            <span className="rotate-[8deg] rounded-lg border-2 border-red px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-red dark:text-danger">
+            <span className="rounded-[2px] border-2 border-red px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-red dark:text-danger">
               Again
             </span>
           </div>
@@ -351,12 +350,12 @@ function Face({
   return (
     <div
       className={cn(
-        'absolute inset-0 flex flex-col rounded-[18px] border p-5 shadow-lift [backface-visibility:hidden] sm:p-7',
+        'absolute inset-0 flex flex-col overflow-hidden rounded-[4px] border p-5 [backface-visibility:hidden] sm:p-7',
         side === 'front' ? 'border-line bg-surface' : 'border-navy/20 bg-surface dark:border-blue/30',
       )}
       style={side === 'back' ? { transform: 'rotateY(180deg)' } : undefined}
     >
-      {side === 'back' && <div className="absolute inset-x-0 top-0 h-1 rounded-t-[18px] bg-red" aria-hidden />}
+      {side === 'back' && <div className="absolute inset-x-0 top-0 h-[3px] bg-red" aria-hidden />}
       <div className="flex items-center justify-between gap-2">
         <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">{label}</span>
         <StatusChip status={status} />

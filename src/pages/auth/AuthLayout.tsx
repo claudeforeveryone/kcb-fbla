@@ -1,33 +1,23 @@
 import { useState, type ReactNode } from 'react';
-import { Eye, EyeOff, Lock, Moon, Sun, Swords, Target, UsersRound } from 'lucide-react';
+import { Eye, EyeOff, Lock, Moon, Sun } from 'lucide-react';
 import { Brand } from '../../components/layout/Brand';
 import { useTheme } from '../../components/layout/theme';
 import { FacetArt } from '../../components/ui/PageHeader';
-import { TIERS, TierGem } from '../../components/ui/EloBadge';
 import { Input, type InputProps } from '../../components/ui/Field';
 
 const features = [
-  { icon: Target, title: 'Official-style exams', body: 'Fifteen FBLC events, timed papers and Elo that moves with every answer.' },
-  { icon: Swords, title: 'Arena duels', body: 'Challenge a friend to ten questions. Fastest correct answers win.' },
-  { icon: UsersRound, title: 'Your chapter, organised', body: 'Assignments, newsletters, attendance and a coach view of every member.' },
+  { title: 'Official-style exams', body: 'Fifteen FBLC events, timed papers and Elo that moves with every answer.' },
+  { title: 'Arena duels', body: 'Challenge a friend to ten questions. Fastest correct answers win.' },
+  { title: 'Your chapter, organised', body: 'Assignments, newsletters, attendance and a coach view of every member.' },
 ];
 
-function TierLadder() {
+function EloNote() {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm">
-      <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
-        <span>Rank tiers</span>
-        <span>Elo</span>
-      </div>
-      <ol className="grid grid-cols-6 gap-2">
-        {TIERS.map((t) => (
-          <li key={t.name} className="flex flex-col items-center gap-1.5 text-center">
-            <TierGem elo={t.min} size={28} />
-            <span className="text-[10.5px] font-semibold text-white/85">{t.name}</span>
-            <span className="tabular text-[10px] text-white/50">{t.min}+</span>
-          </li>
-        ))}
-      </ol>
+    <div className="border-t border-white/15 pt-4">
+      <div className="text-xs font-bold uppercase tracking-[0.14em] text-white/60">One number: your Elo</div>
+      <p className="mt-1.5 text-sm text-white/75">
+        Every answer moves your Elo score. Harder questions are worth more, and the leaderboard ranks by Elo alone.
+      </p>
     </div>
   );
 }
@@ -52,14 +42,14 @@ export function AuthLayout({
   return (
     <div className="flex min-h-dvh flex-col bg-bg lg:flex-row">
       {/* Brand panel */}
-      <aside className="facets relative isolate overflow-hidden text-white lg:sticky lg:top-0 lg:flex lg:h-dvh lg:w-[44%] lg:max-w-[640px] lg:flex-col">
+      <aside className="relative isolate overflow-hidden bg-navy text-white lg:sticky lg:top-0 lg:flex lg:h-dvh lg:w-[44%] lg:max-w-[640px] lg:flex-col">
         <FacetArt className="w-full opacity-70 lg:inset-y-auto lg:bottom-0 lg:h-[42%] lg:opacity-100" intensity={1.1} />
         <div className="relative flex items-center justify-between px-5 pt-5 lg:px-12 lg:pt-10">
           <Brand size="md" />
           <button
             type="button"
             onClick={toggle}
-            className="grid size-9 place-items-center rounded-full text-white/75 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
+            className="grid size-9 place-items-center rounded-[2px] text-white/75 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? <Sun className="size-4.5" /> : <Moon className="size-4.5" />}
@@ -69,8 +59,8 @@ export function AuthLayout({
           {aside ?? (
             <>
               <p className="mb-3 hidden items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/65 lg:flex">
-                <span className="h-[3px] w-6 rounded-full bg-red" />
-                KCB Future Business Leaders
+                <span className="h-[3px] w-6 bg-red" />
+                Future Business Leaders of Canada
               </p>
               <h2 className="max-w-md text-2xl font-extrabold leading-[1.08] tracking-tight text-white lg:text-[2.75rem]">
                 Train like it is nationals.
@@ -80,10 +70,7 @@ export function AuthLayout({
               </p>
               <ul className="mt-9 hidden space-y-5 lg:block">
                 {features.map((f) => (
-                  <li key={f.title} className="flex gap-4">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-white/10 ring-1 ring-inset ring-white/15">
-                      <f.icon className="size-5" />
-                    </span>
+                  <li key={f.title} className="border-l-[3px] border-red pl-4">
                     <div>
                       <div className="font-display font-bold text-white">{f.title}</div>
                       <div className="text-sm text-white/70">{f.body}</div>
@@ -92,7 +79,7 @@ export function AuthLayout({
                 ))}
               </ul>
               <div className="mt-10 hidden max-w-md lg:block">
-                <TierLadder />
+                <EloNote />
               </div>
             </>
           )}
@@ -105,7 +92,7 @@ export function AuthLayout({
           <button
             type="button"
             onClick={toggle}
-            className="grid size-9 place-items-center rounded-full text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+            className="grid size-9 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface-2 hover:text-ink"
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? <Sun className="size-4.5" /> : <Moon className="size-4.5" />}
@@ -136,7 +123,7 @@ export function PasswordInput(props: Omit<InputProps, 'type' | 'right'>) {
         <button
           type="button"
           onClick={() => setShow((s) => !s)}
-          className="grid size-8 place-items-center rounded-md text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+          className="grid size-8 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface-2 hover:text-ink"
           aria-label={show ? 'Hide password' : 'Show password'}
           aria-pressed={show}
         >
@@ -169,7 +156,7 @@ export function StrengthMeter({ password }: { password: string }) {
         {[0, 1, 2, 3].map((i) => (
           <span
             key={i}
-            className={`h-1 rounded-full transition-colors duration-200 ${i < Math.max(1, score) ? colors[score] : 'bg-surface-3'}`}
+            className={`h-1 transition-colors duration-200 ${i < Math.max(1, score) ? colors[score] : 'bg-surface-3'}`}
           />
         ))}
       </div>

@@ -39,7 +39,7 @@ export function BarChart({
   if (!data.length)
     return (
       <div className={className} role="img" aria-label={`${title}: no data`}>
-        <div className="grid h-28 place-items-center rounded-lg border border-dashed border-line text-sm text-muted">{emptyLabel}</div>
+        <div className="grid h-28 place-items-center rounded-[4px] border border-dashed border-line text-sm text-muted">{emptyLabel}</div>
       </div>
     );
   return orientation === 'horizontal' ? (
@@ -81,9 +81,9 @@ function Horizontal({
                   <span className="font-semibold text-heading">{formatValue(d.value)}</span>
                 </span>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-surface-3">
+              <div className="h-2 overflow-hidden bg-surface-3">
                 <div
-                  className="h-full rounded-full transition-[width] duration-700 ease-out"
+                  className="h-full transition-[width] duration-700 ease-out"
                   style={{ width: `${p}%`, background: c }}
                 />
               </div>
@@ -150,7 +150,7 @@ function Vertical({
               style={{ transition: 'opacity 150ms' }}
             >
               <rect x={pad.l + band * i} y={pad.t} width={band} height={ih} fill="transparent" />
-              <rect x={cx - bw / 2} y={y} width={bw} height={Math.max(0, pad.t + ih - y)} rx={Math.min(5, bw / 3)} fill={c}>
+              <rect x={cx - bw / 2} y={y} width={bw} height={Math.max(0, pad.t + ih - y)} fill={c}>
                 <title>{`${d.label}: ${formatValue(d.value)}`}</title>
               </rect>
               {hover === i && (

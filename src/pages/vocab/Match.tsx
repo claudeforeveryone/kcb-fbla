@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Play, RefreshCw, Timer, Trophy, Zap } from 'lucide-react';
+import { Play, RefreshCw, Timer } from 'lucide-react';
 import { Badge, Button, SegmentedControl, cn } from '../../components/ui';
 import type { StudyDeck } from '../../api/vocab';
 import { shuffled } from './leitner';
 import { getMatchBest, setMatchBest } from './store';
-import { Burst, MiniStat, SessionPanel, formatMs } from './parts';
+import { MiniStat, SessionPanel, formatMs } from './parts';
 
 type Tile = { key: string; pair: string; text: string; kind: 'term' | 'def' };
 const PENALTY = 1000;
@@ -22,7 +22,6 @@ export function Match({ deck }: { deck: StudyDeck }) {
   if (phase === 'ready') {
     return (
       <SessionPanel
-        icon={<Zap />}
         eyebrow="Match"
         title="Race the clock"
         actions={
@@ -45,7 +44,6 @@ export function Match({ deck }: { deck: StudyDeck }) {
             />
           )}
           <div className="flex items-center gap-2 text-sm">
-            <Trophy className="size-4 text-warning" />
             {best != null ? (
               <span>
                 Your best: <strong className="tabular text-heading">{formatMs(best)}</strong>
@@ -151,9 +149,7 @@ function Board({
     const accuracy = Math.round((pairs / (pairs + misses)) * 100);
     return (
       <div className="relative">
-        {result.record && <Burst />}
         <SessionPanel
-          icon={<Trophy />}
           tone={result.record ? 'success' : 'navy'}
           eyebrow={result.record ? 'New best time' : 'Board cleared'}
           title={<span className="tabular">{formatMs(result.ms)}</span>}
@@ -188,8 +184,8 @@ function Board({
     <div className="grid gap-4">
       <div className="flex items-center justify-between gap-3">
         <div className="relative flex items-center gap-2">
-          <span className="grid size-9 place-items-center rounded-lg bg-navy text-white dark:bg-blue">
-            <Timer className="size-4" />
+          <span className="text-muted">
+            <Timer className="size-5" aria-hidden />
           </span>
           <span className="tabular min-w-[4.5rem] font-display text-2xl font-extrabold text-heading" aria-live="off">
             {formatMs(shown)}
@@ -225,7 +221,7 @@ function Board({
           const isGone = gone.has(t.pair);
           const isSel = sel === t.key;
           const isWrong = !!wrong && wrong.includes(t.key);
-          if (isGone) return <div key={t.key} className="min-h-24 rounded-xl border border-dashed border-line/70" aria-hidden />;
+          if (isGone) return <div key={t.key} className="min-h-24 rounded-[4px] border border-dashed border-line/70" aria-hidden />;
           return (
             <button
               key={t.key}
@@ -234,12 +230,12 @@ function Board({
               aria-pressed={isSel}
               disabled={isMatched}
               className={cn(
-                'flex min-h-24 items-center justify-center rounded-xl border-2 p-3 text-center transition-[transform,border-color,background-color,box-shadow] duration-150',
+                'flex min-h-24 items-center justify-center rounded-[4px] border-2 p-3 text-center transition-[border-color,background-color] duration-150',
                 t.kind === 'term'
                   ? 'font-display text-[0.9375rem] font-bold text-heading'
                   : 'text-[0.8125rem] leading-snug text-ink',
-                !isSel && !isWrong && !isMatched && 'border-line bg-surface shadow-card hover:-translate-y-0.5 hover:border-blue/50 hover:shadow-lift',
-                isSel && '-translate-y-0.5 border-blue bg-blue/8 shadow-lift ring-4 ring-blue/15',
+                !isSel && !isWrong && !isMatched && 'border-line bg-surface hover:border-blue/50 hover:bg-surface-2',
+                isSel && 'border-blue bg-blue/8',
                 isWrong && 'border-red bg-red/8 [animation:vocab-shake_320ms_ease-in-out]',
                 isMatched && 'border-success bg-success/12 [animation:vocab-match-out_380ms_ease-out_both]',
               )}

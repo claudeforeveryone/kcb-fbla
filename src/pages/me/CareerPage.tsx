@@ -1,22 +1,6 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import {
-  ArrowDownWideNarrow,
-  ArrowUpNarrowWide,
-  CheckCircle2,
-  ChevronDown,
-  ChevronRight,
-  Clock,
-  FileText,
-  History,
-  Lightbulb,
-  ListChecks,
-  PartyPopper,
-  RotateCcw,
-  Search,
-  Target,
-  XCircle,
-} from 'lucide-react';
+import { ArrowDownWideNarrow, ArrowUpNarrowWide, CheckCircle2, ChevronDown, ChevronRight, Lightbulb, RotateCcw, Search, Target } from 'lucide-react';
 import {
   Badge,
   Button,
@@ -105,8 +89,8 @@ export default function CareerPage() {
           value={tab}
           onChange={setTab}
           items={[
-            { value: 'exams', label: 'Past exams', icon: <History />, count: attempts.data?.length },
-            { value: 'wrong', label: 'Wrong questions', icon: <XCircle />, count: wrong.data?.length },
+            { value: 'exams', label: 'Past exams', count: attempts.data?.length },
+            { value: 'wrong', label: 'Wrong questions', count: wrong.data?.length },
           ]}
         />
         <div {...tabPanelProps('career', tab)} className="mt-5 outline-none">
@@ -156,7 +140,6 @@ function ExamsTab({ q }: { q: Async<Attempt[]> }) {
   if (!rows.length)
     return (
       <EmptyState
-        icon={<FileText />}
         title="No exams yet"
         description="Every practice set, mock exam and duel you finish lands here, so you can see how far you have come."
         action={<ButtonLink to="/play">Take your first exam</ButtonLink>}
@@ -233,7 +216,6 @@ function ExamsTab({ q }: { q: Async<Attempt[]> }) {
         <EmptyState
           compact
           className="mt-3"
-          icon={<Search />}
           title="Nothing matches those filters"
           action={
             <Button
@@ -274,7 +256,7 @@ function ExamRow({ a }: { a: Attempt }) {
     <li>
       <Link
         to={`/play/review/${a.id}`}
-        className="group flex items-center gap-3 rounded-[12px] border border-line bg-surface p-3 transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-lift sm:gap-4 sm:p-4"
+        className="group flex items-center gap-3 rounded-[4px] border border-line bg-surface p-3 transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-lift sm:gap-4 sm:p-4"
       >
         <div
           className={cn(
@@ -294,11 +276,9 @@ function ExamRow({ a }: { a: Attempt }) {
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-muted">
             {info && a.label && <span>{info.short}</span>}
             <span className="tabular inline-flex items-center gap-1">
-              <ListChecks className="size-3.5" />
               {a.correct}/{a.total}
             </span>
             <span className="tabular inline-flex items-center gap-1">
-              <Clock className="size-3.5" />
               {formatDuration(a.duration_ms)}
             </span>
             <span title={new Date(a.created_at).toLocaleString()}>{relativeTime(a.created_at)}</span>
@@ -308,7 +288,7 @@ function ExamRow({ a }: { a: Attempt }) {
           {!NO_ELO_KINDS.includes(a.kind) && (
             <span
               className={cn(
-                'tabular hidden rounded-full px-2.5 py-1 text-xs font-bold sm:inline-block',
+                'tabular hidden rounded-[2px] px-2.5 py-1 text-xs font-bold sm:inline-block',
                 delta > 0 ? 'bg-success/10 text-success' : delta < 0 ? 'bg-red/10 text-red dark:text-danger' : 'bg-surface-2 text-muted',
               )}
             >
@@ -361,7 +341,6 @@ function WrongTab({ q }: { q: Async<WrongQuestion[]> }) {
   if (!rows.length)
     return (
       <EmptyState
-        icon={<PartyPopper />}
         title="Nothing to fix"
         description="Questions you get wrong show up here until you answer them right. Right now your slate is clean."
         action={<ButtonLink to="/play">Practise something new</ButtonLink>}
@@ -380,7 +359,7 @@ function WrongTab({ q }: { q: Async<WrongQuestion[]> }) {
 
   return (
     <div>
-      <div className="rounded-[12px] border border-line bg-surface p-4">
+      <div className="rounded-[4px] border border-line bg-surface p-4">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.2fr]">
           <Select
             label="Event"
@@ -442,7 +421,6 @@ function WrongTab({ q }: { q: Async<WrongQuestion[]> }) {
         <EmptyState
           compact
           className="mt-4"
-          icon={<Search />}
           title="Nothing matches"
           action={
             <Button
@@ -480,11 +458,8 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
   const qq = r.question;
   const panelId = `wq-${r.id}`;
   return (
-    <li className={cn('overflow-hidden rounded-[12px] border bg-surface transition-colors', open ? 'border-line-strong shadow-lift' : 'border-line')}>
+    <li className={cn('overflow-hidden rounded-[4px] border bg-surface transition-colors', open ? 'border-line-strong shadow-lift' : 'border-line')}>
       <div className="flex items-start gap-3 p-4">
-        <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-red/10 text-red dark:text-danger">
-          <XCircle className="size-4" />
-        </span>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5 text-xs">
             <Badge tone="navy">{info?.short ?? r.event}</Badge>
@@ -542,7 +517,7 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
                 >
                   <span
                     className={cn(
-                      'grid size-5 shrink-0 place-items-center rounded-full text-[11px] font-bold',
+                      'grid size-5 shrink-0 place-items-center rounded-[2px] text-[11px] font-bold',
                       right ? 'bg-success text-white' : mine ? 'bg-red text-white' : 'bg-surface-3 text-muted',
                     )}
                   >
@@ -571,9 +546,9 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
 function ListSkeleton() {
   return (
     <div className="space-y-2" role="status" aria-label="Loading">
-      <Skeleton className="h-20" rounded="rounded-[12px]" />
+      <Skeleton className="h-20" rounded="rounded-[4px]" />
       {Array.from({ length: 6 }, (_, i) => (
-        <Skeleton key={i} className="h-[74px]" rounded="rounded-[12px]" />
+        <Skeleton key={i} className="h-[74px]" rounded="rounded-[4px]" />
       ))}
     </div>
   );

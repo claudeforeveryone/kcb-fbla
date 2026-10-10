@@ -6,8 +6,6 @@ import {
   CheckCheck,
   ExternalLink,
   Mail,
-  MailCheck,
-  MailX,
   MoreHorizontal,
   RefreshCw,
   Swords,
@@ -46,7 +44,7 @@ import {
   dayLabel,
   fullTime,
   isInternalLink,
-  NotificationIcon,
+  NotificationKindLabel,
   spokenAgo,
   timeAgo,
 } from '../../components/notifications/parts';
@@ -202,7 +200,7 @@ export default function NotificationsPage() {
                 <Pill key={k} active={cat === k} onClick={() => setCat(k)} count={counts.get(k)!.total}>
                   {CATEGORY_LABELS[k]}
                   {counts.get(k)!.unread > 0 && cat !== k && (
-                    <span className="size-1.5 rounded-full bg-red" aria-label={`${counts.get(k)!.unread} unread`} />
+                    <span className="size-1.5 bg-red" aria-label={`${counts.get(k)!.unread} unread`} />
                   )}
                 </Pill>
               ))}
@@ -368,7 +366,6 @@ function Row({
         onClick={() => onOpen(n)}
         className="flex min-w-0 flex-1 items-start gap-3.5 px-4 py-4 text-left transition-colors hover:bg-surface-2/70 focus-visible:bg-surface-2 sm:px-5"
       >
-        <NotificationIcon n={n} />
         <span className="min-w-0 flex-1">
           <span className="flex items-start gap-2">
             <span className={cn('min-w-0 flex-1 text-[0.9375rem] leading-snug', unread ? 'font-semibold text-heading' : 'text-ink')}>
@@ -383,10 +380,10 @@ function Row({
               <span aria-hidden>{timeAgo(n.created_at)}</span>
             </time>
             <span aria-hidden>&middot;</span>
-            <span>{CATEGORY_LABELS[categoryOf(n.kind)]}</span>
+            <NotificationKindLabel n={n} />
             {unread && (
               <span className="inline-flex items-center gap-1 font-semibold text-red dark:text-danger">
-                <span className="size-1.5 rounded-full bg-current" aria-hidden />
+                <span className="size-1.5 bg-current" aria-hidden />
                 New
               </span>
             )}
@@ -402,7 +399,7 @@ function Row({
               type="button"
               aria-label={`Options for "${n.title}"`}
               className={cn(
-                'grid size-9 place-items-center rounded-lg text-muted transition-[opacity,background-color,color] hover:bg-surface-3 hover:text-heading',
+                'grid size-9 place-items-center rounded-[2px] text-muted transition-[opacity,background-color,color] hover:bg-surface-3 hover:text-heading',
                 'sm:opacity-0 sm:focus-visible:opacity-100 sm:group-hover:opacity-100',
                 p.open && 'bg-surface-3 text-heading sm:opacity-100',
               )}
@@ -431,7 +428,7 @@ function Row({
 function LiveDot({ live }: { live: boolean }) {
   return (
     <span
-      className="mr-1 inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-semibold text-muted"
+      className="mr-1 inline-flex items-center gap-1.5 rounded-[2px] px-2 py-1 text-xs font-semibold text-muted"
       title={live ? 'New notifications appear instantly' : 'Reconnecting. New notifications will appear when the connection returns.'}
     >
       <span className="relative flex size-2">
@@ -452,7 +449,6 @@ function ListSkeleton() {
           <Card padded={false}>
             {Array.from({ length: rows }, (_, i) => (
               <div key={i} className="flex items-start gap-3.5 border-b border-line px-5 py-4 last:border-0">
-                <Skeleton className="size-10" rounded="rounded-xl" />
                 <div className="flex-1 space-y-2 pt-0.5">
                   <Skeleton className="h-4 w-3/4" />
                   <Skeleton className="h-3.5 w-1/2" />
@@ -489,9 +485,6 @@ function EmailCard() {
   return (
     <Card>
       <div className="flex items-start gap-3">
-        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-navy text-white dark:bg-blue">
-          {on ? <MailCheck className="size-5" /> : <MailX className="size-5" />}
-        </span>
         <div className="min-w-0">
           <h2 className="text-sm font-bold text-heading">Email updates</h2>
           <p className="mt-0.5 text-xs leading-relaxed text-muted">
@@ -531,16 +524,13 @@ function EmailBanner({
     <div
       role="status"
       className={cn(
-        'animate-rise relative mb-6 flex flex-col gap-3 rounded-[12px] border p-4 pr-12 sm:flex-row sm:items-center',
-        ok ? 'border-blue/25 bg-blue/[0.06]' : 'border-warning/30 bg-warning/10',
+        'animate-rise relative mb-6 flex flex-col gap-3 rounded-[4px] border p-4 pr-12 sm:flex-row sm:items-center',
+        ok ? 'border-blue/25 border-l-[3px] border-l-blue bg-surface' : 'border-warning/30 border-l-[3px] border-l-warning bg-surface',
       )}
     >
-      <span className={cn('grid size-10 shrink-0 place-items-center rounded-xl', ok ? 'bg-blue/15 text-blue dark:text-link' : 'bg-warning/20 text-[#8a5f00] dark:text-warning')}>
-        <MailX className="size-5" />
-      </span>
       <div className="min-w-0 flex-1">
         <p className="font-display font-bold text-heading">
-          {ok ? 'You are unsubscribed from KCB FBLA emails' : 'That unsubscribe link did not work'}
+          {ok ? 'You are unsubscribed from FBLC emails' : 'That unsubscribe link did not work'}
         </p>
         <p className="mt-0.5 text-sm text-muted">
           {ok
@@ -566,7 +556,7 @@ function EmailBanner({
         type="button"
         onClick={onDismiss}
         aria-label="Dismiss"
-        className="absolute right-2 top-2 grid size-8 place-items-center rounded-lg text-muted hover:bg-surface-2 hover:text-ink"
+        className="absolute right-2 top-2 grid size-8 place-items-center rounded-[2px] text-muted hover:bg-surface-2 hover:text-ink"
       >
         <X className="size-4" />
       </button>

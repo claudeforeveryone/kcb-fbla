@@ -40,7 +40,7 @@ export default function Login() {
       subtitle="Sign in to keep your streak alive."
       footer={
         <>
-          New to KCB FBLA?{' '}
+          New to FBLC?{' '}
           <Link to={`/signup${params.get('next') ? `?next=${encodeURIComponent(next)}` : ''}`} className="link">
             Create an account
           </Link>
@@ -49,7 +49,7 @@ export default function Login() {
     >
       <form onSubmit={submit} noValidate className="space-y-4">
         {error && (
-          <div role="alert" className="animate-rise rounded-[10px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
+          <div role="alert" className="animate-rise rounded-[4px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
             {error}
           </div>
         )}

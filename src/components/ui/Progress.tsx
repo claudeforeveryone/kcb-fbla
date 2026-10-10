@@ -51,7 +51,7 @@ export function ProgressBar({
         </div>
       )}
       <div
-        className={cn('w-full overflow-hidden rounded-full bg-surface-3', h)}
+        className={cn('w-full overflow-hidden bg-surface-3', h)}
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={max}
@@ -59,7 +59,7 @@ export function ProgressBar({
         aria-label={typeof label === 'string' ? label : undefined}
       >
         <div
-          className={cn('h-full rounded-full transition-[width] duration-500 ease-out', fills[tone])}
+          className={cn('h-full transition-[width] duration-500 ease-out', fills[tone])}
           style={{ width: `${p}%` }}
         />
       </div>
@@ -109,7 +109,7 @@ export function ProgressRing({
           fill="none"
           stroke={strokes[tone]}
           strokeWidth={stroke}
-          strokeLinecap="round"
+          strokeLinecap="butt"
           strokeDasharray={c}
           strokeDashoffset={c - (p / 100) * c}
           style={{ transition: 'stroke-dashoffset 600ms cubic-bezier(0.22,1,0.36,1)' }}

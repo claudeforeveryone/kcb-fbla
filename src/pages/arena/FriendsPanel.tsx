@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Check, Search, Swords, UserMinus, UserPlus, Users, X } from 'lucide-react';
+import { Check, Search, UserMinus, X } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -68,9 +68,8 @@ export function FriendsPanel({
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
       <div className="space-y-6">
         {incoming.length > 0 && (
-          <Card padded={false} className="overflow-hidden border-red/30">
-            <div className="flex items-center gap-2 border-b border-line bg-red/[0.04] px-5 py-3">
-              <span className="size-2 rounded-full bg-red" aria-hidden />
+          <Card padded={false} className="overflow-hidden border-l-4 border-l-red">
+            <div className="flex items-center gap-2 border-b border-line bg-surface-2 px-5 py-3">
               <h3 className="text-sm font-bold">Friend requests</h3>
               <Badge tone="red">{incoming.length}</Badge>
             </div>
@@ -122,7 +121,7 @@ export function FriendsPanel({
           {friends.length === 0 ? (
             <EmptyState
               compact
-              icon={<Users />}
+
               title="No friends yet"
               description="Add chapter-mates and rivals with the search on this page. Friends show up first when you start a challenge."
             />
@@ -159,7 +158,7 @@ export function FriendsPanel({
                         <Button
                           size="sm"
                           variant="accent"
-                          leftIcon={<Swords className="size-4" />}
+
                           disabled={!p}
                           onClick={() => p && onChallenge(p)}
                         >
@@ -278,9 +277,7 @@ function AddFriend({
 
   return (
     <Card>
-      <h3 className="mb-1 flex items-center gap-2 text-sm font-bold">
-        <UserPlus className="size-4 text-blue dark:text-link" /> Add a friend
-      </h3>
+      <h3 className="mb-1 text-sm font-bold">Add a friend</h3>
       <p className="mb-3 text-xs text-muted">Find anyone by username or name.</p>
       <Input
         value={q}
@@ -299,7 +296,7 @@ function AddFriend({
           {rows.map((p) => {
             const st = statusOf(p.id);
             return (
-              <li key={p.id} className="flex items-center gap-2.5 rounded-[10px] px-1.5 py-1.5">
+              <li key={p.id} className="flex items-center gap-2.5 rounded-[2px] px-1.5 py-1.5">
                 <Avatar src={p.avatar_url} name={p.display_name || p.username} size="sm" />
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-sm font-semibold text-heading">{displayName(p)}</div>
@@ -307,7 +304,8 @@ function AddFriend({
                     <span className="truncate">@{p.username}</span>
                   </div>
                 </div>
-                <EloBadge elo={p.elo} size="sm" showTier={false} className="max-sm:hidden" />
+                <EloBadge elo={p.elo} size="sm"
+ className="max-sm:hidden" />
                 {st === 'friends' ? (
                   <Badge tone="success">Friends</Badge>
                 ) : st === 'sent' ? (

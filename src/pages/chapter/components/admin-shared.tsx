@@ -1,6 +1,6 @@
 // Small pieces shared by the chapter pages (ChapterPage, AdminPage, MemberPage).
 import { useCallback, useEffect, useRef, useState, type DependencyList } from 'react';
-import { Check, Copy, Crown, GraduationCap, Link2, RefreshCw, ShieldCheck, User } from 'lucide-react';
+import { Check, Copy, RefreshCw } from 'lucide-react';
 import { Badge, Button, ConfirmDialog, Skeleton, cn, errorMessage, useToast, type BadgeTone } from '../../../components/ui';
 import { ROLE_LABELS, type ChapterRole, type ChapterInvite } from '../../../lib/types';
 import { getChapterInvite, inviteUrl, rotateChapterInvite } from '../../../api/chapter';
@@ -67,19 +67,11 @@ export const ACCURACY_COLOR = { success: 'var(--success)', warning: 'var(--warni
 // ------------------------------------------------------------------------------------------------ roles
 
 const ROLE_TONE: Record<ChapterRole, BadgeTone> = { president: 'red', executive: 'navy', trainer: 'blue', member: 'neutral' };
-const ROLE_ICON: Record<ChapterRole, typeof Crown> = {
-  president: Crown,
-  executive: ShieldCheck,
-  trainer: GraduationCap,
-  member: User,
-};
 
 export function RoleBadge({ role, className, iconOnlyMember }: { role: ChapterRole; className?: string; iconOnlyMember?: boolean }) {
-  const Icon = ROLE_ICON[role];
   if (iconOnlyMember && role === 'member') return null;
   return (
-    <Badge tone={ROLE_TONE[role]} className={className}>
-      <Icon className="size-3" aria-hidden />
+    <Badge tone={ROLE_TONE[role]} className={cn('rounded-[2px] uppercase tracking-wide', className)}>
       {ROLE_LABELS[role]}
     </Badge>
   );
@@ -147,10 +139,8 @@ export function InviteCard({ chapterId, className }: { chapterId: string; classN
   };
 
   return (
-    <div className={cn('@container rounded-[12px] border border-line bg-surface p-4 sm:p-5', className)}>
-      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted">
-        <Link2 className="size-4" aria-hidden /> Invite members
-      </div>
+    <div className={cn('@container rounded-[2px] border border-line bg-surface p-4 sm:p-5', className)}>
+      <div className="text-xs font-bold uppercase tracking-wider text-muted">Invite members</div>
       {inv.loading && !inv.data ? (
         <div className="mt-3 space-y-3">
           <Skeleton className="h-12 w-48" />
@@ -169,7 +159,7 @@ export function InviteCard({ chapterId, className }: { chapterId: string; classN
             <div className="text-xs text-muted">Join code</div>
             <div className="mt-1 flex items-center gap-2">
               <span
-                className="tabular rounded-lg bg-navy px-3 py-1.5 font-display text-2xl font-extrabold tracking-[0.25em] text-white dark:bg-surface-3"
+                className="tabular rounded-[2px] bg-navy px-3 py-1.5 font-display text-2xl font-extrabold tracking-[0.25em] text-white dark:bg-surface-3"
                 aria-label={`Join code ${inv.data.join_code.split('').join(' ')}`}
               >
                 {inv.data.join_code}
@@ -183,7 +173,8 @@ export function InviteCard({ chapterId, className }: { chapterId: string; classN
           <div className="min-w-0">
             <div className="text-xs text-muted">Invite link</div>
             <div className="mt-1 flex items-center gap-2">
-              <code className="min-w-0 flex-1 truncate rounded-lg border border-line bg-surface-2 px-3 py-1.5 text-sm text-ink">
+              <code className="min-w-0 flex-1 truncate rounded-[2px] border
+ border-line bg-surface-2 px-3 py-1.5 text-sm text-ink">
                 {inviteUrl(inv.data.invite_token)}
               </code>
               <CopyButton text={inviteUrl(inv.data.invite_token)} label="Copy link" />

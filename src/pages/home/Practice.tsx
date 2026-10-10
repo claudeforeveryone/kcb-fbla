@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Crosshair, History, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Badge, ButtonLink, Card, CardHeader, EmptyState, ErrorState, Skeleton, cn } from '../../components/ui';
 import { ATTEMPT_KIND_LABELS, eventInfo, eventName, type Attempt, type WeakSpot } from '../../lib/types';
 import { runLink, timeAgo } from './homeData';
@@ -32,12 +32,11 @@ export function WeakSpots({
   return (
     <Card>
       <CardHeader
-        icon={<Crosshair className="size-[18px]" />}
         title="Weak spots"
         subtitle="Areas where you drop the most marks"
         action={
           list.length > 0 ? (
-            <ButtonLink to={runLink({ kind: 'weak', n: 10 })} size="sm" variant="secondary" leftIcon={<Zap className="size-3.5" />}>
+            <ButtonLink to={runLink({ kind: 'weak', n: 10 })} size="sm" variant="secondary">
               Drill all
             </ButtonLink>
           ) : undefined
@@ -57,7 +56,6 @@ export function WeakSpots({
       ) : list.length === 0 ? (
         <EmptyState
           compact
-          icon={<Sparkles />}
           title={answered === 0 ? 'Nothing to fix yet' : tracked === 0 ? 'Keep going' : 'No weak spots right now'}
           description={
             answered === 0
@@ -94,8 +92,8 @@ export function WeakSpots({
                     </span>
                   </div>
                   <div className="mt-2 flex items-center gap-3">
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface-3">
-                      <div className={cn('h-full rounded-full', tone.bar)} style={{ width: `${Math.max(4, s.accuracy * 100)}%` }} />
+                    <div className="h-1.5 flex-1 overflow-hidden bg-surface-3">
+                      <div className={cn('h-full', tone.bar)} style={{ width: `${Math.max(4, s.accuracy * 100)}%` }} />
                     </div>
                     <span className="tabular shrink-0 text-xs text-muted">
                       {s.correct}/{s.answered} right
@@ -126,7 +124,6 @@ export function RecentAttempts({
   return (
     <Card>
       <CardHeader
-        icon={<History className="size-[18px]" />}
         title="Recent runs"
         subtitle="Tap one to review your answers"
         action={
@@ -152,11 +149,10 @@ export function RecentAttempts({
       ) : !rows || rows.length === 0 ? (
         <EmptyState
           compact
-          icon={<History />}
           title="No runs yet"
           description="Your practice sets, daily challenges and duels will show up here."
           action={
-            <ButtonLink to={runLink({ kind: 'practice', n: 10 })} size="sm" leftIcon={<Zap className="size-3.5" />}>
+            <ButtonLink to={runLink({ kind: 'practice', n: 10 })} size="sm">
               Quick 10
             </ButtonLink>
           }
@@ -191,7 +187,7 @@ export function RecentAttempts({
                   {delta !== 0 && (
                     <span
                       className={cn(
-                        'tabular shrink-0 rounded-md px-1.5 py-0.5 text-xs font-bold',
+                        'tabular shrink-0 rounded-[2px] px-1.5 py-0.5 text-xs font-bold',
                         delta > 0 ? 'bg-success/10 text-success' : 'bg-red/10 text-red dark:text-danger',
                       )}
                     >
@@ -223,8 +219,7 @@ function ScoreChip({ pct, className }: { pct: number; className?: string }) {
           fill="none"
           stroke="currentColor"
           strokeWidth="4"
-          strokeLinecap="round"
-          strokeDasharray={`${c * pct} ${c}`}
+                    strokeDasharray={`${c * pct} ${c}`}
         />
       </svg>
       <span className="tabular text-[0.7rem] font-extrabold">{Math.round(pct * 100)}</span>

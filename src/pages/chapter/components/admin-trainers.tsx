@@ -1,6 +1,6 @@
 // Admin > Trainers: one or two trainers for each of the 15 events.
 import { useMemo, useState } from 'react';
-import { GraduationCap, Plus, Sparkles, X } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { Avatar, Badge, Card, EmptyState, Skeleton, Spinner, cn, errorMessage, useToast } from '../../../components/ui';
 import { EVENT_GROUPS, EVENTS, type Trainer } from '../../../lib/types';
 import { setEventTrainers, type RosterMember } from '../../../api/chapter';
@@ -49,7 +49,7 @@ export function TrainersPanel({
     return (
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 6 }, (_, i) => (
-          <Skeleton key={i} className="h-36 w-full" rounded="rounded-[12px]" />
+          <Skeleton key={i} className="h-36 w-full" rounded="rounded-[4px]" />
         ))}
       </div>
     );
@@ -57,7 +57,6 @@ export function TrainersPanel({
   if (members && members.length < 2)
     return (
       <EmptyState
-        icon={<GraduationCap />}
         title="Invite members first"
         description="Trainers are chapter members who lead prep for an event. Once people join, you can assign one or two per event here."
       />
@@ -67,8 +66,7 @@ export function TrainersPanel({
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-3 rounded-[12px] border border-line bg-surface p-4 sm:flex-row sm:items-center">
-        <Sparkles className="size-5 shrink-0 text-red" aria-hidden />
+      <div className="flex flex-col gap-3 rounded-[2px] border border-line border-l-4 border-l-red bg-surface p-4 sm:flex-row sm:items-center">
         <p className="flex-1 text-sm text-ink">
           Trainers can post, build tests and decks, and assign work for their events, and see members' stats. Assigning a
           member makes them a <strong>Trainer</strong>; removing their last event makes them a member again. Executives keep
@@ -97,7 +95,7 @@ export function TrainersPanel({
               return (
                 <Card key={e.slug} className={cn('flex flex-col', ids.length === 0 && 'border-dashed')}>
                   <div className="flex items-start gap-3">
-                    <span className="rounded-md bg-navy px-2 py-1 font-display text-[0.6875rem] font-bold text-white dark:bg-surface-3">
+                    <span className="rounded-[2px] bg-navy px-2 py-1 font-display text-[0.6875rem] font-bold text-white dark:bg-surface-3">
                       {e.short}
                     </span>
                     <div className="min-w-0 flex-1">
@@ -113,7 +111,7 @@ export function TrainersPanel({
                     {ids.map((id) => {
                       const m = byId.get(id);
                       return (
-                        <li key={id} className="flex items-center gap-2.5 rounded-lg bg-surface-2/70 px-2.5 py-2">
+                        <li key={id} className="flex items-center gap-2.5 rounded-[2px] bg-surface-2 px-2.5 py-2">
                           <Avatar src={m?.profile.avatar_url} name={m?.profile.display_name ?? '?'} size="xs" />
                           <span className="min-w-0 flex-1 truncate text-sm font-medium">{m?.profile.display_name ?? 'Former member'}</span>
                           <button
@@ -126,7 +124,7 @@ export function TrainersPanel({
                                 `${m?.profile.display_name ?? 'Trainer'} no longer trains ${e.name}`,
                               )
                             }
-                            className="grid size-7 place-items-center rounded-md text-muted transition-colors hover:bg-danger/10 hover:text-danger disabled:opacity-50"
+                            className="grid size-7 place-items-center rounded-[2px] text-muted transition-colors hover:bg-danger/10 hover:text-danger disabled:opacity-50"
                             aria-label={`Remove ${m?.profile.display_name ?? 'trainer'} from ${e.name}`}
                           >
                             <X className="size-4" />
@@ -148,7 +146,7 @@ export function TrainersPanel({
                           const m = byId.get(id);
                           void save(e.slug, [...ids, id], `${m?.profile.display_name ?? 'Member'} now trains ${e.name}`);
                         }}
-                        className="h-9 w-full appearance-none rounded-lg border border-dashed border-line-strong bg-surface pl-9 pr-3 text-sm text-muted outline-none transition hover:border-blue/50 focus:border-blue focus:ring-4 focus:ring-blue/15"
+                        className="h-9 w-full appearance-none rounded-[2px] border border-dashed border-line-strong bg-surface pl-9 pr-3 text-sm text-muted outline-none transition hover:border-blue/50 focus:border-blue focus:ring-4 focus:ring-blue/15"
                       >
                         <option value="">Add trainer…</option>
                         {candidates.map((m) => (

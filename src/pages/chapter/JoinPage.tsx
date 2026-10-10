@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { AlertTriangle, ArrowRight, LinkIcon, LogIn, UserPlus } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button, ButtonLink, Card, EmptyState, ErrorState, PageHeader, Skeleton, errorMessage, useToast } from '../../components/ui';
 import { Page } from '../../components/layout/Page';
 import { useAuth } from '../../lib/auth';
@@ -13,26 +13,23 @@ export default function JoinPage() {
   const { loading, session, profile } = useAuth();
   const here = `/chapter/join/${encodeURIComponent(token)}`;
 
-  if (loading) return <Shell><Skeleton className="h-80 w-full" rounded="rounded-[12px]" /></Shell>;
+  if (loading) return <Shell><Skeleton className="h-80 w-full" rounded="rounded-[4px]" /></Shell>;
 
   if (!session) {
     const next = encodeURIComponent(here);
     return (
       <Shell>
-        <Card className="text-center">
-          <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-navy text-white dark:bg-surface-3">
-            <LinkIcon className="size-6" aria-hidden />
-          </div>
-          <h2 className="mt-4 text-2xl font-extrabold">You've been invited to a chapter</h2>
+        <Card className="border-t-4 border-t-red text-center">
+          <h2 className="text-2xl font-extrabold">You've been invited to a chapter</h2>
           <p className="mx-auto mt-2 max-w-md text-muted">
-            KCB FBLA is where your chapter practises for competition: official-style exams, Elo rankings, vocab and 1v1
+            FBLC is where your chapter practises for competition: official-style exams, Elo rankings, vocab and 1v1
             duels. Sign in or create a free account to see the chapter and join.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-            <ButtonLink to={`/signup?next=${next}`} variant="accent" size="lg" leftIcon={<UserPlus className="size-5" />}>
+            <ButtonLink to={`/signup?next=${next}`} variant="accent" size="lg">
               Create account
             </ButtonLink>
-            <ButtonLink to={`/login?next=${next}`} variant="secondary" size="lg" leftIcon={<LogIn className="size-5" />}>
+            <ButtonLink to={`/login?next=${next}`} variant="secondary" size="lg">
               Sign in
             </ButtonLink>
           </div>
@@ -68,13 +65,12 @@ function JoinFlow({ token, currentChapterId }: { token: string; currentChapterId
   const navigate = useNavigate();
   const [joining, setJoining] = useState(false);
 
-  if (pv.loading) return <Skeleton className="h-80 w-full" rounded="rounded-[12px]" />;
+  if (pv.loading) return <Skeleton className="h-80 w-full" rounded="rounded-[4px]" />;
   if (pv.error) return <ErrorState error={pv.error} onRetry={() => void pv.reload()} />;
   const p = pv.data;
   if (!p)
     return (
       <EmptyState
-        icon={<AlertTriangle />}
         title="This invite doesn't work any more"
         description="The link may have been replaced with a new one. Ask your chapter for a fresh link, or enter their 6-character join code."
         action={<ButtonLink to="/chapter">Enter a join code</ButtonLink>}
@@ -110,9 +106,9 @@ function JoinFlow({ token, currentChapterId }: { token: string; currentChapterId
           </ButtonLink>
         ) : inOther ? (
           <div className="space-y-3">
-            <div className="flex gap-3 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm text-ink" role="status">
-              <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden />
-              <span>You're in another chapter. Leave it first (from your Chapter page), then come back to this link.</span>
+            <div className="rounded-[2px] border border-line border-l-4 border-l-warning bg-surface-2 p-3 text-sm text-ink" role="status">
+              <span>
+You're in another chapter. Leave it first (from your Chapter page), then come back to this link.</span>
             </div>
             <ButtonLink to="/chapter" variant="secondary" block>
               Go to my current chapter

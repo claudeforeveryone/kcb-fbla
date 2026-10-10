@@ -12,10 +12,10 @@ export function Card({ interactive, padded = true, as: Tag = 'div', className, .
   return (
     <Tag
       className={cn(
-        'rounded-[12px] border border-line bg-surface shadow-card',
+        'rounded-[4px] border border-line bg-surface',
         padded && 'p-5',
         interactive &&
-          'transition-[box-shadow,transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong hover:shadow-lift',
+          'transition-[transform,border-color] duration-200 ease-out hover:-translate-y-px hover:border-line-strong',
         className,
       )}
       {...rest}
@@ -27,7 +27,7 @@ export function CardHeader({
   title,
   subtitle,
   action,
-  icon,
+  icon: _icon,
   className,
 }: {
   title: ReactNode;
@@ -38,11 +38,6 @@ export function CardHeader({
 }) {
   return (
     <div className={cn('mb-4 flex items-start gap-3', className)}>
-      {icon && (
-        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-navy/8 text-navy dark:bg-blue/20 dark:text-link">
-          {icon}
-        </span>
-      )}
       <div className="min-w-0 flex-1">
         <h3 className="text-base font-bold leading-tight">{title}</h3>
         {subtitle && <p className="mt-0.5 text-sm text-muted">{subtitle}</p>}

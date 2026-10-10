@@ -1,11 +1,11 @@
 import { cn } from './cn';
 
-export function Skeleton({ className, rounded = 'rounded-md' }: { className?: string; rounded?: string }) {
+export function Skeleton({ className, rounded = 'rounded-[2px]' }: { className?: string; rounded?: string }) {
   return (
     <span
       aria-hidden
       className={cn(
-        'animate-shimmer block bg-[length:200%_100%] bg-[linear-gradient(90deg,var(--surface-2)_25%,var(--surface-3)_50%,var(--surface-2)_75%)]',
+        'block animate-pulse bg-surface-3 motion-reduce:animate-none',
         rounded,
         className ?? 'h-4 w-full',
       )}
@@ -29,9 +29,9 @@ export function SkeletonCards({ count = 3, className }: { count?: number; classN
   return (
     <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-3', className)} role="status" aria-label="Loading">
       {Array.from({ length: count }, (_, i) => (
-        <div key={i} className="rounded-[12px] border border-line bg-surface p-5">
+        <div key={i} className="rounded-[4px] border border-line bg-surface p-5">
           <div className="flex items-center gap-3">
-            <Skeleton className="size-10" rounded="rounded-full" />
+            <Skeleton className="size-10" />
             <div className="flex-1 space-y-2">
               <Skeleton className="h-3.5 w-1/2" />
               <Skeleton className="h-3 w-1/3" />

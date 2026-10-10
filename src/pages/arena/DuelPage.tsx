@@ -1,26 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  AlertTriangle,
-  Check,
-  CheckCircle2,
-  ChevronDown,
-  Clock,
-  EyeOff,
-  Gauge,
-  Hourglass,
-  ListChecks,
-  Lightbulb,
-  Play,
-  RefreshCw,
-  RotateCcw,
-  Swords,
-  Timer,
-  Trophy,
-  X,
-  XCircle,
-  Zap,
-} from 'lucide-react';
+import { Check, CheckCircle2, ChevronDown, RefreshCw, RotateCcw, X, XCircle } from 'lucide-react';
 import {
   Badge,
   Button,
@@ -159,7 +139,6 @@ export function DuelPage() {
     return (
       <Page width="narrow">
         <EmptyState
-          icon={<Swords />}
           title="Duel not found"
           description="This duel doesn't exist, or it's between two other players."
           action={<ButtonLink to="/arena">Back to the Arena</ButtonLink>}
@@ -280,8 +259,7 @@ export function DuelPage() {
     title = 'Challenge sent';
     body = (
       <Card className="text-center">
-        <Hourglass className="mx-auto size-8 text-blue dark:text-link" />
-        <h2 className="mt-3 text-lg font-bold">Waiting for {displayName(opp)}</h2>
+        <h2 className="text-lg font-bold">Waiting for {displayName(opp)}</h2>
         <p className="mx-auto mt-1 max-w-md text-sm text-muted">
           They have {formatUntil(duel.expires_at)} to accept. You'll get a notification the moment they do, and the
           questions unlock for both of you.
@@ -297,10 +275,7 @@ export function DuelPage() {
     body = (
       <>
         <Card className="flex flex-col items-center gap-2 text-center">
-          <span className="relative flex size-3">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-blue opacity-60 motion-reduce:hidden" />
-            <span className="relative inline-flex size-3 rounded-full bg-blue" />
-          </span>
+          <span className="inline-flex size-2 rounded-full bg-blue" aria-hidden />
           <h2 className="text-lg font-bold">Waiting for {displayName(opp)} to play</h2>
           <p className="max-w-md text-sm text-muted">
             You scored <b className="tabular text-heading">{side.myScore}/{DUEL_QUESTIONS}</b> in{' '}
@@ -321,7 +296,6 @@ export function DuelPage() {
     title = duel.status === 'expired' ? 'Expired' : duel.status === 'declined' ? 'Declined' : 'Cancelled';
     body = (
       <EmptyState
-        icon={<Swords />}
         title={what}
         description="Rematches are one tap away."
         action={
@@ -350,7 +324,7 @@ export function DuelPage() {
           rightMs={duel.status === 'accepted' ? (side.theyPlayed ? 'finished, score hidden' : 'not played') : undefined}
         />
         {duel.message && (
-          <p className="mx-auto mt-6 max-w-md rounded-[12px] bg-white/[0.08] px-4 py-2.5 text-center text-sm italic text-white/85 ring-1 ring-inset ring-white/12">
+          <p className="mx-auto mt-6 max-w-md rounded-[2px] border border-white/15 bg-navy-2 px-4 py-2.5 text-center text-sm italic text-white/85">
             "{duel.message}"
             <span className="ml-1 not-italic text-white/55">- {displayName(players[duel.challenger_id])}</span>
           </p>
@@ -454,10 +428,9 @@ function CancelButton({ duel, onCancelled }: { duel: DuelRow; onCancelled: (d: D
 
 function ReadyPanel({ duel, theyPlayed, onStart }: { duel: DuelRow; theyPlayed: boolean; onStart: () => void }) {
   const per = Math.round(duel.time_limit_sec / DUEL_QUESTIONS);
-  const rules: { icon: ReactNode; text: ReactNode }[] = [
-    { icon: <ListChecks />, text: <>{DUEL_QUESTIONS} questions from {arenaEventName(duel.event)}, the same set your opponent gets.</> },
+  const rules: { text: ReactNode }[] = [
+    { text: <>{DUEL_QUESTIONS} questions from {arenaEventName(duel.event)}, the same set your opponent gets.</> },
     {
-      icon: <Timer />,
       text: (
         <>
           <b>{clockLabel(duel.time_limit_sec)}</b> on the clock (about {per}s a question). It starts when you press Start and
@@ -465,28 +438,26 @@ function ReadyPanel({ duel, theyPlayed, onStart }: { duel: DuelRow; theyPlayed: 
         </>
       ),
     },
-    { icon: <Trophy />, text: <>Most correct wins. If you tie, the faster total time wins.</> },
-    { icon: <EyeOff />, text: <>No answers are shown until you've both played, so no peeking.</> },
+    { text: <>Most correct wins. If you tie, the faster total time wins.</> },
+    { text: <>No answers are shown until you've both played, so no peeking.</> },
   ];
   return (
     <Card padded={false} className="overflow-hidden">
       {theyPlayed && (
-        <div className="flex items-center gap-2 border-b border-line bg-blue/[0.06] px-5 py-3 text-sm font-semibold text-blue dark:text-link">
-          <Zap className="size-4" /> Your opponent has already played. Their score stays hidden until you finish.
+        <div className="border-b border-l-4 border-line border-l-blue bg-surface-2 px-5 py-3 text-sm font-semibold text-blue dark:text-link">
+          Your opponent has already played. Their score stays hidden until you finish.
         </div>
       )}
       <ul className="space-y-4 p-5 sm:p-6">
         {rules.map((r, i) => (
           <li key={i} className="flex items-start gap-3 text-[0.9375rem]">
-            <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-navy/8 text-navy dark:bg-blue/20 dark:text-link [&>svg]:size-[18px]">
-              {r.icon}
-            </span>
-            <span className="pt-1.5">{r.text}</span>
+            <span className="tabular w-7 shrink-0 pt-px font-display text-sm font-black text-red">{String(i + 1).padStart(2, '0')}</span>
+            <span>{r.text}</span>
           </li>
         ))}
       </ul>
-      <div className="flex flex-col items-center gap-2 border-t border-line bg-surface-2/60 px-5 py-5">
-        <Button variant="accent" size="lg" onClick={onStart} leftIcon={<Play className="size-5" />} className="min-w-56">
+      <div className="flex flex-col items-center gap-2 border-t border-line bg-surface-2 px-5 py-5">
+        <Button variant="accent" size="lg" onClick={onStart} className="min-w-56">
           Start the duel
         </Button>
         <span className="text-xs text-muted">Play by {new Date(duel.expires_at).toLocaleString(undefined, { weekday: 'short', hour: 'numeric', minute: '2-digit' })}</span>
@@ -632,9 +603,8 @@ function DuelPlay({
   if (submitError)
     return (
       <Page width="narrow">
-        <Card className="text-center">
-          <AlertTriangle className="mx-auto size-8 text-warning" />
-          <h2 className="mt-3 text-lg font-bold">Your answers are safe, but we couldn't send them</h2>
+        <Card className="border-l-4 border-l-red text-center">
+          <h2 className="text-lg font-bold">Your answers are safe, but we couldn't send them</h2>
           <p className="mx-auto mt-1 max-w-md text-sm text-muted">{submitError}</p>
           <Button className="mt-5" onClick={() => void send()} loading={submitting} leftIcon={<RefreshCw className="size-4" />}>
             Try again
@@ -653,9 +623,7 @@ function DuelPlay({
         onSnapshot={onSnapshot}
         submitting={submitting}
         title={
-          <span className="flex items-center gap-1.5">
-            <Swords className="size-4 text-red" aria-hidden /> vs {displayName(opponent)}
-          </span>
+          <span>vs {displayName(opponent)}</span>
         }
         subtitle={`${arenaEventName(duel.event)} · ${DUEL_QUESTIONS} questions`}
         onExit={() => {
@@ -691,8 +659,7 @@ function PaceStrip({ snap, perSec, total }: { snap: RunnerSnapshot; perSec: numb
   const ahead = answered - expected;
   return (
     <div className="fixed inset-x-0 bottom-[calc(env(safe-area-inset-bottom)+4.5rem)] z-30 px-4 md:bottom-4">
-      <div className="mx-auto flex max-w-md items-center gap-3 rounded-full border border-line bg-surface/95 px-4 py-2 shadow-lift backdrop-blur-md">
-        <Gauge className={cn('size-4 shrink-0', over ? 'text-warning' : 'text-blue dark:text-link')} aria-hidden />
+      <div className="mx-auto flex max-w-md items-center gap-3 rounded-[2px] border border-line bg-surface px-4 py-2 shadow-lift">
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline justify-between gap-2 text-xs">
             <span className="font-semibold text-heading">
@@ -702,9 +669,9 @@ function PaceStrip({ snap, perSec, total }: { snap: RunnerSnapshot; perSec: numb
               {ahead > 0 ? `${ahead} ahead of pace` : ahead === 0 ? 'on pace' : `${-ahead} behind pace`}
             </span>
           </div>
-          <div className="mt-1 h-1 overflow-hidden rounded-full bg-surface-3" aria-hidden>
+          <div className="mt-1 h-1 overflow-hidden rounded-none bg-surface-3" aria-hidden>
             <div
-              className={cn('h-full rounded-full transition-[width] duration-200 ease-linear', over ? 'bg-warning' : 'bg-blue')}
+              className={cn('h-full transition-[width] duration-200 ease-linear', over ? 'bg-warning' : 'bg-blue')}
               style={{ width: `${ratio * 100}%` }}
             />
           </div>
@@ -745,18 +712,11 @@ function ResultExplainer({ duel, uid, opp }: { duel: DuelRow; uid: string; opp?:
   return (
     <div
       className={cn(
-        'flex items-center gap-3 rounded-[12px] border px-4 py-3 text-sm',
-        o === 'win' ? 'border-success/30 bg-success/[0.06]' : o === 'loss' ? 'border-red/25 bg-red/[0.04]' : 'border-line bg-surface',
+        'rounded-[2px] border border-l-4 border-line bg-surface px-4 py-3 text-sm',
+        o === 'win' ? 'border-l-success' : o === 'loss' ? 'border-l-red' : 'border-l-blue',
       )}
     >
-      {o === 'win' ? (
-        <Trophy className="size-5 shrink-0 text-warning" />
-      ) : o === 'loss' ? (
-        <Swords className="size-5 shrink-0 text-red" />
-      ) : (
-        <Clock className="size-5 shrink-0 text-muted" />
-      )}
-      <span>{text}</span>
+      {text}
     </div>
   );
 }
@@ -798,7 +758,7 @@ function Comparison({
     return (
       <div className="mt-8 space-y-3">
         {Array.from({ length: 4 }, (_, i) => (
-          <Skeleton key={i} className="h-24 w-full" rounded="rounded-[12px]" />
+          <Skeleton key={i} className="h-24 w-full" rounded="rounded-[2px]" />
         ))}
       </div>
     );
@@ -845,7 +805,7 @@ function Comparison({
       )}
 
       {rows.length === 0 ? (
-        <EmptyState compact icon={<CheckCircle2 />} title="Nothing to show" description="No questions match this filter." />
+        <EmptyState compact title="Nothing to show" description="No questions match this filter." />
       ) : (
         <ol className="space-y-3">
           {rows.map(({ q, i, a, b }) => {
@@ -866,9 +826,9 @@ function Comparison({
                         return n;
                       })
                     }
-                    className="flex w-full items-start gap-3 px-4 py-3.5 text-left transition-colors hover:bg-surface-2/60"
+                    className="flex w-full items-start gap-3 px-4 py-3.5 text-left transition-colors hover:bg-surface-2"
                   >
-                    <span className="tabular grid size-7 shrink-0 place-items-center rounded-full bg-surface-2 font-display text-xs font-bold text-muted ring-1 ring-inset ring-line">
+                    <span className="tabular grid size-7 shrink-0 place-items-center rounded-[2px] bg-surface-2 font-display text-xs font-bold text-muted ring-1 ring-inset ring-line">
                       {i + 1}
                     </span>
                     <span className="min-w-0 flex-1">
@@ -885,7 +845,7 @@ function Comparison({
                     {showTheirs && <AnswerCell label={oppName} a={b} faster={faster === 'them'} />}
                   </div>
                   {expanded && (
-                    <div className="space-y-2 border-t border-line bg-surface-2/40 px-4 py-4">
+                    <div className="space-y-2 border-t border-line bg-surface-2 px-4 py-4">
                       <ul className="space-y-1.5">
                         {q.choices.map((c, ci) => {
                           const right = ci === q.answer;
@@ -895,13 +855,13 @@ function Comparison({
                             <li
                               key={ci}
                               className={cn(
-                                'flex items-start gap-2.5 rounded-[10px] border px-3 py-2 text-sm',
+                                'flex items-start gap-2.5 rounded-[2px] border px-3 py-2 text-sm',
                                 right ? 'border-success/40 bg-success/[0.07]' : myPick || theirPick ? 'border-red/25 bg-red/[0.04]' : 'border-line bg-surface',
                               )}
                             >
                               <span
                                 className={cn(
-                                  'grid size-6 shrink-0 place-items-center rounded-md font-display text-xs font-bold',
+                                  'grid size-6 shrink-0 place-items-center rounded-[2px] font-display text-xs font-bold',
                                   right ? 'bg-success text-white' : 'bg-surface-2 text-muted ring-1 ring-inset ring-line',
                                 )}
                               >
@@ -917,9 +877,9 @@ function Comparison({
                         })}
                       </ul>
                       {q.explain && (
-                        <p className="flex gap-2 pt-1 text-sm text-muted">
-                          <Lightbulb className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden />
-                          <span>{q.explain}</span>
+                        <p className="pt-1 text-sm text-muted">
+                          <span className="mr-1.5 text-[11px] font-bold uppercase tracking-wider text-heading">Why</span>
+                          {q.explain}
                         </p>
                       )}
                     </div>
@@ -939,7 +899,7 @@ function AnswerCell({ label, a, faster }: { label: string; a?: DuelRunAnswer; fa
   return (
     <div className="flex min-w-0 items-center gap-2 px-4 py-2.5">
       {skipped ? (
-        <span className="grid size-5 shrink-0 place-items-center rounded-full bg-surface-3 text-muted">
+        <span className="grid size-5 shrink-0 place-items-center rounded-[2px] bg-surface-3 text-muted">
           <X className="size-3" aria-hidden />
         </span>
       ) : a.correct ? (
@@ -957,12 +917,12 @@ function AnswerCell({ label, a, faster }: { label: string; a?: DuelRunAnswer; fa
       {a && a.ms > 0 && (
         <span
           className={cn(
-            'tabular inline-flex shrink-0 items-center gap-1 rounded-full px-1.5 py-0.5 text-[11px] font-semibold',
-            faster ? 'bg-blue/12 text-blue dark:text-link' : 'text-muted',
+            'tabular inline-flex shrink-0 items-center rounded-[2px] px-1.5 py-0.5 text-[11px] font-semibold',
+            faster ? 'bg-blue text-white' : 'text-muted',
           )}
           title={faster ? 'Faster correct answer' : 'Time on this question'}
         >
-          {faster && <Zap className="size-3" aria-hidden />}
+
           {fmtMs(a.ms, true)}
         </span>
       )}
@@ -972,7 +932,7 @@ function AnswerCell({ label, a, faster }: { label: string; a?: DuelRunAnswer; fa
 
 function MiniStat({ label, me, them }: { label: string; me: string; them: string | null }) {
   return (
-    <div className="rounded-[12px] border border-line bg-surface px-4 py-3">
+    <div className="rounded-[2px] border border-line bg-surface px-4 py-3">
       <div className="text-[11px] font-bold uppercase tracking-wider text-muted">{label}</div>
       <div className="mt-1 flex items-baseline gap-3">
         <span className="tabular font-display text-xl font-extrabold text-heading">{me}</span>
@@ -997,7 +957,8 @@ function Confetti() {
         dy: `${-80 - Math.random() * 220}px`,
         rot: `${Math.random() * 720 - 360}deg`,
         delay: Math.random() * 250,
-        color: ['#BF0D3E', '#3F6FB3', '#FFFFFF', '#C98A00', '#7FA3DD'][i % 5],
+        color: ['#BF0D3E', '#3F6FB3', '#FFFFFF'][i % 3],
+
         w: 6 + Math.random() * 6,
       })),
     [],
@@ -1032,8 +993,8 @@ function DuelSkeleton() {
       <div className="facets h-72 w-full" aria-hidden />
       <Page width="narrow">
         <div className="space-y-3" role="status" aria-label="Loading duel">
-          <Skeleton className="h-28 w-full" rounded="rounded-[12px]" />
-          <Skeleton className="h-20 w-full" rounded="rounded-[12px]" />
+          <Skeleton className="h-28 w-full" rounded="rounded-[2px]" />
+          <Skeleton className="h-20 w-full" rounded="rounded-[2px]" />
         </div>
       </Page>
     </>

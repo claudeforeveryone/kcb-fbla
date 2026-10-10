@@ -26,7 +26,7 @@ alter table fbla_private.email_config enable row level security;
 insert into fbla_private.email_config (key, value) values
   ('site_url', 'https://kcb-fbla.vercel.app'),
   ('functions_url', 'https://uhgzeuvybyohdbfuhfil.supabase.co/functions/v1'),
-  ('email_from', 'KCB FBLA <onboarding@resend.dev>'),
+  ('email_from', 'FBLC <onboarding@resend.dev>'),
   ('reply_to', '')
 on conflict (key) do nothing;
 

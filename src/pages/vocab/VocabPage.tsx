@@ -1,18 +1,11 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  BookOpen,
-  CalendarClock,
   ChevronRight,
-  Layers,
   Pencil,
   Plus,
   Search,
-  Sparkles,
-  Star,
-  Trophy,
-  Users,
   X,
 } from 'lucide-react';
 import {
@@ -90,9 +83,9 @@ export default function VocabPage() {
         }
       >
         <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-3">
-          <HeaderStat icon={<CalendarClock />} label="Due today" value={firstLoad ? null : totals.due} accent={totals.due > 0} />
-          <HeaderStat icon={<Trophy />} label="Mastered" value={firstLoad ? null : totals.mastered} />
-          <HeaderStat icon={<BookOpen />} label="Studied" value={firstLoad ? null : `${totals.studied}`} suffix={firstLoad ? '' : ` / ${totals.terms}`} />
+          <HeaderStat label="Due today" value={firstLoad ? null : totals.due} accent={totals.due > 0} />
+          <HeaderStat label="Mastered" value={firstLoad ? null : totals.mastered} />
+          <HeaderStat label="Studied" value={firstLoad ? null : `${totals.studied}`} suffix={firstLoad ? '' : ` / ${totals.terms}`} />
         </div>
       </PageHeader>
 
@@ -102,7 +95,7 @@ export default function VocabPage() {
         ) : (
           <>
             {s.saveError && (
-              <div role="status" className="mb-4 rounded-lg bg-warning/12 px-3 py-2 text-sm font-semibold text-[#8a5f00] dark:text-warning">
+              <div role="status" className="mb-4 rounded-[2px] border-l-[3px] border-warning bg-warning/12 px-3 py-2 text-sm font-semibold text-[#8a5f00] dark:text-warning">
                 Some reviews haven't saved yet ({s.saveError}). We'll keep retrying.
               </div>
             )}
@@ -126,7 +119,7 @@ export default function VocabPage() {
               <SearchResults query={query} decks={allDecks} progress={s.progress} onClear={() => setQuery('')} />
             ) : firstLoad ? (
               <div className="mt-8 grid gap-4">
-                <Skeleton className="h-36 w-full" rounded="rounded-[12px]" />
+                <Skeleton className="h-36 w-full" rounded="rounded-[4px]" />
                 <SkeletonCards count={6} />
               </div>
             ) : (
@@ -174,13 +167,11 @@ export default function VocabPage() {
 }
 
 function HeaderStat({
-  icon,
   label,
   value,
   suffix,
   accent,
 }: {
-  icon: ReactNode;
   label: string;
   value: number | string | null;
   suffix?: string;
@@ -189,11 +180,10 @@ function HeaderStat({
   return (
     <div
       className={cn(
-        'flex min-w-0 items-center gap-3 rounded-xl px-3 py-2.5 ring-1 ring-inset backdrop-blur-sm sm:min-w-40 sm:px-4',
-        accent ? 'bg-red/90 ring-white/20' : 'bg-white/8 ring-white/15',
+        'flex min-w-0 items-center gap-3 rounded-[2px] border px-3 py-2.5 sm:min-w-40 sm:px-4',
+        accent ? 'border-red bg-red' : 'border-white/20',
       )}
     >
-      <span className="hidden size-9 place-items-center rounded-lg bg-white/12 text-white sm:grid [&>svg]:size-4.5">{icon}</span>
       <div className="min-w-0">
         <div className="tabular font-display text-xl font-extrabold leading-none text-white sm:text-2xl">
           {value === null ? <span className="inline-block h-6 w-10 animate-pulse rounded bg-white/20" /> : value}
@@ -209,12 +199,12 @@ function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
   const started = stats.total - stats.fresh > 0;
   return (
     <Card className="relative mt-6 overflow-hidden p-0" as="section">
-      <div className="absolute inset-y-0 left-0 w-1 bg-red" aria-hidden />
+      <div className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />
       <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:p-6">
         <DeckRing stats={stats} size={88} stroke={8} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
-            <Star className="size-3.5 fill-current" /> Your event
+            Your event
           </div>
           <h2 className="mt-1 text-2xl font-extrabold">{deck.title}</h2>
           <p className="mt-1 text-sm text-muted">
@@ -256,7 +246,7 @@ function DeckTile({
   const complete = stats.total > 0 && stats.mastered === stats.total;
   return (
     <Card interactive padded={false} className="group relative">
-      <Link to={`/vocab/${deck.key}`} className="flex h-full items-start gap-4 rounded-[12px] p-4 outline-none">
+      <Link to={`/vocab/${deck.key}`} className="flex h-full items-start gap-4 rounded-[4px] p-4 outline-none">
         <DeckRing stats={stats} size={60} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5">
@@ -335,9 +325,6 @@ function ChapterDecks({
   if (!s.chapterId) {
     return (
       <Card className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-        <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue dark:text-link">
-          <Users className="size-5" />
-        </span>
         <div className="min-w-0 flex-1">
           <h3 className="font-bold">Chapter decks</h3>
           <p className="text-sm text-muted">Join your chapter to study the decks your trainers and executives make for you.</p>
@@ -372,7 +359,6 @@ function ChapterDecks({
       ) : sorted.length === 0 ? (
         <EmptyState
           compact
-          icon={<Layers />}
           title="No chapter decks yet"
           description={
             staff
@@ -437,7 +423,6 @@ function SearchResults({
     return (
       <EmptyState
         className="mt-6"
-        icon={<Search />}
         title={`No terms match "${query.trim()}"`}
         description="Try a shorter word, or search part of a definition."
         action={
@@ -453,7 +438,7 @@ function SearchResults({
       <p className="mb-3 text-sm text-muted" aria-live="polite">
         <span className="tabular font-semibold text-ink">{hits.length}</span> {hits.length === 1 ? 'match' : 'matches'}
       </p>
-      <ul className="divide-y divide-line overflow-hidden rounded-[12px] border border-line bg-surface">
+      <ul className="divide-y divide-line overflow-hidden rounded-[4px] border border-line bg-surface">
         {hits.slice(0, limit).map((t) => {
           const d = deckBy.get(t.deckKey);
           const p = progress.get(t.id);
@@ -481,7 +466,7 @@ function SearchResults({
       </ul>
       {hits.length > limit && (
         <div className="mt-3 flex justify-center">
-          <Button variant="outline" onClick={() => setLimit((n) => n + 60)} leftIcon={<Sparkles className="size-4" />}>
+          <Button variant="outline" onClick={() => setLimit((n) => n + 60)}>
             Show more ({hits.length - limit} left)
           </Button>
         </div>

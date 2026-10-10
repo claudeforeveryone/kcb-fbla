@@ -1,5 +1,5 @@
-import { Flame, TrendingDown, TrendingUp } from 'lucide-react';
-import { Avatar, FacetArt, Skeleton, TierGem, TIERS, cn, tierFor, tierProgress } from '../../components/ui';
+import { TrendingDown, TrendingUp } from 'lucide-react';
+import { Avatar, FacetArt, Skeleton, cn } from '../../components/ui';
 import { Sparkline } from '../../components/charts';
 import type { ProfileStats } from '../../lib/types';
 import { greeting, torontoDay } from './homeData';
@@ -40,7 +40,7 @@ export function Hero({ profile, stats, statsLoading }: { profile: HeroProfile; s
           <Avatar src={profile.avatar_url} name={profile.display_name} size="xl" ring className="max-sm:size-16 max-sm:text-xl" />
           <div className="min-w-0">
             <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
-              <span className="h-[3px] w-5 rounded-full bg-red" aria-hidden />
+              <span className="h-[3px] w-5 bg-red" aria-hidden />
               {dateLine}
             </div>
             <h1 className="text-[1.75rem] sm:truncate font-extrabold tracking-tight text-white md:text-4xl">
@@ -60,25 +60,20 @@ export function Hero({ profile, stats, statsLoading }: { profile: HeroProfile; s
 }
 
 function RatingPanel({ elo, peak, stats, loading }: { elo: number; peak: number; stats: ProfileStats | undefined; loading: boolean }) {
-  const tier = tierFor(elo);
-  const progress = tierProgress(elo);
-  const nextTier = tier.next != null ? TIERS.find((t) => t.min === tier.next) : undefined;
   const history = stats?.elo_history ?? [];
   const recent = history.slice(-30).map((h) => h.elo);
   // Change over the last 7 days, against the last rating on or before a week ago (0 if you're new).
   const weekAgo = torontoDay(Date.now() - 7 * 86_400_000);
   const before = [...history].reverse().find((h) => h.date <= weekAgo)?.elo ?? (history.length ? 0 : elo);
   const delta = elo - before;
+  const peakElo = Math.round(Math.max(peak, elo));
 
   return (
-    <div className="min-w-0 flex-1 rounded-2xl bg-white/[0.08] p-4 ring-1 ring-inset ring-white/15 backdrop-blur-sm sm:min-w-[280px]">
+    <div className="min-w-0 flex-1 rounded-[4px] border border-white/15 bg-white/10 p-4 sm:min-w-[280px]">
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <TierGem elo={elo} size={44} className="drop-shadow-[0_4px_10px_rgb(0_0_0/0.35)]" />
-          <div>
-            <div className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/65">{tier.name} tier</div>
-            <div className="tabular font-display text-4xl font-extrabold leading-none tracking-tight">{Math.round(elo)}</div>
-          </div>
+        <div>
+          <div className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/65">Elo rating</div>
+          <div className="tabular mt-1 font-display text-4xl font-extrabold leading-none tracking-tight">{Math.round(elo)}</div>
         </div>
         <div className="text-right">
           {loading && !stats ? (
@@ -86,27 +81,27 @@ function RatingPanel({ elo, peak, stats, loading }: { elo: number; peak: number;
           ) : recent.length >= 2 ? (
             <Sparkline values={recent} width={96} height={34} color="#7FA3DD" title="Elo, last 30 days" />
           ) : null}
-          {delta !== 0 && (
-            <div className={cn('tabular mt-1 inline-flex items-center gap-1 text-xs font-semibold', delta > 0 ? 'text-[#7ee2b0]' : 'text-[#ff9fb6]')}>
-              {delta > 0 ? <TrendingUp className="size-3.5" /> : <TrendingDown className="size-3.5" />}
-              {delta > 0 ? '+' : ''}
-              {delta} this week
-            </div>
-          )}
         </div>
       </div>
-      <div className="mt-4">
-        <div className="h-1.5 overflow-hidden rounded-full bg-white/15">
-          <div
-            className="h-full rounded-full transition-[width] duration-700 ease-out"
-            style={{ width: `${Math.max(3, progress * 100)}%`, background: `linear-gradient(90deg, ${tier.from}, ${tier.to})` }}
-          />
+      <dl className="tabular mt-4 grid grid-cols-2 border-t border-white/15 pt-3 text-xs">
+        <div>
+          <dt className="font-bold uppercase tracking-[0.12em] text-white/60">Peak</dt>
+          <dd className="mt-0.5 text-base font-extrabold text-white">{peakElo}</dd>
         </div>
-        <div className="tabular mt-1.5 flex justify-between text-xs text-white/70">
-          <span>{nextTier ? `${nextTier.min - Math.round(elo)} to ${nextTier.name}` : 'Top tier'}</span>
-          <span>Peak {Math.round(Math.max(peak, elo))}</span>
+        <div className="border-l border-white/15 pl-3">
+          <dt className="font-bold uppercase tracking-[0.12em] text-white/60">This week</dt>
+          <dd
+            className={cn(
+              'mt-0.5 inline-flex items-center gap-1 text-base font-extrabold',
+              delta > 0 ? 'text-[#7ee2b0]' : delta < 0 ? 'text-[#ff9fb6]' : 'text-white',
+            )}
+          >
+            {delta > 0 ? <TrendingUp className="size-3.5" aria-hidden /> : delta < 0 ? <TrendingDown className="size-3.5" aria-hidden /> : null}
+            {delta > 0 ? '+' : ''}
+            {delta}
+          </dd>
         </div>
-      </div>
+      </dl>
     </div>
   );
 }
@@ -115,27 +110,19 @@ function StreakPanel({ streak, best, lit }: { streak: number; best: number; lit:
   return (
     <div
       className={cn(
-        'flex items-center gap-3 rounded-2xl p-4 ring-1 ring-inset sm:w-[150px] sm:flex-col sm:items-start sm:justify-between',
-        lit ? 'bg-gradient-to-br from-[#FF8A3D]/30 to-red/40 ring-[#FF8A3D]/40' : 'bg-white/[0.08] ring-white/15',
+        'flex items-center justify-between gap-3 rounded-[4px] border p-4 sm:w-[150px] sm:flex-col sm:items-start',
+        lit ? 'border-red bg-red' : 'border-white/15 bg-white/10',
       )}
       title={lit ? 'You practised today' : 'Practise today to keep your streak'}
     >
-      <span
-        className={cn(
-          'grid size-11 shrink-0 place-items-center rounded-xl',
-          lit ? 'bg-gradient-to-b from-[#FFB347] to-[#FF5A3D] text-white shadow-[0_0_24px_rgb(255_120_60/0.55)]' : 'bg-white/10 text-white/55',
-        )}
-      >
-        <Flame className={cn('size-6', lit && 'motion-safe:animate-[flicker_2.4s_ease-in-out_infinite]')} fill={lit ? 'currentColor' : 'none'} />
-      </span>
-      <div>
+      <div className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/70">Streak</div>
+      <div className="text-right sm:text-left">
         <div className="tabular font-display text-3xl font-extrabold leading-none">
           {streak}
           <span className="ml-1 text-sm font-semibold text-white/70">day{streak === 1 ? '' : 's'}</span>
         </div>
-        <div className="mt-1 text-xs text-white/70">{lit ? 'Streak safe today' : streak > 0 ? 'Not safe yet' : `Best ${best}`}</div>
+        <div className="mt-1 text-xs text-white/75">{lit ? 'Streak safe today' : streak > 0 ? 'Not safe yet' : `Best ${best}`}</div>
       </div>
-      <style>{`@keyframes flicker{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.06) rotate(-3deg)}60%{transform:scale(.97) rotate(2deg)}}`}</style>
     </div>
   );
 }

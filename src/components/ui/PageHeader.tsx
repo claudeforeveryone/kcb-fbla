@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { cn } from './cn';
@@ -9,6 +9,9 @@ import { cn } from './cn';
  */
 export function FacetArt({ className, intensity = 1 }: { className?: string; intensity?: number }) {
   const o = (v: number) => Math.min(1, v * intensity);
+  // Each shape drifts a few pixels on its own slow loop (see .facet-drift in index.css); flat fills, no gradients.
+  const drift = (dur: number, delay: number, x: number, y: number, r: number) =>
+    ({ '--facet-dur': `${dur}s`, '--facet-delay': `${delay}s`, '--facet-x': `${x}px`, '--facet-y': `${y}px`, '--facet-r': `${r}deg` }) as CSSProperties;
   return (
     <svg
       className={cn('pointer-events-none absolute inset-y-0 right-0 h-full w-[min(760px,100%)]', className)}
@@ -16,28 +19,23 @@ export function FacetArt({ className, intensity = 1 }: { className?: string; int
       preserveAspectRatio="xMaxYMid slice"
       aria-hidden
     >
-      <defs>
-        <linearGradient id="fa-a" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity={o(0.14)} />
-          <stop offset="1" stopColor="#fff" stopOpacity={o(0.02)} />
-        </linearGradient>
-        <linearGradient id="fa-b" x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#3F6FB3" stopOpacity={o(0.55)} />
-          <stop offset="1" stopColor="#3F6FB3" stopOpacity={o(0.05)} />
-        </linearGradient>
-      </defs>
       {/* big rising shard */}
-      <polygon points="430,320 640,40 700,190 560,320" fill="url(#fa-a)" />
+      <polygon className="facet-drift" style={drift(16, 0, 12, -8, 1.5)} points="430,320 640,40 700,190 560,320" fill="#fff" fillOpacity={o(0.08)} />
       {/* stepped lower plane, like the logo's base */}
-      <polygon points="520,320 620,250 650,250 690,200 760,170 760,320" fill="url(#fa-b)" />
+      <polygon className="facet-drift" style={drift(19, -6, -10, 4, -0.8)} points="520,320 620,250 650,250 690,200 760,170 760,320" fill="#3F6FB3" fillOpacity={o(0.35)} />
       {/* left wedge */}
-      <polygon points="340,320 400,210 470,320" fill="#fff" fillOpacity={o(0.06)} />
+      <polygon className="facet-drift" style={drift(13, -3, 8, -10, 2.5)} points="340,320 400,210 470,320" fill="#fff" fillOpacity={o(0.06)} />
       {/* top-right flag plane */}
-      <polygon points="610,0 760,0 760,120 700,70" fill="#fff" fillOpacity={o(0.07)} />
+      <polygon className="facet-drift" style={drift(17, -9, -8, 8, -1.5)} points="610,0 760,0 760,120 700,70" fill="#fff" fillOpacity={o(0.07)} />
+      {/* small floating triangles */}
+      <polygon className="facet-drift" style={drift(11, -2, 14, -12, 6)} points="300,70 330,40 342,92" fill="#fff" fillOpacity={o(0.09)} />
+      <polygon className="facet-drift" style={drift(14, -7, -12, 10, -5)} points="560,120 586,104 584,140" fill="#3F6FB3" fillOpacity={o(0.5)} />
       {/* thin red accent edge */}
-      <polygon points="638,45 644,41 705,190 700,194" fill="#BF0D3E" fillOpacity={o(0.9)} />
+      <polygon className="facet-drift" style={drift(16, 0, 12, -8, 1.5)} points="638,45 644,41 705,190 700,194" fill="#BF0D3E" fillOpacity={o(0.9)} />
       {/* fine outline shard */}
       <polyline
+        className="facet-drift"
+        style={drift(21, -4, 6, -6, 0.8)}
         points="250,320 520,60 560,150"
         fill="none"
         stroke="#fff"
@@ -84,7 +82,7 @@ export function PageHeader({
         {back && (
           <Link
             to={back.to}
-            className="mb-3 inline-flex items-center gap-1 rounded-md text-sm font-semibold text-white/75 transition-colors hover:text-white"
+            className="mb-3 inline-flex items-center gap-1 rounded-[2px] text-sm font-semibold text-white/75 transition-colors hover:text-white"
           >
             <ChevronLeft className="size-4" />
             {back.label}
@@ -96,7 +94,7 @@ export function PageHeader({
             <div className="min-w-0">
               {eyebrow && (
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
-                  <span className="h-[3px] w-5 rounded-full bg-red" aria-hidden />
+                  <span className="h-[3px] w-5 bg-red" aria-hidden />
                   {eyebrow}
                 </div>
               )}

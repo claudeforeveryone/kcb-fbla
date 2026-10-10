@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { CalendarClock } from 'lucide-react';
 import { Button, Input, Modal, Pill, SegmentedControl, Select, Textarea, errorMessage, useToast } from '../../../components/ui';
 import { eventName, type AssignmentKind } from '../../../lib/types';
 import {
@@ -12,7 +11,7 @@ import {
   type ClassTest,
   type ClassroomContext,
 } from '../../../api/classroom';
-import { ASSIGNMENT_META, eventOptions, toLocalInput } from './classroom-shared';
+import { eventOptions, toLocalInput } from './classroom-shared';
 
 export type AssignPreset = { kind: AssignmentKind; ref: string } | null;
 
@@ -154,8 +153,7 @@ export function AssignModal({
             value={kind}
             onChange={pickKind}
             options={kinds.map((k) => {
-              const M = ASSIGNMENT_META[k];
-              return { value: k, label: k === 'official' ? 'Official' : k === 'test' ? 'Test' : 'Deck', icon: <M.icon /> };
+              return { value: k, label: k === 'official' ? 'Official' : k === 'test' ? 'Test' : 'Deck' };
             })}
           />
         )}
@@ -226,7 +224,6 @@ export function AssignModal({
             value={due}
             onChange={(e) => setDue(e.target.value)}
             error={errors.due}
-            leftIcon={<CalendarClock />}
           />
           <div className="mt-2 flex flex-wrap gap-1.5">
             {QUICK_DUES.map((q) => (
@@ -245,5 +242,5 @@ export function AssignModal({
 }
 
 function Empty({ text }: { text: string }) {
-  return <p className="rounded-[10px] border border-dashed border-line-strong bg-surface-2/50 px-4 py-3 text-sm text-muted">{text}</p>;
+  return <p className="rounded-[2px] border border-dashed border-line-strong bg-surface-2 px-4 py-3 text-sm text-muted">{text}</p>;
 }

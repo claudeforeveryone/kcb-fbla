@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { eloDelta, eloPreview, eloTier, expectedScore, nextRating, questionRating, replayElo } from './elo';
+import { eloDelta, eloPreview, expectedScore, nextRating, questionRating, replayElo } from './elo';
 
 // Sequences graded by fbla_submit_attempt() on the live database (2026-10-10), so the client mirror is pinned
 // to the server: the same answers must give the same deltas.
@@ -71,9 +71,4 @@ describe('elo', () => {
     expect(eloPreview(300, 2, false)).toEqual({ win: eloDelta(300, 2, true, false), loss: eloDelta(300, 2, false, false) });
   });
 
-  it('names tiers', () => {
-    expect(eloTier(0).name).toBe('Rookie');
-    expect(eloTier(320).name).toBe('Silver');
-    expect(eloTier(900).name).toBe('Elite');
-  });
 });

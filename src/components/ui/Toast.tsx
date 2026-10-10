@@ -81,7 +81,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 key={t.id}
                 role={tone === 'error' ? 'alert' : 'status'}
                 className={cn(
-                  'pointer-events-auto relative flex w-full max-w-sm items-start gap-3 overflow-hidden rounded-xl border border-line bg-surface py-3 pl-4 pr-2 shadow-pop transition-all duration-200 ease-out',
+                  'pointer-events-auto relative flex w-full max-w-sm items-start gap-3 overflow-hidden rounded-[4px] border border-line bg-surface py-3 pl-4 pr-2 shadow-lift transition-all duration-200 ease-out',
                   t.leaving ? 'translate-y-1 opacity-0' : 'animate-slide-in',
                 )}
               >
@@ -106,7 +106,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 <button
                   type="button"
                   onClick={() => dismiss(t.id)}
-                  className="grid size-7 shrink-0 place-items-center rounded-md text-muted hover:bg-surface-2 hover:text-ink"
+                  className="grid size-7 shrink-0 place-items-center rounded-[2px] text-muted hover:bg-surface-2 hover:text-ink"
                   aria-label="Dismiss"
                 >
                   <X className="size-4" />

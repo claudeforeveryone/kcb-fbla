@@ -8,7 +8,7 @@ export function StatTile({
   sub,
   delta,
   deltaSuffix = '',
-  icon,
+  icon: _icon,
   chart,
   tone = 'default',
   className,
@@ -29,22 +29,12 @@ export function StatTile({
   return (
     <div
       className={cn(
-        'relative flex flex-col overflow-hidden rounded-[12px] border p-4',
-        navy ? 'facets border-white/10 text-white' : 'border-line bg-surface',
+        'relative flex flex-col overflow-hidden rounded-[4px] border p-4',
+        navy ? 'border-navy bg-navy text-white dark:border-white/10 dark:bg-navy-2' : 'border-line bg-surface',
         className,
       )}
     >
       <div className="flex items-center gap-2">
-        {icon && (
-          <span
-            className={cn(
-              'grid size-7 place-items-center rounded-lg [&>svg]:size-4',
-              navy ? 'bg-white/12 text-white' : 'bg-navy/7 text-navy dark:bg-blue/20 dark:text-link',
-            )}
-          >
-            {icon}
-          </span>
-        )}
         <span className={cn('text-xs font-semibold uppercase tracking-wider', navy ? 'text-white/70' : 'text-muted')}>
           {label}
         </span>

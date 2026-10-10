@@ -1,26 +1,6 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {
-  Award,
-  BarChart3,
-  BookMarked,
-  CalendarDays,
-  Check,
-  Clock,
-  Crosshair,
-  Flame,
-  History,
-  LineChart as LineIcon,
-  ListChecks,
-  Medal,
-  Settings,
-  Swords,
-  Trophy,
-  UserSearch,
-  Users,
-  X,
-  Zap,
-} from 'lucide-react';
+import { Check, History, Settings, X } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -34,11 +14,8 @@ import {
   Select,
   Skeleton,
   StatTile,
-  TierGem,
   cn,
   errorMessage,
-  tierFor,
-  tierProgress,
   useToast,
 } from '../../components/ui';
 import { BarChart, Donut, LineChart, RadarChart } from '../../components/charts';
@@ -82,7 +59,6 @@ export default function ProfilePage() {
         <PageHeader title="Player not found" size="sm" />
         <Page>
           <EmptyState
-            icon={<UserSearch />}
             title={`No player called @${username}`}
             description="They may have changed their username. Find them on the leaderboard instead."
             action={<ButtonLink to="/leaderboard">Open the leaderboard</ButtonLink>}
@@ -96,7 +72,6 @@ export default function ProfilePage() {
 function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   const p = stats.profile;
   const main = eventInfo(p.main_event);
-  const tier = tierFor(p.elo);
   const chapRank = useAsync(
     () => (stats.chapter ? chapterRank(stats.chapter.id, p.id) : Promise.resolve(null)),
     [stats.chapter?.id, p.id],
@@ -111,12 +86,7 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
         size="lg"
         eyebrow={isMe ? 'Your player card' : 'Player card'}
         leading={
-          <div className="relative">
-            <Avatar src={p.avatar_url} name={p.display_name} size="2xl" ring className="max-sm:size-20 max-sm:text-2xl" />
-            <span className="absolute -bottom-1 -right-1 grid size-9 place-items-center rounded-full bg-navy ring-2 ring-white/90">
-              <TierGem elo={p.elo} size={22} />
-            </span>
-          </div>
+          <Avatar src={p.avatar_url} name={p.display_name} size="2xl" ring className="max-sm:size-20 max-sm:text-2xl" />
         }
         title={<span className="break-words">{p.display_name}</span>}
         subtitle={
@@ -146,7 +116,7 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
               <ButtonLink
                 to={`/arena?challenge=${encodeURIComponent(p.username)}`}
                 variant="accent"
-                leftIcon={<Swords className="size-4" />}
+               
               >
                 Challenge to a duel
               </ButtonLink>
@@ -157,11 +127,10 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
       >
         <div className="flex flex-wrap items-center gap-2">
           <EloBadge elo={p.elo} size="lg" onDark />
-          <HeaderChip icon={<Trophy className="size-4" />} label="Global" value={`#${stats.rank}`} sub={`of ${stats.players}`} />
+          <HeaderChip label="Global" value={`#${stats.rank}`} sub={`of ${stats.players}`} />
           {stats.chapter && (
             <ChipLink to={isMe ? '/chapter' : null}>
               <HeaderChip
-                icon={<Users className="size-4" />}
                 label={stats.chapter.name}
                 value={chapRank.data ? `#${chapRank.data.rank}` : '...'}
                 sub={chapRank.data ? `of ${chapRank.data.of}` : ROLE_LABELS[stats.chapter.role]}
@@ -170,28 +139,14 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
           )}
           {main && (
             <Link to={`/play/${main.slug}`}>
-              <HeaderChip icon={<Crosshair className="size-4" />} label="Main event" value={main.short} sub={main.name} />
+              <HeaderChip label="Main event" value={main.short} sub={main.name} />
             </Link>
           )}
           {stats.chapter && stats.chapter.role !== 'member' && (
-            <span className="inline-flex h-10 items-center rounded-full bg-red px-3.5 text-xs font-bold uppercase tracking-wider text-white">
+            <span className="inline-flex h-10 items-center rounded-[2px] bg-red px-3.5 text-xs font-bold uppercase tracking-wider text-white">
               {ROLE_LABELS[stats.chapter.role]}
             </span>
           )}
-        </div>
-        <div className="mt-5 max-w-md">
-          <div className="mb-1.5 flex justify-between text-xs font-semibold text-white/70">
-            <span>{tier.name}</span>
-            <span className="tabular">
-              {tier.next == null ? 'Top tier' : `${tier.next - p.elo} Elo to ${tierFor(tier.next).name}`}
-            </span>
-          </div>
-          <div className="h-2 overflow-hidden rounded-full bg-white/15">
-            <div
-              className="h-full rounded-full transition-[width] duration-700 ease-out"
-              style={{ width: `${Math.round(tierProgress(p.elo) * 100)}%`, background: `linear-gradient(90deg, ${tier.from}, ${tier.to})` }}
-            />
-          </div>
         </div>
         {p.bio && <p className="mt-5 max-w-2xl whitespace-pre-line text-[0.9375rem] text-white/85">{p.bio}</p>}
       </PageHeader>
@@ -202,7 +157,7 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
             <StatGrid stats={stats} isMe={isMe} />
             <EloCard stats={stats} />
             <AccuracyCard stats={stats} />
-            <Panel title="Activity" icon={<CalendarDays />} action={<span className="text-xs text-muted">Last 12 weeks</span>}>
+            <Panel title="Activity" action={<span className="text-xs text-muted">Last 12 weeks</span>}>
               <ActivityHeatmap activity={stats.activity} />
             </Panel>
             {stats.recent_attempts && <RecentCard stats={stats} isMe={isMe} />}
@@ -211,7 +166,6 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
           <aside className="min-w-0 space-y-6">
             <Panel
               title={isMe ? 'Around you' : `Around ${p.display_name.split(' ')[0]}`}
-              icon={<Medal />}
               action={
                 <Link to="/leaderboard" className="text-sm font-semibold text-link hover:underline">
                   Full board
@@ -241,9 +195,7 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
         <section className="mt-8">
           <div className="mb-4 flex items-end justify-between gap-4">
             <div>
-              <h2 className="flex items-center gap-2 text-xl font-bold">
-                <Award className="size-5 text-red" /> Achievements
-              </h2>
+              <h2 className="text-xl font-bold">Achievements</h2>
               <p className="mt-0.5 text-sm text-muted">
                 {isMe ? 'Unlock them by practising, keeping streaks and winning duels.' : `What ${p.display_name} has unlocked.`}
               </p>
@@ -260,10 +212,9 @@ function ChipLink({ to, children }: { to: string | null; children: ReactNode }) 
   return to ? <Link to={to}>{children}</Link> : <span>{children}</span>;
 }
 
-function HeaderChip({ icon, label, value, sub }: { icon: ReactNode; label: string; value: string; sub?: string }) {
+function HeaderChip({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <span className="inline-flex h-10 max-w-full items-center gap-2 rounded-full bg-white/10 pl-2 pr-3.5 ring-1 ring-inset ring-white/15 transition-colors hover:bg-white/15">
-      <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white/12 text-white/85">{icon}</span>
+    <span className="inline-flex h-10 max-w-full items-center gap-2 rounded-[2px] border border-white/15 bg-white/10 px-3 transition-colors hover:bg-white/15">
       <span className="min-w-0 leading-tight">
         <span className="block max-w-40 truncate text-[10px] font-bold uppercase tracking-wider text-white/60">{label}</span>
         <span className="flex items-baseline gap-1">
@@ -280,29 +231,26 @@ function StatGrid({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   const today = stats.current_streak > 0;
   return (
     <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-      <StatTile tone="navy" label="Global rank" icon={<Trophy />} value={`#${stats.rank}`} sub={`of ${stats.players} players`} />
+      <StatTile tone="navy" label="Global rank" value={`#${stats.rank}`} sub={`of ${stats.players} players`} />
       <StatTile
         label="Questions"
-        icon={<ListChecks />}
         value={stats.questions_answered.toLocaleString()}
         sub={`${stats.questions_correct.toLocaleString()} correct`}
       />
       <StatTile
         label="Accuracy"
-        icon={<Crosshair />}
         value={stats.questions_answered ? pct(stats.accuracy) : '–'}
         sub={`${stats.attempts_count} exam${stats.attempts_count === 1 ? '' : 's'}`}
       />
-      <StatTile label="Time spent" icon={<Clock />} value={formatHours(stats.time_spent_ms)} sub="practising" />
+      <StatTile label="Time spent" value={formatHours(stats.time_spent_ms)} sub="practising" />
       <StatTile
         label="Current streak"
-        icon={<Flame className={today ? 'text-red' : undefined} />}
         value={`${stats.current_streak}d`}
         sub={today ? (isMe ? 'Keep it alive' : 'days in a row') : isMe ? 'Practise today to start' : 'Not active lately'}
       />
-      <StatTile label="Best streak" icon={<CalendarDays />} value={`${stats.best_streak}d`} sub="days in a row" />
-      <StatTile label="Answer streak" icon={<Zap />} value={stats.best_answer_streak} sub="best run of correct answers" />
-      <StatTile label="Peak Elo" icon={<LineIcon />} value={p.peak_elo} sub={tierFor(p.peak_elo).name} />
+      <StatTile label="Best streak" value={`${stats.best_streak}d`} sub="days in a row" />
+      <StatTile label="Answer streak" value={stats.best_answer_streak} sub="best run of correct answers" />
+      <StatTile label="Peak Elo" value={p.peak_elo} sub="highest rating" />
     </div>
   );
 }
@@ -325,7 +273,6 @@ function EloCard({ stats }: { stats: ProfileStats }) {
   return (
     <Panel
       title="Elo over time"
-      icon={<LineIcon />}
       action={
         <SegmentedControl
           size="sm"
@@ -371,10 +318,9 @@ function AccuracyCard({ stats }: { stats: ProfileStats }) {
 
   if (!stats.by_event.length)
     return (
-      <Panel title="Accuracy" icon={<BarChart3 />}>
+      <Panel title="Accuracy">
         <EmptyState
           compact
-          icon={<BarChart3 />}
           title="No answers yet"
           description="Accuracy by event and section shows up after the first practice set."
           action={<ButtonLink to="/play">Start practising</ButtonLink>}
@@ -385,7 +331,6 @@ function AccuracyCard({ stats }: { stats: ProfileStats }) {
   return (
     <Panel
       title="Accuracy"
-      icon={<BarChart3 />}
       action={
         stats.by_sub ? (
           <SegmentedControl
@@ -470,7 +415,6 @@ function DuelCard({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   return (
     <Panel
       title="Duel record"
-      icon={<Swords />}
       action={
         <Link to="/arena" className="text-sm font-semibold text-link hover:underline">
           Arena
@@ -481,7 +425,7 @@ function DuelCard({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
         <div className="text-sm text-muted">
           <p>No duels yet.</p>
           {isMe ? (
-            <ButtonLink to="/arena" size="sm" variant="secondary" className="mt-3" leftIcon={<Swords className="size-4" />}>
+            <ButtonLink to="/arena" size="sm" variant="secondary" className="mt-3">
               Find an opponent
             </ButtonLink>
           ) : (
@@ -490,7 +434,7 @@ function DuelCard({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
               size="sm"
               variant="secondary"
               className="mt-3"
-              leftIcon={<Swords className="size-4" />}
+             
             >
               Be the first to challenge
             </ButtonLink>
@@ -544,7 +488,7 @@ function BestPaper({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   const b = stats.best_paper!;
   const body = (
     <div className="flex items-center gap-4">
-      <div className="grid size-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#FFE08A] to-[#C98A00] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.4)]">
+      <div className="grid size-16 shrink-0 place-items-center rounded-[4px] bg-navy text-white dark:bg-blue">
         <span className="tabular font-display text-lg font-extrabold">{Math.round(Number(b.accuracy) * 100)}%</span>
       </div>
       <div className="min-w-0">
@@ -559,7 +503,7 @@ function BestPaper({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
     </div>
   );
   return (
-    <Panel title="Best paper" icon={<BookMarked />}>
+    <Panel title="Best paper">
       {isMe ? (
         <Link to={`/play/review/${b.attempt_id}`} className="-m-2 block rounded-lg p-2 transition-colors hover:bg-surface-2">
           {body}
@@ -576,7 +520,6 @@ function RecentCard({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   return (
     <Panel
       title="Recent exams"
-      icon={<History />}
       action={
         isMe && rows.length > 0 ? (
           <Link to="/me/career" className="text-sm font-semibold text-link hover:underline">
@@ -659,7 +602,6 @@ function FriendsCard() {
   return (
     <Panel
       title="Friends"
-      icon={<Users />}
       action={friends.length > 0 ? <span className="tabular text-sm text-muted">{friends.length}</span> : undefined}
     >
       {q.loading ? (
@@ -710,7 +652,7 @@ function FriendsCard() {
                       <span className="block truncate text-sm font-semibold text-heading">{f.profile.display_name}</span>
                       <span className="block truncate text-xs text-muted">@{f.profile.username}</span>
                     </span>
-                    <EloBadge elo={f.profile.elo} size="sm" showTier={false} />
+                    <EloBadge elo={f.profile.elo} size="sm" />
                   </Link>
                 </li>
               ))}
@@ -747,12 +689,12 @@ function ProfileSkeleton() {
       <Page width="wide">
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4" role="status" aria-label="Loading profile">
           {Array.from({ length: 8 }, (_, i) => (
-            <Skeleton key={i} className="h-24" rounded="rounded-[12px]" />
+            <Skeleton key={i} className="h-24" rounded="rounded-[4px]" />
           ))}
         </div>
         <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <Skeleton className="h-72" rounded="rounded-[12px]" />
-          <Skeleton className="h-72" rounded="rounded-[12px]" />
+          <Skeleton className="h-72" rounded="rounded-[4px]" />
+          <Skeleton className="h-72" rounded="rounded-[4px]" />
         </div>
       </Page>
     </>

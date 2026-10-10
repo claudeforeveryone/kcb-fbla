@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronRight, Clock, FileText, Target } from 'lucide-react';
+import { ChevronRight, Clock } from 'lucide-react';
 import { Badge, Modal, ProgressRing, cn } from '../../components/ui';
 import type { AreaSummary, HistoryAttempt } from '../../api/play';
 import { msUntilNextDay } from '../../api/play';
@@ -16,7 +16,7 @@ export function AccuracyRing({ accuracy, answered, size = 52 }: { accuracy: numb
   if (!answered)
     return (
       <span
-        className="grid shrink-0 place-items-center rounded-full border-2 border-dashed border-line-strong text-[10px] font-bold uppercase tracking-wide text-muted"
+        className="grid shrink-0 place-items-center rounded-[2px] border border-dashed border-line-strong text-[10px] font-bold uppercase tracking-wide text-muted"
         style={{ width: size, height: size }}
         aria-label="Not started"
       >
@@ -94,9 +94,9 @@ export function EventPickerModal({
                     key={e.slug}
                     type="button"
                     onClick={() => onPick(e.slug)}
-                    className="flex items-center gap-3 rounded-[10px] border border-line px-3 py-2.5 text-left transition-colors hover:border-blue/60 hover:bg-surface-2"
+                    className="flex items-center gap-3 rounded-[4px] border border-line px-3 py-2.5 text-left transition-colors hover:border-blue/60 hover:bg-surface-2"
                   >
-                    <span className="grid h-8 w-12 shrink-0 place-items-center rounded-md bg-navy/8 font-display text-[11px] font-bold text-navy dark:bg-blue/20 dark:text-link">
+                    <span className="grid h-8 w-12 shrink-0 place-items-center rounded-[2px] bg-navy/8 font-display text-[11px] font-bold text-navy dark:bg-blue/20 dark:text-link">
                       {e.short}
                     </span>
                     <span className="min-w-0 flex-1">
@@ -153,9 +153,8 @@ export function AreaPickerModal({
                   onClose();
                   navigate(runHref({ mode: 'area', event, area: s.name, n: 10 }));
                 }}
-                className="flex w-full items-center gap-3 rounded-[10px] border border-line px-3 py-2.5 text-left transition-colors hover:border-blue/60 hover:bg-surface-2"
+                className="flex w-full items-center gap-3 rounded-[4px] border border-line px-3 py-2.5 text-left transition-colors hover:border-blue/60 hover:bg-surface-2"
               >
-                <Target className="size-4 shrink-0 text-blue dark:text-link" />
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold text-heading">{s.name}</span>
                   <span className="block text-xs text-muted">
@@ -202,9 +201,8 @@ export function MockPickerModal({ open, onClose, event }: { open: boolean; onClo
               onClose();
               navigate(runHref({ mode: 'mock', event, n: o.n === 100 ? null : o.n }));
             }}
-            className="rounded-[12px] border border-line p-4 text-left transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-blue/60 hover:shadow-lift"
+            className="rounded-[2px] border border-line border-t-[3px] border-t-navy p-4 text-left transition-colors hover:bg-surface-2 dark:border-t-link"
           >
-            <FileText className="mb-2 size-5 text-blue dark:text-link" />
             <div className="font-display font-bold text-heading">{o.title}</div>
             <div className="tabular text-sm font-semibold text-ink">{o.sub}</div>
             <div className="mt-1 text-xs text-muted">{o.note}</div>
@@ -218,7 +216,7 @@ export function MockPickerModal({ open, onClose, event }: { open: boolean; onClo
 /** Compact list of past attempts linking to their review. */
 export function AttemptList({ attempts, showEvent }: { attempts: HistoryAttempt[]; showEvent?: boolean }) {
   return (
-    <ul className="divide-y divide-line overflow-hidden rounded-[12px] border border-line bg-surface">
+    <ul className="divide-y divide-line overflow-hidden rounded-[4px] border border-line bg-surface">
       {attempts.map((t) => {
         const p = t.total ? t.correct / t.total : 0;
         const d = t.elo_after - t.elo_before;
@@ -230,7 +228,7 @@ export function AttemptList({ attempts, showEvent }: { attempts: HistoryAttempt[
             >
               <span
                 className={cn(
-                  'tabular grid size-11 shrink-0 place-items-center rounded-[10px] font-display text-sm font-extrabold',
+                  'tabular grid size-11 shrink-0 place-items-center rounded-[2px] font-display text-sm font-extrabold',
                   p >= 0.8 ? 'bg-success/12 text-success' : p >= 0.6 ? 'bg-blue/12 text-blue dark:text-link' : 'bg-red/10 text-red dark:text-danger',
                 )}
               >

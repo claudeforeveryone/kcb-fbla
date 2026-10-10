@@ -1,7 +1,6 @@
 // Admin > Analytics: chapter-wide accuracy, weakest areas, activity, inactivity and Elo spread.
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, AlertTriangle, BarChart3, Flame, Gauge, Moon, Target, TrendingDown, Trophy, Users } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -19,15 +18,28 @@ import {
   TH,
   THead,
   TR,
-  TIERS,
-  tierFor,
 } from '../../../components/ui';
 import { BarChart, LineChart } from '../../../components/charts';
 import { eventInfo, eventName } from '../../../lib/types';
 import { chapterAnalytics, daysSince, relativeDay, type AnalyticsMember } from '../../../api/chapter';
 import { accuracyTone, fmt, pct, useLoad } from './admin-shared';
 
-type SortKey = 'name' | 'elo' | 'accuracy' | 'week' | 'streak' | 'attendance' | 'last';
+/** Members per numeric Elo range (0-99, 100-199, ...); wider ranges once scores climb high. */
+function eloBuckets(elos: number[]) {
+  const max = Math.max(0, ...elos.map((e) => Math.max(0, Math.round(e || 0))));
+  const step = max < 1000 ? 100 : max < 2500 ? 250 : 500;
+  const count = Math.max(3, Math.floor(max / step) + 1);
+  const out = Array.from({ length: count }, (_, i) => ({
+    label: `${i * step}-${(i + 1) * step - 1}`,
+    value: 0,
+    color: 'var(--blue)',
+  }));
+  for (const e of elos) out[Math.min(count - 1, Math.floor(Math.max(0, Math.round(e || 0)) / step))].value++;
+  return out;
+}
+
+type SortKey =
+ 'name' | 'elo' | 'accuracy' | 'week' | 'streak' | 'attendance' | 'last';
 
 export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
   const a = useLoad(() => chapterAnalytics(chapterId), [chapterId]);
@@ -87,9 +99,7 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
     .map((m) => ({ m, days: daysSince(m.last_answer_at) }))
     .filter((x) => x.days == null || x.days >= 7)
     .sort((x, y) => (y.days ?? 9999) - (x.days ?? 9999));
-  const tiers = TIERS.map((t) => ({ label: t.name, value: members.filter((m) => tierFor(m.elo).name === t.name).length, color: t.to }));
-  const lastTier = tiers.reduce((acc, t, i) => (t.value > 0 ? i : acc), 0);
-  const tierData = tiers.slice(0, Math.max(3, lastTier + 1));
+  const eloData = eloBuckets(members.map((m) => m.elo));
 
   const toggle = (key: SortKey) =>
     setSort((s) => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: key === 'name' ? 'asc' : 'desc' }));
@@ -100,24 +110,23 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5 [&>*]:min-w-0">
-        <StatTile tone="navy" icon={<Users />} label="Members" value={fmt(summary.members)} sub={`${summary.active_7d} active this week`} />
-        <StatTile icon={<Activity />} label="Answered (7d)" value={fmt(summary.answered_7d)} sub={`${fmt(summary.questions_answered)} all time`} />
-        <StatTile icon={<Target />} label="Accuracy (7d)" value={pct(weekAcc)} sub={`${pct(allAcc)} all time`} />
-        <StatTile icon={<Gauge />} label="Avg Elo" value={fmt(summary.avg_elo)} sub={`${fmt(summary.total_elo)} total`} />
-        <StatTile icon={<Moon />} label="Inactive 7d+" value={fmt(inactive.length)} sub={summary.members ? pct(inactive.length / summary.members) + ' of chapter' : undefined} />
+        <StatTile tone="navy" label="Members" value={fmt(summary.members)} sub={`${summary.active_7d} active this week`} />
+        <StatTile label="Answered (7d)" value={fmt(summary.answered_7d)} sub={`${fmt(summary.questions_answered)} all time`} />
+        <StatTile label="Accuracy (7d)" value={pct(weekAcc)} sub={`${pct(allAcc)} all time`} />
+        <StatTile label="Avg Elo" value={fmt(summary.avg_elo)} sub={`${fmt(summary.total_elo)} total`} />
+        <StatTile label="Inactive 7d+" value={fmt(inactive.length)} sub={summary.members ? pct(inactive.length / summary.members) + ' of chapter' : undefined} />
       </div>
 
       {nothingYet && (
         <EmptyState
           compact
-          icon={<BarChart3 />}
           title="Waiting for the first answers"
           description="Analytics fill in as members practise. Share the classroom or assign a set to get things moving."
         />
       )}
 
       <Card as="section">
-        <CardHeader icon={<Activity className="size-5" />} title="Questions answered, last 30 days" subtitle="Official questions across the whole chapter" />
+        <CardHeader title="Questions answered, last 30 days" subtitle="Official questions across the whole chapter" />
         <LineChart
           title="Questions answered per day"
           series={[{ name: 'Answered', data: daily.map((d) => ({ x: d.x, y: d.answered })) }]}
@@ -130,7 +139,7 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
 
       <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
         <Card as="section">
-          <CardHeader icon={<Target className="size-5" />} title="Accuracy by event" subtitle="Every official answer from current members" />
+          <CardHeader title="Accuracy by event" subtitle="Every official answer from current members" />
           <BarChart
             title="Accuracy by event"
             data={by_event.map((e) => ({
@@ -147,7 +156,6 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
 
         <Card as="section">
           <CardHeader
-            icon={<TrendingDown className="size-5" />}
             title="Weakest areas"
             subtitle={enough.length ? 'Lowest accuracy among areas with 5+ answers' : 'Lowest accuracy so far'}
           />
@@ -182,14 +190,14 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
 
       <div className="grid gap-6 lg:grid-cols-3 [&>*]:min-w-0">
         <Card as="section">
-          <CardHeader icon={<Flame className="size-5" />} title="Most active this week" />
+          <CardHeader title="Most active this week" />
           {mostActive.length === 0 ? (
             <p className="text-sm text-muted">No one has practised in the last 7 days.</p>
           ) : (
             <ol className="space-y-2.5">
               {mostActive.map((m, i) => (
                 <li key={m.user_id}>
-                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-lg p-1 hover:bg-surface-2/70">
+                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-[2px] p-1 hover:bg-surface-2">
                     <span className="tabular w-4 text-center font-display text-sm font-bold text-muted">{i + 1}</span>
                     <Avatar src={m.avatar_url} name={m.display_name} size="sm" />
                     <span className="min-w-0 flex-1">
@@ -208,7 +216,6 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
 
         <Card as="section">
           <CardHeader
-            icon={<AlertTriangle className="size-5" />}
             title="Inactive 7+ days"
             subtitle={inactive.length ? 'A nudge goes a long way' : undefined}
             action={inactive.length ? <Badge tone="warning">{inactive.length}</Badge> : undefined}
@@ -219,7 +226,7 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
             <ul className="max-h-72 space-y-2 overflow-y-auto pr-1">
               {inactive.map(({ m, days }) => (
                 <li key={m.user_id}>
-                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-lg p-1 hover:bg-surface-2/70">
+                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-[2px] p-1 hover:bg-surface-2">
                     <Avatar src={m.avatar_url} name={m.display_name} size="sm" />
                     <span className="min-w-0 flex-1 truncate text-sm font-semibold text-heading">{m.display_name}</span>
                     <span className="shrink-0 text-xs font-semibold text-muted">{days == null ? 'Never practised' : `${days} days`}</span>
@@ -231,14 +238,14 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
         </Card>
 
         <Card as="section">
-          <CardHeader icon={<Trophy className="size-5" />} title="Elo spread" subtitle="Members per rank tier" />
-          <BarChart title="Members per tier" orientation="vertical" data={tierData} height={190} formatValue={(v) => String(v)} />
+          <CardHeader title="Elo spread" subtitle="Members per Elo range" />
+          <BarChart title="Members per Elo range" orientation="vertical" data={eloData} height={190} formatValue={(v) => String(v)} />
         </Card>
       </div>
 
       <Card as="section" padded={false} className="overflow-hidden">
         <div className="p-4 sm:p-5">
-          <CardHeader className="mb-0" icon={<Users className="size-5" />} title="Member performance" subtitle="Click a column to sort. Open a member for weak spots and history." />
+          <CardHeader className="mb-0" title="Member performance" subtitle="Click a column to sort. Open a member for weak spots and history." />
         </div>
         <Table>
           <THead>
@@ -262,7 +269,7 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
                   </Link>
                 </TD>
                 <TD align="right">
-                  <EloBadge elo={m.elo} size="sm" showTier={false} />
+                  <EloBadge elo={m.elo} size="sm" />
                 </TD>
                 <TD align="right" className="tabular text-sm">
                   {m.accuracy == null ? <span className="text-muted">–</span> : <span style={{ color: `var(--${accuracyTone(m.accuracy) === 'red' ? 'red' : accuracyTone(m.accuracy)})` }} className="font-semibold">{pct(m.accuracy)}</span>}

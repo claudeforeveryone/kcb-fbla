@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ArrowLeft, History, ListRestart, RotateCcw, SearchX } from 'lucide-react';
+import { ArrowLeft, History, ListRestart, RotateCcw } from 'lucide-react';
 import { ButtonLink, EmptyState, ErrorState, Skeleton, SkeletonText } from '../../components/ui';
 import { Page } from '../../components/layout/Page';
 import { ExamResults, fromContent, fromCustom, resultFromStored, type ExamQuestion, type ExamResultData } from '../../components/exam';
@@ -64,7 +64,7 @@ export default function ReviewPage() {
           <Skeleton className="mb-6 h-10 w-80" />
           <div className="space-y-3">
             {Array.from({ length: 4 }, (_, i) => (
-              <div key={i} className="rounded-[12px] border border-line bg-surface p-4">
+              <div key={i} className="rounded-[4px] border border-line bg-surface p-4">
                 <SkeletonText lines={2} />
               </div>
             ))}
@@ -76,7 +76,6 @@ export default function ReviewPage() {
     return (
       <Page width="narrow">
         <EmptyState
-          icon={<SearchX />}
           title="Attempt not found"
           description="It may have been deleted, or it belongs to someone whose results you can't see."
           action={

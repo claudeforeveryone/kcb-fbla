@@ -1,22 +1,5 @@
 import { Link } from 'react-router-dom';
-import {
-  BookOpen,
-  CalendarCheck,
-  ChevronRight,
-  Crown,
-  Flame,
-  Gem,
-  Layers,
-  Medal,
-  Mountain,
-  Plus,
-  Star,
-  Target,
-  TrendingUp,
-  Trophy,
-  UsersRound,
-  type LucideIcon,
-} from 'lucide-react';
+import { ChevronRight, Plus } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -65,7 +48,6 @@ export function WeekCard({
   return (
     <Card>
       <CardHeader
-        icon={<CalendarCheck className="size-[18px]" />}
         title="This week"
         subtitle={
           loading && !stats
@@ -117,18 +99,6 @@ function Mini({ label, value }: { label: string; value: string }) {
 
 // ------------------------------------------------------------------------------------------------ next goals
 
-const GOAL_ICONS: Partial<Record<AchievementCode, LucideIcon>> = {
-  questions_100: Target,
-  questions_500: Layers,
-  questions_1000: Mountain,
-  streak_3: Flame,
-  streak_7: CalendarCheck,
-  streak_30: Crown,
-  elo_300: Star,
-  elo_500: TrendingUp,
-  elo_700: Gem,
-};
-
 /** The two locked milestone achievements you're closest to. */
 export function NextGoals({
   stats,
@@ -169,7 +139,6 @@ export function NextGoals({
   return (
     <Card>
       <CardHeader
-        icon={<Medal className="size-[18px]" />}
         title="Next achievements"
         subtitle={`${have.size} of 20 unlocked`}
         action={
@@ -181,12 +150,8 @@ export function NextGoals({
       <ul className="space-y-4">
         {goals.map((g) => {
           const def = achievementDef(g.code);
-          const Icon = GOAL_ICONS[g.code] ?? Trophy;
           return (
             <li key={g.code} className="flex items-center gap-3">
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#FFE08A] to-[#C98A00] text-white shadow-[inset_0_-2px_0_rgb(0_0_0/0.12)]">
-                <Icon className="size-5" />
-              </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-baseline justify-between gap-2">
                   <span className="truncate text-sm font-semibold text-heading">{def?.title ?? g.code}</span>
@@ -194,9 +159,9 @@ export function NextGoals({
                     {Math.min(g.value, g.target)}/{g.target} {g.unit}
                   </span>
                 </div>
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-surface-3">
+                <div className="mt-1.5 h-1.5 overflow-hidden bg-surface-3">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[#FFC94A] to-[#C98A00]"
+                    className="h-full bg-navy dark:bg-blue"
                     style={{ width: `${Math.max(3, g.pct * 100)}%` }}
                   />
                 </div>
@@ -229,7 +194,6 @@ export function MiniLeaderboard({
   return (
     <Card>
       <CardHeader
-        icon={<Trophy className="size-[18px]" />}
         title="Leaderboard"
         subtitle={me.players ? `${me.players.toLocaleString()} ranked players` : 'Top players by Elo'}
         action={
@@ -279,7 +243,7 @@ export function MiniLeaderboard({
   );
 }
 
-const PODIUM = ['bg-gradient-to-b from-[#FFE08A] to-[#C98A00] text-white', 'bg-gradient-to-b from-[#E6EBF2] to-[#8C97A8] text-white', 'bg-gradient-to-b from-[#E3A46F] to-[#9A5A2B] text-white'];
+const PODIUM = ['bg-red text-white', 'bg-navy text-white dark:bg-blue', 'bg-navy text-white dark:bg-blue'];
 
 function Row({ rank, name, username, avatar, elo, isMe }: { rank: number; name: string; username: string; avatar: string | null; elo: number; isMe: boolean }) {
   return (
@@ -293,7 +257,7 @@ function Row({ rank, name, username, avatar, elo, isMe }: { rank: number; name: 
       >
         <span
           className={cn(
-            'tabular grid size-6 shrink-0 place-items-center rounded-full text-xs font-extrabold',
+            'tabular grid size-6 shrink-0 place-items-center rounded-[2px] text-xs font-extrabold',
             rank <= 3 ? PODIUM[rank - 1] : 'text-muted',
           )}
         >
@@ -304,7 +268,7 @@ function Row({ rank, name, username, avatar, elo, isMe }: { rank: number; name: 
           {name}
           {isMe && <span className="ml-1.5 text-xs font-bold text-red dark:text-danger">You</span>}
         </span>
-        <EloBadge elo={elo} size="sm" showTier={false} />
+        <EloBadge elo={elo} size="sm" />
       </Link>
     </li>
   );
@@ -327,12 +291,8 @@ export function ChapterCard({
 }) {
   if (!hasChapter) {
     return (
-      <div className="facets relative overflow-hidden rounded-[12px] p-5 text-white">
-        <span aria-hidden className="absolute -right-8 -top-8 size-32 rotate-[30deg] rounded-[24px] bg-white/[0.07]" />
-        <span className="grid size-10 place-items-center rounded-xl bg-white/15">
-          <UsersRound className="size-5" />
-        </span>
-        <h3 className="mt-3 text-lg font-extrabold text-white">Practise with your chapter</h3>
+      <div className="facets relative overflow-hidden rounded-[4px] p-5 text-white">
+        <h3 className="text-lg font-extrabold text-white">Practise with your chapter</h3>
         <p className="mt-1 text-sm text-white/75">
           Join your school's chapter for assignments, chapter tests and a spot on the chapter leaderboard.
         </p>
@@ -361,7 +321,7 @@ export function ChapterCard({
 
   const { chapter, role, memberCount, rank, chapters, avgElo, faces } = summary;
   return (
-    <Link to="/chapter" className="block rounded-[12px] focus-visible:outline-offset-4">
+    <Link to="/chapter" className="block rounded-[4px] focus-visible:outline-offset-4">
       <Card interactive>
         <div className="flex items-start gap-3">
           <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-navy font-display text-sm font-extrabold text-white dark:bg-blue">
@@ -406,16 +366,9 @@ export function VocabCard({ data, mainEvent }: { data: { due: number; mastered: 
   if (!data) return null;
   const to = data.started === 0 && mainEvent ? `/vocab/${mainEvent}` : '/vocab';
   return (
-    <Link to={to} className="block rounded-[12px]">
+    <Link to={to} className="block rounded-[4px]">
       <Card interactive className="flex items-center gap-4">
-        <span
-          className={cn(
-            'grid size-11 shrink-0 place-items-center rounded-xl',
-            data.due > 0 ? 'bg-red/10 text-red dark:text-danger' : 'bg-blue/10 text-blue dark:text-link',
-          )}
-        >
-          <BookOpen className="size-5" />
-        </span>
+        <span aria-hidden className={cn('h-10 w-[3px] shrink-0', data.due > 0 ? 'bg-red' : 'bg-blue')} />
         <div className="min-w-0 flex-1">
           <div className="text-sm font-bold text-heading">
             {data.started === 0 ? 'Start your vocab deck' : data.due > 0 ? `${data.due} term${data.due === 1 ? '' : 's'} due for review` : 'Vocab is up to date'}

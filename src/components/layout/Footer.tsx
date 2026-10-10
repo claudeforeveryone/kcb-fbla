@@ -10,11 +10,11 @@ export function Footer({ className }: { className?: string }) {
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <span className="grid size-11 place-items-center rounded-xl bg-navy">
+            <span className="grid size-11 place-items-center rounded-[2px] bg-navy">
               <img src={LOGO_WHITE} alt="" className="h-7 w-auto" />
             </span>
             <div>
-              <div className="font-display text-lg font-extrabold text-heading">KCB FBLA</div>
+              <div className="font-display text-lg font-extrabold text-heading">FBLC</div>
               <div className="text-xs text-muted">Practise. Compete. Lead.</div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export function Footer({ className }: { className?: string }) {
       </div>
       <div className="border-t border-line">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-4 py-4 text-xs text-muted sm:flex-row sm:justify-between sm:px-6">
-          <span>&copy; {year} KCB FBLA. Student-run practice platform.</span>
+          <span>&copy; {year} FBLC. Student-run practice platform.</span>
           <span>Practice questions are unofficial and written for study.</span>
         </div>
       </div>

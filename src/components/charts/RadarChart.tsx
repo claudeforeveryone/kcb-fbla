@@ -28,7 +28,7 @@ export function RadarChart({
   if (n < 3)
     return (
       <div className={className} role="img" aria-label={`${title}: not enough areas`}>
-        <div className="grid h-40 place-items-center rounded-lg border border-dashed border-line text-sm text-muted">
+        <div className="grid h-40 place-items-center rounded-[4px] border border-dashed border-line text-sm text-muted">
           Needs at least three areas
         </div>
       </div>
@@ -116,7 +116,7 @@ export function RadarChart({
         <div className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-muted">
           {series.map((s, i) => (
             <span key={s.name} className="inline-flex items-center gap-1.5">
-              <span className="size-2.5 rounded-sm" style={{ background: s.color ?? chartColor(i) }} />
+              <span className="size-2.5" style={{ background: s.color ?? chartColor(i) }} />
               {s.name}
             </span>
           ))}

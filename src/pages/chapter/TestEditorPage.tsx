@@ -1,26 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  AlertTriangle,
-  ArrowDown,
-  ArrowUp,
-  BookCopy,
-  Check,
-  CheckCircle2,
-  ChevronDown,
-  Copy,
-  Eye,
-  FileQuestion,
-  Lock,
-  Play,
-  Plus,
-  Save,
-  Search,
-  Send,
-  Shuffle,
-  Timer,
-  Trash2,
-} from 'lucide-react';
+import { ArrowDown, ArrowUp, Check, ChevronDown, Copy, Plus, Search, Shuffle, Trash2 } from 'lucide-react';
 import {
   Badge,
   Button,
@@ -308,7 +288,6 @@ export default function TestEditorPage() {
         <PageHeader back={{ to: '/chapter/classroom?tab=library', label: 'Classroom' }} title="Test editor" />
         <Page width="narrow">
           <EmptyState
-            icon={state === 'forbidden' ? <Lock /> : <FileQuestion />}
             title={state === 'forbidden' ? 'You can’t edit this test' : 'Test not found'}
             description={
               state === 'forbidden'
@@ -339,9 +318,9 @@ export default function TestEditorPage() {
           <span className="flex items-center gap-2">
             Test editor
             {test.published ? (
-              <span className="rounded-full bg-success px-2 py-0.5 text-[10px] tracking-wider text-white">Published</span>
+              <span className="rounded-[2px] bg-success px-2 py-0.5 text-[10px] tracking-wider text-white">Published</span>
             ) : (
-              <span className="rounded-full bg-warning px-2 py-0.5 text-[10px] tracking-wider text-white">Draft</span>
+              <span className="rounded-[2px] bg-warning px-2 py-0.5 text-[10px] tracking-wider text-white">Draft</span>
             )}
           </span>
         }
@@ -357,7 +336,7 @@ export default function TestEditorPage() {
         actions={
           <>
             {test.published && (
-              <ButtonLink to={customTestHref(test.id)} variant="inverse" leftIcon={<Eye className="size-4" />} onClick={(e) => {
+              <ButtonLink to={customTestHref(test.id)} variant="inverse" onClick={(e) => {
                   if (!dirty) return;
                   e.preventDefault();
                   toast.warning('Save first', 'Try-outs use the saved version.');
@@ -365,7 +344,7 @@ export default function TestEditorPage() {
                 Try it
               </ButtonLink>
             )}
-            <Button variant="accent" leftIcon={<Save className="size-4" />} loading={saving} disabled={!dirty} onClick={() => void save()}>
+            <Button variant="accent" loading={saving} disabled={!dirty} onClick={() => void save()}>
               {dirty ? 'Save' : 'Saved'}
             </Button>
           </>
@@ -378,7 +357,7 @@ export default function TestEditorPage() {
           <div className="min-w-0 lg:order-1">
             <div className="mb-4 flex flex-wrap items-center gap-2">
               <h2 className="mr-auto text-xl font-bold">Questions</h2>
-              <Button variant="outline" size="sm" leftIcon={<BookCopy className="size-4" />} onClick={() => setImporting(true)} disabled={!meta.event} title={meta.event ? undefined : 'Pick an event to import from'}>
+              <Button variant="outline" size="sm" onClick={() => setImporting(true)} disabled={!meta.event} title={meta.event ? undefined : 'Pick an event to import from'}>
                 Import from bank
               </Button>
               <Button
@@ -397,13 +376,12 @@ export default function TestEditorPage() {
             </div>
 
             {showErrors && invalid.length > 0 && (
-              <div className="mb-4 flex items-start gap-3 rounded-[12px] border border-red/25 bg-red/[0.05] px-4 py-3 text-sm" role="alert">
-                <AlertTriangle className="mt-0.5 size-4 shrink-0 text-red dark:text-danger" />
+              <div className="mb-4 rounded-[2px] border border-line border-l-4 border-l-red bg-surface px-4 py-3 text-sm" role="alert">
                 <div>
                   <p className="font-semibold text-ink">{pluralize(invalid.length, 'question')} to finish before saving</p>
                   <div className="mt-1.5 flex flex-wrap gap-1.5">
                     {invalid.slice(0, 12).map((x) => (
-                      <button key={x.i} type="button" className="rounded-md bg-surface px-2 py-0.5 text-xs font-semibold text-red ring-1 ring-red/20 hover:bg-red/10 dark:text-danger" onClick={() => {
+                      <button key={x.i} type="button" className="rounded-[2px] bg-surface px-2 py-0.5 text-xs font-semibold text-red ring-1 ring-red/30 hover:bg-surface-2 dark:text-danger" onClick={() => {
                         setOpen(qs[x.i].key);
                         document.getElementById(`q-${qs[x.i].key}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                       }}>
@@ -435,7 +413,6 @@ export default function TestEditorPage() {
               </ol>
             ) : (
               <EmptyState
-                icon={<FileQuestion />}
                 title="No questions yet"
                 description={meta.event ? `Write your own, or pull some from the ${eventName(meta.event)} official bank and tweak them.` : 'Write your own questions. Pick an event in the settings to import from the official bank.'}
                 action={
@@ -444,7 +421,7 @@ export default function TestEditorPage() {
                       Write a question
                     </Button>
                     {meta.event && (
-                      <Button variant="outline" leftIcon={<BookCopy className="size-4" />} onClick={() => setImporting(true)}>
+                      <Button variant="outline" onClick={() => setImporting(true)}>
                         Import from bank
                       </Button>
                     )}
@@ -458,7 +435,7 @@ export default function TestEditorPage() {
                 <button
                   type="button"
                   onClick={addBlank}
-                  className="flex h-14 items-center justify-center gap-2 rounded-[12px] border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue/60 hover:bg-blue/[0.04] hover:text-blue"
+                  className="flex h-14 items-center justify-center gap-2 rounded-[2px] border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue hover:bg-surface-2 hover:text-blue"
                 >
                   <Plus className="size-4" /> Add a question
                 </button>
@@ -466,9 +443,9 @@ export default function TestEditorPage() {
                   type="button"
                   onClick={() => setImporting(true)}
                   disabled={!meta.event}
-                  className="flex h-14 items-center justify-center gap-2 rounded-[12px] border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue/60 hover:bg-blue/[0.04] hover:text-blue disabled:pointer-events-none disabled:opacity-50"
+                  className="flex h-14 items-center justify-center gap-2 rounded-[2px] border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue hover:bg-surface-2 hover:text-blue disabled:pointer-events-none disabled:opacity-50"
                 >
-                  <BookCopy className="size-4" /> Import from the official bank
+                  Import from the official bank
                 </button>
               </div>
             )}
@@ -488,7 +465,7 @@ export default function TestEditorPage() {
                   options={eventOptions(ctx, { allowNone: admin ? 'No event (mixed)' : undefined, manageableOnly: !admin })}
                   hint={admin ? 'Trainers of this event can edit and assign it.' : undefined}
                 />
-                <div className="space-y-3 rounded-[10px] border border-line bg-surface-2/50 p-3">
+                <div className="space-y-3 rounded-[4px] border border-line bg-surface-2/50 p-3">
                   <Switch checked={meta.timed} onChange={(v) => patchMeta({ timed: v })} label="Time limit" description="The run submits itself when time runs out." />
                   {meta.timed && (
                     <Input
@@ -499,7 +476,6 @@ export default function TestEditorPage() {
                       inputMode="numeric"
                       value={meta.minutes}
                       onChange={(e) => patchMeta({ minutes: e.target.value })}
-                      leftIcon={<Timer />}
                       right={<span className="pr-2 text-sm text-muted">min</span>}
                       error={timeError}
                       hint={qs.length ? `About ${Math.round(((minutes || 0) * 60) / Math.max(1, qs.length))} s per question (competition pace is 30 s).` : undefined}
@@ -511,10 +487,7 @@ export default function TestEditorPage() {
             </Card>
 
             <Card>
-              <div className="flex items-center gap-3">
-                <span className={cn('grid size-10 place-items-center rounded-full', test.published ? 'bg-success/12 text-success' : 'bg-warning/15 text-warning')}>
-                  {test.published ? <CheckCircle2 className="size-5" /> : <Lock className="size-5" />}
-                </span>
+              <div className={cn('flex items-center gap-3 border-l-4 pl-3', test.published ? 'border-success' : 'border-warning')}>
                 <div className="min-w-0 flex-1">
                   <p className="font-display font-bold text-heading">{test.published ? 'Published' : 'Draft'}</p>
                   <p className="text-sm text-muted">{test.published ? 'Members can take it from the library.' : 'Only chapter leaders can see it.'}</p>
@@ -532,7 +505,6 @@ export default function TestEditorPage() {
                 )}
                 <Button
                   variant="accent"
-                  leftIcon={<Send className="size-4" />}
                   disabled={!qs.length || saving}
                   onClick={async () => {
                     if (dirty || !test.published) {
@@ -554,10 +526,10 @@ export default function TestEditorPage() {
 
       {/* sticky save bar on phones */}
       {dirty && (
-        <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-40 border-t border-line bg-surface/95 px-4 py-2.5 shadow-pop backdrop-blur md:hidden">
+        <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-40 border-t border-line bg-surface px-4 py-2.5 shadow-pop md:hidden">
           <div className="flex items-center gap-3">
             <span className="flex-1 text-sm font-semibold text-ink">Unsaved changes</span>
-            <Button size="sm" variant="accent" loading={saving} onClick={() => void save()} leftIcon={<Save className="size-4" />}>
+            <Button size="sm" variant="accent" loading={saving} onClick={() => void save()}>
               Save
             </Button>
           </div>
@@ -639,11 +611,11 @@ function QuestionCard({
 
   return (
     <li id={`q-${q.key}`}>
-      <Card padded={false} className={cn('overflow-hidden transition-[border-color,box-shadow]', open && 'border-blue/40 shadow-lift', bad && 'border-red/40')}>
+      <Card padded={false} className={cn('overflow-hidden transition-[border-color,box-shadow]', open && 'border-blue', bad && 'border-red/60')}>
         <div className="flex items-start gap-3 p-3 sm:p-4">
           <span
             className={cn(
-              'tabular grid size-8 shrink-0 place-items-center rounded-lg font-display text-sm font-bold',
+              'tabular grid size-8 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold',
               bad ? 'bg-red/10 text-red dark:text-danger' : 'bg-navy/8 text-navy dark:bg-blue/20 dark:text-link',
             )}
           >
@@ -701,7 +673,7 @@ function QuestionCard({
                 {q.choices.map((c, ci) => {
                   const correct = q.answer === ci;
                   return (
-                    <div key={ci} className={cn('flex items-center gap-2 rounded-[10px] border p-1.5 pr-2 transition-colors', correct ? 'border-success/50 bg-success/[0.07]' : 'border-line-strong bg-surface')}>
+                    <div key={ci} className={cn('flex items-center gap-2 rounded-[4px] border p-1.5 pr-2 transition-colors', correct ? 'border-success/50 bg-success/[0.07]' : 'border-line-strong bg-surface')}>
                       <button
                         type="button"
                         role="radio"
@@ -709,7 +681,7 @@ function QuestionCard({
                         aria-label={`Mark ${LETTERS[ci]} as correct`}
                         onClick={() => onPatch({ answer: ci })}
                         className={cn(
-                          'grid size-8 shrink-0 place-items-center rounded-lg font-display text-sm font-bold transition-colors',
+                          'grid size-8 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold transition-colors',
                           correct ? 'bg-success text-white' : 'bg-surface-2 text-muted hover:bg-success/15 hover:text-success',
                         )}
                       >
@@ -945,7 +917,7 @@ function ImportModal({
             )}
           </div>
 
-          <ul className="mt-3 max-h-[52dvh] divide-y divide-line overflow-y-auto rounded-[12px] border border-line">
+          <ul className="mt-3 max-h-[52dvh] divide-y divide-line overflow-y-auto rounded-[4px] border border-line">
             {shown.map((x) => {
               const done = imported.has(x.id);
               const on = pickedSet.has(x.id);
@@ -965,7 +937,7 @@ function ImportModal({
                       {expanded && (
                         <ol className="mt-2 space-y-1 text-sm">
                           {x.choices.map((c, ci) => (
-                            <li key={ci} className={cn('flex gap-2 rounded-md px-2 py-1', ci === x.answer ? 'bg-success/10 font-semibold text-success' : 'text-ink/80')}>
+                            <li key={ci} className={cn('flex gap-2 rounded-[2px] px-2 py-1', ci === x.answer ? 'bg-success/10 font-semibold text-success' : 'text-ink/80')}>
                               <span className="w-4 shrink-0 font-display font-bold">{LETTERS[ci]}</span>
                               {c}
                             </li>
@@ -979,8 +951,9 @@ function ImportModal({
             })}
             {!shown.length && <li className="px-4 py-10 text-center text-sm text-muted">No questions match these filters.</li>}
           </ul>
-          <p className="mt-2 flex items-center gap-1.5 text-xs text-muted">
-            <Play className="size-3" /> Tap a question to preview its choices and answer.
+          <p className="mt-2 text-xs text-muted">
+            Tap
+ a question to preview its choices and answer.
           </p>
         </div>
       )}

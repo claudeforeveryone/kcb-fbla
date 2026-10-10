@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Flame, History, Inbox, Plus, Swords, Trophy, Users, Zap } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import {
   Badge,
   Button,
@@ -307,25 +307,24 @@ export function ArenaPage() {
         title="Arena"
         subtitle="Challenge anyone to the same 10 questions. Most correct wins, the faster time breaks a tie."
         actions={
-          <Button variant="accent" size="lg" leftIcon={<Swords className="size-5" />} onClick={() => openNew()}>
+          <Button variant="accent" size="lg" onClick={() => openNew()}>
             New challenge
           </Button>
         }
       >
         <dl className="grid max-w-2xl grid-cols-2 gap-2 sm:grid-cols-4">
           {[
-            { k: 'Wins', v: wins, icon: <Trophy className="size-4" /> },
-            { k: 'Losses', v: losses, icon: null },
-            { k: 'Draws', v: draws, icon: null },
+            { k: 'Wins', v: wins },
+            { k: 'Losses', v: losses },
+            { k: 'Draws', v: draws },
             {
               k: record.streakKind === 'win' && record.streak >= 2 ? 'Win streak' : 'Win rate',
               v: record.streakKind === 'win' && record.streak >= 2 ? record.streak : winRate == null ? '-' : `${winRate}%`,
-              icon: record.streakKind === 'win' && record.streak >= 2 ? <Flame className="size-4 text-red" /> : null,
+
             },
           ].map((s) => (
-            <div key={s.k} className="rounded-[12px] bg-white/[0.07] px-4 py-3 ring-1 ring-inset ring-white/12 backdrop-blur-sm">
-              <dt className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/65">
-                {s.icon}
+            <div key={s.k} className="rounded-[2px] border border-white/15 bg-navy-2 px-4 py-3">
+              <dt className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/65">
                 {s.k}
               </dt>
               <dd className="tabular mt-0.5 font-display text-2xl font-extrabold text-white">{s.v}</dd>
@@ -342,9 +341,9 @@ export function ArenaPage() {
           onChange={setTab}
           className="mb-6"
           items={[
-            { value: 'duels', label: 'Live duels', icon: <Zap className="size-4" />, count: liveCount || undefined },
-            { value: 'history', label: 'History', icon: <History className="size-4" /> },
-            { value: 'friends', label: 'Friends', icon: <Users className="size-4" />, count: incomingFriendCount || undefined },
+            { value: 'duels', label: 'Live duels', count: liveCount || undefined },
+            { value: 'history', label: 'History' },
+            { value: 'friends', label: 'Friends', count: incomingFriendCount || undefined },
           ]}
         />
 
@@ -384,7 +383,7 @@ export function ArenaPage() {
               </div>
               {histRows.length === 0 ? (
                 <EmptyState
-                  icon={<History />}
+
                   title={histFilter === 'all' ? 'No finished duels yet' : 'Nothing here yet'}
                   description={
                     histFilter === 'all'
@@ -392,7 +391,7 @@ export function ArenaPage() {
                       : 'Try another filter, or go make some history.'
                   }
                   action={
-                    <Button variant="accent" leftIcon={<Swords className="size-4" />} onClick={() => openNew()}>
+                    <Button variant="accent" onClick={() => openNew()}>
                       New challenge
                     </Button>
                   }
@@ -424,7 +423,7 @@ export function ArenaPage() {
             <div className="min-w-0">
               {liveCount === 0 && buckets.waiting.length === 0 ? (
                 <EmptyState
-                  icon={<Swords />}
+
                   title="No live duels"
                   description="Pick a rival, choose an event and send a challenge. You'll both get the same 10 questions."
                   action={
@@ -432,7 +431,7 @@ export function ArenaPage() {
                       <Button variant="accent" leftIcon={<Plus className="size-4" />} onClick={() => openNew()}>
                         New challenge
                       </Button>
-                      <Button variant="outline" leftIcon={<Users className="size-4" />} onClick={() => setTab('friends')}>
+                      <Button variant="outline" onClick={() => setTab('friends')}>
                         Find friends
                       </Button>
                     </>
@@ -444,10 +443,7 @@ export function ArenaPage() {
                     <Section
                       title={
                         <span className="flex items-center gap-2">
-                          <span className="relative flex size-2.5">
-                            <span className="absolute inline-flex size-full animate-ping rounded-full bg-red opacity-60 motion-reduce:hidden" />
-                            <span className="relative inline-flex size-2.5 rounded-full bg-red" />
-                          </span>
+                          <span className="inline-flex size-2 rounded-full bg-red" />
                           Incoming challenges
                         </span>
                       }
@@ -503,14 +499,10 @@ export function ArenaPage() {
               <RecordCard wins={wins} losses={losses} draws={draws} />
               <Card>
                 <div className="mb-3 flex items-center justify-between">
-                  <h3 className="flex items-center gap-2 text-sm font-bold">
-                    <Users className="size-4 text-blue dark:text-link" /> Friends
-                  </h3>
+                  <h3 className="text-sm font-bold">Friends</h3>
                   <Button size="xs" variant="ghost" onClick={() => setTab('friends')}>
                     {incomingFriendCount > 0 ? (
-                      <span className="flex items-center gap-1.5">
-                        <Inbox className="size-3.5" /> {incomingFriendCount} new
-                      </span>
+                      <span>{incomingFriendCount} new</span>
                     ) : (
                       'Manage'
                     )}
@@ -529,8 +521,8 @@ export function ArenaPage() {
                     {friendCards.slice(0, 6).map((p) => (
                       <li key={p.id} className="flex items-center gap-2">
                         <PlayerLine player={p} size="sm" className="flex-1" />
-                        <Button size="icon-sm" variant="secondary" aria-label={`Challenge ${displayName(p)}`} onClick={() => openNew(p)}>
-                          <Swords className="size-4" />
+                        <Button size="xs" variant="secondary" aria-label={`Challenge ${displayName(p)}`} onClick={() => openNew(p)}>
+                          Duel
                         </Button>
                       </li>
                     ))}
@@ -569,9 +561,7 @@ function RecordCard({ wins, losses, draws }: { wins: number; losses: number; dra
   const played = wins + losses + draws;
   return (
     <Card>
-      <h3 className="mb-4 flex items-center gap-2 text-sm font-bold">
-        <Trophy className="size-4 text-warning" /> Your record
-      </h3>
+      <h3 className="mb-4 text-sm font-bold">Your record</h3>
       {played === 0 ? (
         <p className="text-sm text-muted">Your wins, losses and draws show up here after your first finished duel.</p>
       ) : (
@@ -609,9 +599,7 @@ function RivalsCard({
   if (rivals.length === 0) return null;
   return (
     <Card>
-      <h3 className="mb-3 flex items-center gap-2 text-sm font-bold">
-        <Swords className="size-4 text-red" /> Top rivals
-      </h3>
+      <h3 className="mb-3 text-sm font-bold">Top rivals</h3>
       <ul className="space-y-3">
         {rivals.map(({ id, rec }) => {
           const p = players[id];
@@ -633,8 +621,8 @@ function RivalsCard({
                 {lead > 0 ? `+${lead}` : lead < 0 ? lead : 'Even'}
               </Badge>
               {p && (
-                <Button size="icon-sm" variant="ghost" aria-label={`Challenge ${displayName(p)}`} onClick={() => onChallenge(p)}>
-                  <Swords className="size-4" />
+                <Button size="xs" variant="ghost" aria-label={`Challenge ${displayName(p)}`} onClick={() => onChallenge(p)}>
+                  Duel
                 </Button>
               )}
             </li>
@@ -651,19 +639,22 @@ function LobbySkeleton() {
       <div className="space-y-3">
         <Skeleton className="mb-2 h-6 w-48" />
         {Array.from({ length: 4 }, (_, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-[12px] border border-line bg-surface p-4">
+          <div key={i} className="flex items-center gap-3 rounded-[4px] border border-line bg-surface p-4">
             <Skeleton className="size-10" rounded="rounded-full" />
             <div className="flex-1 space-y-2">
               <Skeleton className="h-3.5 w-1/3" />
               <Skeleton className="h-3 w-1/4" />
             </div>
-            <Skeleton className="h-8 w-20" rounded="rounded-[10px]" />
+            <Skeleton className="h-8 w-20" rounded="rounded-[2px]"
+ />
           </div>
         ))}
       </div>
       <div className="space-y-4">
-        <Skeleton className="h-48 w-full" rounded="rounded-[12px]" />
-        <Skeleton className="h-40 w-full" rounded="rounded-[12px]" />
+        <Skeleton className="h-48 w-full" rounded="rounded-[2px]"
+ />
+        <Skeleton className="h-40 w-full" rounded="rounded-[2px]"
+ />
       </div>
     </div>
   );

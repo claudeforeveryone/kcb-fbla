@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, History, Keyboard, ListRestart, Lock, Play, RotateCcw, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, History, Keyboard, ListRestart, Play, RotateCcw } from 'lucide-react';
 import { Button, ButtonLink, ErrorState, Kbd, Skeleton, cn } from '../../components/ui';
 import { FacetArt } from '../../components/ui/PageHeader';
 import { ExamSession, type ExamResultData, type RunnerSnapshot } from '../../components/exam';
@@ -99,11 +99,8 @@ function Run() {
   if (state.s === 'blocked')
     return (
       <Shell>
-        <div className="animate-rise mx-auto max-w-lg rounded-[16px] border border-line bg-surface p-6 text-center shadow-lift md:p-8">
-          <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-navy/8 text-navy dark:bg-blue/20 dark:text-link">
-            <Lock className="size-6" />
-          </span>
-          <h1 className="mt-4 text-2xl font-extrabold">{state.title}</h1>
+        <div className="animate-rise mx-auto max-w-lg rounded-[4px] border border-line bg-surface p-6 text-center md:p-8">
+          <h1 className="text-2xl font-extrabold">{state.title}</h1>
           <p className="mt-2 text-muted">{state.detail}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-2">
             {state.action && (
@@ -237,17 +234,17 @@ function Intro({
         >
           {run.back.label}
         </ButtonLink>
-        <div className="animate-rise overflow-hidden rounded-[16px] border border-line bg-surface shadow-lift">
+        <div className="animate-rise overflow-hidden rounded-[4px] border border-line bg-surface">
           <div className="border-b border-line p-6 md:p-8">
             <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
-              <span className="h-[3px] w-5 rounded-full bg-red" aria-hidden />
+              <span className="h-[3px] w-5 rounded-none bg-red" aria-hidden />
               {run.subtitle}
             </div>
             <h1 className="text-[1.75rem] font-extrabold tracking-tight md:text-4xl">{run.title}</h1>
             <p className="mt-3 text-[0.975rem] leading-relaxed text-muted">{run.blurb}</p>
             <dl className="mt-6 grid grid-cols-3 gap-2 sm:gap-3">
               {run.facts.map((f) => (
-                <div key={f.label} className="rounded-[10px] bg-surface-2 px-3 py-3">
+                <div key={f.label} className="rounded-[4px] bg-surface-2 px-3 py-3">
                   <dt className="text-[11px] font-bold uppercase tracking-wider text-muted">{f.label}</dt>
                   <dd className="mt-1 line-clamp-2 font-display text-[0.95rem] font-bold leading-tight text-heading">{f.value}</dd>
                 </div>
@@ -256,8 +253,7 @@ function Intro({
           </div>
           <div className="bg-surface-2/50 p-6 md:p-8">
             {resume && answered > 0 && onResume && (
-              <div className="mb-4 flex items-center gap-3 rounded-[10px] border border-blue/30 bg-blue/[0.06] p-3 text-sm">
-                <Sparkles className="size-4 shrink-0 text-blue dark:text-link" />
+              <div className="mb-4 flex items-center gap-3 rounded-[2px] border border-blue/30 border-l-[3px] border-l-blue bg-surface p-3 text-sm">
                 <span className="flex-1">
                   You have a run in progress with <b>{answered}</b> answered. Pick up where you left off?
                 </span>
@@ -313,17 +309,17 @@ function IntroSkeleton() {
     <Shell>
       <div className="mx-auto max-w-2xl" role="status" aria-label="Building your question set">
         <Skeleton className="mb-4 h-8 w-28 opacity-40" />
-        <div className="rounded-[16px] border border-line bg-surface p-6 shadow-lift md:p-8">
+        <div className="rounded-[4px] border border-line bg-surface p-6 md:p-8">
           <Skeleton className="h-3 w-40" />
           <Skeleton className="mt-3 h-9 w-3/4" />
           <Skeleton className="mt-4 h-4 w-full" />
           <Skeleton className="mt-2 h-4 w-2/3" />
           <div className="mt-6 grid grid-cols-3 gap-3">
-            <Skeleton className="h-16" rounded="rounded-[10px]" />
-            <Skeleton className="h-16" rounded="rounded-[10px]" />
-            <Skeleton className="h-16" rounded="rounded-[10px]" />
+            <Skeleton className="h-16" rounded="rounded-[4px]" />
+            <Skeleton className="h-16" rounded="rounded-[4px]" />
+            <Skeleton className="h-16" rounded="rounded-[4px]" />
           </div>
-          <Skeleton className="mt-8 h-12 w-full" rounded="rounded-[10px]" />
+          <Skeleton className="mt-8 h-12 w-full" rounded="rounded-[4px]" />
         </div>
       </div>
     </Shell>

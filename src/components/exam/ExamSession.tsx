@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, type ReactNode } from 'react';
-import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { Button, Spinner, useToast } from '../ui';
 import { submitAttempt } from '../../api/core';
 import { invalidatePlayHistory } from '../../api/play';
@@ -90,8 +90,8 @@ export function ExamSession({ submit, resultActions, onSubmitted, previousBest, 
     <>
       <ExamRunner {...runner} onFinish={onFinish} submitting={phase === 'submitting'} />
       {phase !== 'running' && (
-        <div className="fixed inset-0 z-[60] grid place-items-center bg-navy-deep/55 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-live="polite">
-          <div className="animate-pop w-full max-w-sm rounded-[14px] border border-line bg-surface p-6 text-center shadow-pop">
+        <div className="fixed inset-0 z-[60] grid place-items-center bg-navy-deep/60 p-4" role="dialog" aria-modal="true" aria-live="polite">
+          <div className="animate-pop w-full max-w-sm rounded-[2px] border border-line border-t-[3px] border-t-red bg-surface p-6 text-center">
             {phase === 'submitting' ? (
               <>
                 <Spinner className="mx-auto size-8 text-blue" />
@@ -100,10 +100,7 @@ export function ExamSession({ submit, resultActions, onSubmitted, previousBest, 
               </>
             ) : (
               <>
-                <span className="mx-auto grid size-12 place-items-center rounded-full bg-red/10 text-red dark:text-danger">
-                  <AlertTriangle className="size-6" />
-                </span>
-                <h2 className="mt-4 text-lg font-bold">We couldn't save that run</h2>
+                <h2 className="text-lg font-bold">We couldn't save that run</h2>
                 <p className="mt-1 text-sm text-muted">{error}</p>
                 <p className="mt-2 text-sm text-muted">Your answers are still here. Try again when you're back online.</p>
                 <div className="mt-5 flex flex-col gap-2">

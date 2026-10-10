@@ -1,25 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  AtSign,
-  Bell,
-  Camera,
-  Check,
-  Eye,
-  EyeOff,
-  KeyRound,
-  Loader2,
-  LogOut,
-  Mail,
-  Monitor,
-  Moon,
-  Palette,
-  School,
-  Sun,
-  Trash2,
-  User,
-  X,
-} from 'lucide-react';
+import { AtSign, Camera, Check, Eye, EyeOff, Loader2, LogOut, Mail, School, Trash2, X } from 'lucide-react';
 import {
   Avatar,
   Button,
@@ -42,11 +23,11 @@ import { AVATAR_MAX_BYTES, isUsernameAvailable, updateMyProfile, uploadAvatar } 
 import { changePassword, myEmail } from '../../api/me';
 
 const SECTIONS = [
-  { id: 'profile', label: 'Profile', icon: <User /> },
-  { id: 'email', label: 'Email', icon: <Bell /> },
-  { id: 'appearance', label: 'Appearance', icon: <Palette /> },
-  { id: 'security', label: 'Password', icon: <KeyRound /> },
-  { id: 'account', label: 'Sign out', icon: <LogOut /> },
+  { id: 'profile', label: 'Profile' },
+  { id: 'email', label: 'Email' },
+  { id: 'appearance', label: 'Appearance' },
+  { id: 'security', label: 'Password' },
+  { id: 'account', label: 'Sign out' },
 ];
 
 export default function SettingsPage() {
@@ -67,7 +48,6 @@ export default function SettingsPage() {
                     }}
                     className="flex h-9 items-center gap-2 whitespace-nowrap rounded-lg px-3 text-sm font-semibold text-muted transition-colors hover:bg-surface-2 hover:text-ink [&>svg]:size-4"
                   >
-                    {s.icon}
                     {s.label}
                   </a>
                 </li>
@@ -101,7 +81,7 @@ function SettingsCard({
   footer?: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 overflow-hidden rounded-[12px] border border-line bg-surface">
+    <section id={id} className="scroll-mt-24 overflow-hidden rounded-[4px] border border-line bg-surface">
       <div className="px-5 pt-5 sm:px-6">
         <h2 className="text-lg font-bold">{title}</h2>
         {description && <p className="mt-0.5 text-sm text-muted">{description}</p>}
@@ -450,10 +430,10 @@ function EmailSection() {
 
 function AppearanceSection() {
   const { theme, setTheme } = useTheme();
-  const options: { value: ThemePref; label: string; icon: ReactNode; preview: string }[] = [
-    { value: 'light', label: 'Light', icon: <Sun />, preview: 'bg-[#F5F7FB]' },
-    { value: 'dark', label: 'Dark', icon: <Moon />, preview: 'bg-[#0A1230]' },
-    { value: 'system', label: 'Auto', icon: <Monitor />, preview: 'bg-[linear-gradient(135deg,#F5F7FB_50%,#0A1230_50%)]' },
+  const options: { value: ThemePref; label: string; preview: string }[] = [
+    { value: 'light', label: 'Light', preview: 'bg-[#F5F7FB]' },
+    { value: 'dark', label: 'Dark', preview: 'bg-[#0A1230]' },
+    { value: 'system', label: 'Auto', preview: 'bg-[#F5F7FB]' },
   ];
   return (
     <SettingsCard id="appearance" title="Appearance" description="Saved on this device. Auto follows your system setting.">
@@ -473,12 +453,12 @@ function AppearanceSection() {
               )}
             >
               <span className={cn('relative block h-16 overflow-hidden rounded-lg ring-1 ring-inset ring-line sm:h-20', o.preview)}>
+                {o.value === 'system' && <span className="absolute inset-y-0 right-0 w-1/2 bg-[#0A1230]" />}
                 <span className="absolute inset-x-0 top-0 h-3 bg-[#001E60]" />
-                <span className="absolute left-2 top-5 h-2 w-1/2 rounded-full bg-[#3F6FB3]/70" />
-                <span className="absolute left-2 top-9 h-2 w-1/3 rounded-full bg-[#BF0D3E]/70" />
+                <span className="absolute left-2 top-5 h-2 w-1/2 bg-[#3F6FB3]/70" />
+                <span className="absolute left-2 top-9 h-2 w-1/3 bg-[#BF0D3E]/70" />
               </span>
               <span className="mt-2 flex items-center gap-1.5 text-sm font-semibold text-ink [&>svg]:size-4">
-                {o.icon}
                 {o.label}
                 {active && <Check className="ml-auto size-4 text-blue dark:text-link" />}
               </span>
@@ -599,7 +579,7 @@ function PasswordSection() {
                     <span
                       key={i}
                       className={cn(
-                        'h-1.5 flex-1 rounded-full transition-colors',
+                        'h-1.5 flex-1 transition-colors',
                         i < st.score ? (st.score <= 1 ? 'bg-red' : st.score === 2 ? 'bg-warning' : 'bg-success') : 'bg-surface-3',
                       )}
                     />
@@ -646,7 +626,7 @@ function AccountSection() {
     }
   };
   return (
-    <SettingsCard id="account" title="Sign out" description="Sign out of KCB FBLA on this device. Your progress is saved to your account.">
+    <SettingsCard id="account" title="Sign out" description="Sign out of FBLC on this device. Your progress is saved to your account.">
       <Button variant="danger" leftIcon={<LogOut className="size-4" />} loading={busy} onClick={out}>
         Sign out
       </Button>

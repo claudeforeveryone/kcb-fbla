@@ -1,20 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  ArrowRight,
-  BookOpen,
-  CalendarCheck,
-  ChevronRight,
-  Crown,
-  GraduationCap,
-  LogOut,
-  MoreHorizontal,
-  Plus,
-  Settings2,
-  Sparkles,
-  Trophy,
-  Users,
-} from 'lucide-react';
+import { ArrowRight, ChevronRight, MoreHorizontal } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -36,7 +22,6 @@ import {
   TH,
   THead,
   TR,
-  TierGem,
   cn,
   errorMessage,
   useToast,
@@ -99,7 +84,6 @@ function NoChapter() {
         <div className="grid gap-6 lg:grid-cols-2">
           <Card as="section" className="p-5 sm:p-6">
             <CardHeader
-              icon={<Users className="size-5" />}
               title="Join with a code"
               subtitle="Got a link instead? Just open it and you'll land on the invite page."
             />
@@ -109,7 +93,6 @@ function NoChapter() {
           </Card>
           <Card as="section" className="flex flex-col p-5 sm:p-6">
             <CardHeader
-              icon={<Crown className="size-5" />}
               title="Starting a chapter?"
               subtitle="Register it in a minute. You'll be president and can invite members right away."
             />
@@ -121,12 +104,12 @@ function NoChapter() {
                 'See every member\'s weakest areas before competition',
               ].map((t) => (
                 <li key={t} className="flex gap-3">
-                  <Sparkles className="mt-0.5 size-4 shrink-0 text-red" aria-hidden />
+                  <span className="mt-[0.55em] size-1.5 shrink-0 bg-red" aria-hidden />
                   <span>{t}</span>
                 </li>
               ))}
             </ul>
-            <ButtonLink to="/chapter/new" variant="primary" size="lg" className="mt-6" leftIcon={<Plus className="size-5" />}>
+            <ButtonLink to="/chapter/new" variant="primary" size="lg" className="mt-6">
               Register a chapter
             </ButtonLink>
           </Card>
@@ -185,11 +168,11 @@ function ChapterHome({ ctx, onLeft }: { ctx: MyChapter; onLeft: () => void }) {
         size="lg"
         actions={
           <>
-            <ButtonLink to="/chapter/classroom" variant="inverse" leftIcon={<BookOpen className="size-4" />}>
+            <ButtonLink to="/chapter/classroom" variant="inverse">
               Classroom
             </ButtonLink>
             {admin && (
-              <ButtonLink to="/chapter/admin" variant="accent" leftIcon={<Settings2 className="size-4" />}>
+              <ButtonLink to="/chapter/admin" variant="accent">
                 Manage
               </ButtonLink>
             )}
@@ -200,10 +183,10 @@ function ChapterHome({ ctx, onLeft }: { ctx: MyChapter; onLeft: () => void }) {
                 </Button>
               )}
               items={[
-                ...(admin ? [{ label: 'Admin dashboard', icon: <Settings2 className="size-4" />, to: '/chapter/admin' }] : []),
-                { label: 'Classroom', icon: <BookOpen className="size-4" />, to: '/chapter/classroom' },
+                ...(admin ? [{ label: 'Admin dashboard', to: '/chapter/admin' }] : []),
+                { label: 'Classroom', to: '/chapter/classroom' },
                 { type: 'separator' as const },
-                { label: 'Leave chapter', icon: <LogOut className="size-4" />, danger: true, onSelect: () => setLeaveOpen(true) },
+                { label: 'Leave chapter', danger: true, onSelect: () => setLeaveOpen(true) },
               ]}
             />
           </>
@@ -282,8 +265,8 @@ function HeroChip({ label, value, sub, accent }: { label: string; value: string;
   return (
     <div
       className={cn(
-        'min-w-[104px] rounded-xl px-3.5 py-2.5 ring-1 ring-inset backdrop-blur-sm',
-        accent ? 'bg-red/90 ring-white/10' : 'bg-white/10 ring-white/15',
+        'min-w-[104px] rounded-[2px] border px-3.5 py-2.5',
+        accent ? 'border-red bg-red' : 'border-white/15 bg-navy-2',
       )}
     >
       <div className="text-[0.6875rem] font-bold uppercase tracking-wider text-white/70">{label}</div>
@@ -320,7 +303,7 @@ function Leaderboard({
   return (
     <Card as="section" padded={false} className="overflow-hidden">
       <div className="flex items-center justify-between gap-3 p-4 sm:p-5">
-        <CardHeader className="mb-0" icon={<Trophy className="size-5" />} title="Chapter leaderboard" subtitle="Everyone starts at 0. Every right answer counts." />
+        <CardHeader className="mb-0" title="Chapter leaderboard" subtitle="Everyone starts at 0. Every right answer counts." />
         <ButtonLink to="/play" size="sm" variant="secondary" className="shrink-0" rightIcon={<ArrowRight className="size-4" />}>
           Practise
         </ButtonLink>
@@ -338,14 +321,14 @@ function Leaderboard({
       ) : rows && rows.length ? (
         <>
           {podium.length >= 2 && (
-            <div className="grid grid-cols-3 items-end gap-2 border-y border-line bg-surface-2/50 px-3 pb-4 pt-5 sm:gap-4 sm:px-6">
+            <div className="grid grid-cols-3 items-end gap-2 border-y border-line bg-surface-2 px-3 pb-4 pt-5 sm:gap-4 sm:px-6">
               {[podium[1], podium[0], podium[2]].map((r, i) =>
                 r ? (
                   <Link
                     key={r.user_id}
                     to={linkFor(r)}
                     className={cn(
-                      'group flex flex-col items-center rounded-xl p-2 text-center transition-colors hover:bg-surface',
+                      'group flex flex-col items-center rounded-[2px] p-2 text-center transition-colors hover:bg-surface',
                       i === 1 && '-mt-3',
                     )}
                   >
@@ -353,16 +336,16 @@ function Leaderboard({
                       <Avatar src={r.avatar_url} name={r.display_name} size={i === 1 ? 'xl' : 'lg'} className={cn(r.is_me && 'ring-2 ring-red')} />
                       <span
                         className={cn(
-                          'absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-full font-display text-xs font-extrabold text-white ring-2 ring-surface',
-                          r.rank === 1 ? 'bg-[#C99A1A]' : r.rank === 2 ? 'bg-[#8C96A8]' : 'bg-[#A0623A]',
+                          'absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-[2px] font-display text-xs font-extrabold text-white ring-2 ring-surface',
+                          r.rank === 1 ? 'bg-red' : 'bg-navy',
                         )}
                       >
                         {r.rank}
                       </span>
                     </div>
                     <div className="mt-2.5 w-full truncate text-sm font-bold text-heading group-hover:underline">{r.display_name}</div>
-                    <div className="tabular mt-0.5 flex items-center gap-1 text-sm font-semibold text-muted">
-                      <TierGem elo={r.elo} size={14} /> {r.elo}
+                    <div className="tabular mt-0.5 text-sm font-semibold text-muted">
+                      {r.elo} <span className="text-xs">Elo</span>
                     </div>
                   </Link>
                 ) : (
@@ -372,8 +355,7 @@ function Leaderboard({
             </div>
           )}
           {allZero && (
-            <div className="mx-4 mb-3 flex items-center gap-3 rounded-lg bg-blue/8 px-3 py-2.5 text-sm text-ink sm:mx-5 dark:bg-blue/15">
-              <Sparkles className="size-4 shrink-0 text-blue dark:text-link" aria-hidden />
+            <div className="mx-4 mb-3 rounded-[2px] border-l-4 border-blue bg-surface-2 px-3 py-2.5 text-sm text-ink sm:mx-5">
               Fresh board: everyone is at 0. The first member to finish a practice set takes the top spot.
             </div>
           )}
@@ -412,7 +394,7 @@ function Leaderboard({
                     <TD align="right" className="tabular max-sm:hidden">{r.questions_answered ? pct(r.accuracy) : '–'}</TD>
                     <TD align="right" className="tabular max-sm:hidden">{fmt(r.questions_answered)}</TD>
                     <TD align="right">
-                      <EloBadge elo={r.elo} size="sm" showTier={false} />
+                      <EloBadge elo={r.elo} size="sm" />
                     </TD>
                   </TR>
                 );
@@ -421,7 +403,7 @@ function Leaderboard({
           </Table>
         </>
       ) : (
-        <EmptyState compact icon={<Trophy />} title="No players yet" description="Invite your members to fill the board." />
+        <EmptyState compact title="No players yet" description="Invite your members to fill the board." />
       )}
     </Card>
   );
@@ -449,7 +431,7 @@ function Roster({
 
   return (
     <Card as="section">
-      <CardHeader icon={<Users className="size-5" />} title="Roster" subtitle={members ? `${members.length} ${members.length === 1 ? 'member' : 'members'}` : undefined} />
+      <CardHeader title="Roster" subtitle={members ? `${members.length} ${members.length === 1 ? 'member' : 'members'}` : undefined} />
       {loading && !members ? (
         <div className="grid gap-2 sm:grid-cols-2">
           {Array.from({ length: 6 }, (_, i) => (
@@ -471,7 +453,7 @@ function Roster({
                   <li key={m.user_id}>
                     <Link
                       to={linkFor({ user_id: m.user_id, username: m.profile.username })}
-                      className="flex items-center gap-3 rounded-lg border border-line p-2.5 transition-colors hover:border-blue/40 hover:bg-surface-2/60"
+                      className="flex items-center gap-3 rounded-[2px] border border-line p-2.5 transition-colors hover:border-blue hover:bg-surface-2"
                     >
                       <Avatar src={m.profile.avatar_url} name={m.profile.display_name} size="sm" />
                       <span className="min-w-0 flex-1">
@@ -481,8 +463,8 @@ function Roster({
                           {m.profile.grade ? ` · Gr ${m.profile.grade}` : ''}
                         </span>
                       </span>
-                      <span className="tabular flex items-center gap-1 text-sm font-semibold text-muted">
-                        <TierGem elo={m.profile.elo} size={14} /> {m.profile.elo}
+                      <span className="tabular text-sm font-semibold text-muted">
+                        {m.profile.elo} <span className="text-xs">Elo</span>
                       </span>
                     </Link>
                   </li>
@@ -502,12 +484,9 @@ function ClassroomCard({ staff }: { staff: boolean }) {
   return (
     <Link
       to="/chapter/classroom"
-      className="group facets relative block overflow-hidden rounded-[12px] p-5 text-white shadow-sm transition-shadow hover:shadow-lg"
+      className="group relative block overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-5 text-white transition-colors hover:bg-navy-2"
     >
       <div className="flex items-center gap-3">
-        <span className="grid size-10 place-items-center rounded-xl bg-white/12">
-          <BookOpen className="size-5" aria-hidden />
-        </span>
         <div className="min-w-0 flex-1">
           <div className="font-display text-lg font-bold">Classroom</div>
           <div className="text-sm text-white/75">
@@ -545,7 +524,6 @@ function TrainersCard({
   return (
     <Card as="section">
       <CardHeader
-        icon={<GraduationCap className="size-5" />}
         title="Event trainers"
         subtitle={trainers ? `${covered.length} of ${EVENTS.length} events covered` : undefined}
         action={
@@ -569,7 +547,7 @@ function TrainersCard({
         <ul className="divide-y divide-line">
           {covered.map((e) => (
             <li key={e.slug} className="flex items-center gap-3 py-2.5">
-              <span className="w-12 shrink-0 rounded-md bg-surface-2 py-1 text-center font-display text-[0.6875rem] font-bold text-muted">
+              <span className="w-12 shrink-0 rounded-[2px] bg-surface-2 py-1 text-center font-display text-[0.6875rem] font-bold text-muted">
                 {e.short}
               </span>
               <span className="min-w-0 flex-1 truncate text-sm font-medium" title={e.name}>
@@ -597,7 +575,7 @@ function MyAttendance({
   rows: { session: { id: string; title: string; held_on: string }; status: keyof typeof ATTENDANCE_LABELS | null }[] | undefined;
   loading: boolean;
 }) {
-  if (loading && !rows) return <Skeleton className="h-40 w-full" rounded="rounded-[12px]" />;
+  if (loading && !rows) return <Skeleton className="h-40 w-full" rounded="rounded-[2px]" />;
   if (!rows || rows.length === 0) return null;
   const { rate, attended, counted } = attendanceRate(rows.map((r) => r.status));
   const recent = rows.slice(0, 5);
@@ -610,8 +588,8 @@ function MyAttendance({
   return (
     <Card as="section">
       <CardHeader
-        icon={<CalendarCheck className="size-5" />}
         title="Your attendance"
+
         subtitle={counted ? `${attended} of ${counted} meetings` : `${rows.length} meetings so far`}
         action={<span className="tabular font-display text-2xl font-extrabold text-heading">{pct(rate)}</span>}
       />

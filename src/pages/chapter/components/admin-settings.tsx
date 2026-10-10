@@ -1,7 +1,7 @@
 // Admin > Settings: chapter details, presidency transfer and deletion (president only).
 import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Crown, Save, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { Avatar, Button, Card, CardHeader, Input, Modal, Select, Textarea, cn, errorMessage, useToast } from '../../../components/ui';
 import { useAuth } from '../../../lib/auth';
 import type { Chapter, ChapterRole } from '../../../lib/types';
@@ -95,7 +95,7 @@ export function SettingsPanel({
             corner={`${description.length}/1000`}
           />
           <div className="flex justify-end">
-            <Button type="submit" loading={saving} disabled={!dirty} leftIcon={<Save className="size-4" />}>
+            <Button type="submit" loading={saving} disabled={!dirty}>
               Save changes
             </Button>
           </div>
@@ -104,7 +104,6 @@ export function SettingsPanel({
 
       <Card as="section" className={cn(!president && 'opacity-90')}>
         <CardHeader
-          icon={<Crown className="size-5" />}
           title="Transfer presidency"
           subtitle={
             president
@@ -146,7 +145,6 @@ export function SettingsPanel({
       {president && (
         <Card as="section" className="border-danger/40">
           <CardHeader
-            icon={<Trash2 className="size-5 text-danger" />}
             title="Delete chapter"
             subtitle="Removes the chapter, its classroom, tests, decks, assignments and attendance. Members keep their own stats and Elo."
           />
@@ -222,14 +220,14 @@ function TransferModal({
           <Button variant="ghost" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
-          <Button variant="accent" onClick={go} loading={busy} leftIcon={<Crown className="size-4" />}>
+          <Button variant="accent" onClick={go} loading={busy}>
             Transfer presidency
           </Button>
         </>
       }
     >
       {heir && (
-        <div className="flex items-center gap-3 rounded-lg border border-line p-3">
+        <div className="flex items-center gap-3 rounded-[2px] border border-line p-3">
           <Avatar src={heir.profile.avatar_url} name={heir.profile.display_name} />
           <div>
             <div className="font-semibold">{heir.profile.display_name}</div>

@@ -29,7 +29,7 @@ export function AppShell({ children }: { children?: ReactNode }) {
     <div className="flex min-h-dvh flex-col">
       <a
         href="#main"
-        className="sr-only z-[200] rounded-md bg-white px-3 py-2 font-semibold text-navy focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
+        className="sr-only z-[200] rounded-[2px] bg-white px-3 py-2 font-semibold text-navy focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
       >
         Skip to content
       </a>
@@ -46,7 +46,7 @@ export function AppShell({ children }: { children?: ReactNode }) {
 
 function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-bar text-white shadow-[0_1px_0_rgb(0_0_0/0.15),0_6px_20px_-10px_rgb(0_20_63/0.6)]">
+    <header className="sticky top-0 z-50 border-b border-black/20 bg-bar text-white">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center gap-3 px-4 sm:px-6">
         <Brand size="md" className="shrink-0" wordmarkClassName="md:hidden lg:flex" />
         {signedIn && (
@@ -68,7 +68,7 @@ function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string })
                   {n.label}
                   <span
                     className={cn(
-                      'absolute inset-x-2 bottom-0 h-[3px] rounded-t-full transition-all duration-200 ease-out',
+                      'absolute inset-x-2 bottom-0 h-[3px] transition-all duration-200 ease-out',
                       active ? 'bg-red' : 'scale-x-0 bg-white/40 group-hover:scale-x-50',
                     )}
                     aria-hidden
@@ -133,14 +133,14 @@ function UserMenu() {
       header={
         <Link
           to="/me"
-          className="mb-1 flex items-center gap-3 rounded-lg p-2.5 transition-colors hover:bg-surface-2"
+          className="mb-1 flex items-center gap-3 rounded-[2px] p-2.5 transition-colors hover:bg-surface-2"
         >
           <Avatar src={profile.avatar_url} name={profile.display_name} size="md" />
           <div className="min-w-0 flex-1">
             <div className="truncate font-display font-bold text-heading">{profile.display_name}</div>
             <div className="truncate text-xs text-muted">@{profile.username}</div>
           </div>
-          <EloBadge elo={profile.elo} size="sm" showTier={false} />
+          <EloBadge elo={profile.elo} size="sm" />
         </Link>
       }
       items={[
@@ -154,7 +154,7 @@ function UserMenu() {
           render: (
             <div className="px-2.5 py-1.5">
               <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wider text-muted">Theme</div>
-              <div className="grid grid-cols-3 gap-1 rounded-lg bg-surface-2 p-1" role="radiogroup" aria-label="Theme">
+              <div className="grid grid-cols-3 gap-0 rounded-[2px] bg-surface-2 p-0.5 ring-1 ring-inset ring-line" role="radiogroup" aria-label="Theme">
                 {themeOptions.map((o) => {
                   const Icon = o.icon;
                   const active = theme === o.value;
@@ -166,8 +166,8 @@ function UserMenu() {
                       aria-checked={active}
                       onClick={() => setTheme(o.value)}
                       className={cn(
-                        'flex h-8 items-center justify-center gap-1.5 rounded-md text-xs font-semibold transition-all',
-                        active ? 'bg-surface text-heading shadow-[0_1px_3px_rgb(0_30_96/0.15)] dark:bg-surface-3' : 'text-muted hover:text-ink',
+                        'flex h-8 items-center justify-center gap-1.5 rounded-[2px] text-xs font-semibold transition-colors',
+                        active ? 'bg-navy text-white dark:bg-blue' : 'text-muted hover:text-ink',
                       )}
                     >
                       <Icon className="size-3.5" />
@@ -197,11 +197,11 @@ function UserMenu() {
           {...props}
           aria-label="Account menu"
           className={cn(
-            'flex items-center gap-1 rounded-full p-0.5 pr-1.5 transition-colors hover:bg-white/10',
+            'flex items-center gap-1 rounded-[2px] p-0.5 pr-1.5 transition-colors hover:bg-white/10',
             open && 'bg-white/10',
           )}
         >
-          <Avatar src={profile.avatar_url} name={profile.display_name} size="sm" className="ring-2 ring-white/25" />
+          <Avatar src={profile.avatar_url} name={profile.display_name} size="sm" className="ring-1 ring-white/25" />
           <ChevronDown className={cn('size-4 text-white/70 transition-transform duration-200', open && 'rotate-180')} />
         </button>
       )}
@@ -213,7 +213,7 @@ function BottomTabs({ pathname }: { pathname: string }) {
   return (
     <nav
       aria-label="Main"
-      className="pb-safe fixed inset-x-0 bottom-0 z-50 border-t border-line bg-surface/95 shadow-[0_-6px_20px_-12px_rgb(0_30_96/0.35)] backdrop-blur-md md:hidden"
+      className="pb-safe fixed inset-x-0 bottom-0 z-50 border-t border-line bg-surface md:hidden"
     >
       <ul className="mx-auto grid h-16 max-w-lg grid-cols-7">
         {NAV.map((n) => {
@@ -231,7 +231,7 @@ function BottomTabs({ pathname }: { pathname: string }) {
               >
                 <span
                   className={cn(
-                    'absolute inset-x-3 top-0 h-[3px] rounded-b-full transition-colors',
+                    'absolute inset-x-3 top-0 h-[3px] transition-colors',
                     active ? 'bg-red' : 'bg-transparent',
                   )}
                   aria-hidden

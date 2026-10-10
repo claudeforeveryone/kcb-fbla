@@ -1,100 +1,44 @@
-import type { ComponentType } from 'react';
-import {
-  Award,
-  BadgeCheck,
-  Bell,
-  BookOpen,
-  CalendarCheck,
-  ClipboardList,
-  Compass,
-  Crown,
-  Flame,
-  Footprints,
-  Gem,
-  GraduationCap,
-  Handshake,
-  Layers,
-  Megaphone,
-  Mountain,
-  Newspaper,
-  ShieldAlert,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Swords,
-  Target,
-  Timer,
-  TrendingUp,
-  Trophy,
-  UserMinus,
-  UserPlus,
-  Users,
-  XCircle,
-  Zap,
-  type LucideProps,
-} from 'lucide-react';
 import { cn } from '../ui/cn';
 import { categoryOf, type Notification, type NotificationCategory } from '../../api/notifications';
 
-type Icon = ComponentType<LucideProps>;
-
-/** Achievement icons by the lucide name stored on fbla_achievement_defs.icon. */
-const ACHIEVEMENT_ICONS: Record<string, Icon> = {
-  BadgeCheck, BookOpen, CalendarCheck, Compass, Crown, Flame, Footprints, Gem, GraduationCap, Layers, Mountain,
-  Sparkles, Star, Swords, Target, Timer, TrendingUp, Trophy, Users, Zap,
+/** Thin colour bar per category (no icon tiles). */
+const BARS: Record<NotificationCategory, string> = {
+  arena: 'bg-red',
+  classroom: 'bg-blue',
+  chapter: 'bg-navy dark:bg-white/70',
+  achievements: 'bg-warning',
+  social: 'bg-success',
+  other: 'bg-line-strong',
 };
 
-function iconFor(n: Notification): Icon {
-  const k = n.kind;
-  if (k === 'achievement') {
-    const name = typeof n.data?.icon === 'string' ? n.data.icon : '';
-    return ACHIEVEMENT_ICONS[name] ?? Award;
-  }
-  if (k === 'duel_result') return n.data?.outcome === 'win' ? Trophy : Swords;
-  if (k === 'duel_declined') return XCircle;
-  if (k === 'duel_expired') return Timer;
-  if (k.startsWith('duel') || k.startsWith('arena')) return Swords;
-  if (k === 'friend_request') return UserPlus;
-  if (k.startsWith('friend')) return Handshake;
-  if (k === 'announcement') return Megaphone;
-  if (k === 'newsletter') return Newspaper;
-  if (k.startsWith('assignment')) return ClipboardList;
-  if (k === 'chapter_join' || k === 'chapter_added') return UserPlus;
-  if (k === 'chapter_removed') return UserMinus;
-  if (k === 'chapter_banned' || k.startsWith('ban')) return ShieldAlert;
-  if (k === 'chapter_unbanned') return ShieldCheck;
-  if (k === 'trainer_assigned') return GraduationCap;
-  if (k.startsWith('role') || k === 'chapter_role') {
-    const role = n.data?.role;
-    return role === 'president' ? Crown : role === 'trainer' ? GraduationCap : ShieldCheck;
-  }
-  return Bell;
+const TEXT: Record<NotificationCategory, string> = {
+  arena: 'text-red dark:text-[#ff8aa8]',
+  classroom: 'text-blue dark:text-link',
+  chapter: 'text-navy dark:text-white/80',
+  achievements: 'text-[#8a5f00] dark:text-warning',
+  social: 'text-success',
+  other: 'text-muted',
+};
+
+const LABELS: Record<NotificationCategory, string> = {
+  arena: 'Arena',
+  classroom: 'Classroom',
+  chapter: 'Chapter',
+  achievements: 'Achievement',
+  social: 'Friends',
+  other: 'Notice',
+};
+
+/** A thin coloured left bar marking the notification's category. Stretch it inside a flex row. */
+export function NotificationIcon({ n, size: _size }: { n: Notification; size?: 'sm' | 'md' }) {
+  return <span className={cn('w-[3px] shrink-0 self-stretch', BARS[categoryOf(n.kind)])} aria-hidden />;
 }
 
-const TONES: Record<NotificationCategory, string> = {
-  arena: 'bg-red/10 text-red dark:bg-red/20 dark:text-[#ff8aa8]',
-  classroom: 'bg-blue/10 text-blue dark:bg-blue/20 dark:text-link',
-  chapter: 'bg-navy/8 text-navy dark:bg-white/10 dark:text-white',
-  achievements: 'bg-warning/15 text-[#8a5f00] dark:text-warning',
-  social: 'bg-success/10 text-success',
-  other: 'bg-surface-2 text-muted',
-};
-
-export function NotificationIcon({ n, size = 'md' }: { n: Notification; size?: 'sm' | 'md' }) {
-  const Icon = iconFor(n);
+/** Small flat uppercase kind label, e.g. ARENA. */
+export function NotificationKindLabel({ n, className }: { n: Notification; className?: string }) {
   const cat = categoryOf(n.kind);
-  const win = n.kind === 'duel_result' && n.data?.outcome === 'win';
   return (
-    <span
-      className={cn(
-        'grid shrink-0 place-items-center rounded-xl',
-        size === 'sm' ? 'size-9' : 'size-10',
-        win ? 'bg-warning/15 text-[#8a5f00] dark:text-warning' : TONES[cat],
-      )}
-      aria-hidden
-    >
-      <Icon className={size === 'sm' ? 'size-[18px]' : 'size-5'} strokeWidth={2.1} />
-    </span>
+    <span className={cn('text-[10px] font-bold uppercase tracking-[0.08em]', TEXT[cat], className)}>{LABELS[cat]}</span>
   );
 }
 

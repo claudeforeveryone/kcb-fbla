@@ -3,7 +3,7 @@ import { cn } from '../ui/cn';
 
 export const LOGO_WHITE = `${import.meta.env.BASE_URL}brand/fblc-logo-white.webp`;
 
-/** FBLC logo + "KCB FBLA" wordmark. Always place on navy. */
+/** FBLC logo + "FBLC" wordmark. Always place on navy. */
 export function Brand({
   to = '/',
   size = 'md',
@@ -25,7 +25,7 @@ export function Brand({
       {showWordmark && (
         <span className={cn("flex flex-col leading-none", text, wordmarkClassName)}>
           <span className="font-display font-extrabold tracking-tight text-white">
-            KCB <span className="text-white/80">FBLA</span>
+            FBLC
           </span>
           {size === 'lg' && (
             <span className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60">
@@ -36,9 +36,9 @@ export function Brand({
       )}
     </>
   );
-  const cls = cn('inline-flex items-center gap-2.5 rounded-md', className);
+  const cls = cn('inline-flex items-center gap-2.5 rounded-[2px]', className);
   return to ? (
-    <Link to={to} className={cls} aria-label="KCB FBLA home">
+    <Link to={to} className={cls} aria-label="FBLC home">
       {inner}
     </Link>
   ) : (

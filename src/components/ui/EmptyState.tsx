@@ -22,18 +22,12 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        'flex flex-col items-center rounded-[12px] border border-dashed border-line-strong bg-surface/60 text-center',
+        'flex flex-col items-center rounded-[4px] border border-dashed border-line-strong bg-surface text-center',
         compact ? 'px-5 py-8' : 'px-6 py-14',
         className,
       )}
     >
-      {icon && (
-        <div className="relative mb-4 grid size-14 place-items-center">
-          <span className="absolute inset-0 rotate-6 rounded-2xl bg-blue/10" aria-hidden />
-          <span className="absolute inset-0 -rotate-3 rounded-2xl bg-navy/5 dark:bg-white/5" aria-hidden />
-          <span className="relative text-navy dark:text-link [&>svg]:size-6">{icon}</span>
-        </div>
-      )}
+      {icon && <span className="mb-3 text-muted/70 [&>svg]:size-5" aria-hidden>{icon}</span>}
       <h3 className="text-base font-bold">{title}</h3>
       {description && <p className="mt-1.5 max-w-sm text-sm text-muted">{description}</p>}
       {action && <div className="mt-5 flex flex-wrap justify-center gap-2">{action}</div>}
@@ -61,11 +55,9 @@ export function ErrorState({
   return (
     <div
       role="alert"
-      className={cn('flex flex-col items-center rounded-[12px] border border-red/20 bg-red/[0.04] px-6 py-10 text-center', className)}
+      className={cn('flex flex-col items-center rounded-[4px] border border-red/20 bg-red/[0.04] px-6 py-10 text-center', className)}
     >
-      <span className="mb-3 grid size-11 place-items-center rounded-full bg-red/10 text-red dark:text-danger">
-        <AlertTriangle className="size-5" />
-      </span>
+      <AlertTriangle className="mb-3 size-5 text-red dark:text-danger" aria-hidden />
       <h3 className="text-base font-bold">{title}</h3>
       <p className="mt-1 max-w-md text-sm text-muted">{msg}</p>
       {onRetry && (
