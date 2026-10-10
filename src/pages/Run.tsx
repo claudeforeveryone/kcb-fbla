@@ -35,6 +35,7 @@ type Setup = {
   label: string;
   minutes: number | null;
   duelId?: string;
+  picks?: (number | null)[];
 };
 
 export default function Run() {
@@ -58,8 +59,15 @@ export default function Run() {
     if (!topics.length) return;
     let off = false;
     (async () => {
-      const slugs =
-        !topic || topic === "all" || kind === "fix"
+      const duel =
+        kind === "duel" ? logs.duels.find((x) => x.id === params.get("id")) : undefined;
+      if (kind === "duel" && !duel) {
+        setFail("That 1v1 could not be found.");
+        return;
+      }
+      const slugs = duel
+        ? [duel.topic]
+        : !topic || topic === "all" || kind === "fix"
           ? topics.map((t) => t.slug)
           : [topic];
       const pool =
@@ -74,9 +82,13 @@ export default function Run() {
       let ids: string[] = [],
         label = "",
         minutes: number | null = null,
+        picks: (number | null)[] | undefined,
         duelId: string | undefined;
       if (resume) {
-        ids = resume.ids.filter((id) => qs.has(id));
+        // a question removed from a bank since: drop it and its pick together so answers stay aligned
+        const keep = resume.ids.map((id) => qs.has(id));
+        ids = resume.ids.filter((_, i) => keep[i]);
+        picks = resume.picks.filter((_, i) => keep[i]);
         label = resume.label;
         minutes =
           kind === "paper"
@@ -111,14 +123,8 @@ export default function Run() {
         ids = first ? [first.id] : [];
         label = `Endless · ${name}`;
       } else if (kind === "duel") {
-        const d = logs.duels.find((x) => x.id === params.get("id"));
-        if (!d) {
-          setFail("That 1v1 could not be found.");
-          return;
-        }
-        const set = await loadQuestions(d.topic);
-        set.forEach((q) => qs.set(q.id, q));
-        ids = shuffle(set.map((q) => q.id).sort(), seeded(d.seed)).slice(
+        const d = duel!;
+        ids = shuffle(pool.map((q) => q.id).sort(), seeded(d.seed)).slice(
           0,
           d.size,
         );
@@ -128,7 +134,7 @@ export default function Run() {
         label = `1v1 vs ${other?.name ?? "a member"} · ${topicBy(d.topic)?.name ?? d.topic}`;
         duelId = d.id;
       }
-      if (!off) setSetup({ qs, pool, ids, label, minutes, duelId });
+      if (!off) setSetup({ qs, pool, ids, label, minutes, duelId, picks });
     })().catch(
       () =>
         !off &&
@@ -206,9 +212,9 @@ function Session({
   const nav = useNavigate();
   const test = TESTS.has(kind);
   const [ids, setIds] = useState<string[]>(setup.ids);
-  const [idx, setIdx] = useState(resume?.idx ?? 0);
+  const [idx, setIdx] = useState(Math.min(resume?.idx ?? 0, setup.ids.length - 1));
   const [picks, setPicks] = useState<(number | null)[]>(
-    () => resume?.picks ?? setup.ids.map(() => null),
+    () => setup.picks ?? setup.ids.map(() => null),
   );
   const times = useRef<number[]>(setup.ids.map(() => 0));
   const shownAt = useRef(performance.now());

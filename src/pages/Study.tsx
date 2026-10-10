@@ -5,6 +5,7 @@ import { useStore } from "../state";
 import { useTerms } from "./Vocab";
 import {
   buildDeck,
+  DECK_FILTERS,
   dayKey,
   daySummary,
   NEW_TARGET,
@@ -27,7 +28,9 @@ export default function Study() {
     if (round || !terms.length || store.phase !== "in") return;
     const today = dayKey(new Date());
     const deck = buildDeck(terms, store.d.srs, {
-      filter: (sp.get("deck") as DeckFilter) || "smart",
+      filter: DECK_FILTERS.some((f) => f.id === sp.get("deck"))
+        ? (sp.get("deck") as DeckFilter)
+        : "smart",
       topics: (sp.get("topics") || "").split(",").filter(Boolean),
       today,
       newTarget: NEW_TARGET,
@@ -135,8 +138,10 @@ function Round({
       } else {
         const n = "1234".indexOf(e.key);
         if (n >= 0 && options[n] && !picked) pick(options[n]);
-        else if (picked && (e.key === "Enter" || e.key === "ArrowRight"))
+        else if (picked && (e.key === "Enter" || e.key === "ArrowRight")) {
+          e.preventDefault();
           next();
+        }
       }
     };
     window.addEventListener("keydown", onKey);

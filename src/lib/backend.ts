@@ -32,6 +32,7 @@ export interface Backend {
   signUp(email: string, password: string, name: string, grade: number | null): Promise<void>;
   resetPassword(email: string): Promise<void>;
   signOut(): Promise<void>;
+  updatePassword(password: string): Promise<void>;
   profile(id: string): Promise<Profile | null>;
   profiles(): Promise<Profile[]>;
   createProfile(id: string, name: string, grade: number | null): Promise<Profile>;
@@ -78,6 +79,7 @@ export function localBackend(): Backend {
     async signUp(_e, _p, name, grade) { mut(d => { d.profile = blankProfile('local-' + uid(), name, grade); }); },
     async resetPassword() { throw new Error('Chapter sign-in is offline right now.'); },
     async signOut() { /* the local profile stays on this device */ },
+    async updatePassword() { throw new Error('No password in on-device mode.'); },
     async profile(id) { const p = readLocal().profile; return p && p.id === id ? p : null; },
     async profiles() { const p = readLocal().profile; return p ? [p] : []; },
     async createProfile(id, name, grade) { const p = blankProfile(id, name, grade); mut(d => { d.profile = p; }); return p; },
@@ -126,15 +128,15 @@ export function flushPending(): Promise<number> {
     try {
       const user = currentUser;
       if (!user) return 0;
-      const all = store.get<Pending[]>(PKEY, []);
-      const mine = all.filter(p => p.user === user);
+      const mine = store.get<Pending[]>(PKEY, []).filter(p => p.user === user);
       if (!mine.length) return 0;
-      const keep = all.filter(p => p.user !== user);
+      const done = new Set<string>();
       let sent = 0;
       for (const p of mine) {
-        try { await rawInsert(p.table, p.rows); sent += p.rows.length; } catch { keep.push(p); }
+        try { await rawInsert(p.table, p.rows); sent += p.rows.length; done.add(JSON.stringify(p)); } catch { /* stays queued */ }
       }
-      store.set(PKEY, keep);
+      // re-read: writes that failed while we were sending were queued meanwhile and must survive
+      store.set(PKEY, store.get<Pending[]>(PKEY, []).filter(p => !done.has(JSON.stringify(p))));
       return sent;
     } finally { flushing = null; }
   })());
@@ -176,10 +178,14 @@ export function cloudBackend(): Backend {
       if (!data.session) throw new Error('Check your email to confirm the account, then sign in.');
     },
     async resetPassword(email) {
-      const { error } = await s.auth.resetPasswordForEmail(email, { redirectTo: location.origin + import.meta.env.BASE_URL + 'settings' });
+      const { error } = await s.auth.resetPasswordForEmail(email, { redirectTo: location.origin + import.meta.env.BASE_URL + 'settings#password' });
       if (error) throw new Error(error.message);
     },
     async signOut() { await s.auth.signOut(); currentUser = null; },
+    async updatePassword(password) {
+      const { error } = await s.auth.updateUser({ password });
+      if (error) throw new Error(error.message);
+    },
     async profile(id) {
       const { data, error } = await s.from('fbla_profiles').select('*').eq('id', id).maybeSingle();
       if (error) throw error;

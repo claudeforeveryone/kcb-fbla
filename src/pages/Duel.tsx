@@ -9,8 +9,10 @@ export default function Duel() {
   const { me, profiles, topics, backend, refresh } = useStore();
   const nav = useNavigate();
   const others = profiles.filter((p) => p.id !== me?.id);
-  const [vs, setVs] = useState(sp.get("vs") ?? others[0]?.id ?? "");
-  const [topic, setTopic] = useState(me?.event ?? topics[0]?.slug ?? "");
+  const [pickedVs, setVs] = useState(sp.get("vs") ?? "");
+  const vs = pickedVs || others[0]?.id || "";
+  const [picked, setTopic] = useState(me?.event ?? "");
+  const topic = picked || topics[0]?.slug || "";
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 

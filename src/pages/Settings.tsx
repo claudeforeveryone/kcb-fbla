@@ -19,10 +19,13 @@ export default function Settings() {
   const [theme, setTheme] = useState<ThemePref>(readTheme);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
+  const [pw, setPw] = useState("");
+  const [pwMsg, setPwMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
   useEffect(() => {
-    if (location.hash === "#prep")
-      document.getElementById("prep")?.scrollIntoView();
+    const target = location.hash.slice(1);
+    if (target === "prep" || target === "password")
+      document.getElementById(target)?.scrollIntoView();
   }, []);
   if (!me) return null;
   const ibc = topics.find((t) => t.slug === "intro-business-concepts");
@@ -182,7 +185,7 @@ export default function Settings() {
         </section>
 
         <div className="flex flex-wrap items-center gap-3">
-          <button className="btn btn-primary" disabled={busy}>
+          <button className="btn btn-primary" disabled={busy || ibcBlocked}>
             {busy ? "Saving…" : "Save"}
           </button>
           {msg && (
@@ -241,14 +244,38 @@ export default function Settings() {
             )}
           </>
         ) : (
-          <button
-            className="btn"
-            onClick={() =>
-              signOut().catch(() => setNote("Could not sign out."))
-            }
-          >
-            Sign out
-          </button>
+          <>
+            <form
+              id="password"
+              className="flex scroll-mt-20 flex-wrap items-end gap-3"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (pw.length < 8) { setPwMsg({ ok: false, text: "Use at least 8 characters." }); return; }
+                try {
+                  await backend!.updatePassword(pw);
+                  setPw("");
+                  setPwMsg({ ok: true, text: "Password changed." });
+                } catch (err) {
+                  setPwMsg({ ok: false, text: err instanceof Error ? err.message : "Could not change the password." });
+                }
+              }}
+            >
+              <label className="block min-w-60 flex-1">
+                <span className="label">New password</span>
+                <input type="password" className="field-input mt-1" value={pw} onChange={(e) => setPw(e.target.value)} autoComplete="new-password" minLength={8} />
+              </label>
+              <button className="btn" disabled={!pw}>Change password</button>
+              {pwMsg && <span role="status" className={pwMsg.ok ? "text-ok" : "text-danger"}>{pwMsg.text}</span>}
+            </form>
+            <button
+              className="btn"
+              onClick={() =>
+                signOut().catch(() => setNote("Could not sign out."))
+              }
+            >
+              Sign out
+            </button>
+          </>
         )}
       </section>
     </Page>

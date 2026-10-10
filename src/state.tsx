@@ -85,7 +85,7 @@ export const useStore = () => {
   return s;
 };
 
-const RESUME_KEY = "kcbfbla:resume";
+const resumeKey = (id: string) => `kcbfbla:resume:${id}`;
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<Store["phase"]>("boot");
@@ -98,6 +98,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [vocab, setVocab] = useState<Term[]>([]);
   const [note, setNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const userCache = useRef(new Map<string, { at: number; data: { profile: Profile; logs: Logs } }>());
   const logsRef = useRef(logs);
   logsRef.current = logs;
 
@@ -170,7 +171,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!backend || !me || phase !== "in") return;
     const n = logs.answers.length;
-    if (syncedAt.current === -1) { syncedAt.current = n; if (n === me.answered) return; }
+    if (syncedAt.current === -1 && n === me.answered) { syncedAt.current = n; return; }
     if (n === syncedAt.current) return;
     const mine = {
       rating: Math.round(d.rating * 10) / 10,
@@ -266,9 +267,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const setResume = useCallback(
     (r: Resume | null) => {
       try {
-        r
-          ? localStorage.setItem(RESUME_KEY, JSON.stringify(r))
-          : localStorage.removeItem(RESUME_KEY);
+        if (me) {
+          if (r) localStorage.setItem(resumeKey(me.id), JSON.stringify(r));
+          else localStorage.removeItem(resumeKey(me.id));
+        }
       } catch {
         /* ignore */
       }
@@ -321,23 +323,28 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setMe(null);
     setLogs(EMPTY);
     setWords([]);
+    setProfiles([]);
+    userCache.current.clear();
+    syncedAt.current = -1;
     setPhase("out");
   }, [backend]);
 
-  const userCache = useRef(new Map<string, { profile: Profile; logs: Logs }>());
+  const meRef = useRef(me);
+  meRef.current = me;
   const loadUser = useCallback(
     async (id: string) => {
       if (!backend) return null;
-      if (me && id === me.id) return { profile: me, logs };
+      const self = meRef.current;
+      if (self && id === self.id) return { profile: self, logs: logsRef.current };
       const hit = userCache.current.get(id);
-      if (hit) return hit;
+      if (hit && Date.now() - hit.at < 60_000) return hit.data;
       const profile = await backend.profile(id);
       if (!profile) return null;
-      const out = { profile, logs: await backend.logs(id) };
-      userCache.current.set(id, out);
-      return out;
+      const data = { profile, logs: await backend.logs(id) };
+      userCache.current.set(id, { at: Date.now(), data });
+      return data;
     },
-    [backend, me, logs],
+    [backend],
   );
 
   // "Another user": your chosen rival, else the member just above you, else just below.
@@ -360,7 +367,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     if (phase !== "in" || !me) return;
     try {
       const local = JSON.parse(
-        localStorage.getItem(RESUME_KEY) || "null",
+        localStorage.getItem(resumeKey(me.id)) || "null",
       ) as Resume | null;
       if (local && (!me.resume || local.savedAt > me.resume.savedAt))
         setMe((m) => (m ? { ...m, resume: local } : m));
