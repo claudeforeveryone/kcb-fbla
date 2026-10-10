@@ -57,10 +57,10 @@ const get = <T>(path: string): Promise<T> => {
 };
 
 export const loadIndex = () =>
-  get<{ topics: Topic[] }>("/content/index.json").then((d) => d.topics);
-export const loadVocab = () => get<Term[]>("/content/vocab.json");
+  get<{ topics: Topic[] }>(`${import.meta.env.BASE_URL}content/index.json`).then((d) => d.topics);
+export const loadVocab = () => get<Term[]>(`${import.meta.env.BASE_URL}content/vocab.json`);
 export const loadQuestions = (slug: string) =>
-  get<Question[]>(`/content/q/${slug}.json`);
+  get<Question[]>(`${import.meta.env.BASE_URL}content/q/${slug}.json`);
 export const loadMany = async (slugs: string[]) =>
   (await Promise.all(slugs.map(loadQuestions))).flat();
 

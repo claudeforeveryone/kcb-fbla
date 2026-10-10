@@ -235,7 +235,7 @@ export default function Settings() {
               moves to your account the first time you sign in to the chapter.
             </p>
             {cloudConfigured() && (
-              <button className="btn" onClick={() => { setMode(null); location.assign("/"); }}>
+              <button className="btn" onClick={() => { setMode(null); location.assign(import.meta.env.BASE_URL); }}>
                 Sign in to the chapter
               </button>
             )}

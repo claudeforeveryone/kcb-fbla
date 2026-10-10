@@ -170,13 +170,13 @@ export function cloudBackend(): Backend {
     async signUp(email, password, name, grade) {
       const { data, error } = await s.auth.signUp({
         email, password,
-        options: { data: { name, grade, app: 'kcb-fbla' }, emailRedirectTo: location.origin },
+        options: { data: { name, grade, app: 'kcb-fbla' }, emailRedirectTo: location.origin + import.meta.env.BASE_URL },
       });
       if (error) throw new Error(error.message);
       if (!data.session) throw new Error('Check your email to confirm the account, then sign in.');
     },
     async resetPassword(email) {
-      const { error } = await s.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/settings' });
+      const { error } = await s.auth.resetPasswordForEmail(email, { redirectTo: location.origin + import.meta.env.BASE_URL + 'settings' });
       if (error) throw new Error(error.message);
     },
     async signOut() { await s.auth.signOut(); currentUser = null; },
