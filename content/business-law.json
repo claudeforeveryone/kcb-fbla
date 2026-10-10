@@ -1,0 +1,1781 @@
+{
+  "slug": "business-law",
+  "name": "Business Law",
+  "group": "objective",
+  "notes": "Competency areas come from the FBLA 2025-26 Business Law (High School) guidelines, updated Aug 2025: https://www.cteresource.org/media/xukjaoit/2526-business-law-va-fbla.pdf (copy of the FBLA guideline). Format: 50-minute online test, 100 multiple-choice questions, no deduction for wrong answers. The nine knowledge areas are the guideline's own list. The guideline's per-area percentage chart could not be read from the PDF text layer, so per-area question counts (15/20/10/10/15/10/10/5/5) are an approximation. Questions are original; law is U.S. (UCC, federal statutes, common law).",
+  "subs": [
+    "Legal systems",
+    "Contracts and sales",
+    "Business organization",
+    "Property laws",
+    "Agency and employment laws",
+    "Negotiable instruments, insurance, secured transactions, bankruptcy",
+    "Consumer protection and product/personal liability",
+    "Computer law",
+    "Domestic and private law"
+  ],
+  "questions": [
+    {
+      "id": "law-001",
+      "q": "Which branch of the U.S. federal government has the main power to enact statutes?",
+      "choices": [
+        "The executive branch",
+        "The judicial branch",
+        "The legislative branch (Congress)",
+        "The regulatory branch of an executive agency"
+      ],
+      "answer": 2,
+      "explain": "Congress enacts statutes. Courts interpret them, the executive enforces them, and agencies make regulations under delegated authority.",
+      "sub": "Legal systems",
+      "diff": 1
+    },
+    {
+      "id": "law-002",
+      "q": "Which element of a valid contract is the bargained-for exchange of value between the parties?",
+      "choices": [
+        "Consideration",
+        "Capacity",
+        "Legality",
+        "Genuine assent"
+      ],
+      "answer": 0,
+      "explain": "Consideration is something of legal value given in exchange for a promise. Capacity, legality and genuine assent are separate elements.",
+      "sub": "Contracts and sales",
+      "diff": 1
+    },
+    {
+      "id": "law-003",
+      "q": "An agent's authority that arises from the principal's conduct, leading a third party to reasonably believe the agent has power to act, is called:",
+      "choices": [
+        "Express authority",
+        "Implied authority",
+        "Incidental authority",
+        "Apparent authority"
+      ],
+      "answer": 3,
+      "explain": "Apparent authority rests on the third party's reasonable belief caused by the principal's conduct. Implied authority is actual authority inferred from the agent's duties.",
+      "sub": "Agency and employment laws",
+      "diff": 2
+    },
+    {
+      "id": "law-004",
+      "q": "Which type of property is generally movable and not attached to land, such as furniture or a car?",
+      "choices": [
+        "Real property",
+        "Personal property",
+        "Fixtures",
+        "An easement"
+      ],
+      "answer": 1,
+      "explain": "Personal property is movable. Real property is land and things permanently attached to it, and fixtures are items that have become part of the land.",
+      "sub": "Property laws",
+      "diff": 1
+    },
+    {
+      "id": "law-005",
+      "q": "Under the UCC, which warranty arises automatically when a merchant sells goods, even if the contract never mentions a warranty?",
+      "choices": [
+        "Express warranty of fitness",
+        "Implied warranty of merchantability",
+        "Full written warranty",
+        "Limited warranty of repair"
+      ],
+      "answer": 1,
+      "explain": "The implied warranty of merchantability attaches to sales by merchants of goods of the kind sold. Express warranties must be stated by the seller.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 3
+    },
+    {
+      "id": "law-006",
+      "q": "Which dispute resolution method uses a neutral third party whose decision is binding on the parties?",
+      "choices": [
+        "Mediation",
+        "Conciliation",
+        "Negotiation",
+        "Arbitration"
+      ],
+      "answer": 3,
+      "explain": "Arbitration produces a binding decision by a neutral arbitrator. Mediation and conciliation help parties reach their own agreement and are not binding.",
+      "sub": "Legal systems",
+      "diff": 1
+    },
+    {
+      "id": "law-007",
+      "q": "In a partnership where some owners have limited liability and at least one owner has unlimited liability, the business is a:",
+      "choices": [
+        "Limited partnership",
+        "General partnership",
+        "Limited liability partnership",
+        "Joint venture"
+      ],
+      "answer": 0,
+      "explain": "A limited partnership has at least one general partner with unlimited liability and limited partners whose liability is capped. A general partnership gives every partner unlimited liability.",
+      "sub": "Business organization",
+      "diff": 3
+    },
+    {
+      "id": "law-008",
+      "q": "A written, unconditional order by one party directing a second party to pay money to a third party is called a:",
+      "choices": [
+        "Promissory note",
+        "Certificate of deposit",
+        "Draft (bill of exchange)",
+        "Bearer bond"
+      ],
+      "answer": 2,
+      "explain": "A draft has three parties (drawer, drawee and payee). A promissory note is a promise to pay made by the maker and involves only two parties.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 2
+    },
+    {
+      "id": "law-009",
+      "q": "Which document lets a person name an agent to handle financial matters if the person becomes incapacitated?",
+      "choices": [
+        "Durable power of attorney",
+        "Living will",
+        "Codicil",
+        "Trust deed"
+      ],
+      "answer": 0,
+      "explain": "A durable power of attorney survives the principal's incapacity. A living will addresses end-of-life medical care, not finances.",
+      "sub": "Domestic and private law",
+      "diff": 1
+    },
+    {
+      "id": "law-010",
+      "q": "Which federal law makes it a crime to access a computer without authorization or to exceed authorized access?",
+      "choices": [
+        "Digital Millennium Copyright Act",
+        "Electronic Communications Privacy Act",
+        "Computer Fraud and Abuse Act",
+        "Fair Credit Reporting Act"
+      ],
+      "answer": 2,
+      "explain": "The Computer Fraud and Abuse Act (1986) is the main federal anti-hacking statute. The DMCA addresses copyright protection technology.",
+      "sub": "Computer law",
+      "diff": 2
+    },
+    {
+      "id": "law-011",
+      "q": "A court's obligation to follow precedent from earlier decisions on similar facts is known as:",
+      "choices": [
+        "Judicial review",
+        "Stare decisis",
+        "Original jurisdiction",
+        "Due process"
+      ],
+      "answer": 1,
+      "explain": "Stare decisis means to stand by things decided. Judicial review is the power to strike down laws that violate the Constitution.",
+      "sub": "Legal systems",
+      "diff": 2
+    },
+    {
+      "id": "law-012",
+      "q": "Which contract must be in writing to be enforceable under the Statute of Frauds?",
+      "choices": [
+        "A contract for the sale of $400 of goods",
+        "A contract that can be performed within one year",
+        "A contract for cash services paid upfront",
+        "A contract for the sale of land"
+      ],
+      "answer": 3,
+      "explain": "Contracts for the sale of land fall under the Statute of Frauds. Goods sales require a writing only at $500 or more under UCC 2-201.",
+      "sub": "Contracts and sales",
+      "diff": 2
+    },
+    {
+      "id": "law-013",
+      "q": "Which event ends an offer by operation of law?",
+      "choices": [
+        "The offeree accepts on the stated terms",
+        "The offeror says the offer stays open for 30 days",
+        "The offeree asks a question about delivery",
+        "The death of the offeror before acceptance"
+      ],
+      "answer": 3,
+      "explain": "An offer ends by operation of law on the death or incapacity of either party before acceptance. Acceptance forms a contract, and a question is not a counteroffer.",
+      "sub": "Contracts and sales",
+      "diff": 1
+    },
+    {
+      "id": "law-014",
+      "q": "An employee injured on the job generally receives benefits from which program?",
+      "choices": [
+        "Unemployment compensation",
+        "Workers' compensation",
+        "Social Security retirement benefits",
+        "Medicare"
+      ],
+      "answer": 1,
+      "explain": "Workers' compensation is a no-fault system funded by employers that pays benefits for work-related injuries. Unemployment insurance covers job loss.",
+      "sub": "Agency and employment laws",
+      "diff": 1
+    },
+    {
+      "id": "law-015",
+      "q": "Which easement lets a landowner cross a neighbor's land to reach a public road when the land is otherwise landlocked?",
+      "choices": [
+        "Easement in gross",
+        "Easement by prescription",
+        "Easement by necessity",
+        "Negative easement"
+      ],
+      "answer": 2,
+      "explain": "An easement by necessity arises when a parcel has no access to a road. An easement by prescription arises from open, continuous, adverse use over time.",
+      "sub": "Property laws",
+      "diff": 2
+    },
+    {
+      "id": "law-016",
+      "q": "The party who brings a civil lawsuit is called the:",
+      "choices": [
+        "Plaintiff",
+        "Defendant",
+        "Prosecutor",
+        "Grand juror"
+      ],
+      "answer": 0,
+      "explain": "The plaintiff starts a civil suit. The defendant responds to it, and a prosecutor represents the government in criminal cases.",
+      "sub": "Legal systems",
+      "diff": 1
+    },
+    {
+      "id": "law-017",
+      "q": "On a promissory note, which party is the maker?",
+      "choices": [
+        "The party to whom payment is promised",
+        "The party who must present the note for payment",
+        "The party who promises to pay",
+        "The party who transfers the note by endorsement"
+      ],
+      "answer": 2,
+      "explain": "The maker is the primary party who signs a promise to pay. The payee receives payment, and endorsers transfer the instrument.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 2
+    },
+    {
+      "id": "law-018",
+      "q": "A contract whose existence and terms are inferred from the parties' conduct rather than their words is:",
+      "choices": [
+        "An implied-in-fact contract",
+        "A quasi-contract",
+        "An express contract",
+        "A void contract"
+      ],
+      "answer": 0,
+      "explain": "An implied-in-fact contract is found from conduct. A quasi-contract is implied in law by the court to prevent unjust enrichment and is not based on agreement.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-019",
+      "q": "Which federal law regulates the collection of debts by third-party debt collectors?",
+      "choices": [
+        "Truth in Lending Act",
+        "Equal Credit Opportunity Act",
+        "Electronic Fund Transfer Act",
+        "Fair Debt Collection Practices Act"
+      ],
+      "answer": 3,
+      "explain": "The FDCPA limits abusive and deceptive collection practices by third-party collectors. TILA governs credit cost disclosures.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 2
+    },
+    {
+      "id": "law-020",
+      "q": "Under Subchapter S, a corporation's income and losses are:",
+      "choices": [
+        "Taxed at the corporate level only",
+        "Passed through to shareholders and reported on their personal returns",
+        "Taxed at both the corporate and shareholder levels",
+        "Exempt from federal income tax entirely"
+      ],
+      "answer": 1,
+      "explain": "An S corporation avoids entity-level federal income tax by passing items through to shareholders. A C corporation is taxed at the entity level and again on dividends.",
+      "sub": "Business organization",
+      "diff": 2
+    },
+    {
+      "id": "law-021",
+      "q": "A tenant renting an apartment for a fixed term of one year holds which type of estate?",
+      "choices": [
+        "Fee simple",
+        "Estate for years",
+        "Life estate",
+        "Tenancy at will"
+      ],
+      "answer": 1,
+      "explain": "An estate for years is a leasehold with a fixed start and end date. A tenancy at will has no fixed term.",
+      "sub": "Property laws",
+      "diff": 1
+    },
+    {
+      "id": "law-022",
+      "q": "Under respondeat superior, an employer is liable for an employee's torts when the employee:",
+      "choices": [
+        "Acts as an independent contractor",
+        "Acts entirely outside the employer's business",
+        "Acts without any employer control",
+        "Commits the tort within the scope of employment"
+      ],
+      "answer": 3,
+      "explain": "Respondeat superior makes employers liable for torts committed within the scope of employment. Independent contractors generally do not create that liability.",
+      "sub": "Agency and employment laws",
+      "diff": 3
+    },
+    {
+      "id": "law-023",
+      "q": "A software license that lets users copy, modify and redistribute code on the same terms is commonly called:",
+      "choices": [
+        "A copyleft (open-source) license",
+        "A shrink-wrap license",
+        "A site license",
+        "A proprietary license"
+      ],
+      "answer": 0,
+      "explain": "Copyleft licenses require derivative works to carry the same open terms. Shrink-wrap, site and proprietary licenses restrict redistribution.",
+      "sub": "Computer law",
+      "diff": 2
+    },
+    {
+      "id": "law-024",
+      "q": "A holographic will is a will that is:",
+      "choices": [
+        "Typed and notarized",
+        "Witnessed by two people and recorded",
+        "Handwritten and signed by the testator",
+        "Created by a trust officer"
+      ],
+      "answer": 2,
+      "explain": "A holographic will is entirely in the testator's handwriting and signed. Many states accept holographic wills without witnesses, but the handwriting must be proven.",
+      "sub": "Domestic and private law",
+      "diff": 2
+    },
+    {
+      "id": "law-025",
+      "q": "Which area of law addresses wrongs against society that the government prosecutes?",
+      "choices": [
+        "Criminal law",
+        "Civil law",
+        "Tort law",
+        "Administrative law"
+      ],
+      "answer": 0,
+      "explain": "Criminal law addresses offenses against society, prosecuted by the state. Civil and tort law address disputes between private parties.",
+      "sub": "Legal systems",
+      "diff": 1
+    },
+    {
+      "id": "law-026",
+      "q": "A court order requiring a party to perform the exact promised act is:",
+      "choices": [
+        "Rescission",
+        "Restitution",
+        "Specific performance",
+        "Liquidated damages"
+      ],
+      "answer": 2,
+      "explain": "Specific performance compels the promised act and is used when money damages are inadequate, such as for unique goods or land.",
+      "sub": "Contracts and sales",
+      "diff": 2
+    },
+    {
+      "id": "law-027",
+      "q": "Advertising a product at a very low price with no intent to sell it, then pressuring buyers toward a costlier item, is:",
+      "choices": [
+        "Puffery",
+        "Bait and switch",
+        "Negative option billing",
+        "Loss-leader pricing"
+      ],
+      "answer": 1,
+      "explain": "Bait and switch is a deceptive practice. Loss-leader pricing is a real sale of a discounted item, and puffery is harmless exaggeration.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 1
+    },
+    {
+      "id": "law-028",
+      "q": "Which form of business is a separate legal entity that offers owners limited liability?",
+      "choices": [
+        "Sole proprietorship",
+        "General partnership",
+        "Unincorporated association",
+        "Corporation"
+      ],
+      "answer": 3,
+      "explain": "A corporation is a separate legal entity, so owners' personal liability is generally limited to their investment. The other forms do not provide this.",
+      "sub": "Business organization",
+      "diff": 1
+    },
+    {
+      "id": "law-029",
+      "q": "To be negotiable under the UCC, an instrument must be payable:",
+      "choices": [
+        "Only with collateral attached",
+        "Only in goods",
+        "Only after an uncertain event",
+        "On demand or at a definite time"
+      ],
+      "answer": 3,
+      "explain": "UCC 3-104 requires payment on demand or at a definite time, among other elements. Payment that depends on an uncertain event defeats negotiability.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 2
+    },
+    {
+      "id": "law-030",
+      "q": "A relationship in which one party authorizes another to act on its behalf and under its control is:",
+      "choices": [
+        "Bailment",
+        "Agency",
+        "Partnership",
+        "Trust"
+      ],
+      "answer": 1,
+      "explain": "Agency is created when a principal authorizes an agent to act for it under the principal's control. A bailment concerns temporary possession of goods.",
+      "sub": "Agency and employment laws",
+      "diff": 1
+    },
+    {
+      "id": "law-031",
+      "q": "A legal claim against property to secure payment of a debt is called a:",
+      "choices": [
+        "Easement",
+        "Covenant",
+        "Lien",
+        "License"
+      ],
+      "answer": 2,
+      "explain": "A lien is a claim on property that secures a debt. An easement is a right to use land, and a covenant is a promise about land use.",
+      "sub": "Property laws",
+      "diff": 1
+    },
+    {
+      "id": "law-032",
+      "q": "Which law gives electronic signatures the same legal effect as handwritten signatures in interstate commerce?",
+      "choices": [
+        "E-SIGN Act",
+        "Gramm-Leach-Bliley Act",
+        "Sarbanes-Oxley Act",
+        "Telephone Consumer Protection Act"
+      ],
+      "answer": 0,
+      "explain": "The Electronic Signatures in Global and National Commerce (E-SIGN) Act gives electronic signatures and records legal effect. The others regulate financial privacy, corporate reporting and telemarketing.",
+      "sub": "Computer law",
+      "diff": 2
+    },
+    {
+      "id": "law-033",
+      "q": "Which court typically hears appeals and reviews the trial record for legal errors rather than retrying the facts?",
+      "choices": [
+        "Small claims court",
+        "Trial court of general jurisdiction",
+        "Appellate court",
+        "Probate court"
+      ],
+      "answer": 2,
+      "explain": "Appellate courts review for legal error and generally do not retry facts or hear witnesses. Trial courts decide facts.",
+      "sub": "Legal systems",
+      "diff": 2
+    },
+    {
+      "id": "law-034",
+      "q": "Besides offer and acceptance, what must be present for a contract to be enforceable?",
+      "choices": [
+        "Consideration",
+        "Notarization",
+        "Witness signatures",
+        "Recording with the county"
+      ],
+      "answer": 0,
+      "explain": "Enforceable contracts generally require offer, acceptance and consideration. Notarization and recording are not general requirements.",
+      "sub": "Contracts and sales",
+      "diff": 1
+    },
+    {
+      "id": "law-035",
+      "q": "A written agreement made before marriage that sets out how property will be divided is a:",
+      "choices": [
+        "Separation agreement",
+        "Divorce decree",
+        "Marital trust",
+        "Prenuptial agreement"
+      ],
+      "answer": 3,
+      "explain": "A prenuptial agreement is made before marriage and governs property and support. A separation agreement is made after the couple decides to live apart.",
+      "sub": "Domestic and private law",
+      "diff": 1
+    },
+    {
+      "id": "law-036",
+      "q": "Under the Fair Labor Standards Act, covered non-exempt employees must receive what pay for hours worked over 40 in a workweek?",
+      "choices": [
+        "Double pay for all hours worked",
+        "Overtime pay of at least 1.5 times the regular rate",
+        "Paid time off equal to hours worked",
+        "A fixed weekly bonus"
+      ],
+      "answer": 1,
+      "explain": "The FLSA requires at least time-and-a-half for hours over 40 in a workweek for non-exempt employees. Other options are not federal requirements.",
+      "sub": "Agency and employment laws",
+      "diff": 3
+    },
+    {
+      "id": "law-037",
+      "q": "A holder in due course takes a negotiable instrument free of most defenses. Which of the following is still a valid defense against such a holder?",
+      "choices": [
+        "The holder paid full value in good faith",
+        "The maker's signature was forged",
+        "The holder took the instrument by a qualified endorsement",
+        "The instrument was payable to bearer"
+      ],
+      "answer": 1,
+      "explain": "Forgery is a real defense that survives holder-in-due-course status. Good faith value, a qualified endorsement and bearer status are all features of HDC status or negotiability, not defenses.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 3
+    },
+    {
+      "id": "law-038",
+      "q": "Which federal act requires lenders to disclose the finance charge and annual percentage rate on consumer credit?",
+      "choices": [
+        "Fair Credit Reporting Act",
+        "Equal Credit Opportunity Act",
+        "Fair Debt Collection Practices Act",
+        "Truth in Lending Act"
+      ],
+      "answer": 3,
+      "explain": "TILA requires standardized disclosure of credit costs, including the finance charge and APR. The other laws cover credit reports, lending discrimination and debt collection.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 2
+    },
+    {
+      "id": "law-039",
+      "q": "A process in which a neutral person helps the parties reach their own agreement but cannot impose a decision is:",
+      "choices": [
+        "Mediation",
+        "Arbitration",
+        "Litigation",
+        "Adjudication"
+      ],
+      "answer": 0,
+      "explain": "A mediator facilitates a voluntary settlement and cannot impose an outcome. An arbitrator decides the dispute.",
+      "sub": "Legal systems",
+      "diff": 1
+    },
+    {
+      "id": "law-040",
+      "q": "Which form of co-ownership gives the surviving owners the deceased owner's share automatically?",
+      "choices": [
+        "Tenancy in common",
+        "Tenancy at sufferance",
+        "Joint tenancy with right of survivorship",
+        "Life estate"
+      ],
+      "answer": 2,
+      "explain": "Joint tenancy with right of survivorship passes a deceased owner's interest to the surviving owners automatically. Tenants in common pass their shares through their estates.",
+      "sub": "Property laws",
+      "diff": 2
+    },
+    {
+      "id": "law-041",
+      "q": "The corporate officer generally responsible for day-to-day management, who reports to the board of directors, is the:",
+      "choices": [
+        "Chief executive officer",
+        "Shareholder of record",
+        "Independent auditor",
+        "Trustee"
+      ],
+      "answer": 0,
+      "explain": "The CEO runs daily operations and reports to the board. Shareholders own the company, and auditors examine its financial statements.",
+      "sub": "Business organization",
+      "diff": 1
+    },
+    {
+      "id": "law-042",
+      "q": "Which contract is voidable rather than void?",
+      "choices": [
+        "A contract for an illegal purpose",
+        "A contract with no offer",
+        "A contract made by a minor",
+        "A contract requiring a crime"
+      ],
+      "answer": 2,
+      "explain": "A minor's contract is voidable at the minor's option. Contracts for illegal purposes and contracts lacking an offer are void.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-043",
+      "q": "A principal is bound to a contract made with a third party by its agent when the agent had:",
+      "choices": [
+        "No authority of any kind",
+        "Actual or apparent authority",
+        "Authority only if the contract is notarized",
+        "Authority acquired after signing"
+      ],
+      "answer": 1,
+      "explain": "Principals are bound by acts within actual or apparent authority. Notarization is not a general requirement, and later-acquired authority does not bind retroactively.",
+      "sub": "Agency and employment laws",
+      "diff": 2
+    },
+    {
+      "id": "law-044",
+      "q": "Which federal law limits the online collection of personal information from children under 13?",
+      "choices": [
+        "Health Insurance Portability and Accountability Act",
+        "Gramm-Leach-Bliley Act",
+        "Fair Credit Reporting Act",
+        "Children's Online Privacy Protection Act"
+      ],
+      "answer": 3,
+      "explain": "COPPA requires parental consent and limits data collection for children under 13. HIPAA covers health records, and GLBA covers financial privacy.",
+      "sub": "Computer law",
+      "diff": 2
+    },
+    {
+      "id": "law-045",
+      "q": "An endorsement consisting only of the endorser's signature on the back of an instrument is a:",
+      "choices": [
+        "Qualified endorsement",
+        "Restrictive endorsement",
+        "Conditional endorsement",
+        "Blank endorsement"
+      ],
+      "answer": 3,
+      "explain": "A blank endorsement names no payee, so the instrument becomes payable to bearer. Qualified, restrictive and conditional endorsements add words or limits.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 3
+    },
+    {
+      "id": "law-046",
+      "q": "Under TILA, which right lets a consumer cancel certain loans secured by the principal dwelling within three business days?",
+      "choices": [
+        "Right of withdrawal under the FCRA",
+        "Right of rescission",
+        "Right of setoff",
+        "Right of subrogation"
+      ],
+      "answer": 1,
+      "explain": "The TILA right of rescission applies to certain home-secured credit transactions such as refinancing. The FCRA does not give a cancellation right, and setoff and subrogation are unrelated remedies.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 3
+    },
+    {
+      "id": "law-047",
+      "q": "The doctrine requiring a party to have a sufficient personal stake in a case to bring it is:",
+      "choices": [
+        "Mootness",
+        "Ripeness",
+        "Standing",
+        "Venue"
+      ],
+      "answer": 2,
+      "explain": "Standing requires a concrete injury tied to the defendant's conduct. Mootness and ripeness concern timing, and venue concerns the proper place for trial.",
+      "sub": "Legal systems",
+      "diff": 2
+    },
+    {
+      "id": "law-048",
+      "q": "Which intellectual property right protects a new and useful machine design?",
+      "choices": [
+        "Patent",
+        "Trademark",
+        "Copyright",
+        "Service mark"
+      ],
+      "answer": 0,
+      "explain": "Patents protect new, useful and non-obvious inventions. Trademarks protect brand identifiers, and copyrights protect creative works.",
+      "sub": "Property laws",
+      "diff": 1
+    },
+    {
+      "id": "law-049",
+      "q": "Which worker is most likely an independent contractor rather than an employee?",
+      "choices": [
+        "A cashier paid hourly and supervised by a manager",
+        "A driver on set shifts using a company vehicle",
+        "A freelance designer who sets her own hours, uses her own tools and is paid per project",
+        "A factory worker enrolled in the company health plan"
+      ],
+      "answer": 2,
+      "explain": "Control over hours, tools and method points to independent contractor status. Hourly pay, supervision and benefits point toward employment.",
+      "sub": "Agency and employment laws",
+      "diff": 2
+    },
+    {
+      "id": "law-050",
+      "q": "A merger that combines companies in unrelated businesses is a:",
+      "choices": [
+        "Conglomerate merger",
+        "Horizontal merger",
+        "Vertical merger",
+        "Reverse triangular merger"
+      ],
+      "answer": 0,
+      "explain": "A conglomerate merger joins firms in unrelated industries. A horizontal merger joins competitors, and a vertical merger joins firms at different stages of the same supply chain.",
+      "sub": "Business organization",
+      "diff": 1
+    },
+    {
+      "id": "law-051",
+      "q": "Which is a common no-fault ground for divorce?",
+      "choices": [
+        "Adultery in every state",
+        "Desertion for one day",
+        "Fraud before the marriage",
+        "Irreconcilable differences"
+      ],
+      "answer": 3,
+      "explain": "No-fault divorce is generally based on irreconcilable differences or an irretrievable breakdown of the marriage. Fault grounds such as adultery are not required and are not used in every state.",
+      "sub": "Domestic and private law",
+      "diff": 2
+    },
+    {
+      "id": "law-052",
+      "q": "Presentment for acceptance is required for which type of instrument?",
+      "choices": [
+        "A promissory note payable on demand",
+        "A time draft payable at a future date",
+        "A certificate of deposit",
+        "A check payable on demand"
+      ],
+      "answer": 1,
+      "explain": "Under UCC 3-501, a time draft must be presented to the drawee for acceptance when acceptance is required. Demand instruments and CDs do not require acceptance.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 3
+    },
+    {
+      "id": "law-053",
+      "q": "Which practice is deceptive under FTC rules?",
+      "choices": [
+        "Offering a clearly stated money-back guarantee",
+        "Claiming a product is clinically proven without supporting evidence",
+        "Listing cash and financing prices separately",
+        "Disclosing a product's country of origin"
+      ],
+      "answer": 1,
+      "explain": "Advertising claims must be truthful and substantiated. The other options are lawful disclosure or guarantee practices.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 2
+    },
+    {
+      "id": "law-054",
+      "q": "Which body decides whether there is enough evidence to bring a felony indictment?",
+      "choices": [
+        "Petit jury",
+        "Appellate panel",
+        "Magistrate judge acting alone",
+        "Grand jury"
+      ],
+      "answer": 3,
+      "explain": "A grand jury hears evidence and decides whether to indict. A petit (trial) jury decides guilt or innocence at trial.",
+      "sub": "Legal systems",
+      "diff": 2
+    },
+    {
+      "id": "law-055",
+      "q": "Which doctrine lets a court exercise personal jurisdiction over an out-of-state online seller that targets customers in the forum state?",
+      "choices": [
+        "Long-arm jurisdiction",
+        "Venue",
+        "Subject-matter jurisdiction",
+        "Res judicata"
+      ],
+      "answer": 0,
+      "explain": "Long-arm statutes and minimum-contacts analysis allow personal jurisdiction over nonresident defendants who purposefully reach the forum. Venue concerns the location of trial, and res judicata bars relitigation.",
+      "sub": "Computer law",
+      "diff": 3
+    },
+    {
+      "id": "law-056",
+      "q": "Which document transfers title to real property?",
+      "choices": [
+        "Lease",
+        "Mortgage",
+        "Deed",
+        "Bill of sale"
+      ],
+      "answer": 2,
+      "explain": "A deed conveys title to real property. A lease grants possession, a mortgage secures a loan, and a bill of sale transfers personal property.",
+      "sub": "Property laws",
+      "diff": 1
+    },
+    {
+      "id": "law-057",
+      "q": "An agent who purports to contract for a principal that does not exist is typically personally liable under the:",
+      "choices": [
+        "Implied warranty of authority",
+        "Doctrine of respondeat superior",
+        "Statute of Frauds",
+        "Parol evidence rule"
+      ],
+      "answer": 0,
+      "explain": "An agent impliedly warrants having authority, so misrepresenting a principal's existence exposes the agent to liability. The other doctrines do not address this situation.",
+      "sub": "Agency and employment laws",
+      "diff": 3
+    },
+    {
+      "id": "law-058",
+      "q": "Which body is elected by shareholders to oversee corporate management?",
+      "choices": [
+        "Corporate officers",
+        "Creditors' committee",
+        "Board of directors",
+        "Trustees in bankruptcy"
+      ],
+      "answer": 2,
+      "explain": "Shareholders elect the board of directors, which oversees management. Officers are appointed by the board to run daily operations.",
+      "sub": "Business organization",
+      "diff": 1
+    },
+    {
+      "id": "law-059",
+      "q": "A promise to keep an offer open for 30 days, made without payment or other consideration, is generally:",
+      "choices": [
+        "Binding for the full 30 days",
+        "Revocable by the offeror before acceptance",
+        "Binding because it was in writing",
+        "Binding only if notarized"
+      ],
+      "answer": 1,
+      "explain": "Without consideration or a separate option contract, a promise to hold an offer open is revocable before acceptance under common law. Writing and notarization do not supply consideration.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-060",
+      "q": "Which document names someone to make health care decisions if the principal cannot communicate?",
+      "choices": [
+        "Last will and testament",
+        "Trust instrument",
+        "Codicil",
+        "Health care proxy"
+      ],
+      "answer": 3,
+      "explain": "A health care proxy appoints an agent for medical decisions. A will governs property at death, and a codicil amends a will.",
+      "sub": "Domestic and private law",
+      "diff": 2
+    },
+    {
+      "id": "law-061",
+      "q": "Which standard of proof applies in a typical civil case?",
+      "choices": [
+        "Beyond a reasonable doubt",
+        "Probable cause",
+        "Clear and convincing evidence",
+        "Preponderance of the evidence"
+      ],
+      "answer": 3,
+      "explain": "Civil cases generally require a preponderance of the evidence, meaning more likely than not. Beyond a reasonable doubt is the criminal standard.",
+      "sub": "Legal systems",
+      "diff": 2
+    },
+    {
+      "id": "law-062",
+      "q": "Under strict product liability, a manufacturer may be liable for a defective and unreasonably dangerous product:",
+      "choices": [
+        "Only if negligence is proven",
+        "Without proof of negligence",
+        "Only if the buyer signed a warranty",
+        "Only if the seller and manufacturer are the same party"
+      ],
+      "answer": 1,
+      "explain": "Strict liability focuses on the product's condition, not the manufacturer's fault. Plaintiffs need not prove negligence.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 3
+    },
+    {
+      "id": "law-063",
+      "q": "Which insurance principle limits recovery to the actual loss suffered?",
+      "choices": [
+        "Underwriting",
+        "Premium",
+        "Indemnity",
+        "Reinsurance"
+      ],
+      "answer": 2,
+      "explain": "The indemnity principle restores the insured to the pre-loss position without profit. Underwriting decides whether to insure, and the premium is the price paid.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 1
+    },
+    {
+      "id": "law-064",
+      "q": "A contract provision that ends a party's duties automatically when a specified event occurs is a:",
+      "choices": [
+        "Condition subsequent",
+        "Condition precedent",
+        "Liquidated damages clause",
+        "Novation"
+      ],
+      "answer": 0,
+      "explain": "A condition subsequent terminates an existing duty when an event happens. A condition precedent must occur before a duty arises.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-065",
+      "q": "A mechanic's lien is a claim against:",
+      "choices": [
+        "A debtor's wages",
+        "A corporation's shares",
+        "Real property, for unpaid labor and materials that improved it",
+        "A landlord's future rent"
+      ],
+      "answer": 2,
+      "explain": "A mechanic's lien secures payment for work or materials that improved real property. It attaches to the property itself.",
+      "sub": "Property laws",
+      "diff": 2
+    },
+    {
+      "id": "law-066",
+      "q": "Which federal law prohibits employment discrimination based on race, color, religion, sex or national origin?",
+      "choices": [
+        "Title VII of the Civil Rights Act of 1964",
+        "Age Discrimination in Employment Act",
+        "Americans with Disabilities Act",
+        "Equal Pay Act of 1963"
+      ],
+      "answer": 0,
+      "explain": "Title VII prohibits employment discrimination on those five bases. The ADEA covers age, the ADA covers disability, and the Equal Pay Act covers pay differences by sex.",
+      "sub": "Agency and employment laws",
+      "diff": 2
+    },
+    {
+      "id": "law-067",
+      "q": "A combination in which one company absorbs another, and only the absorbing company survives, is a:",
+      "choices": [
+        "Consolidation",
+        "Dissolution",
+        "Recapitalization",
+        "Merger"
+      ],
+      "answer": 3,
+      "explain": "In a merger, the surviving company absorbs the other. In a consolidation, both companies cease to exist and a new company is formed.",
+      "sub": "Business organization",
+      "diff": 2
+    },
+    {
+      "id": "law-068",
+      "q": "Which filing gives public notice of a creditor's security interest in personal property under the UCC?",
+      "choices": [
+        "Deed of trust",
+        "UCC-1 financing statement",
+        "Mortgage",
+        "Recorded deed"
+      ],
+      "answer": 1,
+      "explain": "A UCC-1 financing statement perfects a security interest in most personal property. Deeds of trust and mortgages secure real property.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 2
+    },
+    {
+      "id": "law-069",
+      "q": "Which federal agency polices unfair or deceptive trade practices?",
+      "choices": [
+        "Securities and Exchange Commission",
+        "Federal Trade Commission",
+        "Federal Reserve",
+        "Internal Revenue Service"
+      ],
+      "answer": 1,
+      "explain": "The FTC enforces the FTC Act's prohibition on unfair and deceptive practices. The SEC regulates securities, and the Federal Reserve oversees monetary policy and banks.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 1
+    },
+    {
+      "id": "law-070",
+      "q": "A party signs a contract after being told a false fact that induced the signing. This defense is:",
+      "choices": [
+        "Duress",
+        "Undue influence",
+        "Unconscionability",
+        "Fraudulent misrepresentation"
+      ],
+      "answer": 3,
+      "explain": "Fraudulent misrepresentation makes a contract voidable when a party relies on a knowingly false material fact. Duress involves threats, and undue influence involves a dominant relationship.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-071",
+      "q": "Which requirement must be met for a federal court to hear a state-law claim under diversity jurisdiction?",
+      "choices": [
+        "Complete diversity of citizenship and more than $75,000 in controversy",
+        "Both parties reside in the same state",
+        "The federal government must be a party",
+        "The claim must arise under a federal statute"
+      ],
+      "answer": 0,
+      "explain": "Diversity requires complete diversity among parties and an amount in controversy above the statutory threshold, currently $75,000. Federal-question cases need a federal claim.",
+      "sub": "Legal systems",
+      "diff": 3
+    },
+    {
+      "id": "law-072",
+      "q": "A doctrine excusing performance because an unforeseen event made it impossible is:",
+      "choices": [
+        "Anticipatory repudiation",
+        "Accord and satisfaction",
+        "Impossibility of performance",
+        "Novation"
+      ],
+      "answer": 2,
+      "explain": "Impossibility of performance excuses a duty when an unforeseeable event, not the party's own choice, makes performance impossible. Anticipatory repudiation is a breach.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-073",
+      "q": "Which employer duty is required under the Occupational Safety and Health Act?",
+      "choices": [
+        "Providing a workplace free from recognized serious hazards",
+        "Paying a living wage",
+        "Offering paid vacation after one year",
+        "Providing unemployment insurance"
+      ],
+      "answer": 0,
+      "explain": "OSHA requires employers to protect workers from recognized serious hazards. It does not set wages, vacation or unemployment coverage.",
+      "sub": "Agency and employment laws",
+      "diff": 1
+    },
+    {
+      "id": "law-074",
+      "q": "A bailment is created when:",
+      "choices": [
+        "Title passes permanently to a buyer",
+        "A landlord leases land to a tenant",
+        "Possession of personal property is temporarily transferred and must be returned",
+        "A debtor pledges real estate as collateral"
+      ],
+      "answer": 2,
+      "explain": "A bailment transfers possession, not title, and the bailee must return or dispose of the goods as agreed. Title transfer, leases and real estate pledges are different arrangements.",
+      "sub": "Property laws",
+      "diff": 2
+    },
+    {
+      "id": "law-075",
+      "q": "Charging an interest rate above the legal maximum on a loan is called:",
+      "choices": [
+        "Redlining",
+        "Usury",
+        "Amortization",
+        "Escrow"
+      ],
+      "answer": 1,
+      "explain": "Usury is charging interest above the lawful limit. Redlining is discriminatory lending, amortization is repayment scheduling, and escrow holds funds for a third party.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 1
+    },
+    {
+      "id": "law-076",
+      "q": "Which is the highest court in the U.S. federal court system?",
+      "choices": [
+        "U.S. Court of Appeals",
+        "U.S. District Court",
+        "U.S. Tax Court",
+        "U.S. Supreme Court"
+      ],
+      "answer": 3,
+      "explain": "The U.S. Supreme Court is the highest federal court and the final appellate authority on federal questions. Courts of appeals and district courts are lower federal courts.",
+      "sub": "Legal systems",
+      "diff": 1
+    },
+    {
+      "id": "law-077",
+      "q": "Which contract term describes a claim that a contract cannot be enforced in court because a required writing is missing?",
+      "choices": [
+        "Void",
+        "Voidable",
+        "Illusory",
+        "Unenforceable"
+      ],
+      "answer": 3,
+      "explain": "An unenforceable contract is valid between the parties but cannot be enforced, such as one lacking a required writing. A void contract has no legal effect.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-078",
+      "q": "Which fiduciary holds property for another's benefit under a written trust instrument?",
+      "choices": [
+        "Bailee",
+        "Trustee",
+        "Surety",
+        "Principal"
+      ],
+      "answer": 1,
+      "explain": "A trustee holds legal title and manages property for beneficiaries under a trust instrument. A bailee holds goods temporarily, and a surety guarantees another's debt.",
+      "sub": "Agency and employment laws",
+      "diff": 1
+    },
+    {
+      "id": "law-079",
+      "q": "Which business form combines limited liability for owners with pass-through taxation and fewer formal requirements than a corporation?",
+      "choices": [
+        "Business trust",
+        "Cooperative",
+        "Limited liability company",
+        "Franchise"
+      ],
+      "answer": 2,
+      "explain": "An LLC gives owners limited liability and can be taxed as a partnership, with fewer formalities than a corporation. A franchise is a licensing arrangement, not an entity type.",
+      "sub": "Business organization",
+      "diff": 2
+    },
+    {
+      "id": "law-080",
+      "q": "Under UCC 2-207, between merchants, an additional term in an acceptance generally:",
+      "choices": [
+        "Becomes part of the contract unless it materially alters it or the offer limits acceptance to its terms",
+        "Always voids the contract",
+        "Always controls over the offer",
+        "Must be notarized to take effect"
+      ],
+      "answer": 0,
+      "explain": "Between merchants, additional terms usually become part of the contract unless they materially alter it, the offer forbids them, or objection is made. Notarization is not required.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-081",
+      "q": "Which of the following is a duty an agent owes to the principal?",
+      "choices": [
+        "Paying the principal's personal debts",
+        "Acting as guarantor for third-party debts",
+        "Loyalty and disclosure of material information",
+        "Providing unlimited credit to the principal"
+      ],
+      "answer": 2,
+      "explain": "Agents owe fiduciary duties of loyalty, obedience and disclosure to the principal. The other options are not agent duties.",
+      "sub": "Agency and employment laws",
+      "diff": 3
+    },
+    {
+      "id": "law-082",
+      "q": "Which party to a check is the drawee?",
+      "choices": [
+        "The bank on which the check is drawn",
+        "The person who writes the check",
+        "The person who receives the check",
+        "The person who endorses the check"
+      ],
+      "answer": 0,
+      "explain": "The drawee is the bank that must pay the check. The drawer writes it, and the payee receives it.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 2
+    },
+    {
+      "id": "law-083",
+      "q": "Which federal statute regulates consumer credit reports?",
+      "choices": [
+        "Electronic Fund Transfer Act",
+        "Fair Packaging and Labeling Act",
+        "Telephone Consumer Protection Act",
+        "Fair Credit Reporting Act"
+      ],
+      "answer": 3,
+      "explain": "The FCRA governs the accuracy, privacy and use of consumer credit reports. The other statutes address electronic transfers, product packaging and telemarketing.",
+      "sub": "Consumer protection and product/personal liability",
+      "diff": 1
+    },
+    {
+      "id": "law-084",
+      "q": "A promise to make a gift with nothing given in return is generally:",
+      "choices": [
+        "Enforceable because it is in writing",
+        "Unenforceable for lack of consideration",
+        "Enforceable under the Statute of Frauds",
+        "Enforceable only if the promisor is a corporation"
+      ],
+      "answer": 1,
+      "explain": "A gratuitous promise lacks consideration and is generally unenforceable. Writing does not supply consideration.",
+      "sub": "Contracts and sales",
+      "diff": 1
+    },
+    {
+      "id": "law-085",
+      "q": "Which defense applies when a party is forced to sign a contract under threat of physical harm?",
+      "choices": [
+        "Undue influence",
+        "Duress",
+        "Mistake",
+        "Fraud"
+      ],
+      "answer": 1,
+      "explain": "Duress is coercion by threats that overcome a party's free will, making the contract voidable. Undue influence arises from a relationship of trust.",
+      "sub": "Contracts and sales",
+      "diff": 1
+    },
+    {
+      "id": "law-086",
+      "q": "Under the parol evidence rule, which statement is correct?",
+      "choices": [
+        "It allows oral evidence to override any written term",
+        "It applies only to oral contracts",
+        "It requires contracts to be notarized",
+        "It generally bars prior or contemporaneous oral terms that contradict a fully integrated written contract"
+      ],
+      "answer": 3,
+      "explain": "The parol evidence rule protects integrated written agreements from contradiction by earlier or contemporaneous oral terms. Exceptions exist for fraud, ambiguity and certain terms.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-087",
+      "q": "Which promise must be in writing under the Statute of Frauds?",
+      "choices": [
+        "A promise to pay the debt of another if that person defaults",
+        "A promise to deliver flowers next week",
+        "A gift of cash",
+        "A promise to pay for a meal today"
+      ],
+      "answer": 0,
+      "explain": "Promises to answer for another's debt, called suretyship promises, must be in writing. The other promises can be performed quickly or are gifts.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-088",
+      "q": "A mutual mistake supports rescission when:",
+      "choices": [
+        "One party was careless in reading the terms",
+        "The buyer simply regrets the contract later",
+        "Both parties were mistaken about the same material fact at formation",
+        "The mistake concerns future market prices"
+      ],
+      "answer": 2,
+      "explain": "Mutual mistake about a material fact existing at formation can justify rescission. Carelessness, regret and mistakes about future prices do not.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-089",
+      "q": "Which remedy cancels a contract and returns the parties to their pre-contract positions?",
+      "choices": [
+        "Rescission",
+        "Specific performance",
+        "Injunction",
+        "Reformation"
+      ],
+      "answer": 0,
+      "explain": "Rescission cancels the contract and restores the parties. Specific performance compels performance, and reformation rewrites the contract.",
+      "sub": "Contracts and sales",
+      "diff": 1
+    },
+    {
+      "id": "law-090",
+      "q": "Which contract defense covers terms that are grossly unfair and oppressive, often because of unequal bargaining power?",
+      "choices": [
+        "Duress",
+        "Accord and satisfaction",
+        "Unconscionability",
+        "Novation"
+      ],
+      "answer": 2,
+      "explain": "Unconscionability permits a court to refuse enforcement of grossly one-sided terms. Duress, accord and satisfaction, and novation are different doctrines.",
+      "sub": "Contracts and sales",
+      "diff": 3
+    },
+    {
+      "id": "law-091",
+      "q": "Which type of authority is expressly stated by the principal?",
+      "choices": [
+        "Implied authority",
+        "Express authority",
+        "Apparent authority",
+        "Inherent authority"
+      ],
+      "answer": 1,
+      "explain": "Express authority is granted in words, orally or in writing. Implied authority is inferred from duties, and apparent authority comes from the principal's conduct toward third parties.",
+      "sub": "Agency and employment laws",
+      "diff": 2
+    },
+    {
+      "id": "law-092",
+      "q": "Under the FLSA, which employee is typically exempt from overtime?",
+      "choices": [
+        "A janitor paid hourly",
+        "A retail stock clerk paid hourly",
+        "A cashier paid by the hour",
+        "A bona fide executive earning a qualifying salary"
+      ],
+      "answer": 3,
+      "explain": "Bona fide executive, administrative and professional employees who meet salary and duty tests are exempt from overtime. Hourly workers are generally non-exempt.",
+      "sub": "Agency and employment laws",
+      "diff": 2
+    },
+    {
+      "id": "law-093",
+      "q": "Which law requires employers to provide unpaid, job-protected leave for certain family and medical reasons?",
+      "choices": [
+        "Equal Pay Act",
+        "Fair Labor Standards Act",
+        "Worker Adjustment and Retraining Notification Act",
+        "Family and Medical Leave Act"
+      ],
+      "answer": 3,
+      "explain": "The FMLA provides up to 12 weeks of unpaid, job-protected leave for qualifying reasons. The other statutes address pay equity, minimum wage and mass layoffs.",
+      "sub": "Agency and employment laws",
+      "diff": 1
+    },
+    {
+      "id": "law-094",
+      "q": "Which property interest is a right to use another's land for a specific purpose without owning it?",
+      "choices": [
+        "Fee simple",
+        "Easement",
+        "Life estate",
+        "Tenancy by the entirety"
+      ],
+      "answer": 1,
+      "explain": "An easement is a non-possessory right to use land for a specific purpose. Fee simple and life estates are ownership interests, and tenancy by the entirety is a form of co-ownership.",
+      "sub": "Property laws",
+      "diff": 2
+    },
+    {
+      "id": "law-095",
+      "q": "Which legal form of business has unlimited personal liability for the owner and is the easiest to form?",
+      "choices": [
+        "Corporation",
+        "Limited partnership",
+        "Sole proprietorship",
+        "S corporation"
+      ],
+      "answer": 2,
+      "explain": "A sole proprietorship requires no formal filing, and the owner is personally liable for business debts. The other forms involve formal filings or limited liability.",
+      "sub": "Business organization",
+      "diff": 1
+    },
+    {
+      "id": "law-096",
+      "q": "Which corporate action creates a new company from two merging companies, which both cease to exist?",
+      "choices": [
+        "Consolidation",
+        "Merger",
+        "Dissolution",
+        "Recapitalization"
+      ],
+      "answer": 0,
+      "explain": "In a consolidation, the combining companies cease to exist and a new entity is formed. In a merger, one company survives.",
+      "sub": "Business organization",
+      "diff": 2
+    },
+    {
+      "id": "law-097",
+      "q": "Which type of endorsement limits further negotiation, such as one that says 'For deposit only'?",
+      "choices": [
+        "Blank endorsement",
+        "Special endorsement",
+        "Restrictive endorsement",
+        "Qualified endorsement"
+      ],
+      "answer": 2,
+      "explain": "A restrictive endorsement limits how the instrument may be used, such as requiring deposit only. A special endorsement names a payee, and a qualified endorsement disclaims liability.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
+      "diff": 2
+    },
+    {
+      "id": "law-098",
+      "q": "Which principle requires that a court have authority over the type of dispute being heard?",
+      "choices": [
+        "Subject-matter jurisdiction",
+        "Personal jurisdiction",
+        "Venue",
+        "Standing"
+      ],
+      "answer": 0,
+      "explain": "Subject-matter jurisdiction is the court's authority over the kind of case. Personal jurisdiction concerns the parties, and venue concerns the location.",
+      "sub": "Legal systems",
+      "diff": 2
+    },
+    {
+      "id": "law-099",
+      "q": "Which concept requires that laws give fair notice and fair procedures before the government deprives someone of life, liberty or property?",
+      "choices": [
+        "Equal protection",
+        "Judicial review",
+        "Stare decisis",
+        "Due process"
+      ],
+      "answer": 3,
+      "explain": "The Due Process Clauses require fair procedures before deprivation. Equal protection concerns unequal treatment, and judicial review and stare decisis concern courts' roles.",
+      "sub": "Legal systems",
+      "diff": 2
+    },
+    {
+      "id": "law-100",
+      "q": "Which term describes a court's power to review whether a law violates the Constitution?",
+      "choices": [
+        "Stare decisis",
+        "Judicial review",
+        "Original jurisdiction",
+        "Appellate jurisdiction"
+      ],
+      "answer": 1,
+      "explain": "Judicial review, established in Marbury v. Madison, lets courts strike down unconstitutional laws. Stare decisis is the rule of following precedent.",
+      "sub": "Legal systems",
+      "diff": 2
+    }
+  ],
+  "vocab": [
+    {
+      "id": "law-v001",
+      "term": "Arbitration",
+      "def": "An alternative dispute resolution process in which a neutral arbitrator hears the case and issues a binding decision.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v002",
+      "term": "Mediation",
+      "def": "A non-binding process in which a neutral mediator helps disputing parties reach their own voluntary settlement.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v003",
+      "term": "Litigation",
+      "def": "The process of resolving a dispute through the court system.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v004",
+      "term": "Stare decisis",
+      "def": "The doctrine that courts should follow the precedents set by earlier decisions in similar cases.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v005",
+      "term": "Standing",
+      "def": "The requirement that a party have a sufficient personal stake and injury to bring a lawsuit.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v006",
+      "term": "Subject-matter jurisdiction",
+      "def": "A court's legal authority to hear the type of case presented.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v007",
+      "term": "Grand jury",
+      "def": "A group of citizens that hears evidence in private and decides whether there is probable cause to indict.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v008",
+      "term": "Due process",
+      "def": "The constitutional guarantee that the government must follow fair procedures before depriving a person of life, liberty or property.",
+      "sub": "Legal systems"
+    },
+    {
+      "id": "law-v009",
+      "term": "Consideration",
+      "def": "Something of legal value, such as a promise, act or forbearance, bargained for and exchanged in a contract.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v010",
+      "term": "Statute of Frauds",
+      "def": "A rule requiring certain contracts, such as those for land or suretyship, to be evidenced by a signed writing to be enforceable.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v011",
+      "term": "Parol evidence rule",
+      "def": "A rule that generally bars prior or contemporaneous oral agreements from contradicting a fully integrated written contract.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v012",
+      "term": "Unconscionability",
+      "def": "A defense allowing a court to refuse enforcement of a contract term that is grossly unfair and oppressive.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v013",
+      "term": "Rescission",
+      "def": "A remedy that cancels a contract and restores the parties to their pre-contract positions.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v014",
+      "term": "Specific performance",
+      "def": "A court order requiring a party to perform exactly what the contract promised.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v015",
+      "term": "Impossibility of performance",
+      "def": "A doctrine excusing a party's duty to perform when an unforeseeable event makes performance impossible.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v016",
+      "term": "Voidable contract",
+      "def": "A contract that one party may choose to cancel, such as a contract made by a minor.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v017",
+      "term": "Breach of contract",
+      "def": "The failure of a party to perform a duty owed under an enforceable contract without a legal excuse.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v018",
+      "term": "Implied-in-fact contract",
+      "def": "A contract whose existence and terms are inferred from the parties' conduct and circumstances.",
+      "sub": "Contracts and sales"
+    },
+    {
+      "id": "law-v019",
+      "term": "Limited liability company",
+      "def": "A business entity that gives owners limited liability and can be taxed as a partnership or corporation.",
+      "sub": "Business organization"
+    },
+    {
+      "id": "law-v020",
+      "term": "Subchapter S corporation",
+      "def": "A corporation that passes income and losses through to shareholders for federal tax purposes if it meets eligibility rules.",
+      "sub": "Business organization"
+    },
+    {
+      "id": "law-v021",
+      "term": "Limited partnership",
+      "def": "A partnership with at least one general partner who has unlimited liability and limited partners whose liability is capped.",
+      "sub": "Business organization"
+    },
+    {
+      "id": "law-v022",
+      "term": "Merger",
+      "def": "A transaction in which one company absorbs another, and only the surviving company continues to exist.",
+      "sub": "Business organization"
+    },
+    {
+      "id": "law-v023",
+      "term": "Consolidation",
+      "def": "A combination in which two or more companies cease to exist and a new company is formed.",
+      "sub": "Business organization"
+    },
+    {
+      "id": "law-v024",
+      "term": "Board of directors",
+      "def": "The group elected by shareholders to oversee a corporation's management and major decisions.",
+      "sub": "Business organization"
+    },
+    {
+      "id": "law-v025",
+      "term": "Fee simple",
+      "def": "The highest form of land ownership, which is unlimited in duration and transferable.",
+      "sub": "Property laws"
+    },
+    {
+      "id": "law-v026",
+      "term": "Estate for years",
+      "def": "A leasehold interest that lasts for a fixed, definite period.",
+      "sub": "Property laws"
+    },
+    {
+      "id": "law-v027",
+      "term": "Easement",
+      "def": "A non-possessory right to use another's land for a specific purpose.",
+      "sub": "Property laws"
+    },
+    {
+      "id": "law-v028",
+      "term": "Lien",
+      "def": "A legal claim against property that secures payment of a debt or obligation.",
+      "sub": "Property laws"
+    },
+    {
+      "id": "law-v029",
+      "term": "Deed",
+      "def": "A written instrument that transfers title to real property.",
+      "sub": "Property laws"
+    },
+    {
+      "id": "law-v030",
+      "term": "Bailment",
+      "def": "A temporary transfer of possession of personal property to another party, who must return or dispose of it as agreed.",
+      "sub": "Property laws"
+    },
+    {
+      "id": "law-v031",
+      "term": "Agency",
+      "def": "A relationship in which an agent acts on behalf of and under the control of a principal.",
+      "sub": "Agency and employment laws"
+    },
+    {
+      "id": "law-v032",
+      "term": "Apparent authority",
+      "def": "Authority that a third party reasonably believes an agent has, based on the principal's conduct.",
+      "sub": "Agency and employment laws"
+    },
+    {
+      "id": "law-v033",
+      "term": "Respondeat superior",
+      "def": "A doctrine making an employer liable for torts an employee commits within the scope of employment.",
+      "sub": "Agency and employment laws"
+    },
+    {
+      "id": "law-v034",
+      "term": "Independent contractor",
+      "def": "A worker who controls how the work is done and is not an employee for most legal purposes.",
+      "sub": "Agency and employment laws"
+    },
+    {
+      "id": "law-v035",
+      "term": "Fiduciary duty",
+      "def": "A duty of loyalty and care that an agent or trustee owes to the principal or beneficiary.",
+      "sub": "Agency and employment laws"
+    },
+    {
+      "id": "law-v036",
+      "term": "Workers' compensation",
+      "def": "A no-fault system, funded by employers, that pays benefits for work-related injuries and illness.",
+      "sub": "Agency and employment laws"
+    },
+    {
+      "id": "law-v037",
+      "term": "Title VII",
+      "def": "The part of the Civil Rights Act of 1964 that prohibits employment discrimination based on race, color, religion, sex or national origin.",
+      "sub": "Agency and employment laws"
+    },
+    {
+      "id": "law-v038",
+      "term": "Negotiable instrument",
+      "def": "A written, unconditional promise or order to pay a fixed sum of money that can be transferred by endorsement or delivery.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy"
+    },
+    {
+      "id": "law-v039",
+      "term": "Holder in due course",
+      "def": "A holder who takes a negotiable instrument for value, in good faith and without notice of defects, and takes it free of most defenses.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy"
+    },
+    {
+      "id": "law-v040",
+      "term": "Draft",
+      "def": "A written order by a drawer directing a drawee to pay a payee, such as a check or bill of exchange.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy"
+    },
+    {
+      "id": "law-v041",
+      "term": "Blank endorsement",
+      "def": "An endorsement consisting only of the endorser's signature, which makes the instrument payable to bearer.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy"
+    },
+    {
+      "id": "law-v042",
+      "term": "Presentment",
+      "def": "The demand for payment or acceptance of an instrument made by or on behalf of the holder.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy"
+    },
+    {
+      "id": "law-v043",
+      "term": "Security interest",
+      "def": "A legal interest in collateral that secures a debt and gives the creditor rights in that property if the debtor defaults.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy"
+    },
+    {
+      "id": "law-v044",
+      "term": "Indemnity",
+      "def": "The insurance principle that limits recovery to the actual loss so the insured is not profited.",
+      "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy"
+    },
+    {
+      "id": "law-v045",
+      "term": "Truth in Lending Act",
+      "def": "A federal law requiring lenders to disclose standardized credit terms, including the finance charge and annual percentage rate.",
+      "sub": "Consumer protection and product/personal liability"
+    },
+    {
+      "id": "law-v046",
+      "term": "Fair Debt Collection Practices Act",
+      "def": "A federal law that restricts abusive and deceptive debt collection practices by third-party collectors.",
+      "sub": "Consumer protection and product/personal liability"
+    },
+    {
+      "id": "law-v047",
+      "term": "Bait and switch",
+      "def": "A deceptive practice of advertising a low-priced item with no intention to sell it, then steering buyers to a costlier one.",
+      "sub": "Consumer protection and product/personal liability"
+    },
+    {
+      "id": "law-v048",
+      "term": "Usury",
+      "def": "Charging interest on a loan above the maximum rate allowed by law.",
+      "sub": "Consumer protection and product/personal liability"
+    },
+    {
+      "id": "law-v049",
+      "term": "Strict product liability",
+      "def": "Liability of a seller or manufacturer for a defective and unreasonably dangerous product, without proof of negligence.",
+      "sub": "Consumer protection and product/personal liability"
+    },
+    {
+      "id": "law-v050",
+      "term": "Implied warranty of merchantability",
+      "def": "An automatic UCC warranty that goods sold by a merchant are fit for their ordinary purpose.",
+      "sub": "Consumer protection and product/personal liability"
+    },
+    {
+      "id": "law-v051",
+      "term": "Copyleft license",
+      "def": "An open-source license that requires derivative works to be distributed under the same terms as the original code.",
+      "sub": "Computer law"
+    },
+    {
+      "id": "law-v052",
+      "term": "Computer Fraud and Abuse Act",
+      "def": "A federal law that makes unauthorized access to protected computers a crime.",
+      "sub": "Computer law"
+    },
+    {
+      "id": "law-v053",
+      "term": "Long-arm statute",
+      "def": "A state law allowing a court to exercise personal jurisdiction over nonresident defendants who have sufficient contacts with the state.",
+      "sub": "Computer law"
+    },
+    {
+      "id": "law-v054",
+      "term": "E-SIGN Act",
+      "def": "A federal law giving electronic signatures and records the same legal effect as handwritten ones in interstate commerce.",
+      "sub": "Computer law"
+    },
+    {
+      "id": "law-v055",
+      "term": "Prenuptial agreement",
+      "def": "A contract made before marriage that sets out how property and support will be handled if the marriage ends.",
+      "sub": "Domestic and private law"
+    },
+    {
+      "id": "law-v056",
+      "term": "Durable power of attorney",
+      "def": "A document appointing an agent to manage a person's financial affairs that remains effective if the person becomes incapacitated.",
+      "sub": "Domestic and private law"
+    },
+    {
+      "id": "law-v057",
+      "term": "Holographic will",
+      "def": "A will written entirely in the testator's own handwriting and signed by the testator.",
+      "sub": "Domestic and private law"
+    },
+    {
+      "id": "law-v058",
+      "term": "Health care proxy",
+      "def": "A document appointing an agent to make medical decisions if the principal cannot communicate.",
+      "sub": "Domestic and private law"
+    },
+    {
+      "id": "law-v059",
+      "term": "Codicil",
+      "def": "A written amendment to an existing will that must be executed with the same formalities as a will.",
+      "sub": "Domestic and private law"
+    },
+    {
+      "id": "law-v060",
+      "term": "No-fault divorce",
+      "def": "A divorce granted on grounds such as irreconcilable differences, without proof of marital misconduct.",
+      "sub": "Domestic and private law"
+    }
+  ]
+}

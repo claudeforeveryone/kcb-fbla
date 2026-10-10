@@ -1,0 +1,1782 @@
+{
+  "slug": "hospitality-event-management",
+  "name": "Hospitality & Event Management",
+  "group": "case",
+  "notes": "Official FBLA 2025-26 Hospitality and Event Management guideline PDF could not be retrieved (fbla.org returned 403; the NYS 2025-26 guidelines URL returned 404; no PAFBLA copy for this event was found). Competency areas are standard high-school hospitality and event-management curriculum areas, cross-checked against Idaho CTE Hospitality Management program standards (Performance Standard 6.2 Events, and related food, lodging and guest service standards). Re-check against the official event guideline when available. Questions are scenario-led for a case study event and use U.S. conventions (GAAP for nonprofit donations, FLSA overtime, ADA access, U.S. fire-code occupancy).",
+  "subs": [
+    "Event Planning and Logistics",
+    "Venue Selection and Layout",
+    "Budgeting and Financial Management",
+    "Vendor and Contract Management",
+    "Marketing and Promotion",
+    "Guest Services and Experience",
+    "Food and Beverage Operations",
+    "Risk Management and Safety",
+    "Staffing and Leadership",
+    "Evaluation and Post-Event Review"
+  ],
+  "questions": [
+    {
+      "id": "hem-001",
+      "q": "A chapter has eight weeks to plan a 300-guest awards banquet. Which task should the event coordinator complete first?",
+      "choices": [
+        "Define the event goals, guest count and budget, then confirm the date",
+        "Order centerpieces for each table",
+        "Hire a DJ for the reception",
+        "Print the event programs"
+      ],
+      "answer": 0,
+      "explain": "Goals, audience size and budget drive every later decision, including venue size, catering and vendor choices, so they come before any purchase.",
+      "sub": "Event Planning and Logistics",
+      "diff": 1
+    },
+    {
+      "id": "hem-002",
+      "q": "Which planning tool shows the sequence of dependent tasks and identifies the longest chain of tasks that sets the minimum time needed to finish the project?",
+      "choices": [
+        "A Gantt chart with no dependency lines",
+        "A critical path method (CPM) network diagram",
+        "A SWOT analysis",
+        "A guest satisfaction survey"
+      ],
+      "answer": 1,
+      "explain": "CPM links dependent tasks; any delay on the critical path delays the whole event, which is why it is tracked closely.",
+      "sub": "Event Planning and Logistics",
+      "diff": 2
+    },
+    {
+      "id": "hem-003",
+      "q": "A run-of-show document is best described as:",
+      "choices": [
+        "A list of vendor contract terms",
+        "A budget variance report",
+        "A minute-by-minute timeline of every activity, speaker, cue and staff assignment on event day",
+        "A guest registration form"
+      ],
+      "answer": 2,
+      "explain": "The run-of-show is the operational script the team uses during the event itself.",
+      "sub": "Event Planning and Logistics",
+      "diff": 1
+    },
+    {
+      "id": "hem-004",
+      "q": "A planner learns that an outdoor reception has a 40 percent chance of rain. What is the most effective step?",
+      "choices": [
+        "Ignore the forecast until the morning of the event",
+        "Cancel the event as soon as any rain is forecast",
+        "Buy umbrellas for all guests in advance",
+        "Reserve an indoor backup space and set a decision date for choosing between the two sites"
+      ],
+      "answer": 3,
+      "explain": "A contingency plan with a backup space and a decision deadline protects the event without cancelling early on a forecast alone.",
+      "sub": "Event Planning and Logistics",
+      "diff": 2
+    },
+    {
+      "id": "hem-005",
+      "q": "Which objective is written as a SMART objective?",
+      "choices": [
+        "Recruit 40 volunteers and raise $1,500 for the food bank by March 15",
+        "Make the banquet fun",
+        "Try to get more people involved this year",
+        "Improve the chapter's reputation"
+      ],
+      "answer": 0,
+      "explain": "SMART objectives are specific, measurable, achievable, relevant and time-bound; only one choice has a number and a deadline.",
+      "sub": "Event Planning and Logistics",
+      "diff": 1
+    },
+    {
+      "id": "hem-006",
+      "q": "What is the primary purpose of a floor plan in event planning?",
+      "choices": [
+        "To list vendor invoices",
+        "To show seating, stage, service and exit locations so the layout can be checked for flow and fire-code compliance",
+        "To record guest dietary needs",
+        "To track ticket sales"
+      ],
+      "answer": 1,
+      "explain": "A scaled floor plan lets the planner check aisle widths, exits and service routes before the event.",
+      "sub": "Event Planning and Logistics",
+      "diff": 2
+    },
+    {
+      "id": "hem-007",
+      "q": "A three-day conference expects a breakout room to exceed its capacity on day two. Which action best solves the problem while protecting the schedule?",
+      "choices": [
+        "Cancel the session",
+        "Ask attendees to share seats informally",
+        "Move the session to a larger room in the same venue and update signage and the event app",
+        "Shorten all sessions to 15 minutes"
+      ],
+      "answer": 2,
+      "explain": "Relocating within the same venue and updating every channel fixes capacity without losing content or breaking the schedule.",
+      "sub": "Event Planning and Logistics",
+      "diff": 3
+    },
+    {
+      "id": "hem-008",
+      "q": "Which element belongs in a complete day-of event timeline?",
+      "choices": [
+        "Final invoice payment dates only",
+        "Post-event survey results",
+        "Long-term brand strategy",
+        "Load-in and setup times, rehearsal, guest arrival and breakdown, with a named staff owner for each"
+      ],
+      "answer": 3,
+      "explain": "A day-of timeline assigns times and owners to every phase, not just the main program.",
+      "sub": "Event Planning and Logistics",
+      "diff": 2
+    },
+    {
+      "id": "hem-009",
+      "q": "What does a rain date or backup date protect against?",
+      "choices": [
+        "Loss of the event date due to weather or other disruption",
+        "Price increases from vendors",
+        "Guests forgetting to RSVP",
+        "Inflation in catering costs"
+      ],
+      "answer": 0,
+      "explain": "A pre-set backup date keeps the event alive if the original date is disrupted.",
+      "sub": "Event Planning and Logistics",
+      "diff": 1
+    },
+    {
+      "id": "hem-010",
+      "q": "A planner's schedule sets the final catering headcount for day 20, but the RSVP deadline is day 25. What is the best fix?",
+      "choices": [
+        "Keep the schedule, since the caterer can add guests later at no cost",
+        "Move the RSVP deadline before the catering headcount deadline, with a buffer for late requests",
+        "Remove the catering headcount step",
+        "Ask the caterer to guess the number"
+      ],
+      "answer": 1,
+      "explain": "The headcount must be locked after RSVPs close; reversing the order creates an unplanned cost or waste.",
+      "sub": "Event Planning and Logistics",
+      "diff": 2
+    },
+    {
+      "id": "hem-011",
+      "q": "Which factor should be assessed first when selecting a venue for a 200-person conference?",
+      "choices": [
+        "The color of the walls",
+        "Whether the parking lot has a coffee cart",
+        "Capacity for the planned layout, including exits and the fire-code occupancy limit",
+        "The brand of the projector"
+      ],
+      "answer": 2,
+      "explain": "Capacity and legal occupancy are non-negotiable, so they screen venues before any preference is considered.",
+      "sub": "Venue Selection and Layout",
+      "diff": 1
+    },
+    {
+      "id": "hem-012",
+      "q": "A banquet needs seating for 200 guests at round tables of 10. How many tables are needed?",
+      "choices": [
+        "25",
+        "10",
+        "200",
+        "20"
+      ],
+      "answer": 3,
+      "explain": "200 divided by 10 is 20. Using 8 seats per table (25 tables) is a common error that wastes space.",
+      "sub": "Venue Selection and Layout",
+      "diff": 2
+    },
+    {
+      "id": "hem-013",
+      "q": "Which room setup is best for a lecture-style session where attendees take notes and no meals are served?",
+      "choices": [
+        "Theater style",
+        "Banquet rounds",
+        "Cabaret",
+        "Hollow square"
+      ],
+      "answer": 0,
+      "explain": "Theater style uses rows facing the front, which maximizes seats for a presentation without tables for dining.",
+      "sub": "Venue Selection and Layout",
+      "diff": 3
+    },
+    {
+      "id": "hem-014",
+      "q": "Before signing an outdoor venue contract, which question is most important to ask the site manager?",
+      "choices": [
+        "Does the building have a restaurant on site?",
+        "What is the backup plan, and what are the rules on permits, noise limits and weather cancellation?",
+        "What is the price of the house wine?",
+        "Is the building painted in neutral colors?"
+      ],
+      "answer": 1,
+      "explain": "Permits, noise rules and weather policy can cancel or disrupt an outdoor event, so they must be settled up front.",
+      "sub": "Venue Selection and Layout",
+      "diff": 1
+    },
+    {
+      "id": "hem-015",
+      "q": "Which term describes the maximum number of people a room may hold under fire-safety rules?",
+      "choices": [
+        "Net revenue",
+        "Attendance quota",
+        "Occupancy load",
+        "Floor ratio"
+      ],
+      "answer": 2,
+      "explain": "The occupancy load is set by the local fire authority and must not be exceeded.",
+      "sub": "Venue Selection and Layout",
+      "diff": 1
+    },
+    {
+      "id": "hem-016",
+      "q": "A venue charges $3,000 for room rental, $25 per guest for 150 guests, and a $500 setup fee. What is the total venue cost?",
+      "choices": [
+        "$6,750",
+        "$7,000",
+        "$7,750",
+        "$7,250"
+      ],
+      "answer": 3,
+      "explain": "3,000 plus (25 times 150 = 3,750) plus 500 equals 7,250. Forgetting the setup fee gives $6,750.",
+      "sub": "Venue Selection and Layout",
+      "diff": 2
+    },
+    {
+      "id": "hem-017",
+      "q": "Which layout decision best supports smooth guest flow at registration?",
+      "choices": [
+        "Placing check-in tables at the main entrance with signage and extra lanes for peak arrival",
+        "Placing registration at the far end of the hall from the entrance",
+        "Using a single table with no signage",
+        "Moving check-in to the stage"
+      ],
+      "answer": 0,
+      "explain": "Registration at the entrance with clear signage and extra lanes prevents bottlenecks at peak arrival times.",
+      "sub": "Venue Selection and Layout",
+      "diff": 3
+    },
+    {
+      "id": "hem-018",
+      "q": "A venue contract includes a minimum food and beverage spend of $4,000, but projected catering spend is $2,800. What is the best action?",
+      "choices": [
+        "Ignore it, since minimums are not enforceable",
+        "Negotiate a lower minimum or add items to reach it, and confirm the final terms in writing before signing",
+        "Cancel the venue",
+        "Reduce the guest count to save money"
+      ],
+      "answer": 1,
+      "explain": "Minimum spend clauses are negotiable, and the shortfall is a real cost that must be resolved before the contract is signed.",
+      "sub": "Venue Selection and Layout",
+      "diff": 3
+    },
+    {
+      "id": "hem-019",
+      "q": "In U.S. event planning, what does ADA compliance require of a venue layout?",
+      "choices": [
+        "A dance floor in every room",
+        "Only round tables",
+        "Accessible routes, entrances and restrooms, including for wheelchair users",
+        "A stage in every room"
+      ],
+      "answer": 2,
+      "explain": "The Americans with Disabilities Act requires accessible routes and facilities in public accommodations, including event venues.",
+      "sub": "Venue Selection and Layout",
+      "diff": 1
+    },
+    {
+      "id": "hem-020",
+      "q": "What is the main purpose of a site inspection before a major event?",
+      "choices": [
+        "To sign the contract for the first time",
+        "To choose the menu",
+        "To send invitations",
+        "To confirm sightlines, power, load-in access, restrooms and exits match the plan"
+      ],
+      "answer": 3,
+      "explain": "A site visit verifies that the plan works in the actual space, catching problems before they become day-of failures.",
+      "sub": "Venue Selection and Layout",
+      "diff": 2
+    },
+    {
+      "id": "hem-021",
+      "q": "What is a budget variance?",
+      "choices": [
+        "The difference between budgeted and actual amounts for a line item",
+        "The total of all guest payments",
+        "The number of vendors used",
+        "The ticket price"
+      ],
+      "answer": 0,
+      "explain": "A variance measures how far actual results are from the budget, favorable or unfavorable.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-022",
+      "q": "Which of these is a fixed cost for a conference?",
+      "choices": [
+        "A per-plate meal charge",
+        "A venue rental fee paid regardless of attendance",
+        "A per-guest printed badge",
+        "A commission on sponsorship sales"
+      ],
+      "answer": 1,
+      "explain": "Fixed costs do not change with attendance; per-guest and commission costs are variable.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-023",
+      "q": "A chapter sells 120 tickets at $25 each and has $2,400 in total expenses. What is the net profit?",
+      "choices": [
+        "$2,400",
+        "$3,000",
+        "$600",
+        "$5,400"
+      ],
+      "answer": 2,
+      "explain": "Revenue is 120 times 25, which is 3,000. Subtracting expenses of 2,400 leaves 600.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-024",
+      "q": "Break-even attendance is found by dividing total fixed costs by which value?",
+      "choices": [
+        "Total variable costs",
+        "Total revenue",
+        "The number of vendors",
+        "Contribution margin per guest (ticket price minus variable cost per guest)"
+      ],
+      "answer": 3,
+      "explain": "Each guest contributes the ticket price less variable cost toward fixed costs; dividing gives the guests needed to cover them.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 2
+    },
+    {
+      "id": "hem-025",
+      "q": "Fixed costs are $1,800, the ticket price is $30, and variable cost is $12 per guest. What is the break-even attendance?",
+      "choices": [
+        "100",
+        "60",
+        "150",
+        "180"
+      ],
+      "answer": 0,
+      "explain": "The contribution margin is 30 minus 12, which is 18. Then 1,800 divided by 18 equals 100 guests.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 3
+    },
+    {
+      "id": "hem-026",
+      "q": "What is a contingency reserve in an event budget?",
+      "choices": [
+        "Money spent on the main speaker",
+        "Money set aside, usually as a percentage of the budget, for unexpected costs",
+        "Money from sponsors that is spent immediately",
+        "Profit paid out to the chapter"
+      ],
+      "answer": 1,
+      "explain": "The reserve absorbs surprises such as price increases or weather costs without breaking the budget.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-027",
+      "q": "A sponsor donates $1,000 of printed banners instead of cash. How should the chapter record the donation?",
+      "choices": [
+        "As zero, since no cash changed hands",
+        "As a cash expense",
+        "As in-kind revenue with an equal expense at fair value when the banners are used",
+        "As a long-term liability"
+      ],
+      "answer": 2,
+      "explain": "Under U.S. GAAP for nonprofits, donated goods are recorded at fair value as revenue, with an expense when used.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 3
+    },
+    {
+      "id": "hem-028",
+      "q": "Which is the best way to control spending during an event?",
+      "choices": [
+        "Let each committee spend freely and reconcile at the end",
+        "Pay all vendors in cash without receipts",
+        "Skip the budget for small events",
+        "Track actual spending against each budget line daily and approve any change in writing"
+      ],
+      "answer": 3,
+      "explain": "Daily tracking against budget lines catches overruns while there is still time to correct them.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 2
+    },
+    {
+      "id": "hem-029",
+      "q": "A food budget is $900 for 150 guests. The caterer quotes $8.50 per guest. What is the result?",
+      "choices": [
+        "$1,275, over budget",
+        "$900, within budget",
+        "$1,050, within budget",
+        "$1,175, over budget"
+      ],
+      "answer": 0,
+      "explain": "150 times 8.50 equals 1,275, which is 375 over the $900 budget.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 3
+    },
+    {
+      "id": "hem-030",
+      "q": "Which statement about accrual and cash accounting for an event is correct?",
+      "choices": [
+        "Cash basis records revenue when it is earned, regardless of payment",
+        "Accrual basis records revenue when earned and expenses when incurred, regardless of when cash moves",
+        "Accrual basis tracks only cash received",
+        "Cash basis is required by GAAP for all events"
+      ],
+      "answer": 1,
+      "explain": "Accrual accounting matches income and costs to the period they relate to, which is why it is preferred for multi-period comparison.",
+      "sub": "Budgeting and Financial Management",
+      "diff": 3
+    },
+    {
+      "id": "hem-031",
+      "q": "Which document defines the scope, price and responsibilities between an event planner and a caterer?",
+      "choices": [
+        "A run-of-show",
+        "A floor plan",
+        "A signed contract or letter of agreement",
+        "An invoice"
+      ],
+      "answer": 2,
+      "explain": "A signed agreement sets what is delivered, when, at what price, and who is responsible if something goes wrong.",
+      "sub": "Vendor and Contract Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-032",
+      "q": "A vendor contract includes a force majeure clause. What does it address?",
+      "choices": [
+        "Late payment penalties",
+        "Guest ticket refunds",
+        "Trademark use",
+        "Unforeseen events beyond either party's control, such as severe weather or government orders, that may excuse performance"
+      ],
+      "answer": 3,
+      "explain": "Force majeure clauses allocate risk for events outside the parties' control; their scope depends on the exact wording.",
+      "sub": "Vendor and Contract Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-033",
+      "q": "Which is the strongest reason to get three bids before hiring an audio-visual vendor?",
+      "choices": [
+        "It allows comparison of price, scope, reliability and references before awarding the job",
+        "Bids are always cheaper than single quotes",
+        "It removes the need for a contract",
+        "Vendors must provide free equipment"
+      ],
+      "answer": 0,
+      "explain": "Comparing scope and references matters as much as price; the cheapest bid is not always the best value.",
+      "sub": "Vendor and Contract Management",
+      "diff": 3
+    },
+    {
+      "id": "hem-034",
+      "q": "What is a deposit in a vendor agreement?",
+      "choices": [
+        "The final payment due after the event",
+        "A partial payment that secures the date and is usually non-refundable or subject to a cancellation schedule",
+        "A penalty for late cancellation only",
+        "A tip paid to staff"
+      ],
+      "answer": 1,
+      "explain": "Deposits reserve the vendor's time; the refund terms should be spelled out in the contract.",
+      "sub": "Vendor and Contract Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-035",
+      "q": "A caterer requires a final guest count seven days before the event, and later changes are billed at 100 percent of the per-plate price. RSVPs are still changing. What is the best action?",
+      "choices": [
+        "Ignore the deadline and pay later",
+        "Ask the caterer to cancel",
+        "Confirm the count with a sensible buffer and clarify the change policy in writing before the deadline",
+        "Order for 500 guests to avoid all risk"
+      ],
+      "answer": 2,
+      "explain": "Locking a count with a buffer, while knowing the cost of changes, avoids paying for unused meals without risking shortages.",
+      "sub": "Vendor and Contract Management",
+      "diff": 2
+    },
+    {
+      "id": "hem-036",
+      "q": "What is the main purpose of a certificate of insurance requested from a vendor?",
+      "choices": [
+        "To prove the vendor is profitable",
+        "To register the vendor's trademark",
+        "To set the vendor's price",
+        "To confirm the vendor carries liability coverage that protects the chapter"
+      ],
+      "answer": 3,
+      "explain": "A certificate shows the vendor's coverage limits and names the chapter as additional insured if the contract requires it.",
+      "sub": "Vendor and Contract Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-037",
+      "q": "Which term describes an outside business that supplies services under a written agreement with defined deliverables?",
+      "choices": [
+        "Contractor",
+        "Volunteer",
+        "Sponsor",
+        "Guest"
+      ],
+      "answer": 0,
+      "explain": "A contractor delivers defined services for a fee; the contract, not the relationship, defines the obligations.",
+      "sub": "Vendor and Contract Management",
+      "diff": 1
+    },
+    {
+      "id": "hem-038",
+      "q": "Which statement best describes a verbal agreement for a one-day event service?",
+      "choices": [
+        "Verbal agreements are never enforceable",
+        "Verbal agreements can be enforceable, but a written agreement makes the terms easier to prove",
+        "Verbal agreements are enforceable only if notarized",
+        "Verbal agreements must be filed with the state"
+      ],
+      "answer": 1,
+      "explain": "Oral contracts can bind parties, but proof of terms is the problem; a written agreement avoids disputes.",
+      "sub": "Vendor and Contract Management",
+      "diff": 2
+    },
+    {
+      "id": "hem-039",
+      "q": "Which practice best protects a chapter when a vendor fails to deliver a rented sound system?",
+      "choices": [
+        "Pay the full balance before the event",
+        "Accept any substitute without notice",
+        "Enforce the contract's delivery and remedy terms, and document the failure in writing",
+        "Cancel all other vendors"
+      ],
+      "answer": 2,
+      "explain": "Written documentation and the contract's remedy clause are what support a refund or credit claim.",
+      "sub": "Vendor and Contract Management",
+      "diff": 2
+    },
+    {
+      "id": "hem-040",
+      "q": "A venue contract says a cancellation within 60 days costs 50 percent of the rental fee, and within 14 days costs 100 percent. The chapter cancels on day 30. What must it pay?",
+      "choices": [
+        "Nothing, because it cancelled more than 14 days out",
+        "100 percent of the rental fee",
+        "25 percent of the rental fee",
+        "50 percent of the rental fee"
+      ],
+      "answer": 3,
+      "explain": "Day 30 falls inside the 60-day window but outside 14 days, so the 50 percent tier applies.",
+      "sub": "Vendor and Contract Management",
+      "diff": 2
+    },
+    {
+      "id": "hem-041",
+      "q": "Which promotion method is most effective for a small chapter's bake sale at low cost?",
+      "choices": [
+        "Social media posts, school announcements and posters in high-traffic areas",
+        "A paid television ad",
+        "A billboard on the highway",
+        "A direct mail campaign to every household"
+      ],
+      "answer": 0,
+      "explain": "Free and targeted channels reach the chapter's real audience at minimal cost.",
+      "sub": "Marketing and Promotion",
+      "diff": 1
+    },
+    {
+      "id": "hem-042",
+      "q": "What is a target audience?",
+      "choices": [
+        "Everyone who might ever attend",
+        "The specific group the event is designed for and most likely to attend",
+        "The sponsors who pay for the event",
+        "The venue staff"
+      ],
+      "answer": 1,
+      "explain": "Targeting narrows messaging, channel choice and pricing to the people most likely to say yes.",
+      "sub": "Marketing and Promotion",
+      "diff": 2
+    },
+    {
+      "id": "hem-043",
+      "q": "Flyers produced 25 percent of attendees, and social media produced none. What is the most useful next step?",
+      "choices": [
+        "Stop all marketing",
+        "Spend more on the same flyers",
+        "Track the source of each registration and shift budget toward the channels producing attendees",
+        "Hire a celebrity speaker"
+      ],
+      "answer": 2,
+      "explain": "Source tracking shows which channels work, so spending follows results instead of habit.",
+      "sub": "Marketing and Promotion",
+      "diff": 2
+    },
+    {
+      "id": "hem-044",
+      "q": "Which metric best measures the reach of a social media campaign?",
+      "choices": [
+        "Number of event staff",
+        "Venue capacity",
+        "Price per plate",
+        "Impressions and unique accounts reached"
+      ],
+      "answer": 3,
+      "explain": "Reach measures how many people saw the content; engagement and conversion are separate metrics.",
+      "sub": "Marketing and Promotion",
+      "diff": 2
+    },
+    {
+      "id": "hem-045",
+      "q": "Which content is most effective for a promotional flyer?",
+      "choices": [
+        "A clear headline with the event name, date, time, location and a call to action",
+        "A long paragraph about chapter history",
+        "A list of every vendor",
+        "A photo with no text"
+      ],
+      "answer": 0,
+      "explain": "A flyer must answer the basic questions in seconds because it is read briefly.",
+      "sub": "Marketing and Promotion",
+      "diff": 1
+    },
+    {
+      "id": "hem-046",
+      "q": "Last month 50 of 1,000 website visitors registered. This month 80 of 1,200 registered. Which conclusion is correct?",
+      "choices": [
+        "Conversion fell from 6.7 to 5.0 percent",
+        "Conversion improved from 5.0 to 6.7 percent",
+        "Conversion was unchanged at 5 percent",
+        "Conversion cannot be compared across months"
+      ],
+      "answer": 1,
+      "explain": "Conversion is registrations divided by visitors: 50/1,000 is 5.0 percent and 80/1,200 is 6.7 percent.",
+      "sub": "Marketing and Promotion",
+      "diff": 2
+    },
+    {
+      "id": "hem-047",
+      "q": "Which approach best uses sponsorship benefits to attract sponsors?",
+      "choices": [
+        "Offering free admission with no recognition",
+        "Hiding the sponsor's logo",
+        "Offering a defined package with measurable visibility, such as logo placement and social mentions",
+        "Charging the sponsor after the event"
+      ],
+      "answer": 2,
+      "explain": "Sponsors buy defined, measurable exposure; vague promises rarely close.",
+      "sub": "Marketing and Promotion",
+      "diff": 2
+    },
+    {
+      "id": "hem-048",
+      "q": "What is a call to action in promotional material?",
+      "choices": [
+        "The venue's name",
+        "The sponsor's slogan",
+        "A list of event rules",
+        "A specific instruction telling the audience what to do next, such as register by a date"
+      ],
+      "answer": 3,
+      "explain": "A call to action converts interest into behavior, such as registering or buying a ticket.",
+      "sub": "Marketing and Promotion",
+      "diff": 1
+    },
+    {
+      "id": "hem-049",
+      "q": "What is a key benefit of early-bird ticket pricing?",
+      "choices": [
+        "It encourages early commitment and gives the chapter an early head count for planning",
+        "It lowers the event's fixed costs",
+        "It removes the need for registration",
+        "It guarantees sponsorship money"
+      ],
+      "answer": 0,
+      "explain": "Early sales improve planning accuracy and cash flow, though they reduce average ticket revenue.",
+      "sub": "Marketing and Promotion",
+      "diff": 3
+    },
+    {
+      "id": "hem-050",
+      "q": "A chapter wants to know whether its Instagram promotion drove the event. Which pair of metrics best shows impact on the event itself?",
+      "choices": [
+        "Likes and follower count",
+        "Registrations or ticket sales from tracked links, and attendance at check-in",
+        "Post length and emoji count",
+        "Impressions and comment count"
+      ],
+      "answer": 1,
+      "explain": "Impressions and comments measure the post; only tracked registrations and check-ins measure the event outcome.",
+      "sub": "Marketing and Promotion",
+      "diff": 3
+    },
+    {
+      "id": "hem-051",
+      "q": "Which action best improves the guest experience at check-in?",
+      "choices": [
+        "Requiring guests to wait for a manual sign-up",
+        "Having one volunteer handle all tasks",
+        "Pre-printed name badges, alphabetical lanes and trained greeters",
+        "Asking guests to find their own badges"
+      ],
+      "answer": 2,
+      "explain": "Pre-printed badges and split lanes shorten waits and make the first impression smooth.",
+      "sub": "Guest Services and Experience",
+      "diff": 1
+    },
+    {
+      "id": "hem-052",
+      "q": "A guest with a severe food allergy is seated where the meal contains the allergen. What is the best first step?",
+      "choices": [
+        "Tell the guest to eat it anyway",
+        "Ignore it, since the allergy was on the RSVP",
+        "Move the guest out of the event",
+        "Inform the kitchen and servers, and confirm the item is safe before service"
+      ],
+      "answer": 3,
+      "explain": "Allergy safety is the first priority; confirming with the kitchen prevents a medical emergency.",
+      "sub": "Guest Services and Experience",
+      "diff": 2
+    },
+    {
+      "id": "hem-053",
+      "q": "What does service recovery mean?",
+      "choices": [
+        "Restoring a guest's trust after a service failure through an apology and corrective action",
+        "Reducing service staff to save money",
+        "Recovering lost deposits",
+        "Recording guest complaints for marketing"
+      ],
+      "answer": 0,
+      "explain": "Good recovery turns a failure into a retained guest, often more loyal than before.",
+      "sub": "Guest Services and Experience",
+      "diff": 3
+    },
+    {
+      "id": "hem-054",
+      "q": "Which is an example of a guest touchpoint?",
+      "choices": [
+        "An accounting ledger entry",
+        "The venue's registration desk, the event app or a follow-up email",
+        "A vendor invoice",
+        "A tax form"
+      ],
+      "answer": 1,
+      "explain": "A touchpoint is any moment a guest interacts with the event, which is where the experience is shaped.",
+      "sub": "Guest Services and Experience",
+      "diff": 1
+    },
+    {
+      "id": "hem-055",
+      "q": "A conference survey averages 4.6 out of 5, but 30 percent of attendees skipped the food question. What is the most accurate interpretation?",
+      "choices": [
+        "The event was an overall failure",
+        "Food was clearly the best element",
+        "The average is strong, but skipped questions can hide a problem, so the chapter should follow up with a targeted question",
+        "The survey is invalid and should be deleted"
+      ],
+      "answer": 2,
+      "explain": "High averages can mask gaps; nonresponse on a topic is a signal worth investigating.",
+      "sub": "Guest Services and Experience",
+      "diff": 3
+    },
+    {
+      "id": "hem-056",
+      "q": "A guest complains about a long line at registration. Which response is best?",
+      "choices": [
+        "Tell the guest to wait without comment",
+        "Argue that the line is normal",
+        "Ask the guest to leave",
+        "Acknowledge the wait, give an updated time estimate, and open another lane or point to a shorter line"
+      ],
+      "answer": 3,
+      "explain": "Acknowledging the problem and offering a concrete fix changes the guest's experience immediately.",
+      "sub": "Guest Services and Experience",
+      "diff": 2
+    },
+    {
+      "id": "hem-057",
+      "q": "What is the main purpose of a post-event guest feedback survey?",
+      "choices": [
+        "To measure satisfaction and identify improvements for future events",
+        "To sell next year's tickets",
+        "To set vendor prices",
+        "To collect sponsor payments"
+      ],
+      "answer": 0,
+      "explain": "Feedback is most useful as an input for improving the next event.",
+      "sub": "Guest Services and Experience",
+      "diff": 1
+    },
+    {
+      "id": "hem-058",
+      "q": "A hotel guest reports noise from a nearby ballroom event. Which response reflects good hospitality practice?",
+      "choices": [
+        "Ignore it until checkout",
+        "Offer a room change and log the issue so the event team can address the noise",
+        "Charge the guest for the inconvenience",
+        "Tell the guest it is not their concern"
+      ],
+      "answer": 1,
+      "explain": "Solving the guest's problem and passing the root cause to the event team is standard hospitality practice.",
+      "sub": "Guest Services and Experience",
+      "diff": 2
+    },
+    {
+      "id": "hem-059",
+      "q": "In service quality models, what is the service gap?",
+      "choices": [
+        "The difference between a venue's cost and its price",
+        "The gap between two event dates",
+        "The difference between what guests expect and what they perceive they received",
+        "The difference between cash and card payments"
+      ],
+      "answer": 2,
+      "explain": "Service quality is measured by the difference between expectations and perceived performance, which is why expectations must be managed.",
+      "sub": "Guest Services and Experience",
+      "diff": 3
+    },
+    {
+      "id": "hem-060",
+      "q": "Which practice matters most for guests with mobility needs?",
+      "choices": [
+        "Accessible seating placed in a separate area with no route",
+        "Asking guests to bring a helper",
+        "Holding the event only on an upper floor",
+        "Reserved accessible seating with step-free routes, communicated in advance"
+      ],
+      "answer": 3,
+      "explain": "Accessibility requires both the seating and a usable route to it, and it should be confirmed before the event.",
+      "sub": "Guest Services and Experience",
+      "diff": 2
+    },
+    {
+      "id": "hem-061",
+      "q": "What does FIFO mean in food storage?",
+      "choices": [
+        "First in, first out, meaning older stock is used before newer stock",
+        "Fresh items are only ordered on Fridays",
+        "Food is inventoried only when finished",
+        "Frozen items are only sold outside"
+      ],
+      "answer": 0,
+      "explain": "FIFO reduces spoilage by rotating stock so older items are used first.",
+      "sub": "Food and Beverage Operations",
+      "diff": 1
+    },
+    {
+      "id": "hem-062",
+      "q": "What is the food temperature danger zone?",
+      "choices": [
+        "32 to 40 degrees F",
+        "40 to 140 degrees F (about 4 to 60 degrees C)",
+        "0 to 10 degrees F",
+        "180 to 212 degrees F"
+      ],
+      "answer": 1,
+      "explain": "Bacteria multiply fastest in this range, so hot and cold holding must stay outside it.",
+      "sub": "Food and Beverage Operations",
+      "diff": 2
+    },
+    {
+      "id": "hem-063",
+      "q": "A caterer expects 1.1 buffet plates per guest for 150 guests. How many plates should be prepared?",
+      "choices": [
+        "150",
+        "180",
+        "165",
+        "200"
+      ],
+      "answer": 2,
+      "explain": "150 times 1.1 is 165. The 10 percent buffer covers second helpings without wild over-production.",
+      "sub": "Food and Beverage Operations",
+      "diff": 2
+    },
+    {
+      "id": "hem-064",
+      "q": "What is the main purpose of a HACCP plan?",
+      "choices": [
+        "To set menu prices",
+        "To schedule staff breaks",
+        "To track guest preferences",
+        "To identify and control food hazards at critical control points to keep food safe"
+      ],
+      "answer": 3,
+      "explain": "HACCP is a systematic food-safety method built around critical control points.",
+      "sub": "Food and Beverage Operations",
+      "diff": 2
+    },
+    {
+      "id": "hem-065",
+      "q": "What is a standard recipe used for in event catering?",
+      "choices": [
+        "Consistent portions and per-guest costing",
+        "Setting the venue rental fee",
+        "Choosing the guest room layout",
+        "Assigning seating"
+      ],
+      "answer": 0,
+      "explain": "A standard recipe lets the caterer predict cost and quality per guest, the basis for accurate quotes.",
+      "sub": "Food and Beverage Operations",
+      "diff": 1
+    },
+    {
+      "id": "hem-066",
+      "q": "A plated dinner has $18 of food cost per guest, and the target food cost percentage is 30 percent. What menu price per guest meets the target?",
+      "choices": [
+        "$25.40",
+        "$60.00",
+        "$36.00",
+        "$54.00"
+      ],
+      "answer": 1,
+      "explain": "Food cost percentage is food cost divided by price, so price is 18 divided by 0.30, which is 60.",
+      "sub": "Food and Beverage Operations",
+      "diff": 3
+    },
+    {
+      "id": "hem-067",
+      "q": "Which beverage practice most reduces liability when alcohol is served at an event?",
+      "choices": [
+        "Serving unlimited drinks to all guests",
+        "Letting guests self-serve from open bottles",
+        "Checking IDs, serving responsibly, and using a licensed bartender under an approved permit",
+        "Serving anyone who asks"
+      ],
+      "answer": 2,
+      "explain": "Liability for over-service falls on the host, so licensing, ID checks and responsible service are essential.",
+      "sub": "Food and Beverage Operations",
+      "diff": 2
+    },
+    {
+      "id": "hem-068",
+      "q": "In banquet pricing, what is a cover?",
+      "choices": [
+        "A tablecloth fee",
+        "A reservation deposit",
+        "Sales tax on food",
+        "A guest or place setting charged for a meal"
+      ],
+      "answer": 3,
+      "explain": "Per-cover pricing charges by the number of guests served, not by the number of dishes.",
+      "sub": "Food and Beverage Operations",
+      "diff": 1
+    },
+    {
+      "id": "hem-069",
+      "q": "Which is the best way to reduce food waste after a buffet?",
+      "choices": [
+        "Forecast guest counts from RSVPs and plan smaller, refilled batches",
+        "Order double the food to be safe",
+        "Throw out all leftovers without tracking",
+        "Serve only dessert"
+      ],
+      "answer": 0,
+      "explain": "Good forecasting and refill planning cut waste while keeping the buffet full.",
+      "sub": "Food and Beverage Operations",
+      "diff": 1
+    },
+    {
+      "id": "hem-070",
+      "q": "A food truck arrives with a permit that expired two days before the event. What should the planner do first?",
+      "choices": [
+        "Accept the truck and ask for the permit later",
+        "Verify the permit's dates and require a current permit before approving the truck to operate",
+        "Assume the permit renewed automatically",
+        "Charge the truck a fee and let it operate"
+      ],
+      "answer": 1,
+      "explain": "Operating without a valid permit creates legal and health exposure for the host, so verification comes first.",
+      "sub": "Food and Beverage Operations",
+      "diff": 3
+    },
+    {
+      "id": "hem-071",
+      "q": "What is the purpose of a risk assessment in event planning?",
+      "choices": [
+        "To set the ticket price",
+        "To assign seating",
+        "To identify hazards, rate their likelihood and impact, and plan controls",
+        "To record guest reviews"
+      ],
+      "answer": 2,
+      "explain": "A risk assessment ranks hazards so the most serious ones get the most planning effort.",
+      "sub": "Risk Management and Safety",
+      "diff": 1
+    },
+    {
+      "id": "hem-072",
+      "q": "Which insurance covers a claim that a guest was injured at an event because of the organizer's negligence?",
+      "choices": [
+        "Auto insurance",
+        "Workers' compensation for event staff only",
+        "Business interruption insurance",
+        "General liability insurance"
+      ],
+      "answer": 3,
+      "explain": "General liability covers third-party bodily injury and property damage claims arising from the organizer's operations.",
+      "sub": "Risk Management and Safety",
+      "diff": 2
+    },
+    {
+      "id": "hem-073",
+      "q": "What is an incident report used for?",
+      "choices": [
+        "Documenting injuries, property damage or unsafe conditions for follow-up and claims",
+        "Ranking vendors",
+        "Scheduling speakers",
+        "Setting the next year's budget"
+      ],
+      "answer": 0,
+      "explain": "Prompt, factual incident reports support insurance claims and prevent repeat hazards.",
+      "sub": "Risk Management and Safety",
+      "diff": 3
+    },
+    {
+      "id": "hem-074",
+      "q": "The fire marshal sets the room's occupancy at 400, but the chapter sells 450 tickets. What is the correct response?",
+      "choices": [
+        "Sell all 450, since the tickets are paid",
+        "Cap ticket sales at the lawful occupancy limit and manage the overflow",
+        "Ask guests to stand",
+        "Remove the fire exits to create space"
+      ],
+      "answer": 1,
+      "explain": "Exceeding occupancy is a life-safety violation; the lawful limit governs sales.",
+      "sub": "Risk Management and Safety",
+      "diff": 2
+    },
+    {
+      "id": "hem-075",
+      "q": "A chapter hires a DJ who is paid in cash under no contract, and the DJ is later injured on site. Which risk is most significant?",
+      "choices": [
+        "Loss of a tax deduction",
+        "Marketing confusion",
+        "Unclear liability and workers' compensation exposure",
+        "Copyright on the music played"
+      ],
+      "answer": 2,
+      "explain": "Without a contract or proper classification, responsibility for an injury is disputed and costly.",
+      "sub": "Risk Management and Safety",
+      "diff": 3
+    },
+    {
+      "id": "hem-076",
+      "q": "What is the first priority in an emergency at an event?",
+      "choices": [
+        "Protect the sponsors' logos",
+        "Count the cash",
+        "Finish the program",
+        "Protect life and safety by following the emergency plan and calling 911 when needed"
+      ],
+      "answer": 3,
+      "explain": "Life safety comes first; the emergency plan defines who calls for help and who directs guests.",
+      "sub": "Risk Management and Safety",
+      "diff": 1
+    },
+    {
+      "id": "hem-077",
+      "q": "Which license allows copyrighted music to be played at a public event?",
+      "choices": [
+        "A public performance license from a performing rights organization such as ASCAP, BMI or SESAC",
+        "A driver's license",
+        "A sales tax exemption",
+        "A trademark registration"
+      ],
+      "answer": 0,
+      "explain": "Public performance of copyrighted music requires permission, typically through a performing rights organization.",
+      "sub": "Risk Management and Safety",
+      "diff": 3
+    },
+    {
+      "id": "hem-078",
+      "q": "What is the purpose of a waiver or release form for event participants?",
+      "choices": [
+        "To guarantee attendance",
+        "To document the participant's acknowledgment of known risks and agreement to terms, which may limit claims",
+        "To set ticket prices",
+        "To replace liability insurance entirely"
+      ],
+      "answer": 1,
+      "explain": "A waiver can limit some claims, but it does not replace insurance and may not bar every claim.",
+      "sub": "Risk Management and Safety",
+      "diff": 2
+    },
+    {
+      "id": "hem-079",
+      "q": "Which action best protects a chapter from volunteer injury claims?",
+      "choices": [
+        "Have volunteers sign no documents",
+        "Assume volunteers are never covered",
+        "Confirm volunteer accident or liability coverage and provide safety training before setup",
+        "Hire volunteers so insurance is not needed"
+      ],
+      "answer": 2,
+      "explain": "Coverage and training reduce both the risk and the chapter's exposure if an injury occurs.",
+      "sub": "Risk Management and Safety",
+      "diff": 3
+    },
+    {
+      "id": "hem-080",
+      "q": "A severe storm warning is issued two hours before an outdoor event. Which action is most appropriate?",
+      "choices": [
+        "Hold the event as planned",
+        "Tell guests to bring umbrellas only",
+        "Let each vendor decide individually",
+        "Follow the pre-set weather decision plan, notify guests and vendors, and move to backup or postpone"
+      ],
+      "answer": 3,
+      "explain": "A pre-agreed trigger and communication plan avoids panic decisions in the final hours.",
+      "sub": "Risk Management and Safety",
+      "diff": 2
+    },
+    {
+      "id": "hem-081",
+      "q": "What is the main purpose of a volunteer job description?",
+      "choices": [
+        "To define duties, time commitment and expectations so volunteers know their roles",
+        "To set the venue rental price",
+        "To record guest feedback",
+        "To track sponsor payments"
+      ],
+      "answer": 0,
+      "explain": "Clear role descriptions reduce confusion and make accountability possible.",
+      "sub": "Staffing and Leadership",
+      "diff": 1
+    },
+    {
+      "id": "hem-082",
+      "q": "Three committee chairs are not communicating. Which leadership approach is best?",
+      "choices": [
+        "Let them compete for the lead role",
+        "Set a regular check-in schedule, a shared timeline and clear decision authority for each area",
+        "Remove one chair from the team",
+        "Take over every task personally"
+      ],
+      "answer": 1,
+      "explain": "Structure and clear authority fix coordination failures without removing people or creating a bottleneck.",
+      "sub": "Staffing and Leadership",
+      "diff": 2
+    },
+    {
+      "id": "hem-083",
+      "q": "What is a shift schedule used for during an event?",
+      "choices": [
+        "Recording vendor invoices",
+        "Setting the program theme",
+        "Assigning staff to times and locations so coverage is clear",
+        "Tracking marketing impressions"
+      ],
+      "answer": 2,
+      "explain": "Shift schedules guarantee coverage at every station and make absences visible quickly.",
+      "sub": "Staffing and Leadership",
+      "diff": 1
+    },
+    {
+      "id": "hem-084",
+      "q": "Which method is best for training event staff quickly?",
+      "choices": [
+        "Hand out a manual with no walkthrough",
+        "Tell staff to figure it out during the event",
+        "Train only the manager",
+        "Run a short briefing with a run-of-show walkthrough, role cards and a practice session"
+      ],
+      "answer": 3,
+      "explain": "A walkthrough and practice build familiarity fast, and role cards keep staff focused on their own tasks.",
+      "sub": "Staffing and Leadership",
+      "diff": 2
+    },
+    {
+      "id": "hem-085",
+      "q": "Under the Fair Labor Standards Act (FLSA), which situation most likely requires overtime pay for a paid staff member?",
+      "choices": [
+        "Working 45 hours in a week at a non-exempt hourly rate",
+        "Working 45 hours as a volunteer",
+        "Working 45 hours as an unpaid nonprofit volunteer",
+        "Working 45 hours as an independent contractor"
+      ],
+      "answer": 0,
+      "explain": "Non-exempt employees must receive time-and-a-half for hours over 40 in a workweek; volunteers and contractors are treated differently.",
+      "sub": "Staffing and Leadership",
+      "diff": 3
+    },
+    {
+      "id": "hem-086",
+      "q": "Which statement about nonprofit volunteers is most accurate?",
+      "choices": [
+        "Volunteers must be paid minimum wage",
+        "Volunteers generally receive no wages but still need safety training and clear role expectations",
+        "Volunteers cannot be given any training",
+        "Volunteers must be employees"
+      ],
+      "answer": 1,
+      "explain": "Volunteer status does not remove the duty to keep volunteers safe and informed.",
+      "sub": "Staffing and Leadership",
+      "diff": 1
+    },
+    {
+      "id": "hem-087",
+      "q": "What does a volunteer sign-in sheet support?",
+      "choices": [
+        "Vendor pricing",
+        "Ticket sales",
+        "Attendance tracking, accountability and emergency headcount",
+        "Sponsor recognition only"
+      ],
+      "answer": 2,
+      "explain": "Sign-in records support accountability and a reliable headcount if an evacuation is needed.",
+      "sub": "Staffing and Leadership",
+      "diff": 1
+    },
+    {
+      "id": "hem-088",
+      "q": "A staff member with a personal stake in one caterer is assigned to choose the caterer. What is the best action?",
+      "choices": [
+        "Hide the conflict",
+        "Let the staff member choose anyway",
+        "Remove all vendors from the process",
+        "Disclose the conflict and have another person make the vendor decision"
+      ],
+      "answer": 3,
+      "explain": "A conflict of interest must be disclosed and managed by reassigning the decision.",
+      "sub": "Staffing and Leadership",
+      "diff": 2
+    },
+    {
+      "id": "hem-089",
+      "q": "Which leadership style fits a new volunteer team that needs clear direction?",
+      "choices": [
+        "Directive leadership with clear instructions and frequent check-ins, shifting to supportive leadership as skills grow",
+        "Laissez-faire with no check-ins",
+        "Delegating all decisions to the newest member",
+        "Consensus voting on every task"
+      ],
+      "answer": 0,
+      "explain": "Teams that are new need direction first; autonomy is earned as competence develops.",
+      "sub": "Staffing and Leadership",
+      "diff": 3
+    },
+    {
+      "id": "hem-090",
+      "q": "A volunteer is consistently late for shifts. Which response is most constructive?",
+      "choices": [
+        "Remove the volunteer immediately without discussion",
+        "Talk privately, restate expectations, and document the issue and the agreed plan",
+        "Ignore it because volunteers are unpaid",
+        "Raise the issue publicly with the group"
+      ],
+      "answer": 1,
+      "explain": "A private, documented conversation addresses the problem fairly and creates a record if the issue continues.",
+      "sub": "Staffing and Leadership",
+      "diff": 3
+    },
+    {
+      "id": "hem-091",
+      "q": "What is the main purpose of a post-event debrief?",
+      "choices": [
+        "To pay all vendors",
+        "To market the next event",
+        "To review results against goals, document lessons and recommend changes",
+        "To collect sponsor logos"
+      ],
+      "answer": 2,
+      "explain": "A debrief turns one event's experience into improvements for the next.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 1
+    },
+    {
+      "id": "hem-092",
+      "q": "A chapter's goal was 200 attendees and 180 attended. What is the attainment rate?",
+      "choices": [
+        "80 percent",
+        "110 percent",
+        "95 percent",
+        "90 percent"
+      ],
+      "answer": 3,
+      "explain": "Attainment is actual divided by goal: 180 divided by 200 is 0.90, or 90 percent.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 2
+    },
+    {
+      "id": "hem-093",
+      "q": "How is cost per attendee calculated?",
+      "choices": [
+        "Total event cost divided by the number of attendees",
+        "Total revenue divided by the number of sponsors",
+        "Ticket price multiplied by the number of attendees",
+        "Venue capacity divided by the number of attendees"
+      ],
+      "answer": 0,
+      "explain": "Cost per attendee shows the efficiency of spending and is useful for comparing events.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 3
+    },
+    {
+      "id": "hem-094",
+      "q": "Which metric best evaluates whether a change to the registration process succeeded?",
+      "choices": [
+        "Number of event shirts sold",
+        "Completion rate of registrations and the time from starting a registration to a confirmed ticket",
+        "Number of social media followers",
+        "Size of the venue"
+      ],
+      "answer": 1,
+      "explain": "Process changes should be judged on the process outcome, such as completion rate and time to confirm.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 3
+    },
+    {
+      "id": "hem-095",
+      "q": "What is a post-mortem in event management?",
+      "choices": [
+        "A pre-event sales pitch",
+        "A venue inspection",
+        "A structured review of what went well and what to improve after the event",
+        "A vendor's final invoice"
+      ],
+      "answer": 2,
+      "explain": "A post-mortem focuses on learning, not blame, and feeds the next planning cycle.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 1
+    },
+    {
+      "id": "hem-096",
+      "q": "Which data point best evaluates the financial result of a fundraising event?",
+      "choices": [
+        "Number of photos taken",
+        "Number of social media posts",
+        "Number of programs printed",
+        "Net proceeds after all costs, compared to the budget"
+      ],
+      "answer": 3,
+      "explain": "Net proceeds after costs are the financial result; gross receipts alone overstate the success.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 2
+    },
+    {
+      "id": "hem-097",
+      "q": "Which approach gives a fair picture of attendee satisfaction?",
+      "choices": [
+        "Send a short survey to all attendees and track the response rate",
+        "Survey only the VIP guests",
+        "Survey only people who complained",
+        "Survey only the sponsors"
+      ],
+      "answer": 0,
+      "explain": "A representative, well-reported survey avoids biased samples, and the response rate shows how far the results can be trusted.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 3
+    },
+    {
+      "id": "hem-098",
+      "q": "A survey of 60 responses shows 70 percent rated the venue good or better, but only 60 of 200 attendees responded. What is the most important caution?",
+      "choices": [
+        "70 percent is always representative",
+        "The response rate is 30 percent, so the results may not represent all attendees",
+        "The survey should be discarded entirely",
+        "The venue should be rated by staff only"
+      ],
+      "answer": 1,
+      "explain": "Only 30 percent responded, so non-responders may differ; the result is informative but not conclusive.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 3
+    },
+    {
+      "id": "hem-099",
+      "q": "How should lessons learned from a debrief be used?",
+      "choices": [
+        "Filed without reading",
+        "Deleted after one month",
+        "Built into planning templates, timelines and vendor checklists for the next event",
+        "Shared only with sponsors"
+      ],
+      "answer": 2,
+      "explain": "Lessons only matter when they change the templates and checklists the team actually uses.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 2
+    },
+    {
+      "id": "hem-100",
+      "q": "Projected net income was $4,000 ($13,000 revenue minus $9,000 expenses). Actual revenue was $12,000 and actual expenses were $10,000. What is the variance on net income?",
+      "choices": [
+        "$2,000 favorable",
+        "$1,000 unfavorable",
+        "$6,000 favorable",
+        "$2,000 unfavorable"
+      ],
+      "answer": 3,
+      "explain": "Actual net income is $2,000 against a $4,000 budget, a $2,000 unfavorable variance.",
+      "sub": "Evaluation and Post-Event Review",
+      "diff": 3
+    }
+  ],
+  "vocab": [
+    {
+      "id": "hem-v001",
+      "term": "Run-of-show",
+      "def": "A minute-by-minute timeline of every activity, speaker, cue and staff assignment on event day.",
+      "sub": "Event Planning and Logistics"
+    },
+    {
+      "id": "hem-v002",
+      "term": "Critical path method (CPM)",
+      "def": "A scheduling method that links dependent tasks to find the longest sequence that sets the minimum project duration.",
+      "sub": "Event Planning and Logistics"
+    },
+    {
+      "id": "hem-v003",
+      "term": "Lead time",
+      "def": "The time between the decision to act and the date the action must be complete, such as booking a vendor before an event.",
+      "sub": "Event Planning and Logistics"
+    },
+    {
+      "id": "hem-v004",
+      "term": "Contingency plan",
+      "def": "A pre-set alternative course of action to use if a planned element fails or a risk occurs.",
+      "sub": "Event Planning and Logistics"
+    },
+    {
+      "id": "hem-v005",
+      "term": "Load-in",
+      "def": "The period when equipment, decor and vendors are brought into the venue before guests arrive.",
+      "sub": "Event Planning and Logistics"
+    },
+    {
+      "id": "hem-v006",
+      "term": "Objective (SMART)",
+      "def": "A goal that is specific, measurable, achievable, relevant and time-bound.",
+      "sub": "Event Planning and Logistics"
+    },
+    {
+      "id": "hem-v007",
+      "term": "Occupancy load",
+      "def": "The maximum number of people a room may legally hold, set by the local fire authority.",
+      "sub": "Venue Selection and Layout"
+    },
+    {
+      "id": "hem-v008",
+      "term": "Floor plan",
+      "def": "A scaled drawing showing where seating, stages, service areas and exits are placed in a venue.",
+      "sub": "Venue Selection and Layout"
+    },
+    {
+      "id": "hem-v009",
+      "term": "Theater style",
+      "def": "A room layout with rows of chairs facing the front, used for presentations without dining.",
+      "sub": "Venue Selection and Layout"
+    },
+    {
+      "id": "hem-v010",
+      "term": "Banquet rounds",
+      "def": "A layout of round tables with chairs for guests to dine together.",
+      "sub": "Venue Selection and Layout"
+    },
+    {
+      "id": "hem-v011",
+      "term": "Venue hold",
+      "def": "A tentative reservation of a date and space that the venue keeps for a limited time before the client must sign.",
+      "sub": "Venue Selection and Layout"
+    },
+    {
+      "id": "hem-v012",
+      "term": "Site inspection",
+      "def": "A pre-event visit to confirm that the space, power, access and exits match the event plan.",
+      "sub": "Venue Selection and Layout"
+    },
+    {
+      "id": "hem-v013",
+      "term": "Fixed cost",
+      "def": "A cost that stays the same regardless of attendance or sales volume, such as a venue rental fee.",
+      "sub": "Budgeting and Financial Management"
+    },
+    {
+      "id": "hem-v014",
+      "term": "Variable cost",
+      "def": "A cost that changes with the number of guests or units, such as per-plate food cost.",
+      "sub": "Budgeting and Financial Management"
+    },
+    {
+      "id": "hem-v015",
+      "term": "Break-even point",
+      "def": "The volume of attendance or sales at which total revenue equals total costs.",
+      "sub": "Budgeting and Financial Management"
+    },
+    {
+      "id": "hem-v016",
+      "term": "Budget variance",
+      "def": "The difference between budgeted and actual amounts, labeled favorable or unfavorable.",
+      "sub": "Budgeting and Financial Management"
+    },
+    {
+      "id": "hem-v017",
+      "term": "Contingency reserve",
+      "def": "Money set aside within a budget for unexpected costs.",
+      "sub": "Budgeting and Financial Management"
+    },
+    {
+      "id": "hem-v018",
+      "term": "In-kind donation",
+      "def": "A non-cash gift of goods or services, recorded at fair value.",
+      "sub": "Budgeting and Financial Management"
+    },
+    {
+      "id": "hem-v019",
+      "term": "Force majeure",
+      "def": "A contract clause that excuses performance when extraordinary events beyond a party’s control prevent it.",
+      "sub": "Vendor and Contract Management"
+    },
+    {
+      "id": "hem-v020",
+      "term": "Certificate of insurance",
+      "def": "A document issued by an insurer that confirms a vendor’s coverage limits and policy dates.",
+      "sub": "Vendor and Contract Management"
+    },
+    {
+      "id": "hem-v021",
+      "term": "Deposit",
+      "def": "A partial payment made to secure a vendor’s services, with refund terms set by the contract.",
+      "sub": "Vendor and Contract Management"
+    },
+    {
+      "id": "hem-v022",
+      "term": "Indemnification",
+      "def": "A contract clause in which one party agrees to cover the other party’s losses from specified claims.",
+      "sub": "Vendor and Contract Management"
+    },
+    {
+      "id": "hem-v023",
+      "term": "Request for proposal (RFP)",
+      "def": "A document that asks vendors to submit detailed proposals for defined services so they can be compared.",
+      "sub": "Vendor and Contract Management"
+    },
+    {
+      "id": "hem-v024",
+      "term": "Letter of agreement",
+      "def": "A written document setting out the scope, price, dates and responsibilities of a vendor engagement.",
+      "sub": "Vendor and Contract Management"
+    },
+    {
+      "id": "hem-v025",
+      "term": "Target audience",
+      "def": "The specific group an event or message is designed for and most likely to respond to it.",
+      "sub": "Marketing and Promotion"
+    },
+    {
+      "id": "hem-v026",
+      "term": "Call to action",
+      "def": "An explicit instruction telling the audience what to do next, such as register or buy a ticket.",
+      "sub": "Marketing and Promotion"
+    },
+    {
+      "id": "hem-v027",
+      "term": "Conversion rate",
+      "def": "The percentage of people who take a desired action, such as registering, out of those who saw the offer or visited the page.",
+      "sub": "Marketing and Promotion"
+    },
+    {
+      "id": "hem-v028",
+      "term": "Early-bird pricing",
+      "def": "A discounted ticket price offered for a limited period to encourage early commitment.",
+      "sub": "Marketing and Promotion"
+    },
+    {
+      "id": "hem-v029",
+      "term": "Impressions",
+      "def": "The number of times a piece of content is displayed, whether or not it is clicked or read.",
+      "sub": "Marketing and Promotion"
+    },
+    {
+      "id": "hem-v030",
+      "term": "Sponsorship package",
+      "def": "A defined set of benefits, such as logo placement and mentions, offered to a sponsor for a set fee.",
+      "sub": "Marketing and Promotion"
+    },
+    {
+      "id": "hem-v031",
+      "term": "Guest touchpoint",
+      "def": "Any point at which a guest interacts with the event, such as registration, signage or a follow-up email.",
+      "sub": "Guest Services and Experience"
+    },
+    {
+      "id": "hem-v032",
+      "term": "Service recovery",
+      "def": "The actions taken to restore a guest’s satisfaction after a service failure.",
+      "sub": "Guest Services and Experience"
+    },
+    {
+      "id": "hem-v033",
+      "term": "Guest experience",
+      "def": "The overall impression a guest forms from every interaction before, during and after an event.",
+      "sub": "Guest Services and Experience"
+    },
+    {
+      "id": "hem-v034",
+      "term": "Accessibility (ADA)",
+      "def": "Design and service practices that let people with disabilities use facilities and attend events, required under the Americans with Disabilities Act for public accommodations.",
+      "sub": "Guest Services and Experience"
+    },
+    {
+      "id": "hem-v035",
+      "term": "Net Promoter Score (NPS)",
+      "def": "A loyalty measure based on how likely guests are to recommend an experience, on a scale of 0 to 10.",
+      "sub": "Guest Services and Experience"
+    },
+    {
+      "id": "hem-v036",
+      "term": "Concierge service",
+      "def": "A staff function that helps guests with requests, information and problems during an event or stay.",
+      "sub": "Guest Services and Experience"
+    },
+    {
+      "id": "hem-v037",
+      "term": "FIFO (first in, first out)",
+      "def": "A stock rotation method in which the oldest inventory is used or sold first.",
+      "sub": "Food and Beverage Operations"
+    },
+    {
+      "id": "hem-v038",
+      "term": "Danger zone",
+      "def": "The temperature range of about 40 to 140 degrees F (4 to 60 degrees C) in which bacteria multiply rapidly.",
+      "sub": "Food and Beverage Operations"
+    },
+    {
+      "id": "hem-v039",
+      "term": "HACCP",
+      "def": "Hazard Analysis and Critical Control Points, a systematic food-safety method that identifies and controls hazards at critical points.",
+      "sub": "Food and Beverage Operations"
+    },
+    {
+      "id": "hem-v040",
+      "term": "Cover",
+      "def": "A guest or place setting charged for a meal, used as a unit of banquet pricing.",
+      "sub": "Food and Beverage Operations"
+    },
+    {
+      "id": "hem-v041",
+      "term": "Food cost percentage",
+      "def": "Food cost divided by menu price, expressed as a percentage, used to judge menu pricing.",
+      "sub": "Food and Beverage Operations"
+    },
+    {
+      "id": "hem-v042",
+      "term": "Standard recipe",
+      "def": "A tested recipe with fixed ingredients, portions and method that allows consistent quality and cost per serving.",
+      "sub": "Food and Beverage Operations"
+    },
+    {
+      "id": "hem-v043",
+      "term": "Risk assessment",
+      "def": "A process that identifies hazards, rates their likelihood and impact, and plans controls for each.",
+      "sub": "Risk Management and Safety"
+    },
+    {
+      "id": "hem-v044",
+      "term": "General liability insurance",
+      "def": "Coverage that pays for third-party bodily injury and property damage claims arising from the insured’s operations.",
+      "sub": "Risk Management and Safety"
+    },
+    {
+      "id": "hem-v045",
+      "term": "Waiver (release of liability)",
+      "def": "A signed document in which a participant acknowledges known risks and agrees to terms that may limit claims.",
+      "sub": "Risk Management and Safety"
+    },
+    {
+      "id": "hem-v046",
+      "term": "Incident report",
+      "def": "A written record of an injury, damage or unsafe condition, used for follow-up and insurance claims.",
+      "sub": "Risk Management and Safety"
+    },
+    {
+      "id": "hem-v047",
+      "term": "Performing rights license",
+      "def": "Permission to publicly play copyrighted music, typically obtained through an organization such as ASCAP, BMI or SESAC.",
+      "sub": "Risk Management and Safety"
+    },
+    {
+      "id": "hem-v048",
+      "term": "Negligence",
+      "def": "Failure to exercise the care a reasonable person would in the same situation, which can create liability when it causes harm.",
+      "sub": "Risk Management and Safety"
+    },
+    {
+      "id": "hem-v049",
+      "term": "Job description",
+      "def": "A written statement of a role’s duties, responsibilities, time commitment and expectations.",
+      "sub": "Staffing and Leadership"
+    },
+    {
+      "id": "hem-v050",
+      "term": "Shift schedule",
+      "def": "A plan that assigns staff or volunteers to specific times and locations so coverage is clear.",
+      "sub": "Staffing and Leadership"
+    },
+    {
+      "id": "hem-v051",
+      "term": "Overtime (FLSA)",
+      "def": "Pay at one and one-half times the regular rate for hours worked over 40 in a workweek by non-exempt employees.",
+      "sub": "Staffing and Leadership"
+    },
+    {
+      "id": "hem-v052",
+      "term": "Exempt vs. non-exempt employee",
+      "def": "Under the FLSA, an exempt employee is not eligible for overtime pay, and a non-exempt employee is eligible for it.",
+      "sub": "Staffing and Leadership"
+    },
+    {
+      "id": "hem-v053",
+      "term": "Conflict of interest",
+      "def": "A situation in which a personal interest could improperly influence a professional decision, requiring disclosure and recusal.",
+      "sub": "Staffing and Leadership"
+    },
+    {
+      "id": "hem-v054",
+      "term": "Directive leadership",
+      "def": "A leadership style that gives clear instructions and close oversight, suited to new or inexperienced teams.",
+      "sub": "Staffing and Leadership"
+    },
+    {
+      "id": "hem-v055",
+      "term": "Post-event debrief",
+      "def": "A structured meeting after an event to review results against goals and capture lessons learned.",
+      "sub": "Evaluation and Post-Event Review"
+    },
+    {
+      "id": "hem-v056",
+      "term": "Attainment rate",
+      "def": "Actual results divided by the goal, expressed as a percentage.",
+      "sub": "Evaluation and Post-Event Review"
+    },
+    {
+      "id": "hem-v057",
+      "term": "Cost per attendee",
+      "def": "Total event cost divided by the number of attendees, used to measure spending efficiency.",
+      "sub": "Evaluation and Post-Event Review"
+    },
+    {
+      "id": "hem-v058",
+      "term": "Net proceeds",
+      "def": "The amount left after all costs are subtracted from gross revenue.",
+      "sub": "Evaluation and Post-Event Review"
+    },
+    {
+      "id": "hem-v059",
+      "term": "Response rate",
+      "def": "The number of survey responses divided by the number of people invited, used to judge how representative results are.",
+      "sub": "Evaluation and Post-Event Review"
+    },
+    {
+      "id": "hem-v060",
+      "term": "Budget variance analysis",
+      "def": "A review of the differences between budgeted and actual results to explain why they occurred.",
+      "sub": "Evaluation and Post-Event Review"
+    }
+  ]
+}

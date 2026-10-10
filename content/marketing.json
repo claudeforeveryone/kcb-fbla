@@ -1,0 +1,1780 @@
+{
+  "slug": "marketing",
+  "name": "Marketing",
+  "group": "case",
+  "notes": "Competency areas: FBLA 2025-26 Marketing guideline knowledge areas (Marketing Fundamentals, Market Planning, Marketing-Information Management, Product/Service Management, Channel Management, Pricing, Promotion, Selling), taken from the 2025-26 Marketing guideline summary (https://www.pafbla.org/wp-content/uploads/2026/08/Marketing.pdf) and the FBLA high school events page (https://www.fbla.org/high-school/competitive-events/). Unusual: the official FBLA Marketing event is a High School Role Play (objective test plus interactive role play), not a case study. The brief group is set to case as requested. The detailed objectives sit in the guideline study guide, which I could not open, so sub weights are approximate. The FBLA site now also lists 2026-27 guidelines, so areas may have shifted. Questions are original practice items.",
+  "subs": [
+    "Marketing Fundamentals",
+    "Market Planning",
+    "Marketing-Information Management",
+    "Product/Service Management",
+    "Channel Management",
+    "Pricing",
+    "Promotion",
+    "Selling"
+  ],
+  "questions": [
+    {
+      "id": "mkt-001",
+      "q": "Which element of the marketing mix is most directly concerned with the amount a customer pays for a product?",
+      "choices": [
+        "Price",
+        "Place",
+        "Promotion",
+        "Product"
+      ],
+      "answer": 0,
+      "explain": "Price is the mix variable that sets the amount a customer pays. Place covers distribution, not cost.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-002",
+      "q": "A company splits a city's coffee drinkers into groups by age, income, and lifestyle, then chooses which groups to serve. Dividing the total market into groups with shared needs is called:",
+      "choices": [
+        "Positioning",
+        "Market segmentation",
+        "Mass marketing",
+        "Test marketing"
+      ],
+      "answer": 1,
+      "explain": "Segmentation divides the market; targeting is the later choice of which segments to serve.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-003",
+      "q": "Which statement best reflects the marketing concept?",
+      "choices": [
+        "Maximize production volume regardless of demand",
+        "Sell whatever inventory the firm already holds",
+        "Satisfy customer needs in a way that also earns a profit",
+        "Minimize advertising spending to protect margins"
+      ],
+      "answer": 2,
+      "explain": "The marketing concept treats customer needs as the route to profit.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-004",
+      "q": "A manufacturer cuts unit costs and makes more units, assuming buyers will purchase whatever it produces. This reflects which business orientation?",
+      "choices": [
+        "Marketing orientation",
+        "Societal orientation",
+        "Selling orientation",
+        "Production orientation"
+      ],
+      "answer": 3,
+      "explain": "A production orientation focuses on efficiency and volume. Selling orientation pushes existing goods and is the near-miss trap.",
+      "sub": "Marketing Fundamentals",
+      "diff": 3
+    },
+    {
+      "id": "mkt-005",
+      "q": "Services are often marketed with samples, testimonials, and tangible cues because services have which characteristic?",
+      "choices": [
+        "Intangibility",
+        "Perishability",
+        "Inseparability",
+        "Heterogeneity"
+      ],
+      "answer": 0,
+      "explain": "Intangibility means a service cannot be inspected before purchase, so marketers add tangible cues.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-006",
+      "q": "A firm sells one product with one message to the entire market. This approach is best called:",
+      "choices": [
+        "Niche marketing",
+        "Undifferentiated (mass) marketing",
+        "Micromarketing",
+        "Relationship marketing"
+      ],
+      "answer": 1,
+      "explain": "Undifferentiated marketing treats the whole market as one segment.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-007",
+      "q": "Brand equity refers to:",
+      "choices": [
+        "The cost of registering a trademark",
+        "The total revenue from licensing a logo",
+        "The added value a brand name gives a product beyond its functional features",
+        "The number of retail stores that carry a brand"
+      ],
+      "answer": 2,
+      "explain": "Brand equity is the value a name adds, such as trust and recognition, beyond what the product does.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-008",
+      "q": "Which of the following is a need rather than a want?",
+      "choices": [
+        "A red leather handbag",
+        "A sports car",
+        "A premium coffee",
+        "Food to relieve hunger"
+      ],
+      "answer": 3,
+      "explain": "Needs are basic requirements; wants are specific ways of meeting needs.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-009",
+      "q": "Maya realizes she needs a new laptop for school. Which stage of the consumer decision process comes first?",
+      "choices": [
+        "Problem recognition",
+        "Information search",
+        "Evaluation of alternatives",
+        "Post-purchase evaluation"
+      ],
+      "answer": 0,
+      "explain": "The process starts when the buyer recognizes a gap between the current and desired state.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-010",
+      "q": "Which business buyer purchases goods to resell without significant change?",
+      "choices": [
+        "Industrial user",
+        "Reseller",
+        "Government agency",
+        "Institutional buyer"
+      ],
+      "answer": 1,
+      "explain": "Resellers are wholesalers and retailers that buy for resale. Industrial users buy for use in production.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-011",
+      "q": "A company drops a profitable product that harms the environment, weighing long-term community well-being alongside profit. Which concept does this reflect?",
+      "choices": [
+        "Selling concept",
+        "Production concept",
+        "Societal marketing concept",
+        "Transactional concept"
+      ],
+      "answer": 2,
+      "explain": "The societal marketing concept balances customer wants, company profit, and public welfare.",
+      "sub": "Marketing Fundamentals",
+      "diff": 3
+    },
+    {
+      "id": "mkt-012",
+      "q": "Why should a firm evaluate customer lifetime value rather than the profit from one sale?",
+      "choices": [
+        "Single sales are always less profitable than repeat sales in every industry",
+        "Lifetime value measures inventory turnover",
+        "Lifetime value matters only for nonprofit organizations",
+        "Lifetime value captures expected profit across the whole relationship, guiding how much to spend on acquisition and retention"
+      ],
+      "answer": 3,
+      "explain": "CLV estimates total future profit from a customer and informs acquisition and retention budgets.",
+      "sub": "Marketing Fundamentals",
+      "diff": 3
+    },
+    {
+      "id": "mkt-013",
+      "q": "Which statement best distinguishes a marketing strategy from a marketing tactic?",
+      "choices": [
+        "A strategy is the long-range plan for reaching goals; a tactic is a specific action used to carry it out",
+        "A strategy is a short-term promotional offer; a tactic is a multi-year plan",
+        "A strategy is set by sales staff; a tactic is set by finance",
+        "The two terms mean the same thing"
+      ],
+      "answer": 0,
+      "explain": "Strategy is the overall plan; tactics are the specific actions that execute it.",
+      "sub": "Marketing Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "mkt-014",
+      "q": "A firm's SWOT analysis notes a strong brand reputation. Where does this belong?",
+      "choices": [
+        "Opportunities",
+        "Strengths",
+        "Threats",
+        "Weaknesses"
+      ],
+      "answer": 1,
+      "explain": "A brand reputation is an internal advantage, so it is a strength.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-015",
+      "q": "A competitor announces it will leave the market, and the firm expects demand to shift toward it. In a SWOT, this is best classified as a(n):",
+      "choices": [
+        "Strength",
+        "Weakness",
+        "Opportunity",
+        "Threat"
+      ],
+      "answer": 2,
+      "explain": "An external factor that favors the firm is an opportunity.",
+      "sub": "Market Planning",
+      "diff": 1
+    },
+    {
+      "id": "mkt-016",
+      "q": "A plan states the firm will raise market share by 3 points within 12 months. This statement is a(n):",
+      "choices": [
+        "Mission statement",
+        "Situation analysis",
+        "Tactic",
+        "Objective"
+      ],
+      "answer": 3,
+      "explain": "An objective is a measurable target with a time frame.",
+      "sub": "Market Planning",
+      "diff": 1
+    },
+    {
+      "id": "mkt-017",
+      "q": "Which goal best follows the SMART criteria?",
+      "choices": [
+        "Increase online orders by 15% by June 30",
+        "Improve customer happiness",
+        "Be the best coffee shop in town",
+        "Grow when the market allows"
+      ],
+      "answer": 0,
+      "explain": "SMART goals are specific, measurable, achievable, relevant, and time-bound.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-018",
+      "q": "Market share is calculated as:",
+      "choices": [
+        "Total industry sales divided by company sales",
+        "Company sales divided by total industry sales for the same period",
+        "Company profit divided by company sales",
+        "Company sales minus industry sales"
+      ],
+      "answer": 1,
+      "explain": "Market share is the firm's portion of total industry sales.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-019",
+      "q": "A firm holds 12% market share in an industry with $50 million in total sales. What are the firm's sales?",
+      "choices": [
+        "$4 million",
+        "$5.5 million",
+        "$6 million",
+        "$12 million"
+      ],
+      "answer": 2,
+      "explain": "0.12 x $50 million = $6 million.",
+      "sub": "Market Planning",
+      "diff": 3
+    },
+    {
+      "id": "mkt-020",
+      "q": "Which tool plots products by market share and market growth rate?",
+      "choices": [
+        "Gantt chart",
+        "Break-even chart",
+        "Perceptual map",
+        "BCG growth-share matrix"
+      ],
+      "answer": 3,
+      "explain": "The BCG matrix classifies products as stars, cash cows, question marks, or dogs.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-021",
+      "q": "A product has high market share in a slow-growing market. Under the BCG matrix, it is a:",
+      "choices": [
+        "Cash cow",
+        "Star",
+        "Question mark",
+        "Dog"
+      ],
+      "answer": 0,
+      "explain": "High share and low growth define a cash cow.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-022",
+      "q": "A firm sells its existing product to new customers in a new region. Under the Ansoff matrix, this is:",
+      "choices": [
+        "Market penetration",
+        "Market development",
+        "Product development",
+        "Diversification"
+      ],
+      "answer": 1,
+      "explain": "Market development applies existing products to new markets.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-023",
+      "q": "A firm lowers prices to sell more of its current product to its current customers. This Ansoff strategy is:",
+      "choices": [
+        "Diversification",
+        "Market development",
+        "Market penetration",
+        "Product development"
+      ],
+      "answer": 2,
+      "explain": "Market penetration grows existing products in existing markets.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-024",
+      "q": "A firm pursues low costs but only within one narrow customer segment. Which of Porter's generic strategies is this?",
+      "choices": [
+        "Broad differentiation",
+        "Broad cost leadership",
+        "Vertical integration",
+        "Focused cost strategy"
+      ],
+      "answer": 3,
+      "explain": "Porter's focus strategy targets a narrow segment. Pairing it with low cost makes it a focused cost strategy.",
+      "sub": "Market Planning",
+      "diff": 3
+    },
+    {
+      "id": "mkt-025",
+      "q": "A firm sets its marketing budget as a fixed percentage of forecast sales. This is the:",
+      "choices": [
+        "Percentage-of-sales method",
+        "Objective-and-task method",
+        "Competitive parity method",
+        "All-you-can-afford method"
+      ],
+      "answer": 0,
+      "explain": "The percentage-of-sales method ties the budget to sales, so it can shrink when sales fall.",
+      "sub": "Market Planning",
+      "diff": 2
+    },
+    {
+      "id": "mkt-026",
+      "q": "In which product life cycle stage do sales growth slow and competition intensify, pushing firms to differentiate?",
+      "choices": [
+        "Introduction",
+        "Maturity",
+        "Growth",
+        "Decline"
+      ],
+      "answer": 1,
+      "explain": "Maturity is when growth flattens and competition is strongest.",
+      "sub": "Market Planning",
+      "diff": 1
+    },
+    {
+      "id": "mkt-027",
+      "q": "In a PESTEL analysis, a new federal rule restricting how sugar content can be labeled falls under which factor?",
+      "choices": [
+        "Economic",
+        "Social",
+        "Political-legal",
+        "Technological"
+      ],
+      "answer": 2,
+      "explain": "A regulation is a political-legal factor.",
+      "sub": "Market Planning",
+      "diff": 3
+    },
+    {
+      "id": "mkt-028",
+      "q": "Data that already exists from another source, such as census figures, is called:",
+      "choices": [
+        "Primary research",
+        "Experimental research",
+        "Focus group research",
+        "Secondary research"
+      ],
+      "answer": 3,
+      "explain": "Secondary data was collected for another purpose. Primary data is gathered firsthand.",
+      "sub": "Marketing-Information Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-029",
+      "q": "A company surveys 500 customers with a standardized questionnaire to measure satisfaction numerically. This is:",
+      "choices": [
+        "Quantitative primary research",
+        "Qualitative primary research",
+        "Secondary research",
+        "Ethnographic research"
+      ],
+      "answer": 0,
+      "explain": "Standardized, numerical, firsthand survey data is quantitative primary research.",
+      "sub": "Marketing-Information Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-030",
+      "q": "A moderator leads eight consumers through an open discussion of a new snack. This is a:",
+      "choices": [
+        "Consumer panel",
+        "Focus group",
+        "Mystery shop",
+        "Test market"
+      ],
+      "answer": 1,
+      "explain": "A focus group is a small moderated discussion aimed at qualitative insight.",
+      "sub": "Marketing-Information Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-031",
+      "q": "Which sampling method gives every member of the population an equal chance of selection?",
+      "choices": [
+        "Quota sampling",
+        "Convenience sampling",
+        "Simple random sampling",
+        "Judgment sampling"
+      ],
+      "answer": 2,
+      "explain": "Simple random sampling gives each member an equal probability of selection.",
+      "sub": "Marketing-Information Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-032",
+      "q": "A marketer compares sales at two stores, one with a new display and one without, holding other factors constant. This is:",
+      "choices": [
+        "A focus group",
+        "A Delphi study",
+        "An observational audit",
+        "A controlled experiment"
+      ],
+      "answer": 3,
+      "explain": "Changing one variable against a comparison group while controlling the rest is an experiment.",
+      "sub": "Marketing-Information Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-033",
+      "q": "An online retailer analyzes purchase histories to predict what customers will buy next. This is best described as:",
+      "choices": [
+        "Data mining for customer patterns",
+        "Competitive benchmarking",
+        "Price elasticity testing",
+        "Channel audit"
+      ],
+      "answer": 0,
+      "explain": "Data mining finds patterns in large databases to support predictions.",
+      "sub": "Marketing-Information Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-034",
+      "q": "A survey gives the same results when repeated under the same conditions. This describes which research quality?",
+      "choices": [
+        "Validity",
+        "Reliability",
+        "Representativeness",
+        "Relevance"
+      ],
+      "answer": 1,
+      "explain": "Reliability means consistent results across repeated measurements.",
+      "sub": "Marketing-Information Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-035",
+      "q": "A survey asks, 'Don't you agree our fresh menu is far better than competitors?' Which problem most affects the results?",
+      "choices": [
+        "Sampling frame error",
+        "Nonresponse error",
+        "Leading question bias",
+        "Recall error"
+      ],
+      "answer": 2,
+      "explain": "The wording pushes respondents toward one answer, which is leading question bias.",
+      "sub": "Marketing-Information Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-036",
+      "q": "A firm must choose between a $500 secondary-data review and a $25,000 primary survey. Which factor best supports starting with secondary research?",
+      "choices": [
+        "Secondary data is always more accurate",
+        "Secondary data cannot inform decisions",
+        "Primary data is never needed",
+        "Secondary data is cheaper and faster for a first look at the problem"
+      ],
+      "answer": 3,
+      "explain": "Secondary research is a low-cost first step. It does not replace primary research when the question needs firsthand data.",
+      "sub": "Marketing-Information Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-037",
+      "q": "Which metric asks customers how likely they are to recommend a brand?",
+      "choices": [
+        "Net Promoter Score",
+        "Customer lifetime value",
+        "Gross margin return",
+        "Customer acquisition cost"
+      ],
+      "answer": 0,
+      "explain": "Net Promoter Score is built on a likelihood-to-recommend question.",
+      "sub": "Marketing-Information Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-038",
+      "q": "A marketing team wants to know whether a new ad caused awareness to rise. Which design best isolates the ad's effect?",
+      "choices": [
+        "Annual report review",
+        "Pre- and post-campaign awareness survey with a comparison group not exposed to the ad",
+        "Balance sheet analysis",
+        "Break-even chart"
+      ],
+      "answer": 1,
+      "explain": "Comparing before and after, against a group that did not see the ad, isolates the campaign's effect.",
+      "sub": "Marketing-Information Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-039",
+      "q": "Brand positioning is best defined as:",
+      "choices": [
+        "The legal registration of a brand name",
+        "The number of licenses a firm holds on its brand",
+        "The place a brand holds in customers' minds relative to competitors",
+        "The cost of a brand's advertising"
+      ],
+      "answer": 2,
+      "explain": "Positioning is the perceived place of a brand relative to rivals.",
+      "sub": "Product/Service Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-040",
+      "q": "A product's core benefit is best described as:",
+      "choices": [
+        "Its packaging design",
+        "Its warranty terms",
+        "Its brand name",
+        "The fundamental need the product satisfies"
+      ],
+      "answer": 3,
+      "explain": "The core benefit is the problem the product solves for the buyer.",
+      "sub": "Product/Service Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-041",
+      "q": "A company sells a basic phone, a premium phone, and an accessories bundle under one brand. This is best described as:",
+      "choices": [
+        "Product line management",
+        "Product mix pruning",
+        "Co-branding",
+        "Vertical integration"
+      ],
+      "answer": 0,
+      "explain": "A product line is a group of related products; managing the lines within the mix is product line management.",
+      "sub": "Product/Service Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-042",
+      "q": "In new product development, which stage tests the product idea with target customers before full development?",
+      "choices": [
+        "Idea generation",
+        "Concept testing",
+        "Commercialization",
+        "Business analysis"
+      ],
+      "answer": 1,
+      "explain": "Concept testing gauges target customers' reaction to the idea.",
+      "sub": "Product/Service Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-043",
+      "q": "A sportswear brand uses its name on a new line of kitchen appliances. This is a:",
+      "choices": [
+        "Line extension",
+        "Repositioning",
+        "Brand extension",
+        "Private label"
+      ],
+      "answer": 2,
+      "explain": "Brand extension uses an established name in a different product category.",
+      "sub": "Product/Service Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-044",
+      "q": "A soup company adds a new flavor to its existing soup line. This is a:",
+      "choices": [
+        "Brand extension",
+        "Repositioning",
+        "Diversification",
+        "Line extension"
+      ],
+      "answer": 3,
+      "explain": "A line extension adds items within the same category.",
+      "sub": "Product/Service Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-045",
+      "q": "The sequence of introduction, growth, maturity, and decline describes the:",
+      "choices": [
+        "Product life cycle",
+        "Buyer decision process",
+        "Diffusion curve",
+        "Marketing mix"
+      ],
+      "answer": 0,
+      "explain": "Those four stages make up the product life cycle.",
+      "sub": "Product/Service Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-046",
+      "q": "In the diffusion of innovations, which adopter group tries new products first?",
+      "choices": [
+        "Late majority",
+        "Innovators",
+        "Laggards",
+        "Early majority"
+      ],
+      "answer": 1,
+      "explain": "Innovators are the first group to adopt a new product.",
+      "sub": "Product/Service Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-047",
+      "q": "A firm drops a product with falling sales, high costs, and a negative contribution margin. This is:",
+      "choices": [
+        "Harvesting",
+        "Penetration",
+        "Pruning",
+        "Repositioning"
+      ],
+      "answer": 2,
+      "explain": "Pruning removes weak products from the product mix.",
+      "sub": "Product/Service Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-048",
+      "q": "Which is a benefit of a consistent brand identity?",
+      "choices": [
+        "It eliminates the need for quality control",
+        "It lowers the price customers will pay",
+        "It replaces market research",
+        "It makes a brand easier to recognize and recall"
+      ],
+      "answer": 3,
+      "explain": "Consistency builds recognition and recall.",
+      "sub": "Product/Service Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-049",
+      "q": "Which packaging function is mainly about keeping the product safe while it is shipped and stored?",
+      "choices": [
+        "Protection",
+        "Promotion",
+        "Positioning",
+        "Pricing"
+      ],
+      "answer": 0,
+      "explain": "Protection is the packaging function for transport and storage.",
+      "sub": "Product/Service Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-050",
+      "q": "In the United States, which legal instrument primarily protects a brand's name, logo, and tagline?",
+      "choices": [
+        "Patent",
+        "Trademark",
+        "Copyright",
+        "Trade secret"
+      ],
+      "answer": 1,
+      "explain": "Trademarks protect brand identifiers. Patents cover inventions and copyrights cover creative works.",
+      "sub": "Product/Service Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-051",
+      "q": "Intermediaries that take title to goods and resell them to retailers are called:",
+      "choices": [
+        "Agents",
+        "Brokers",
+        "Wholesalers",
+        "Facilitators"
+      ],
+      "answer": 2,
+      "explain": "Wholesalers take title and resell, typically to retailers or business users.",
+      "sub": "Channel Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-052",
+      "q": "A manufacturer sells directly to consumers through its own website. This is a:",
+      "choices": [
+        "Indirect channel with one intermediary",
+        "Reverse channel",
+        "Dual channel with wholesalers",
+        "Direct channel"
+      ],
+      "answer": 3,
+      "explain": "No intermediaries are used, so it is a direct channel.",
+      "sub": "Channel Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-053",
+      "q": "Intensive distribution means the product is sold in:",
+      "choices": [
+        "As many outlets as possible",
+        "One exclusive store per region",
+        "A selected few outlets",
+        "Only company-owned stores"
+      ],
+      "answer": 0,
+      "explain": "Intensive distribution maximizes outlets, which suits convenience goods.",
+      "sub": "Channel Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-054",
+      "q": "A luxury watch brand grants one authorized jeweler sole rights to sell its watches in each city. Which distribution strategy is this?",
+      "choices": [
+        "Intensive",
+        "Exclusive",
+        "Mass",
+        "Selective"
+      ],
+      "answer": 1,
+      "explain": "Exclusive distribution gives a limited number of dealers sole rights in a territory.",
+      "sub": "Channel Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-055",
+      "q": "A manufacturer sells directly online at prices below its retail partners, causing friction with them. This is:",
+      "choices": [
+        "Horizontal conflict",
+        "Vertical conflict",
+        "Multichannel conflict",
+        "Lateral conflict"
+      ],
+      "answer": 2,
+      "explain": "Multichannel conflict arises when a producer's direct channel competes with its existing channels.",
+      "sub": "Channel Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-056",
+      "q": "Which statement correctly distinguishes an agent from a broker?",
+      "choices": [
+        "An agent takes title to goods; a broker does not",
+        "Both take title to goods",
+        "Brokers work only for manufacturers",
+        "An agent represents a buyer or seller on an ongoing basis without taking title; a broker brings parties together for a transaction"
+      ],
+      "answer": 3,
+      "explain": "Agents usually hold ongoing representation without taking title; brokers match parties for a transaction.",
+      "sub": "Channel Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-057",
+      "q": "Which channel function means a retailer holds goods so they are available when customers want them?",
+      "choices": [
+        "Storage and inventory holding",
+        "Sorting",
+        "Financing",
+        "Risk taking"
+      ],
+      "answer": 0,
+      "explain": "Storage and inventory holding keeps goods on hand for customers.",
+      "sub": "Channel Management",
+      "diff": 1
+    },
+    {
+      "id": "mkt-058",
+      "q": "A firm removes an intermediary and sells straight to customers. This is called:",
+      "choices": [
+        "Reintermediation",
+        "Disintermediation",
+        "Franchising",
+        "Backward integration"
+      ],
+      "answer": 1,
+      "explain": "Disintermediation removes middlemen from a channel.",
+      "sub": "Channel Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-059",
+      "q": "A company's outlets are run by independent operators under a contract that sets the business model. This is a:",
+      "choices": [
+        "Corporate vertical marketing system",
+        "Administered vertical marketing system",
+        "Contractual vertical marketing system",
+        "Horizontal marketing system"
+      ],
+      "answer": 2,
+      "explain": "A franchise is a contractual vertical marketing system.",
+      "sub": "Channel Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-060",
+      "q": "A retailer's inventory turnover ratio is calculated as:",
+      "choices": [
+        "Average inventory divided by cost of goods sold",
+        "Gross profit divided by net sales",
+        "Inventory divided by total assets",
+        "Cost of goods sold divided by average inventory"
+      ],
+      "answer": 3,
+      "explain": "Turnover uses cost of goods sold over average inventory at cost.",
+      "sub": "Channel Management",
+      "diff": 3
+    },
+    {
+      "id": "mkt-061",
+      "q": "Which is a benefit of using a wholesaler?",
+      "choices": [
+        "It reduces the number of contacts a manufacturer must make with retailers",
+        "It eliminates all transportation costs",
+        "It guarantees the manufacturer full control over retail prices",
+        "It removes the need for promotion"
+      ],
+      "answer": 0,
+      "explain": "Wholesalers consolidate contacts and distribution work for the manufacturer.",
+      "sub": "Channel Management",
+      "diff": 2
+    },
+    {
+      "id": "mkt-062",
+      "q": "A firm sets price by adding a fixed percentage to its unit cost. This is:",
+      "choices": [
+        "Penetration pricing",
+        "Cost-plus pricing",
+        "Going-rate pricing",
+        "Skimming pricing"
+      ],
+      "answer": 1,
+      "explain": "Cost-plus pricing adds a markup to cost.",
+      "sub": "Pricing",
+      "diff": 1
+    },
+    {
+      "id": "mkt-063",
+      "q": "A new high-tech product launches at a high price, which is lowered over time. This describes:",
+      "choices": [
+        "Penetration pricing",
+        "Loss-leader pricing",
+        "Price skimming",
+        "Odd-even pricing"
+      ],
+      "answer": 2,
+      "explain": "Skimming starts high and steps down to reach successive groups of buyers.",
+      "sub": "Pricing",
+      "diff": 1
+    },
+    {
+      "id": "mkt-064",
+      "q": "A product costs $20 per unit, and the firm applies a 25% markup on cost. What is the selling price?",
+      "choices": [
+        "$22.50",
+        "$24.00",
+        "$30.00",
+        "$25.00"
+      ],
+      "answer": 3,
+      "explain": "0.25 x $20 = $5; $20 + $5 = $25.",
+      "sub": "Pricing",
+      "diff": 3
+    },
+    {
+      "id": "mkt-065",
+      "q": "A retailer sells an item for $80 that cost $48. What is the gross margin percentage based on selling price?",
+      "choices": [
+        "40%",
+        "60%",
+        "67%",
+        "32%"
+      ],
+      "answer": 0,
+      "explain": "($80 - $48) / $80 = 40%.",
+      "sub": "Pricing",
+      "diff": 3
+    },
+    {
+      "id": "mkt-066",
+      "q": "Fixed costs are $12,000 per month. Price is $30 and variable cost is $18 per unit. How many units break even?",
+      "choices": [
+        "400 units",
+        "1,000 units",
+        "600 units",
+        "2,000 units"
+      ],
+      "answer": 1,
+      "explain": "$12,000 / ($30 - $18) = 1,000 units.",
+      "sub": "Pricing",
+      "diff": 3
+    },
+    {
+      "id": "mkt-067",
+      "q": "Which approach sets a low introductory price to gain market share quickly?",
+      "choices": [
+        "Price skimming",
+        "Prestige pricing",
+        "Penetration pricing",
+        "Target-return pricing"
+      ],
+      "answer": 2,
+      "explain": "Penetration pricing starts low to win share.",
+      "sub": "Pricing",
+      "diff": 1
+    },
+    {
+      "id": "mkt-068",
+      "q": "Prices such as $9.99 are an example of:",
+      "choices": [
+        "Bundle pricing",
+        "Customary pricing",
+        "Dynamic pricing",
+        "Odd-even pricing"
+      ],
+      "answer": 3,
+      "explain": "Odd-even pricing uses prices ending in odd numbers to appear lower.",
+      "sub": "Pricing",
+      "diff": 1
+    },
+    {
+      "id": "mkt-069",
+      "q": "If demand for a product is elastic, a 10% price increase will most likely cause:",
+      "choices": [
+        "Quantity demanded to fall by more than 10%",
+        "Quantity demanded to rise",
+        "Quantity demanded to fall by less than 10%",
+        "No change in quantity demanded"
+      ],
+      "answer": 0,
+      "explain": "Elastic demand means quantity falls by a larger percentage than price rises.",
+      "sub": "Pricing",
+      "diff": 3
+    },
+    {
+      "id": "mkt-070",
+      "q": "A retailer discounts a printer and earns profit on the ink cartridges buyers must purchase. This is:",
+      "choices": [
+        "Loss-leader pricing",
+        "Captive product pricing",
+        "Price bundling",
+        "Price lining"
+      ],
+      "answer": 1,
+      "explain": "Captive product pricing discounts the base product and earns on required supplies.",
+      "sub": "Pricing",
+      "diff": 2
+    },
+    {
+      "id": "mkt-071",
+      "q": "A business sets its price at the level competitors charge for similar products. This is:",
+      "choices": [
+        "Customary pricing",
+        "Prestige pricing",
+        "Going-rate pricing",
+        "Value-based pricing"
+      ],
+      "answer": 2,
+      "explain": "Going-rate pricing follows the prevailing market rate.",
+      "sub": "Pricing",
+      "diff": 1
+    },
+    {
+      "id": "mkt-072",
+      "q": "What is the main risk of relying on cost-based pricing alone?",
+      "choices": [
+        "It always produces a loss",
+        "It cannot be used by manufacturers",
+        "It requires no cost data",
+        "It ignores customer demand and the value customers perceive"
+      ],
+      "answer": 3,
+      "explain": "Cost-based pricing can misprice when demand and perceived value differ from cost.",
+      "sub": "Pricing",
+      "diff": 2
+    },
+    {
+      "id": "mkt-073",
+      "q": "A product sells for $40 with a variable cost of $25 per unit. What is its contribution margin per unit?",
+      "choices": [
+        "$15",
+        "$40",
+        "$25",
+        "$65"
+      ],
+      "answer": 0,
+      "explain": "$40 - $25 = $15 per unit toward fixed costs.",
+      "sub": "Pricing",
+      "diff": 3
+    },
+    {
+      "id": "mkt-074",
+      "q": "A firm offers a product in three versions at $19, $29, and $39. What is the main purpose of this price lining?",
+      "choices": [
+        "To raise prices across all products",
+        "To simplify choices across defined quality tiers",
+        "To eliminate competition",
+        "To avoid all discounts"
+      ],
+      "answer": 1,
+      "explain": "Price lining sets clear tiers for the customer to choose from.",
+      "sub": "Pricing",
+      "diff": 2
+    },
+    {
+      "id": "mkt-075",
+      "q": "Which promotional mix element is paid, nonpersonal communication from an identified sponsor?",
+      "choices": [
+        "Publicity",
+        "Personal selling",
+        "Advertising",
+        "Sales promotion"
+      ],
+      "answer": 2,
+      "explain": "Advertising is paid and nonpersonal, with an identified sponsor.",
+      "sub": "Promotion",
+      "diff": 1
+    },
+    {
+      "id": "mkt-076",
+      "q": "Free news coverage of a company's new product is:",
+      "choices": [
+        "Advertising",
+        "Direct marketing",
+        "Sponsorship",
+        "Publicity"
+      ],
+      "answer": 3,
+      "explain": "Publicity is unpaid media coverage.",
+      "sub": "Promotion",
+      "diff": 1
+    },
+    {
+      "id": "mkt-077",
+      "q": "A coupon giving 20% off the next purchase is an example of:",
+      "choices": [
+        "Sales promotion",
+        "Publicity",
+        "Advertising",
+        "Public relations"
+      ],
+      "answer": 0,
+      "explain": "Sales promotions are short-term incentives.",
+      "sub": "Promotion",
+      "diff": 1
+    },
+    {
+      "id": "mkt-078",
+      "q": "In the AIDA model, which stage requires the ad to create a strong wish to own the product?",
+      "choices": [
+        "Attention",
+        "Desire",
+        "Interest",
+        "Action"
+      ],
+      "answer": 1,
+      "explain": "Desire follows interest and builds the want to own.",
+      "sub": "Promotion",
+      "diff": 2
+    },
+    {
+      "id": "mkt-079",
+      "q": "In the AIDA model, which stage aims to get the consumer to buy now?",
+      "choices": [
+        "Attention",
+        "Desire",
+        "Action",
+        "Interest"
+      ],
+      "answer": 2,
+      "explain": "Action is the final stage.",
+      "sub": "Promotion",
+      "diff": 1
+    },
+    {
+      "id": "mkt-080",
+      "q": "Which promotional mix element has a company's salespeople presenting directly to buyers?",
+      "choices": [
+        "Advertising",
+        "Publicity",
+        "Sales promotion",
+        "Personal selling"
+      ],
+      "answer": 3,
+      "explain": "Personal selling is two-way and direct.",
+      "sub": "Promotion",
+      "diff": 1
+    },
+    {
+      "id": "mkt-081",
+      "q": "A brand decides to reach 18 to 24-year-olds through influencer posts on one platform. This choice is most directly a:",
+      "choices": [
+        "Media selection decision",
+        "Pricing decision",
+        "Channel decision",
+        "Product decision"
+      ],
+      "answer": 0,
+      "explain": "Choosing the medium and vehicle to reach an audience is a media selection decision.",
+      "sub": "Promotion",
+      "diff": 2
+    },
+    {
+      "id": "mkt-082",
+      "q": "An email offering loyalty rewards to customers who purchased in the past year is an example of:",
+      "choices": [
+        "Publicity",
+        "Direct marketing",
+        "Mass advertising",
+        "Public relations"
+      ],
+      "answer": 1,
+      "explain": "Direct marketing targets known customers to prompt a response.",
+      "sub": "Promotion",
+      "diff": 2
+    },
+    {
+      "id": "mkt-083",
+      "q": "A media plan says the average consumer will see an ad three times. This measure is:",
+      "choices": [
+        "Reach",
+        "Impressions",
+        "Frequency",
+        "Cost per thousand"
+      ],
+      "answer": 2,
+      "explain": "Frequency counts repeated exposures per person.",
+      "sub": "Promotion",
+      "diff": 2
+    },
+    {
+      "id": "mkt-084",
+      "q": "An ad campaign costs $12,000 and reaches 2,000,000 people. What is its cost per thousand (CPM)?",
+      "choices": [
+        "$12.00",
+        "$60.00",
+        "$0.006",
+        "$6.00"
+      ],
+      "answer": 3,
+      "explain": "$12,000 / 2,000 thousand people = $6.00.",
+      "sub": "Promotion",
+      "diff": 3
+    },
+    {
+      "id": "mkt-085",
+      "q": "A 'buy one, get one free' offer is mainly used to:",
+      "choices": [
+        "Stimulate immediate sales or trial",
+        "Build long-term brand equity",
+        "Improve public image",
+        "Reduce production costs"
+      ],
+      "answer": 0,
+      "explain": "Sales promotions drive short-term action.",
+      "sub": "Promotion",
+      "diff": 1
+    },
+    {
+      "id": "mkt-086",
+      "q": "Which method best measures whether a campaign raised brand awareness?",
+      "choices": [
+        "Annual report review",
+        "Pre- and post-campaign awareness survey",
+        "Balance sheet analysis",
+        "Break-even chart"
+      ],
+      "answer": 1,
+      "explain": "Comparing awareness before and after the campaign measures the change.",
+      "sub": "Promotion",
+      "diff": 2
+    },
+    {
+      "id": "mkt-087",
+      "q": "Public relations primarily helps a firm by:",
+      "choices": [
+        "Guaranteeing sales volume",
+        "Setting product prices",
+        "Managing its image and relationships with stakeholders",
+        "Reducing shipping time"
+      ],
+      "answer": 2,
+      "explain": "Public relations manages image and stakeholder relationships.",
+      "sub": "Promotion",
+      "diff": 1
+    },
+    {
+      "id": "mkt-088",
+      "q": "Identifying qualified potential customers is which selling step?",
+      "choices": [
+        "Closing",
+        "Demonstrating",
+        "Follow-up",
+        "Prospecting"
+      ],
+      "answer": 3,
+      "explain": "Prospecting finds and qualifies leads.",
+      "sub": "Selling",
+      "diff": 1
+    },
+    {
+      "id": "mkt-089",
+      "q": "A salesperson asks open-ended questions to learn needs before presenting. This is:",
+      "choices": [
+        "Needs assessment",
+        "Closing",
+        "Objection handling",
+        "Follow-up"
+      ],
+      "answer": 0,
+      "explain": "Needs assessment uncovers the buyer's problems.",
+      "sub": "Selling",
+      "diff": 1
+    },
+    {
+      "id": "mkt-090",
+      "q": "A customer says, 'Your price is higher than a competitor's.' What is the best response?",
+      "choices": [
+        "Argue that the competitor's product is worse",
+        "Acknowledge the concern and explain value and total cost of ownership",
+        "Lower the price immediately without discussion",
+        "Ignore the comment and continue the presentation"
+      ],
+      "answer": 1,
+      "explain": "Acknowledge the concern, then reframe around value.",
+      "sub": "Selling",
+      "diff": 2
+    },
+    {
+      "id": "mkt-091",
+      "q": "Which closing technique offers two options, both of which lead to a sale?",
+      "choices": [
+        "Assumptive close",
+        "Trial close",
+        "Alternative choice close",
+        "Summary close"
+      ],
+      "answer": 2,
+      "explain": "The alternative choice close offers two acceptable paths to a sale.",
+      "sub": "Selling",
+      "diff": 2
+    },
+    {
+      "id": "mkt-092",
+      "q": "A rep sends a thank-you note two days after a purchase. This is which step?",
+      "choices": [
+        "Prospecting",
+        "Approach",
+        "Closing",
+        "Follow-up"
+      ],
+      "answer": 3,
+      "explain": "Follow-up supports retention after the sale.",
+      "sub": "Selling",
+      "diff": 1
+    },
+    {
+      "id": "mkt-093",
+      "q": "Which selling approach aims at a long-term partnership rather than one transaction?",
+      "choices": [
+        "Relationship selling",
+        "Transactional selling",
+        "Hard sell",
+        "Scripted presentation"
+      ],
+      "answer": 0,
+      "explain": "Relationship selling builds ongoing trust.",
+      "sub": "Selling",
+      "diff": 1
+    },
+    {
+      "id": "mkt-094",
+      "q": "A rep's commission rate rises once sales exceed a set level. This is a(n):",
+      "choices": [
+        "Straight salary",
+        "Accelerated commission plan",
+        "Salary-plus-commission plan",
+        "Draw against commission"
+      ],
+      "answer": 1,
+      "explain": "Accelerated plans raise the commission rate above a threshold.",
+      "sub": "Selling",
+      "diff": 2
+    },
+    {
+      "id": "mkt-095",
+      "q": "Which behavior is consultative selling?",
+      "choices": [
+        "Reading a scripted pitch word-for-word",
+        "Offering the same discount to every buyer",
+        "Asking diagnostic questions and tailoring the solution",
+        "Avoiding questions to save time"
+      ],
+      "answer": 2,
+      "explain": "Consultative selling diagnoses needs before recommending.",
+      "sub": "Selling",
+      "diff": 1
+    },
+    {
+      "id": "mkt-096",
+      "q": "A manager tracks calls made per week to evaluate a rep. This is a:",
+      "choices": [
+        "Lagging indicator",
+        "Profitability ratio",
+        "Market share measure",
+        "Leading activity metric"
+      ],
+      "answer": 3,
+      "explain": "Activity metrics such as calls made predict future sales.",
+      "sub": "Selling",
+      "diff": 2
+    },
+    {
+      "id": "mkt-097",
+      "q": "What is the best use of a trial close?",
+      "choices": [
+        "To check the customer's readiness to buy before the final close",
+        "To end the sales call immediately",
+        "To lower the price",
+        "To avoid objections"
+      ],
+      "answer": 0,
+      "explain": "A trial close tests readiness before asking for the order.",
+      "sub": "Selling",
+      "diff": 2
+    },
+    {
+      "id": "mkt-098",
+      "q": "How should customer objections be viewed?",
+      "choices": [
+        "Signals of rejection that end the sale",
+        "Requests for information and reassurance that can advance the sale",
+        "Reasons to reassign the customer",
+        "Proof the product is defective"
+      ],
+      "answer": 1,
+      "explain": "Objections are openings to clarify value and move the sale forward.",
+      "sub": "Selling",
+      "diff": 2
+    },
+    {
+      "id": "mkt-099",
+      "q": "A buyer's purchase requires a committee. What is the rep's best next step?",
+      "choices": [
+        "Sign the contract without meeting others",
+        "Discount the price by 40%",
+        "Ask who else influences the decision and map the buying group",
+        "Stop communicating"
+      ],
+      "answer": 2,
+      "explain": "Mapping the buying group is the key next step in a multi-stakeholder sale.",
+      "sub": "Selling",
+      "diff": 3
+    },
+    {
+      "id": "mkt-100",
+      "q": "Which metric measures a sales team's conversion efficiency?",
+      "choices": [
+        "Gross margin",
+        "Days sales outstanding",
+        "Inventory turnover",
+        "Conversion rate"
+      ],
+      "answer": 3,
+      "explain": "Conversion rate is the share of leads that become customers.",
+      "sub": "Selling",
+      "diff": 1
+    }
+  ],
+  "vocab": [
+    {
+      "id": "mkt-v001",
+      "term": "Marketing concept",
+      "def": "A business philosophy holding that satisfying customer needs at a profit is the route to organizational goals.",
+      "sub": "Marketing Fundamentals"
+    },
+    {
+      "id": "mkt-v002",
+      "term": "Market segmentation",
+      "def": "Dividing a broad market into groups of buyers who share similar needs or characteristics.",
+      "sub": "Marketing Fundamentals"
+    },
+    {
+      "id": "mkt-v003",
+      "term": "Marketing mix",
+      "def": "The controllable product, price, place, and promotion variables a firm combines to serve a target market.",
+      "sub": "Marketing Fundamentals"
+    },
+    {
+      "id": "mkt-v004",
+      "term": "Need",
+      "def": "A basic requirement for survival or well-being, such as food, water, or shelter.",
+      "sub": "Marketing Fundamentals"
+    },
+    {
+      "id": "mkt-v005",
+      "term": "Want",
+      "def": "A desire for a specific way of satisfying a need, shaped by culture and personality.",
+      "sub": "Marketing Fundamentals"
+    },
+    {
+      "id": "mkt-v006",
+      "term": "Brand equity",
+      "def": "The added value a brand name gives a product beyond its functional features.",
+      "sub": "Marketing Fundamentals"
+    },
+    {
+      "id": "mkt-v007",
+      "term": "Consumer decision process",
+      "def": "The sequence of problem recognition, information search, evaluation of alternatives, purchase, and post-purchase evaluation.",
+      "sub": "Marketing Fundamentals"
+    },
+    {
+      "id": "mkt-v008",
+      "term": "SWOT analysis",
+      "def": "A review of internal strengths and weaknesses together with external opportunities and threats.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v009",
+      "term": "Objective",
+      "def": "A measurable target a marketing plan aims to reach within a set time frame.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v010",
+      "term": "Market share",
+      "def": "A firm's sales as a percentage of total industry sales for a product over a period.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v011",
+      "term": "BCG growth-share matrix",
+      "def": "A portfolio tool that classifies products as stars, cash cows, question marks, or dogs by market share and market growth.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v012",
+      "term": "Cash cow",
+      "def": "A product with high market share in a slow-growing market that generates more cash than it needs.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v013",
+      "term": "Ansoff matrix",
+      "def": "A growth framework with four strategies: market penetration, market development, product development, and diversification.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v014",
+      "term": "Market penetration",
+      "def": "Growth by selling more of existing products in existing markets.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v015",
+      "term": "PESTEL analysis",
+      "def": "A scan of political-legal, economic, social, technological, environmental, and legal forces in the external environment.",
+      "sub": "Market Planning"
+    },
+    {
+      "id": "mkt-v016",
+      "term": "Primary research",
+      "def": "Data collected firsthand for the specific study at hand.",
+      "sub": "Marketing-Information Management"
+    },
+    {
+      "id": "mkt-v017",
+      "term": "Secondary research",
+      "def": "Analysis of data that was already collected for another purpose.",
+      "sub": "Marketing-Information Management"
+    },
+    {
+      "id": "mkt-v018",
+      "term": "Focus group",
+      "def": "A small, moderated discussion used to gather qualitative consumer opinions.",
+      "sub": "Marketing-Information Management"
+    },
+    {
+      "id": "mkt-v019",
+      "term": "Simple random sampling",
+      "def": "A sampling method in which every member of the population has an equal chance of selection.",
+      "sub": "Marketing-Information Management"
+    },
+    {
+      "id": "mkt-v020",
+      "term": "Marketing information system",
+      "def": "A structured process for gathering, sorting, analyzing, and distributing information for marketing decisions.",
+      "sub": "Marketing-Information Management"
+    },
+    {
+      "id": "mkt-v021",
+      "term": "Reliability",
+      "def": "The degree to which a measurement gives consistent results when repeated under the same conditions.",
+      "sub": "Marketing-Information Management"
+    },
+    {
+      "id": "mkt-v022",
+      "term": "Validity",
+      "def": "The degree to which a research instrument measures what it was designed to measure.",
+      "sub": "Marketing-Information Management"
+    },
+    {
+      "id": "mkt-v023",
+      "term": "Product line",
+      "def": "A group of closely related products that are sold to the same customer groups or work in similar ways.",
+      "sub": "Product/Service Management"
+    },
+    {
+      "id": "mkt-v024",
+      "term": "Brand extension",
+      "def": "Using an established brand name for a new product in a different product category.",
+      "sub": "Product/Service Management"
+    },
+    {
+      "id": "mkt-v025",
+      "term": "Line extension",
+      "def": "Adding new items within the same product category under an existing brand.",
+      "sub": "Product/Service Management"
+    },
+    {
+      "id": "mkt-v026",
+      "term": "Brand positioning",
+      "def": "The place a brand occupies in customers' minds relative to competing brands.",
+      "sub": "Product/Service Management"
+    },
+    {
+      "id": "mkt-v027",
+      "term": "Product life cycle",
+      "def": "The stages a product passes through: introduction, growth, maturity, and decline.",
+      "sub": "Product/Service Management"
+    },
+    {
+      "id": "mkt-v028",
+      "term": "Diffusion of innovations",
+      "def": "The process by which a new product or idea spreads through a population over time.",
+      "sub": "Product/Service Management"
+    },
+    {
+      "id": "mkt-v029",
+      "term": "Trademark",
+      "def": "Legal protection, granted in the United States, for a word, name, symbol, or logo that identifies a seller's goods.",
+      "sub": "Product/Service Management"
+    },
+    {
+      "id": "mkt-v030",
+      "term": "Wholesaler",
+      "def": "An intermediary that buys and takes title to goods, then resells them mainly to retailers or business users.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v031",
+      "term": "Agent",
+      "def": "An intermediary that represents a buyer or seller on an ongoing basis and typically does not take title to goods.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v032",
+      "term": "Intensive distribution",
+      "def": "Placing a product in as many outlets as possible.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v033",
+      "term": "Exclusive distribution",
+      "def": "Granting a limited number of dealers sole rights to sell a product in a territory.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v034",
+      "term": "Selective distribution",
+      "def": "Using a moderate number of carefully chosen outlets in a market.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v035",
+      "term": "Channel conflict",
+      "def": "Disagreement among channel members over goals, roles, prices, or territory.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v036",
+      "term": "Disintermediation",
+      "def": "Removing intermediaries from a channel so the producer sells more directly to customers.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v037",
+      "term": "Vertical marketing system",
+      "def": "A channel in which producers, wholesalers, and retailers act as one coordinated system.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v038",
+      "term": "Inventory turnover",
+      "def": "The ratio of cost of goods sold to average inventory, showing how often stock is sold and replaced.",
+      "sub": "Channel Management"
+    },
+    {
+      "id": "mkt-v039",
+      "term": "Cost-plus pricing",
+      "def": "Setting a price by adding a markup to the cost of producing a product.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v040",
+      "term": "Price skimming",
+      "def": "Starting with a high price and lowering it over time to capture successive layers of demand.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v041",
+      "term": "Penetration pricing",
+      "def": "Setting a low initial price to gain market share quickly.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v042",
+      "term": "Price elasticity of demand",
+      "def": "The responsiveness of quantity demanded to a change in price.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v043",
+      "term": "Break-even point",
+      "def": "The sales volume at which total revenue equals total costs.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v044",
+      "term": "Contribution margin",
+      "def": "Selling price minus variable cost per unit, the amount each unit contributes toward fixed costs.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v045",
+      "term": "Loss leader",
+      "def": "A product sold at or below cost to attract customers who buy other items.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v046",
+      "term": "Captive product pricing",
+      "def": "A low price on a core product with profit earned on the supplies that product requires.",
+      "sub": "Pricing"
+    },
+    {
+      "id": "mkt-v047",
+      "term": "Advertising",
+      "def": "Paid, nonpersonal communication from an identified sponsor.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v048",
+      "term": "Publicity",
+      "def": "Unpaid media coverage of a company, product, or idea.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v049",
+      "term": "Sales promotion",
+      "def": "A short-term incentive that encourages purchase or trial, such as coupons or rebates.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v050",
+      "term": "Personal selling",
+      "def": "Two-way, direct communication between a salesperson and a buyer.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v051",
+      "term": "AIDA model",
+      "def": "The attention, interest, desire, and action stages a promotion aims to move a consumer through.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v052",
+      "term": "Reach",
+      "def": "The number of unique people or households exposed to a message in a period.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v053",
+      "term": "Frequency",
+      "def": "The average number of times a person is exposed to a message in a period.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v054",
+      "term": "Cost per thousand",
+      "def": "The cost of delivering an advertisement to 1,000 people.",
+      "sub": "Promotion"
+    },
+    {
+      "id": "mkt-v055",
+      "term": "Prospecting",
+      "def": "Identifying and qualifying potential customers.",
+      "sub": "Selling"
+    },
+    {
+      "id": "mkt-v056",
+      "term": "Needs assessment",
+      "def": "A questioning process that uncovers a buyer's needs and problems before a solution is offered.",
+      "sub": "Selling"
+    },
+    {
+      "id": "mkt-v057",
+      "term": "Objection",
+      "def": "A customer concern or resistance raised during a sale that must be addressed.",
+      "sub": "Selling"
+    },
+    {
+      "id": "mkt-v058",
+      "term": "Trial close",
+      "def": "A question that tests a buyer's readiness to purchase before the final close.",
+      "sub": "Selling"
+    },
+    {
+      "id": "mkt-v059",
+      "term": "Consultative selling",
+      "def": "An approach in which the salesperson diagnoses needs and tailors solutions as a trusted advisor.",
+      "sub": "Selling"
+    },
+    {
+      "id": "mkt-v060",
+      "term": "Relationship selling",
+      "def": "A focus on long-term customer partnerships rather than a single transaction.",
+      "sub": "Selling"
+    }
+  ]
+}

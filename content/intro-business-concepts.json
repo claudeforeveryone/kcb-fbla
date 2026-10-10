@@ -1,0 +1,1780 @@
+{
+  "slug": "intro-business-concepts",
+  "name": "Introduction to Business Concepts",
+  "group": "objective",
+  "notes": "Competency areas and weighting from the National FBLA 2026-2027 Competitive Events Guidelines, Introduction to Business Concepts (updated Aug 2026), as hosted by PA FBLA: https://www.pafbla.org/wp-content/uploads/2026/09/26-27-Introduction-to-Business-Concepts-PA.pdf . The 2025-26 PDF was not reachable (NYS copy returned 404, fbla.org returned 403), so the 2026-27 areas are used; the knowledge-area list is the same family of areas. The guideline lists 100 multiple-choice questions in 50 minutes. The printed weights (30/25/20/15/10/5) do not map cleanly to the eight areas in text extraction, so per-area question counts are an approximate split (20/15/15/16/14/10/5/5). Tests use U.S. conventions.",
+  "subs": [
+    "Fundamental Economic Concepts",
+    "Nature of Business",
+    "Economic Systems",
+    "Cost/Profit Relationships",
+    "Owning a Business",
+    "Types of Business Activities",
+    "Career Planning",
+    "Job-Search Skills"
+  ],
+  "questions": [
+    {
+      "id": "ibc-001",
+      "q": "Which term describes the condition in which unlimited human wants exceed limited resources?",
+      "choices": [
+        "Scarcity",
+        "Surplus",
+        "Equilibrium",
+        "Inflation"
+      ],
+      "answer": 0,
+      "explain": "Scarcity is the basic economic problem: resources are limited relative to wants, which forces choices. Surplus is a market condition, not the underlying problem.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "ibc-002",
+      "q": "Maria can either work a shift that pays $80 or attend a training course. She chooses the course. What is her opportunity cost of the course?",
+      "choices": [
+        "The full cost of the training course",
+        "The $80 of pay she gave up by not working the shift",
+        "Zero, since the course is free",
+        "The total of all her possible earnings for the year"
+      ],
+      "answer": 1,
+      "explain": "Opportunity cost is the value of the next best alternative forgone, not the price paid. The trap is confusing it with out-of-pocket cost.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-003",
+      "q": "A product's price rises from $20 to $25. What is the percentage increase?",
+      "choices": [
+        "5%",
+        "20%",
+        "25%",
+        "80%"
+      ],
+      "answer": 2,
+      "explain": "The change is $5 on a base of $20, so $5 / $20 = 25%. A common error is dividing by the new price.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "ibc-004",
+      "q": "Which change would shift the demand curve for a normal good to the right?",
+      "choices": [
+        "A decrease in the good's own price",
+        "An increase in the good's own price",
+        "A rise in the cost of raw materials",
+        "An increase in consumer incomes"
+      ],
+      "answer": 3,
+      "explain": "Income changes shift demand; a change in the good's own price only moves along the existing curve. Raw material costs affect supply, not demand.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-005",
+      "q": "Which change would shift the supply curve for a product to the right?",
+      "choices": [
+        "A decrease in the cost of raw materials",
+        "An increase in consumer preference for the product",
+        "A rise in the product's own price",
+        "An increase in consumer income"
+      ],
+      "answer": 0,
+      "explain": "Lower input costs let firms produce more at every price, shifting supply right. Consumer preferences and income affect demand.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-006",
+      "q": "Which factor of production is human effort, both physical and mental, used to produce goods and services?",
+      "choices": [
+        "Capital",
+        "Labor",
+        "Land",
+        "Entrepreneurship"
+      ],
+      "answer": 1,
+      "explain": "Labor is the human work input. Capital is human-made goods, land is natural resources, and entrepreneurship is risk-taking and organizing.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "ibc-007",
+      "q": "Which factor of production is the willingness to take on risk and combine the other resources to pursue profit?",
+      "choices": [
+        "Labor",
+        "Capital",
+        "Entrepreneurship",
+        "Land"
+      ],
+      "answer": 2,
+      "explain": "Entrepreneurship is the fourth factor of production, and it is the factor that organizes and bears risk.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "ibc-008",
+      "q": "In economics, which of the following best describes capital as a factor of production?",
+      "choices": [
+        "Money held in a bank account",
+        "Natural resources such as timber and water",
+        "Workers' skills and education",
+        "Human-made goods, such as machinery and tools, used to produce other goods"
+      ],
+      "answer": 3,
+      "explain": "Economic capital means produced goods used in production. Money is financial capital and is not counted as a factor of production in the classic model.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-009",
+      "q": "Which measure best describes gross domestic product (GDP)?",
+      "choices": [
+        "The total market value of all final goods and services produced within a country in a period",
+        "The total income earned by citizens living abroad",
+        "The total value of all goods a country imports",
+        "The total money supply in circulation"
+      ],
+      "answer": 0,
+      "explain": "GDP measures production within the borders of a country over a time period. Income earned abroad and imports are different measures.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-010",
+      "q": "What term describes a sustained, general increase in the price level of goods and services?",
+      "choices": [
+        "Deflation",
+        "Inflation",
+        "Recession",
+        "Depreciation"
+      ],
+      "answer": 1,
+      "explain": "Inflation is a broad, persistent rise in prices. Deflation is the opposite, and depreciation refers to an asset losing value.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "ibc-011",
+      "q": "A basket of goods costs $400 last year and $420 this year. What is the rate of inflation?",
+      "choices": [
+        "4.76%",
+        "20%",
+        "5%",
+        "95%"
+      ],
+      "answer": 2,
+      "explain": "The change is $20 divided by last year's $400 base, which equals 5%. Dividing by this year's $420 gives the 4.76% trap.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-012",
+      "q": "At market equilibrium, which condition holds?",
+      "choices": [
+        "Price is at its highest possible level",
+        "Supply exceeds demand",
+        "The government has set a price ceiling",
+        "Quantity demanded equals quantity supplied"
+      ],
+      "answer": 3,
+      "explain": "Equilibrium is where the supply and demand curves intersect, so quantity demanded equals quantity supplied and there is no pressure to change price.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "ibc-013",
+      "q": "When the price of a good is above its equilibrium level, what typically happens?",
+      "choices": [
+        "A surplus forms, which puts downward pressure on price",
+        "A shortage forms, which puts upward pressure on price",
+        "A surplus forms, which puts upward pressure on price",
+        "A shortage forms with no pressure on price"
+      ],
+      "answer": 0,
+      "explain": "At a price above equilibrium, sellers offer more than buyers want, creating a surplus. The unsold stock pushes the price down toward equilibrium.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-014",
+      "q": "A business owner can earn $50,000 running her current company or $35,000 teaching. If she runs the company, what is her opportunity cost?",
+      "choices": [
+        "$50,000 in company earnings",
+        "$35,000 in teaching income forgone",
+        "$15,000, the difference between the two",
+        "$85,000, the sum of both options"
+      ],
+      "answer": 1,
+      "explain": "Opportunity cost is the value of the next best alternative, here $35,000. The $50,000 is what she gains, not what she gives up.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-015",
+      "q": "Country A can make a unit of cloth at a lower opportunity cost than Country B. Which statement is correct?",
+      "choices": [
+        "Country A has an absolute advantage in every good",
+        "Country A has no advantage in cloth",
+        "Country A has a comparative advantage in producing cloth",
+        "Country A always wins in trade due to lower wages"
+      ],
+      "answer": 2,
+      "explain": "Comparative advantage depends on opportunity cost, not on absolute output or wages. A country can hold a comparative advantage even if it is not the most productive at everything.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-016",
+      "q": "A 10% increase in price causes a 20% decrease in quantity demanded. Demand for this good is:",
+      "choices": [
+        "Inelastic, because quantity fell by more than price rose",
+        "Unit elastic, because the two percentages are close",
+        "Perfectly inelastic, because quantity changed",
+        "Elastic, because the elasticity ratio is greater than 1"
+      ],
+      "answer": 3,
+      "explain": "Elasticity is the percent change in quantity divided by the percent change in price, here 20% / 10% = 2. A ratio above 1 means demand is elastic.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-017",
+      "q": "Which market structure has many sellers, identical products, and free entry and exit?",
+      "choices": [
+        "Perfect competition",
+        "Monopoly",
+        "Oligopoly",
+        "Monopolistic competition"
+      ],
+      "answer": 0,
+      "explain": "Perfect competition assumes identical products and free entry. Monopolistic competition has differentiated products, so it is the closest distractor.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "ibc-018",
+      "q": "Which phase of the business cycle is characterized by falling real GDP and rising unemployment?",
+      "choices": [
+        "Expansion",
+        "Contraction",
+        "Recovery",
+        "Peak"
+      ],
+      "answer": 1,
+      "explain": "Contraction is the downturn phase. Recovery is the rise after a trough, and expansion is the growth phase, so both are traps.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-019",
+      "q": "A worker quits a job to look for a better position and is between jobs for two months. This is an example of which type of unemployment?",
+      "choices": [
+        "Structural unemployment",
+        "Cyclical unemployment",
+        "Frictional unemployment",
+        "Seasonal unemployment"
+      ],
+      "answer": 2,
+      "explain": "Frictional unemployment is short-term and comes from workers moving between jobs. Structural unemployment comes from skill mismatches, and cyclical comes from downturns.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-020",
+      "q": "When the Federal Reserve raises the federal funds rate, which outcome is most likely?",
+      "choices": [
+        "The money supply rises and spending increases",
+        "Inflation automatically rises to offset the change",
+        "Unemployment falls permanently",
+        "Borrowing becomes more expensive and spending tends to slow"
+      ],
+      "answer": 3,
+      "explain": "A higher policy rate raises borrowing costs across the economy, which slows spending and can cool inflation. Its effects are indirect and take time.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 3
+    },
+    {
+      "id": "ibc-021",
+      "q": "Which form of business ownership offers no legal separation between the owner's personal and business liabilities?",
+      "choices": [
+        "Sole proprietorship",
+        "Limited liability company",
+        "Corporation",
+        "Limited partnership"
+      ],
+      "answer": 0,
+      "explain": "A sole proprietor and the business are one legal person, so the owner is personally liable for business debts.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-022",
+      "q": "What is a key advantage of a corporation over a sole proprietorship?",
+      "choices": [
+        "Owners are personally liable for all business debts",
+        "Limited liability for shareholders",
+        "It is the simplest and cheapest form to form",
+        "Profits are taxed only once at the owner's personal rate"
+      ],
+      "answer": 1,
+      "explain": "Shareholders are generally not personally liable for corporate debts. Corporations are more costly to form and may face double taxation.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-023",
+      "q": "Which business structure is most associated with double taxation of profits?",
+      "choices": [
+        "Sole proprietorship",
+        "General partnership",
+        "C corporation",
+        "S corporation"
+      ],
+      "answer": 2,
+      "explain": "A C corporation pays tax on profits, and shareholders pay tax again on dividends. An S corporation passes income through to owners and avoids this.",
+      "sub": "Nature of Business",
+      "diff": 3
+    },
+    {
+      "id": "ibc-024",
+      "q": "In a general partnership, what is the usual liability of each partner for business debts?",
+      "choices": [
+        "Shielded by limited liability",
+        "Liable only up to the amount they invested",
+        "Not liable for debts incurred by other partners",
+        "Jointly and severally liable, so a creditor can pursue any partner for the full amount"
+      ],
+      "answer": 3,
+      "explain": "General partners are personally liable for partnership debts, and each partner can be held responsible for the full amount. Limited liability is a feature of LLCs and corporations.",
+      "sub": "Nature of Business",
+      "diff": 3
+    },
+    {
+      "id": "ibc-025",
+      "q": "Which group is a stakeholder in a business but is not necessarily a shareholder?",
+      "choices": [
+        "Employees",
+        "Major shareholders",
+        "Owners of common stock",
+        "Investors holding preferred shares"
+      ],
+      "answer": 0,
+      "explain": "Stakeholders include anyone affected by the business, such as employees, customers, and communities. Shareholders are only one stakeholder group.",
+      "sub": "Nature of Business",
+      "diff": 3
+    },
+    {
+      "id": "ibc-026",
+      "q": "What is the primary purpose of a company's mission statement?",
+      "choices": [
+        "To forecast revenue for the next five years",
+        "To communicate the organization's core purpose and reason for existing",
+        "To list the company's main competitors",
+        "To set the quarterly financial targets"
+      ],
+      "answer": 1,
+      "explain": "A mission statement explains why the organization exists. Forecasts, competitors, and targets belong in other planning documents.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-027",
+      "q": "In a SWOT analysis, which element refers to external factors that could help the business?",
+      "choices": [
+        "Strengths",
+        "Weaknesses",
+        "Opportunities",
+        "Threats"
+      ],
+      "answer": 2,
+      "explain": "Opportunities are external conditions the business can exploit. Strengths are internal, and threats are external but harmful.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-028",
+      "q": "How is net profit calculated?",
+      "choices": [
+        "Gross sales minus cost of goods sold",
+        "Total assets minus total liabilities",
+        "Total revenue divided by total expenses",
+        "Total revenue minus total expenses"
+      ],
+      "answer": 3,
+      "explain": "Net profit is the bottom line after all expenses. Gross sales minus cost of goods sold gives gross profit, and assets minus liabilities gives equity.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-029",
+      "q": "Which action best demonstrates corporate social responsibility?",
+      "choices": [
+        "Voluntarily cutting the factory's emissions below what the law requires",
+        "Hiding a product defect to protect sales",
+        "Moving operations overseas solely to avoid all local laws",
+        "Paying the lowest wage the market will bear without any review"
+      ],
+      "answer": 0,
+      "explain": "CSR means taking responsibility for social and environmental impact beyond legal minimums. Hiding defects and evading laws are unethical choices.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-030",
+      "q": "A person buys the right to operate a business using an established company's brand and operating system. This person is a:",
+      "choices": [
+        "Franchisor",
+        "Franchisee",
+        "Licensor",
+        "Business partner"
+      ],
+      "answer": 1,
+      "explain": "The franchisee pays fees and royalties to use the franchisor's brand and system. The franchisor is the company granting the rights.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-031",
+      "q": "What distinguishes a limited liability company (LLC) from a general partnership?",
+      "choices": [
+        "LLCs cannot have more than one owner",
+        "LLCs must issue shares of stock to the public",
+        "LLC members generally have limited liability for business debts",
+        "LLC profits are always taxed at the corporate rate"
+      ],
+      "answer": 2,
+      "explain": "An LLC combines limited liability with flexible tax treatment. A general partnership has no such shield, and LLCs can have multiple owners and do not issue public stock by default.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-032",
+      "q": "In a business plan, which section describes target customers and competitors?",
+      "choices": [
+        "Executive summary",
+        "Financial plan",
+        "Operations plan",
+        "Market analysis"
+      ],
+      "answer": 3,
+      "explain": "The market analysis section covers the target market, customer needs, and competition. The executive summary is an overview placed at the front.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-033",
+      "q": "Which term describes a person who organizes, operates, and assumes the risks of a business?",
+      "choices": [
+        "Entrepreneur",
+        "Investor",
+        "Manager",
+        "Stakeholder"
+      ],
+      "answer": 0,
+      "explain": "An entrepreneur starts and runs a business and bears its risk. An investor provides capital but may not operate the business.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-034",
+      "q": "A company has $240,000 in revenue and $180,000 in total expenses. What is its net profit margin?",
+      "choices": [
+        "33.3%",
+        "25%",
+        "75%",
+        "$60,000"
+      ],
+      "answer": 1,
+      "explain": "Net profit is $60,000 and the margin is $60,000 / $240,000 = 25%. Dividing by expenses gives the 33.3% trap, and $60,000 is profit, not a margin.",
+      "sub": "Nature of Business",
+      "diff": 3
+    },
+    {
+      "id": "ibc-035",
+      "q": "Which is a benefit of buying a franchise for the franchisee?",
+      "choices": [
+        "Full control over menu and pricing decisions",
+        "No royalty or fee payments",
+        "Access to an established brand and a proven business system",
+        "Freedom from any franchisor rules"
+      ],
+      "answer": 2,
+      "explain": "Franchisees gain brand recognition and a tested system, but they pay fees and follow standards. Full control and fee-free operation are not typical benefits.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-036",
+      "q": "Which economic system uses customs, beliefs, and history to decide what is produced?",
+      "choices": [
+        "Command economy",
+        "Market economy",
+        "Mixed economy",
+        "Traditional economy"
+      ],
+      "answer": 3,
+      "explain": "A traditional economy relies on long-standing customs and roles. Command economies use central planning, and market economies use prices.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-037",
+      "q": "In a command economy, who primarily decides what goods are produced?",
+      "choices": [
+        "The central government",
+        "Consumers through their spending",
+        "Producers competing for profit",
+        "The market through price signals"
+      ],
+      "answer": 0,
+      "explain": "In a command economy, a central authority plans production and allocation. The other options describe market mechanisms.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-038",
+      "q": "A mixed economy is best described as:",
+      "choices": [
+        "Equal government ownership of every business",
+        "A combination of market forces and government intervention",
+        "A system with no private property at all",
+        "Production based entirely on tradition"
+      ],
+      "answer": 1,
+      "explain": "Mixed economies combine private enterprise with government regulation or public services. Pure systems are rare.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-039",
+      "q": "Which characteristic is most central to a market economy?",
+      "choices": [
+        "Central planning of all production",
+        "Government ownership of major industries",
+        "Private ownership of resources, with prices set by supply and demand",
+        "Production based on tradition"
+      ],
+      "answer": 2,
+      "explain": "Market economies rely on private ownership and price signals. The other options describe command or traditional systems.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-040",
+      "q": "The transfer of a government-owned business to private ownership is called:",
+      "choices": [
+        "Nationalization",
+        "Deregulation",
+        "Subsidization",
+        "Privatization"
+      ],
+      "answer": 3,
+      "explain": "Privatization moves a public enterprise into private hands. Nationalization is the reverse, and deregulation removes rules without changing ownership.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "ibc-041",
+      "q": "Which U.S. federal law is the primary statute prohibiting monopolies and restraints of trade?",
+      "choices": [
+        "Sherman Antitrust Act of 1890",
+        "Securities Act of 1933",
+        "Fair Labor Standards Act of 1938",
+        "Consumer Credit Protection Act of 1968"
+      ],
+      "answer": 0,
+      "explain": "The Sherman Act is the foundational U.S. antitrust law. The other laws cover securities, wages, and consumer credit.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "ibc-042",
+      "q": "Which concept, introduced by Adam Smith, describes self-interested individuals unintentionally advancing society's welfare?",
+      "choices": [
+        "The law of diminishing returns",
+        "The invisible hand",
+        "The tragedy of the commons",
+        "Marginal utility"
+      ],
+      "answer": 1,
+      "explain": "Smith's invisible hand describes how self-interest in competitive markets can benefit society. The other concepts describe different economic ideas.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-043",
+      "q": "Which characteristic is most associated with socialism?",
+      "choices": [
+        "Unrestricted private ownership of all businesses",
+        "Prices set only by bidding between consumers",
+        "Significant collective or government ownership of major means of production",
+        "No public services provided to citizens"
+      ],
+      "answer": 2,
+      "explain": "Socialism emphasizes collective ownership of major industries. Private ownership and limited public services are the opposite.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-044",
+      "q": "When shared, unowned resources are overused and depleted, economists call this:",
+      "choices": [
+        "The free rider problem",
+        "Moral hazard",
+        "Adverse selection",
+        "The tragedy of the commons"
+      ],
+      "answer": 3,
+      "explain": "Shared resources with no clear owner tend to be overused. Free riding, moral hazard, and adverse selection are different market problems.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "ibc-045",
+      "q": "Which government action is a consumer-protection regulation?",
+      "choices": [
+        "Requiring food labels to list ingredients and allergens",
+        "Subsidizing a domestic industry",
+        "Imposing a tariff on imported steel",
+        "Giving a tax credit to solar panel manufacturers"
+      ],
+      "answer": 0,
+      "explain": "Labeling rules protect consumers from harm and deception. Subsidies and tariffs are economic policy tools, not consumer protection.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-046",
+      "q": "A tax on imported goods is called a:",
+      "choices": [
+        "Quota",
+        "Tariff",
+        "Subsidy",
+        "Embargo"
+      ],
+      "answer": 1,
+      "explain": "A tariff is a tax on imports. A quota limits quantity, a subsidy pays producers, and an embargo bans trade.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-047",
+      "q": "A government payment to a producer to lower its production costs is called a:",
+      "choices": [
+        "Tariff",
+        "Excise tax",
+        "Subsidy",
+        "Price ceiling"
+      ],
+      "answer": 2,
+      "explain": "Subsidies reduce a producer's costs or increase its revenue. Tariffs and excise taxes raise money, and a price ceiling caps prices.",
+      "sub": "Economic Systems",
+      "diff": 1
+    },
+    {
+      "id": "ibc-048",
+      "q": "Command economies are most likely to experience which problem?",
+      "choices": [
+        "Prices that change every minute",
+        "Excessive competition among firms",
+        "Too many private property rights",
+        "Shortages and surpluses caused by planners misjudging demand"
+      ],
+      "answer": 3,
+      "explain": "Without price signals, central planners often misallocate goods, causing shortages or surpluses. Private property and competition are features of market systems.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "ibc-049",
+      "q": "Which statement best explains why pure market economies rarely exist in practice?",
+      "choices": [
+        "Governments usually provide public goods, regulate externalities, and redistribute income",
+        "Consumers never have enough information to buy anything",
+        "Markets always produce too many goods",
+        "Private firms are legally barred from earning profits"
+      ],
+      "answer": 0,
+      "explain": "Public goods, externalities, and inequality are market failures that most governments address, so real systems are mixed.",
+      "sub": "Economic Systems",
+      "diff": 3
+    },
+    {
+      "id": "ibc-050",
+      "q": "Which term describes a cost or benefit imposed on people who are not part of a transaction?",
+      "choices": [
+        "Public good",
+        "Externality",
+        "Monopsony",
+        "Elasticity"
+      ],
+      "answer": 1,
+      "explain": "An externality affects third parties, such as pollution from a factory. A public good is non-excludable, and monopsony is a single buyer.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "ibc-051",
+      "q": "Which cost does NOT change with the level of production in the short run?",
+      "choices": [
+        "Raw materials",
+        "Hourly wages for production workers",
+        "Factory rent",
+        "Packaging"
+      ],
+      "answer": 2,
+      "explain": "Fixed costs such as rent stay the same regardless of output. The other costs rise as production rises.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 1
+    },
+    {
+      "id": "ibc-052",
+      "q": "Which cost is a variable cost for a bakery?",
+      "choices": [
+        "Annual insurance premium",
+        "Monthly rent for the shop",
+        "The owner's fixed salary",
+        "Flour used in each batch"
+      ],
+      "answer": 3,
+      "explain": "Variable costs change with output, and flour per batch rises with production. The others are fixed in the short run.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 1
+    },
+    {
+      "id": "ibc-053",
+      "q": "A business has fixed costs of $12,000, a price of $40 per unit, and variable cost of $25 per unit. How many units must it sell to break even?",
+      "choices": [
+        "800 units",
+        "300 units",
+        "480 units",
+        "1,200 units"
+      ],
+      "answer": 0,
+      "explain": "Contribution margin is $40 - $25 = $15, and $12,000 / $15 = 800 units. Dividing fixed costs by price (300) is a common mistake.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "ibc-054",
+      "q": "Sales are $150,000 and cost of goods sold is $90,000. What is gross profit?",
+      "choices": [
+        "$90,000",
+        "$60,000",
+        "$40,000",
+        "$150,000"
+      ],
+      "answer": 1,
+      "explain": "Gross profit is sales minus cost of goods sold, so $150,000 - $90,000 = $60,000.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 1
+    },
+    {
+      "id": "ibc-055",
+      "q": "A retailer buys an item for $50 and sells it for $75. What is the markup as a percentage of cost?",
+      "choices": [
+        "33.3%",
+        "25%",
+        "50%",
+        "150%"
+      ],
+      "answer": 2,
+      "explain": "Markup on cost is ($75 - $50) / $50 = 50%. The 33.3% figure is the gross margin, which divides by the selling price.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "ibc-056",
+      "q": "Fixed costs are $5,000, and variable cost is $8 per unit. What is total cost of producing 1,000 units?",
+      "choices": [
+        "$8,000",
+        "$5,008",
+        "$40,000",
+        "$13,000"
+      ],
+      "answer": 3,
+      "explain": "Total cost = fixed costs + (variable cost per unit x units) = $5,000 + $8,000 = $13,000.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 1
+    },
+    {
+      "id": "ibc-057",
+      "q": "A product sells for $30 and has variable cost of $18 per unit. What is its contribution margin per unit?",
+      "choices": [
+        "$12 per unit",
+        "$30 per unit",
+        "$18 per unit",
+        "$48 per unit"
+      ],
+      "answer": 0,
+      "explain": "Contribution margin is price minus variable cost per unit, here $30 - $18 = $12. It is the amount each sale contributes toward fixed costs.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "ibc-058",
+      "q": "Which term refers to total revenue minus all costs, including taxes and interest?",
+      "choices": [
+        "Gross profit",
+        "Net income",
+        "Operating income",
+        "Owner's equity"
+      ],
+      "answer": 1,
+      "explain": "Net income is the bottom line after every expense. Gross profit excludes operating costs, and operating income excludes interest and taxes.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 2
+    },
+    {
+      "id": "ibc-059",
+      "q": "Marginal cost is best defined as:",
+      "choices": [
+        "The average cost across all units produced",
+        "Total fixed cost divided by output",
+        "The additional cost of producing one more unit",
+        "The cost of the most recent inventory purchase"
+      ],
+      "answer": 2,
+      "explain": "Marginal cost is the change in total cost from one more unit. Average cost spreads total cost over all units.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 2
+    },
+    {
+      "id": "ibc-060",
+      "q": "At the break-even point, a business's:",
+      "choices": [
+        "Profit is at its maximum",
+        "Fixed costs are zero",
+        "Variable costs exceed revenue",
+        "Total revenue equals total cost"
+      ],
+      "answer": 3,
+      "explain": "Break-even occurs where revenue covers all costs, so profit is zero. Fixed costs never fall to zero at this point.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 1
+    },
+    {
+      "id": "ibc-061",
+      "q": "Which costs are included in cost of goods sold for a manufacturer?",
+      "choices": [
+        "Direct materials, direct labor, and factory overhead",
+        "Sales commissions and advertising",
+        "Office rent and executive salaries",
+        "Interest on long-term debt"
+      ],
+      "answer": 0,
+      "explain": "COGS covers costs of making the product sold. Selling, administrative, and financing costs are reported separately as operating or other expenses.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 2
+    },
+    {
+      "id": "ibc-062",
+      "q": "Which pricing strategy sets a low introductory price to gain market share quickly?",
+      "choices": [
+        "Skimming pricing",
+        "Penetration pricing",
+        "Psychological pricing",
+        "Premium pricing"
+      ],
+      "answer": 1,
+      "explain": "Penetration pricing starts low to attract buyers and build share. Skimming starts high and lowers price over time.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 1
+    },
+    {
+      "id": "ibc-063",
+      "q": "As a firm increases output, its average cost per unit falls because of:",
+      "choices": [
+        "Diseconomies of scale",
+        "Diminishing marginal returns",
+        "Economies of scale",
+        "Price discrimination"
+      ],
+      "answer": 2,
+      "explain": "Spreading fixed costs over more units and using efficient processes lowers average cost. Diseconomies raise it, and diminishing returns are a short-run production concept.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 2
+    },
+    {
+      "id": "ibc-064",
+      "q": "Operating expenses are $35,000 and gross profit is $80,000. What is operating income?",
+      "choices": [
+        "$115,000",
+        "$35,000",
+        "$80,000",
+        "$45,000"
+      ],
+      "answer": 3,
+      "explain": "Operating income = gross profit - operating expenses = $80,000 - $35,000 = $45,000.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "ibc-065",
+      "q": "Fixed costs are $60,000 and the contribution margin ratio is 40%. What are break-even sales in dollars?",
+      "choices": [
+        "$150,000",
+        "$24,000",
+        "$100,000",
+        "$60,000"
+      ],
+      "answer": 0,
+      "explain": "Break-even sales = fixed costs / contribution margin ratio = $60,000 / 0.40 = $150,000. Multiplying instead of dividing gives the $24,000 trap.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "ibc-066",
+      "q": "Which change would LOWER a firm's break-even point in units?",
+      "choices": [
+        "An increase in fixed costs",
+        "A higher selling price with costs unchanged",
+        "An increase in variable cost per unit",
+        "A decrease in selling price"
+      ],
+      "answer": 1,
+      "explain": "A higher price raises the contribution margin per unit, so fewer units are needed to cover fixed costs. The other options raise the break-even point.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 2
+    },
+    {
+      "id": "ibc-067",
+      "q": "What is a key disadvantage of raising money through equity rather than debt?",
+      "choices": [
+        "The business must make fixed loan payments",
+        "Lenders can claim business assets if payments are missed",
+        "Owners give up part of the ownership and future profits",
+        "Interest payments reduce taxable income"
+      ],
+      "answer": 2,
+      "explain": "Equity investors share ownership and profits, which dilutes the owner's control. The other options describe disadvantages of debt.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-068",
+      "q": "Which equation is the basic accounting equation?",
+      "choices": [
+        "Revenue - Expenses = Assets",
+        "Assets + Liabilities = Equity",
+        "Equity = Revenue + Expenses",
+        "Assets = Liabilities + Owner's equity"
+      ],
+      "answer": 3,
+      "explain": "The accounting equation states that a company's assets are financed by liabilities and owner's equity. The other forms are incorrect.",
+      "sub": "Owning a Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-069",
+      "q": "Which financial statement reports revenues and expenses over a period of time?",
+      "choices": [
+        "Income statement",
+        "Balance sheet",
+        "Trial balance",
+        "Statement of owner's equity"
+      ],
+      "answer": 0,
+      "explain": "The income statement summarizes performance over a period. The balance sheet is a snapshot at one date.",
+      "sub": "Owning a Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-070",
+      "q": "A business is profitable on paper but runs out of money and fails. What is the most likely cause?",
+      "choices": [
+        "A high stock price",
+        "Poor cash flow",
+        "Excessive liquidity",
+        "A low debt-to-equity ratio"
+      ],
+      "answer": 1,
+      "explain": "Profit is an accounting measure, and cash flow is the timing of actual money. A profitable firm can still fail if cash runs out.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-071",
+      "q": "What does the U.S. Small Business Administration (SBA) typically do for small business loans?",
+      "choices": [
+        "Lends directly to all small businesses at zero interest",
+        "Buys shares in small businesses on the public market",
+        "Guarantees a portion of loans made by approved lenders",
+        "Sets interest rates on all commercial loans"
+      ],
+      "answer": 2,
+      "explain": "SBA loan programs reduce lender risk by guaranteeing part of a loan made by a bank. The SBA is not the direct lender in most programs.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-072",
+      "q": "Which description best fits an angel investor?",
+      "choices": [
+        "A bank that offers government-backed loans",
+        "A firm pooling money to buy shares of mature public companies",
+        "A government agency that provides grants",
+        "An individual who invests personal funds in early-stage businesses"
+      ],
+      "answer": 3,
+      "explain": "Angel investors are individuals funding young companies, often in exchange for equity. The other options describe lenders or public market investors.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-073",
+      "q": "The primary purpose of a business plan is to:",
+      "choices": [
+        "Guide the business and communicate its strategy and financial projections",
+        "Meet legal requirements for incorporation",
+        "Report past taxes to the government",
+        "Replace the need for an accounting system"
+      ],
+      "answer": 0,
+      "explain": "A business plan is a planning and communication tool for owners, lenders, and investors. It does not replace accounting or legal filings.",
+      "sub": "Owning a Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-074",
+      "q": "Which insurance covers claims that a customer was injured by the business's product?",
+      "choices": [
+        "Business interruption insurance",
+        "Product liability insurance",
+        "Key person insurance",
+        "Workers' compensation insurance"
+      ],
+      "answer": 1,
+      "explain": "Product liability insurance covers claims from product-related injuries. The others cover lost income, a key employee's loss, or employee injuries.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-075",
+      "q": "A company has current assets of $180,000 and current liabilities of $90,000. What is its current ratio?",
+      "choices": [
+        "0.5 to 1",
+        "1.5 to 1",
+        "2.0 to 1",
+        "2.5 to 1"
+      ],
+      "answer": 2,
+      "explain": "The current ratio is current assets divided by current liabilities, so $180,000 / $90,000 = 2.0. Inverting the ratio gives 0.5 to 1.",
+      "sub": "Owning a Business",
+      "diff": 3
+    },
+    {
+      "id": "ibc-076",
+      "q": "Working capital is calculated as:",
+      "choices": [
+        "Total assets minus total liabilities",
+        "Total revenue minus cost of goods sold",
+        "Long-term debt plus owner's equity",
+        "Current assets minus current liabilities"
+      ],
+      "answer": 3,
+      "explain": "Working capital measures short-term liquidity. Total assets minus total liabilities is net worth, and the other options are different measures.",
+      "sub": "Owning a Business",
+      "diff": 1
+    },
+    {
+      "id": "ibc-077",
+      "q": "A small business needs $25,000 for equipment to be repaid over five years. Which financing is most appropriate?",
+      "choices": [
+        "A term loan",
+        "A line of credit for daily expenses",
+        "Issuing common stock in an initial public offering",
+        "A 30-day trade credit arrangement"
+      ],
+      "answer": 0,
+      "explain": "A term loan provides a lump sum repaid on a fixed schedule, which matches a long-term asset. Lines of credit and trade credit suit short-term needs.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-078",
+      "q": "A company buys equipment for $50,000 with a five-year life and no salvage value, using straight-line depreciation. What is the annual depreciation expense?",
+      "choices": [
+        "$12,500",
+        "$10,000",
+        "$5,000",
+        "$50,000"
+      ],
+      "answer": 1,
+      "explain": "Straight-line depreciation spreads the cost evenly: $50,000 / 5 = $10,000 per year.",
+      "sub": "Owning a Business",
+      "diff": 3
+    },
+    {
+      "id": "ibc-079",
+      "q": "Which is the best description of a business line of credit?",
+      "choices": [
+        "A fixed loan repaid in equal installments over ten years",
+        "An investment in exchange for an ownership stake",
+        "A revolving loan up to a set limit, borrowed and repaid as needed",
+        "A grant that never has to be repaid"
+      ],
+      "answer": 2,
+      "explain": "A line of credit lets the business draw and repay within a limit, which suits fluctuating cash needs. Fixed installment loans and equity investments work differently.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-080",
+      "q": "Which metric shows how much of a company's financing comes from creditors relative to owners?",
+      "choices": [
+        "Current ratio",
+        "Gross margin",
+        "Return on assets",
+        "Debt-to-equity ratio"
+      ],
+      "answer": 3,
+      "explain": "Debt-to-equity compares total liabilities to owner's equity. The other ratios measure liquidity, profitability, or efficiency.",
+      "sub": "Owning a Business",
+      "diff": 2
+    },
+    {
+      "id": "ibc-081",
+      "q": "A farm that grows wheat is part of which sector of the economy?",
+      "choices": [
+        "Primary sector",
+        "Secondary sector",
+        "Tertiary sector",
+        "Quaternary sector"
+      ],
+      "answer": 0,
+      "explain": "The primary sector extracts or grows natural resources, such as farming, mining, and fishing.",
+      "sub": "Types of Business Activities",
+      "diff": 1
+    },
+    {
+      "id": "ibc-082",
+      "q": "A factory that assembles cars is classified in which sector?",
+      "choices": [
+        "Primary sector",
+        "Secondary sector",
+        "Tertiary sector",
+        "Quaternary sector"
+      ],
+      "answer": 1,
+      "explain": "The secondary sector transforms raw materials into finished goods through manufacturing.",
+      "sub": "Types of Business Activities",
+      "diff": 1
+    },
+    {
+      "id": "ibc-083",
+      "q": "A bank that makes loans to customers is part of which sector?",
+      "choices": [
+        "Primary sector",
+        "Secondary sector",
+        "Tertiary sector",
+        "Quaternary sector"
+      ],
+      "answer": 2,
+      "explain": "The tertiary sector provides services. Banking, retail, and transportation all fall here.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-084",
+      "q": "A business buys goods in bulk from manufacturers and sells them to retailers. It is a:",
+      "choices": [
+        "Retailer",
+        "Franchisor",
+        "Exporter",
+        "Wholesaler"
+      ],
+      "answer": 3,
+      "explain": "Wholesalers sell to businesses rather than final consumers. Retailers sell directly to consumers.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-085",
+      "q": "A software company sells accounting software to other businesses. Its activity is primarily:",
+      "choices": [
+        "Business-to-business (B2B)",
+        "Business-to-consumer (B2C)",
+        "Consumer-to-consumer (C2C)",
+        "Government-to-business (G2B)"
+      ],
+      "answer": 0,
+      "explain": "B2B means selling to other businesses. B2C is selling to individual consumers.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-086",
+      "q": "Which description best defines e-commerce?",
+      "choices": [
+        "Offline sales of goods in physical stores",
+        "Buying and selling goods or services over the internet",
+        "Digital advertising without any sales",
+        "Online-only charitable donations"
+      ],
+      "answer": 1,
+      "explain": "E-commerce is any commercial transaction conducted electronically. It does not require a physical store.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-087",
+      "q": "What defines a nonprofit organization?",
+      "choices": [
+        "It is not allowed to earn any revenue",
+        "It is owned by shareholders who receive dividends",
+        "It reinvests surplus revenue into its mission instead of paying profits to owners",
+        "It is automatically exempt from all taxes"
+      ],
+      "answer": 2,
+      "explain": "Nonprofits can earn revenue but cannot distribute profits to owners. Tax-exempt status must be applied for and is not automatic.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-088",
+      "q": "Members of a cooperative are typically:",
+      "choices": [
+        "Employees paid fixed wages only",
+        "Outside investors with no voting rights",
+        "Government appointees who run the business",
+        "Owners who share in the business's profits or benefits"
+      ],
+      "answer": 3,
+      "explain": "Cooperatives are owned and governed by their members, who share in the benefits. The other options describe other structures.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-089",
+      "q": "Which of the following is a pure service business?",
+      "choices": [
+        "A tax preparation firm",
+        "A steel mill",
+        "A corn farm",
+        "A shoe factory"
+      ],
+      "answer": 0,
+      "explain": "A pure service business sells expertise or labor rather than physical goods. The others are primary or secondary producers.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-090",
+      "q": "What does a franchisor typically earn from its franchise system?",
+      "choices": [
+        "Profit from reselling inventory to franchisees at cost",
+        "Royalties and franchise fees paid by franchisees",
+        "Full sales revenue from every outlet it owns",
+        "Membership charges paid directly by customers"
+      ],
+      "answer": 1,
+      "explain": "Franchisors earn ongoing royalties and initial fees rather than the sales of each outlet. The other options describe models the franchisor does not usually use.",
+      "sub": "Types of Business Activities",
+      "diff": 2
+    },
+    {
+      "id": "ibc-091",
+      "q": "Which section of a resume lists relevant work history, usually in reverse chronological order?",
+      "choices": [
+        "Objective statement",
+        "References",
+        "Professional experience",
+        "Hobbies"
+      ],
+      "answer": 2,
+      "explain": "Professional experience shows what the candidate has done, with the most recent job first. References are listed separately.",
+      "sub": "Career Planning",
+      "diff": 2
+    },
+    {
+      "id": "ibc-092",
+      "q": "What is the main purpose of a cover letter?",
+      "choices": [
+        "To list every duty from your past roles",
+        "To provide a complete record of your education",
+        "To request a salary before the interview",
+        "To introduce yourself and explain your fit for a specific job"
+      ],
+      "answer": 3,
+      "explain": "A cover letter tailors the application to one role and highlights the most relevant qualifications. It does not repeat the resume.",
+      "sub": "Career Planning",
+      "diff": 2
+    },
+    {
+      "id": "ibc-093",
+      "q": "Which is an example of professional networking?",
+      "choices": [
+        "Connecting with an alumnus in your field to ask for an informational interview",
+        "Posting personal photos on social media for employers to see",
+        "Asking a classmate to write a fake reference",
+        "Sending unsolicited mass emails to every company in a state"
+      ],
+      "answer": 0,
+      "explain": "Networking builds relationships for career information and opportunities. Fabricated references and mass unsolicited emails are not effective or ethical networking.",
+      "sub": "Career Planning",
+      "diff": 2
+    },
+    {
+      "id": "ibc-094",
+      "q": "What should come FIRST when creating a career plan?",
+      "choices": [
+        "Applying to every posted job",
+        "Assessing your interests, skills, and values",
+        "Accepting the first offer you receive",
+        "Memorizing answers to common interview questions"
+      ],
+      "answer": 1,
+      "explain": "Self-assessment comes first, because goals and job targets depend on interests, skills, and values. The other steps come later.",
+      "sub": "Career Planning",
+      "diff": 2
+    },
+    {
+      "id": "ibc-095",
+      "q": "Which characteristic makes a career goal a SMART goal?",
+      "choices": [
+        "Vague but ambitious",
+        "Based only on salary",
+        "Specific, measurable, achievable, relevant, and time-bound",
+        "Set once and never revised"
+      ],
+      "answer": 2,
+      "explain": "SMART goals are specific, measurable, achievable, relevant, and time-bound, which makes progress trackable. The other options do not match the acronym.",
+      "sub": "Career Planning",
+      "diff": 2
+    },
+    {
+      "id": "ibc-096",
+      "q": "In the STAR interview method, what does the letter 'A' stand for?",
+      "choices": [
+        "Answer",
+        "Attitude",
+        "Achievement",
+        "Action"
+      ],
+      "answer": 3,
+      "explain": "STAR stands for Situation, Task, Action, and Result. Candidates describe what they did, then the outcome.",
+      "sub": "Job-Search Skills",
+      "diff": 2
+    },
+    {
+      "id": "ibc-097",
+      "q": "How soon after an interview should a candidate typically send a thank-you note?",
+      "choices": [
+        "Within 24 hours",
+        "Within one month",
+        "Only if the employer asks for one",
+        "Before the interview takes place"
+      ],
+      "answer": 0,
+      "explain": "A prompt thank-you note, usually within 24 hours, reinforces interest. Waiting a month or sending it beforehand is ineffective.",
+      "sub": "Job-Search Skills",
+      "diff": 2
+    },
+    {
+      "id": "ibc-098",
+      "q": "When listing references on a job application, what should you do first?",
+      "choices": [
+        "List only family members",
+        "Ask each person's permission before listing them",
+        "Include home addresses for every reference",
+        "Submit a new list only after the employer asks for one"
+      ],
+      "answer": 1,
+      "explain": "Asking permission ensures references are willing and prepared to speak. Listing people without asking can harm the application.",
+      "sub": "Job-Search Skills",
+      "diff": 2
+    },
+    {
+      "id": "ibc-099",
+      "q": "Why do many employers use applicant tracking systems (ATS) to screen resumes?",
+      "choices": [
+        "To verify applicants' social security numbers",
+        "To rank applicants by age",
+        "To scan for keywords that match the job description",
+        "To eliminate any resume without a photo"
+      ],
+      "answer": 2,
+      "explain": "An ATS filters resumes by matching keywords from the job posting, so tailoring resumes to the description matters. It does not check identity or age.",
+      "sub": "Job-Search Skills",
+      "diff": 2
+    },
+    {
+      "id": "ibc-100",
+      "q": "Which element of a job posting describes the duties and expectations of the role?",
+      "choices": [
+        "Company logo",
+        "Application deadline",
+        "Job title",
+        "Job description"
+      ],
+      "answer": 3,
+      "explain": "The job description lists responsibilities and expectations. The title names the role, but it does not describe duties in detail.",
+      "sub": "Job-Search Skills",
+      "diff": 2
+    }
+  ],
+  "vocab": [
+    {
+      "id": "ibc-v001",
+      "term": "Scarcity",
+      "def": "The condition in which unlimited wants exceed the limited resources available to satisfy them.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v002",
+      "term": "Opportunity cost",
+      "def": "The value of the next best alternative that is given up when a choice is made.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v003",
+      "term": "Supply",
+      "def": "The quantity of a good producers are willing and able to offer at various prices during a period.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v004",
+      "term": "Demand",
+      "def": "The quantity of a good consumers are willing and able to buy at various prices during a period.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v005",
+      "term": "Equilibrium price",
+      "def": "The price at which quantity demanded equals quantity supplied, so there is no pressure to change it.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v006",
+      "term": "Inflation",
+      "def": "A sustained general increase in the price level of goods and services over time.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v007",
+      "term": "Gross domestic product (GDP)",
+      "def": "The total market value of all final goods and services produced within a country in a given period.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v008",
+      "term": "Factors of production",
+      "def": "The inputs used to produce goods and services: land, labor, capital, and entrepreneurship.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v009",
+      "term": "Comparative advantage",
+      "def": "The ability to produce a good at a lower opportunity cost than another producer.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v010",
+      "term": "Elasticity",
+      "def": "A measure of how much quantity demanded or supplied responds to a change in price.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v011",
+      "term": "Contraction",
+      "def": "The phase of the business cycle in which real GDP declines and economic activity slows.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v012",
+      "term": "Monetary policy",
+      "def": "Actions by a central bank, such as changing interest rates, to influence the money supply and economic activity.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "ibc-v013",
+      "term": "Sole proprietorship",
+      "def": "A business owned and run by one person, with no legal separation between owner and business.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v014",
+      "term": "Partnership",
+      "def": "A business owned by two or more people who share profits, losses, and management.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v015",
+      "term": "Corporation",
+      "def": "A legal entity separate from its owners, which gives shareholders limited liability.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v016",
+      "term": "Limited liability company (LLC)",
+      "def": "A business structure that offers owners limited liability and flexible pass-through tax treatment.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v017",
+      "term": "Stakeholder",
+      "def": "Any person or group affected by a business's decisions, such as employees, customers, or the community.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v018",
+      "term": "Mission statement",
+      "def": "A statement that describes an organization's core purpose and reason for existing.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v019",
+      "term": "Franchise",
+      "def": "A business arrangement in which a franchisee pays fees to operate under a franchisor's brand and system.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v020",
+      "term": "Entrepreneur",
+      "def": "A person who organizes, operates, and assumes the risks of a business in pursuit of profit.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v021",
+      "term": "SWOT analysis",
+      "def": "A planning tool that assesses a business's strengths, weaknesses, opportunities, and threats.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "ibc-v022",
+      "term": "Traditional economy",
+      "def": "An economic system in which customs, beliefs, and history determine what is produced and how.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v023",
+      "term": "Command economy",
+      "def": "An economic system in which a central government plans and directs production and distribution.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v024",
+      "term": "Market economy",
+      "def": "An economic system in which private individuals own resources and prices are set by supply and demand.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v025",
+      "term": "Mixed economy",
+      "def": "An economic system combining market forces with significant government intervention.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v026",
+      "term": "Socialism",
+      "def": "An economic system with significant collective or government ownership of major means of production.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v027",
+      "term": "Privatization",
+      "def": "The transfer of a government-owned business or asset to private ownership.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v028",
+      "term": "Tariff",
+      "def": "A tax imposed on imported goods.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v029",
+      "term": "Externality",
+      "def": "A cost or benefit of a transaction that falls on people who are not part of it.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v030",
+      "term": "Invisible hand",
+      "def": "Adam Smith's term for how self-interested decisions in competitive markets can benefit society as a whole.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "ibc-v031",
+      "term": "Fixed cost",
+      "def": "A business cost that does not change with the level of output in the short run, such as rent.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v032",
+      "term": "Variable cost",
+      "def": "A business cost that rises or falls with the level of output, such as materials used in production.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v033",
+      "term": "Break-even point",
+      "def": "The level of sales at which total revenue equals total cost, so profit is zero.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v034",
+      "term": "Gross profit",
+      "def": "Sales revenue minus the cost of goods sold.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v035",
+      "term": "Markup",
+      "def": "The amount added to the cost of a product to set its selling price, often expressed as a percentage of cost.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v036",
+      "term": "Contribution margin",
+      "def": "The selling price per unit minus the variable cost per unit, which contributes toward fixed costs.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v037",
+      "term": "Net income",
+      "def": "Total revenue minus all expenses, including operating costs, interest, and taxes.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v038",
+      "term": "Marginal cost",
+      "def": "The additional cost of producing one more unit of output.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v039",
+      "term": "Economies of scale",
+      "def": "Cost advantages that lower average cost per unit as a firm increases its output.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "ibc-v040",
+      "term": "Business plan",
+      "def": "A written document that describes a business's goals, strategy, market, and financial projections.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v041",
+      "term": "Equity financing",
+      "def": "Raising money by selling ownership shares in the business.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v042",
+      "term": "Debt financing",
+      "def": "Raising money by borrowing, which must be repaid with interest.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v043",
+      "term": "Term loan",
+      "def": "A lump-sum loan repaid over a fixed schedule, often used to buy long-term assets.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v044",
+      "term": "Line of credit",
+      "def": "A revolving borrowing limit that a business can draw on and repay as needed.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v045",
+      "term": "Working capital",
+      "def": "Current assets minus current liabilities, a measure of short-term liquidity.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v046",
+      "term": "Cash flow",
+      "def": "The actual movement of money into and out of a business over a period.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v047",
+      "term": "Balance sheet",
+      "def": "A financial statement that reports assets, liabilities, and owner's equity at a specific date.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v048",
+      "term": "Debt-to-equity ratio",
+      "def": "A ratio comparing a company's total liabilities to its owner's equity.",
+      "sub": "Owning a Business"
+    },
+    {
+      "id": "ibc-v049",
+      "term": "Primary sector",
+      "def": "The part of the economy that extracts or grows natural resources, such as farming and mining.",
+      "sub": "Types of Business Activities"
+    },
+    {
+      "id": "ibc-v050",
+      "term": "Secondary sector",
+      "def": "The part of the economy that manufactures finished goods from raw materials.",
+      "sub": "Types of Business Activities"
+    },
+    {
+      "id": "ibc-v051",
+      "term": "Tertiary sector",
+      "def": "The part of the economy that provides services, such as retail, banking, and transportation.",
+      "sub": "Types of Business Activities"
+    },
+    {
+      "id": "ibc-v052",
+      "term": "Wholesaler",
+      "def": "A business that buys goods in bulk from producers and sells them to retailers or other businesses.",
+      "sub": "Types of Business Activities"
+    },
+    {
+      "id": "ibc-v053",
+      "term": "Business-to-business (B2B)",
+      "def": "Commerce in which one business sells products or services to another business.",
+      "sub": "Types of Business Activities"
+    },
+    {
+      "id": "ibc-v054",
+      "term": "Nonprofit organization",
+      "def": "An organization that uses its revenue to pursue a mission rather than distributing profits to owners.",
+      "sub": "Types of Business Activities"
+    },
+    {
+      "id": "ibc-v055",
+      "term": "Resume",
+      "def": "A brief written summary of a candidate's education, experience, and skills, tailored to a job.",
+      "sub": "Career Planning"
+    },
+    {
+      "id": "ibc-v056",
+      "term": "Cover letter",
+      "def": "A letter sent with a resume that introduces the applicant and explains fit for a specific role.",
+      "sub": "Career Planning"
+    },
+    {
+      "id": "ibc-v057",
+      "term": "SMART goal",
+      "def": "A goal that is specific, measurable, achievable, relevant, and time-bound.",
+      "sub": "Career Planning"
+    },
+    {
+      "id": "ibc-v058",
+      "term": "STAR method",
+      "def": "An interview technique that answers questions with the Situation, Task, Action, and Result.",
+      "sub": "Job-Search Skills"
+    },
+    {
+      "id": "ibc-v059",
+      "term": "Applicant tracking system (ATS)",
+      "def": "Software employers use to collect, sort, and screen job applications, often by keyword.",
+      "sub": "Job-Search Skills"
+    },
+    {
+      "id": "ibc-v060",
+      "term": "Job description",
+      "def": "A document that lists the duties, responsibilities, and qualifications of a role.",
+      "sub": "Job-Search Skills"
+    }
+  ]
+}

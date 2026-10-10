@@ -1,0 +1,1777 @@
+{
+  "slug": "business-management",
+  "name": "Business Management",
+  "group": "case",
+  "notes": "Source: FBLA 2025-2026 Competitive Events Guidelines, Business Management (Updated August 2025), hosted at https://www.middletonfbla.com/wp-content/uploads/2025/09/Business-Management_Guidelines25-26.pdf (fbla.org returned 403 to fetch). Official format is an objective test plus an interactive role play (Role Play category), not a pure case study; group is set to case per the assignment. Sub areas and test weights come from the guideline's Study Guide (Business Environment 15, Management Types 25, Business Finance 15, Operations 15, Strategic Management 30). Questions are original practice items; calculations use U.S. conventions.",
+  "subs": [
+    "Business Environment",
+    "Management Types",
+    "Business Finance",
+    "Operations",
+    "Strategic Management"
+  ],
+  "questions": [
+    {
+      "id": "bm-001",
+      "q": "A plant manager compares weekly output to a 5,000-unit standard, finds output 8% short, and orders a root-cause review of the shortfall. Which management function is the manager primarily performing?",
+      "choices": [
+        "Planning",
+        "Organizing",
+        "Controlling",
+        "Staffing"
+      ],
+      "answer": 2,
+      "explain": "Comparing results to a standard and taking corrective action is the controlling function. Planning sets the standard; organizing and staffing come before performance is measured.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-002",
+      "q": "A software company forms a team with a fixed start date, a fixed budget, and one deliverable: a mobile app launch in nine months. Which type of management is being applied?",
+      "choices": [
+        "Project management",
+        "Knowledge management",
+        "Change management",
+        "Supply chain management"
+      ],
+      "answer": 0,
+      "explain": "A temporary effort with a defined scope, budget, and deliverable is project management. Change management focuses on people adopting new processes.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-003",
+      "q": "A company's balance sheet shows total assets of $240,000 and total liabilities of $90,000. Using the accounting equation, what is owners' equity?",
+      "choices": [
+        "$90,000",
+        "$240,000",
+        "$330,000",
+        "$150,000"
+      ],
+      "answer": 3,
+      "explain": "Equity equals assets minus liabilities: $240,000 minus $90,000 is $150,000. The trap is reporting total assets or liabilities as equity.",
+      "sub": "Business Finance",
+      "diff": 1
+    },
+    {
+      "id": "bm-004",
+      "q": "In operations management, which term best describes the network of organizations that moves a product from raw material suppliers through manufacturers and distributors to the final customer?",
+      "choices": [
+        "Sales funnel",
+        "Supply chain",
+        "Value proposition",
+        "Business model"
+      ],
+      "answer": 1,
+      "explain": "A supply chain is the network of suppliers, manufacturers, distributors, and retailers that moves a product to the customer. A sales funnel describes how prospects become buyers.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-005",
+      "q": "A manager must decide how many new employees to hire. Before writing job postings, HR must document what each position requires in duties, skills, and working conditions. What is this step called?",
+      "choices": [
+        "Performance appraisal",
+        "Orientation",
+        "Job analysis",
+        "Compensation planning"
+      ],
+      "answer": 2,
+      "explain": "Job analysis gathers the duties, skills, and conditions for a position and comes before recruiting. Appraisal and orientation happen later in the employee lifecycle.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-006",
+      "q": "A company sells monthly subscription boxes directly to consumers through its website and bypasses retail stores. Which business model is it using?",
+      "choices": [
+        "Direct-to-consumer model",
+        "Franchise model",
+        "Wholesale model",
+        "Licensing model"
+      ],
+      "answer": 0,
+      "explain": "Selling straight to end users without intermediaries is a direct-to-consumer model. Wholesale sells to resellers, and franchising and licensing grant rights to others.",
+      "sub": "Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "bm-007",
+      "q": "A company spends $50,000 cash to buy new manufacturing equipment. On the statement of cash flows, under which activity is this outflow reported?",
+      "choices": [
+        "Operating activities",
+        "Financing activities",
+        "Non-cash activities",
+        "Investing activities"
+      ],
+      "answer": 3,
+      "explain": "Purchases of long-term assets such as equipment are investing activities. This transaction involves cash, so it is not a non-cash activity.",
+      "sub": "Business Finance",
+      "diff": 1
+    },
+    {
+      "id": "bm-008",
+      "q": "A bakery measures how many loaves its staff produces per labour hour and tracks the figure monthly to find efficiency gains. Which operations concept is being measured?",
+      "choices": [
+        "Liquidity",
+        "Productivity",
+        "Solvency",
+        "Profitability"
+      ],
+      "answer": 1,
+      "explain": "Output per unit of input, such as labour hours, is productivity. Liquidity and solvency are financial measures, and profitability measures earnings.",
+      "sub": "Operations",
+      "diff": 2
+    },
+    {
+      "id": "bm-009",
+      "q": "A board approves a five-year plan to enter two new international markets and reallocate capital accordingly. Which type of plan is this?",
+      "choices": [
+        "Operational plan",
+        "Tactical plan",
+        "Strategic plan",
+        "Contingency plan"
+      ],
+      "answer": 2,
+      "explain": "Long-range plans that set overall direction and allocate major resources are strategic. Tactical plans are mid-range, and operational plans are short-term and specific.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-010",
+      "q": "A firm buys fire insurance on its warehouse so that a loss would be covered financially. Which risk management response is this?",
+      "choices": [
+        "Risk transfer",
+        "Risk avoidance",
+        "Risk reduction",
+        "Risk acceptance"
+      ],
+      "answer": 0,
+      "explain": "Shifting the financial consequence of a loss to an insurer is risk transfer. Avoidance would mean not operating the warehouse; reduction would mean installing sprinklers.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-011",
+      "q": "A small manufacturer disputes warranty terms on machinery it sold. Which U.S. law primarily governs contracts for the sale of goods?",
+      "choices": [
+        "Fair Labor Standards Act",
+        "Sherman Antitrust Act",
+        "Occupational Safety and Health Act",
+        "Uniform Commercial Code, Article 2"
+      ],
+      "answer": 3,
+      "explain": "UCC Article 2 governs sales of goods in the U.S. The other laws cover wages, antitrust, and workplace safety.",
+      "sub": "Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "bm-012",
+      "q": "A retailer maps every activity needed to fulfill an online order, from receiving to delivery, and looks for steps that add no value. Which concept is the retailer applying?",
+      "choices": [
+        "Strategic planning",
+        "Business process management",
+        "Capital budgeting",
+        "Market segmentation"
+      ],
+      "answer": 1,
+      "explain": "Mapping and improving linked activities that turn inputs into outputs is business process management. The other choices are different disciplines.",
+      "sub": "Operations",
+      "diff": 2
+    },
+    {
+      "id": "bm-013",
+      "q": "A manager checks the quality of incoming raw materials before production begins so defective inputs never reach the line. Which type of control is this?",
+      "choices": [
+        "Feedback control",
+        "Concurrent control",
+        "Feedforward control",
+        "Discretionary control"
+      ],
+      "answer": 2,
+      "explain": "Feedforward (preliminary) control anticipates problems before work starts. Feedback control evaluates results after the fact, and concurrent control monitors work as it happens.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-014",
+      "q": "An HR department is introducing a new time-tracking system and expects employee resistance. Which management approach helps people adjust to the new process?",
+      "choices": [
+        "Change management",
+        "Knowledge management",
+        "Customer relationship management",
+        "Quality management"
+      ],
+      "answer": 0,
+      "explain": "Change management plans for and supports people through a change in processes or systems. The other choices cover different areas.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-015",
+      "q": "A company's current ratio is 0.8 and managers worry about paying bills due in 30 days. Which concept is most directly at issue?",
+      "choices": [
+        "Profitability",
+        "Leverage",
+        "Market value",
+        "Liquidity"
+      ],
+      "answer": 3,
+      "explain": "Liquidity is the ability to meet short-term obligations. A current ratio below 1.0 means current assets do not cover current liabilities. Leverage concerns long-term debt.",
+      "sub": "Business Finance",
+      "diff": 2
+    },
+    {
+      "id": "bm-016",
+      "q": "A furniture maker switches from one distant overseas supplier to two regional suppliers and cuts average lead time from 12 weeks to 3 weeks. Which effect on performance is most likely?",
+      "choices": [
+        "Higher inventory carrying costs",
+        "Faster response to demand and fewer stockouts",
+        "Lower product quality by definition",
+        "Higher long-term debt"
+      ],
+      "answer": 1,
+      "explain": "Shorter lead times improve responsiveness and reduce stockouts. Lower quality and higher debt do not follow from the change described.",
+      "sub": "Operations",
+      "diff": 3
+    },
+    {
+      "id": "bm-017",
+      "q": "A call centre wants to know whether customers get their issue resolved on the first contact. Which metric best matches that goal?",
+      "choices": [
+        "Average handle time",
+        "Employee tenure",
+        "First-contact resolution rate",
+        "Calls received per month"
+      ],
+      "answer": 2,
+      "explain": "First-contact resolution rate measures the goal directly. Average handle time measures speed, and pushing it down can work against resolution.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-018",
+      "q": "A manufacturer sells in several countries and must change its product labelling for each market's rules. Which environmental factor is most directly affecting its operations?",
+      "choices": [
+        "Global legal and regulatory environment",
+        "Technological environment",
+        "Demographic environment",
+        "Natural resource environment"
+      ],
+      "answer": 0,
+      "explain": "Differing labelling rules across countries are part of the global legal and regulatory environment. Demographics and technology are not the direct driver here.",
+      "sub": "Business Environment",
+      "diff": 3
+    },
+    {
+      "id": "bm-019",
+      "q": "A company builds a searchable repository where employees store lessons learned from past projects and share best practices. Which management type is this?",
+      "choices": [
+        "Quality management",
+        "Supply chain management",
+        "Risk management",
+        "Knowledge management"
+      ],
+      "answer": 3,
+      "explain": "Capturing, storing, and sharing organizational know-how is knowledge management.",
+      "sub": "Management Types",
+      "diff": 3
+    },
+    {
+      "id": "bm-020",
+      "q": "A company sets a goal of raising market share by 4 points in 12 months and chooses the tactics to reach it. Which management function does this represent?",
+      "choices": [
+        "Organizing",
+        "Planning",
+        "Leading",
+        "Controlling"
+      ],
+      "answer": 1,
+      "explain": "Setting objectives and choosing the means to reach them is planning. Controlling comes later when results are compared to the plan.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-021",
+      "q": "A company reports net income of $120,000, yet its cash balance fell during the year. Which statement best explains the difference?",
+      "choices": [
+        "Net income always equals cash flow",
+        "Depreciation reduces cash on hand",
+        "Accrual accounting records revenue and expenses when earned or incurred, so timing differs from cash movement",
+        "Dividends are an operating expense"
+      ],
+      "answer": 2,
+      "explain": "Under accrual accounting, net income and cash flow can differ in timing. Depreciation is a non-cash expense, and dividends are not operating expenses.",
+      "sub": "Business Finance",
+      "diff": 1
+    },
+    {
+      "id": "bm-022",
+      "q": "Which statement about a business process is most accurate?",
+      "choices": [
+        "It transforms inputs into outputs through a sequence of linked activities",
+        "It is a one-time event with no outputs",
+        "It is a financial statement of the firm",
+        "It applies only to human resources"
+      ],
+      "answer": 0,
+      "explain": "A business process is a set of linked activities that turns inputs into outputs. The other choices misdescribe the concept.",
+      "sub": "Operations",
+      "diff": 1
+    },
+    {
+      "id": "bm-023",
+      "q": "A CEO wants employees to behave ethically, so the firm adopts a written code of conduct, trains staff on it, and rewards compliance. Which element of managerial ethics is being built?",
+      "choices": [
+        "Corporate tax planning",
+        "A strategic alliance",
+        "Lean manufacturing",
+        "An ethical climate supported by a formal ethics program"
+      ],
+      "answer": 3,
+      "explain": "A code of conduct, training, and reward systems form a formal ethics program that shapes the ethical climate. The other choices are unrelated to ethics.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-024",
+      "q": "A hospital standardizes its patient intake forms and tracks error rates against a target so that defects drop. Which management type is most directly involved?",
+      "choices": [
+        "Customer relationship management",
+        "Quality management",
+        "Human resources management",
+        "Information management"
+      ],
+      "answer": 1,
+      "explain": "Standardizing processes and measuring defect rates against targets is quality management.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-025",
+      "q": "A U.S. business decides to incorporate rather than remain a sole proprietorship. What is the most important legal consequence for the owners?",
+      "choices": [
+        "Owners' personal assets are fully exposed to business debts",
+        "Owners pay taxes only at the entity level",
+        "Owners have limited liability for business debts",
+        "Owners lose the right to vote on decisions"
+      ],
+      "answer": 2,
+      "explain": "Incorporation generally limits shareholders' personal liability to their investment. The other choices misstate the effect of incorporating.",
+      "sub": "Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "bm-026",
+      "q": "A company earns revenue of $800,000, has cost of goods sold of $500,000, and operating expenses of $200,000. What is gross profit?",
+      "choices": [
+        "$300,000",
+        "$100,000",
+        "$500,000",
+        "$800,000"
+      ],
+      "answer": 0,
+      "explain": "Gross profit is revenue minus cost of goods sold: $800,000 minus $500,000 is $300,000. Subtracting operating expenses gives operating income, not gross profit.",
+      "sub": "Business Finance",
+      "diff": 1
+    },
+    {
+      "id": "bm-027",
+      "q": "A company relies on a single supplier for a critical component. A flood shuts that supplier down and halts production for weeks. Which supply chain impact best describes this event?",
+      "choices": [
+        "Improved economies of scale",
+        "Reduced inventory risk",
+        "Higher quality control",
+        "Supply chain disruption from lack of supplier diversification"
+      ],
+      "answer": 3,
+      "explain": "Depending on one source creates vulnerability to disruption. The other choices describe benefits or effects that do not match the event.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-028",
+      "q": "A manager measures staff against monthly targets and then corrects any gaps. Which sequence correctly describes the control process?",
+      "choices": [
+        "Hire staff, train staff, evaluate staff, dismiss staff",
+        "Set standards, measure performance, compare to standards, take corrective action",
+        "Forecast demand, buy inventory, sell product, close books",
+        "Draft mission, write vision, list values, publish"
+      ],
+      "answer": 1,
+      "explain": "The control process is: set standards, measure performance, compare results to standards, and take corrective action where needed.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-029",
+      "q": "A company is worried about legal compliance and wants a formal approach to identify, rate, and respond to threats to its objectives. Which management type fits best?",
+      "choices": [
+        "Project management",
+        "Knowledge management",
+        "Risk management",
+        "Supply chain management"
+      ],
+      "answer": 2,
+      "explain": "Identifying, assessing, and responding to threats to objectives is risk management.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-030",
+      "q": "A company's CEO states that the firm will be the most trusted brand in its industry within ten years. Which element of strategic management does this statement represent?",
+      "choices": [
+        "Vision statement",
+        "Code of conduct",
+        "Budget",
+        "Organizational chart"
+      ],
+      "answer": 0,
+      "explain": "A vision statement describes the desired future state. A code of conduct governs behaviour, and a budget and organization chart serve other purposes.",
+      "sub": "Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "bm-031",
+      "q": "A company compares its budgeted expenses for the year to actual expenses to find out why profits fell. Which financial tool is it using?",
+      "choices": [
+        "Ratio analysis",
+        "Break-even analysis",
+        "Discounted cash flow",
+        "Variance analysis"
+      ],
+      "answer": 3,
+      "explain": "Comparing budget to actual results to explain differences is variance analysis.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-032",
+      "q": "Why do companies study their business processes?",
+      "choices": [
+        "To eliminate all managers",
+        "To find waste, reduce cycle time, and improve quality and cost",
+        "To avoid all business risk",
+        "To set the company's stock price"
+      ],
+      "answer": 1,
+      "explain": "Process study targets waste, cycle time, quality, and cost. The other choices are not purposes of process analysis.",
+      "sub": "Operations",
+      "diff": 2
+    },
+    {
+      "id": "bm-033",
+      "q": "Employees have proposed a new approach that changes their daily work. The manager wants to reduce conflict and build support before implementing it. Which approach is most suitable?",
+      "choices": [
+        "Implement immediately and skip communication",
+        "Remove the employees who object",
+        "Involve employees in planning and explain the reasons for the change",
+        "Ignore the proposal until next year"
+      ],
+      "answer": 2,
+      "explain": "Involving employees and explaining the reasons builds support and reduces resistance. The other options ignore people's needs or act against them.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-034",
+      "q": "A retailer records each customer's purchases, preferences, and service history to tailor offers. Which management type is this?",
+      "choices": [
+        "Customer relationship management",
+        "Supply chain management",
+        "Quality management",
+        "Operations management"
+      ],
+      "answer": 0,
+      "explain": "Using customer data to manage and personalize relationships is customer relationship management.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-035",
+      "q": "A multinational firm faces a sudden change in exchange rates that raises the cost of its imported parts. Which environment is most directly involved?",
+      "choices": [
+        "Technological environment",
+        "Social environment",
+        "Political environment",
+        "Economic environment"
+      ],
+      "answer": 3,
+      "explain": "Exchange rates and input costs are part of the economic environment. The other environments do not drive this change directly.",
+      "sub": "Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "bm-036",
+      "q": "Management theory lists four managerial functions. Which set is correct?",
+      "choices": [
+        "Planning, budgeting, hiring, auditing",
+        "Planning, organizing, leading, controlling",
+        "Forecasting, purchasing, selling, reporting",
+        "Recruiting, training, leading, evaluating"
+      ],
+      "answer": 1,
+      "explain": "The four functions are planning, organizing, leading, and controlling. The other sets mix in activities that fall within these functions.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-037",
+      "q": "A company has $60,000 in current assets and $40,000 in current liabilities. What is its working capital?",
+      "choices": [
+        "$60,000",
+        "$40,000",
+        "$20,000",
+        "$100,000"
+      ],
+      "answer": 2,
+      "explain": "Working capital is current assets minus current liabilities: $60,000 minus $40,000 is $20,000.",
+      "sub": "Business Finance",
+      "diff": 3
+    },
+    {
+      "id": "bm-038",
+      "q": "A manager wants to measure the time from receiving an order to delivering the product. Which measure is this?",
+      "choices": [
+        "Lead time",
+        "Gross margin",
+        "Debt-to-equity ratio",
+        "Return on assets"
+      ],
+      "answer": 0,
+      "explain": "The elapsed time from order to delivery is lead time (or cycle time). The other measures are financial ratios.",
+      "sub": "Operations",
+      "diff": 3
+    },
+    {
+      "id": "bm-039",
+      "q": "Managers decide which tasks to group into departments and who reports to whom. Which managerial function is this?",
+      "choices": [
+        "Controlling",
+        "Leading",
+        "Planning",
+        "Organizing"
+      ],
+      "answer": 3,
+      "explain": "Grouping tasks and setting reporting lines is organizing.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-040",
+      "q": "Which statement best describes a sole proprietorship?",
+      "choices": [
+        "A business owned by shareholders with limited liability",
+        "A business owned by one person with no legal separation from the owner, who is personally liable for its debts",
+        "A business owned by a partnership of at least two investors and taxed as a corporation",
+        "A non-profit organization exempt from income tax"
+      ],
+      "answer": 1,
+      "explain": "A sole proprietorship has one owner who is personally liable for business debts. The other choices describe corporations, partnerships, and non-profits.",
+      "sub": "Business Environment",
+      "diff": 3
+    },
+    {
+      "id": "bm-041",
+      "q": "A company sets a goal to cut its product defect rate from 4% to 1% within a year, using standardized measurement and continuous improvement. Which approach is this?",
+      "choices": [
+        "Just-in-time inventory",
+        "Activity-based costing",
+        "Total quality management",
+        "Zero-based budgeting"
+      ],
+      "answer": 2,
+      "explain": "Total quality management focuses on continuous improvement and measured quality outcomes across the organization.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-042",
+      "q": "A company's accounts receivable turnover is low, so customers take a long time to pay. Which action most directly addresses the liquidity concern?",
+      "choices": [
+        "Tighten credit terms and follow up on overdue invoices",
+        "Increase the dividend payout to shareholders",
+        "Offer longer payment terms to new buyers",
+        "Buy new equipment with cash on hand"
+      ],
+      "answer": 0,
+      "explain": "Tightening credit and collecting overdue invoices speeds cash inflows. The other choices reduce cash or slow collections.",
+      "sub": "Business Finance",
+      "diff": 1
+    },
+    {
+      "id": "bm-043",
+      "q": "A company sets inventory levels using just-in-time principles. What is the main benefit?",
+      "choices": [
+        "It eliminates all demand uncertainty",
+        "It requires the largest warehouse space",
+        "It removes the need for suppliers",
+        "It cuts carrying costs and waste by receiving inventory close to when it is needed"
+      ],
+      "answer": 3,
+      "explain": "JIT reduces carrying costs and waste by timing deliveries to need. It does not eliminate demand uncertainty or suppliers.",
+      "sub": "Operations",
+      "diff": 1
+    },
+    {
+      "id": "bm-044",
+      "q": "A company links pay to goals that each employee and manager set together. Which motivational approach is this?",
+      "choices": [
+        "Scientific management",
+        "Management by objectives",
+        "Bureaucratic management",
+        "Theory X management"
+      ],
+      "answer": 1,
+      "explain": "Management by objectives sets jointly agreed goals and ties rewards to achieving them.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-045",
+      "q": "Managers analyze the number of potential customers, their ages, and income levels before choosing store locations. Which environment is most directly analyzed?",
+      "choices": [
+        "Technological environment",
+        "Legal environment",
+        "Demographic environment",
+        "Natural environment"
+      ],
+      "answer": 2,
+      "explain": "Population size, age, and income are demographic factors.",
+      "sub": "Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "bm-046",
+      "q": "A company keeps a second qualified vendor for a key part because its main vendor could go bankrupt. Which risk response is this?",
+      "choices": [
+        "Risk reduction",
+        "Risk transfer",
+        "Risk avoidance",
+        "Risk acceptance"
+      ],
+      "answer": 0,
+      "explain": "Having a backup source lowers the likelihood and impact of a supply failure, which is risk reduction.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-047",
+      "q": "A company wants to know how intensively its machinery is used relative to what it could produce. Which measure best reflects this?",
+      "choices": [
+        "Current ratio",
+        "Debt ratio",
+        "Gross margin",
+        "Capacity utilization rate"
+      ],
+      "answer": 3,
+      "explain": "Capacity utilization compares actual output with maximum capacity. The other measures are financial ratios.",
+      "sub": "Operations",
+      "diff": 1
+    },
+    {
+      "id": "bm-048",
+      "q": "A firm's net profit margin is 6% and its sales are $2,000,000. What is its net income?",
+      "choices": [
+        "$12,000",
+        "$120,000",
+        "$33,333",
+        "$1,200,000"
+      ],
+      "answer": 1,
+      "explain": "Net income is margin times sales: 6% of $2,000,000 is $120,000.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-049",
+      "q": "Leaders want an organizational culture that supports open communication. Which step most directly supports this in the leading function?",
+      "choices": [
+        "Restrict information to senior staff",
+        "Eliminate team meetings",
+        "Communicate openly, model the behaviour, and recognize staff who raise concerns",
+        "Standardize all job titles"
+      ],
+      "answer": 2,
+      "explain": "Leaders build open culture by communicating, modelling the behaviour, and rewarding it. The other options restrict or remove communication.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-050",
+      "q": "Which human resources activity most directly determines the skills a business needs before it recruits?",
+      "choices": [
+        "Human resource planning",
+        "Payroll processing",
+        "Employee discipline",
+        "Retirement counselling"
+      ],
+      "answer": 0,
+      "explain": "Human resource planning forecasts the skills and headcount the business needs, which guides recruiting.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-051",
+      "q": "A firm groups employees into marketing, finance, and production units, each reporting to a senior manager. Which organizational design is this?",
+      "choices": [
+        "Product structure",
+        "Team structure",
+        "Network structure",
+        "Functional structure"
+      ],
+      "answer": 3,
+      "explain": "Grouping by business function is a functional structure. Product structures group by product line.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-052",
+      "q": "A company cuts its suppliers from 40 to 8 to gain volume discounts and simpler management. Which risk should managers monitor most closely?",
+      "choices": [
+        "A higher number of quality audits",
+        "Dependence on fewer suppliers that may raise disruption risk",
+        "An increase in the number of contracts",
+        "Greater logistics fragmentation"
+      ],
+      "answer": 1,
+      "explain": "Fewer suppliers can bring discounts but increase the impact of any single disruption.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-053",
+      "q": "Results will be reviewed every week against the plan, with exceptions reported immediately. Which part of the control process is being emphasized?",
+      "choices": [
+        "Hiring new staff",
+        "Designing the company logo",
+        "Measuring performance against standards and reporting variances",
+        "Negotiating a merger"
+      ],
+      "answer": 2,
+      "explain": "Weekly review against the plan, with exceptions reported, is measuring performance against standards and reporting variances.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-054",
+      "q": "A company issues $100,000 of bonds at 5% interest. Annual interest expense is $5,000 regardless of profit. Which term describes this obligation?",
+      "choices": [
+        "Fixed financing cost",
+        "Operating expense",
+        "Dividend",
+        "Depreciation"
+      ],
+      "answer": 0,
+      "explain": "Interest on debt is a fixed financing cost that creates leverage. It is not an operating expense, a dividend, or depreciation.",
+      "sub": "Business Finance",
+      "diff": 2
+    },
+    {
+      "id": "bm-055",
+      "q": "A company uses continuous improvement in its operations. Which is the best example?",
+      "choices": [
+        "Buying a single large machine once",
+        "Ending a product line permanently",
+        "Changing the company name",
+        "Regularly reviewing a process and making small changes that reduce waste over time"
+      ],
+      "answer": 3,
+      "explain": "Continuous improvement is ongoing, incremental refinement of processes.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-056",
+      "q": "A market has low entry barriers and many new firms can enter easily. Which competitive force is most directly described?",
+      "choices": [
+        "Bargaining power of buyers",
+        "Threat of new entrants",
+        "Threat of substitutes",
+        "Rivalry among existing firms"
+      ],
+      "answer": 1,
+      "explain": "Low barriers to entry describe the threat of new entrants in Porter's five forces.",
+      "sub": "Business Environment",
+      "diff": 3
+    },
+    {
+      "id": "bm-057",
+      "q": "A company's stated purpose is to provide affordable healthy food to every community it serves. Which element of strategic management is this?",
+      "choices": [
+        "Budget",
+        "Organizational chart",
+        "Mission statement",
+        "Performance appraisal"
+      ],
+      "answer": 2,
+      "explain": "A mission statement describes the organization's purpose and what it does for whom.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-058",
+      "q": "A company uses a formal process to identify, evaluate, and monitor threats to its information systems, including data breaches. Which management type is most directly involved?",
+      "choices": [
+        "Risk management",
+        "Customer relationship management",
+        "Human resource management",
+        "Supply chain management"
+      ],
+      "answer": 0,
+      "explain": "Identifying and monitoring threats to information systems and their consequences is risk management.",
+      "sub": "Management Types",
+      "diff": 3
+    },
+    {
+      "id": "bm-059",
+      "q": "A company's gross margin is 40% on sales of $500,000. What is its cost of goods sold?",
+      "choices": [
+        "$200,000",
+        "$400,000",
+        "$500,000",
+        "$300,000"
+      ],
+      "answer": 3,
+      "explain": "Gross margin of 40% means COGS is 60% of sales: 0.60 times $500,000 is $300,000.",
+      "sub": "Business Finance",
+      "diff": 3
+    },
+    {
+      "id": "bm-060",
+      "q": "A company has a lead time of 10 days and average daily demand of 50 units. With no safety stock, what is the reorder point?",
+      "choices": [
+        "200 units",
+        "500 units",
+        "50 units",
+        "10 units"
+      ],
+      "answer": 1,
+      "explain": "Reorder point is lead-time demand: 10 days times 50 units per day is 500 units.",
+      "sub": "Operations",
+      "diff": 3
+    },
+    {
+      "id": "bm-061",
+      "q": "Which statement best describes the four perspectives of a balanced scorecard?",
+      "choices": [
+        "Sales, marketing, finance, and legal",
+        "Revenue, cost, profit, and tax",
+        "Financial, customer, internal business process, and learning and growth",
+        "Strategy, tactics, operations, and budget"
+      ],
+      "answer": 2,
+      "explain": "The balanced scorecard uses financial, customer, internal process, and learning and growth perspectives.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-062",
+      "q": "A company faces a new technology that could replace its product entirely. Which competitive force is this?",
+      "choices": [
+        "Threat of substitutes",
+        "Bargaining power of suppliers",
+        "Rivalry among competitors",
+        "Threat of new entrants"
+      ],
+      "answer": 0,
+      "explain": "A product that could be replaced by a different product or technology is a threat of substitutes.",
+      "sub": "Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "bm-063",
+      "q": "A company's data governance policy requires personal customer information to be encrypted and access logged. Which management type is most directly involved?",
+      "choices": [
+        "Supply chain management",
+        "Project management",
+        "Change management",
+        "Information management"
+      ],
+      "answer": 3,
+      "explain": "Protecting and controlling access to information is information management.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-064",
+      "q": "A company runs a push system, producing to forecast. Compared with a pull system that produces to actual orders, what is the typical drawback of push?",
+      "choices": [
+        "Longer order cycle times by definition",
+        "Higher risk of excess inventory when forecasts are wrong",
+        "No need for supplier coordination",
+        "Lower need for production scheduling"
+      ],
+      "answer": 1,
+      "explain": "Producing to forecast can build excess inventory when demand falls short of the forecast.",
+      "sub": "Operations",
+      "diff": 1
+    },
+    {
+      "id": "bm-065",
+      "q": "A company's flattened structure now has three approval levels instead of seven. Which organizational design change is this?",
+      "choices": [
+        "Vertical integration",
+        "Horizontal merger",
+        "Flattening the organizational structure",
+        "Divestiture"
+      ],
+      "answer": 2,
+      "explain": "Reducing layers of management is flattening the structure. The other options are strategic moves, not structural changes.",
+      "sub": "Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "bm-066",
+      "q": "A state law requires environmental impact reports before a company can build a plant. Which environment is this?",
+      "choices": [
+        "Legal-regulatory environment",
+        "Technological environment",
+        "Social environment",
+        "Competitive environment"
+      ],
+      "answer": 0,
+      "explain": "Government requirements for permits and reports are part of the legal-regulatory environment.",
+      "sub": "Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "bm-067",
+      "q": "A manager delegates authority to team leaders. Which managerial consideration does this illustrate?",
+      "choices": [
+        "Controlling",
+        "Forecasting",
+        "Auditing",
+        "Organizing"
+      ],
+      "answer": 3,
+      "explain": "Delegation distributes authority and responsibility, a part of organizing.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-068",
+      "q": "A consulting firm delivers $30,000 of services in December and collects the cash in January. Under accrual accounting, when is the revenue recognized?",
+      "choices": [
+        "January",
+        "December",
+        "Split equally between the two months",
+        "Only when cash is collected"
+      ],
+      "answer": 1,
+      "explain": "Accrual accounting recognizes revenue when earned, which is when the service is delivered in December.",
+      "sub": "Business Finance",
+      "diff": 2
+    },
+    {
+      "id": "bm-069",
+      "q": "A company's cost of goods sold is $900,000 and its average inventory is $150,000. What is its inventory turnover?",
+      "choices": [
+        "4 times",
+        "8 times",
+        "6 times",
+        "0.17 times"
+      ],
+      "answer": 2,
+      "explain": "Inventory turnover is COGS divided by average inventory: $900,000 divided by $150,000 is 6.",
+      "sub": "Operations",
+      "diff": 2
+    },
+    {
+      "id": "bm-070",
+      "q": "Which statement describes the assumptions of Theory X management?",
+      "choices": [
+        "Workers dislike work and need close supervision",
+        "Workers seek responsibility and self-direction",
+        "Workers are motivated mainly by teamwork",
+        "Workers ignore pay entirely"
+      ],
+      "answer": 0,
+      "explain": "Theory X assumes workers avoid work and need direction and control, in contrast with Theory Y.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-071",
+      "q": "A CEO promises to cut carbon emissions per unit by 20%, in response to stakeholder expectations. Which environment is this most closely linked to?",
+      "choices": [
+        "Technological environment",
+        "Economic environment",
+        "Demographic environment",
+        "Social and ethical environment"
+      ],
+      "answer": 3,
+      "explain": "Stakeholder expectations about environmental responsibility are part of the social environment.",
+      "sub": "Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "bm-072",
+      "q": "Which U.S. business form gives owners limited liability and an unlimited life that continues beyond any one owner?",
+      "choices": [
+        "Sole proprietorship",
+        "Corporation",
+        "General partnership",
+        "Joint venture between two individuals"
+      ],
+      "answer": 1,
+      "explain": "A corporation gives limited liability and perpetual existence. Sole proprietorships and general partnerships expose owners to personal liability.",
+      "sub": "Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "bm-073",
+      "q": "A company's debt-to-equity ratio is 2.0. What does this indicate?",
+      "choices": [
+        "It has twice as much equity as debt",
+        "It has no debt",
+        "It has twice as much debt as equity financing",
+        "Its assets are twice its liabilities"
+      ],
+      "answer": 2,
+      "explain": "A debt-to-equity ratio of 2.0 means debt is twice equity.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-074",
+      "q": "In a Gantt chart, what does a bar represent?",
+      "choices": [
+        "The scheduled duration of a task",
+        "The cost of each resource",
+        "The number of defects",
+        "The customer's satisfaction score"
+      ],
+      "answer": 0,
+      "explain": "Each bar shows a task's start, end, and duration on a timeline.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-075",
+      "q": "Which pair correctly identifies internal factors in a SWOT analysis?",
+      "choices": [
+        "Opportunities and threats",
+        "Revenue and costs",
+        "Suppliers and customers",
+        "Strengths and weaknesses"
+      ],
+      "answer": 3,
+      "explain": "Strengths and weaknesses are internal. Opportunities and threats are external.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-076",
+      "q": "A board requires a formal succession plan for key executives. Which HR area is this?",
+      "choices": [
+        "Payroll accounting",
+        "Human resource planning",
+        "Labour relations",
+        "Employee benefits administration"
+      ],
+      "answer": 1,
+      "explain": "Succession planning identifies future leaders and is part of human resource planning.",
+      "sub": "Management Types",
+      "diff": 3
+    },
+    {
+      "id": "bm-077",
+      "q": "A company sells goods on credit for $5,000. Which account is credited to record the sale?",
+      "choices": [
+        "Cash",
+        "Accounts payable",
+        "Sales revenue",
+        "Inventory"
+      ],
+      "answer": 2,
+      "explain": "The sale is debited to accounts receivable and credited to sales revenue.",
+      "sub": "Business Finance",
+      "diff": 3
+    },
+    {
+      "id": "bm-078",
+      "q": "A quality team uses statistical process control charts. What is their primary purpose?",
+      "choices": [
+        "To monitor whether a process stays within expected variation",
+        "To set the annual budget",
+        "To measure employee satisfaction",
+        "To determine interest rates"
+      ],
+      "answer": 0,
+      "explain": "Control charts track process variation over time to detect when a process goes out of control.",
+      "sub": "Management Types",
+      "diff": 3
+    },
+    {
+      "id": "bm-079",
+      "q": "A manager uses management by exception. What does this mean?",
+      "choices": [
+        "Managers ignore all results",
+        "Managers review every transaction equally",
+        "Managers delegate all decisions",
+        "Managers focus on significant deviations from plan rather than routine results"
+      ],
+      "answer": 3,
+      "explain": "Management by exception directs attention to significant deviations from plan.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-080",
+      "q": "Which human resources function most directly ensures the firm follows federal overtime and minimum-wage rules?",
+      "choices": [
+        "Supply chain management",
+        "Labour compliance within human resources management",
+        "Knowledge management",
+        "Quality management"
+      ],
+      "answer": 1,
+      "explain": "Labour compliance in HR covers wage and hour rules such as the federal Fair Labor Standards Act.",
+      "sub": "Management Types",
+      "diff": 3
+    },
+    {
+      "id": "bm-081",
+      "q": "A company's return on equity is 15% and its net income is $300,000. What is its average shareholders' equity?",
+      "choices": [
+        "$45,000",
+        "$20,000",
+        "$2,000,000",
+        "$4,500,000"
+      ],
+      "answer": 2,
+      "explain": "ROE is net income divided by equity: $300,000 divided by 0.15 is $2,000,000.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-082",
+      "q": "A company merges purchasing across its branches to lower unit costs. Which concept does this illustrate?",
+      "choices": [
+        "Economies of scale",
+        "Diseconomies of scope",
+        "Gross margin decline",
+        "Liquidity ratio"
+      ],
+      "answer": 0,
+      "explain": "Spreading volume across branches lowers unit costs, which is economies of scale.",
+      "sub": "Operations",
+      "diff": 1
+    },
+    {
+      "id": "bm-083",
+      "q": "Which managerial activity is primarily part of the staffing function?",
+      "choices": [
+        "Setting the firm's long-term strategy",
+        "Auditing financial statements",
+        "Designing marketing campaigns",
+        "Recruiting and selecting new employees"
+      ],
+      "answer": 3,
+      "explain": "Staffing covers recruiting, selecting, training, and retaining employees.",
+      "sub": "Strategic Management",
+      "diff": 1
+    },
+    {
+      "id": "bm-084",
+      "q": "An integrated system gives sales, production, and finance one view of customer orders and inventory. Which management type does this best reflect?",
+      "choices": [
+        "Risk management",
+        "Information management",
+        "Change management",
+        "Human resource management"
+      ],
+      "answer": 1,
+      "explain": "Integrating data across functions for decisions is information management.",
+      "sub": "Management Types",
+      "diff": 1
+    },
+    {
+      "id": "bm-085",
+      "q": "A company expanding abroad faces new tariffs on its imports. Which environment is most directly affected?",
+      "choices": [
+        "Demographic environment",
+        "Technological environment",
+        "Global political and legal environment",
+        "Social environment"
+      ],
+      "answer": 2,
+      "explain": "Tariffs are trade policy and fall within the global political and legal environment.",
+      "sub": "Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "bm-086",
+      "q": "A company has a current ratio of 2.5 and a quick ratio of 1.0. What does the gap suggest?",
+      "choices": [
+        "A large share of current assets is inventory",
+        "Cash is larger than receivables",
+        "Liabilities are growing faster than assets",
+        "Equity is negative"
+      ],
+      "answer": 0,
+      "explain": "The quick ratio excludes inventory, so a big gap means inventory makes up much of current assets.",
+      "sub": "Business Finance",
+      "diff": 1
+    },
+    {
+      "id": "bm-087",
+      "q": "A plant can produce 1,000 units per day and produces 800. What is its capacity utilization?",
+      "choices": [
+        "125%",
+        "20%",
+        "1.25",
+        "80%"
+      ],
+      "answer": 3,
+      "explain": "Utilization is actual output divided by capacity: 800 divided by 1,000 is 80%.",
+      "sub": "Operations",
+      "diff": 1
+    },
+    {
+      "id": "bm-088",
+      "q": "Which step of the strategic management process comes after strategy formulation?",
+      "choices": [
+        "Environmental scanning",
+        "Strategy implementation",
+        "Mission drafting",
+        "Budget audit"
+      ],
+      "answer": 1,
+      "explain": "Formulation is followed by implementation, then evaluation and control. Environmental scanning comes before formulation.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-089",
+      "q": "Which term means the accounting standards used to prepare U.S. financial statements?",
+      "choices": [
+        "General Accounting Auditing Practices",
+        "Government Approved Accounting Policies",
+        "Generally Accepted Accounting Principles",
+        "Global Accounting and Auditing Procedures"
+      ],
+      "answer": 2,
+      "explain": "GAAP is the body of accounting standards used in the United States.",
+      "sub": "Business Finance",
+      "diff": 2
+    },
+    {
+      "id": "bm-090",
+      "q": "Which statement best defines a value-added activity?",
+      "choices": [
+        "An activity that increases the product's worth to the customer",
+        "Any activity that increases cost",
+        "Any activity performed by management",
+        "Any activity performed at a supplier's facility"
+      ],
+      "answer": 0,
+      "explain": "A value-added activity is one the customer would pay for. Other activities are waste to reduce.",
+      "sub": "Operations",
+      "diff": 2
+    },
+    {
+      "id": "bm-091",
+      "q": "Which leadership style gives employees the most decision-making power?",
+      "choices": [
+        "Autocratic",
+        "Bureaucratic",
+        "Paternalistic",
+        "Laissez-faire"
+      ],
+      "answer": 3,
+      "explain": "Laissez-faire leaders delegate most decisions to the group. Autocratic and paternalistic styles keep decisions with the leader.",
+      "sub": "Strategic Management",
+      "diff": 2
+    },
+    {
+      "id": "bm-092",
+      "q": "A company buys $500 of raw materials on credit. Which account increases?",
+      "choices": [
+        "Accounts receivable",
+        "Accounts payable",
+        "Retained earnings",
+        "Cash"
+      ],
+      "answer": 1,
+      "explain": "Buying on credit increases inventory and accounts payable. Cash is unchanged.",
+      "sub": "Business Finance",
+      "diff": 2
+    },
+    {
+      "id": "bm-093",
+      "q": "A procurement team combines purchases across five plants to negotiate better terms with one shared supplier. Which management type is most directly applied?",
+      "choices": [
+        "Customer relationship management",
+        "Quality management",
+        "Supply chain management",
+        "Knowledge management"
+      ],
+      "answer": 2,
+      "explain": "Coordinating purchasing across the supply network is supply chain management.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-094",
+      "q": "A company hires a consultant to lead the firm through a new enterprise system rollout that changes how staff work. Which management type applies?",
+      "choices": [
+        "Change management",
+        "Quality management",
+        "Risk management",
+        "Supply chain management"
+      ],
+      "answer": 0,
+      "explain": "Leading people through a significant change in systems and work is change management.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-095",
+      "q": "A company hedges its foreign currency exposure with financial contracts to protect earnings. Which risk response is this?",
+      "choices": [
+        "Risk avoidance by exiting the market",
+        "Risk acceptance by doing nothing",
+        "Risk retention through reserves",
+        "Risk transfer through a financial hedge"
+      ],
+      "answer": 3,
+      "explain": "A hedge shifts currency risk to a counterparty, which is risk transfer.",
+      "sub": "Management Types",
+      "diff": 2
+    },
+    {
+      "id": "bm-096",
+      "q": "A machine setup takes four hours and happens once per batch. Which improvement would best reduce waste from setups?",
+      "choices": [
+        "Increase the batch size without changing setup",
+        "Reduce setup time with quick-changeover methods",
+        "Hire additional managers",
+        "Reduce inventory counts"
+      ],
+      "answer": 1,
+      "explain": "Quick-changeover methods such as SMED cut setup time, which lowers the cost of each batch.",
+      "sub": "Operations",
+      "diff": 3
+    },
+    {
+      "id": "bm-097",
+      "q": "Which section of a business plan describes what a new café will do to win and keep customers?",
+      "choices": [
+        "Balance sheet",
+        "Articles of incorporation",
+        "Marketing plan",
+        "Lease agreement"
+      ],
+      "answer": 2,
+      "explain": "The marketing plan describes target customers, pricing, promotion, and distribution.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-098",
+      "q": "An asset costs $50,000 with a $5,000 salvage value and a five-year life. Under straight-line depreciation, what is the annual expense?",
+      "choices": [
+        "$9,000",
+        "$10,000",
+        "$5,000",
+        "$45,000"
+      ],
+      "answer": 0,
+      "explain": "Straight-line depreciation is (cost minus salvage) divided by life: $45,000 divided by 5 is $9,000.",
+      "sub": "Business Finance",
+      "diff": 3
+    },
+    {
+      "id": "bm-099",
+      "q": "A company's operating plan sets specific monthly sales quotas for each territory. Which type of plan is this?",
+      "choices": [
+        "Strategic plan",
+        "Vision plan",
+        "Contingency plan",
+        "Operational plan"
+      ],
+      "answer": 3,
+      "explain": "Short-term, specific targets are operational plans.",
+      "sub": "Strategic Management",
+      "diff": 3
+    },
+    {
+      "id": "bm-100",
+      "q": "A company uses a Gantt chart and the critical path method to plan a project. What does the critical path identify?",
+      "choices": [
+        "The cheapest supplier for each task",
+        "The longest sequence of dependent tasks that sets the minimum project duration",
+        "The employees with the most overtime",
+        "The best-selling product"
+      ],
+      "answer": 1,
+      "explain": "The critical path is the longest chain of dependent tasks, and it determines the shortest possible completion time.",
+      "sub": "Management Types",
+      "diff": 3
+    }
+  ],
+  "vocab": [
+    {
+      "id": "bm-v001",
+      "term": "Business model",
+      "def": "The method by which a company creates, delivers, and captures value, such as selling direct, by franchise, or by subscription.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v002",
+      "term": "Sole proprietorship",
+      "def": "A business owned and operated by one person, with no legal separation between the owner and the business.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v003",
+      "term": "Partnership",
+      "def": "A business owned by two or more persons who share profits, losses, and management under a partnership agreement.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v004",
+      "term": "Corporation",
+      "def": "A legal entity separate from its owners (shareholders) that offers limited liability and continues to exist apart from any owner.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v005",
+      "term": "Limited liability",
+      "def": "A protection under which owners are not personally responsible for the debts of the business beyond their investment.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v006",
+      "term": "Organizational design",
+      "def": "The way a firm arranges its tasks, reporting relationships, and departments to achieve its goals, such as functional or divisional structure.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v007",
+      "term": "Uniform Commercial Code (UCC)",
+      "def": "A set of standardized U.S. state laws that govern commercial transactions, including sales of goods under Article 2.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v008",
+      "term": "Antitrust laws",
+      "def": "U.S. laws, including the Sherman Act and Clayton Act, that prohibit practices which restrain competition, such as price-fixing.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v009",
+      "term": "Threat of new entrants",
+      "def": "A competitive force in which low barriers to entry allow new firms to enter an industry and reduce existing firms' profits.",
+      "sub": "Business Environment"
+    },
+    {
+      "id": "bm-v010",
+      "term": "Project management",
+      "def": "The planning, organizing, and control of a temporary effort with a defined scope, budget, schedule, and deliverable.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v011",
+      "term": "Change management",
+      "def": "A structured approach to preparing, supporting, and helping people adopt a change in processes, systems, or structure.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v012",
+      "term": "Knowledge management",
+      "def": "The process of capturing, storing, sharing, and applying an organization's knowledge and best practices.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v013",
+      "term": "Quality management",
+      "def": "Systematic activities that ensure products and services meet defined standards, including measurement and continuous improvement.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v014",
+      "term": "Total quality management (TQM)",
+      "def": "A management approach that involves everyone in continuous improvement of quality with a focus on customer satisfaction.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v015",
+      "term": "Risk management",
+      "def": "The process of identifying, assessing, and responding to threats that could keep an organization from achieving its objectives.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v016",
+      "term": "Risk avoidance",
+      "def": "A risk response that eliminates a risk by not engaging in the activity that creates it.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v017",
+      "term": "Risk transfer",
+      "def": "A risk response that shifts the financial consequence of a loss to another party, usually through insurance or contracts.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v018",
+      "term": "Customer relationship management (CRM)",
+      "def": "A strategy and set of tools used to manage interactions with customers in order to improve retention and satisfaction.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v019",
+      "term": "Supply chain management",
+      "def": "The coordination of activities that move goods and information from suppliers through manufacturers and distributors to customers.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v020",
+      "term": "Human resource planning",
+      "def": "The process of forecasting the number and type of employees a business will need and planning how to meet those needs.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v021",
+      "term": "Information management",
+      "def": "The collection, storage, protection, and use of data and information systems to support business decisions.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v022",
+      "term": "Hedging",
+      "def": "Using financial instruments to offset the risk of price, interest rate, or currency changes.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v023",
+      "term": "Quality control",
+      "def": "Inspection and testing methods that detect defects so that output meets specified standards.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v024",
+      "term": "Succession planning",
+      "def": "Identifying and developing future leaders so that key positions can be filled when they become vacant.",
+      "sub": "Management Types"
+    },
+    {
+      "id": "bm-v025",
+      "term": "Strategic management process",
+      "def": "The sequence of analyzing the environment, formulating strategy, implementing it, and evaluating and controlling results.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v026",
+      "term": "Balance sheet",
+      "def": "A financial statement that shows a company's assets, liabilities, and owners' equity at a specific point in time.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v027",
+      "term": "Income statement",
+      "def": "A financial statement that reports revenues, expenses, and net income for a period of time.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v028",
+      "term": "Statement of cash flows",
+      "def": "A financial statement that reports cash inflows and outflows in operating, investing, and financing activities for a period.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v029",
+      "term": "Budget",
+      "def": "A financial plan that estimates revenues and expenses for a future period and serves as a benchmark for control.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v030",
+      "term": "Liquidity",
+      "def": "A company's ability to pay its short-term obligations as they come due.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v031",
+      "term": "Working capital",
+      "def": "Current assets minus current liabilities, a measure of short-term financial health.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v032",
+      "term": "Accrual accounting",
+      "def": "An accounting method that records revenues when earned and expenses when incurred, regardless of when cash changes hands.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v033",
+      "term": "Break-even point",
+      "def": "The sales volume at which total revenue equals total costs, so the business has neither profit nor loss.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v034",
+      "term": "Gross profit",
+      "def": "Revenue minus cost of goods sold, before operating expenses are subtracted.",
+      "sub": "Business Finance"
+    },
+    {
+      "id": "bm-v035",
+      "term": "Supply chain",
+      "def": "The network of organizations, resources, and activities that moves a product from raw materials to the final customer.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v036",
+      "term": "Business process",
+      "def": "A set of linked activities that transforms inputs into outputs to create value for a customer.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v037",
+      "term": "Productivity",
+      "def": "The ratio of output to the input used to produce it, such as units produced per labour hour.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v038",
+      "term": "Lead time",
+      "def": "The total time from placing an order to receiving the goods or completing the process.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v039",
+      "term": "Just-in-time (JIT) inventory",
+      "def": "An inventory system that receives materials only as they are needed in production, reducing carrying costs and waste.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v040",
+      "term": "Capacity utilization",
+      "def": "The percentage of maximum possible output that a firm actually produces.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v041",
+      "term": "Inventory turnover",
+      "def": "The number of times inventory is sold and replaced in a period, calculated as cost of goods sold divided by average inventory.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v042",
+      "term": "Economies of scale",
+      "def": "Cost advantages that a firm gains as its volume of production grows, lowering the cost per unit.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v043",
+      "term": "Critical path",
+      "def": "The longest sequence of dependent tasks in a project, which sets the minimum time needed to finish it.",
+      "sub": "Operations"
+    },
+    {
+      "id": "bm-v044",
+      "term": "Mission statement",
+      "def": "A statement of an organization's purpose and what it does for whom.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v045",
+      "term": "Vision statement",
+      "def": "A statement describing the future state the organization aims to achieve.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v046",
+      "term": "SWOT analysis",
+      "def": "A review of a firm's internal strengths and weaknesses and external opportunities and threats.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v047",
+      "term": "Strategic plan",
+      "def": "A long-range plan that sets an organization's overall direction and allocates major resources.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v048",
+      "term": "Operational plan",
+      "def": "A short-term, specific plan that sets the detailed actions and targets needed to carry out strategy.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v049",
+      "term": "Managerial control",
+      "def": "The process of setting standards, measuring performance, comparing results to standards, and taking corrective action.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v050",
+      "term": "Feedforward control",
+      "def": "Control that anticipates problems before work begins, such as inspecting inputs before production.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v051",
+      "term": "Management by objectives (MBO)",
+      "def": "A process in which managers and employees jointly set goals and link rewards to achieving them.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v052",
+      "term": "Balanced scorecard",
+      "def": "A performance framework measuring financial, customer, internal process, and learning and growth perspectives.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v053",
+      "term": "Key performance indicator (KPI)",
+      "def": "A measurable value that shows how effectively an organization is achieving a key objective.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v054",
+      "term": "Management by exception",
+      "def": "A management approach that focuses attention on significant deviations from plan rather than routine results.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v055",
+      "term": "Organizing",
+      "def": "The management function of grouping tasks, assigning authority, and establishing reporting relationships.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v056",
+      "term": "Staffing",
+      "def": "The management function of recruiting, selecting, training, and retaining employees.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v057",
+      "term": "Managerial ethics",
+      "def": "The standards of right and wrong that guide managers' decisions and behaviour toward employees, customers, and society.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v058",
+      "term": "Laissez-faire leadership",
+      "def": "A leadership style in which leaders give employees wide freedom to make decisions with little direction.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v059",
+      "term": "Theory X",
+      "def": "A management assumption that workers dislike work and need close supervision and control.",
+      "sub": "Strategic Management"
+    },
+    {
+      "id": "bm-v060",
+      "term": "Business plan",
+      "def": "A written document describing a business's goals, strategy, market, operations, and financial projections.",
+      "sub": "Strategic Management"
+    }
+  ]
+}

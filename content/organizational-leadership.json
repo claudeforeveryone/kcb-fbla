@@ -1,0 +1,1780 @@
+{
+  "slug": "organizational-leadership",
+  "name": "Organizational Leadership",
+  "group": "objective",
+  "notes": "Could not open the official 2025-26 FBLA Organizational Leadership guideline: fbla.org returned HTTP 403 to every fetch (https://www.fbla.org/competitive-events/ and https://www.fbla.org/high-school/competitive-events/), and no PDF surfaced in search. Competency areas are therefore the standard high-school organizational leadership and management curriculum areas (leadership, motivation, communication, management functions, decision making, ethics, organizational structure and culture, change and conflict). The one partial reference found was a CliffsNotes page reproducing an archived 2018 FBLA-PBL Organizational Leadership competency list (https://www.cliffsnotes.com/study-notes/34046510), which I could not open to confirm. Re-check the sub areas and weights against the 2025-26 guideline PDF once it can be reached. Questions are original practice items written to FBLA state/NLC difficulty, with U.S. conventions.",
+  "subs": [
+    "Leadership Concepts and Traits",
+    "Motivation and Leadership Theories",
+    "Communication and Teamwork",
+    "Managerial Functions",
+    "Decision Making and Problem Solving",
+    "Ethics and Social Responsibility",
+    "Organizational Structure and Culture",
+    "Change Management and Conflict Resolution"
+  ],
+  "questions": [
+    {
+      "id": "ol-001",
+      "q": "Which leadership style is characterized by the leader making decisions alone with little input from group members?",
+      "choices": [
+        "Autocratic leadership",
+        "Democratic leadership",
+        "Laissez-faire leadership",
+        "Transformational leadership"
+      ],
+      "answer": 0,
+      "explain": "Autocratic leaders decide alone and direct followers. Democratic leaders seek member input, which is the common confusion.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 2
+    },
+    {
+      "id": "ol-002",
+      "q": "According to Maslow's hierarchy of needs, which level sits at the top of the pyramid?",
+      "choices": [
+        "Safety needs",
+        "Belonging needs",
+        "Self-actualization",
+        "Physiological needs"
+      ],
+      "answer": 2,
+      "explain": "Self-actualization is the highest level, reached after physiological, safety, and belonging and esteem needs are met.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 2
+    },
+    {
+      "id": "ol-003",
+      "q": "A manager openly admits a missed deadline and takes responsibility for fixing it with the team. Which core leadership trait is shown?",
+      "choices": [
+        "Charisma",
+        "Accountability",
+        "Authoritarianism",
+        "Delegation"
+      ],
+      "answer": 1,
+      "explain": "Accountability means owning results, including failures. Delegation is assigning work, which is not what the scenario describes.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 2
+    },
+    {
+      "id": "ol-004",
+      "q": "Which management function involves setting goals and deciding the course of action needed to reach them?",
+      "choices": [
+        "Organizing",
+        "Controlling",
+        "Staffing",
+        "Planning"
+      ],
+      "answer": 3,
+      "explain": "Planning sets objectives and the actions to reach them. Organizing arranges resources once the plan exists.",
+      "sub": "Managerial Functions",
+      "diff": 2
+    },
+    {
+      "id": "ol-005",
+      "q": "A manager picks the first option that meets minimum requirements instead of searching for the best possible option. Which decision approach is this?",
+      "choices": [
+        "Satisficing",
+        "Maximizing",
+        "Brainstorming",
+        "Benchmarking"
+      ],
+      "answer": 0,
+      "explain": "Satisficing accepts an option that is good enough. Maximizing would require evaluating all alternatives for the best one.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 3
+    },
+    {
+      "id": "ol-006",
+      "q": "Which communication barrier occurs when a receiver filters a message through personal biases and experiences?",
+      "choices": [
+        "Noise",
+        "Feedback delay",
+        "Perception",
+        "Channel overload"
+      ],
+      "answer": 2,
+      "explain": "Perception barriers distort meaning based on the receiver's own frame of reference. Noise refers to physical or environmental interference.",
+      "sub": "Communication and Teamwork",
+      "diff": 2
+    },
+    {
+      "id": "ol-007",
+      "q": "Which ethical framework judges an action by whether it produces the greatest good for the greatest number of people?",
+      "choices": [
+        "Deontology",
+        "Utilitarianism",
+        "Egoism",
+        "Virtue ethics"
+      ],
+      "answer": 1,
+      "explain": "Utilitarianism weighs outcomes for the largest group. Deontology judges actions by duties and rules regardless of outcomes.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 2
+    },
+    {
+      "id": "ol-008",
+      "q": "In a functional organizational structure, employees are grouped primarily by:",
+      "choices": [
+        "Customer served",
+        "Geographic region",
+        "Product line",
+        "Area of specialty, such as marketing or finance"
+      ],
+      "answer": 3,
+      "explain": "Functional structures group staff by specialty. Divisional structures group by product, region, or customer.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 2
+    },
+    {
+      "id": "ol-009",
+      "q": "Which conflict management style gives up some of one's own goals to preserve the relationship?",
+      "choices": [
+        "Accommodating",
+        "Competing",
+        "Avoiding",
+        "Collaborating"
+      ],
+      "answer": 0,
+      "explain": "Accommodating yields to the other party's wishes. Competing pursues one's own goals at the other party's expense.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 2
+    },
+    {
+      "id": "ol-010",
+      "q": "In Herzberg's two-factor theory, which of the following is a motivator rather than a hygiene factor?",
+      "choices": [
+        "Salary",
+        "Job security",
+        "Recognition for achievement",
+        "Working conditions"
+      ],
+      "answer": 2,
+      "explain": "Motivators such as achievement and recognition drive satisfaction. Hygiene factors such as salary and security prevent dissatisfaction but do not motivate on their own.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 2
+    },
+    {
+      "id": "ol-011",
+      "q": "Which type of communication flows from subordinates up to managers?",
+      "choices": [
+        "Downward",
+        "Upward",
+        "Grapevine",
+        "Horizontal"
+      ],
+      "answer": 1,
+      "explain": "Upward communication carries feedback, questions, and reports from staff to management. Grapevine is informal and moves in all directions.",
+      "sub": "Communication and Teamwork",
+      "diff": 2
+    },
+    {
+      "id": "ol-012",
+      "q": "Controlling as a management function primarily involves:",
+      "choices": [
+        "Hiring and training staff",
+        "Designing the organizational chart",
+        "Setting the long-range vision",
+        "Comparing actual performance to standards and correcting deviations"
+      ],
+      "answer": 3,
+      "explain": "Controlling measures performance against standards and takes corrective action. The other options describe staffing, organizing, and planning.",
+      "sub": "Managerial Functions",
+      "diff": 3
+    },
+    {
+      "id": "ol-013",
+      "q": "A decision matrix is used to:",
+      "choices": [
+        "Rank alternatives by weighted criteria",
+        "Forecast market demand",
+        "Map communication channels",
+        "Track employee attendance"
+      ],
+      "answer": 0,
+      "explain": "A decision matrix scores each option against weighted criteria so the totals can be compared. It is not a forecasting tool.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 2
+    },
+    {
+      "id": "ol-014",
+      "q": "Corporate social responsibility refers to:",
+      "choices": [
+        "Maximizing shareholder returns only",
+        "Avoiding all government regulation",
+        "A company's obligations to society beyond what the law requires",
+        "Charitable donations made only during tax season"
+      ],
+      "answer": 2,
+      "explain": "CSR covers voluntary responsibilities to employees, communities, and the environment beyond legal minimums.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 2
+    },
+    {
+      "id": "ol-015",
+      "q": "Organizational culture is best described as:",
+      "choices": [
+        "The legal structure of the business",
+        "Shared values, beliefs, and norms that guide behavior",
+        "The written job descriptions of employees",
+        "The budget allocated to each department"
+      ],
+      "answer": 1,
+      "explain": "Culture is the shared set of values and unwritten norms that shape how people act. Legal structure and job descriptions are formal, not cultural.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 2
+    },
+    {
+      "id": "ol-016",
+      "q": "The first step in Kotter's eight-step change model is:",
+      "choices": [
+        "Consolidating gains",
+        "Anchoring changes in the culture",
+        "Generating short-term wins",
+        "Creating a sense of urgency"
+      ],
+      "answer": 3,
+      "explain": "Kotter begins by establishing urgency. Consolidating gains and anchoring changes come near the end of the model.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 3
+    },
+    {
+      "id": "ol-017",
+      "q": "Servant leadership focuses primarily on:",
+      "choices": [
+        "Serving the needs of followers and the community",
+        "Maximizing the leader's personal authority",
+        "Strict enforcement of rules",
+        "Rapid individual promotion"
+      ],
+      "answer": 0,
+      "explain": "Servant leaders put the growth and needs of followers first, which is the opposite of an authority-centered style.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 2
+    },
+    {
+      "id": "ol-018",
+      "q": "McGregor's Theory X assumes that employees:",
+      "choices": [
+        "Seek responsibility and creativity",
+        "Are self-directed and enjoy their work",
+        "Dislike work and must be closely supervised",
+        "Are motivated mainly by peer belonging"
+      ],
+      "answer": 2,
+      "explain": "Theory X is the pessimistic view that workers avoid work and need control. Theory Y is the optimistic counterpart.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 2
+    },
+    {
+      "id": "ol-019",
+      "q": "Which nonverbal cue most often signals openness and engagement during a presentation?",
+      "choices": [
+        "Crossed arms",
+        "Eye contact and an open posture",
+        "Looking at a phone",
+        "Hands kept in pockets"
+      ],
+      "answer": 1,
+      "explain": "Eye contact and open posture show confidence and engagement. Crossed arms and distracted behavior signal the opposite.",
+      "sub": "Communication and Teamwork",
+      "diff": 2
+    },
+    {
+      "id": "ol-020",
+      "q": "Span of control refers to:",
+      "choices": [
+        "The number of levels in an organization",
+        "The total budget of a department",
+        "The distance between headquarters and branch offices",
+        "The number of subordinates a manager directly supervises"
+      ],
+      "answer": 3,
+      "explain": "Span of control is the number of direct reports. A narrow span usually creates more management levels.",
+      "sub": "Managerial Functions",
+      "diff": 2
+    },
+    {
+      "id": "ol-021",
+      "q": "An analysis shows that 80 percent of customer complaints come from 20 percent of causes. This pattern is known as:",
+      "choices": [
+        "The 80/20 rule, or Pareto principle",
+        "The Gantt principle",
+        "The Hawthorne effect",
+        "The bell curve rule"
+      ],
+      "answer": 0,
+      "explain": "The Pareto principle says a small share of causes drives most results. It is used to prioritize problems.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 3
+    },
+    {
+      "id": "ol-022",
+      "q": "Which of the following best describes a conflict of interest?",
+      "choices": [
+        "Disagreement over project timelines",
+        "Two employees with different working styles",
+        "A situation where a personal interest could improperly influence professional judgment",
+        "Shared responsibility for a joint task"
+      ],
+      "answer": 2,
+      "explain": "A conflict of interest exists when a personal interest could compromise professional duties, even if no wrong is done.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 2
+    },
+    {
+      "id": "ol-023",
+      "q": "A matrix organizational structure is characterized by:",
+      "choices": [
+        "A single chain of command with no shared authority",
+        "Employees reporting to both a functional manager and a project manager",
+        "All decisions made by one owner",
+        "Departments organized by geography only"
+      ],
+      "answer": 1,
+      "explain": "Matrix structures give staff two reporting lines, which supports cross-functional projects but can create role confusion.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 2
+    },
+    {
+      "id": "ol-024",
+      "q": "Which is the most effective first step in resolving a workplace conflict?",
+      "choices": [
+        "Escalate it to the board of directors",
+        "Ignore the issue until the next performance review",
+        "Publicly criticize the other party",
+        "Meet privately with each party to understand the issue"
+      ],
+      "answer": 3,
+      "explain": "A private, direct conversation with each party gathers facts and keeps the issue contained before escalation is considered.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 2
+    },
+    {
+      "id": "ol-025",
+      "q": "Which trait describes a leader's ability to remain effective when priorities change suddenly?",
+      "choices": [
+        "Adaptability",
+        "Rigidity",
+        "Authoritarianism",
+        "Indecision"
+      ],
+      "answer": 0,
+      "explain": "Adaptability is the capacity to adjust approach and priorities as conditions change.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 2
+    },
+    {
+      "id": "ol-026",
+      "q": "Vroom's expectancy theory states that motivation depends on which three factors?",
+      "choices": [
+        "Need, drive, and incentive",
+        "Ethics, equity, and effort",
+        "Expectancy, instrumentality, and valence",
+        "Salary, status, and security"
+      ],
+      "answer": 2,
+      "explain": "Expectancy (effort leads to performance), instrumentality (performance leads to reward), and valence (value of the reward) multiply to produce motivation.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 3
+    },
+    {
+      "id": "ol-027",
+      "q": "Which approach best encourages participation from quieter team members during a meeting?",
+      "choices": [
+        "Calling on the most senior person first only",
+        "Using round-robin turns for input",
+        "Ending the meeting early if discussion slows",
+        "Letting one person speak uninterrupted"
+      ],
+      "answer": 1,
+      "explain": "Round-robin turns give every member a structured chance to contribute, which draws out quieter voices.",
+      "sub": "Communication and Teamwork",
+      "diff": 2
+    },
+    {
+      "id": "ol-028",
+      "q": "Which management function involves assigning people and resources to tasks and positions?",
+      "choices": [
+        "Planning",
+        "Controlling",
+        "Leading",
+        "Organizing"
+      ],
+      "answer": 3,
+      "explain": "Organizing arranges people, tasks, and resources into a structure. Leading is about influencing and motivating people.",
+      "sub": "Managerial Functions",
+      "diff": 2
+    },
+    {
+      "id": "ol-029",
+      "q": "Groupthink is best described as:",
+      "choices": [
+        "A group decision process that suppresses dissent in pursuit of consensus",
+        "Brainstorming without any evaluation",
+        "Independent decision making by each team member",
+        "A formal voting procedure"
+      ],
+      "answer": 0,
+      "explain": "Groupthink happens when the desire for harmony overrides critical evaluation of alternatives.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 3
+    },
+    {
+      "id": "ol-030",
+      "q": "Which principle means treating all employees fairly and giving each the opportunity to succeed based on merit and need?",
+      "choices": [
+        "Efficiency",
+        "Hierarchy",
+        "Equity",
+        "Specialization"
+      ],
+      "answer": 2,
+      "explain": "Equity focuses on fair treatment and outcomes. Equality gives everyone the same resources, which is a related but different idea.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 2
+    },
+    {
+      "id": "ol-031",
+      "q": "Which is an example of an informal organization?",
+      "choices": [
+        "The official organizational chart",
+        "A group of coworkers who regularly lunch together and share information",
+        "The written employee handbook",
+        "The formal board of directors"
+      ],
+      "answer": 1,
+      "explain": "The informal organization is the network of relationships that exists alongside the formal structure.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 2
+    },
+    {
+      "id": "ol-032",
+      "q": "Lewin's three-stage model of change consists of:",
+      "choices": [
+        "Plan, act, observe",
+        "Start, develop, close",
+        "Define, measure, control",
+        "Unfreeze, change, refreeze"
+      ],
+      "answer": 3,
+      "explain": "Unfreeze prepares people to let go of old behavior, change moves them to the new state, and refreeze locks in the new norm.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 2
+    },
+    {
+      "id": "ol-033",
+      "q": "Transformational leaders primarily influence followers by:",
+      "choices": [
+        "Inspiring a shared vision and encouraging personal growth",
+        "Relying on rewards and punishments for compliance",
+        "Avoiding decisions until consensus forms",
+        "Restricting information to protect their authority"
+      ],
+      "answer": 0,
+      "explain": "Transformational leaders motivate through vision, inspiration, and development. Rewards and punishments describe transactional leadership.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 2
+    },
+    {
+      "id": "ol-034",
+      "q": "In Maslow's hierarchy, which need comes directly above safety needs?",
+      "choices": [
+        "Self-actualization",
+        "Esteem",
+        "Belonging and love",
+        "Physiological needs"
+      ],
+      "answer": 2,
+      "explain": "The order from bottom to top is physiological, safety, belonging and love, esteem, and self-actualization.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 2
+    },
+    {
+      "id": "ol-035",
+      "q": "Which communication channel is best for sensitive, complex, or emotionally charged messages?",
+      "choices": [
+        "Mass email",
+        "Face-to-face conversation",
+        "Text message",
+        "Posted memo"
+      ],
+      "answer": 1,
+      "explain": "Face-to-face communication carries tone and nonverbal cues that reduce misunderstanding in difficult messages.",
+      "sub": "Communication and Teamwork",
+      "diff": 2
+    },
+    {
+      "id": "ol-036",
+      "q": "A manager sets a quarterly budget and then compares actual spending to it each month. Which two functions are involved?",
+      "choices": [
+        "Leading and staffing",
+        "Organizing and planning only",
+        "Staffing and communicating",
+        "Planning and controlling"
+      ],
+      "answer": 3,
+      "explain": "Setting the budget is planning. Monitoring and comparing against it is controlling.",
+      "sub": "Managerial Functions",
+      "diff": 3
+    },
+    {
+      "id": "ol-037",
+      "q": "Which step comes first in the rational decision-making model?",
+      "choices": [
+        "Identify the problem",
+        "Implement the chosen solution",
+        "Evaluate the alternatives",
+        "Monitor the results"
+      ],
+      "answer": 0,
+      "explain": "The rational model begins with defining the problem clearly before generating or evaluating options.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 2
+    },
+    {
+      "id": "ol-038",
+      "q": "A manager discovers that a subordinate has falsified expense reports. The most ethical first response is to:",
+      "choices": [
+        "Ignore it to avoid conflict",
+        "Reduce the employee's pay privately",
+        "Investigate through proper channels and follow company policy",
+        "Post the findings on social media"
+      ],
+      "answer": 2,
+      "explain": "Ethical handling means verifying facts and following established policy and reporting channels, with due process for the employee.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 3
+    },
+    {
+      "id": "ol-039",
+      "q": "Centralized decision making means:",
+      "choices": [
+        "Decisions are made at lower levels by front-line staff",
+        "Decisions are concentrated at the top of the organization",
+        "Every department votes on each decision",
+        "Decisions are made by outside consultants"
+      ],
+      "answer": 1,
+      "explain": "Centralization keeps authority at the top. Decentralization pushes it down the hierarchy.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 2
+    },
+    {
+      "id": "ol-040",
+      "q": "Which conflict management style seeks a solution that fully satisfies both parties?",
+      "choices": [
+        "Avoiding",
+        "Accommodating",
+        "Competing",
+        "Collaborating"
+      ],
+      "answer": 3,
+      "explain": "Collaborating, also called integrative problem solving, looks for win-win outcomes that meet both sets of interests.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 3
+    },
+    {
+      "id": "ol-041",
+      "q": "Which is a core characteristic of an effective leader's vision?",
+      "choices": [
+        "A clear, inspiring direction for the future",
+        "Frequent changes to avoid commitment",
+        "Focus only on daily tasks",
+        "Secrecy about goals"
+      ],
+      "answer": 0,
+      "explain": "A vision gives people a clear and motivating destination. Vision is about direction, not day-to-day operations.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 2
+    },
+    {
+      "id": "ol-042",
+      "q": "Which theory proposes that people are motivated by a strong need for achievement, power, and affiliation?",
+      "choices": [
+        "Theory X",
+        "Two-factor theory",
+        "McClelland's needs theory",
+        "Equity theory"
+      ],
+      "answer": 2,
+      "explain": "McClelland's needs theory identifies achievement, power, and affiliation as learned needs that drive behavior.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 2
+    },
+    {
+      "id": "ol-043",
+      "q": "Which barrier to communication is caused by a lack of shared language or excessive jargon?",
+      "choices": [
+        "Physical noise",
+        "Semantic barrier",
+        "Information overload",
+        "Emotional filtering"
+      ],
+      "answer": 1,
+      "explain": "Semantic barriers arise when words mean different things to the sender and receiver.",
+      "sub": "Communication and Teamwork",
+      "diff": 2
+    },
+    {
+      "id": "ol-044",
+      "q": "Which tool breaks a project into tasks, durations, and dependencies on a timeline?",
+      "choices": [
+        "SWOT analysis",
+        "Fishbone diagram",
+        "Pareto chart",
+        "Gantt chart"
+      ],
+      "answer": 3,
+      "explain": "A Gantt chart displays scheduled tasks as bars on a timeline. A fishbone diagram identifies causes of a problem.",
+      "sub": "Managerial Functions",
+      "diff": 2
+    },
+    {
+      "id": "ol-045",
+      "q": "Which technique generates many ideas before any are evaluated?",
+      "choices": [
+        "Brainstorming",
+        "Cost-benefit analysis",
+        "Break-even analysis",
+        "Variance analysis"
+      ],
+      "answer": 0,
+      "explain": "Brainstorming separates idea generation from evaluation to encourage a wide range of options.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 2
+    },
+    {
+      "id": "ol-046",
+      "q": "Whistleblower protection is best described as:",
+      "choices": [
+        "Permission to ignore company policy",
+        "A bonus paid for reporting competitors",
+        "Legal safeguards for employees who report illegal or unethical conduct",
+        "A requirement to report all coworkers' personal conduct"
+      ],
+      "answer": 2,
+      "explain": "Whistleblower protections shield employees from retaliation when they report wrongdoing in good faith.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 2
+    },
+    {
+      "id": "ol-047",
+      "q": "Which organizational structure is typically the flattest?",
+      "choices": [
+        "Tall hierarchy",
+        "Flat structure with few management levels",
+        "Multi-divisional",
+        "Matrix"
+      ],
+      "answer": 1,
+      "explain": "A flat structure has few layers between top management and front-line staff, which usually means a wide span of control.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 2
+    },
+    {
+      "id": "ol-048",
+      "q": "Resistance to change is most effectively reduced by:",
+      "choices": [
+        "Imposing the change quickly without explanation",
+        "Removing employees who resist",
+        "Reducing communication until the change is complete",
+        "Involving employees early and explaining the reasons"
+      ],
+      "answer": 3,
+      "explain": "Participation and clear reasoning build buy-in. Imposition and silence tend to increase resistance.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 2
+    },
+    {
+      "id": "ol-049",
+      "q": "Situational leadership theory suggests that:",
+      "choices": [
+        "The most effective leadership style depends on the followers' readiness and the situation",
+        "One leadership style works in every situation",
+        "Leaders are born and cannot be developed",
+        "Leadership depends mainly on the leader's appearance"
+      ],
+      "answer": 0,
+      "explain": "Hersey and Blanchard's model matches directive or supportive behavior to follower competence and commitment.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 3
+    },
+    {
+      "id": "ol-050",
+      "q": "Which motivational approach ties rewards directly to individual performance?",
+      "choices": [
+        "Job rotation",
+        "Team lunch events",
+        "Merit pay",
+        "Open office layout"
+      ],
+      "answer": 2,
+      "explain": "Merit pay links compensation to measured individual results, which is a direct extrinsic reward.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 2
+    },
+    {
+      "id": "ol-051",
+      "q": "Which is the best use of feedback in a team?",
+      "choices": [
+        "Only point out mistakes",
+        "Give specific, timely feedback on behavior and results",
+        "Save all feedback for annual reviews",
+        "Share feedback only with management"
+      ],
+      "answer": 1,
+      "explain": "Effective feedback is specific, timely, and focused on behavior and results, and it is useful in both directions.",
+      "sub": "Communication and Teamwork",
+      "diff": 1
+    },
+    {
+      "id": "ol-052",
+      "q": "Staffing as a management function includes:",
+      "choices": [
+        "Writing the company mission statement",
+        "Setting the annual revenue target",
+        "Auditing financial statements",
+        "Recruiting, selecting, training, and developing employees"
+      ],
+      "answer": 3,
+      "explain": "Staffing covers filling and developing positions with qualified people.",
+      "sub": "Managerial Functions",
+      "diff": 1
+    },
+    {
+      "id": "ol-053",
+      "q": "Which decision tool compares expected monetary outcomes weighted by their probabilities?",
+      "choices": [
+        "Expected value analysis",
+        "Mind mapping",
+        "Force field analysis",
+        "Empathy mapping"
+      ],
+      "answer": 0,
+      "explain": "Expected value multiplies each outcome by its probability and sums the results to compare options under uncertainty.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 3
+    },
+    {
+      "id": "ol-054",
+      "q": "Which statement best reflects stakeholder theory?",
+      "choices": [
+        "Only shareholders matter to management",
+        "Management should focus only on profit",
+        "A business should consider the interests of all groups its actions affect",
+        "Customers are the only stakeholders"
+      ],
+      "answer": 2,
+      "explain": "Stakeholder theory includes employees, customers, suppliers, communities, and owners, not shareholders alone.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 1
+    },
+    {
+      "id": "ol-055",
+      "q": "A chart showing job titles, reporting relationships, and lines of authority is called an:",
+      "choices": [
+        "Budget",
+        "Organizational chart",
+        "Strategic plan",
+        "Mission statement"
+      ],
+      "answer": 1,
+      "explain": "An organizational chart shows the formal structure of authority and reporting.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 1
+    },
+    {
+      "id": "ol-056",
+      "q": "In change management, which step reinforces new behaviors so they become the standard?",
+      "choices": [
+        "Unfreezing",
+        "Diagnosing",
+        "Piloting",
+        "Refreezing"
+      ],
+      "answer": 3,
+      "explain": "Refreezing in Lewin's model locks in the new behavior through reinforcement, policies, and culture.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 3
+    },
+    {
+      "id": "ol-057",
+      "q": "Which leadership quality is most closely tied to earning trust over time?",
+      "choices": [
+        "Consistency and integrity",
+        "Frequent reorganizations",
+        "Strict secrecy",
+        "Constant competition"
+      ],
+      "answer": 0,
+      "explain": "Trust grows when leaders act consistently with their stated values.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 1
+    },
+    {
+      "id": "ol-058",
+      "q": "Equity theory predicts that employees become dissatisfied when they perceive:",
+      "choices": [
+        "Their pay is above the industry average",
+        "Their manager is too friendly",
+        "Their input-to-outcome ratio is unfair compared with peers",
+        "Their workload is shared evenly"
+      ],
+      "answer": 2,
+      "explain": "Equity theory compares a person's inputs and outcomes with those of comparable others. Perceived unfairness reduces motivation.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 3
+    },
+    {
+      "id": "ol-059",
+      "q": "What is the main purpose of an agenda in a business meeting?",
+      "choices": [
+        "To record decisions after the meeting",
+        "To outline topics and goals in advance",
+        "To assign blame for missed deadlines",
+        "To limit attendance to managers"
+      ],
+      "answer": 1,
+      "explain": "An agenda sets topics, goals, and timing so participants can prepare and the meeting stays focused.",
+      "sub": "Communication and Teamwork",
+      "diff": 1
+    },
+    {
+      "id": "ol-060",
+      "q": "Which management function involves monitoring performance and taking corrective action?",
+      "choices": [
+        "Planning",
+        "Organizing",
+        "Leading",
+        "Controlling"
+      ],
+      "answer": 3,
+      "explain": "Controlling is the feedback loop of measuring results against standards and correcting deviations.",
+      "sub": "Managerial Functions",
+      "diff": 1
+    },
+    {
+      "id": "ol-061",
+      "q": "Which tool identifies an organization's strengths, weaknesses, opportunities, and threats?",
+      "choices": [
+        "SWOT analysis",
+        "PERT chart",
+        "Break-even chart",
+        "Balanced scorecard"
+      ],
+      "answer": 0,
+      "explain": "SWOT pairs internal factors (strengths, weaknesses) with external factors (opportunities, threats).",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 1
+    },
+    {
+      "id": "ol-062",
+      "q": "The Sarbanes-Oxley Act of 2002 primarily aimed to:",
+      "choices": [
+        "Regulate consumer credit cards",
+        "Set the federal minimum wage",
+        "Improve corporate financial disclosure and accountability",
+        "Create federal labor unions"
+      ],
+      "answer": 2,
+      "explain": "SOX was a U.S. federal response to corporate accounting scandals, and it strengthened internal controls and executive responsibility.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 3
+    },
+    {
+      "id": "ol-063",
+      "q": "A company with separate divisions for each product line most likely uses which structure?",
+      "choices": [
+        "Functional",
+        "Divisional",
+        "Simple",
+        "Network"
+      ],
+      "answer": 1,
+      "explain": "Divisional structures organize around products, markets, or regions, each with its own resources.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 1
+    },
+    {
+      "id": "ol-064",
+      "q": "Which is a common driver of organizational change?",
+      "choices": [
+        "Stable customer demand",
+        "Unchanged technology",
+        "Identical competitors",
+        "New technology or shifting market demand"
+      ],
+      "answer": 3,
+      "explain": "External forces such as technology and market shifts are a main reason organizations must change.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 1
+    },
+    {
+      "id": "ol-065",
+      "q": "Which is the best definition of leadership?",
+      "choices": [
+        "The process of influencing a group toward achieving goals",
+        "The formal authority to give orders",
+        "The title given to a senior manager",
+        "The ability to win every argument"
+      ],
+      "answer": 0,
+      "explain": "Leadership is influence. Authority and title do not guarantee that people will follow.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 1
+    },
+    {
+      "id": "ol-066",
+      "q": "In Herzberg's theory, which of the following is a hygiene factor?",
+      "choices": [
+        "Achievement",
+        "Recognition",
+        "Company policy and supervision",
+        "Advancement"
+      ],
+      "answer": 2,
+      "explain": "Hygiene factors such as policy, supervision, and working conditions prevent dissatisfaction but do not create motivation.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 1
+    },
+    {
+      "id": "ol-067",
+      "q": "A manager receives a message full of technical jargon from a remote team. Which step best ensures understanding?",
+      "choices": [
+        "Reply with the same jargon",
+        "Paraphrase the message and confirm understanding through feedback",
+        "Ignore the message until a meeting",
+        "Forward it to the CEO"
+      ],
+      "answer": 1,
+      "explain": "Paraphrasing and asking for confirmation closes the feedback loop and catches misunderstandings early.",
+      "sub": "Communication and Teamwork",
+      "diff": 1
+    },
+    {
+      "id": "ol-068",
+      "q": "Delegation means:",
+      "choices": [
+        "Giving up accountability for results",
+        "Assigning all tasks to the most senior staff",
+        "Doing all the work personally to ensure quality",
+        "Assigning tasks and authority while keeping accountability for outcomes"
+      ],
+      "answer": 3,
+      "explain": "Delegation transfers authority for a task, but the manager remains accountable for results.",
+      "sub": "Managerial Functions",
+      "diff": 1
+    },
+    {
+      "id": "ol-069",
+      "q": "Which bias occurs when people favor information that supports their existing beliefs?",
+      "choices": [
+        "Confirmation bias",
+        "Halo effect",
+        "Anchoring bias",
+        "Recency bias"
+      ],
+      "answer": 0,
+      "explain": "Confirmation bias leads decision makers to seek and weigh evidence that confirms what they already think.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 3
+    },
+    {
+      "id": "ol-070",
+      "q": "Which principle means a company discloses material information fairly and truthfully to stakeholders?",
+      "choices": [
+        "Confidentiality",
+        "Autonomy",
+        "Transparency",
+        "Subsidiarity"
+      ],
+      "answer": 2,
+      "explain": "Transparency means open, accurate disclosure. Confidentiality protects information, which can be appropriate but is a different principle.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 1
+    },
+    {
+      "id": "ol-071",
+      "q": "In a span of control analysis, a narrow span usually means:",
+      "choices": [
+        "Many subordinates per manager",
+        "Few subordinates per manager",
+        "Few management levels",
+        "Wide geographic coverage"
+      ],
+      "answer": 1,
+      "explain": "A narrow span means each manager supervises few people, which usually creates more layers in a tall structure.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 1
+    },
+    {
+      "id": "ol-072",
+      "q": "Which phase of Tuckman's model of team development features members testing roles and disagreeing?",
+      "choices": [
+        "Forming",
+        "Adjourning",
+        "Norming",
+        "Storming"
+      ],
+      "answer": 3,
+      "explain": "Storming is the conflict phase. Forming is orientation, norming is agreement on norms, and performing is productive work.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 3
+    },
+    {
+      "id": "ol-073",
+      "q": "Which leadership approach gives followers the most freedom with the least direction?",
+      "choices": [
+        "Laissez-faire",
+        "Autocratic",
+        "Bureaucratic",
+        "Transactional"
+      ],
+      "answer": 0,
+      "explain": "Laissez-faire leaders step back and let the group decide and self-manage.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 1
+    },
+    {
+      "id": "ol-074",
+      "q": "Which motivation theory holds that people act to reach goals they value and believe they can achieve?",
+      "choices": [
+        "Hierarchy of needs",
+        "Two-factor theory",
+        "Expectancy theory",
+        "Theory Y"
+      ],
+      "answer": 2,
+      "explain": "Expectancy theory ties effort to the belief that effort produces performance and that performance produces valued rewards.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 3
+    },
+    {
+      "id": "ol-075",
+      "q": "What is the main purpose of an elevator pitch?",
+      "choices": [
+        "To close a sale immediately",
+        "To quickly and clearly communicate who you are and what you offer",
+        "To read a full report aloud",
+        "To negotiate salary terms"
+      ],
+      "answer": 1,
+      "explain": "An elevator pitch is a short, clear introduction. It is meant to spark interest, not to close a deal.",
+      "sub": "Communication and Teamwork",
+      "diff": 1
+    },
+    {
+      "id": "ol-076",
+      "q": "Which management function is primarily about influencing and motivating people toward goals?",
+      "choices": [
+        "Planning",
+        "Organizing",
+        "Controlling",
+        "Leading"
+      ],
+      "answer": 3,
+      "explain": "Leading covers motivation, direction, and communication to align people with goals.",
+      "sub": "Managerial Functions",
+      "diff": 1
+    },
+    {
+      "id": "ol-077",
+      "q": "A decision tree is most useful for:",
+      "choices": [
+        "Mapping sequential choices and their possible outcomes",
+        "Tracking employee attendance",
+        "Designing a company logo",
+        "Recording meeting minutes"
+      ],
+      "answer": 0,
+      "explain": "Decision trees branch by choice and chance to show possible paths and outcomes for a decision.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 3
+    },
+    {
+      "id": "ol-078",
+      "q": "Which situation is an example of a conflict of interest for a purchasing agent?",
+      "choices": [
+        "Choosing the lowest qualified bidder",
+        "Documenting vendor quotes",
+        "Approving a contract with a supplier owned by a relative",
+        "Following the approved vendor list"
+      ],
+      "answer": 2,
+      "explain": "A relationship with the supplier could bias the purchasing decision, which is what makes it a conflict of interest.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 3
+    },
+    {
+      "id": "ol-079",
+      "q": "Organizational culture is most often passed on to new employees through:",
+      "choices": [
+        "Stock option plans",
+        "Stories, rituals, and observed leader behavior",
+        "Annual tax filings",
+        "Vendor contracts"
+      ],
+      "answer": 1,
+      "explain": "Culture is learned through stories, ceremonies, and what leaders model and reward.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 1
+    },
+    {
+      "id": "ol-080",
+      "q": "Which change management practice matters most when introducing new software?",
+      "choices": [
+        "Keeping it secret until launch",
+        "Skipping training to save time",
+        "Making it optional forever",
+        "Providing training and support before and after launch"
+      ],
+      "answer": 3,
+      "explain": "User adoption depends on training and ongoing support, which is a core change management principle.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 1
+    },
+    {
+      "id": "ol-081",
+      "q": "Which leadership quality describes holding oneself to a clear code of conduct even when no one is watching?",
+      "choices": [
+        "Integrity",
+        "Charisma",
+        "Delegation",
+        "Visibility"
+      ],
+      "answer": 0,
+      "explain": "Integrity is consistent ethical conduct regardless of observation.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 1
+    },
+    {
+      "id": "ol-082",
+      "q": "According to Maslow, what is the lowest level of the hierarchy?",
+      "choices": [
+        "Esteem",
+        "Safety",
+        "Physiological needs",
+        "Belonging"
+      ],
+      "answer": 2,
+      "explain": "Physiological needs such as food, water, and shelter form the base of the pyramid.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 1
+    },
+    {
+      "id": "ol-083",
+      "q": "What is the best way to close a presentation?",
+      "choices": [
+        "Apologize for the content",
+        "Summarize the key points and state the call to action",
+        "End abruptly after the last slide",
+        "Read unrelated notes aloud"
+      ],
+      "answer": 1,
+      "explain": "A strong close summarizes the main message and tells the audience what to do next.",
+      "sub": "Communication and Teamwork",
+      "diff": 1
+    },
+    {
+      "id": "ol-084",
+      "q": "Which tool compares actual results against standards to find and explain gaps?",
+      "choices": [
+        "Mind map",
+        "Empathy map",
+        "Fishbone diagram",
+        "Variance analysis"
+      ],
+      "answer": 3,
+      "explain": "Variance analysis calculates the difference between planned and actual results and investigates the cause.",
+      "sub": "Managerial Functions",
+      "diff": 3
+    },
+    {
+      "id": "ol-085",
+      "q": "Which problem-solving step involves generating several possible solutions?",
+      "choices": [
+        "Brainstorming alternatives",
+        "Implementing the plan",
+        "Evaluating results",
+        "Defining the root cause"
+      ],
+      "answer": 0,
+      "explain": "After the problem is defined, generating alternatives is the step that precedes evaluation and selection.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 1
+    },
+    {
+      "id": "ol-086",
+      "q": "Which statement best describes fiduciary duty?",
+      "choices": [
+        "A duty to maximize personal bonuses",
+        "A duty to avoid all risk",
+        "A legal obligation to act in the best interest of another party",
+        "A duty to share profits equally with employees"
+      ],
+      "answer": 2,
+      "explain": "Fiduciaries such as directors and trustees must put the interests of the party they serve ahead of their own.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 1
+    },
+    {
+      "id": "ol-087",
+      "q": "A line-and-staff structure differs from a pure line structure because it adds:",
+      "choices": [
+        "Direct production workers",
+        "Specialist advisory staff",
+        "Elected employee councils",
+        "Public shareholders"
+      ],
+      "answer": 1,
+      "explain": "Staff specialists advise line managers, who keep command authority over operations.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 3
+    },
+    {
+      "id": "ol-088",
+      "q": "Which best describes organizational resilience?",
+      "choices": [
+        "Never changing processes",
+        "Avoiding all risk",
+        "Keeping the same structure for decades",
+        "The ability to adapt and recover from disruption"
+      ],
+      "answer": 3,
+      "explain": "Resilience is the capacity to absorb shocks, adapt, and recover while continuing core operations.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 3
+    },
+    {
+      "id": "ol-089",
+      "q": "Emotional intelligence in leadership most directly involves:",
+      "choices": [
+        "Recognizing and managing one's own emotions and those of others",
+        "Avoiding all emotional topics",
+        "Making decisions without feedback",
+        "Ranking employees by performance alone"
+      ],
+      "answer": 0,
+      "explain": "Emotional intelligence includes self-awareness, self-management, empathy, and relationship skills.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 1
+    },
+    {
+      "id": "ol-090",
+      "q": "Which type of reward is intrinsic?",
+      "choices": [
+        "A year-end bonus check",
+        "A promotion with a higher salary",
+        "Personal satisfaction from completing meaningful work",
+        "A gift card from the manager"
+      ],
+      "answer": 2,
+      "explain": "Intrinsic rewards come from within the person, such as a sense of accomplishment. Pay and gifts are extrinsic.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 1
+    },
+    {
+      "id": "ol-091",
+      "q": "In negotiation, which approach focuses on mutual gain rather than winning at the other party's expense?",
+      "choices": [
+        "Zero-sum bargaining",
+        "Integrative negotiation",
+        "Hard bargaining",
+        "Ultimatum tactics"
+      ],
+      "answer": 1,
+      "explain": "Integrative negotiation expands value by exploring interests, which creates outcomes both sides can accept.",
+      "sub": "Communication and Teamwork",
+      "diff": 1
+    },
+    {
+      "id": "ol-092",
+      "q": "Which is an example of the organizing function?",
+      "choices": [
+        "Setting a five-year goal",
+        "Monitoring monthly sales",
+        "Motivating a team",
+        "Creating a new department with defined reporting lines"
+      ],
+      "answer": 3,
+      "explain": "Creating departments and reporting lines is organizing. The other options are planning, controlling, and leading.",
+      "sub": "Managerial Functions",
+      "diff": 1
+    },
+    {
+      "id": "ol-093",
+      "q": "Which decision-making model assumes complete information and a fully logical process?",
+      "choices": [
+        "Rational decision-making model",
+        "Garbage can model",
+        "Intuitive model",
+        "Satisficing model"
+      ],
+      "answer": 0,
+      "explain": "The rational model assumes full information and optimal choice. The garbage can and satisficing models relax those assumptions.",
+      "sub": "Decision Making and Problem Solving",
+      "diff": 3
+    },
+    {
+      "id": "ol-094",
+      "q": "Which best describes a code of ethics?",
+      "choices": [
+        "A list of employee vacation rules",
+        "A government tax form",
+        "A written statement of values and standards of conduct",
+        "A list of product prices"
+      ],
+      "answer": 2,
+      "explain": "A code of ethics states the values and expected conduct for members of an organization.",
+      "sub": "Ethics and Social Responsibility",
+      "diff": 1
+    },
+    {
+      "id": "ol-095",
+      "q": "Which structure groups employees by the customer segment they serve?",
+      "choices": [
+        "Functional",
+        "Customer-based",
+        "Geographic",
+        "Process"
+      ],
+      "answer": 1,
+      "explain": "Customer-based (or market-based) structures align teams with particular customer groups.",
+      "sub": "Organizational Structure and Culture",
+      "diff": 1
+    },
+    {
+      "id": "ol-096",
+      "q": "Which concept describes employees' initial reluctance to new processes?",
+      "choices": [
+        "Economies of scale",
+        "Span of control",
+        "Zero-based budgeting",
+        "Resistance to change"
+      ],
+      "answer": 3,
+      "explain": "Resistance to change is the natural reluctance to give up familiar routines and is a normal part of change management.",
+      "sub": "Change Management and Conflict Resolution",
+      "diff": 1
+    },
+    {
+      "id": "ol-097",
+      "q": "A leader uses 360-degree feedback primarily to:",
+      "choices": [
+        "Gather input from peers, subordinates, and supervisors for development",
+        "Rank employees for layoffs",
+        "Set the annual budget",
+        "Choose a new office location"
+      ],
+      "answer": 0,
+      "explain": "360-degree feedback collects multi-rater input to support self-awareness and development, not punitive decisions.",
+      "sub": "Leadership Concepts and Traits",
+      "diff": 1
+    },
+    {
+      "id": "ol-098",
+      "q": "Theory Y managers assume that employees are:",
+      "choices": [
+        "Lazy and must be controlled",
+        "Motivated only by pay",
+        "Capable of self-direction and seek responsibility",
+        "Unable to contribute ideas"
+      ],
+      "answer": 2,
+      "explain": "Theory Y is the optimistic view that people can be committed and self-directed when conditions allow.",
+      "sub": "Motivation and Leadership Theories",
+      "diff": 3
+    },
+    {
+      "id": "ol-099",
+      "q": "Which is the best example of active listening?",
+      "choices": [
+        "Planning your reply while the other person speaks",
+        "Restating the speaker's point to confirm understanding",
+        "Interrupting to share your own experience",
+        "Checking your phone during the conversation"
+      ],
+      "answer": 1,
+      "explain": "Active listening includes paraphrasing and checking understanding. Planning a reply or multitasking blocks it.",
+      "sub": "Communication and Teamwork",
+      "diff": 1
+    },
+    {
+      "id": "ol-100",
+      "q": "A manager tracks weekly output against a target and adjusts staffing when output falls short. Which two functions are primarily involved?",
+      "choices": [
+        "Planning and leading",
+        "Organizing and staffing only",
+        "Leading and communicating",
+        "Controlling and organizing"
+      ],
+      "answer": 3,
+      "explain": "Tracking against the target is controlling, and changing staffing levels and assignments is organizing.",
+      "sub": "Managerial Functions",
+      "diff": 3
+    }
+  ],
+  "vocab": [
+    {
+      "id": "ol-v001",
+      "term": "Leadership",
+      "def": "The process of influencing a group of people toward achieving a common goal.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v002",
+      "term": "Transformational leadership",
+      "def": "A leadership style in which the leader inspires followers through a shared vision and encourages their development.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v003",
+      "term": "Transactional leadership",
+      "def": "A leadership style based on exchanges, where rewards and penalties are tied to performance.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v004",
+      "term": "Servant leadership",
+      "def": "A leadership approach that puts the needs and growth of followers and the community first.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v005",
+      "term": "Autocratic leadership",
+      "def": "A leadership style in which the leader makes decisions alone with little input from members.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v006",
+      "term": "Democratic leadership",
+      "def": "A leadership style in which members participate in decision making, with the leader guiding the group.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v007",
+      "term": "Laissez-faire leadership",
+      "def": "A hands-off leadership style in which members are given wide freedom to make decisions.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v008",
+      "term": "Emotional intelligence",
+      "def": "The ability to recognize and manage one's own emotions and to understand and respond to the emotions of others.",
+      "sub": "Leadership Concepts and Traits"
+    },
+    {
+      "id": "ol-v009",
+      "term": "Maslow's hierarchy of needs",
+      "def": "A theory that ranks human needs from physiological to self-actualization, with lower needs generally met first.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v010",
+      "term": "Herzberg's two-factor theory",
+      "def": "A theory that separates hygiene factors, which prevent dissatisfaction, from motivators, which create satisfaction.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v011",
+      "term": "Theory X",
+      "def": "McGregor's view that workers dislike work, avoid responsibility, and must be closely directed and controlled.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v012",
+      "term": "Theory Y",
+      "def": "McGregor's view that workers can be self-directed, seek responsibility, and be committed when conditions allow.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v013",
+      "term": "Expectancy theory",
+      "def": "A motivation theory holding that effort depends on the belief that effort leads to performance and performance leads to valued rewards.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v014",
+      "term": "Equity theory",
+      "def": "A motivation theory holding that people judge fairness by comparing their input-to-outcome ratio with that of others.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v015",
+      "term": "Intrinsic motivation",
+      "def": "Motivation that comes from within a person, such as enjoyment of the work or personal satisfaction.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v016",
+      "term": "Extrinsic motivation",
+      "def": "Motivation driven by external rewards such as pay, promotion, or recognition.",
+      "sub": "Motivation and Leadership Theories"
+    },
+    {
+      "id": "ol-v017",
+      "term": "Active listening",
+      "def": "A communication technique in which the listener concentrates fully on the speaker and confirms understanding by paraphrasing.",
+      "sub": "Communication and Teamwork"
+    },
+    {
+      "id": "ol-v018",
+      "term": "Feedback",
+      "def": "Information about performance or behavior given to a person so they can understand results and adjust.",
+      "sub": "Communication and Teamwork"
+    },
+    {
+      "id": "ol-v019",
+      "term": "Nonverbal communication",
+      "def": "The transmission of meaning through body language, facial expression, eye contact, and tone of voice rather than words.",
+      "sub": "Communication and Teamwork"
+    },
+    {
+      "id": "ol-v020",
+      "term": "Semantic barrier",
+      "def": "A communication barrier created when the sender and receiver attach different meanings to the same words or jargon.",
+      "sub": "Communication and Teamwork"
+    },
+    {
+      "id": "ol-v021",
+      "term": "Upward communication",
+      "def": "Communication that flows from subordinates to managers, such as reports, suggestions, and questions.",
+      "sub": "Communication and Teamwork"
+    },
+    {
+      "id": "ol-v022",
+      "term": "Grapevine",
+      "def": "The informal communication network through which information spreads among employees outside official channels.",
+      "sub": "Communication and Teamwork"
+    },
+    {
+      "id": "ol-v023",
+      "term": "Tuckman's stages of team development",
+      "def": "A model of team growth in four stages: forming, storming, norming, and performing (later adding adjourning).",
+      "sub": "Communication and Teamwork"
+    },
+    {
+      "id": "ol-v024",
+      "term": "Planning",
+      "def": "The management function of setting goals and determining the actions needed to achieve them.",
+      "sub": "Managerial Functions"
+    },
+    {
+      "id": "ol-v025",
+      "term": "Organizing",
+      "def": "The management function of arranging people, tasks, and resources into a structure that supports the plan.",
+      "sub": "Managerial Functions"
+    },
+    {
+      "id": "ol-v026",
+      "term": "Leading",
+      "def": "The management function of influencing and motivating people to work toward organizational goals.",
+      "sub": "Managerial Functions"
+    },
+    {
+      "id": "ol-v027",
+      "term": "Controlling",
+      "def": "The management function of measuring performance against standards and taking corrective action when needed.",
+      "sub": "Managerial Functions"
+    },
+    {
+      "id": "ol-v028",
+      "term": "Delegation",
+      "def": "Assigning tasks and the authority to complete them to another person while the delegator stays accountable for results.",
+      "sub": "Managerial Functions"
+    },
+    {
+      "id": "ol-v029",
+      "term": "Span of control",
+      "def": "The number of employees a manager directly supervises.",
+      "sub": "Managerial Functions"
+    },
+    {
+      "id": "ol-v030",
+      "term": "Staffing",
+      "def": "The management function of recruiting, selecting, training, and developing employees.",
+      "sub": "Managerial Functions"
+    },
+    {
+      "id": "ol-v031",
+      "term": "Brainstorming",
+      "def": "A group technique for generating many ideas quickly, with evaluation deferred until after idea generation.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v032",
+      "term": "Satisficing",
+      "def": "A decision approach that selects the first option that meets minimum acceptable criteria rather than the best possible option.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v033",
+      "term": "Pareto principle",
+      "def": "The observation that roughly 80 percent of effects come from 20 percent of causes, used to set priorities.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v034",
+      "term": "SWOT analysis",
+      "def": "A planning tool that identifies internal strengths and weaknesses and external opportunities and threats.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v035",
+      "term": "Decision matrix",
+      "def": "A table that scores alternatives against weighted criteria to compare options systematically.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v036",
+      "term": "Groupthink",
+      "def": "A pattern in which a group's desire for harmony suppresses critical evaluation and dissenting views.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v037",
+      "term": "Confirmation bias",
+      "def": "The tendency to search for, favor, and remember information that supports one's existing beliefs.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v038",
+      "term": "Decision tree",
+      "def": "A diagram that maps a decision's options, chance events, and possible outcomes as connected branches.",
+      "sub": "Decision Making and Problem Solving"
+    },
+    {
+      "id": "ol-v039",
+      "term": "Ethics",
+      "def": "The principles and standards that guide what is right and wrong in an individual's or organization's conduct.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v040",
+      "term": "Code of ethics",
+      "def": "A written statement of the values and standards of conduct expected of members of an organization.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v041",
+      "term": "Corporate social responsibility",
+      "def": "A company's voluntary commitment to act in ways that benefit society, the environment, and its stakeholders beyond legal requirements.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v042",
+      "term": "Stakeholder theory",
+      "def": "The view that a business should consider the interests of all groups its actions affect, not only shareholders.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v043",
+      "term": "Conflict of interest",
+      "def": "A situation in which a personal interest could improperly influence a person's professional judgment or duties.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v044",
+      "term": "Fiduciary duty",
+      "def": "A legal obligation to act in the best interest of another party, placing that party's interests first.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v045",
+      "term": "Whistleblower protection",
+      "def": "Legal safeguards that shield employees from retaliation when they report illegal or unethical conduct in good faith.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v046",
+      "term": "Utilitarianism",
+      "def": "An ethical framework that judges actions by whether they produce the greatest good for the greatest number.",
+      "sub": "Ethics and Social Responsibility"
+    },
+    {
+      "id": "ol-v047",
+      "term": "Organizational culture",
+      "def": "The shared values, beliefs, and norms that shape how people in an organization think and behave.",
+      "sub": "Organizational Structure and Culture"
+    },
+    {
+      "id": "ol-v048",
+      "term": "Functional structure",
+      "def": "An organizational design that groups employees by specialty, such as marketing, finance, or operations.",
+      "sub": "Organizational Structure and Culture"
+    },
+    {
+      "id": "ol-v049",
+      "term": "Divisional structure",
+      "def": "An organizational design that groups units by product, market, customer, or region, each with its own resources.",
+      "sub": "Organizational Structure and Culture"
+    },
+    {
+      "id": "ol-v050",
+      "term": "Matrix structure",
+      "def": "An organizational design in which employees report to both a functional manager and a project or product manager.",
+      "sub": "Organizational Structure and Culture"
+    },
+    {
+      "id": "ol-v051",
+      "term": "Informal organization",
+      "def": "The network of relationships and unofficial groups that exists alongside the formal structure of an organization.",
+      "sub": "Organizational Structure and Culture"
+    },
+    {
+      "id": "ol-v052",
+      "term": "Line-and-staff structure",
+      "def": "An organizational design that combines line managers with command authority and specialist staff who advise them.",
+      "sub": "Organizational Structure and Culture"
+    },
+    {
+      "id": "ol-v053",
+      "term": "Lewin's change model",
+      "def": "A three-stage model of change: unfreezing existing behavior, moving to the new state, and refreezing it as the norm.",
+      "sub": "Change Management and Conflict Resolution"
+    },
+    {
+      "id": "ol-v054",
+      "term": "Kotter's eight-step model",
+      "def": "A change framework that begins with creating urgency and ends with anchoring changes in the culture.",
+      "sub": "Change Management and Conflict Resolution"
+    },
+    {
+      "id": "ol-v055",
+      "term": "Resistance to change",
+      "def": "Reluctance or opposition by employees to a new process, structure, or way of working.",
+      "sub": "Change Management and Conflict Resolution"
+    },
+    {
+      "id": "ol-v056",
+      "term": "Accommodating style",
+      "def": "A conflict approach in which one party yields to the other's wishes to preserve the relationship.",
+      "sub": "Change Management and Conflict Resolution"
+    },
+    {
+      "id": "ol-v057",
+      "term": "Collaborating style",
+      "def": "A conflict approach that seeks a solution fully satisfying both parties' interests.",
+      "sub": "Change Management and Conflict Resolution"
+    },
+    {
+      "id": "ol-v058",
+      "term": "Integrative negotiation",
+      "def": "A negotiation approach that expands value by focusing on interests, so both sides can gain.",
+      "sub": "Change Management and Conflict Resolution"
+    },
+    {
+      "id": "ol-v059",
+      "term": "Storming",
+      "def": "The stage of team development in which members clash over roles, goals, and working methods.",
+      "sub": "Change Management and Conflict Resolution"
+    },
+    {
+      "id": "ol-v060",
+      "term": "Organizational resilience",
+      "def": "The ability of an organization to adapt to disruption, recover, and continue its core operations.",
+      "sub": "Change Management and Conflict Resolution"
+    }
+  ]
+}

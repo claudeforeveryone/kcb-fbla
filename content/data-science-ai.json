@@ -1,0 +1,1780 @@
+{
+  "slug": "data-science-ai",
+  "name": "Data Science & AI",
+  "group": "objective",
+  "notes": "Competency areas from the PA FBLA 2026-2027 Data Science & AI guidelines (updated August 2026), knowledge areas and study-guide item counts: https://www.pafbla.org/wp-content/uploads/2026/09/26-27-Data-Science-AI-PA.pdf . The brief asked for 2025-26; the fbla.org 2025-26 page returned 403 and no 2025-26 knowledge-area list was retrievable, so these are the current-cycle areas. Format per the same guideline: 100 multiple-choice questions, 50 minutes, no points deducted. Question counts per area follow the guideline (15/15/10/10/10/10/10/20). Re-check against the 2025-26 guideline if its wording differs. Calculations were recomputed by hand; all items are original.",
+  "subs": [
+    "Probability and Statistics Foundations",
+    "Data Analysis and Statistics for AI",
+    "Tools for Data and AI",
+    "AI Basics",
+    "Machine Learning",
+    "Perception, Representation, and Reasoning",
+    "Privacy and Ethics",
+    "Data Literacy and Foundations"
+  ],
+  "questions": [
+    {
+      "id": "dsa-001",
+      "q": "What is the range of the dataset 4, 8, 8, 15, 21?",
+      "choices": [
+        "8",
+        "11.2",
+        "17",
+        "21"
+      ],
+      "answer": 2,
+      "explain": "Range is the maximum minus the minimum, 21 - 4 = 17. The mean of 11.2 is a different measure, a trap for students who mix up terms.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-002",
+      "q": "Which measure of central tendency is most affected by a single extreme outlier?",
+      "choices": [
+        "The median",
+        "The mode",
+        "The mean",
+        "The most frequent value"
+      ],
+      "answer": 2,
+      "explain": "The mean uses every value, so one extreme value pulls it. The median and mode are resistant to outliers.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-003",
+      "q": "The values 2, 4, and 6 are treated as a sample. What is the sample variance (divide the sum of squared deviations by n - 1)?",
+      "choices": [
+        "2",
+        "2.67",
+        "4",
+        "8"
+      ],
+      "answer": 2,
+      "explain": "The mean is 4, the squared deviations are 4, 0, 4 (sum 8), and 8 / (3 - 1) = 4. Dividing by n gives 2.67, the population variance.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-004",
+      "q": "A dataset has a standard deviation of 0. What does this mean?",
+      "choices": [
+        "The mean is zero",
+        "The dataset has no outliers",
+        "The values are evenly spaced",
+        "All values in the dataset are identical"
+      ],
+      "answer": 3,
+      "explain": "Standard deviation measures spread. A value of zero means there is no spread at all, so every value is the same.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-005",
+      "q": "In a normal (Gaussian) distribution, about what percentage of values fall within one standard deviation of the mean?",
+      "choices": [
+        "About 68%",
+        "About 95%",
+        "About 50%",
+        "About 99.7%"
+      ],
+      "answer": 0,
+      "explain": "The 68-95-99.7 rule: about 68% within one SD, 95% within two, and 99.7% within three. The 95% figure is the two-SD trap.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-006",
+      "q": "A fair six-sided die is rolled once. What is the expected value of the number shown?",
+      "choices": [
+        "3",
+        "4",
+        "6",
+        "3.5"
+      ],
+      "answer": 3,
+      "explain": "The expected value is the average of the outcomes weighted by probability: (1+2+3+4+5+6)/6 = 3.5. It is not itself a possible roll.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-007",
+      "q": "A raffle ticket costs $2. It pays $50 with probability 0.02 and pays nothing otherwise. What is the expected net gain per ticket?",
+      "choices": [
+        "-$1.00 per ticket",
+        "+$1.00 per ticket",
+        "-$0.50 per ticket",
+        "$0.00 per ticket"
+      ],
+      "answer": 0,
+      "explain": "Expected payout is 0.02 x $50 = $1.00. Subtracting the $2 cost gives an expected net of -$1.00 per ticket.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-008",
+      "q": "The number of customers who enter a store on a Monday (0, 1, 2, 3, ...) is which type of variable?",
+      "choices": [
+        "Continuous",
+        "Nominal",
+        "Ordinal",
+        "Discrete"
+      ],
+      "answer": 3,
+      "explain": "Counts that take separate whole-number values are discrete. Continuous variables can take any value within an interval.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-009",
+      "q": "A survey asks people to rate service as poor, fair, good, or excellent. What type of variable is this?",
+      "choices": [
+        "Ordinal",
+        "Nominal",
+        "Continuous",
+        "Discrete"
+      ],
+      "answer": 0,
+      "explain": "The categories have a meaningful order but the gaps between them are not necessarily equal, which defines an ordinal variable.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-010",
+      "q": "Events A and B are independent, with P(A) = 0.3 and P(B) = 0.5. What is P(A and B)?",
+      "choices": [
+        "0.80",
+        "0.65",
+        "0.35",
+        "0.15"
+      ],
+      "answer": 3,
+      "explain": "Independent events multiply: 0.3 x 0.5 = 0.15. Adding the probabilities (0.80) is the trap for students who confuse AND with OR.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-011",
+      "q": "The covariance between two variables is positive. What does this indicate?",
+      "choices": [
+        "The variables are causally linked",
+        "The correlation coefficient must equal 1",
+        "The variables have equal variances",
+        "The variables tend to move in the same direction"
+      ],
+      "answer": 3,
+      "explain": "A positive covariance means the variables tend to rise and fall together. It does not prove causation, and its size depends on units, unlike correlation.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-012",
+      "q": "What is the median of the dataset 9, 3, 7, 1, 5, 11?",
+      "choices": [
+        "6",
+        "5",
+        "7",
+        "6.5"
+      ],
+      "answer": 0,
+      "explain": "Sorted: 1, 3, 5, 7, 9, 11. With an even count, the median is the average of the two middle values, (5 + 7) / 2 = 6.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-013",
+      "q": "Which statement about the normal distribution is correct?",
+      "choices": [
+        "It is always skewed to the right",
+        "Its mean is always larger than its median",
+        "It is symmetric and bell-shaped, with mean, median, and mode equal",
+        "It applies only to discrete data"
+      ],
+      "answer": 2,
+      "explain": "A normal distribution is symmetric about its mean, so the mean, median, and mode coincide. Skewed distributions are the ones with unequal measures.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-014",
+      "q": "A bag holds 3 red and 2 blue marbles. Two marbles are drawn without replacement. What is the probability both are red?",
+      "choices": [
+        "3/10",
+        "9/25",
+        "1/5",
+        "3/5"
+      ],
+      "answer": 0,
+      "explain": "First draw: 3/5. Second draw with one fewer marble: 2/4. Product is 6/20 = 3/10. The 9/25 answer is what you get with replacement, which is the trap.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-015",
+      "q": "Which problem is the most direct cause of sampling bias?",
+      "choices": [
+        "A sample size that is too large",
+        "Reporting results to two decimal places",
+        "A sample that does not represent the population, such as surveying only online volunteers",
+        "Using a spreadsheet instead of a calculator"
+      ],
+      "answer": 2,
+      "explain": "Sampling bias occurs when some members of the population are systematically more or less likely to be selected, so the sample is unrepresentative.",
+      "sub": "Probability and Statistics Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-016",
+      "q": "Which visual is best for showing the distribution of a single continuous variable?",
+      "choices": [
+        "Histogram",
+        "Pie chart",
+        "Line chart over time",
+        "Scatterplot"
+      ],
+      "answer": 0,
+      "explain": "A histogram bins a continuous variable and shows how often values fall in each range. A scatterplot is for two variables.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-017",
+      "q": "What five values does a boxplot display?",
+      "choices": [
+        "Mean, median, mode, range, count",
+        "Minimum, Q1, median, Q3, maximum",
+        "Minimum, mean, maximum, variance, median",
+        "Q1, Q2, Q3, Q4, total"
+      ],
+      "answer": 1,
+      "explain": "A boxplot shows the five-number summary: minimum, first quartile, median, third quartile, and maximum.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-018",
+      "q": "Which diagram is best for examining the relationship between two numeric variables?",
+      "choices": [
+        "Histogram",
+        "Bar chart",
+        "Scatterplot",
+        "Pie chart"
+      ],
+      "answer": 2,
+      "explain": "A scatterplot places each observation as a point on two numeric axes, which reveals association, trend, and outliers.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-019",
+      "q": "When is multiple linear regression used?",
+      "choices": [
+        "To predict a yes or no category from one variable",
+        "To predict a numeric outcome from two or more predictor variables",
+        "To group unlabeled data into clusters",
+        "To find the most frequent value in a dataset"
+      ],
+      "answer": 1,
+      "explain": "Multiple linear regression models a numeric outcome using several predictors. Predicting a binary category is logistic regression.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-020",
+      "q": "Which technique predicts a binary outcome, such as approved or denied?",
+      "choices": [
+        "Linear regression",
+        "Logistic regression",
+        "K-means clustering",
+        "Principal component analysis"
+      ],
+      "answer": 1,
+      "explain": "Logistic regression models the probability of a binary class. Linear regression predicts continuous values and k-means does not use labels.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-021",
+      "q": "Which of these is an example of a data quality problem?",
+      "choices": [
+        "Duplicate customer records",
+        "A table with a clear data dictionary",
+        "Dates stored in one consistent format",
+        "A relational database with defined keys"
+      ],
+      "answer": 0,
+      "explain": "Duplicate records, along with missing values and low-quality sources, are common quality problems that reduce analysis reliability.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 1
+    },
+    {
+      "id": "dsa-022",
+      "q": "12% of the rows in an income column are missing. Which action is generally the most appropriate first step?",
+      "choices": [
+        "Delete the entire dataset",
+        "Replace every missing value with zero without checking",
+        "Investigate why the values are missing before deciding how to handle them",
+        "Drop the column from all future analysis"
+      ],
+      "answer": 2,
+      "explain": "The cause of missingness (random or systematic) determines whether deletion, imputation, or flagging is valid. Acting before diagnosing can bias results.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 3
+    },
+    {
+      "id": "dsa-023",
+      "q": "Which data-cleaning step removes exact repeated rows?",
+      "choices": [
+        "Normalization",
+        "Deduplication",
+        "Feature scaling",
+        "Encoding"
+      ],
+      "answer": 1,
+      "explain": "Deduplication identifies and removes duplicate records. The other options transform values rather than remove repeated rows.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-024",
+      "q": "Which algorithm groups unlabeled data into k clusters by minimizing distance to cluster centroids?",
+      "choices": [
+        "K-means",
+        "Decision tree",
+        "Linear regression",
+        "Naive Bayes"
+      ],
+      "answer": 0,
+      "explain": "K-means is an unsupervised clustering method that assigns points to the nearest of k centroids and iteratively updates them.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-025",
+      "q": "How does a decision tree decide where to split the data at each node?",
+      "choices": [
+        "By sorting the labels alphabetically",
+        "By averaging all features together",
+        "By choosing the feature test that best separates the outcome classes",
+        "By selecting random splits without testing them"
+      ],
+      "answer": 2,
+      "explain": "Trees choose splits that maximize class separation, using measures such as Gini impurity or information gain.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-026",
+      "q": "Which source is least reliable for training a model on public health data?",
+      "choices": [
+        "An anonymous forum post with no citation",
+        "A national statistics agency dataset",
+        "A peer-reviewed study with a documented method",
+        "A government health survey with a published codebook"
+      ],
+      "answer": 0,
+      "explain": "Data quality depends on provenance. Uncited, anonymous sources cannot be verified, so they are the least reliable.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-027",
+      "q": "A linear model is y = 2x + 5. What is the predicted y when x = 10?",
+      "choices": [
+        "20",
+        "25",
+        "15",
+        "52"
+      ],
+      "answer": 1,
+      "explain": "Substitute: y = 2(10) + 5 = 25. The 52 answer comes from concatenating the digits, a careless error.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 3
+    },
+    {
+      "id": "dsa-028",
+      "q": "A histogram of house prices is strongly right-skewed. Which measure is the better summary of a typical price?",
+      "choices": [
+        "Mean",
+        "Range",
+        "Sum",
+        "Median"
+      ],
+      "answer": 3,
+      "explain": "Extreme high prices pull the mean upward. The median is resistant to those outliers and better represents a typical value in skewed data.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-029",
+      "q": "A scatterplot shows points forming a tight upward diagonal. What does this suggest?",
+      "choices": [
+        "No relationship between the variables",
+        "A strong negative linear relationship",
+        "A strong positive linear relationship",
+        "A nonlinear pattern with no trend"
+      ],
+      "answer": 2,
+      "explain": "Points rising together along a tight line indicate a strong positive linear association. Correlation does not by itself prove causation.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 1
+    },
+    {
+      "id": "dsa-030",
+      "q": "A model scores 99% on its training data but 70% on new data. What is this pattern most likely showing?",
+      "choices": [
+        "Overfitting",
+        "Underfitting",
+        "Data leakage in the test set",
+        "Class imbalance only"
+      ],
+      "answer": 0,
+      "explain": "A large gap between training and new-data performance means the model memorized training patterns that do not generalize, which is overfitting.",
+      "sub": "Data Analysis and Statistics for AI",
+      "diff": 3
+    },
+    {
+      "id": "dsa-031",
+      "q": "Which SQL clause filters groups after a GROUP BY aggregation?",
+      "choices": [
+        "WHERE",
+        "ORDER BY",
+        "SELECT",
+        "HAVING"
+      ],
+      "answer": 3,
+      "explain": "WHERE filters individual rows before grouping. HAVING filters on aggregated results, such as groups whose COUNT exceeds a threshold.",
+      "sub": "Tools for Data and AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-032",
+      "q": "Which SQL statement returns only distinct values from a column?",
+      "choices": [
+        "SELECT UNIQUE",
+        "SELECT ONLY",
+        "SELECT GROUP",
+        "SELECT DISTINCT"
+      ],
+      "answer": 3,
+      "explain": "SELECT DISTINCT removes duplicate values from the result. Other keywords are not standard SQL for this purpose.",
+      "sub": "Tools for Data and AI",
+      "diff": 1
+    },
+    {
+      "id": "dsa-033",
+      "q": "Which SQL query returns the average salary for each department?",
+      "choices": [
+        "SELECT dept, AVG(salary) FROM employees GROUP BY dept;",
+        "SELECT dept, SUM(salary) FROM employees GROUP BY dept;",
+        "SELECT AVG(salary) FROM employees WHERE dept;",
+        "SELECT dept, AVG(salary) FROM employees ORDER BY salary;"
+      ],
+      "answer": 0,
+      "explain": "AVG with GROUP BY produces one average per department. SUM gives totals, and ORDER BY does not aggregate.",
+      "sub": "Tools for Data and AI",
+      "diff": 3
+    },
+    {
+      "id": "dsa-034",
+      "q": "Which Python library is primarily used for working with tabular data frames?",
+      "choices": [
+        "PyTorch",
+        "Pandas",
+        "Matplotlib",
+        "Flask"
+      ],
+      "answer": 1,
+      "explain": "Pandas provides the DataFrame structure for loading, cleaning, and analyzing tabular data. PyTorch is for deep learning and Matplotlib is for plotting.",
+      "sub": "Tools for Data and AI",
+      "diff": 1
+    },
+    {
+      "id": "dsa-035",
+      "q": "Which library is most commonly used to build and train deep neural networks in Python?",
+      "choices": [
+        "Pandas",
+        "PyTorch",
+        "Matplotlib",
+        "Seaborn"
+      ],
+      "answer": 1,
+      "explain": "PyTorch is a major deep learning framework. Pandas handles data tables, and Matplotlib and Seaborn handle visualization.",
+      "sub": "Tools for Data and AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-036",
+      "q": "Which pandas method removes rows containing missing values from a DataFrame df?",
+      "choices": [
+        "df.fillna()",
+        "df.drop_duplicates()",
+        "df.dropna()",
+        "df.isnull()"
+      ],
+      "answer": 2,
+      "explain": "dropna() removes rows with missing values by default. fillna() replaces them, drop_duplicates() removes repeats, and isnull() only flags them.",
+      "sub": "Tools for Data and AI",
+      "diff": 3
+    },
+    {
+      "id": "dsa-037",
+      "q": "Which family of R packages is widely used for data manipulation and visualization?",
+      "choices": [
+        "Pandas",
+        "Tidyverse",
+        "NumPy",
+        "Keras"
+      ],
+      "answer": 1,
+      "explain": "The tidyverse (including dplyr and ggplot2) is a core R toolkit. Pandas is a Python library, a common trap.",
+      "sub": "Tools for Data and AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-038",
+      "q": "Which property ensures a foreign key value refers to an existing primary key row?",
+      "choices": [
+        "Normalization",
+        "Atomicity",
+        "Indexing",
+        "Referential integrity"
+      ],
+      "answer": 3,
+      "explain": "Referential integrity requires that every foreign key match an existing primary key or be null. Atomicity is a transaction property.",
+      "sub": "Tools for Data and AI",
+      "diff": 2
+    },
+    {
+      "id": "dsa-039",
+      "q": "In a relational database, what is a primary key?",
+      "choices": [
+        "A column that must always contain duplicates",
+        "A column or set of columns that uniquely identifies each row",
+        "Any column that holds numeric data",
+        "A table that links two other tables"
+      ],
+      "answer": 1,
+      "explain": "A primary key uniquely identifies each record and cannot be null. A table that links others is a junction table, a different concept.",
+      "sub": "Tools for Data and AI",
+      "diff": 1
+    },
+    {
+      "id": "dsa-040",
+      "q": "A table has customer_id, customer_name, and order_id, and customer names repeat across many orders. Which change best applies normalization?",
+      "choices": [
+        "Add customer_name to every order row",
+        "Move customers into their own table linked to orders by customer_id",
+        "Combine all names into one long text column",
+        "Delete the customer_id column"
+      ],
+      "answer": 1,
+      "explain": "Normalization separates repeated entities into their own tables and links them with keys, which removes redundant storage and update anomalies.",
+      "sub": "Tools for Data and AI",
+      "diff": 3
+    },
+    {
+      "id": "dsa-041",
+      "q": "Generative AI is best described as AI that:",
+      "choices": [
+        "Creates new content such as text, images, or code based on patterns in training data",
+        "Only classifies existing data into predefined labels",
+        "Stores and retrieves data from a database",
+        "Controls physical robots using fixed rules only"
+      ],
+      "answer": 0,
+      "explain": "Generative models produce new outputs that resemble their training data. Classification alone is a different AI task.",
+      "sub": "AI Basics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-042",
+      "q": "Which is a documented limitation of generative AI?",
+      "choices": [
+        "It always cites its sources accurately",
+        "It cannot generate any text",
+        "It can produce confident but false statements",
+        "It never reflects bias from its training data"
+      ],
+      "answer": 2,
+      "explain": "Generative models can hallucinate, presenting false content fluently. They can also reflect bias present in training data.",
+      "sub": "AI Basics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-043",
+      "q": "Which is an example of a use of generative AI in healthcare?",
+      "choices": [
+        "Measuring blood pressure with a manual cuff",
+        "Drafting summaries of clinical notes for a physician to review",
+        "Scheduling cleaning crews for hospital wings",
+        "Printing paper patient charts"
+      ],
+      "answer": 1,
+      "explain": "Generative AI can draft text such as note summaries, which clinicians then review. The other options are not generative AI tasks.",
+      "sub": "AI Basics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-044",
+      "q": "Which AI subfield enables a computer to interpret images and video?",
+      "choices": [
+        "Natural language processing",
+        "Robotics",
+        "Computer vision",
+        "Expert systems"
+      ],
+      "answer": 2,
+      "explain": "Computer vision extracts meaning from visual data such as images and video. NLP handles language.",
+      "sub": "AI Basics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-045",
+      "q": "Which AI subfield focuses on enabling computers to understand and generate human language?",
+      "choices": [
+        "Computer vision",
+        "Robotics",
+        "Knowledge representation",
+        "Natural language processing"
+      ],
+      "answer": 3,
+      "explain": "Natural language processing covers tasks such as translation, sentiment analysis, and text generation.",
+      "sub": "AI Basics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-046",
+      "q": "What does the term large language model (LLM) refer to?",
+      "choices": [
+        "A neural network trained on very large text datasets to predict and generate language",
+        "A database that stores every word in a dictionary",
+        "A rule-based chatbot with fixed scripts",
+        "A spreadsheet tool for analyzing text"
+      ],
+      "answer": 0,
+      "explain": "LLMs are neural networks trained on large corpora to predict the next token, which lets them generate language. They are not rule-based.",
+      "sub": "AI Basics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-047",
+      "q": "Which is a capability of large language models?",
+      "choices": [
+        "Guaranteeing the factual accuracy of every answer",
+        "Accessing live data without any tools or retrieval",
+        "Physically moving objects in a warehouse",
+        "Summarizing long documents and answering questions about them"
+      ],
+      "answer": 3,
+      "explain": "LLMs are good at summarizing and answering questions from text. They do not guarantee accuracy and cannot access live data without tools.",
+      "sub": "AI Basics",
+      "diff": 3
+    },
+    {
+      "id": "dsa-048",
+      "q": "An LLM is asked for a legal case citation and invents one that does not exist. What is this called?",
+      "choices": [
+        "Overfitting",
+        "Hallucination",
+        "Data leakage",
+        "Underfitting"
+      ],
+      "answer": 1,
+      "explain": "A hallucination is fluent, plausible output that is not grounded in fact. Overfitting and underfitting describe training behavior, not individual outputs.",
+      "sub": "AI Basics",
+      "diff": 3
+    },
+    {
+      "id": "dsa-049",
+      "q": "A worker pastes confidential client data into a public LLM service. What is the main risk?",
+      "choices": [
+        "The model will refuse to answer any later question",
+        "The data becomes a verified public record",
+        "The data may be retained or used for training, creating a privacy exposure",
+        "The service will automatically encrypt the data permanently"
+      ],
+      "answer": 2,
+      "explain": "Data submitted to some services may be stored or used for improvement, so confidential information should not be shared without approval.",
+      "sub": "AI Basics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-050",
+      "q": "Which term describes AI that performs a single, narrowly defined task, such as spam filtering?",
+      "choices": [
+        "General AI",
+        "Narrow AI",
+        "Superintelligence",
+        "Hybrid AI"
+      ],
+      "answer": 1,
+      "explain": "Narrow (weak) AI is designed for one task. General AI would perform across many tasks at human level, which does not yet exist.",
+      "sub": "AI Basics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-051",
+      "q": "What is the core idea of machine learning?",
+      "choices": [
+        "Algorithms learn patterns from data to make predictions without a programmer writing every rule",
+        "Programmers write every decision rule by hand",
+        "Computers store data without processing it",
+        "Data is deleted after each analysis to protect privacy"
+      ],
+      "answer": 0,
+      "explain": "Machine learning infers rules from data rather than relying on hand-coded logic.",
+      "sub": "Machine Learning",
+      "diff": 1
+    },
+    {
+      "id": "dsa-052",
+      "q": "Which dataset is used to tune hyperparameters and compare candidate models during development?",
+      "choices": [
+        "Test set",
+        "Training set",
+        "Validation set",
+        "Production set"
+      ],
+      "answer": 2,
+      "explain": "The validation set guides model selection. The test set is reserved for a final, one-time performance estimate.",
+      "sub": "Machine Learning",
+      "diff": 1
+    },
+    {
+      "id": "dsa-053",
+      "q": "Which dataset is held out and used only once, at the end, to estimate performance on unseen data?",
+      "choices": [
+        "Validation set",
+        "Training set",
+        "Feature set",
+        "Test set"
+      ],
+      "answer": 3,
+      "explain": "Using the test set repeatedly for tuning leaks information into the model. It is kept separate for the final estimate.",
+      "sub": "Machine Learning",
+      "diff": 3
+    },
+    {
+      "id": "dsa-054",
+      "q": "Which learning type uses labeled examples to predict a known outcome?",
+      "choices": [
+        "Unsupervised learning",
+        "Supervised learning",
+        "Reinforcement learning",
+        "Clustering"
+      ],
+      "answer": 1,
+      "explain": "Supervised learning trains on input-label pairs. Unsupervised learning works without labels.",
+      "sub": "Machine Learning",
+      "diff": 1
+    },
+    {
+      "id": "dsa-055",
+      "q": "Which learning type improves through rewards and penalties from actions taken in an environment?",
+      "choices": [
+        "Reinforcement learning",
+        "Supervised learning",
+        "Unsupervised learning",
+        "Dimensionality reduction"
+      ],
+      "answer": 0,
+      "explain": "Reinforcement learning learns a policy that maximizes cumulative reward through trial and error.",
+      "sub": "Machine Learning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-056",
+      "q": "A retailer groups customers by purchase behavior with no predefined labels. Which approach fits?",
+      "choices": [
+        "Supervised regression",
+        "Reinforcement learning",
+        "Unsupervised learning (clustering)",
+        "Supervised classification"
+      ],
+      "answer": 2,
+      "explain": "With no labels and a goal of finding natural groups, clustering is an unsupervised method.",
+      "sub": "Machine Learning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-057",
+      "q": "What is the basic building block of a neural network that combines weighted inputs and applies an activation function?",
+      "choices": [
+        "A hyperplane",
+        "A neuron (node)",
+        "A decision node",
+        "A cluster centroid"
+      ],
+      "answer": 1,
+      "explain": "Each neuron computes a weighted sum of inputs, passes it through an activation function, and sends the output to the next layer.",
+      "sub": "Machine Learning",
+      "diff": 3
+    },
+    {
+      "id": "dsa-058",
+      "q": "Which description best fits deep learning?",
+      "choices": [
+        "Machine learning that never uses data",
+        "Storing large datasets in deep cloud storage",
+        "A subset of machine learning that uses neural networks with many layers to learn hierarchical features",
+        "Any algorithm that runs on a server"
+      ],
+      "answer": 2,
+      "explain": "Deep learning uses multi-layer neural networks to learn increasingly abstract representations from data.",
+      "sub": "Machine Learning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-059",
+      "q": "Which description best fits a decision tree?",
+      "choices": [
+        "A method that sorts data into a binary search tree of records",
+        "A visual map of all database relationships",
+        "A neural network with exactly one layer",
+        "A model that splits data by feature tests and ends in leaf nodes that give predictions"
+      ],
+      "answer": 3,
+      "explain": "Decision trees repeatedly split data on feature tests. Each leaf holds a prediction, which makes the model easy to interpret.",
+      "sub": "Machine Learning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-060",
+      "q": "A model is 98% accurate on a dataset where 98% of cases are negative because it predicts negative every time. Which measure best reveals its weakness?",
+      "choices": [
+        "Model file size",
+        "Number of hidden layers",
+        "Training runtime in seconds",
+        "Recall for the positive class"
+      ],
+      "answer": 3,
+      "explain": "Recall measures how many true positives are found. Predicting all negatives gives zero recall on the positive class, exposing the failure that accuracy hides.",
+      "sub": "Machine Learning",
+      "diff": 3
+    },
+    {
+      "id": "dsa-061",
+      "q": "In predicate logic, the symbol for 'for all' (as in 'for all x, ...') is called what?",
+      "choices": [
+        "Universal quantifier",
+        "Existential quantifier",
+        "Conditional operator",
+        "Negation"
+      ],
+      "answer": 0,
+      "explain": "The universal quantifier (for all) asserts a property holds for every element. The existential quantifier means 'there exists'.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 1
+    },
+    {
+      "id": "dsa-062",
+      "q": "Which predicate logic statement means 'some student passed the exam'?",
+      "choices": [
+        "For all x, if Student(x) then Passed(x)",
+        "There exists x such that Student(x) implies Passed(x)",
+        "For all x, Student(x) and Passed(x)",
+        "There exists x such that Student(x) and Passed(x)"
+      ],
+      "answer": 3,
+      "explain": "'Some' uses an existential quantifier combined with AND. Using implication with 'exists' is a trap, since it is true for any non-student.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 3
+    },
+    {
+      "id": "dsa-063",
+      "q": "Which of these is a predicate rather than a constant?",
+      "choices": [
+        "Alex",
+        "42",
+        "IsTaller(x, y)",
+        "The number seven"
+      ],
+      "answer": 2,
+      "explain": "A predicate is a property or relation that takes arguments and is true or false. Alex, 42, and seven are constants denoting objects.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 1
+    },
+    {
+      "id": "dsa-064",
+      "q": "What is the main difference between logic-based and probability-based reasoning?",
+      "choices": [
+        "Logic-based reasoning uses random sampling; probability-based reasoning uses fixed rules",
+        "Logic-based reasoning works only on numbers; probability-based reasoning works only on text",
+        "They are identical except for the programming language used",
+        "Logic-based reasoning draws certain conclusions from rules; probability-based reasoning assigns degrees of belief to uncertain conclusions"
+      ],
+      "answer": 3,
+      "explain": "Logic-based systems derive conclusions that follow strictly from rules. Probabilistic systems quantify uncertainty.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 3
+    },
+    {
+      "id": "dsa-065",
+      "q": "In a Bayesian network, what do the nodes represent?",
+      "choices": [
+        "Edge weights",
+        "Training examples",
+        "Random variables",
+        "Loss functions"
+      ],
+      "answer": 2,
+      "explain": "Nodes are random variables, and directed edges encode probabilistic dependencies between them.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-066",
+      "q": "What structural property must the graph underlying a Bayesian network have?",
+      "choices": [
+        "It must be a directed acyclic graph (DAG)",
+        "It must be a complete undirected graph",
+        "It must be fully connected with every edge bidirectional",
+        "It must contain at least one cycle to allow reasoning"
+      ],
+      "answer": 0,
+      "explain": "A Bayesian network is a DAG, so no variable can depend on itself through a chain of edges. That acyclicity makes the joint probability factor cleanly.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-067",
+      "q": "A Bayesian network has rain -> wet grass. P(rain) = 0.2, P(wet | rain) = 0.9, and P(wet | no rain) = 0.1. What is P(wet)?",
+      "choices": [
+        "0.18",
+        "0.90",
+        "0.10",
+        "0.26"
+      ],
+      "answer": 3,
+      "explain": "P(wet) = 0.2 x 0.9 + 0.8 x 0.1 = 0.18 + 0.08 = 0.26. Using only the rain case (0.18) ignores the no-rain path.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 3
+    },
+    {
+      "id": "dsa-068",
+      "q": "Which is an example of knowledge representation for an AI system?",
+      "choices": [
+        "A list of pixel colors in an image",
+        "A semantic network linking 'dog' to 'mammal' with an 'is-a' relation",
+        "A random number generator seeded with 42",
+        "A table of unsorted sensor readings"
+      ],
+      "answer": 1,
+      "explain": "Knowledge representation encodes facts and relationships in a form a system can reason over, such as semantic networks or ontologies.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-069",
+      "q": "Which statement about logic-based AI systems is most accurate?",
+      "choices": [
+        "They always produce probabilistic answers",
+        "They require no rules to be written",
+        "They cannot represent relationships between objects",
+        "They can be explained step by step but struggle with uncertain or incomplete information"
+      ],
+      "answer": 3,
+      "explain": "Logic systems are transparent and deductive, but they handle uncertainty poorly compared with probabilistic methods.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 2
+    },
+    {
+      "id": "dsa-070",
+      "q": "Which predicate logic formula best captures 'Every employee who works overtime is paid extra'?",
+      "choices": [
+        "For all x, (Employee(x) and WorksOvertime(x)) implies PaidExtra(x)",
+        "There exists x such that Employee(x) implies (WorksOvertime(x) and PaidExtra(x))",
+        "For all x, (Employee(x) or WorksOvertime(x)) implies PaidExtra(x)",
+        "For all x, (Employee(x) and PaidExtra(x)) implies WorksOvertime(x)"
+      ],
+      "answer": 0,
+      "explain": "'Every' uses a universal quantifier with implication, and the antecedent requires both conditions. The last option reverses the implication, which is the converse error.",
+      "sub": "Perception, Representation, and Reasoning",
+      "diff": 3
+    },
+    {
+      "id": "dsa-071",
+      "q": "Which best describes algorithmic bias?",
+      "choices": [
+        "Systematic unfair outcomes that arise when training data or design choices favor some groups over others",
+        "Random errors that average out over large datasets",
+        "A software bug that only occurs on mobile devices",
+        "Deliberate fraud by a software vendor"
+      ],
+      "answer": 0,
+      "explain": "Algorithmic bias is systematic and tends to disadvantage specific groups. Random error is noise, a different problem.",
+      "sub": "Privacy and Ethics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-072",
+      "q": "A hiring model trained on past hiring decisions learns to reject applicants from one group. What is the most likely cause?",
+      "choices": [
+        "Historical bias in the training data",
+        "Too few hidden layers in the network",
+        "A learning rate that is set too high",
+        "A test set that is too large"
+      ],
+      "answer": 0,
+      "explain": "Models trained on biased historical decisions learn and reproduce those patterns. Architecture and hyperparameters do not create the bias.",
+      "sub": "Privacy and Ethics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-073",
+      "q": "Which privacy risk is specific to large language models?",
+      "choices": [
+        "Slow response times on mobile networks",
+        "Storing too many images in a cache",
+        "Using too many decimal places in output",
+        "Training data memorization that could expose personal information in responses"
+      ],
+      "answer": 3,
+      "explain": "LLMs can memorize and regurgitate fragments of training data, which may include personal information, so this is a distinct privacy risk.",
+      "sub": "Privacy and Ethics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-074",
+      "q": "What is a hallucination in the credibility sense?",
+      "choices": [
+        "A deliberate attempt by the model to deceive the user",
+        "Fluent output presented as fact that is not supported by the data or sources",
+        "A display glitch in the chat interface",
+        "Any output longer than 500 words"
+      ],
+      "answer": 1,
+      "explain": "Hallucinations are unsupported outputs that read as confident fact. The model is not intentionally deceiving anyone.",
+      "sub": "Privacy and Ethics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-075",
+      "q": "Which is an ethical dilemma raised by self-driving vehicles?",
+      "choices": [
+        "Which fuel type should be used for charging",
+        "How the vehicle should act in unavoidable collision scenarios",
+        "What color the vehicle body should be",
+        "Which songs the radio should play"
+      ],
+      "answer": 1,
+      "explain": "Self-driving systems raise hard questions about harm and responsibility in unavoidable crashes, a recognized ethical dilemma.",
+      "sub": "Privacy and Ethics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-076",
+      "q": "Which practice best protects privacy when using personal data to train a model?",
+      "choices": [
+        "Collect all available data so the model is more accurate",
+        "Keep all data indefinitely in case it is useful later",
+        "Publish raw data publicly to allow peer review",
+        "Data minimization: collect and keep only the data needed for the purpose"
+      ],
+      "answer": 3,
+      "explain": "Data minimization limits exposure by collecting and retaining only what is necessary, a core fair information practice.",
+      "sub": "Privacy and Ethics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-077",
+      "q": "What is a proxy variable in the context of algorithmic bias?",
+      "choices": [
+        "A seemingly neutral feature, such as zip code, that correlates with a protected characteristic",
+        "A duplicate copy of the training set",
+        "The variable the model is trained to predict",
+        "The output of an unsupervised algorithm"
+      ],
+      "answer": 0,
+      "explain": "Proxies let a model reproduce discrimination without using a protected attribute directly, because the neutral feature carries the same information.",
+      "sub": "Privacy and Ethics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-078",
+      "q": "Which principle, in widely used fair information practices, requires that personal data be used only for the purpose it was collected for?",
+      "choices": [
+        "Data portability",
+        "The right to erasure",
+        "Anonymization",
+        "Use limitation (purpose limitation)"
+      ],
+      "answer": 3,
+      "explain": "Use limitation restricts secondary use of personal data without consent. Portability and erasure are individual rights, and anonymization is a technique.",
+      "sub": "Privacy and Ethics",
+      "diff": 2
+    },
+    {
+      "id": "dsa-079",
+      "q": "A company removes names from a dataset but keeps zip code, birth date, and sex. Why might individuals still be identifiable?",
+      "choices": [
+        "Removing names makes the data fully anonymous under U.S. law",
+        "Zip codes are always encrypted in modern datasets",
+        "Those combined quasi-identifiers can be linked to public records to re-identify people",
+        "Birth dates are never considered personal information"
+      ],
+      "answer": 2,
+      "explain": "Combinations of quasi-identifiers can uniquely identify many people when linked to other data. Removing direct identifiers alone does not guarantee anonymity.",
+      "sub": "Privacy and Ethics",
+      "diff": 3
+    },
+    {
+      "id": "dsa-080",
+      "q": "Which is a common ethical concern about AI-generated images?",
+      "choices": [
+        "They always require a larger file size than photographs",
+        "They may imitate artists' styles or use training images without consent",
+        "They cannot be displayed in public spaces",
+        "They are always identical to their training data"
+      ],
+      "answer": 1,
+      "explain": "Concerns include consent, attribution, and imitation of creators' work. Generated images are not automatically copies of training data.",
+      "sub": "Privacy and Ethics",
+      "diff": 1
+    },
+    {
+      "id": "dsa-081",
+      "q": "Which is an example of structured data?",
+      "choices": [
+        "Free-text customer reviews",
+        "Rows and columns in a sales table with fixed fields",
+        "Audio recordings from a call center",
+        "Photographs stored as JPEG files"
+      ],
+      "answer": 1,
+      "explain": "Structured data fits a predefined schema of rows and columns with fixed fields. The others lack that fixed tabular structure.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-082",
+      "q": "Which is an example of unstructured data?",
+      "choices": [
+        "A table of order IDs and prices",
+        "A spreadsheet of monthly sales",
+        "A collection of customer emails with free-form text",
+        "A database of employee names and hire dates"
+      ],
+      "answer": 2,
+      "explain": "Free-form text does not follow a fixed schema, so it is unstructured. The other options are tabular, hence structured.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-083",
+      "q": "Which value is categorical rather than numeric?",
+      "choices": [
+        "Eye color: blue, brown, green",
+        "Height in centimeters",
+        "Number of text messages sent",
+        "Temperature in Celsius"
+      ],
+      "answer": 0,
+      "explain": "Eye color is a label with no numeric meaning. The others are measured or counted numbers.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-084",
+      "q": "What is the decimal number 255 in hexadecimal?",
+      "choices": [
+        "FF",
+        "F0",
+        "1FF",
+        "AA"
+      ],
+      "answer": 0,
+      "explain": "255 = 15 x 16 + 15, so each digit is F, giving FF. F0 is 240, a common arithmetic slip.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-085",
+      "q": "What is the binary representation of decimal 10?",
+      "choices": [
+        "1100",
+        "1001",
+        "1010",
+        "0110"
+      ],
+      "answer": 2,
+      "explain": "10 = 8 + 2, which is 1010 in binary. Other patterns represent different values.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-086",
+      "q": "Which source would most likely produce data for a web analytics dashboard?",
+      "choices": [
+        "A paper survey mailed once a decade",
+        "Handwritten receipts kept in a back room",
+        "A printed annual report",
+        "Server and browser log files recording page visits"
+      ],
+      "answer": 3,
+      "explain": "Web analytics relies on automatically generated server and browser logs, which record visits in near real time.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-087",
+      "q": "Which stage of the data science process comes first?",
+      "choices": [
+        "Training the model",
+        "Deploying the model to users",
+        "Visualizing the final results",
+        "Defining the business question or problem"
+      ],
+      "answer": 3,
+      "explain": "Data science projects start by defining the question, which determines what data is needed and how it will be analyzed.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-088",
+      "q": "Why is data wrangling important?",
+      "choices": [
+        "It replaces the need to collect data",
+        "Raw data is often messy and must be cleaned and transformed before analysis",
+        "It guarantees the model will be accurate",
+        "It is needed only after a model is deployed"
+      ],
+      "answer": 1,
+      "explain": "Wrangling (cleaning, reshaping, and transforming) prepares raw data for analysis, and it usually takes a large share of project time.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-089",
+      "q": "Which stage of the data science process involves communicating insights to stakeholders?",
+      "choices": [
+        "Data collection from sensors",
+        "Communication and visualization of results",
+        "Feature engineering",
+        "Hyperparameter tuning"
+      ],
+      "answer": 1,
+      "explain": "Communicating findings clearly is the final stage, where visualizations and summaries turn analysis into decisions.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-090",
+      "q": "Which column in a CSV contains continuous numeric data?",
+      "choices": [
+        "city",
+        "customer_id",
+        "purchase_total",
+        "country"
+      ],
+      "answer": 2,
+      "explain": "Purchase totals can take any value in a range, so they are continuous. Cities and countries are categorical, and IDs are labels.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-091",
+      "q": "A column records whether a customer subscribed, as yes or no. What type of data is this?",
+      "choices": [
+        "Categorical (binary)",
+        "Continuous numeric",
+        "Ordinal numeric",
+        "Unstructured text"
+      ],
+      "answer": 0,
+      "explain": "A yes/no flag has two categories and no numeric meaning, which makes it binary categorical data.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-092",
+      "q": "What best describes data science?",
+      "choices": [
+        "A branch of hardware engineering focused on storage chips",
+        "An interdisciplinary field that uses statistics, programming, and domain knowledge to extract insight from data",
+        "The study of probability theory alone",
+        "A method for manually recording paper surveys"
+      ],
+      "answer": 1,
+      "explain": "Data science combines statistics, computing, and subject knowledge to turn data into insight and decisions.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-093",
+      "q": "Which source is the best source of retail transaction data?",
+      "choices": [
+        "Weather station readings",
+        "Satellite images of the ocean",
+        "Mobile phone camera photos",
+        "Point-of-sale system exports"
+      ],
+      "answer": 3,
+      "explain": "Point-of-sale systems record each sale as it happens, so their exports contain the transactions a retailer needs.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-094",
+      "q": "Convert the binary number 1101 0110 to hexadecimal.",
+      "choices": [
+        "D6",
+        "6D",
+        "B6",
+        "D9"
+      ],
+      "answer": 0,
+      "explain": "Group into nibbles: 1101 = D and 0110 = 6, giving D6. Reversing the nibbles gives 6D, a common mistake.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-095",
+      "q": "What type of data is a series of temperatures recorded every hour?",
+      "choices": [
+        "Cross-sectional data only",
+        "Unstructured text data",
+        "Nominal categorical data",
+        "Time-series data"
+      ],
+      "answer": 3,
+      "explain": "Observations ordered over time at regular intervals form a time series, which needs time-aware analysis.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-096",
+      "q": "Which of these is a common data quality dimension?",
+      "choices": [
+        "Popularity",
+        "Ambient temperature",
+        "Completeness",
+        "Brightness"
+      ],
+      "answer": 2,
+      "explain": "Completeness, accuracy, consistency, and timeliness are standard data quality dimensions.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    },
+    {
+      "id": "dsa-097",
+      "q": "Which data format is most common for semi-structured data exchanged between web applications?",
+      "choices": [
+        "Scanned PDF",
+        "Bitmap image",
+        "JSON",
+        "Flat Excel workbook with macros"
+      ],
+      "answer": 2,
+      "explain": "JSON stores key-value pairs in nested structures without a rigid table schema, which makes it semi-structured and widely used in web APIs.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-098",
+      "q": "A dataset of 1,000 rows has 300 missing ages. Which statement is most accurate?",
+      "choices": [
+        "The dataset is unusable and must be discarded",
+        "The missing ages can safely be set to zero",
+        "The missingness rate is 30%, which should be investigated before choosing a handling method",
+        "Missing values only matter when computing the mean"
+      ],
+      "answer": 2,
+      "explain": "A 30% missingness rate is large. Its cause determines whether imputation or other handling is valid, and zero-filling distorts results.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 3
+    },
+    {
+      "id": "dsa-099",
+      "q": "Which step best describes data transformation?",
+      "choices": [
+        "Storing data in a backup server",
+        "Converting values into a different form, such as scaling numbers or encoding categories",
+        "Deleting outliers by default",
+        "Publishing a report to a website"
+      ],
+      "answer": 1,
+      "explain": "Transformation changes data representation for analysis, such as scaling numeric features or encoding categories as numbers.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 2
+    },
+    {
+      "id": "dsa-100",
+      "q": "Which of these is inherently unstructured data?",
+      "choices": [
+        "A table of store inventory",
+        "Video footage from a security camera",
+        "A list of employee IDs and salaries",
+        "A database of customer addresses"
+      ],
+      "answer": 1,
+      "explain": "Video has no predefined rows and columns. Inventory, salary, and address tables are structured.",
+      "sub": "Data Literacy and Foundations",
+      "diff": 1
+    }
+  ],
+  "vocab": [
+    {
+      "id": "dsa-v001",
+      "term": "Mean",
+      "def": "The arithmetic average of a set of values, found by dividing their sum by the count of values.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v002",
+      "term": "Median",
+      "def": "The middle value of a sorted dataset, or the average of the two middle values when the count is even.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v003",
+      "term": "Standard deviation",
+      "def": "A measure of spread equal to the square root of the variance, in the same units as the data.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v004",
+      "term": "Variance",
+      "def": "The average of the squared deviations from the mean, measuring how spread out the values are.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v005",
+      "term": "Expected value",
+      "def": "The probability-weighted average of all possible outcomes of a random variable.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v006",
+      "term": "Normal distribution",
+      "def": "A symmetric, bell-shaped probability distribution in which the mean, median, and mode are equal.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v007",
+      "term": "Independent events",
+      "def": "Two events where the occurrence of one does not change the probability of the other, so P(A and B) = P(A) x P(B).",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v008",
+      "term": "Covariance",
+      "def": "A measure of how two variables change together; positive values mean they tend to move in the same direction.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v009",
+      "term": "Discrete variable",
+      "def": "A variable that takes a countable set of separate values, such as whole-number counts.",
+      "sub": "Probability and Statistics Foundations"
+    },
+    {
+      "id": "dsa-v010",
+      "term": "Histogram",
+      "def": "A chart that groups a numeric variable into bins and shows how many observations fall in each bin.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v011",
+      "term": "Boxplot",
+      "def": "A chart that displays the five-number summary (minimum, Q1, median, Q3, maximum) and flags potential outliers.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v012",
+      "term": "Scatterplot",
+      "def": "A chart that plots pairs of numeric values as points, used to show the relationship between two variables.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v013",
+      "term": "Outlier",
+      "def": "An observation that lies far outside the general pattern of the data and can distort summary statistics.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v014",
+      "term": "Data cleaning",
+      "def": "The process of detecting and correcting or removing errors, duplicates, and inconsistencies in a dataset.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v015",
+      "term": "Data quality",
+      "def": "The degree to which data is accurate, complete, consistent, and timely enough to support its intended use.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v016",
+      "term": "Multiple regression",
+      "def": "A model that predicts a numeric outcome from two or more predictor variables at once.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v017",
+      "term": "Logistic regression",
+      "def": "A model that estimates the probability of a binary outcome using a logistic (S-shaped) function of predictors.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v018",
+      "term": "Overfitting",
+      "def": "When a model learns noise and specific details of its training data, performing well on training data but poorly on new data.",
+      "sub": "Data Analysis and Statistics for AI"
+    },
+    {
+      "id": "dsa-v019",
+      "term": "SQL",
+      "def": "Structured Query Language, the standard language for querying and managing data in relational databases.",
+      "sub": "Tools for Data and AI"
+    },
+    {
+      "id": "dsa-v020",
+      "term": "Relational database",
+      "def": "A database that stores data in related tables linked by keys, queried with SQL.",
+      "sub": "Tools for Data and AI"
+    },
+    {
+      "id": "dsa-v021",
+      "term": "Primary key",
+      "def": "A column or set of columns that uniquely identifies each row in a table and cannot be null.",
+      "sub": "Tools for Data and AI"
+    },
+    {
+      "id": "dsa-v022",
+      "term": "Foreign key",
+      "def": "A column in one table that references the primary key of another table to link related records.",
+      "sub": "Tools for Data and AI"
+    },
+    {
+      "id": "dsa-v023",
+      "term": "Pandas",
+      "def": "A Python library that provides the DataFrame structure for loading, cleaning, and analyzing tabular data.",
+      "sub": "Tools for Data and AI"
+    },
+    {
+      "id": "dsa-v024",
+      "term": "PyTorch",
+      "def": "An open-source Python framework for building and training deep learning models.",
+      "sub": "Tools for Data and AI"
+    },
+    {
+      "id": "dsa-v025",
+      "term": "Artificial intelligence",
+      "def": "The broad field of building systems that perform tasks normally requiring human intelligence, such as reasoning, perception, and language.",
+      "sub": "AI Basics"
+    },
+    {
+      "id": "dsa-v026",
+      "term": "Generative AI",
+      "def": "AI models that create new content, such as text, images, audio, or code, based on patterns learned from training data.",
+      "sub": "AI Basics"
+    },
+    {
+      "id": "dsa-v027",
+      "term": "Large language model",
+      "def": "A neural network trained on very large text datasets to predict and generate human language.",
+      "sub": "AI Basics"
+    },
+    {
+      "id": "dsa-v028",
+      "term": "Natural language processing",
+      "def": "The AI subfield concerned with enabling computers to understand, analyze, and generate human language.",
+      "sub": "AI Basics"
+    },
+    {
+      "id": "dsa-v029",
+      "term": "Computer vision",
+      "def": "The AI subfield that enables computers to interpret and extract information from images and video.",
+      "sub": "AI Basics"
+    },
+    {
+      "id": "dsa-v030",
+      "term": "Narrow AI",
+      "def": "AI designed to perform one specific task or a narrow set of tasks, in contrast to general AI.",
+      "sub": "AI Basics"
+    },
+    {
+      "id": "dsa-v031",
+      "term": "Prompt",
+      "def": "The input text or instructions given to a generative AI model to guide the content it produces.",
+      "sub": "AI Basics"
+    },
+    {
+      "id": "dsa-v032",
+      "term": "Machine learning",
+      "def": "A branch of AI in which algorithms learn patterns from data to make predictions or decisions.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v033",
+      "term": "Training set",
+      "def": "The portion of data used to fit a model's parameters during learning.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v034",
+      "term": "Validation set",
+      "def": "A held-out portion of data used to tune hyperparameters and compare models during development.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v035",
+      "term": "Test set",
+      "def": "A held-out portion of data used once, at the end, to estimate how well a model performs on unseen data.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v036",
+      "term": "Supervised learning",
+      "def": "A learning approach that trains on labeled examples to predict known outcomes.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v037",
+      "term": "Unsupervised learning",
+      "def": "A learning approach that finds structure, such as clusters or patterns, in data without labels.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v038",
+      "term": "Reinforcement learning",
+      "def": "A learning approach in which an agent improves its actions by receiving rewards and penalties from its environment.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v039",
+      "term": "Deep learning",
+      "def": "A subset of machine learning that uses neural networks with many layers to learn hierarchical representations.",
+      "sub": "Machine Learning"
+    },
+    {
+      "id": "dsa-v040",
+      "term": "Predicate logic",
+      "def": "A formal system that expresses statements about objects, their properties, and relations using quantifiers.",
+      "sub": "Perception, Representation, and Reasoning"
+    },
+    {
+      "id": "dsa-v041",
+      "term": "Universal quantifier",
+      "def": "The logical symbol (for all) indicating that a statement holds for every element in a domain.",
+      "sub": "Perception, Representation, and Reasoning"
+    },
+    {
+      "id": "dsa-v042",
+      "term": "Existential quantifier",
+      "def": "The logical symbol (there exists) indicating that a statement holds for at least one element in a domain.",
+      "sub": "Perception, Representation, and Reasoning"
+    },
+    {
+      "id": "dsa-v043",
+      "term": "Bayesian network",
+      "def": "A graphical model of random variables and their conditional dependencies, used to reason under uncertainty.",
+      "sub": "Perception, Representation, and Reasoning"
+    },
+    {
+      "id": "dsa-v044",
+      "term": "Directed acyclic graph",
+      "def": "A graph whose edges have direction and contain no cycles; the structure underlying a Bayesian network.",
+      "sub": "Perception, Representation, and Reasoning"
+    },
+    {
+      "id": "dsa-v045",
+      "term": "Knowledge representation",
+      "def": "The methods used to encode facts and relationships about the world so an AI system can reason over them.",
+      "sub": "Perception, Representation, and Reasoning"
+    },
+    {
+      "id": "dsa-v046",
+      "term": "Algorithmic bias",
+      "def": "Systematic and unfair outcomes produced by an algorithm, often reflecting bias in data or design.",
+      "sub": "Privacy and Ethics"
+    },
+    {
+      "id": "dsa-v047",
+      "term": "Historical bias",
+      "def": "Bias that already exists in the real-world data a model learns from, such as past discriminatory decisions.",
+      "sub": "Privacy and Ethics"
+    },
+    {
+      "id": "dsa-v048",
+      "term": "Proxy variable",
+      "def": "A seemingly neutral feature that is correlated with a protected characteristic and can reproduce discrimination.",
+      "sub": "Privacy and Ethics"
+    },
+    {
+      "id": "dsa-v049",
+      "term": "Hallucination",
+      "def": "An AI output that is fluent and confident but factually unsupported or fabricated.",
+      "sub": "Privacy and Ethics"
+    },
+    {
+      "id": "dsa-v050",
+      "term": "Data minimization",
+      "def": "The practice of collecting and retaining only the personal data needed for a specific purpose.",
+      "sub": "Privacy and Ethics"
+    },
+    {
+      "id": "dsa-v051",
+      "term": "Quasi-identifier",
+      "def": "An attribute, such as zip code or birth date, that does not identify someone alone but can identify them when combined with other data.",
+      "sub": "Privacy and Ethics"
+    },
+    {
+      "id": "dsa-v052",
+      "term": "Structured data",
+      "def": "Data organized into a predefined schema of rows and columns with fixed fields, such as a relational table.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v053",
+      "term": "Unstructured data",
+      "def": "Data without a predefined schema, such as free text, images, audio, or video.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v054",
+      "term": "Semi-structured data",
+      "def": "Data that has some organizational markers, such as tags or keys, without a rigid table schema, such as JSON.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v055",
+      "term": "Categorical variable",
+      "def": "A variable whose values are labels or groups rather than numeric quantities.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v056",
+      "term": "Numeric variable",
+      "def": "A variable whose values are numbers that support arithmetic, either continuous or discrete.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v057",
+      "term": "Binary number system",
+      "def": "A base-2 number system using only the digits 0 and 1, which underlies how computers store data.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v058",
+      "term": "Hexadecimal",
+      "def": "A base-16 number system using digits 0-9 and A-F, often used as a compact way to write binary values.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v059",
+      "term": "Data wrangling",
+      "def": "The process of cleaning, reshaping, and transforming raw data into a form suitable for analysis.",
+      "sub": "Data Literacy and Foundations"
+    },
+    {
+      "id": "dsa-v060",
+      "term": "Time-series data",
+      "def": "Observations recorded at successive points in time, analyzed with methods that account for ordering.",
+      "sub": "Data Literacy and Foundations"
+    }
+  ]
+}

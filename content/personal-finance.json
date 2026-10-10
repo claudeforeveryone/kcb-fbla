@@ -1,0 +1,1703 @@
+{
+  "slug": "personal-finance",
+  "name": "Personal Finance",
+  "group": "objective",
+  "notes": "Competency areas and item counts come from the 2025-2026 FBLA Competitive Events Guidelines, Personal Finance (updated Nov 2025), Study Guide: Knowledge Areas and Objectives: https://www.pafbla.org/wp-content/uploads/2026/08/Personal-Finance.pdf. The guide lists six areas with test-item counts (20/15/5/5/50/5, total 100), and those counts are used as the sub weights. The guideline notes sample items are in CONNECT (members only), so questions were written from the objectives, not copied. Dollar amounts are US federal rules, and the tax items avoid year-specific limits. Chart labels on the guideline PDF did not match the study guide counts, so the study guide was followed.",
+  "subs": [
+    "Principles of Money",
+    "Financial Needs and Goals",
+    "Financial-Services Providers",
+    "Investment Strategies",
+    "Financial Literacy",
+    "Risk Management"
+  ],
+  "questions": [
+    {
+      "id": "pf-001",
+      "q": "Which form of payment draws funds directly from the payer's checking account at the time of purchase?",
+      "choices": [
+        "Debit card",
+        "Credit card",
+        "Installment loan",
+        "Certificate of deposit"
+      ],
+      "answer": 0,
+      "explain": "A debit card pulls money from the cardholder's own deposit account at the point of sale. A credit card borrows from the issuer.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-002",
+      "q": "Which function of money allows prices of goods and services to be stated and compared?",
+      "choices": [
+        "Medium of exchange",
+        "Store of value",
+        "Unit of measure",
+        "Source of credit"
+      ],
+      "answer": 2,
+      "explain": "Money serves as a unit of measure (common yardstick) so prices can be compared. Medium of exchange is what is used to pay.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-003",
+      "q": "A shopkeeper accepts a $20 bill because every other merchant also accepts it for goods. Which function of money does this best illustrate?",
+      "choices": [
+        "Store of value",
+        "Medium of exchange",
+        "Unit of measure",
+        "Legal tender for all debts"
+      ],
+      "answer": 1,
+      "explain": "Money as a medium of exchange is accepted widely in trade. The trap is store of value, which concerns keeping purchasing power over time.",
+      "sub": "Principles of Money",
+      "diff": 2
+    },
+    {
+      "id": "pf-004",
+      "q": "Which statement about the time value of money is correct?",
+      "choices": [
+        "A dollar received today is worth less than a dollar received next year when interest rates are positive.",
+        "A dollar received today is worth the same as a dollar received next year, regardless of interest rates.",
+        "Money received in the future is worth more than the same amount today, because of inflation.",
+        "A dollar received today can be invested to grow, so it is worth more than the same dollar received later."
+      ],
+      "answer": 3,
+      "explain": "Money on hand today can earn interest, so it has greater value than the same amount received later. The other choices reverse or ignore this relationship.",
+      "sub": "Principles of Money",
+      "diff": 3
+    },
+    {
+      "id": "pf-005",
+      "q": "What is the main difference between a debit card and a credit card?",
+      "choices": [
+        "Credit cards draw from a checking account, while debit cards are loans.",
+        "Debit cards always charge interest on purchases.",
+        "Debit cards require a credit check before approval.",
+        "Debit cards withdraw funds from the cardholder's own bank account, while credit cards borrow from the issuer."
+      ],
+      "answer": 3,
+      "explain": "Debit spends the cardholder's own money. Credit creates a debt owed to the card issuer.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-006",
+      "q": "Which of the following is an example of passive income?",
+      "choices": [
+        "Hourly wages for a full-time job",
+        "Rental income from a property leased to tenants",
+        "Commission earned on sales",
+        "Tips from restaurant customers"
+      ],
+      "answer": 1,
+      "explain": "Passive income comes from assets or arrangements that do not require ongoing work, such as rent. Wages, commissions and tips all require labour.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-007",
+      "q": "A salesperson earns a base salary of $30,000 plus 5% commission on sales. Which describes this pay structure?",
+      "choices": [
+        "A combination of salary and incentive pay",
+        "Salary only",
+        "Piece-rate pay only",
+        "Hourly wages with overtime"
+      ],
+      "answer": 0,
+      "explain": "The base salary is fixed pay, and the commission is incentive pay tied to performance.",
+      "sub": "Principles of Money",
+      "diff": 2
+    },
+    {
+      "id": "pf-008",
+      "q": "An employee earns $1,200 gross pay for a pay period. Federal and state income tax withholding plus FICA total $270. What is net pay for the period?",
+      "choices": ["$270", "$1,470", "$930", "$1,000"],
+      "answer": 2,
+      "explain": "Net pay equals gross pay minus withholdings: $1,200 minus $270 is $930. The trap is $1,000, which subtracts only part of the withholdings.",
+      "sub": "Principles of Money",
+      "diff": 3
+    },
+    {
+      "id": "pf-009",
+      "q": "Which document is a written order instructing a bank to pay a specific amount from the payer's account?",
+      "choices": [
+        "Promissory note",
+        "Certificate of deposit",
+        "Check",
+        "Treasury bond"
+      ],
+      "answer": 2,
+      "explain": "A check is a negotiable instrument directing the bank to pay the payee from the drawer's account.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-010",
+      "q": "Which of the following is NOT currency in circulation?",
+      "choices": [
+        "$50 Federal Reserve note",
+        "Quarter coin",
+        "Dollar coin",
+        "Treasury bond"
+      ],
+      "answer": 3,
+      "explain": "Treasury bonds are government debt securities, not money in circulation. The other items are legal currency.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-011",
+      "q": "Which best describes the purpose of consumer credit?",
+      "choices": [
+        "Letting a consumer buy goods or services now and repay later, usually with interest",
+        "Permanently transferring ownership of savings to a lender",
+        "Guaranteeing a fixed return on investments",
+        "Protecting the consumer against identity theft"
+      ],
+      "answer": 0,
+      "explain": "Credit lets consumers use goods or services before paying, in exchange for interest or fees.",
+      "sub": "Principles of Money",
+      "diff": 2
+    },
+    {
+      "id": "pf-012",
+      "q": "Which U.S. federal law requires lenders to disclose the APR and finance charges on consumer credit?",
+      "choices": [
+        "Fair Credit Reporting Act",
+        "Truth in Lending Act",
+        "Fair Debt Collection Practices Act",
+        "Equal Credit Opportunity Act"
+      ],
+      "answer": 1,
+      "explain": "The Truth in Lending Act (Regulation Z) requires standardized credit cost disclosures. The FCRA covers credit reports.",
+      "sub": "Principles of Money",
+      "diff": 3
+    },
+    {
+      "id": "pf-013",
+      "q": "Which U.S. federal agency was created after the 2008 financial crisis to enforce most consumer financial protection laws?",
+      "choices": [
+        "Federal Deposit Insurance Corporation",
+        "Consumer Financial Protection Bureau",
+        "Securities and Exchange Commission",
+        "Federal Trade Commission"
+      ],
+      "answer": 1,
+      "explain": "The Consumer Financial Protection Bureau was created by the Dodd-Frank Act in 2010 to supervise consumer financial products.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-014",
+      "q": "A consumer's debit card is lost and the loss is reported within two business days. What is the maximum liability under the Electronic Fund Transfer Act?",
+      "choices": ["$50", "$500", "$0 in all cases", "Unlimited"],
+      "answer": 0,
+      "explain": "Under the EFTA, reporting within two business days caps liability at $50. Reporting later raises the cap to $500.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-015",
+      "q": "A $1,000 deposit earns 5% interest compounded annually. What is its value after one year?",
+      "choices": ["$1,005", "$950", "$1,500", "$1,050"],
+      "answer": 3,
+      "explain": "$1,000 times 1.05 equals $1,050. The trap is adding 5% of the deposit incorrectly or using the wrong base.",
+      "sub": "Principles of Money",
+      "diff": 2
+    },
+    {
+      "id": "pf-016",
+      "q": "Under the Fair Credit Billing Act, how many days does a consumer generally have to send a written notice of a billing error after the first statement showing it?",
+      "choices": ["30 days", "45 days", "60 days", "90 days"],
+      "answer": 2,
+      "explain": "The FCBA gives 60 days to dispute a billing error in writing after the first statement with the error is sent.",
+      "sub": "Principles of Money",
+      "diff": 3
+    },
+    {
+      "id": "pf-017",
+      "q": "What does the store-of-value function of money mean?",
+      "choices": [
+        "Money keeps its purchasing worth over time so it can be saved for later use",
+        "Money is used to measure the price of goods",
+        "Money is accepted by sellers in exchange for goods",
+        "Money is issued by private companies"
+      ],
+      "answer": 0,
+      "explain": "Store of value means money can be saved and used later without losing its worth, though inflation erodes it.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-018",
+      "q": "Which of the following is a non-cash employee benefit?",
+      "choices": [
+        "Cash bonus",
+        "Hourly wage",
+        "Commission",
+        "Employer-paid health insurance"
+      ],
+      "answer": 3,
+      "explain": "Health insurance paid by the employer is a fringe benefit, not cash compensation.",
+      "sub": "Principles of Money",
+      "diff": 1
+    },
+    {
+      "id": "pf-019",
+      "q": "Which term describes income before any taxes or deductions are subtracted?",
+      "choices": [
+        "Net income",
+        "Disposable income",
+        "Gross income",
+        "Take-home pay"
+      ],
+      "answer": 2,
+      "explain": "Gross income is the total before taxes and deductions. Net income and take-home pay are after them.",
+      "sub": "Principles of Money",
+      "diff": 2
+    },
+    {
+      "id": "pf-020",
+      "q": "Which is an example of an electronic funds transfer?",
+      "choices": [
+        "Writing a personal check to a landlord",
+        "Paying for groceries with a debit card at point of sale",
+        "Depositing cash at a teller window",
+        "Buying a money order at a post office"
+      ],
+      "answer": 1,
+      "explain": "A debit card purchase moves funds electronically from the account at the point of sale. The other options involve paper or cash.",
+      "sub": "Principles of Money",
+      "diff": 3
+    },
+    {
+      "id": "pf-021",
+      "q": "Which step should come first in the financial planning process?",
+      "choices": [
+        "Investing in the stock market",
+        "Paying bills on time",
+        "Setting financial goals",
+        "Buying insurance"
+      ],
+      "answer": 2,
+      "explain": "Goals guide every later decision, so they come first in the planning process.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-022",
+      "q": "Which of these is a short-term financial goal?",
+      "choices": [
+        "Retiring at age 65",
+        "Saving for a vacation in six months",
+        "Funding a child's college in 18 years",
+        "Building an estate for heirs"
+      ],
+      "answer": 1,
+      "explain": "Short-term goals are typically achievable within about one year. The others are long-term.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-023",
+      "q": "Which formula is used to calculate net worth?",
+      "choices": [
+        "Total income minus total expenses",
+        "Total assets plus total liabilities",
+        "Cash on hand plus investments",
+        "Total assets minus total liabilities"
+      ],
+      "answer": 3,
+      "explain": "Net worth equals what you own minus what you owe. Adding liabilities instead of subtracting them is a common error.",
+      "sub": "Financial Needs and Goals",
+      "diff": 2
+    },
+    {
+      "id": "pf-024",
+      "q": "A monthly budget shows after-tax income of $4,000, fixed expenses of $2,600, and planned variable expenses of $1,500. What is the result?",
+      "choices": [
+        "$100 deficit",
+        "$100 surplus",
+        "$900 surplus",
+        "$1,400 deficit"
+      ],
+      "answer": 0,
+      "explain": "Total expenses are $4,100, so the budget runs $100 short. The trap is forgetting variable expenses.",
+      "sub": "Financial Needs and Goals",
+      "diff": 3
+    },
+    {
+      "id": "pf-025",
+      "q": "What is the main purpose of an emergency fund?",
+      "choices": [
+        "Financing a vacation",
+        "Covering unexpected expenses such as job loss or medical bills",
+        "Investing in high-risk stocks",
+        "Paying for planned home improvements"
+      ],
+      "answer": 1,
+      "explain": "An emergency fund is a reserve of liquid savings for unplanned events.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-026",
+      "q": "A common guideline for the size of an emergency fund is:",
+      "choices": [
+        "One week of expenses",
+        "One month of take-home pay",
+        "One year of gross income",
+        "Three to six months of living expenses"
+      ],
+      "answer": 3,
+      "explain": "Financial educators commonly recommend three to six months of living expenses in an accessible account.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-027",
+      "q": "Which budgeting method assigns every dollar of income to a category until none is left unassigned?",
+      "choices": [
+        "Zero-based budgeting",
+        "Pay-yourself-first budgeting",
+        "50/30/20 rule",
+        "Net worth statement"
+      ],
+      "answer": 0,
+      "explain": "In zero-based budgeting, income minus planned spending equals zero. The 50/30/20 rule is a percentage guideline, not a zero-balance plan.",
+      "sub": "Financial Needs and Goals",
+      "diff": 2
+    },
+    {
+      "id": "pf-028",
+      "q": "Which expense is a fixed expense?",
+      "choices": ["Groceries", "Entertainment", "Rent", "Clothing"],
+      "answer": 2,
+      "explain": "Fixed expenses stay the same each period. Rent is usually set by a lease.",
+      "sub": "Financial Needs and Goals",
+      "diff": 2
+    },
+    {
+      "id": "pf-029",
+      "q": "Which financial statement lists assets, liabilities, and equity at a single point in time?",
+      "choices": [
+        "Income statement",
+        "Cash flow statement",
+        "Budget",
+        "Balance sheet"
+      ],
+      "answer": 3,
+      "explain": "A balance sheet is a snapshot at one date. Income and cash flow statements cover a period.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-030",
+      "q": "Which of the following is a long-term financial goal?",
+      "choices": [
+        "Saving for retirement in 30 years",
+        "Buying a laptop next month",
+        "Paying a parking ticket this week",
+        "Buying groceries for the week"
+      ],
+      "answer": 0,
+      "explain": "Long-term goals are typically more than five years away.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-031",
+      "q": "Which list correctly describes the SMART goal criteria?",
+      "choices": [
+        "Simple, modest, adjustable, reviewed, targeted",
+        "Specific, measurable, achievable, relevant, time-bound",
+        "Strategic, multiple, adaptable, risky, tiered",
+        "Small, mixed, approximate, rolling, tentative"
+      ],
+      "answer": 1,
+      "explain": "SMART stands for specific, measurable, achievable, relevant and time-bound.",
+      "sub": "Financial Needs and Goals",
+      "diff": 2
+    },
+    {
+      "id": "pf-032",
+      "q": "Which action most directly increases a person's net worth?",
+      "choices": [
+        "Taking out a $30,000 car loan",
+        "Paying a $200 restaurant bill with a credit card",
+        "Saving $500 from a paycheck in a savings account",
+        "Spending $500 of savings on a trip"
+      ],
+      "answer": 2,
+      "explain": "Saving income adds to assets with no offsetting liability. Borrowing or spending from savings does not raise net worth.",
+      "sub": "Financial Needs and Goals",
+      "diff": 3
+    },
+    {
+      "id": "pf-033",
+      "q": "Which of these is a sinking fund?",
+      "choices": [
+        "Saving a fixed amount each month for an annual insurance premium",
+        "Borrowing against a retirement account",
+        "A standby credit line for emergencies",
+        "A money market account used for daily spending"
+      ],
+      "answer": 0,
+      "explain": "A sinking fund sets aside money regularly for a known future expense.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-034",
+      "q": "Which best describes a budget?",
+      "choices": [
+        "A list of past transactions only",
+        "A plan showing how income will be spent and saved",
+        "A loan agreement with a lender",
+        "A federal tax form"
+      ],
+      "answer": 1,
+      "explain": "A budget is a forward-looking plan for income, spending and saving.",
+      "sub": "Financial Needs and Goals",
+      "diff": 1
+    },
+    {
+      "id": "pf-035",
+      "q": "An employer's 401(k) match is best classified as:",
+      "choices": [
+        "A tax refund",
+        "A loan forgiveness",
+        "A cash bonus",
+        "A fringe benefit that supports retirement saving"
+      ],
+      "answer": 3,
+      "explain": "An employer match is a non-wage benefit that supports retirement saving.",
+      "sub": "Financial Needs and Goals",
+      "diff": 2
+    },
+    {
+      "id": "pf-036",
+      "q": "Which provider is a depository institution that accepts deposits and makes loans to consumers and businesses?",
+      "choices": [
+        "Insurance broker",
+        "Stockbroker",
+        "Commercial bank",
+        "Pawn shop"
+      ],
+      "answer": 2,
+      "explain": "Commercial banks take deposits and lend. Brokers and insurance agents do not hold deposits.",
+      "sub": "Financial-Services Providers",
+      "diff": 3
+    },
+    {
+      "id": "pf-037",
+      "q": "Which description best fits a credit union?",
+      "choices": [
+        "A for-profit corporation owned by shareholders",
+        "A government agency that sets interest rates",
+        "A member-owned, not-for-profit cooperative",
+        "An investment bank that underwrites stock offerings"
+      ],
+      "answer": 2,
+      "explain": "Credit unions are cooperatives owned by their members and return earnings to them as lower fees and better rates.",
+      "sub": "Financial-Services Providers",
+      "diff": 1
+    },
+    {
+      "id": "pf-038",
+      "q": "Which provider is a broker-dealer that executes trades in securities for clients?",
+      "choices": [
+        "Brokerage firm",
+        "Credit union",
+        "Pawn shop",
+        "Payday lender"
+      ],
+      "answer": 0,
+      "explain": "Brokerage firms buy and sell securities on behalf of clients.",
+      "sub": "Financial-Services Providers",
+      "diff": 1
+    },
+    {
+      "id": "pf-039",
+      "q": "When choosing a bank, which check matters most for protecting your deposits?",
+      "choices": [
+        "How many branches it has",
+        "Whether deposits are insured by the FDIC",
+        "The design of its website",
+        "The size of its advertising budget"
+      ],
+      "answer": 1,
+      "explain": "FDIC insurance protects deposits up to the legal limit if an insured bank fails.",
+      "sub": "Financial-Services Providers",
+      "diff": 2
+    },
+    {
+      "id": "pf-040",
+      "q": "A consumer compares a payday loan with a credit union small-dollar loan. Which factor most clearly favours the credit union?",
+      "choices": [
+        "A fee of $15 for every $100 borrowed",
+        "An annual percentage rate of 390%",
+        "A requirement to post a post-dated check",
+        "A lower interest rate with repayment over several months"
+      ],
+      "answer": 3,
+      "explain": "Payday loans are short, high-cost loans due in full on the next payday. Longer, lower-rate installment terms are the clearest advantage.",
+      "sub": "Financial-Services Providers",
+      "diff": 3
+    },
+    {
+      "id": "pf-041",
+      "q": "Which type of investment represents ownership in a company?",
+      "choices": [
+        "Bond",
+        "Common stock",
+        "Certificate of deposit",
+        "Treasury bill"
+      ],
+      "answer": 1,
+      "explain": "Common stock gives shareholders an ownership stake. Bonds are debt.",
+      "sub": "Investment Strategies",
+      "diff": 1
+    },
+    {
+      "id": "pf-042",
+      "q": "A bond pays $50 per year in interest on a $1,000 face value. What is its coupon rate?",
+      "choices": ["0.5%", "2.5%", "5%", "10%"],
+      "answer": 2,
+      "explain": "Coupon rate equals annual interest divided by face value: $50 divided by $1,000 is 5%.",
+      "sub": "Investment Strategies",
+      "diff": 2
+    },
+    {
+      "id": "pf-043",
+      "q": "Which investment is generally considered the least risky?",
+      "choices": [
+        "U.S. Treasury bill",
+        "Small-cap growth stock",
+        "Cryptocurrency",
+        "Commodity futures"
+      ],
+      "answer": 0,
+      "explain": "Treasury bills are backed by the U.S. government and carry very low default risk.",
+      "sub": "Investment Strategies",
+      "diff": 2
+    },
+    {
+      "id": "pf-044",
+      "q": "Which factor is most important when selecting investments for a goal five years away?",
+      "choices": [
+        "Putting the entire amount into a single stock",
+        "Choosing last year's top performer",
+        "Expecting guaranteed returns in all cases",
+        "Matching the investment to the time horizon and risk tolerance"
+      ],
+      "answer": 3,
+      "explain": "The time horizon and risk tolerance determine how much volatility an investor can absorb.",
+      "sub": "Investment Strategies",
+      "diff": 3
+    },
+    {
+      "id": "pf-045",
+      "q": "What does diversification mean?",
+      "choices": [
+        "Putting all money into one investment",
+        "Borrowing money to invest",
+        "Investing only in bonds",
+        "Spreading investments across different assets to reduce risk"
+      ],
+      "answer": 3,
+      "explain": "Diversification reduces the impact of any single investment's loss.",
+      "sub": "Investment Strategies",
+      "diff": 1
+    },
+    {
+      "id": "pf-046",
+      "q": "Which statement about marginal tax rates is correct?",
+      "choices": [
+        "Each dollar of income is taxed at one flat rate.",
+        "The top bracket's rate applies to all income once you reach it.",
+        "Only the portion of income within a bracket is taxed at that bracket's rate.",
+        "Tax brackets apply only to capital gains."
+      ],
+      "answer": 2,
+      "explain": "A progressive system taxes each bracket's slice of income at that bracket's rate. Higher income does not raise the rate on earlier dollars.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-047",
+      "q": "On a pay stub, which item represents the employee's share of Social Security and Medicare taxes?",
+      "choices": [
+        "Federal income tax",
+        "FICA",
+        "State disability insurance",
+        "Net pay"
+      ],
+      "answer": 1,
+      "explain": "FICA covers Social Security and Medicare. Employers match the amount.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-048",
+      "q": "Gross pay is $2,000 and total withholdings are $460. What is net pay?",
+      "choices": ["$1,540", "$1,460", "$2,460", "$1,640"],
+      "answer": 0,
+      "explain": "Net pay is $2,000 minus $460, which equals $1,540.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-049",
+      "q": "On a check, what is the payee line?",
+      "choices": [
+        "The person or business receiving the payment",
+        "The bank's routing number",
+        "The date the check was written",
+        "The memo line"
+      ],
+      "answer": 0,
+      "explain": "The payee is the person or business that receives the money.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-050",
+      "q": "What must match when you write a check?",
+      "choices": [
+        "The date and memo",
+        "The routing number",
+        "The amount in numerals and in words",
+        "The account signature"
+      ],
+      "answer": 2,
+      "explain": "The numerical and written amounts should agree to avoid disputes or altered checks.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-051",
+      "q": "A check shows $250 in numerals but the written amount reads two hundred fifty-five dollars. Which amount generally controls?",
+      "choices": [
+        "The numerical amount",
+        "The amount shown on the bank statement",
+        "The average of the two amounts",
+        "The written amount"
+      ],
+      "answer": 3,
+      "explain": "Under the Uniform Commercial Code, the written words generally control over numerals when they conflict.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-052",
+      "q": "Your checkbook balance is $1,200. The bank statement shows $1,350, with an outstanding check of $200 and an unrecorded $50 service fee. What is the adjusted balance?",
+      "choices": ["$1,100", "$1,150", "$1,200", "$1,350"],
+      "answer": 1,
+      "explain": "Bank side: $1,350 minus $200 is $1,150. Book side: $1,200 minus the $50 fee is $1,150. Both match.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-053",
+      "q": "Generally, how long should you keep federal tax returns and supporting records?",
+      "choices": [
+        "30 days",
+        "One year",
+        "At least three years from the filing date",
+        "Until the home is sold"
+      ],
+      "answer": 2,
+      "explain": "The IRS generally has three years to audit, so three years is the usual minimum. Some situations require longer.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-054",
+      "q": "Which record is most useful for tracking where money was spent during a month?",
+      "choices": [
+        "Balance sheet",
+        "Pay stub",
+        "Form W-2",
+        "Transaction register"
+      ],
+      "answer": 3,
+      "explain": "A transaction register records each deposit, withdrawal and payment in order.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-055",
+      "q": "To deduct a charitable cash gift of $250 or more on a federal return, what is generally required?",
+      "choices": [
+        "An appraisal for every gift",
+        "A written acknowledgment from the charity",
+        "A notarized letter from the donor",
+        "The recipient's Social Security number"
+      ],
+      "answer": 1,
+      "explain": "The IRS requires a contemporaneous written acknowledgment from the charity for single cash gifts of $250 or more.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-056",
+      "q": "A single filer has a $15,000 standard deduction and itemized deductions of $12,000. Which is more beneficial?",
+      "choices": [
+        "Take the standard deduction of $15,000",
+        "Itemize and reduce taxable income by $12,000",
+        "Take both the standard deduction and itemize",
+        "Itemize and add $3,000 to taxable income"
+      ],
+      "answer": 0,
+      "explain": "Taxpayers generally take whichever is larger, and the larger one here is the standard deduction. Itemizing and standard deduction cannot be combined.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-057",
+      "q": "Which is the safest practice for managing online bank accounts?",
+      "choices": [
+        "Sharing passwords with family members",
+        "Enabling multi-factor authentication",
+        "Using the same password for every site",
+        "Saving login details on a public computer"
+      ],
+      "answer": 1,
+      "explain": "Multi-factor authentication stops most account takeovers even if a password is stolen.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-058",
+      "q": "A $1,000 credit card balance carries 18% APR charged monthly (1.5% per month) with no new purchases. What is the first month's interest?",
+      "choices": ["$15", "$18", "$1.50", "$180"],
+      "answer": 0,
+      "explain": "The monthly rate is 18% divided by 12, or 1.5%. Applied to $1,000, the interest is $15. The trap is using $18, the annual rate in dollars.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-059",
+      "q": "Why do cardholders pay interest on credit cards?",
+      "choices": [
+        "The issuer waives interest after 30 days",
+        "The cardholder pays the full statement balance each month",
+        "The cardholder carries a balance past the grace period",
+        "The card carries an annual fee"
+      ],
+      "answer": 2,
+      "explain": "Interest starts when a balance is carried past the grace period. Paying the full statement balance usually avoids interest on purchases.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-060",
+      "q": "A $3,000 balance at 24% APR requires a $60 minimum payment. Why does the balance fall so slowly?",
+      "choices": [
+        "The minimum is applied entirely to principal",
+        "The issuer refunds interest each month",
+        "Interest applies only to new purchases",
+        "Most of the minimum covers accrued interest, leaving little for principal"
+      ],
+      "answer": 3,
+      "explain": "Monthly interest is $3,000 times 2%, or $60, so the entire minimum goes to interest.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-061",
+      "q": "Which is a common warning sign of identity theft?",
+      "choices": [
+        "Receiving a monthly statement you expected",
+        "Paying bills on time",
+        "A credit score that rose slightly",
+        "A credit card bill for purchases you did not make"
+      ],
+      "answer": 3,
+      "explain": "Unfamiliar charges or accounts are a key sign. Expected statements and normal scores are not warnings.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-062",
+      "q": "Under U.S. federal law, how often can a consumer get a free credit report from each nationwide credit bureau?",
+      "choices": [
+        "Once every five years",
+        "Once every 12 months",
+        "Only after a loan denial",
+        "Once a month"
+      ],
+      "answer": 1,
+      "explain": "The Fair Credit Reporting Act entitles consumers to a free report from each nationwide bureau every 12 months.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-063",
+      "q": "Which factor has the largest impact on a FICO score?",
+      "choices": [
+        "Number of credit inquiries",
+        "Types of credit in use",
+        "Payment history",
+        "Total income"
+      ],
+      "answer": 2,
+      "explain": "Payment history is the largest factor, at about 35 percent. Income is not used in scoring.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-064",
+      "q": "Which statement about the credit utilization ratio is correct?",
+      "choices": [
+        "It is total card balances divided by total credit limits, and lower is generally better",
+        "Higher ratios generally improve a credit score",
+        "It includes only mortgage balances",
+        "It is calculated from the borrower's income"
+      ],
+      "answer": 0,
+      "explain": "Utilization is revolving balances divided by limits. Keeping it low generally helps the score.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-065",
+      "q": "What is the best first step before taking on a new loan?",
+      "choices": [
+        "Compare the total cost, including interest",
+        "Buy the item immediately",
+        "Borrow the maximum amount offered",
+        "Ignore the APR"
+      ],
+      "answer": 0,
+      "explain": "Comparing total cost, including interest and fees, shows what the loan really costs.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-066",
+      "q": "What is the principal of a loan?",
+      "choices": [
+        "The interest charged",
+        "The monthly payment amount",
+        "The origination fee",
+        "The original amount borrowed, excluding interest"
+      ],
+      "answer": 3,
+      "explain": "Principal is the amount borrowed. Interest and fees are separate charges.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-067",
+      "q": "Which debt-repayment method pays off the smallest balance first?",
+      "choices": [
+        "Debt consolidation",
+        "Debt snowball",
+        "Debt avalanche",
+        "Bankruptcy"
+      ],
+      "answer": 1,
+      "explain": "The snowball method targets the smallest balance for quick wins. The avalanche method targets the highest rate.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-068",
+      "q": "Using the avalanche method, which debt should receive extra payments first? Card A: $2,000 at 22%. Card B: $5,000 at 15%. Car loan: $8,000 at 6%.",
+      "choices": [
+        "The car loan",
+        "Card B",
+        "Card A",
+        "Split all payments equally"
+      ],
+      "answer": 2,
+      "explain": "The avalanche method targets the highest interest rate first, which is Card A at 22%.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-069",
+      "q": "Which bill is most important to pay on time to avoid losing housing?",
+      "choices": [
+        "Magazine subscription",
+        "Streaming service",
+        "Rent or mortgage",
+        "Gym membership"
+      ],
+      "answer": 2,
+      "explain": "Missing rent or mortgage payments can lead to eviction or foreclosure, so it takes priority.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-070",
+      "q": "Which U.S. federal law restricts how third-party debt collectors may contact consumers?",
+      "choices": [
+        "Fair Credit Reporting Act",
+        "Fair Debt Collection Practices Act",
+        "Equal Credit Opportunity Act",
+        "Truth in Lending Act"
+      ],
+      "answer": 1,
+      "explain": "The FDCPA limits collector contact times and methods and bans harassment and false statements.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-071",
+      "q": "Which retirement plan allows employees to contribute pre-tax income through payroll deduction?",
+      "choices": [
+        "Traditional 401(k) plan",
+        "Roth IRA with after-tax contributions",
+        "Savings bond",
+        "Payday loan account"
+      ],
+      "answer": 0,
+      "explain": "Traditional 401(k) contributions reduce current taxable wages, and withdrawals in retirement are taxed as income.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-072",
+      "q": "Which statement about a Roth IRA is correct?",
+      "choices": [
+        "Contributions are tax-deductible in the year made",
+        "Withdrawals of contributions are taxed as ordinary income",
+        "Required minimum distributions begin at age 25",
+        "Contributions use after-tax dollars, and qualified retirement withdrawals are tax-free"
+      ],
+      "answer": 3,
+      "explain": "Roth contributions are made with after-tax money, and qualified withdrawals are tax-free. Contributions can be withdrawn without tax at any time.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-073",
+      "q": "Which form does a student complete to apply for federal financial aid?",
+      "choices": ["Form W-4", "FAFSA", "Form 1099-INT", "Form 1098-E"],
+      "answer": 1,
+      "explain": "The Free Application for Federal Student Aid (FAFSA) is required for federal grants and loans.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-074",
+      "q": "Which type of education funding generally does NOT have to be repaid?",
+      "choices": [
+        "Subsidized student loan",
+        "Private student loan",
+        "Parent PLUS loan",
+        "Pell Grant"
+      ],
+      "answer": 3,
+      "explain": "Pell Grants are need-based grants that do not need repayment. All the loan options must be repaid.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-075",
+      "q": "Which document names a person who can manage finances if the owner becomes incapacitated?",
+      "choices": [
+        "Living will",
+        "Birth certificate",
+        "Durable power of attorney",
+        "Beneficiary designation form"
+      ],
+      "answer": 2,
+      "explain": "A durable power of attorney stays in effect if the principal becomes incapacitated. A living will covers medical care.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-076",
+      "q": "Which is a key advantage of a revocable living trust over a will?",
+      "choices": [
+        "It can avoid probate for assets titled in the trust",
+        "It cannot be changed",
+        "It eliminates all estate taxes automatically",
+        "It requires no property titles"
+      ],
+      "answer": 0,
+      "explain": "Assets titled in the trust pass outside probate. A revocable trust can be changed, and it does not automatically remove estate tax.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-077",
+      "q": "Which form does an employer send to an employee to report annual wages and withholding?",
+      "choices": ["Form 1099-DIV", "Form 1098", "Form 1040-ES", "Form W-2"],
+      "answer": 3,
+      "explain": "Form W-2 reports wages and taxes withheld. Form 1099 is used for non-employee income.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-078",
+      "q": "Which filing status generally offers the largest standard deduction?",
+      "choices": [
+        "Married filing jointly",
+        "Head of household",
+        "Single",
+        "Married filing separately"
+      ],
+      "answer": 0,
+      "explain": "Married filing jointly generally has the largest standard deduction, which is double the single amount.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-079",
+      "q": "Which tax item reduces tax owed dollar for dollar?",
+      "choices": ["Deduction", "Exemption", "Credit", "Standard deduction"],
+      "answer": 2,
+      "explain": "A credit reduces tax directly. A deduction only reduces taxable income.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-080",
+      "q": "A taxpayer in the 22% bracket has $1,000 of additional taxable income, all in that bracket. How much additional federal income tax is owed?",
+      "choices": ["$100", "$220", "$180", "$2,200"],
+      "answer": 1,
+      "explain": "Tax is 22% of $1,000, which is $220. The trap is treating the rate as 2.2 times the amount.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-081",
+      "q": "Which tax is paid on the value of goods and services at the point of purchase?",
+      "choices": ["Sales tax", "Estate tax", "Payroll tax", "Property tax"],
+      "answer": 0,
+      "explain": "Sales tax is collected at the register on the taxable price of goods and services.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-082",
+      "q": "Which agency collects federal income tax?",
+      "choices": [
+        "FDIC",
+        "Internal Revenue Service",
+        "Securities and Exchange Commission",
+        "Federal Trade Commission"
+      ],
+      "answer": 1,
+      "explain": "The IRS administers and collects federal income taxes.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-083",
+      "q": "Which statement about capital gains is correct?",
+      "choices": [
+        "A capital gain is a loss on a sold asset",
+        "Short-term gains are always taxed at a lower rate than long-term gains",
+        "Long-term gains on assets held more than one year generally get lower rates than ordinary income",
+        "Capital gains are never subject to federal tax"
+      ],
+      "answer": 2,
+      "explain": "Assets held more than one year usually qualify for lower long-term rates. Short-term gains are taxed as ordinary income.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-084",
+      "q": "Which statement correctly describes a traditional IRA?",
+      "choices": [
+        "Contributions are taxed upfront and withdrawals are tax-free",
+        "Earnings are taxed each year as they accrue",
+        "No contributions are allowed after age 30",
+        "Contributions may be deductible, and retirement withdrawals are taxed as ordinary income"
+      ],
+      "answer": 3,
+      "explain": "Traditional IRA earnings grow tax-deferred. Contributions may be deductible, and withdrawals are taxed as ordinary income.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-085",
+      "q": "Which U.S. federal law protects consumers against unfair practices in credit reporting?",
+      "choices": [
+        "Equal Credit Opportunity Act",
+        "Fair Debt Collection Practices Act",
+        "Fair Credit Reporting Act",
+        "Electronic Fund Transfer Act"
+      ],
+      "answer": 2,
+      "explain": "The FCRA governs how credit bureaus collect, share and correct consumer credit information.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-086",
+      "q": "Which law prohibits credit discrimination based on race, sex, or marital status?",
+      "choices": [
+        "Equal Credit Opportunity Act",
+        "Fair Credit Reporting Act",
+        "Truth in Lending Act",
+        "Fair Debt Collection Practices Act"
+      ],
+      "answer": 0,
+      "explain": "The ECOA prohibits credit discrimination on several protected bases, including race, sex and marital status.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-087",
+      "q": "Which statement about a secured loan is correct?",
+      "choices": [
+        "It requires no collateral",
+        "It always has a higher rate than unsecured loans",
+        "It is available only to businesses",
+        "It is backed by collateral the lender can seize on default"
+      ],
+      "answer": 3,
+      "explain": "A secured loan is backed by collateral, such as a car or home. Rates are often lower, not higher.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-088",
+      "q": "A borrower defaults on a car loan. Under the Uniform Commercial Code, what is the lender's typical remedy?",
+      "choices": [
+        "File criminal charges",
+        "Repossess the collateral after giving required notice",
+        "Collect from the borrower's employer without notice",
+        "Cancel the principal"
+      ],
+      "answer": 1,
+      "explain": "A secured lender may repossess collateral after default, subject to notice rules under the UCC.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-089",
+      "q": "Which action best protects against identity theft?",
+      "choices": [
+        "Posting your Social Security number on social media",
+        "Placing a credit freeze with each credit bureau",
+        "Writing PINs on your cards",
+        "Banking on public Wi-Fi without protection"
+      ],
+      "answer": 1,
+      "explain": "A credit freeze blocks new credit checks, so thieves cannot open accounts in your name.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-090",
+      "q": "What is a fraud alert on a credit report?",
+      "choices": [
+        "A permanent block on all credit",
+        "A lien placed on property",
+        "A notice asking creditors to verify identity before opening new credit, lasting one year",
+        "A bankruptcy notice"
+      ],
+      "answer": 2,
+      "explain": "An initial fraud alert lasts one year and asks lenders to take extra steps to verify identity. It does not block all credit.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-091",
+      "q": "Which statement describes a credit freeze?",
+      "choices": [
+        "It lasts seven years and cannot be lifted",
+        "It prevents you from getting your own credit report",
+        "It applies only to business credit",
+        "It restricts access to your credit report so new accounts are harder to open, and it is free to place and lift"
+      ],
+      "answer": 3,
+      "explain": "Under U.S. law, freezes are free and can be lifted or placed at each bureau. You can still see your own report.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-092",
+      "q": "A debt collector threatens arrest for unpaid debt. What is the most appropriate first step?",
+      "choices": [
+        "Request written validation of the debt under the FDCPA",
+        "Pay immediately to avoid arrest",
+        "Give the collector your online banking password",
+        "Ignore the calls entirely"
+      ],
+      "answer": 0,
+      "explain": "Debt collectors cannot threaten arrest for civil debt. Requesting written validation is the consumer's right under the FDCPA.",
+      "sub": "Financial Literacy",
+      "diff": 3
+    },
+    {
+      "id": "pf-093",
+      "q": "What does a Form W-4 tell an employer?",
+      "choices": [
+        "How much interest to report",
+        "How much to claim as a refund",
+        "Where to file an estate return",
+        "How much federal income tax to withhold"
+      ],
+      "answer": 3,
+      "explain": "Form W-4 sets the employee's federal withholding based on filing status and adjustments.",
+      "sub": "Financial Literacy",
+      "diff": 1
+    },
+    {
+      "id": "pf-094",
+      "q": "Which is a common purpose of Form 1099?",
+      "choices": [
+        "Reporting wages from an employer",
+        "Reporting mortgage interest paid",
+        "Reporting non-employee or investment income",
+        "Requesting a tax refund"
+      ],
+      "answer": 2,
+      "explain": "Form 1099 series reports income such as freelance pay, interest and dividends. Wages use Form W-2.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-095",
+      "q": "Which record-keeping practice best supports a tax audit?",
+      "choices": [
+        "Keeping receipts and statements for the required period, generally three years",
+        "Shredding all statements after one month",
+        "Storing records only on a phone",
+        "Relying on memory"
+      ],
+      "answer": 0,
+      "explain": "Documentation is the basis for supporting deductions and income. Keeping it for the required period protects the taxpayer.",
+      "sub": "Financial Literacy",
+      "diff": 2
+    },
+    {
+      "id": "pf-096",
+      "q": "Which term describes the amount a policyholder pays out of pocket before insurance begins to pay?",
+      "choices": ["Premium", "Deductible", "Policy limit", "Coinsurance"],
+      "answer": 1,
+      "explain": "The deductible is the out-of-pocket amount before the insurer pays. The premium is the regular cost of coverage.",
+      "sub": "Risk Management",
+      "diff": 3
+    },
+    {
+      "id": "pf-097",
+      "q": "What is a premium in insurance?",
+      "choices": [
+        "The amount paid to keep an insurance policy in force",
+        "The amount the insurer pays on a claim",
+        "The maximum payout under the policy",
+        "A fee paid to an insurance agent"
+      ],
+      "answer": 0,
+      "explain": "The premium is the price of coverage, usually paid monthly or annually.",
+      "sub": "Risk Management",
+      "diff": 1
+    },
+    {
+      "id": "pf-098",
+      "q": "Which insurance protects against liability for injuries you cause to others?",
+      "choices": [
+        "Collision coverage on your own car",
+        "Homeowner's contents coverage",
+        "Liability coverage",
+        "Term life insurance"
+      ],
+      "answer": 2,
+      "explain": "Liability coverage pays for legal defence and damages you owe to third parties.",
+      "sub": "Risk Management",
+      "diff": 2
+    },
+    {
+      "id": "pf-099",
+      "q": "Which strategy transfers risk to another party?",
+      "choices": [
+        "Risk avoidance",
+        "Purchasing insurance",
+        "Retaining risk with no reserve",
+        "Risk reduction by driving slower"
+      ],
+      "answer": 1,
+      "explain": "Insurance transfers the financial risk of a loss to the insurer in exchange for a premium. Avoidance and reduction change the risk itself.",
+      "sub": "Risk Management",
+      "diff": 2
+    },
+    {
+      "id": "pf-100",
+      "q": "What is coinsurance in an insurance policy?",
+      "choices": [
+        "The insurer pays 100% of covered costs after the premium is paid",
+        "The insured pays a fixed monthly amount regardless of claims",
+        "The insurer pays nothing until the policy limit is reached",
+        "The insured pays a set percentage of covered costs after the deductible is met"
+      ],
+      "answer": 3,
+      "explain": "Coinsurance is the insured's share of covered costs after the deductible, such as 20 percent. It is not a fixed fee.",
+      "sub": "Risk Management",
+      "diff": 3
+    }
+  ],
+  "vocab": [
+    {
+      "id": "pf-v001",
+      "term": "Electronic funds transfer (EFT)",
+      "def": "Any transfer of money made electronically rather than by cash or paper check, such as a debit card purchase or direct deposit.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v002",
+      "term": "Debit card",
+      "def": "A payment card that withdraws funds directly from the cardholder's deposit account at the time of purchase.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v003",
+      "term": "Credit card",
+      "def": "A payment card that lets the holder borrow from the issuer up to a credit limit and repay later, usually with interest.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v004",
+      "term": "Check",
+      "def": "A written order directing a bank to pay a specific amount from the drawer's account to the payee.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v005",
+      "term": "Medium of exchange",
+      "def": "The function of money as a widely accepted means of paying for goods and services.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v006",
+      "term": "Store of value",
+      "def": "The function of money as a way to save purchasing power for future use.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v007",
+      "term": "Unit of measure",
+      "def": "The function of money as a common yardstick for stating and comparing the prices of goods and services.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v008",
+      "term": "Gross income",
+      "def": "Total income earned before taxes, withholdings and other deductions are subtracted.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v009",
+      "term": "Net income",
+      "def": "Income remaining after taxes and deductions have been subtracted from gross income.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v010",
+      "term": "Time value of money",
+      "def": "The principle that money available now is worth more than the same amount in the future because it can earn interest.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v011",
+      "term": "Legal tender",
+      "def": "Currency that a government requires creditors to accept as payment for debts.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v012",
+      "term": "Consumer credit",
+      "def": "Money, goods or services provided to a consumer with the agreement to repay later, usually with interest or fees.",
+      "sub": "Principles of Money"
+    },
+    {
+      "id": "pf-v013",
+      "term": "Net worth",
+      "def": "Total assets minus total liabilities, showing what a person owns after paying off what is owed.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v014",
+      "term": "Budget",
+      "def": "A plan that projects income and expenses for a period and shows how money will be spent and saved.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v015",
+      "term": "Zero-based budgeting",
+      "def": "A budgeting method in which every dollar of income is assigned to a category so that income minus planned spending equals zero.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v016",
+      "term": "Emergency fund",
+      "def": "A reserve of easily accessible savings set aside for unexpected expenses or loss of income.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v017",
+      "term": "Sinking fund",
+      "def": "Money set aside regularly over time to pay for a known future expense.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v018",
+      "term": "Fixed expense",
+      "def": "An expense that stays about the same each period, such as rent or a loan payment.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v019",
+      "term": "Variable expense",
+      "def": "An expense that changes from period to period, such as groceries, fuel or entertainment.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v020",
+      "term": "SMART goal",
+      "def": "A financial goal that is specific, measurable, achievable, relevant and time-bound.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v021",
+      "term": "Pay yourself first",
+      "def": "A saving approach in which a set amount is moved into savings or investments as soon as income is received, before other spending.",
+      "sub": "Financial Needs and Goals"
+    },
+    {
+      "id": "pf-v022",
+      "term": "Commercial bank",
+      "def": "A depository institution that accepts deposits and makes loans to consumers and businesses.",
+      "sub": "Financial-Services Providers"
+    },
+    {
+      "id": "pf-v023",
+      "term": "Credit union",
+      "def": "A member-owned, not-for-profit financial cooperative that offers deposit and lending services to its members.",
+      "sub": "Financial-Services Providers"
+    },
+    {
+      "id": "pf-v024",
+      "term": "Brokerage firm",
+      "def": "A firm that buys and sells securities on behalf of clients, often as a broker-dealer.",
+      "sub": "Financial-Services Providers"
+    },
+    {
+      "id": "pf-v025",
+      "term": "Pawn shop",
+      "def": "A business that lends money in exchange for personal property held as collateral, which is returned if the loan and fee are repaid.",
+      "sub": "Financial-Services Providers"
+    },
+    {
+      "id": "pf-v026",
+      "term": "Payday loan",
+      "def": "A short-term, high-cost loan due in full on the borrower's next payday, often with very high effective annual rates.",
+      "sub": "Financial-Services Providers"
+    },
+    {
+      "id": "pf-v027",
+      "term": "Fiduciary",
+      "def": "A person or firm legally required to act in the best interest of the client when giving financial advice or managing assets.",
+      "sub": "Financial-Services Providers"
+    },
+    {
+      "id": "pf-v028",
+      "term": "Common stock",
+      "def": "A security that represents an ownership share in a corporation and may pay dividends and carry voting rights.",
+      "sub": "Investment Strategies"
+    },
+    {
+      "id": "pf-v029",
+      "term": "Bond",
+      "def": "A debt security in which the investor lends money to an issuer in exchange for periodic interest and repayment of principal at maturity.",
+      "sub": "Investment Strategies"
+    },
+    {
+      "id": "pf-v030",
+      "term": "Coupon rate",
+      "def": "The annual interest paid on a bond expressed as a percentage of its face value.",
+      "sub": "Investment Strategies"
+    },
+    {
+      "id": "pf-v031",
+      "term": "Diversification",
+      "def": "Spreading investments across different assets so that a loss in one holding has less effect on the whole portfolio.",
+      "sub": "Investment Strategies"
+    },
+    {
+      "id": "pf-v032",
+      "term": "Treasury bill",
+      "def": "A short-term U.S. government debt security sold at a discount and repaid at face value at maturity.",
+      "sub": "Investment Strategies"
+    },
+    {
+      "id": "pf-v033",
+      "term": "Mutual fund",
+      "def": "A pooled investment vehicle that holds a diversified portfolio of securities managed on behalf of many investors.",
+      "sub": "Investment Strategies"
+    },
+    {
+      "id": "pf-v034",
+      "term": "Marginal tax rate",
+      "def": "The tax rate applied to the next dollar of taxable income, which rises through progressive brackets.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v035",
+      "term": "FICA",
+      "def": "Payroll taxes that fund Social Security and Medicare, withheld from employee pay and matched by employers.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v036",
+      "term": "Net pay",
+      "def": "The amount an employee actually receives after all taxes and deductions are withheld from gross pay.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v037",
+      "term": "Form W-4",
+      "def": "The IRS form an employee completes so the employer knows how much federal income tax to withhold from pay.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v038",
+      "term": "Form 1099",
+      "def": "An IRS information return reporting income paid to a person who is not an employee, such as freelance pay or interest.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v039",
+      "term": "Bank reconciliation",
+      "def": "The process of comparing the bank statement with the checkbook record and adjusting for outstanding checks, deposits in transit and fees.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v040",
+      "term": "Annual percentage rate (APR)",
+      "def": "The yearly cost of borrowing expressed as a percentage, including interest and certain fees, as required under the Truth in Lending Act.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v041",
+      "term": "Credit utilization ratio",
+      "def": "The share of available revolving credit in use, calculated as total card balances divided by total credit limits.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v042",
+      "term": "Fraud alert",
+      "def": "A notice on a credit report, lasting one year for an initial alert, asking lenders to verify identity before opening new credit.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v043",
+      "term": "Credit freeze",
+      "def": "A restriction placed with each credit bureau that blocks access to a credit report, at no cost, until it is lifted.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v044",
+      "term": "Debt snowball",
+      "def": "A debt repayment method that pays the smallest balance first while making minimum payments on the others.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v045",
+      "term": "Debt avalanche",
+      "def": "A debt repayment method that directs extra payments to the debt with the highest interest rate first.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v046",
+      "term": "Secured loan",
+      "def": "A loan backed by collateral that the lender can seize if the borrower defaults.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v047",
+      "term": "Roth IRA",
+      "def": "A retirement account funded with after-tax contributions in which qualified withdrawals in retirement are tax-free.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v048",
+      "term": "Capital gain",
+      "def": "The profit from selling an asset for more than its purchase price, taxed at rates that depend on how long it was held.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v049",
+      "term": "Tax credit",
+      "def": "An amount that reduces the tax owed dollar for dollar, unlike a deduction, which only reduces taxable income.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v050",
+      "term": "Pell Grant",
+      "def": "A need-based federal grant for undergraduate students that does not have to be repaid.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v051",
+      "term": "Revocable living trust",
+      "def": "A trust the owner can change during life that holds assets, allowing them to pass outside probate at death.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v052",
+      "term": "FAFSA",
+      "def": "The Free Application for Federal Student Aid, required to apply for federal grants, work-study and loans.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v053",
+      "term": "Fair Debt Collection Practices Act",
+      "def": "A federal law that limits how third-party debt collectors may contact consumers and bans abusive or deceptive practices.",
+      "sub": "Financial Literacy"
+    },
+    {
+      "id": "pf-v054",
+      "term": "Premium",
+      "def": "The periodic amount paid to an insurer to keep an insurance policy in force.",
+      "sub": "Risk Management"
+    },
+    {
+      "id": "pf-v055",
+      "term": "Deductible",
+      "def": "The amount the policyholder must pay out of pocket on a covered loss before the insurer begins to pay.",
+      "sub": "Risk Management"
+    },
+    {
+      "id": "pf-v056",
+      "term": "Coinsurance",
+      "def": "The percentage of covered costs the insured pays after the deductible is met, with the insurer paying the rest.",
+      "sub": "Risk Management"
+    },
+    {
+      "id": "pf-v057",
+      "term": "Liability insurance",
+      "def": "Coverage that pays legal defence costs and damages owed to others for injury or property damage the insured causes.",
+      "sub": "Risk Management"
+    },
+    {
+      "id": "pf-v058",
+      "term": "Risk avoidance",
+      "def": "A risk management strategy of not engaging in an activity that could cause a loss.",
+      "sub": "Risk Management"
+    },
+    {
+      "id": "pf-v059",
+      "term": "Risk transfer",
+      "def": "A risk management strategy of shifting the financial burden of a possible loss to another party, usually through insurance or a contract.",
+      "sub": "Risk Management"
+    },
+    {
+      "id": "pf-v060",
+      "term": "Risk retention",
+      "def": "Accepting a risk and paying any resulting loss from one's own funds, either deliberately or because the risk is too small to insure.",
+      "sub": "Risk Management"
+    }
+  ]
+}

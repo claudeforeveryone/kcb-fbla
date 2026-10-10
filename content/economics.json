@@ -1,0 +1,1779 @@
+{
+  "slug": "economics",
+  "name": "Economics",
+  "group": "objective",
+  "notes": "Competency areas from the FBLA Economics guideline PDF (official, marked 'Updated August 2026'): https://greektrack-fbla-public.s3.amazonaws.com/files/1/High%20School%20Competitive%20Events%20Resources/Individual%20Guidelines/Objective%20Tests/Economics.pdf . The PDF found is the 2026-2027 edition (the 2025-2026 edition was not located). Format: 50 minutes, 100 multiple-choice questions, online. Knowledge areas listed: Fundamental Economic Concepts, Nature of Business, Economic Systems, Government's Impact on Business, Cost/Profit Relationships, Economic Indicators, Global Trade. The PDF's percent weights were garbled in text extraction, so the question counts here (25/20/20/15/10/5/5) are an approximate split of the listed weights. Detailed objectives live in the PDF's study guide, which was not readable in extraction, so the topics follow the standard high-school economics areas named in the knowledge list. Questions are original practice items written for this site, not official FBLA items.",
+  "subs": [
+    "Fundamental Economic Concepts",
+    "Nature of Business",
+    "Economic Systems",
+    "Government's Impact on Business",
+    "Cost/Profit Relationships",
+    "Economic Indicators",
+    "Global Trade"
+  ],
+  "questions": [
+    {
+      "id": "eco-001",
+      "q": "Which best describes economic scarcity?",
+      "choices": [
+        "A temporary shortage caused by a price ceiling set below equilibrium",
+        "Only the goods a government chooses to ration during a war",
+        "The condition in which unlimited human wants exceed the limited resources available to satisfy them",
+        "The total amount of goods a country produces in one year"
+      ],
+      "answer": 2,
+      "explain": "Scarcity is the gap between unlimited wants and limited resources. A shortage from a price ceiling is a symptom of a market problem, not the definition of scarcity.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-002",
+      "q": "What is the opportunity cost of a choice?",
+      "choices": [
+        "The profit a firm earns after paying all of its fixed costs",
+        "The total money spent on a purchase, including sales tax",
+        "The price paid for a good minus its cost of production",
+        "The value of the next-best alternative given up when a choice is made"
+      ],
+      "answer": 3,
+      "explain": "Opportunity cost is the value of the next-best alternative forgone. Money spent is an explicit cost, not an opportunity cost.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-003",
+      "q": "Which factor of production is the risk-taking ability to combine land, labour and capital to create a new business?",
+      "choices": [
+        "Labour",
+        "Capital",
+        "Land",
+        "Entrepreneurship"
+      ],
+      "answer": 3,
+      "explain": "Entrepreneurship is the fourth factor of production: it organizes the other three and bears the risk of doing so.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-004",
+      "q": "In the circular flow model, what do households provide to firms in the factor market?",
+      "choices": [
+        "Goods and services",
+        "Consumer spending",
+        "Tax revenue",
+        "Labour, land and capital"
+      ],
+      "answer": 3,
+      "explain": "Households own the factors of production and supply them to firms for income. Goods and services flow the other way, through the product market.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-005",
+      "q": "A point inside a production possibilities curve indicates that the economy is:",
+      "choices": [
+        "operating at full employment with efficient allocation",
+        "unable to produce that combination of goods with current resources",
+        "operating inefficiently, with unemployed or underused resources",
+        "experiencing rapid economic growth"
+      ],
+      "answer": 2,
+      "explain": "Points inside the curve are attainable but inefficient, because resources are idle or misallocated. Points on the curve are efficient.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-006",
+      "q": "Which characteristic best defines a public good?",
+      "choices": [
+        "Excludable but non-rival",
+        "Rival and excludable",
+        "Rival but non-excludable",
+        "Non-rival and non-excludable"
+      ],
+      "answer": 3,
+      "explain": "A public good is non-rival (one person's use does not reduce another's) and non-excludable (no one can be barred from using it). Excludable but non-rival describes a club good.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-007",
+      "q": "A country has a comparative advantage in producing a good when it can produce that good at:",
+      "choices": [
+        "the lowest total cost in dollars",
+        "a higher output per worker than any other country in every good",
+        "the highest absolute productivity of any good",
+        "a lower opportunity cost than another country"
+      ],
+      "answer": 3,
+      "explain": "Comparative advantage depends on opportunity cost, not on absolute cost or productivity. A country can lack an absolute advantage and still have a comparative one.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-008",
+      "q": "Marginal cost is best defined as:",
+      "choices": [
+        "total cost divided by total output",
+        "the price minus average variable cost",
+        "fixed costs spread over all units produced",
+        "the change in total cost from producing one additional unit"
+      ],
+      "answer": 3,
+      "explain": "Marginal cost is the change in total cost from one more unit. Dividing total cost by output gives average total cost.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-009",
+      "q": "Which event would cause a rightward shift of the demand curve for a normal good?",
+      "choices": [
+        "A decrease in consumer income",
+        "An increase in the price of the good itself",
+        "An increase in consumer income",
+        "A decrease in the price of the good itself"
+      ],
+      "answer": 2,
+      "explain": "A change in the good's own price moves along the curve rather than shifting it. Rising income increases demand for normal goods.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-010",
+      "q": "Which change would shift the supply curve for a product to the left?",
+      "choices": [
+        "An increase in the price of the product itself",
+        "A technological improvement that lowers production costs",
+        "A subsidy paid to producers",
+        "An increase in the cost of raw materials"
+      ],
+      "answer": 3,
+      "explain": "Higher input costs reduce the quantity firms are willing to supply at each price, shifting supply left. The other options shift supply right or move along the curve.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-011",
+      "q": "When the market price is above equilibrium, what happens?",
+      "choices": [
+        "A shortage occurs and the price tends to rise",
+        "Quantity demanded exceeds quantity supplied",
+        "A surplus occurs and the price tends to fall",
+        "The market clears immediately"
+      ],
+      "answer": 2,
+      "explain": "At a price above equilibrium, quantity supplied exceeds quantity demanded, creating a surplus that pushes the price down toward equilibrium.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-012",
+      "q": "The price of a good rises 10% and the quantity demanded falls 20%. The absolute price elasticity of demand is closest to:",
+      "choices": [
+        "2.0, so demand is elastic",
+        "0.5, so demand is inelastic",
+        "10, so demand is perfectly elastic",
+        "0.2, so demand is unit elastic"
+      ],
+      "answer": 0,
+      "explain": "Elasticity is 20% divided by 10%, which is 2.0. Since it is above 1, demand is elastic.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-013",
+      "q": "Which good is most likely to have inelastic demand?",
+      "choices": [
+        "Restaurant meals",
+        "A specific brand of cereal",
+        "Gasoline in the short run",
+        "Luxury cars"
+      ],
+      "answer": 2,
+      "explain": "Gasoline has few close substitutes and is a modest share of most budgets in the short run, so demand is inelastic. The other options have many substitutes.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-014",
+      "q": "Diminishing marginal returns occur when:",
+      "choices": [
+        "total output begins to decline with any additional input",
+        "average costs fall as output increases",
+        "fixed costs rise with each unit produced",
+        "each additional unit of a variable input adds less output than the previous unit"
+      ],
+      "answer": 3,
+      "explain": "Diminishing marginal returns mean the extra output from each added unit of a variable input falls, even while total output may still rise.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-015",
+      "q": "Consumer surplus is the difference between:",
+      "choices": [
+        "the market price and the cost of production",
+        "total revenue and total cost",
+        "the market price and the seller's minimum acceptable price",
+        "the maximum a buyer is willing to pay and the price actually paid"
+      ],
+      "answer": 3,
+      "explain": "Consumer surplus is the gain to buyers: their willingness to pay minus the market price. The option about a seller's minimum acceptable price describes producer surplus.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-016",
+      "q": "A price floor set above the equilibrium price will most likely result in:",
+      "choices": [
+        "a surplus of the good",
+        "a shortage of the good",
+        "the quantity supplied falling to zero",
+        "no change in the quantity exchanged"
+      ],
+      "answer": 0,
+      "explain": "A binding price floor above equilibrium makes quantity supplied exceed quantity demanded, creating a surplus.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-017",
+      "q": "The Latin phrase ceteris paribus means:",
+      "choices": [
+        "all prices change together",
+        "the economy is at full employment",
+        "all other relevant factors are held constant",
+        "consumers always act rationally"
+      ],
+      "answer": 2,
+      "explain": "Economists use ceteris paribus to isolate the effect of one variable by holding others constant.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-018",
+      "q": "Which statement is normative?",
+      "choices": [
+        "Raising the minimum wage increases teen unemployment",
+        "The minimum wage is a type of price floor",
+        "Each $1 increase in the minimum wage reduces hours worked by 2%",
+        "The government should raise the minimum wage to $15 per hour"
+      ],
+      "answer": 3,
+      "explain": "'Should' statements express value judgments and are normative. The others are positive, testable claims.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-019",
+      "q": "Which is a microeconomic topic?",
+      "choices": [
+        "The national inflation rate",
+        "The federal budget deficit",
+        "Monetary policy set by the central bank",
+        "A single firm's pricing decision"
+      ],
+      "answer": 3,
+      "explain": "Microeconomics studies individual households, firms and markets. The other three concern the economy as a whole.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-020",
+      "q": "Which best describes macroeconomics?",
+      "choices": [
+        "The study of the economy as a whole, including inflation, unemployment and growth",
+        "The study of individual households and firms in a single market",
+        "The study of how a firm maximizes its profit",
+        "The study of how one government sets tariffs on a single product"
+      ],
+      "answer": 0,
+      "explain": "Macroeconomics analyzes aggregate outcomes such as GDP, inflation and unemployment. Studying a single market or a single firm is microeconomics.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-021",
+      "q": "Marginal utility is:",
+      "choices": [
+        "the total satisfaction from all units consumed",
+        "the average satisfaction per unit consumed",
+        "the additional satisfaction from consuming one more unit",
+        "the price a consumer pays per unit"
+      ],
+      "answer": 2,
+      "explain": "Marginal utility is the extra satisfaction from one more unit. Consumers maximize utility where marginal utility per dollar is equal across goods.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-022",
+      "q": "Which function does the price system perform?",
+      "choices": [
+        "Guarantees every buyer a fair share of scarce goods",
+        "Allocates scarce goods to those willing and able to pay",
+        "Eliminates all opportunity costs",
+        "Prevents shortages in every market"
+      ],
+      "answer": 0,
+      "explain": "Prices ration scarce goods to those willing and able to pay. Prices do not guarantee fairness and do not eliminate opportunity costs.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-023",
+      "q": "If the price of tea rises and the quantity demanded of coffee rises, tea and coffee are:",
+      "choices": [
+        "complements",
+        "inferior goods",
+        "normal goods",
+        "substitutes"
+      ],
+      "answer": 3,
+      "explain": "Substitutes are goods that can replace each other, so a rise in one price increases demand for the other.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-024",
+      "q": "If the price of printers falls and the quantity demanded of ink cartridges rises, ink is a complement of printers. Why?",
+      "choices": [
+        "Both goods are used together, so a fall in one price raises demand for the other",
+        "Ink is an inferior good for every buyer",
+        "Ink and printers are perfect substitutes",
+        "Ink is a luxury good whose demand rises with income"
+      ],
+      "answer": 0,
+      "explain": "Complements are used together. Cheaper printers mean more printers are bought, which raises demand for the ink they need.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-025",
+      "q": "If both demand and supply increase, the equilibrium price:",
+      "choices": [
+        "rises for certain",
+        "falls for certain",
+        "is indeterminate without knowing the relative sizes of the shifts",
+        "stays the same"
+      ],
+      "answer": 2,
+      "explain": "Both shifts raise equilibrium quantity for certain, but their opposing effects on price depend on which shift is larger.",
+      "sub": "Fundamental Economic Concepts",
+      "diff": 1
+    },
+    {
+      "id": "eco-026",
+      "q": "Which form of business has a single owner who bears unlimited personal liability for business debts?",
+      "choices": [
+        "Sole proprietorship",
+        "C corporation",
+        "Limited liability company",
+        "Nonprofit corporation"
+      ],
+      "answer": 0,
+      "explain": "A sole proprietor and the business are legally the same, so personal assets can be reached for business debts.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-027",
+      "q": "A key disadvantage of a C corporation for U.S. federal tax purposes is:",
+      "choices": [
+        "unlimited personal liability for all owners",
+        "owners must pay self-employment tax on all profit",
+        "owners cannot transfer their shares",
+        "double taxation of corporate profits and of dividends paid to shareholders"
+      ],
+      "answer": 3,
+      "explain": "A C corporation pays corporate income tax, and shareholders pay tax again on dividends. S corporations and LLCs avoid this by default.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-028",
+      "q": "In a limited partnership, which partners have limited liability?",
+      "choices": [
+        "General partners only",
+        "Neither type of partner",
+        "Both general and limited partners",
+        "Limited partners"
+      ],
+      "answer": 3,
+      "explain": "General partners manage the business and bear unlimited liability. Limited partners are generally liable only up to their investment.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-029",
+      "q": "Which section of a business plan describes the target market and the competition?",
+      "choices": [
+        "Market analysis",
+        "Income statement",
+        "Cash flow forecast",
+        "Balance sheet"
+      ],
+      "answer": 0,
+      "explain": "Market analysis covers target customers, industry size and competitors. The financial statements come later in the plan.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-030",
+      "q": "Which group is an internal stakeholder of a business?",
+      "choices": [
+        "Suppliers",
+        "Customers",
+        "Employees",
+        "Competitors"
+      ],
+      "answer": 2,
+      "explain": "Internal stakeholders work within or own the firm. Employees are internal; suppliers, customers and competitors are external.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-031",
+      "q": "The four functions of management are:",
+      "choices": [
+        "buying, selling, producing and distributing",
+        "hiring, firing, paying and training",
+        "budgeting, auditing, taxing and reporting",
+        "planning, organizing, leading and controlling"
+      ],
+      "answer": 3,
+      "explain": "The classic management functions are planning, organizing, leading (directing) and controlling.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-032",
+      "q": "The four Ps of the marketing mix are:",
+      "choices": [
+        "price, place, purchase and profit",
+        "product, process, people and profit",
+        "planning, pricing, packaging and public relations",
+        "product, price, place and promotion"
+      ],
+      "answer": 3,
+      "explain": "The marketing mix is product, price, place and promotion. Some texts add people, process and physical evidence for services.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-033",
+      "q": "The break-even point occurs when:",
+      "choices": [
+        "total revenue equals total cost",
+        "profit is maximized",
+        "marginal cost equals marginal revenue",
+        "fixed costs equal variable costs"
+      ],
+      "answer": 0,
+      "explain": "At break-even, total revenue equals total cost and profit is zero. Marginal cost equal to marginal revenue is the profit-maximizing rule.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-034",
+      "q": "Which is the primary characteristic of an entrepreneur?",
+      "choices": [
+        "A guaranteed salary",
+        "Avoidance of all financial risk",
+        "Willingness to take calculated risks to pursue profit",
+        "Employment by a government agency"
+      ],
+      "answer": 2,
+      "explain": "Entrepreneurs take on risk in exchange for the possibility of profit, which is the reward for bearing uncertainty.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-035",
+      "q": "A nonprofit corporation differs from a for-profit corporation mainly because:",
+      "choices": [
+        "it cannot hire employees",
+        "it cannot earn revenue",
+        "it never pays any taxes",
+        "its earnings cannot be distributed to owners as profit"
+      ],
+      "answer": 3,
+      "explain": "Nonprofits may earn revenue and hire staff. The key difference is that surplus cannot be distributed to owners or directors as profit.",
+      "sub": "Nature of Business",
+      "diff": 1
+    },
+    {
+      "id": "eco-036",
+      "q": "Which business structure gives owners limited liability while being taxed as a partnership by default for U.S. federal tax purposes?",
+      "choices": [
+        "A C corporation",
+        "A general partnership",
+        "A limited liability company (LLC)",
+        "A sole proprietorship that has filed incorporation papers"
+      ],
+      "answer": 2,
+      "explain": "An LLC shields owners' personal assets from business debts and, by default with multiple members, is taxed as a partnership (pass-through).",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-037",
+      "q": "The main advantage of buying a franchise over starting an independent business is:",
+      "choices": [
+        "complete control over product design",
+        "no royalty or fee obligations",
+        "an established brand and operating system",
+        "exemption from the franchisor's standards"
+      ],
+      "answer": 2,
+      "explain": "Franchisees trade some independence and ongoing fees for a proven brand, training and systems. Franchisees usually do pay royalties and must follow standards.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-038",
+      "q": "In a SWOT analysis, which element is an external factor the business cannot directly control?",
+      "choices": [
+        "Strength",
+        "Core competency",
+        "Weakness",
+        "Threat"
+      ],
+      "answer": 3,
+      "explain": "Threats (and opportunities) are external. Strengths and weaknesses are internal and under the firm's influence.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-039",
+      "q": "Which form of intellectual property protects a brand name and logo used to identify goods?",
+      "choices": [
+        "Patent",
+        "Copyright",
+        "Trade secret",
+        "Trademark"
+      ],
+      "answer": 3,
+      "explain": "Trademarks protect names, logos and slogans that identify the source of goods. Patents cover inventions, and copyrights cover creative works.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-040",
+      "q": "A U.S. utility patent protects a novel invention or process for how long from the filing date?",
+      "choices": [
+        "10 years",
+        "Life of the inventor plus 70 years",
+        "50 years",
+        "20 years"
+      ],
+      "answer": 3,
+      "explain": "A utility patent lasts 20 years from the filing date. Copyright for works by an individual lasts life plus 70 years, which is a common mix-up.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-041",
+      "q": "Which U.S. law governs contracts for the sale of goods between merchants?",
+      "choices": [
+        "Uniform Commercial Code, Article 2",
+        "Sherman Antitrust Act",
+        "Fair Labor Standards Act",
+        "Securities Act of 1933"
+      ],
+      "answer": 0,
+      "explain": "UCC Article 2 governs sales of goods. The other laws cover antitrust, wages and securities.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-042",
+      "q": "Besides offer, acceptance and consideration, a legally enforceable contract generally requires:",
+      "choices": [
+        "a notary's signature",
+        "a written document in every case",
+        "capacity of the parties and a legal purpose",
+        "witnesses to the signing"
+      ],
+      "answer": 2,
+      "explain": "Enforceable contracts need capacity (parties able to contract) and lawful purpose. Writing is required only for certain contracts under the Statute of Frauds.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-043",
+      "q": "Which is an example of a variable cost for a bakery?",
+      "choices": [
+        "The annual insurance premium on the shop",
+        "Monthly rent on the building",
+        "Flour and sugar used in each batch of product",
+        "The salary of the owner-manager"
+      ],
+      "answer": 2,
+      "explain": "Variable costs rise with output. Ingredients rise with each batch, while rent, insurance and salaries are generally fixed in the short run.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-044",
+      "q": "Which best describes a business's mission statement?",
+      "choices": [
+        "Its long-term purpose and reason for existing",
+        "Its annual sales target",
+        "A list of its current products",
+        "Its daily work schedule"
+      ],
+      "answer": 0,
+      "explain": "A mission statement states why the business exists. Sales targets are goals, which are narrower and time-bound.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-045",
+      "q": "Which best describes market segmentation?",
+      "choices": [
+        "Selling the same product to every consumer in the same way",
+        "Eliminating competitors through a merger",
+        "Setting a single price for all customers",
+        "Dividing a market into groups of buyers with shared characteristics"
+      ],
+      "answer": 3,
+      "explain": "Segmentation groups buyers by traits such as age, income or needs so each group can be targeted with a tailored marketing mix.",
+      "sub": "Nature of Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-046",
+      "q": "In a pure market economy, who primarily decides what goods are produced?",
+      "choices": [
+        "Government planners",
+        "Labour unions",
+        "Consumers and producers, through prices",
+        "A central bank"
+      ],
+      "answer": 2,
+      "explain": "In a market economy, prices signal what consumers want, and producers respond to those signals to earn profit.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-047",
+      "q": "Which best describes a command economy?",
+      "choices": [
+        "A central government makes most production and allocation decisions",
+        "Prices are set by supply and demand alone",
+        "Private property is abolished in every case",
+        "Foreign trade is entirely prohibited"
+      ],
+      "answer": 0,
+      "explain": "In a command economy, a central authority plans what, how and for whom goods are produced. The other options describe a market economy or extreme cases.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-048",
+      "q": "The United States is best described as which type of economy?",
+      "choices": [
+        "Command economy",
+        "Traditional economy",
+        "Mixed market economy",
+        "Subsistence economy"
+      ],
+      "answer": 2,
+      "explain": "The U.S. relies mainly on markets but has significant government regulation, taxation and public goods, which makes it a mixed economy.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-049",
+      "q": "A traditional economy relies primarily on:",
+      "choices": [
+        "custom, habit and tradition",
+        "central planning by government",
+        "auction markets",
+        "international aid"
+      ],
+      "answer": 0,
+      "explain": "Traditional economies answer the basic economic questions through customs passed down over generations.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-050",
+      "q": "Which is a core feature of capitalism?",
+      "choices": [
+        "Government ownership of major industries",
+        "Fixed prices for all goods",
+        "Equal distribution of income",
+        "Private ownership of property and capital"
+      ],
+      "answer": 3,
+      "explain": "Capitalism is built on private ownership of the factors of production and market-determined prices.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-051",
+      "q": "Which is most characteristic of socialist economic systems?",
+      "choices": [
+        "Widespread private ownership of land",
+        "Unrestricted foreign trade",
+        "Public ownership of major means of production",
+        "Prices set by individual firms only"
+      ],
+      "answer": 2,
+      "explain": "Socialism generally places key productive assets in public or collective ownership, although models vary widely.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-052",
+      "q": "Which basic economic question asks 'for whom' goods and services are produced?",
+      "choices": [
+        "What to produce",
+        "How to produce",
+        "For whom to produce",
+        "How much to save"
+      ],
+      "answer": 2,
+      "explain": "Every economy answers three questions: what to produce, how to produce it, and for whom it is produced (how output is distributed).",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-053",
+      "q": "The 'invisible hand' concept, associated with Adam Smith, refers to:",
+      "choices": [
+        "government price controls",
+        "foreign aid programs",
+        "a central bank managing the money supply",
+        "self-interested individuals unintentionally promoting society's welfare through markets"
+      ],
+      "answer": 3,
+      "explain": "Smith argued that individuals pursuing their own gain through voluntary exchange can produce socially beneficial outcomes.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-054",
+      "q": "Why are secure property rights important in a market economy?",
+      "choices": [
+        "They eliminate the need for prices",
+        "They guarantee equal incomes",
+        "They give owners incentives to invest, save and trade",
+        "They prevent all forms of competition"
+      ],
+      "answer": 2,
+      "explain": "Secure property rights let owners keep the returns from their investment and trade, which encourages productive activity.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-055",
+      "q": "A major problem with central planning is:",
+      "choices": [
+        "too much consumer choice",
+        "excessive competition between firms",
+        "an abundance of accurate information",
+        "persistent shortages and surpluses caused by the absence of market price signals"
+      ],
+      "answer": 3,
+      "explain": "Without prices that reflect scarcity, planners struggle to allocate resources efficiently, which leads to shortages and surpluses.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-056",
+      "q": "In economics, equity refers to:",
+      "choices": [
+        "the fairness of how income and goods are distributed",
+        "the lowest total cost of production",
+        "the speed of economic growth",
+        "the amount of money in circulation"
+      ],
+      "answer": 0,
+      "explain": "Equity is about fairness in distribution. Efficiency is about getting the most output from scarce resources. The two often trade off.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-057",
+      "q": "An allocation of resources is Pareto efficient when:",
+      "choices": [
+        "everyone has identical income",
+        "total output is maximized regardless of cost",
+        "no one can be made better off without making someone else worse off",
+        "the government sets all prices"
+      ],
+      "answer": 2,
+      "explain": "Pareto efficiency means no reallocation can improve one person's position without harming another. It says nothing about equal incomes.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-058",
+      "q": "Which describes a market failure?",
+      "choices": [
+        "Market outcomes that do not achieve efficient allocation, such as pollution from production",
+        "Perfect competition among many firms",
+        "Prices that reflect all costs and benefits",
+        "Full employment with stable prices"
+      ],
+      "answer": 0,
+      "explain": "Market failure occurs when markets misallocate resources, often because of externalities, public goods or market power.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-059",
+      "q": "Pollution from a factory that harms nearby residents, who are not compensated, is an example of:",
+      "choices": [
+        "a positive externality",
+        "a merit good",
+        "a public good",
+        "a negative externality"
+      ],
+      "answer": 3,
+      "explain": "A negative externality imposes an uncompensated cost on third parties. Its market price does not reflect that cost, so too much is produced.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-060",
+      "q": "Which is the best example of a public good?",
+      "choices": [
+        "National defence",
+        "A private gym membership",
+        "A movie ticket",
+        "A restaurant meal"
+      ],
+      "answer": 0,
+      "explain": "National defence is non-rival and non-excludable, so private markets tend to underprovide it and government usually supplies it.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-061",
+      "q": "Which is an example of a merit good?",
+      "choices": [
+        "Cigarettes",
+        "Public education",
+        "Luxury yachts",
+        "Designer clothing"
+      ],
+      "answer": 1,
+      "explain": "Merit goods are considered socially desirable and are often subsidized or provided publicly, such as education and vaccines.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-062",
+      "q": "Privatization refers to:",
+      "choices": [
+        "transferring government-owned enterprises to private ownership",
+        "government purchase of private companies",
+        "an increase in public spending on services",
+        "the creation of a new public corporation"
+      ],
+      "answer": 0,
+      "explain": "Privatization moves assets or services from public to private ownership, such as through a sale of a state-owned company.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-063",
+      "q": "Which trade-off is central to every economic system?",
+      "choices": [
+        "Price stability versus scarcity",
+        "Efficiency versus equity",
+        "Inflation versus consumer spending",
+        "Tax revenue versus deficits"
+      ],
+      "answer": 1,
+      "explain": "Every system must balance getting the most from scarce resources (efficiency) against how fairly they are shared (equity).",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-064",
+      "q": "Division of labour increases productivity mainly because:",
+      "choices": [
+        "workers avoid all tasks they dislike",
+        "workers build skill in a task and lose less time switching between tasks",
+        "machines are no longer needed",
+        "output prices always fall"
+      ],
+      "answer": 1,
+      "explain": "Specialization builds skill and efficiency. Adam Smith's pin factory example illustrates the point.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-065",
+      "q": "Specialization and trade benefit nations because they allow each nation to:",
+      "choices": [
+        "eliminate scarcity entirely",
+        "consume beyond what its own production possibilities would allow",
+        "remove the need for money",
+        "guarantee equal living standards"
+      ],
+      "answer": 1,
+      "explain": "Trade lets countries consume combinations of goods outside their own production possibilities curve, which raises total welfare.",
+      "sub": "Economic Systems",
+      "diff": 2
+    },
+    {
+      "id": "eco-066",
+      "q": "Fiscal policy refers to:",
+      "choices": [
+        "setting interest rates and reserve requirements",
+        "government decisions about taxation and spending",
+        "managing the exchange rate",
+        "control of the money supply by the Federal Reserve"
+      ],
+      "answer": 1,
+      "explain": "Fiscal policy uses taxes and government spending. Interest rates and reserve requirements are monetary policy tools.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-067",
+      "q": "In the U.S., monetary policy is conducted primarily by:",
+      "choices": [
+        "Congress",
+        "the Federal Reserve System",
+        "the Treasury Department's tax office",
+        "the Securities and Exchange Commission"
+      ],
+      "answer": 1,
+      "explain": "The Federal Reserve sets the federal funds target rate and manages the money supply. Congress makes fiscal decisions.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-068",
+      "q": "A per-unit tax levied on sellers shifts the supply curve:",
+      "choices": [
+        "to the right",
+        "to the left",
+        "not at all",
+        "to become perfectly elastic"
+      ],
+      "answer": 1,
+      "explain": "A tax raises sellers' costs, so they supply less at each price. This shifts supply to the left, raising the price buyers pay.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-069",
+      "q": "A government subsidy paid to producers generally results in:",
+      "choices": [
+        "a decrease in supply",
+        "a rightward shift of the supply curve",
+        "an increase in the price consumers pay",
+        "a shortage in the market"
+      ],
+      "answer": 1,
+      "explain": "A subsidy lowers producers' effective costs, so they supply more at each price, shifting supply right and typically lowering the price consumers pay.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-070",
+      "q": "A tariff is best defined as:",
+      "choices": [
+        "a tax on imported goods",
+        "a limit on the physical quantity of exports",
+        "a government payment to exporters",
+        "a fee charged by banks for currency exchange"
+      ],
+      "answer": 0,
+      "explain": "A tariff is a tax on imports. It raises domestic prices and generates government revenue.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-071",
+      "q": "An import quota differs from a tariff because a quota:",
+      "choices": [
+        "collects revenue for the government",
+        "limits the physical quantity of imports allowed",
+        "always raises prices less than a tariff",
+        "applies only to services"
+      ],
+      "answer": 1,
+      "explain": "A quota caps the quantity of imports, while a tariff taxes them. A quota generally does not produce government tariff revenue.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-072",
+      "q": "The Sherman Antitrust Act of 1890 primarily aims to:",
+      "choices": [
+        "regulate interest rates",
+        "prohibit monopolies and restraints of trade",
+        "set minimum wages",
+        "protect copyrights"
+      ],
+      "answer": 1,
+      "explain": "The Sherman Act outlaws contracts and conspiracies that restrain trade and the monopolization of markets.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-073",
+      "q": "Which U.S. agency enforces federal securities laws and protects investors?",
+      "choices": [
+        "Federal Trade Commission",
+        "Securities and Exchange Commission",
+        "Federal Reserve",
+        "Department of Labor"
+      ],
+      "answer": 1,
+      "explain": "The SEC enforces federal securities laws. The FTC focuses on consumer protection and competition, and the Fed on monetary policy.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-074",
+      "q": "A binding minimum wage set above the equilibrium wage typically causes:",
+      "choices": [
+        "a surplus of labour, meaning unemployment",
+        "a shortage of workers for every employer",
+        "lower wages for all workers",
+        "an increase in labour demand"
+      ],
+      "answer": 0,
+      "explain": "A binding wage floor raises the quantity of labour supplied above the quantity demanded, creating unemployment among those seeking work.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-075",
+      "q": "Rent control set below the equilibrium rent most likely causes:",
+      "choices": [
+        "a shortage of rental housing",
+        "a surplus of rental housing",
+        "higher rents for all tenants",
+        "more new apartment construction"
+      ],
+      "answer": 0,
+      "explain": "A binding price ceiling lowers quantity supplied and raises quantity demanded, leaving a housing shortage.",
+      "sub": "Government's Impact on Business",
+      "diff": 2
+    },
+    {
+      "id": "eco-076",
+      "q": "Deadweight loss from a per-unit tax is largest when:",
+      "choices": [
+        "supply and demand are both perfectly inelastic",
+        "demand and supply are relatively elastic",
+        "the tax rate is zero",
+        "the market is a monopoly with no competition"
+      ],
+      "answer": 1,
+      "explain": "Deadweight loss grows with the responsiveness of quantity to price. Elastic supply and demand let the tax shrink trade more.",
+      "sub": "Government's Impact on Business",
+      "diff": 3
+    },
+    {
+      "id": "eco-077",
+      "q": "If demand is perfectly inelastic, the burden of a per-unit tax falls:",
+      "choices": [
+        "entirely on consumers",
+        "entirely on producers",
+        "equally on consumers and producers",
+        "on the government only"
+      ],
+      "answer": 0,
+      "explain": "When buyers cannot reduce quantity demanded, sellers can pass the full tax on through higher prices. Tax incidence follows relative elasticity.",
+      "sub": "Government's Impact on Business",
+      "diff": 3
+    },
+    {
+      "id": "eco-078",
+      "q": "In a simple model with no taxes or imports, the marginal propensity to consume is 0.8. The government spending multiplier is:",
+      "choices": [
+        "1.25",
+        "5",
+        "0.8",
+        "0.2"
+      ],
+      "answer": 1,
+      "explain": "The multiplier is 1 / (1 - MPC) = 1 / 0.2 = 5.",
+      "sub": "Government's Impact on Business",
+      "diff": 3
+    },
+    {
+      "id": "eco-079",
+      "q": "Which statement correctly distinguishes the federal budget deficit from the national debt?",
+      "choices": [
+        "The deficit is the cumulative total owed; the debt is the one-year shortfall",
+        "The debt is the cumulative total owed; the deficit is the one-year excess of spending over revenue",
+        "They are identical measures",
+        "The deficit is always larger than the debt"
+      ],
+      "answer": 1,
+      "explain": "The deficit is an annual flow (spending exceeds revenue in one year). The debt is the accumulated stock of past deficits net of surpluses.",
+      "sub": "Government's Impact on Business",
+      "diff": 3
+    },
+    {
+      "id": "eco-080",
+      "q": "Which U.S. law is the main source of the FTC's authority to act against unfair or deceptive business practices?",
+      "choices": [
+        "Section 5 of the Federal Trade Commission Act",
+        "The Clayton Act",
+        "The Glass-Steagall Act",
+        "The Fair Credit Reporting Act"
+      ],
+      "answer": 0,
+      "explain": "Section 5 of the FTC Act prohibits unfair or deceptive acts or practices in commerce. The Clayton Act targets specific anticompetitive practices such as certain mergers.",
+      "sub": "Government's Impact on Business",
+      "diff": 3
+    },
+    {
+      "id": "eco-081",
+      "q": "A firm faces elastic demand (elasticity of 2.0). To increase total revenue, it should:",
+      "choices": [
+        "raise its price",
+        "lower its price",
+        "keep its price constant and raise fixed costs",
+        "raise its variable costs"
+      ],
+      "answer": 1,
+      "explain": "With elastic demand, the quantity gain from a price cut outweighs the lower price, so total revenue rises. Costs do not affect revenue.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-082",
+      "q": "Economic profit equals:",
+      "choices": [
+        "total revenue minus accounting cost only",
+        "total revenue minus total opportunity cost, including implicit costs",
+        "the net income reported on the income statement",
+        "revenue minus variable cost only"
+      ],
+      "answer": 1,
+      "explain": "Economic profit subtracts implicit costs such as forgone wages. Accounting profit ignores them, so it is usually higher.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-083",
+      "q": "A firm sells 500 units at $12 each. Variable cost is $7 per unit and total fixed cost is $1,000. Its profit is:",
+      "choices": [
+        "$2,500",
+        "$1,000",
+        "$1,500",
+        "$4,000"
+      ],
+      "answer": 2,
+      "explain": "Revenue is $6,000. Variable cost is $3,500 and fixed cost is $1,000, leaving $1,500. Ignoring fixed cost gives $2,500, a common trap.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-084",
+      "q": "Fixed costs are $60,000, price is $50 per unit and variable cost is $30 per unit. The break-even quantity is:",
+      "choices": [
+        "1,200 units",
+        "3,000 units",
+        "2,000 units",
+        "6,000 units"
+      ],
+      "answer": 1,
+      "explain": "Contribution margin is $20 per unit. Break-even quantity is $60,000 / $20 = 3,000 units.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-085",
+      "q": "Total cost is $4,800 for 120 units of output. Average total cost is:",
+      "choices": [
+        "$24",
+        "$36",
+        "$40",
+        "$4,800"
+      ],
+      "answer": 2,
+      "explain": "Average total cost is total cost divided by quantity: $4,800 / 120 = $40.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-086",
+      "q": "Total cost rises from $500 to $560 when output increases from 10 to 12 units. The marginal cost of each added unit is:",
+      "choices": [
+        "$25",
+        "$30",
+        "$50",
+        "$60"
+      ],
+      "answer": 1,
+      "explain": "Change in total cost is $60 and change in quantity is 2 units, so marginal cost is $30.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-087",
+      "q": "In the short run, a firm should keep operating if the market price is at least:",
+      "choices": [
+        "its average variable cost",
+        "its average total cost",
+        "its marginal cost of zero",
+        "its fixed cost per unit"
+      ],
+      "answer": 0,
+      "explain": "Covering variable costs lets the firm pay part of its fixed costs. Below average variable cost, it should shut down in the short run.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-088",
+      "q": "In a perfectly competitive market in long-run equilibrium, firms earn:",
+      "choices": [
+        "large economic profits",
+        "zero economic profit",
+        "persistent losses",
+        "unlimited profit"
+      ],
+      "answer": 1,
+      "explain": "Entry and exit drive economic profit to zero in the long run. Accounting profit may still be positive.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-089",
+      "q": "Which cost is an implicit cost?",
+      "choices": [
+        "Wages paid to employees",
+        "Rent paid for a store",
+        "The salary the owner gives up by not working elsewhere",
+        "Monthly utility bills"
+      ],
+      "answer": 2,
+      "explain": "Implicit costs are the value of resources the owner supplies that are not paid in cash, such as forgone wages. The other three are explicit payments.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-090",
+      "q": "Long-run average cost falls as output increases because of:",
+      "choices": [
+        "diminishing returns",
+        "economies of scale",
+        "rising fixed costs",
+        "excise taxes"
+      ],
+      "answer": 1,
+      "explain": "Economies of scale lower average cost as output grows, such as through bulk purchasing and specialization. Diminishing returns is a short-run concept.",
+      "sub": "Cost/Profit Relationships",
+      "diff": 3
+    },
+    {
+      "id": "eco-091",
+      "q": "Gross domestic product measures:",
+      "choices": [
+        "the market value of all final goods and services produced within a country in a given period",
+        "total government spending only",
+        "the total value of all stocks traded",
+        "the total money supply"
+      ],
+      "answer": 0,
+      "explain": "GDP counts final goods and services produced domestically in a period. It excludes intermediate goods to avoid double counting.",
+      "sub": "Economic Indicators",
+      "diff": 3
+    },
+    {
+      "id": "eco-092",
+      "q": "The Consumer Price Index measures:",
+      "choices": [
+        "the price of gold",
+        "wholesale prices of raw materials only",
+        "the average change over time in prices paid by urban consumers for a basket of goods and services",
+        "the interest rate on government bonds"
+      ],
+      "answer": 2,
+      "explain": "CPI tracks the cost of a fixed basket of consumer goods and services over time, and is the most common inflation gauge.",
+      "sub": "Economic Indicators",
+      "diff": 3
+    },
+    {
+      "id": "eco-093",
+      "q": "A person who is actively looking for work but currently has no job is counted as:",
+      "choices": [
+        "employed",
+        "not in the labour force",
+        "unemployed",
+        "underemployed only"
+      ],
+      "answer": 2,
+      "explain": "The BLS counts people who have no job, have searched for work recently, and are available for work as unemployed.",
+      "sub": "Economic Indicators",
+      "diff": 3
+    },
+    {
+      "id": "eco-094",
+      "q": "Real GDP differs from nominal GDP because real GDP:",
+      "choices": [
+        "ignores government spending",
+        "adjusts for changes in the price level",
+        "includes only exports",
+        "counts only household consumption"
+      ],
+      "answer": 1,
+      "explain": "Real GDP removes the effect of price changes, so it reflects actual changes in output. Nominal GDP uses current prices.",
+      "sub": "Economic Indicators",
+      "diff": 3
+    },
+    {
+      "id": "eco-095",
+      "q": "A common definition of a recession in the business cycle is:",
+      "choices": [
+        "two consecutive quarters of declining real GDP",
+        "a rise in the CPI above 5%",
+        "a fall in the unemployment rate",
+        "a period of rising stock prices"
+      ],
+      "answer": 0,
+      "explain": "The two-consecutive-quarters rule is a common rule of thumb. The official U.S. call is made by the NBER and considers several indicators.",
+      "sub": "Economic Indicators",
+      "diff": 3
+    },
+    {
+      "id": "eco-096",
+      "q": "If the U.S. dollar appreciates against the euro, U.S. exports to Europe become:",
+      "choices": [
+        "cheaper for Europeans",
+        "more expensive for Europeans",
+        "unchanged in price to Europeans",
+        "exempt from tariffs"
+      ],
+      "answer": 1,
+      "explain": "A stronger dollar means each dollar buys fewer euros, so U.S. goods cost European buyers more in euros.",
+      "sub": "Global Trade",
+      "diff": 3
+    },
+    {
+      "id": "eco-097",
+      "q": "Which principle explains why nations benefit from trade even if one nation is more productive in every good?",
+      "choices": [
+        "Absolute advantage",
+        "Comparative advantage",
+        "Mercantilism",
+        "Protectionism"
+      ],
+      "answer": 1,
+      "explain": "Comparative advantage, based on opportunity cost, shows that both nations gain by specializing where their opportunity cost is lowest.",
+      "sub": "Global Trade",
+      "diff": 3
+    },
+    {
+      "id": "eco-098",
+      "q": "The current account of the U.S. balance of payments includes:",
+      "choices": [
+        "trade in goods and services, plus net income and transfers",
+        "only foreign direct investment",
+        "changes in central bank reserves only",
+        "government bond sales only"
+      ],
+      "answer": 0,
+      "explain": "The current account covers trade in goods and services, net primary income and net transfers. Capital and financial accounts track investment flows.",
+      "sub": "Global Trade",
+      "diff": 3
+    },
+    {
+      "id": "eco-099",
+      "q": "A trade deficit means:",
+      "choices": [
+        "exports exceed imports",
+        "imports exceed exports",
+        "government spending exceeds tax revenue",
+        "the currency is fixed to another currency"
+      ],
+      "answer": 1,
+      "explain": "A trade deficit means the country buys more from abroad than it sells. Government spending exceeding tax revenue is a budget deficit.",
+      "sub": "Global Trade",
+      "diff": 3
+    },
+    {
+      "id": "eco-100",
+      "q": "The USMCA is a trade agreement among the United States, Canada and which other country?",
+      "choices": [
+        "Brazil",
+        "Mexico",
+        "Japan",
+        "the European Union"
+      ],
+      "answer": 1,
+      "explain": "USMCA (United States-Mexico-Canada Agreement) replaced NAFTA in 2020. It is a regional free trade agreement among these three countries.",
+      "sub": "Global Trade",
+      "diff": 3
+    }
+  ],
+  "vocab": [
+    {
+      "id": "eco-v001",
+      "term": "Scarcity",
+      "def": "The condition in which unlimited wants exceed the limited resources available to satisfy them.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v002",
+      "term": "Opportunity cost",
+      "def": "The value of the next-best alternative given up when a choice is made.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v003",
+      "term": "Factors of production",
+      "def": "The inputs used to produce goods and services: land, labour, capital and entrepreneurship.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v004",
+      "term": "Entrepreneurship",
+      "def": "The factor of production that organizes land, labour and capital and bears the risk of a new venture.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v005",
+      "term": "Circular flow model",
+      "def": "A model showing how money, goods, services and factors of production flow between households and firms.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v006",
+      "term": "Production possibilities curve",
+      "def": "A graph showing the maximum combinations of two goods an economy can produce with its resources and technology.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v007",
+      "term": "Public good",
+      "def": "A good that is non-rival and non-excludable, so private markets tend to underprovide it.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v008",
+      "term": "Comparative advantage",
+      "def": "The ability of a producer to make a good at a lower opportunity cost than another producer.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v009",
+      "term": "Marginal analysis",
+      "def": "Decision-making based on comparing the additional benefit of an action with its additional cost.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v010",
+      "term": "Marginal utility",
+      "def": "The additional satisfaction a consumer gains from consuming one more unit of a good.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v011",
+      "term": "Law of demand",
+      "def": "As the price of a good rises, the quantity demanded falls, all else equal.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v012",
+      "term": "Law of supply",
+      "def": "As the price of a good rises, the quantity supplied rises, all else equal.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v013",
+      "term": "Equilibrium",
+      "def": "The price and quantity at which quantity demanded equals quantity supplied, so there is no pressure to change.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v014",
+      "term": "Price elasticity of demand",
+      "def": "The percentage change in quantity demanded divided by the percentage change in price.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v015",
+      "term": "Complementary goods",
+      "def": "Goods that are used together, so a fall in the price of one raises demand for the other.",
+      "sub": "Fundamental Economic Concepts"
+    },
+    {
+      "id": "eco-v016",
+      "term": "Sole proprietorship",
+      "def": "A business owned and run by one person, who bears unlimited personal liability for its debts.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v017",
+      "term": "Partnership",
+      "def": "A business owned by two or more people who share profits, losses and management responsibilities.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v018",
+      "term": "Corporation",
+      "def": "A legal entity separate from its owners, which can own property, sue and be sued, and whose owners have limited liability.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v019",
+      "term": "Limited liability company",
+      "def": "A business form that shields owners from personal liability for business debts while allowing flexible tax treatment.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v020",
+      "term": "Business plan",
+      "def": "A written document describing a business's goals, market, operations, management and financial projections.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v021",
+      "term": "SWOT analysis",
+      "def": "A planning tool that evaluates a business's internal strengths and weaknesses and external opportunities and threats.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v022",
+      "term": "Stakeholder",
+      "def": "Any person or group affected by a business's decisions, such as owners, employees, customers, suppliers or the community.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v023",
+      "term": "Marketing mix",
+      "def": "The four Ps (product, price, place and promotion) a business combines to meet customer needs.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v024",
+      "term": "Market segmentation",
+      "def": "Dividing a broad market into groups of buyers who share characteristics or needs.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v025",
+      "term": "Franchise",
+      "def": "An arrangement in which a franchisee pays a fee and royalties to use a franchisor's brand, system and support.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v026",
+      "term": "Patent",
+      "def": "A government grant giving an inventor exclusive rights to a new invention or process for a set period, 20 years from filing for utility patents in the U.S.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v027",
+      "term": "Trademark",
+      "def": "A word, name, symbol or design that identifies the source of goods or services and is protected from unauthorized use.",
+      "sub": "Nature of Business"
+    },
+    {
+      "id": "eco-v028",
+      "term": "Market economy",
+      "def": "An economic system in which prices set by supply and demand guide most decisions about production and distribution.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v029",
+      "term": "Command economy",
+      "def": "An economic system in which a central authority makes most decisions about what, how and for whom goods are produced.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v030",
+      "term": "Mixed economy",
+      "def": "An economic system combining market allocation with significant government participation in the economy.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v031",
+      "term": "Traditional economy",
+      "def": "An economic system in which customs, habits and beliefs passed down over generations determine how goods are produced and shared.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v032",
+      "term": "Capitalism",
+      "def": "An economic system based on private ownership of capital and the use of markets to allocate resources.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v033",
+      "term": "Socialism",
+      "def": "An economic system in which major means of production are owned publicly or collectively rather than privately.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v034",
+      "term": "Invisible hand",
+      "def": "Adam Smith's idea that self-interested market participants can unintentionally advance the wider social good.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v035",
+      "term": "Market failure",
+      "def": "A situation in which markets fail to allocate resources efficiently, such as because of externalities or public goods.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v036",
+      "term": "Externality",
+      "def": "A cost or benefit of an economic activity that falls on third parties and is not reflected in market prices.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v037",
+      "term": "Merit good",
+      "def": "A good that society considers more beneficial than consumers may recognize, such as education, and that is often subsidized.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v038",
+      "term": "Privatization",
+      "def": "The transfer of government-owned assets or services to private ownership or management.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v039",
+      "term": "Division of labour",
+      "def": "Splitting production into specialized tasks so each worker builds skill and output rises.",
+      "sub": "Economic Systems"
+    },
+    {
+      "id": "eco-v040",
+      "term": "Fiscal policy",
+      "def": "Government decisions about taxation and spending used to influence the level of economic activity.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v041",
+      "term": "Monetary policy",
+      "def": "Actions by a central bank, such as changing interest rates or the money supply, to influence the economy.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v042",
+      "term": "Tariff",
+      "def": "A tax on imported goods that raises their price and generates government revenue.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v043",
+      "term": "Quota",
+      "def": "A government limit on the physical quantity of a good that may be imported or produced.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v044",
+      "term": "Subsidy",
+      "def": "A government payment to a producer or consumer that lowers the effective cost of a good or activity.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v045",
+      "term": "Price ceiling",
+      "def": "A legal maximum price set below equilibrium, which tends to create a shortage.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v046",
+      "term": "Price floor",
+      "def": "A legal minimum price set above equilibrium, which tends to create a surplus.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v047",
+      "term": "Sherman Antitrust Act",
+      "def": "A 1890 U.S. law that prohibits contracts and conspiracies in restraint of trade and the monopolization of markets.",
+      "sub": "Government's Impact on Business"
+    },
+    {
+      "id": "eco-v048",
+      "term": "Fixed cost",
+      "def": "A cost that does not change with the level of output in the short run, such as rent.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "eco-v049",
+      "term": "Variable cost",
+      "def": "A cost that rises or falls with the level of output, such as raw materials.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "eco-v050",
+      "term": "Implicit cost",
+      "def": "The opportunity cost of resources a business owner supplies without a cash payment, such as forgone wages.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "eco-v051",
+      "term": "Break-even point",
+      "def": "The output level at which total revenue equals total cost, so profit is zero.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "eco-v052",
+      "term": "Economic profit",
+      "def": "Total revenue minus all costs, including implicit opportunity costs.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "eco-v053",
+      "term": "Economies of scale",
+      "def": "Falling long-run average cost as a firm increases its scale of output.",
+      "sub": "Cost/Profit Relationships"
+    },
+    {
+      "id": "eco-v054",
+      "term": "Gross domestic product",
+      "def": "The market value of all final goods and services produced within a country in a given period.",
+      "sub": "Economic Indicators"
+    },
+    {
+      "id": "eco-v055",
+      "term": "Consumer Price Index",
+      "def": "A measure of the average change over time in prices paid by urban consumers for a fixed basket of goods and services.",
+      "sub": "Economic Indicators"
+    },
+    {
+      "id": "eco-v056",
+      "term": "Unemployment rate",
+      "def": "The percentage of the labour force that is actively seeking work but does not have a job.",
+      "sub": "Economic Indicators"
+    },
+    {
+      "id": "eco-v057",
+      "term": "Exchange rate",
+      "def": "The price of one currency in terms of another currency.",
+      "sub": "Global Trade"
+    },
+    {
+      "id": "eco-v058",
+      "term": "Appreciation",
+      "def": "An increase in a currency's value relative to another currency, so it buys more of that currency.",
+      "sub": "Global Trade"
+    },
+    {
+      "id": "eco-v059",
+      "term": "Current account",
+      "def": "The part of the balance of payments that records trade in goods and services, net income and net transfers.",
+      "sub": "Global Trade"
+    },
+    {
+      "id": "eco-v060",
+      "term": "Trade deficit",
+      "def": "A situation in which a country's imports of goods and services exceed its exports over a period.",
+      "sub": "Global Trade"
+    }
+  ]
+}

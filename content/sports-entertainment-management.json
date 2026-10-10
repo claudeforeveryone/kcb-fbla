@@ -1,0 +1,1788 @@
+{
+  "slug": "sports-entertainment-management",
+  "name": "Sports & Entertainment Management",
+  "group": "case",
+  "notes": "Competency areas: the 16 knowledge areas (A-P) and their study-guide objectives in the 2025-26 Sports & Entertainment Management guidelines (National FBLA, updated Nov 2025; source copy: https://www.pafbla.org/wp-content/uploads/2026/08/Sports-and-Entertainment-Management.pdf). The guideline says the event is a team role play with a 100-question, 50-minute objective test. Test weights come from a chart that is an image in the PDF and could not be read, so question counts were spread roughly in proportion to the number of study-guide objectives per area. Group is \"case\" as requested, though the official format is an objective test plus a role play. Written for practice, not copied from official items.",
+  "subs": [
+    "Sports and Entertainment Marketing/Strategic Marketing",
+    "Facility and Event Management",
+    "Human Resource Management (Labor Relations)",
+    "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+    "Financing and Economic Input",
+    "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+    "Sports Law",
+    "Communication in Sports and Entertainment (Media)",
+    "Ethics",
+    "Licensing",
+    "Sports Governance",
+    "Careers",
+    "Marketing/Management Information Technology and Research",
+    "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
+    "Management Strategies and Strategic Planning Tools",
+    "Basic Functions of Management"
+  ],
+  "questions": [
+    {
+      "id": "sem-001",
+      "q": "A regional team finds that family buyers cut back sharply when prices rise, while corporate buyers buy suites almost regardless of price. Which pricing approach best fits these findings?",
+      "choices": [
+        "Charge different prices to each segment, such as family discounts alongside premium-priced corporate suite packages",
+        "Set one uniform price for all buyers so the pricing structure stays simple",
+        "Raise every price to the level corporate buyers are willing to pay",
+        "Price every seat at the arena average cost per seat to cover costs"
+      ],
+      "answer": 0,
+      "explain": "Segmented (differential) pricing matches price to each segment's different sensitivity to price. The trap is assuming one price keeps things simpler at the cost of the segments.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 2
+    },
+    {
+      "id": "sem-002",
+      "q": "A team pays $12 to produce a cap that it sells for $30. What is the markup on cost?",
+      "choices": [
+        "60%",
+        "150%",
+        "250%",
+        "40%"
+      ],
+      "answer": 1,
+      "explain": "Markup on cost is ($30 - $12) / $12 = 150%. The 60% figure is the margin on the selling price, a different measure.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 2
+    },
+    {
+      "id": "sem-003",
+      "q": "A league groups its fans by how often they attend games, such as heavy, moderate and light users. Which type of market segmentation is this?",
+      "choices": [
+        "Geographic segmentation",
+        "Demographic segmentation",
+        "Psychographic segmentation",
+        "Behavioral segmentation"
+      ],
+      "answer": 3,
+      "explain": "Grouping buyers by how they act (attendance or purchase behavior) is behavioral segmentation. Psychographic segmentation uses lifestyle and values.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 1
+    },
+    {
+      "id": "sem-004",
+      "q": "A marketing team reviews fan surveys and attendance trends to guide next season's plans. Which marketing function is the team performing?",
+      "choices": [
+        "Financing",
+        "Risk taking",
+        "Gathering market information",
+        "Standardization and grading"
+      ],
+      "answer": 2,
+      "explain": "Collecting and analyzing market information is one of the traditional marketing functions and supports every planning decision.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 2
+    },
+    {
+      "id": "sem-005",
+      "q": "A stadium's mobile app has stopped growing. Sales have leveled off and several competing apps now offer similar features. In which stage of the product life cycle is the app most likely?",
+      "choices": [
+        "Introduction",
+        "Growth",
+        "Maturity",
+        "Decline"
+      ],
+      "answer": 2,
+      "explain": "Plateauing sales with intense competition describes maturity. Decline would require falling sales, which the scenario does not state.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 1
+    },
+    {
+      "id": "sem-006",
+      "q": "A team's fans choose ticket packages largely based on advice from friends and online reviews. Which factor best explains this buyer behavior?",
+      "choices": [
+        "Price elasticity of supply",
+        "The product life cycle stage",
+        "A shortage of available seats",
+        "Social influence from reference groups"
+      ],
+      "answer": 3,
+      "explain": "Buyer behavior is shaped by reference groups and word of mouth. The scenario describes influence from others, not supply constraints.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 2
+    },
+    {
+      "id": "sem-007",
+      "q": "A club adds its logo to a new sports drink, a product outside its original category. Which branding strategy is this?",
+      "choices": [
+        "Multibranding",
+        "Private labeling",
+        "Brand extension",
+        "Co-branding with a rival league"
+      ],
+      "answer": 2,
+      "explain": "Using an established brand name on a new product category is a brand extension. Co-branding combines two brands on one product.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 2
+    },
+    {
+      "id": "sem-008",
+      "q": "An arena sells season tickets for $600 each and sells 2,000 seats, for $1,200,000 in revenue. It cuts the price to $500 and sells 2,600 seats. What happens to total revenue?",
+      "choices": [
+        "It rises by $100,000",
+        "It falls by $100,000",
+        "It rises by $200,000",
+        "It stays at $1,200,000"
+      ],
+      "answer": 0,
+      "explain": "New revenue is $500 x 2,600 = $1,300,000, up $100,000. Quantity rises 30% for a 16.7% price cut, so demand is elastic and total revenue rises.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 3
+    },
+    {
+      "id": "sem-009",
+      "q": "A sports drink brand wants to be seen as the first choice for marathon runners rather than casual fans. Which marketing activity is this?",
+      "choices": [
+        "Market segmentation by age",
+        "Penetration pricing",
+        "Positioning the brand in the target market's mind",
+        "Test marketing in new regions"
+      ],
+      "answer": 2,
+      "explain": "Positioning concerns the image a product holds in customers' minds relative to competitors. Segmentation identifies the group; positioning shapes perception of the brand.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 3
+    },
+    {
+      "id": "sem-010",
+      "q": "Which of the following belongs in a marketing plan?",
+      "choices": [
+        "A situation analysis with marketing objectives and strategies",
+        "The arena's construction budget for new seats",
+        "The team's player contract terms",
+        "The box office staffing schedule for one week"
+      ],
+      "answer": 0,
+      "explain": "A marketing plan includes a situation analysis, objectives, strategies and tactics. The distractors are operational or financial items outside the plan.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 1
+    },
+    {
+      "id": "sem-011",
+      "q": "A team sets its ticket price slightly below competitors' prices to attract new fans quickly and win share, planning to raise prices later. Which pricing strategy is this?",
+      "choices": [
+        "Price skimming",
+        "Prestige pricing",
+        "Penetration pricing",
+        "Bundle pricing"
+      ],
+      "answer": 2,
+      "explain": "Penetration pricing sets a low entry price to gain share quickly. Skimming does the opposite, starting high and lowering over time.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing",
+      "diff": 2
+    },
+    {
+      "id": "sem-012",
+      "q": "A city is choosing a site for a 15,000-seat arena. Which factor is a core site-selection criterion?",
+      "choices": [
+        "Access by highway and public transit, with enough parking for peak event days",
+        "The number of employees the team plans to hire",
+        "The team's current merchandise inventory",
+        "The ticket prices set for opening night"
+      ],
+      "answer": 0,
+      "explain": "Venue selection weighs accessibility, parking and the local market. Staffing, inventory and pricing decisions come after the site is chosen.",
+      "sub": "Facility and Event Management",
+      "diff": 1
+    },
+    {
+      "id": "sem-013",
+      "q": "An event has $60,000 in fixed costs. Tickets sell for $40 and the variable cost per attendee is $10. How many attendees are needed to break even?",
+      "choices": [
+        "1,500",
+        "6,000",
+        "2,500",
+        "2,000"
+      ],
+      "answer": 3,
+      "explain": "Break-even = fixed costs / (price - variable cost per attendee) = $60,000 / $30 = 2,000. Dividing fixed costs by the price alone (1,500) ignores variable costs.",
+      "sub": "Facility and Event Management",
+      "diff": 3
+    },
+    {
+      "id": "sem-014",
+      "q": "A stadium buys event cancellation insurance for a concert. Which risk-management strategy is this?",
+      "choices": [
+        "Risk avoidance",
+        "Risk retention",
+        "Risk reduction",
+        "Risk transfer"
+      ],
+      "answer": 3,
+      "explain": "Insurance shifts the financial consequence of a loss to another party, which is risk transfer. Risk reduction lowers the chance or severity of a loss.",
+      "sub": "Facility and Event Management",
+      "diff": 2
+    },
+    {
+      "id": "sem-015",
+      "q": "Staff expect the heaviest arrival rush at a stadium's gates 30 minutes before kickoff. Which action best applies the principle of safety?",
+      "choices": [
+        "Raise gate prices to spread out arrivals",
+        "Open extra entry lanes and staff scanning points for the expected arrival peak",
+        "Close the gates until 10 minutes before kickoff",
+        "Sell more general admission tickets than the venue has room for"
+      ],
+      "answer": 1,
+      "explain": "Planning capacity for the peak flow reduces crowd-crush risk. The other options either create or increase the crowding danger.",
+      "sub": "Facility and Event Management",
+      "diff": 2
+    },
+    {
+      "id": "sem-016",
+      "q": "A festival projects $500,000 in ticket revenue and $200,000 in sponsorship revenue. Its expenses are projected at $650,000. What is the projected result?",
+      "choices": [
+        "A $150,000 deficit",
+        "A $50,000 surplus",
+        "A $50,000 deficit",
+        "An $850,000 surplus"
+      ],
+      "answer": 1,
+      "explain": "Total revenue of $700,000 less $650,000 in expenses leaves a $50,000 surplus. Sign errors and omitting one revenue source produce the other options.",
+      "sub": "Facility and Event Management",
+      "diff": 3
+    },
+    {
+      "id": "sem-017",
+      "q": "A city wants to fund a new arena without raising taxes on residents, so it issues bonds repaid from hotel and car rental taxes. What type of financing is this?",
+      "choices": [
+        "Common stock sold by the city",
+        "Unsecured personal loans to the team owner",
+        "Revenue bonds backed by dedicated tax revenue",
+        "An unrestricted federal grant for luxury suites"
+      ],
+      "answer": 2,
+      "explain": "Revenue bonds are repaid from a specific income stream, here dedicated tourism taxes. The other options are not a recognized way for a city to finance a facility this way.",
+      "sub": "Facility and Event Management",
+      "diff": 2
+    },
+    {
+      "id": "sem-018",
+      "q": "A concession stand sells a hot dog and a drink as a combo for $9, when the items cost $10 separately. Why do operators use this approach?",
+      "choices": [
+        "It removes the need to track inventory",
+        "It eliminates food cost entirely",
+        "It increases the average spend per customer",
+        "It lets the venue skip sales tax"
+      ],
+      "answer": 2,
+      "explain": "Bundles raise average transaction size even when the bundle price is lower than the sum of the parts. The other options misstate what bundling does.",
+      "sub": "Facility and Event Management",
+      "diff": 2
+    },
+    {
+      "id": "sem-019",
+      "q": "A championship weekend needs security, medical, transport and ticketing teams to coordinate across several agencies. Which management approach best organizes this work?",
+      "choices": [
+        "A single integrated operations plan with one lead responsible for communication",
+        "Separate budgets for each agency, with no shared schedule",
+        "Delaying coordination until the day of the event",
+        "Letting each vendor set its own safety procedures"
+      ],
+      "answer": 0,
+      "explain": "Major events need one integrated plan, a clear chain of command and shared communication. Uncoordinated or late planning is the trap.",
+      "sub": "Facility and Event Management",
+      "diff": 3
+    },
+    {
+      "id": "sem-020",
+      "q": "A stadium adopts a written opening-day checklist for every staff member. What is the main purpose?",
+      "choices": [
+        "To replace the need for staff training",
+        "To ensure consistent, repeatable and safe operating procedures",
+        "To reduce the venue's insurance premium directly",
+        "To increase the number of seats sold"
+      ],
+      "answer": 1,
+      "explain": "Standard operating procedures provide consistency and safety. The other options overstate what a checklist does.",
+      "sub": "Facility and Event Management",
+      "diff": 1
+    },
+    {
+      "id": "sem-021",
+      "q": "Before a city selects venues for a new event series, which step should come first?",
+      "choices": [
+        "Sign the venue lease",
+        "Set the event's objectives, mission and budget",
+        "Hire the ticketing vendor",
+        "Print the advertising posters"
+      ],
+      "answer": 1,
+      "explain": "Planning starts with the development phase: defining objectives, mission and budget before choosing venues or vendors.",
+      "sub": "Facility and Event Management",
+      "diff": 1
+    },
+    {
+      "id": "sem-022",
+      "q": "After a charity 5K, event staff send thank-you messages and results to every participant. Why is this follow-up important?",
+      "choices": [
+        "It is required by the sponsors' contracts",
+        "It lowers the permit cost of the next event",
+        "It replaces the need for a post-event budget review",
+        "It builds loyalty and encourages participants to return for future events"
+      ],
+      "answer": 3,
+      "explain": "Post-event recognition supports retention and service for future events. The other options invent legal or cost effects the scenario does not imply.",
+      "sub": "Facility and Event Management",
+      "diff": 1
+    },
+    {
+      "id": "sem-023",
+      "q": "A stadium needs 40 ushers for weekend games and has only 25 on its roster. Which HR function is most directly involved?",
+      "choices": [
+        "Employer relations",
+        "Compensation and benefits",
+        "Labor-law compliance audits",
+        "Planning and staffing"
+      ],
+      "answer": 3,
+      "explain": "Forecasting staffing needs and recruiting to fill them is the planning and staffing function of human resources.",
+      "sub": "Human Resource Management (Labor Relations)",
+      "diff": 1
+    },
+    {
+      "id": "sem-024",
+      "q": "In a professional sports organization, who negotiates a player's contract terms on the player's behalf?",
+      "choices": [
+        "The team's scout",
+        "The general manager",
+        "The team's owner",
+        "The player's agent"
+      ],
+      "answer": 3,
+      "explain": "Agents represent players in contract negotiations. Scouts evaluate talent, general managers make roster decisions, and owners hold the franchise.",
+      "sub": "Human Resource Management (Labor Relations)",
+      "diff": 1
+    },
+    {
+      "id": "sem-025",
+      "q": "A venue manager approves refunds and also reconciles the cash drawers that the same person handles. Which HR principle is being violated?",
+      "choices": [
+        "Job orientation",
+        "Separation of duties",
+        "Benchmarking",
+        "Continuous professional development"
+      ],
+      "answer": 1,
+      "explain": "Separating authorization from custody and recordkeeping prevents fraud and error. Orientation and development are unrelated to this control.",
+      "sub": "Human Resource Management (Labor Relations)",
+      "diff": 2
+    },
+    {
+      "id": "sem-026",
+      "q": "Under the National Labor Relations Act, which action by an employer during a union organizing drive would be an unfair labor practice?",
+      "choices": [
+        "Negotiating wages with a certified union",
+        "Firing employees for joining the union",
+        "Publishing the company's benefit summary",
+        "Hiring seasonal workers for peak weekends"
+      ],
+      "answer": 1,
+      "explain": "The NLRA protects employees' right to organize, so firing them for union activity is an unfair labor practice. Lawful negotiation and normal hiring are not.",
+      "sub": "Human Resource Management (Labor Relations)",
+      "diff": 3
+    },
+    {
+      "id": "sem-027",
+      "q": "A team's HR manager compares its staff turnover and hiring costs with three top franchises to set goals. What technique is this?",
+      "choices": [
+        "Scenario building",
+        "Separation of duties",
+        "Benchmarking",
+        "Collective bargaining"
+      ],
+      "answer": 2,
+      "explain": "Benchmarking measures performance against leading peers. Scenario building explores possible futures rather than current comparisons.",
+      "sub": "Human Resource Management (Labor Relations)",
+      "diff": 2
+    },
+    {
+      "id": "sem-028",
+      "q": "A stadium's seasonal event staff quit after each season. Which strategy best improves retention?",
+      "choices": [
+        "Post job openings only on the final day of the season",
+        "Offer training pathways and a return-season bonus",
+        "Cut hours to the legal minimum",
+        "Remove all supervisory roles"
+      ],
+      "answer": 1,
+      "explain": "Retention improves when workers see a path forward and a reason to return. The distractors increase turnover or ignore the retention problem.",
+      "sub": "Human Resource Management (Labor Relations)",
+      "diff": 3
+    },
+    {
+      "id": "sem-029",
+      "q": "A team gives the first 5,000 fans a free bobblehead at the gate. Which element of the promotion mix is this?",
+      "choices": [
+        "Publicity",
+        "Sales promotion",
+        "Personal selling",
+        "Advertising"
+      ],
+      "answer": 1,
+      "explain": "Short-term incentives such as giveaways are sales promotions. Publicity is unpaid media coverage.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 1
+    },
+    {
+      "id": "sem-030",
+      "q": "An athlete is paid a fee to appear in a television ad for a sports drink. What is this arrangement called?",
+      "choices": [
+        "Endorsement",
+        "Sponsorship",
+        "Product placement",
+        "Licensing"
+      ],
+      "answer": 0,
+      "explain": "An endorsement pays a person to promote a product. Sponsorship supports an event or team, and product placement shows a brand within content.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 1
+    },
+    {
+      "id": "sem-031",
+      "q": "A company pays for the naming rights to a stadium. What is the main benefit to the sponsor?",
+      "choices": [
+        "Free tickets for its executives every season",
+        "Exemption from local advertising taxes",
+        "Control over the league's rulebook",
+        "Brand exposure to the event's audience and association with the team's image"
+      ],
+      "answer": 3,
+      "explain": "Sponsors buy visibility and image transfer. The other options are not standard benefits of naming rights.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 2
+    },
+    {
+      "id": "sem-032",
+      "q": "A new arena opening receives a front-page story in the local paper at no cost. What promotional tool produced this coverage?",
+      "choices": [
+        "Advertising",
+        "Personal selling",
+        "Sales promotion",
+        "Publicity"
+      ],
+      "answer": 3,
+      "explain": "Publicity is unpaid media coverage. Advertising is paid placement, so this coverage is not advertising even though it helps the brand.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 1
+    },
+    {
+      "id": "sem-033",
+      "q": "Which sequence correctly lists the steps in developing an effective advertising campaign?",
+      "choices": [
+        "Choose media, create the message, then set objectives",
+        "Evaluate results, set the budget, then choose a target audience",
+        "Create the message, evaluate results, then set the budget",
+        "Set objectives and target audience, set the budget, create the message and choose media, then evaluate results"
+      ],
+      "answer": 3,
+      "explain": "Campaigns start with objectives and audience, then budget, message and media, and finally evaluation. Starting with media or evaluation is out of order.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 3
+    },
+    {
+      "id": "sem-034",
+      "q": "A film shows a team's branded sports drink on the table during a scene, for a fee paid to the filmmaker. What is this practice called?",
+      "choices": [
+        "Product placement",
+        "Endorsement",
+        "Sponsorship",
+        "Publicity"
+      ],
+      "answer": 0,
+      "explain": "Product placement inserts a brand into entertainment content. An endorsement features a person speaking for the product.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 1
+    },
+    {
+      "id": "sem-035",
+      "q": "A minor league club holds a Halloween-themed game each October, with sponsor logos on the giveaways. What is the main promotional value of seasonal themed events?",
+      "choices": [
+        "They guarantee higher ticket prices all season",
+        "They create repeat attendance and give sponsors a fresh reason to feature their brands",
+        "They eliminate the need for regular advertising",
+        "They lower the club's fixed costs"
+      ],
+      "answer": 1,
+      "explain": "Themed events drive repeat visits and sponsor visibility. The other options overstate what a single theme can do.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 3
+    },
+    {
+      "id": "sem-036",
+      "q": "A sponsor pays $250,000 for a season of signage and wants to compare it with other media. Which measure best evaluates the value of this spend?",
+      "choices": [
+        "Total cost divided by the number of team logos",
+        "Cost per thousand impressions compared with alternative media",
+        "Ticket revenue earned from the sponsor's guests",
+        "The sponsor's share price on opening day"
+      ],
+      "answer": 1,
+      "explain": "CPM (cost per thousand impressions) allows a like-for-like comparison of media costs. The others are not standard media evaluation measures.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 3
+    },
+    {
+      "id": "sem-037",
+      "q": "A team pays its players salaries to compete in a league, and fans buy tickets to watch. Which category of sports does this describe?",
+      "choices": [
+        "Professional sports",
+        "Collegiate athletics",
+        "Amateur sports",
+        "Sports camps"
+      ],
+      "answer": 0,
+      "explain": "Players paid salaries in a commercial league are professionals. Collegiate and amateur sports do not pay players this way, and camps are instructional.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
+      "diff": 1
+    },
+    {
+      "id": "sem-038",
+      "q": "A championship final sells out while the number of seats stays fixed and demand grows. What happens to the market price of tickets?",
+      "choices": [
+        "It falls",
+        "It rises",
+        "It stays the same",
+        "It falls to zero"
+      ],
+      "answer": 1,
+      "explain": "With supply fixed, higher demand pushes prices up. Rising demand does not drive prices to zero.",
+      "sub": "Financing and Economic Input",
+      "diff": 1
+    },
+    {
+      "id": "sem-039",
+      "q": "A community sports league is organized as a 501(c)(3) nonprofit. Which advantage does this status give?",
+      "choices": [
+        "Freedom from all state regulation",
+        "The right to distribute profits to members",
+        "Exemption from federal income tax and eligibility for tax-deductible donations",
+        "Automatic access to broadcast rights"
+      ],
+      "answer": 2,
+      "explain": "Section 501(c)(3) status exempts qualifying organizations from federal income tax and lets donors deduct gifts. It does not remove state oversight or allow profit distribution.",
+      "sub": "Financing and Economic Input",
+      "diff": 2
+    },
+    {
+      "id": "sem-040",
+      "q": "An arena sells naming rights to a corporation for $2 million a year. How should this be classified for the arena?",
+      "choices": [
+        "An operating expense",
+        "A revenue source",
+        "A capital asset",
+        "A liability"
+      ],
+      "answer": 1,
+      "explain": "Cash the arena receives for granting rights is revenue. It is not an expense, asset or liability of the arena.",
+      "sub": "Financing and Economic Input",
+      "diff": 1
+    },
+    {
+      "id": "sem-041",
+      "q": "A venue reports revenue of $800,000, cost of goods sold of $300,000 and operating expenses of $350,000. What is operating income?",
+      "choices": [
+        "$450,000",
+        "$200,000",
+        "$150,000",
+        "$500,000"
+      ],
+      "answer": 2,
+      "explain": "Operating income = $800,000 - $300,000 - $350,000 = $150,000. The $450,000 option leaves out cost of goods sold.",
+      "sub": "Financing and Economic Input",
+      "diff": 2
+    },
+    {
+      "id": "sem-042",
+      "q": "A team reports total assets of $10 million and total liabilities of $6 million. What is owner's equity?",
+      "choices": [
+        "$16 million",
+        "$6 million",
+        "$4 million",
+        "$10 million"
+      ],
+      "answer": 2,
+      "explain": "Assets = liabilities + owner's equity, so equity = $10M - $6M = $4M.",
+      "sub": "Financing and Economic Input",
+      "diff": 2
+    },
+    {
+      "id": "sem-043",
+      "q": "Which budgeting technique requires every expense to be justified from zero each budget cycle, rather than adjusted from last year's amounts?",
+      "choices": [
+        "Incremental budgeting",
+        "Flexible budgeting",
+        "Static budgeting",
+        "Zero-based budgeting"
+      ],
+      "answer": 3,
+      "explain": "Zero-based budgeting rebuilds each budget from scratch. Incremental budgeting starts from the prior year and adjusts it.",
+      "sub": "Financing and Economic Input",
+      "diff": 2
+    },
+    {
+      "id": "sem-044",
+      "q": "A city's report claims a tournament generated $40 million in economic impact. It counts all spending, including money local residents would have spent in town anyway. What is the main flaw?",
+      "choices": [
+        "It ignores the multiplier effect of spending",
+        "It uses too few years of data",
+        "It does not net out substitution effects, where the spending would have happened locally anyway",
+        "It counts only ticket revenue and not sponsorships"
+      ],
+      "answer": 2,
+      "explain": "Credible impact studies subtract spending that merely shifts from other local activities. The multiplier is a legitimate part of the analysis, so ignoring it is not the flaw.",
+      "sub": "Financing and Economic Input",
+      "diff": 3
+    },
+    {
+      "id": "sem-045",
+      "q": "A facility's annual lease payment is the same whether or not any events are held. How should this cost be classified?",
+      "choices": [
+        "Fixed cost",
+        "Variable cost",
+        "Contra-revenue",
+        "Owner's equity"
+      ],
+      "answer": 0,
+      "explain": "A cost that does not change with activity in the short run is fixed. Variable costs rise with event volume.",
+      "sub": "Financing and Economic Input",
+      "diff": 1
+    },
+    {
+      "id": "sem-046",
+      "q": "A rural minor league team earns most of its revenue in summer. Why should its owner forecast cash flow monthly rather than only annually?",
+      "choices": [
+        "Off-season months can produce cash shortfalls even when the full year is profitable",
+        "Monthly forecasts are required by the U.S. tax code",
+        "Summer revenue is recorded as a liability until the season ends",
+        "Monthly forecasts replace the need for a balance sheet"
+      ],
+      "answer": 0,
+      "explain": "Profit is measured over the year, but cash must cover bills in the months with little income. The other options misstate accounting or tax rules.",
+      "sub": "Financing and Economic Input",
+      "diff": 3
+    },
+    {
+      "id": "sem-047",
+      "q": "Which term describes the process in which an initial spending increase generates further rounds of spending in the local economy?",
+      "choices": [
+        "Substitution effect",
+        "Opportunity cost",
+        "Multiplier effect",
+        "Price elasticity"
+      ],
+      "answer": 2,
+      "explain": "The multiplier effect explains how each round of spending creates income that is spent again. Substitution is the opposite concern in impact studies.",
+      "sub": "Financing and Economic Input",
+      "diff": 3
+    },
+    {
+      "id": "sem-048",
+      "q": "What is the main difference between a ticket broker and a ticket scalper?",
+      "choices": [
+        "A broker sells only at face value, while a scalper sells above face value",
+        "A scalper is licensed by the venue, while a broker is not",
+        "A broker works only with season-ticket holders, while a scalper works with the public",
+        "A broker is a licensed reseller that follows venue and local rules, while a scalper resells tickets illegally or in violation of local law"
+      ],
+      "answer": 3,
+      "explain": "Licensed brokers operate legally within the rules. Scalpers operate outside them. Reversing the licensing or pricing roles is the trap.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 2
+    },
+    {
+      "id": "sem-049",
+      "q": "A venue raises ticket prices closer to game day as seats sell out and demand grows. Which pricing approach is this?",
+      "choices": [
+        "Cost-plus pricing",
+        "Price skimming",
+        "Dynamic (demand-based) pricing",
+        "Price ceiling"
+      ],
+      "answer": 2,
+      "explain": "Dynamic pricing adjusts price to real-time demand. Cost-plus pricing sets price from cost, and a price ceiling is a government limit.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 3
+    },
+    {
+      "id": "sem-050",
+      "q": "A venue sets its premium seats at a very high launch price for early buyers, then lowers the price over time as more buyers enter. Which strategy is this?",
+      "choices": [
+        "Penetration pricing",
+        "Bundle pricing",
+        "Price skimming",
+        "Prestige pricing"
+      ],
+      "answer": 2,
+      "explain": "Skimming captures buyers willing to pay the most first, then lowers prices to reach price-sensitive buyers. Penetration does the reverse.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 2
+    },
+    {
+      "id": "sem-051",
+      "q": "Before setting a price for a new event package, which step should a planner take first?",
+      "choices": [
+        "Print the price on all advertising",
+        "Define pricing objectives and estimate costs and likely demand",
+        "Match the rival venue's price exactly",
+        "Set the price after the event is held"
+      ],
+      "answer": 1,
+      "explain": "Pricing starts with objectives, cost and demand estimates. Copying a competitor or pricing after the fact skips the analysis.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 3
+    },
+    {
+      "id": "sem-052",
+      "q": "In the sales process, which step comes directly before the presentation?",
+      "choices": [
+        "The approach, the first contact with the prospect",
+        "Closing the sale",
+        "Post-sale follow-up",
+        "Handling objections after the presentation"
+      ],
+      "answer": 0,
+      "explain": "The sequence runs prospecting, preapproach, approach, presentation, then objections and close. The approach precedes the presentation.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 3
+    },
+    {
+      "id": "sem-053",
+      "q": "A corporate client buys 20 suites to thank clients and motivate its employees. What is this use of sports and entertainment called?",
+      "choices": [
+        "Public domain licensing",
+        "Ticket brokering",
+        "Cause marketing",
+        "Corporate hospitality"
+      ],
+      "answer": 3,
+      "explain": "Corporate hospitality uses events to entertain clients and reward staff. The other options are different business practices.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 1
+    },
+    {
+      "id": "sem-054",
+      "q": "A city imposes a legal maximum on the price of parking near a stadium on game days. What type of government influence on pricing is this?",
+      "choices": [
+        "A price ceiling",
+        "A price floor",
+        "A subsidy paid to the venue",
+        "A sales tax paid by the venue"
+      ],
+      "answer": 0,
+      "explain": "A legal maximum price is a price ceiling. A price floor sets a minimum, and a subsidy or tax does not set the price directly.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 2
+    },
+    {
+      "id": "sem-055",
+      "q": "During a recession, which entertainment spending is typically most at risk of decline?",
+      "choices": [
+        "Premium luxury suite and VIP package purchases",
+        "Local youth league registrations",
+        "Basic outdoor park admission",
+        "Community parade attendance"
+      ],
+      "answer": 0,
+      "explain": "Discretionary, high-priced spending falls first in a downturn, while low-cost and community activities hold up better.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
+      "diff": 3
+    },
+    {
+      "id": "sem-056",
+      "q": "Which U.S. federal law requires public accommodations, including stadiums and arenas, to provide accessible seating for people with disabilities?",
+      "choices": [
+        "Title IX of the Education Amendments of 1972",
+        "The Sherman Antitrust Act",
+        "The Americans with Disabilities Act (ADA)",
+        "The Copyright Act of 1976"
+      ],
+      "answer": 2,
+      "explain": "Title III of the ADA covers places of public accommodation, including sports and entertainment venues.",
+      "sub": "Sports Law",
+      "diff": 1
+    },
+    {
+      "id": "sem-057",
+      "q": "Title IX of the Education Amendments of 1972 primarily prohibits what?",
+      "choices": [
+        "Racial segregation in public venues",
+        "Sex-based discrimination in federally funded education programs, including athletics",
+        "Employment discrimination based on age",
+        "Unfair labor practices by unions"
+      ],
+      "answer": 1,
+      "explain": "Title IX bans sex discrimination in federally funded education programs, including school and college athletics.",
+      "sub": "Sports Law",
+      "diff": 2
+    },
+    {
+      "id": "sem-058",
+      "q": "A promoter uses a copyrighted song in a video ad without permission. Which exclusive right of the copyright owner is most directly infringed?",
+      "choices": [
+        "The right to set the song's ticket price",
+        "The right to reproduce and publicly perform the work",
+        "The right to collect the venue's concession revenue",
+        "The right to name the promoter's company"
+      ],
+      "answer": 1,
+      "explain": "Copyright gives the owner exclusive rights to reproduce, distribute and publicly perform the work. The distractors are not copyright rights.",
+      "sub": "Sports Law",
+      "diff": 3
+    },
+    {
+      "id": "sem-059",
+      "q": "Under U.S. common law, which three elements are generally required for a valid contract?",
+      "choices": [
+        "Offer, signature and notarization",
+        "Acceptance, witnesses and a seal",
+        "Offer, acceptance and consideration",
+        "Consideration, a written copy and a fee"
+      ],
+      "answer": 2,
+      "explain": "A valid contract generally needs an offer, acceptance and consideration (something of value exchanged). Notarization and seals are not general requirements.",
+      "sub": "Sports Law",
+      "diff": 1
+    },
+    {
+      "id": "sem-060",
+      "q": "A league rule forbids its teams from negotiating with outside broadcasters, which reduces competition and raises prices. Which body of law is primarily at issue?",
+      "choices": [
+        "Antitrust law, including the Sherman Act",
+        "Labor law under the NLRA only",
+        "Copyright law",
+        "Title IX"
+      ],
+      "answer": 0,
+      "explain": "Restraints that reduce competition among firms raise antitrust concerns under the Sherman Act. Labor law and copyright do not address this market restraint.",
+      "sub": "Sports Law",
+      "diff": 3
+    },
+    {
+      "id": "sem-061",
+      "q": "A union's members collectively refuse to work to pressure an employer. What is this action called?",
+      "choices": [
+        "A strike",
+        "A lockout",
+        "An arbitration",
+        "A grievance"
+      ],
+      "answer": 0,
+      "explain": "A strike is a collective work stoppage by employees. A lockout is initiated by the employer, and arbitration and grievances are dispute procedures.",
+      "sub": "Sports Law",
+      "diff": 1
+    },
+    {
+      "id": "sem-062",
+      "q": "Which statement best describes publicity?",
+      "choices": [
+        "Paid placement of a message in media",
+        "Unpaid media coverage of an organization or event",
+        "A sales incentive offered to customers",
+        "A contract to use a person's image"
+      ],
+      "answer": 1,
+      "explain": "Publicity is earned, unpaid media coverage. Paid placement is advertising.",
+      "sub": "Communication in Sports and Entertainment (Media)",
+      "diff": 1
+    },
+    {
+      "id": "sem-063",
+      "q": "A team hires a popular athlete to front its campaign. What is the main benefit the brand gains from this celebrity endorsement?",
+      "choices": [
+        "Exemption from advertising regulation",
+        "Guaranteed ticket sales for each game",
+        "Lower production costs for the broadcast",
+        "Transfer of the celebrity's credibility and appeal to the brand"
+      ],
+      "answer": 3,
+      "explain": "Endorsements work by transferring a celebrity's credibility and appeal to the brand. The other options are not benefits of endorsement.",
+      "sub": "Communication in Sports and Entertainment (Media)",
+      "diff": 2
+    },
+    {
+      "id": "sem-064",
+      "q": "A star player is arrested for a DUI on the night before a playoff game. What is the best first communication step for the team?",
+      "choices": [
+        "Say nothing until the court case is resolved",
+        "Blame the media for the coverage",
+        "Post highlight videos to change the focus",
+        "Issue a timely, honest statement that acknowledges the facts and describes next steps"
+      ],
+      "answer": 3,
+      "explain": "Crisis communication works best when the organization is prompt, honest and clear about next steps. Silence or deflection erodes trust.",
+      "sub": "Communication in Sports and Entertainment (Media)",
+      "diff": 3
+    },
+    {
+      "id": "sem-065",
+      "q": "Which media channel gives a team the most direct control over its message?",
+      "choices": [
+        "Its own website and social media accounts",
+        "Local television news coverage",
+        "A newspaper sports column",
+        "Fan blogs run by outside writers"
+      ],
+      "answer": 0,
+      "explain": "Owned channels let the organization decide content and timing. Earned media is controlled by journalists and writers.",
+      "sub": "Communication in Sports and Entertainment (Media)",
+      "diff": 1
+    },
+    {
+      "id": "sem-066",
+      "q": "A team employee bets on the team's games. Which ethical concern is most directly raised?",
+      "choices": [
+        "Conflict of interest and threat to the integrity of competition",
+        "Excessive advertising spending",
+        "Failure to pay the employee overtime",
+        "Poor seating arrangements for fans"
+      ],
+      "answer": 0,
+      "explain": "An insider betting on outcomes creates a conflict of interest and threatens the integrity of the competition. The other concerns are real but not the central ethical issue.",
+      "sub": "Ethics",
+      "diff": 2
+    },
+    {
+      "id": "sem-067",
+      "q": "An arena donates part of its concession profits to a youth sports program. Which concept does this best illustrate?",
+      "choices": [
+        "Price discrimination",
+        "Vertical integration",
+        "Market segmentation",
+        "Corporate social responsibility"
+      ],
+      "answer": 3,
+      "explain": "Voluntary action that benefits society beyond legal requirements is corporate social responsibility.",
+      "sub": "Ethics",
+      "diff": 1
+    },
+    {
+      "id": "sem-068",
+      "q": "A venue's advertising shows premium seats with unobstructed views, but many of those seats have pillars that block the view. What is the likely consequence of this behavior?",
+      "choices": [
+        "A permanent increase in ticket sales",
+        "Automatic exemption from local regulation",
+        "Lower operating costs",
+        "Loss of customer trust and possible legal liability for misleading advertising"
+      ],
+      "answer": 3,
+      "explain": "Misleading advertising damages trust and can create legal exposure. The other options describe benefits that unethical behavior does not produce.",
+      "sub": "Ethics",
+      "diff": 2
+    },
+    {
+      "id": "sem-069",
+      "q": "A team's licensee pays the team 8% of the wholesale price of each licensed jersey it sells. What is this payment called?",
+      "choices": [
+        "A royalty",
+        "A dividend",
+        "A franchise fee",
+        "A commission on tickets"
+      ],
+      "answer": 0,
+      "explain": "A royalty is a payment, usually a percentage of sales, for the right to use intellectual property.",
+      "sub": "Licensing",
+      "diff": 1
+    },
+    {
+      "id": "sem-070",
+      "q": "A video game publisher pays a team a fee to use its logos and team names in a game. What arrangement is this?",
+      "choices": [
+        "A sponsorship of the publisher's events",
+        "A product licensing agreement",
+        "An endorsement contract for the team's coach",
+        "A joint venture to build a stadium"
+      ],
+      "answer": 1,
+      "explain": "Granting permission to use logos and names for a fee is a licensing agreement. The other arrangements involve different rights or purposes.",
+      "sub": "Licensing",
+      "diff": 2
+    },
+    {
+      "id": "sem-071",
+      "q": "A team earns $1,200,000 in royalties at an 8% royalty rate. What were the licensed sales?",
+      "choices": [
+        "$9,600,000",
+        "$96,000,000",
+        "$15,000,000",
+        "$150,000,000"
+      ],
+      "answer": 2,
+      "explain": "Licensed sales = royalties / rate = $1,200,000 / 0.08 = $15,000,000.",
+      "sub": "Licensing",
+      "diff": 3
+    },
+    {
+      "id": "sem-072",
+      "q": "Which body governs member four-year colleges and universities in Divisions I, II and III of U.S. collegiate athletics?",
+      "choices": [
+        "The NFL",
+        "The NBA",
+        "The NCAA",
+        "The PGA Tour"
+      ],
+      "answer": 2,
+      "explain": "The NCAA sets rules for its member colleges and universities across its three divisions. The others govern professional leagues or tours.",
+      "sub": "Sports Governance",
+      "diff": 1
+    },
+    {
+      "id": "sem-073",
+      "q": "A two-year community college wants its teams to compete under a national governing body for junior colleges. Which organization should it join?",
+      "choices": [
+        "The NAIA",
+        "The NFHS",
+        "The NJCAA",
+        "USA Hockey"
+      ],
+      "answer": 2,
+      "explain": "The NJCAA governs athletics for U.S. two-year colleges. The NAIA serves small four-year institutions.",
+      "sub": "Sports Governance",
+      "diff": 2
+    },
+    {
+      "id": "sem-074",
+      "q": "Which role enforces a professional league's rules and resolves disputes among its member teams?",
+      "choices": [
+        "The team's general manager",
+        "The players' union president",
+        "The league commissioner",
+        "The head of a team's ticketing department"
+      ],
+      "answer": 2,
+      "explain": "The commissioner is the league's chief executive, responsible for enforcing rules and settling disputes among teams.",
+      "sub": "Sports Governance",
+      "diff": 1
+    },
+    {
+      "id": "sem-075",
+      "q": "A league limits its official beverage sponsorship to one company per category. What is the main benefit of this exclusivity?",
+      "choices": [
+        "It removes the need for any sponsorship revenue",
+        "It lets the league avoid all antitrust review",
+        "It lets each team set sponsorship prices alone",
+        "It protects the sponsor's investment by keeping competitors from diluting the brand"
+      ],
+      "answer": 3,
+      "explain": "Category exclusivity protects what the sponsor pays for. The other options misstate what the rule does.",
+      "sub": "Sports Governance",
+      "diff": 2
+    },
+    {
+      "id": "sem-076",
+      "q": "Which item belongs in a career portfolio for a sports management applicant?",
+      "choices": [
+        "A list of personal social media passwords",
+        "A full personal medical history",
+        "A résumé with work samples and a cover letter",
+        "A copy of a current employer's confidential budget"
+      ],
+      "answer": 2,
+      "explain": "A career portfolio presents qualifications: résumé, cover letter and work samples. The other items are private or confidential.",
+      "sub": "Careers",
+      "diff": 1
+    },
+    {
+      "id": "sem-077",
+      "q": "A recent graduate wants to enter the sports and entertainment industry. Which entry-level position is most typical?",
+      "choices": [
+        "Chief executive of a professional league",
+        "Ticket operations or event assistant",
+        "General manager of a professional franchise",
+        "Owner of a major arena"
+      ],
+      "answer": 1,
+      "explain": "Entry-level roles in event and ticket operations build experience. The other positions require years of experience.",
+      "sub": "Careers",
+      "diff": 1
+    },
+    {
+      "id": "sem-078",
+      "q": "A candidate lacks industry experience for a sports marketing job. Which strategy best overcomes this barrier?",
+      "choices": [
+        "Apply only to positions that require no experience",
+        "Omit the education section of the résumé",
+        "Complete a volunteer role or internship that builds relevant event experience",
+        "Wait until the posting closes before applying"
+      ],
+      "answer": 2,
+      "explain": "Relevant volunteer work and internships address the experience gap directly. The other options avoid the problem.",
+      "sub": "Careers",
+      "diff": 2
+    },
+    {
+      "id": "sem-079",
+      "q": "A stadium uses one system that links ticketing, concession sales and attendance. What is the main purpose of this management information system?",
+      "choices": [
+        "To replace all human staff",
+        "To set the official league schedule",
+        "To sell advertising directly to fans",
+        "To give managers timely information to support decisions"
+      ],
+      "answer": 3,
+      "explain": "An MIS collects and organizes data so managers can make timely, informed decisions.",
+      "sub": "Marketing/Management Information Technology and Research",
+      "diff": 1
+    },
+    {
+      "id": "sem-080",
+      "q": "A team wants every fan in its database to have an equal chance of being surveyed. Which sampling method does this?",
+      "choices": [
+        "Simple random sampling",
+        "Quota sampling",
+        "Convenience sampling",
+        "Judgment sampling"
+      ],
+      "answer": 0,
+      "explain": "Simple random sampling gives every member of the population an equal chance of selection. The other methods do not.",
+      "sub": "Marketing/Management Information Technology and Research",
+      "diff": 2
+    },
+    {
+      "id": "sem-081",
+      "q": "Offering a 10% discount this Tuesday to boost weekday attendance is an example of what?",
+      "choices": [
+        "A corporate strategy",
+        "A marketing tactic supporting a broader strategy",
+        "A mission statement",
+        "A permanent pricing policy"
+      ],
+      "answer": 1,
+      "explain": "Tactics are short-term actions that support a strategy. A one-day discount is not a permanent policy.",
+      "sub": "Marketing/Management Information Technology and Research",
+      "diff": 2
+    },
+    {
+      "id": "sem-082",
+      "q": "A club wants to test whether a new pregame promotion raises attendance. Which research design is best?",
+      "choices": [
+        "A controlled experiment comparing games with and without the promotion",
+        "A focus group after the season ends",
+        "A review of last season's ticket sales",
+        "A single survey of season-ticket holders"
+      ],
+      "answer": 0,
+      "explain": "A controlled comparison isolates the promotion's effect. The other designs cannot show cause and effect.",
+      "sub": "Marketing/Management Information Technology and Research",
+      "diff": 3
+    },
+    {
+      "id": "sem-083",
+      "q": "Which is an electronic method of collecting fan data?",
+      "choices": [
+        "An online survey or app-based poll",
+        "A paper questionnaire mailed to fans",
+        "A phone call from the ticket office",
+        "A handwritten suggestion box"
+      ],
+      "answer": 0,
+      "explain": "Online surveys and app polls collect data electronically. The other methods are paper-based or personal.",
+      "sub": "Marketing/Management Information Technology and Research",
+      "diff": 1
+    },
+    {
+      "id": "sem-084",
+      "q": "A manager makes decisions alone and gives staff little input. Which leadership style is this?",
+      "choices": [
+        "Autocratic",
+        "Democratic",
+        "Open (laissez-faire)",
+        "Situational"
+      ],
+      "answer": 0,
+      "explain": "The autocratic style centralizes decisions with the leader. The democratic style invites staff input.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
+      "diff": 1
+    },
+    {
+      "id": "sem-085",
+      "q": "A new event coordinator needs close direction, while a veteran needs only occasional check-ins. Which leadership approach fits this?",
+      "choices": [
+        "Situational leadership",
+        "Autocratic leadership for both",
+        "Open leadership for both",
+        "Democratic voting on every task"
+      ],
+      "answer": 0,
+      "explain": "Situational leadership adjusts the leader's style to each follower's readiness. Using one style for both ignores the difference.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
+      "diff": 3
+    },
+    {
+      "id": "sem-086",
+      "q": "In Herzberg's motivation theory, which factor is a motivator rather than a hygiene factor?",
+      "choices": [
+        "Salary paid on time",
+        "A safe working environment",
+        "Company work policies",
+        "Recognition for achievement"
+      ],
+      "answer": 3,
+      "explain": "Motivators such as recognition and achievement increase satisfaction. Hygiene factors such as pay, safety and policies prevent dissatisfaction.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
+      "diff": 2
+    },
+    {
+      "id": "sem-087",
+      "q": "A team is formed from marketing, ticketing and operations staff to plan a championship parade. What type of team is this?",
+      "choices": [
+        "A virtual team",
+        "A standing departmental team",
+        "A self-managed production team",
+        "A cross-functional team"
+      ],
+      "answer": 3,
+      "explain": "Members drawn from several functions form a cross-functional team. A virtual team is defined by remote collaboration, which the scenario does not describe.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
+      "diff": 1
+    },
+    {
+      "id": "sem-088",
+      "q": "A group has unclear goals, and its members avoid disagreement to keep the peace. Which is the most likely reason the team will fail?",
+      "choices": [
+        "Too much diversity of thought",
+        "Unclear goals and roles, combined with suppressed conflict",
+        "Too many written procedures",
+        "Excessive recognition of member achievements"
+      ],
+      "answer": 1,
+      "explain": "Teams fail when goals and roles are unclear and healthy conflict is avoided. The distractors are not typical causes of failure.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
+      "diff": 3
+    },
+    {
+      "id": "sem-089",
+      "q": "What is a key disadvantage of group decision making?",
+      "choices": [
+        "Groups are unable to reach any decision",
+        "Groups cannot share information",
+        "Groups cannot consider alternatives",
+        "Groupthink can suppress dissent and lead to poor choices"
+      ],
+      "answer": 3,
+      "explain": "Groupthink, the suppression of dissent in the pursuit of harmony, is a major risk of group decisions. The other options are not typical disadvantages.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
+      "diff": 2
+    },
+    {
+      "id": "sem-090",
+      "q": "A league decides to expand into two new countries. Which level of strategy does this decision represent?",
+      "choices": [
+        "Corporate strategy",
+        "Business strategy",
+        "Functional strategy",
+        "Tactical strategy"
+      ],
+      "answer": 0,
+      "explain": "Corporate strategy defines the overall scope of the enterprise, including which markets it enters. Business-level strategy concerns competing within one unit.",
+      "sub": "Management Strategies and Strategic Planning Tools",
+      "diff": 1
+    },
+    {
+      "id": "sem-091",
+      "q": "In a SWOT analysis of an arena, a new competitor arena opening nearby is classified as what?",
+      "choices": [
+        "A strength",
+        "A threat",
+        "A weakness",
+        "An opportunity"
+      ],
+      "answer": 1,
+      "explain": "An external factor that could hurt the arena is a threat. Strengths and weaknesses are internal.",
+      "sub": "Management Strategies and Strategic Planning Tools",
+      "diff": 1
+    },
+    {
+      "id": "sem-092",
+      "q": "Which sequence correctly describes the strategic management process?",
+      "choices": [
+        "Implement first, then formulate, then evaluate",
+        "Formulate the strategy, implement it, then evaluate and control",
+        "Evaluate, implement, then formulate",
+        "Formulate, evaluate, then implement"
+      ],
+      "answer": 1,
+      "explain": "The strategic management process runs formulation, implementation, then evaluation and control. Implementing before formulating reverses the logic.",
+      "sub": "Management Strategies and Strategic Planning Tools",
+      "diff": 2
+    },
+    {
+      "id": "sem-093",
+      "q": "A premium arena adds budget family concession packages that conflict with its luxury image. What does this illustrate?",
+      "choices": [
+        "Strong functional strategy alignment",
+        "A lack of strategic fit between the new offering and the venue's positioning",
+        "A successful blue ocean strategy",
+        "A reduction in fixed costs"
+      ],
+      "answer": 1,
+      "explain": "Strategic fit means new offerings support the organization's positioning. A conflicting offering weakens the brand even if it adds sales.",
+      "sub": "Management Strategies and Strategic Planning Tools",
+      "diff": 3
+    },
+    {
+      "id": "sem-094",
+      "q": "Which strategic planning tool plots business units by market growth rate and relative market share?",
+      "choices": [
+        "The break-even chart",
+        "The balance sheet",
+        "The organizational chart",
+        "The BCG growth-share matrix"
+      ],
+      "answer": 3,
+      "explain": "The BCG matrix classifies units as stars, cash cows, question marks or dogs using growth and share. The other tools serve different purposes.",
+      "sub": "Management Strategies and Strategic Planning Tools",
+      "diff": 2
+    },
+    {
+      "id": "sem-095",
+      "q": "Which set lists the four basic functions of management?",
+      "choices": [
+        "Marketing, financing, producing and selling",
+        "Hiring, training, paying and firing",
+        "Forecasting, budgeting, advertising and reporting",
+        "Planning, organizing, leading and controlling"
+      ],
+      "answer": 3,
+      "explain": "The four functions of management are planning, organizing, leading (directing) and controlling.",
+      "sub": "Basic Functions of Management",
+      "diff": 1
+    },
+    {
+      "id": "sem-096",
+      "q": "A stadium sets a target of 95% on-time gate openings, tracks results, and adjusts staffing when the target is missed. Which control step is the staffing adjustment?",
+      "choices": [
+        "Establishing standards",
+        "Monitoring results",
+        "Taking corrective action",
+        "Setting the mission"
+      ],
+      "answer": 2,
+      "explain": "Control runs establish standards, monitor results and compare them, then correct deviations. Adjusting staffing is the correction step.",
+      "sub": "Basic Functions of Management",
+      "diff": 3
+    },
+    {
+      "id": "sem-097",
+      "q": "In the decision-making process, which step comes first?",
+      "choices": [
+        "Identify and define the problem",
+        "Choose the best alternative",
+        "Implement the decision",
+        "Evaluate the results"
+      ],
+      "answer": 0,
+      "explain": "Good decisions start by defining the problem. Choosing, implementing and evaluating come later in the process.",
+      "sub": "Basic Functions of Management",
+      "diff": 1
+    },
+    {
+      "id": "sem-098",
+      "q": "A manager delegates the event budget to an assistant but keeps final approval authority. What does the manager retain after delegating?",
+      "choices": [
+        "No responsibility, since the task was delegated",
+        "Only the right to change the assistant's title",
+        "Ultimate accountability for the outcome",
+        "Full personal liability for every expense line"
+      ],
+      "answer": 2,
+      "explain": "Authority can be delegated, but the manager stays accountable for results. Delegation does not remove responsibility.",
+      "sub": "Basic Functions of Management",
+      "diff": 2
+    },
+    {
+      "id": "sem-099",
+      "q": "Which description best defines economic efficiency for an entertainment event?",
+      "choices": [
+        "Maximizing the number of free tickets given away",
+        "Spending the full budget each year",
+        "Charging the highest price the market will bear",
+        "Producing the event's output at the lowest possible cost"
+      ],
+      "answer": 3,
+      "explain": "Economic efficiency means getting the most output from given resources, which is achieved at the lowest cost for that output.",
+      "sub": "Basic Functions of Management",
+      "diff": 3
+    },
+    {
+      "id": "sem-100",
+      "q": "A venue group uses a divisional structure with separate arena, hotel and concessions units. What is the main advantage?",
+      "choices": [
+        "Each unit avoids all reporting requirements",
+        "Each unit can focus on its market and be held accountable for its results",
+        "The group no longer needs a chief executive",
+        "All units share one budget line"
+      ],
+      "answer": 1,
+      "explain": "Divisional structures let each unit focus on its market and be measured on its own results. The other options describe drawbacks or misreadings.",
+      "sub": "Basic Functions of Management",
+      "diff": 2
+    }
+  ],
+  "vocab": [
+    {
+      "id": "sem-v001",
+      "term": "Market segmentation",
+      "def": "Dividing a broad market into groups of buyers with similar needs or characteristics so each group can be targeted.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing"
+    },
+    {
+      "id": "sem-v002",
+      "term": "Behavioral segmentation",
+      "def": "Grouping customers by their actions, such as purchase frequency, attendance or loyalty.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing"
+    },
+    {
+      "id": "sem-v003",
+      "term": "Positioning",
+      "def": "Creating a distinct image for a product in the minds of target customers relative to competing products.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing"
+    },
+    {
+      "id": "sem-v004",
+      "term": "Price elasticity of demand",
+      "def": "The percentage change in quantity demanded divided by the percentage change in price; when demand is elastic, total revenue rises as price falls.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing"
+    },
+    {
+      "id": "sem-v005",
+      "term": "Markup",
+      "def": "The amount added to a product's cost, usually expressed as a percentage of cost: (price - cost) / cost.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing"
+    },
+    {
+      "id": "sem-v006",
+      "term": "Product life cycle",
+      "def": "The stages a product passes through (introduction, growth, maturity and decline), each with different sales and competitive patterns.",
+      "sub": "Sports and Entertainment Marketing/Strategic Marketing"
+    },
+    {
+      "id": "sem-v007",
+      "term": "Break-even point",
+      "def": "The sales volume at which total revenue equals total costs, so profit is zero; calculated as fixed costs divided by contribution per unit.",
+      "sub": "Facility and Event Management"
+    },
+    {
+      "id": "sem-v008",
+      "term": "Fixed costs",
+      "def": "Costs that do not change with the number of attendees or units sold in the short run, such as rent or insurance premiums.",
+      "sub": "Facility and Event Management"
+    },
+    {
+      "id": "sem-v009",
+      "term": "Variable costs",
+      "def": "Costs that rise or fall with the level of activity, such as food cost per attendee.",
+      "sub": "Facility and Event Management"
+    },
+    {
+      "id": "sem-v010",
+      "term": "Risk transfer",
+      "def": "A risk-management strategy that shifts the financial impact of a loss to another party, usually through insurance or contract.",
+      "sub": "Facility and Event Management"
+    },
+    {
+      "id": "sem-v011",
+      "term": "Concessions",
+      "def": "Food, beverage and merchandise sales operated at a venue, often a major source of non-ticket revenue.",
+      "sub": "Facility and Event Management"
+    },
+    {
+      "id": "sem-v012",
+      "term": "Separation of duties",
+      "def": "An internal control that divides authorization, recordkeeping and custody of assets among different people to reduce fraud and error.",
+      "sub": "Human Resource Management (Labor Relations)"
+    },
+    {
+      "id": "sem-v013",
+      "term": "Collective bargaining",
+      "def": "Negotiation between an employer and a union representing employees over wages, hours and working conditions.",
+      "sub": "Human Resource Management (Labor Relations)"
+    },
+    {
+      "id": "sem-v014",
+      "term": "Unfair labor practice",
+      "def": "An action by an employer or union that violates the National Labor Relations Act, such as firing workers for union activity.",
+      "sub": "Human Resource Management (Labor Relations)"
+    },
+    {
+      "id": "sem-v015",
+      "term": "Benchmarking",
+      "def": "Comparing an organization's processes or results with those of leading competitors to identify gaps and set goals.",
+      "sub": "Human Resource Management (Labor Relations)"
+    },
+    {
+      "id": "sem-v016",
+      "term": "Promotion mix",
+      "def": "The combination of advertising, publicity, personal selling and sales promotion used to communicate with target markets.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v017",
+      "term": "Sales promotion",
+      "def": "Short-term incentives such as giveaways, discounts or contests that encourage immediate purchase.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v018",
+      "term": "Publicity",
+      "def": "Unpaid media coverage of an organization, product or event that the organization does not directly pay for or fully control.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v019",
+      "term": "Sponsorship",
+      "def": "A business investing in an event, team or venue in exchange for brand exposure and association with it.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v020",
+      "term": "Endorsement",
+      "def": "A paid arrangement in which a person, often a celebrity, promotes a product or brand.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v021",
+      "term": "Product placement",
+      "def": "Paid inclusion of a brand's product within film, television or other entertainment content.",
+      "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v022",
+      "term": "Economic impact study",
+      "def": "An analysis estimating the new spending an event or facility brings into a local economy, adjusted for substitution effects.",
+      "sub": "Financing and Economic Input"
+    },
+    {
+      "id": "sem-v023",
+      "term": "Multiplier effect",
+      "def": "The way an initial spending injection generates further rounds of spending in the local economy.",
+      "sub": "Financing and Economic Input"
+    },
+    {
+      "id": "sem-v024",
+      "term": "Income statement",
+      "def": "A financial statement reporting revenues, expenses and net income over a period of time.",
+      "sub": "Financing and Economic Input"
+    },
+    {
+      "id": "sem-v025",
+      "term": "Balance sheet",
+      "def": "A financial statement reporting assets, liabilities and owner's equity at a specific point in time.",
+      "sub": "Financing and Economic Input"
+    },
+    {
+      "id": "sem-v026",
+      "term": "Zero-based budgeting",
+      "def": "A budgeting method that requires every expense to be justified from zero in each budget cycle rather than adjusted from prior-year amounts.",
+      "sub": "Financing and Economic Input"
+    },
+    {
+      "id": "sem-v027",
+      "term": "Ticket broker",
+      "def": "A licensed reseller that buys and sells tickets legally, within the rules set by the venue and local law.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events"
+    },
+    {
+      "id": "sem-v028",
+      "term": "Ticket scalper",
+      "def": "A person who resells tickets illegally or without a license, often above face value and in violation of local law.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events"
+    },
+    {
+      "id": "sem-v029",
+      "term": "Price ceiling",
+      "def": "A legal maximum price set by government, which limits what a seller may charge.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events"
+    },
+    {
+      "id": "sem-v030",
+      "term": "Price skimming",
+      "def": "Setting a high initial price to capture buyers willing to pay more, then lowering it over time.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events"
+    },
+    {
+      "id": "sem-v031",
+      "term": "Business cycle",
+      "def": "The recurring pattern of economic expansion and contraction that affects consumer spending on entertainment.",
+      "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events"
+    },
+    {
+      "id": "sem-v032",
+      "term": "Americans with Disabilities Act",
+      "def": "A federal civil rights law (1990) requiring accessibility in places of public accommodation such as stadiums and arenas.",
+      "sub": "Sports Law"
+    },
+    {
+      "id": "sem-v033",
+      "term": "Title IX",
+      "def": "Part of the Education Amendments of 1972 that prohibits sex-based discrimination in federally funded education programs, including athletics.",
+      "sub": "Sports Law"
+    },
+    {
+      "id": "sem-v034",
+      "term": "Copyright",
+      "def": "Federal protection giving the creator exclusive rights to reproduce, distribute, perform and display an original work.",
+      "sub": "Sports Law"
+    },
+    {
+      "id": "sem-v035",
+      "term": "Antitrust",
+      "def": "Laws, including the Sherman Act, that prohibit restraints of trade and monopolization that reduce competition.",
+      "sub": "Sports Law"
+    },
+    {
+      "id": "sem-v036",
+      "term": "Public relations",
+      "def": "Management of communication between an organization and its publics to build and maintain a favorable image.",
+      "sub": "Communication in Sports and Entertainment (Media)"
+    },
+    {
+      "id": "sem-v037",
+      "term": "Crisis communication",
+      "def": "Timely, honest and planned communication with stakeholders during an event that threatens an organization's reputation.",
+      "sub": "Communication in Sports and Entertainment (Media)"
+    },
+    {
+      "id": "sem-v038",
+      "term": "Media relations",
+      "def": "Building working relationships with journalists and outlets to earn accurate coverage.",
+      "sub": "Communication in Sports and Entertainment (Media)"
+    },
+    {
+      "id": "sem-v039",
+      "term": "Conflict of interest",
+      "def": "A situation in which a person's private interests could improperly influence their duties to an organization.",
+      "sub": "Ethics"
+    },
+    {
+      "id": "sem-v040",
+      "term": "Corporate social responsibility",
+      "def": "An organization's voluntary commitment to act in ways that benefit society beyond legal requirements.",
+      "sub": "Ethics"
+    },
+    {
+      "id": "sem-v041",
+      "term": "Royalty",
+      "def": "A payment, usually a percentage of sales, that a licensee pays the owner for the right to use intellectual property.",
+      "sub": "Licensing"
+    },
+    {
+      "id": "sem-v042",
+      "term": "Licensing agreement",
+      "def": "A contract granting permission to use a trademark, logo or likeness in exchange for fees or royalties.",
+      "sub": "Licensing"
+    },
+    {
+      "id": "sem-v043",
+      "term": "NCAA",
+      "def": "The National Collegiate Athletic Association, which governs member colleges and universities in Divisions I, II and III.",
+      "sub": "Sports Governance"
+    },
+    {
+      "id": "sem-v044",
+      "term": "NJCAA",
+      "def": "The National Junior College Athletic Association, which governs athletics for U.S. two-year colleges.",
+      "sub": "Sports Governance"
+    },
+    {
+      "id": "sem-v045",
+      "term": "Commissioner",
+      "def": "The chief executive of a professional league who enforces league rules and resolves disputes among member teams.",
+      "sub": "Sports Governance"
+    },
+    {
+      "id": "sem-v046",
+      "term": "Career portfolio",
+      "def": "A collection of documents, such as a résumé, cover letter and work samples, that demonstrates a person's skills and experience.",
+      "sub": "Careers"
+    },
+    {
+      "id": "sem-v047",
+      "term": "Internship",
+      "def": "A supervised, usually temporary work experience designed to build practical skills in a field.",
+      "sub": "Careers"
+    },
+    {
+      "id": "sem-v048",
+      "term": "Management information system",
+      "def": "A system that collects, stores and processes data so managers can make timely decisions.",
+      "sub": "Marketing/Management Information Technology and Research"
+    },
+    {
+      "id": "sem-v049",
+      "term": "Simple random sample",
+      "def": "A sample in which every member of the population has an equal chance of being selected.",
+      "sub": "Marketing/Management Information Technology and Research"
+    },
+    {
+      "id": "sem-v050",
+      "term": "Controlled experiment",
+      "def": "A research design that compares outcomes between a group receiving a treatment and a comparable group that does not.",
+      "sub": "Marketing/Management Information Technology and Research"
+    },
+    {
+      "id": "sem-v051",
+      "term": "Autocratic leadership",
+      "def": "A style in which the leader makes decisions alone and gives subordinates little input.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v052",
+      "term": "Situational leadership",
+      "def": "An approach in which the leader adjusts style to the readiness of followers and the demands of the situation.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v053",
+      "term": "Motivator",
+      "def": "In Herzberg's theory, a factor such as recognition or achievement that increases job satisfaction.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v054",
+      "term": "Groupthink",
+      "def": "A pattern in which group members suppress dissent to preserve harmony, leading to poor decisions.",
+      "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry"
+    },
+    {
+      "id": "sem-v055",
+      "term": "Corporate strategy",
+      "def": "The overall plan defining the scope of an organization's businesses and markets across the enterprise.",
+      "sub": "Management Strategies and Strategic Planning Tools"
+    },
+    {
+      "id": "sem-v056",
+      "term": "SWOT analysis",
+      "def": "A planning tool that assesses internal strengths and weaknesses alongside external opportunities and threats.",
+      "sub": "Management Strategies and Strategic Planning Tools"
+    },
+    {
+      "id": "sem-v057",
+      "term": "BCG matrix",
+      "def": "A growth-share portfolio tool that classifies business units by market growth rate and relative market share.",
+      "sub": "Management Strategies and Strategic Planning Tools"
+    },
+    {
+      "id": "sem-v058",
+      "term": "Controlling",
+      "def": "The management function of monitoring performance against standards and taking corrective action when results deviate.",
+      "sub": "Basic Functions of Management"
+    },
+    {
+      "id": "sem-v059",
+      "term": "Delegation",
+      "def": "Assigning authority and responsibility for a task to a subordinate while the manager remains accountable for the result.",
+      "sub": "Basic Functions of Management"
+    },
+    {
+      "id": "sem-v060",
+      "term": "Economic efficiency",
+      "def": "Producing the desired output at the lowest possible cost, using resources in the best way.",
+      "sub": "Basic Functions of Management"
+    }
+  ]
+}

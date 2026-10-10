@@ -1,0 +1,1695 @@
+{
+  "slug": "international-business",
+  "name": "International Business",
+  "group": "case",
+  "notes": "Official FBLA 2025-26 International Business guideline PDF could not be read (fbla.org returned 403, PDFs unreadable). Snippets from a Virginia CTE copy (https://www.cteresource.org/media/i25hvwuw/2526-international-business-va-fbla.pdf) list treaties and trade agreements, currency exchange, finance, HR management, ethics, international travel and career development. Those snippets could not be verified, so subs use the standard international business areas instead. The event is a role play with a team objective test per FBLA materials, not a written case; group is set to case as requested. Check https://www.fbla.org/high-school/competitive-events/ for the official areas and weights.",
+  "subs": [
+    "Global Business Environment",
+    "International Trade Theory and Agreements",
+    "Trade Barriers and Documentation",
+    "Foreign Exchange and International Finance",
+    "Market Entry and Expansion Strategies",
+    "Global Marketing and Cultural Adaptation",
+    "Global Operations and Supply Chain",
+    "Legal, Ethical and Political Risk"
+  ],
+  "questions": [
+    {
+      "id": "ib-001",
+      "q": "A U.S. software firm's home market is saturated and grows about 1 percent a year, but its board wants 15 percent annual growth. Which motive for going global best fits?",
+      "choices": [
+        "Market-seeking motive: access new customers in faster-growing foreign markets",
+        "Resource-seeking motive: secure lower-cost raw materials abroad",
+        "Efficiency-seeking motive: consolidate production in a low-cost country",
+        "Strategic-asset-seeking motive: acquire a rival's patents"
+      ],
+      "answer": 0,
+      "explain": "Market-seeking firms expand to reach new demand when the home market is mature. The other motives are real but do not solve a demand-growth problem.",
+      "sub": "Global Business Environment",
+      "diff": 1
+    },
+    {
+      "id": "ib-002",
+      "q": "Country X can make 10 tons of wheat or 5 tons of cloth per year. Country Y can make 4 tons of wheat or 8 tons of cloth. Which statement is correct?",
+      "choices": [
+        "X has a comparative advantage in cloth because it makes more cloth per year",
+        "Y has an absolute advantage in wheat because it can grow wheat on less land",
+        "X has a comparative advantage in wheat, and Y has one in cloth",
+        "Both countries should produce only wheat because wheat is the larger output"
+      ],
+      "answer": 2,
+      "explain": "X gives up 0.5 tons of cloth per ton of wheat and Y gives up 2 tons, so X has the comparative advantage in wheat. Comparative advantage depends on opportunity cost, not total output.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 1
+    },
+    {
+      "id": "ib-003",
+      "q": "Which trade agreement replaced NAFTA in July 2020?",
+      "choices": ["CAFTA-DR", "USMCA", "CPTPP", "Mercosur"],
+      "answer": 1,
+      "explain": "USMCA (called CUSMA in Canada) took effect July 1, 2020, and replaced NAFTA among the United States, Canada and Mexico.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 1
+    },
+    {
+      "id": "ib-004",
+      "q": "A government limits imports of bicycles to 10,000 units a year and blocks any shipments above that amount. This is an example of a(n):",
+      "choices": [
+        "ad valorem tariff",
+        "countervailing duty",
+        "export subsidy",
+        "import quota"
+      ],
+      "answer": 3,
+      "explain": "A quota is a quantity limit. A tariff taxes the good rather than capping how many can enter.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 1
+    },
+    {
+      "id": "ib-005",
+      "q": "Which tariff is charged as a percentage of the good's declared value?",
+      "choices": [
+        "Specific tariff",
+        "Tariff-rate quota",
+        "Ad valorem tariff",
+        "Embargo"
+      ],
+      "answer": 2,
+      "explain": "Ad valorem means according to value. A specific tariff is a fixed amount per unit, and an embargo is a complete ban on trade.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 1
+    },
+    {
+      "id": "ib-006",
+      "q": "Which exchange rate applies to currency delivered immediately, typically within two business days?",
+      "choices": ["Spot rate", "Forward rate", "Cross rate", "Pegged rate"],
+      "answer": 0,
+      "explain": "The spot rate is for near-immediate settlement. A forward rate is agreed today for a future date.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 1
+    },
+    {
+      "id": "ib-007",
+      "q": "In the 4Ps of the marketing mix, the P that is not product, price or place stands for:",
+      "choices": ["Positioning", "Packaging", "Process", "Promotion"],
+      "answer": 3,
+      "explain": "The four Ps are product, price, place and promotion. Positioning is a strategy concept, not one of the four Ps.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 1
+    },
+    {
+      "id": "ib-008",
+      "q": "A U.S. construction firm's agent pays $5,000 in cash to a foreign official to win a contract. Which U.S. law governs this payment?",
+      "choices": [
+        "Sherman Antitrust Act",
+        "Foreign Corrupt Practices Act",
+        "Robinson-Patman Act",
+        "Clayton Act"
+      ],
+      "answer": 1,
+      "explain": "The FCPA prohibits paying foreign officials to obtain or keep business, including payments made through agents. The antitrust statutes address competition, not bribery.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 2
+    },
+    {
+      "id": "ib-009",
+      "q": "A U.S. running-shoe brand is positioned as fast and affordable in Canada. The same message reads as cheap in Japan, where buyers equate price with quality. What is the best explanation?",
+      "choices": [
+        "Culture shapes how buyers read price and quality signals, so positioning must be localized",
+        "Japanese tariffs make affordable products impossible to import",
+        "Canadian consumers have higher incomes, so the message fits there",
+        "Hofstede's power distance is too high for any advertising to work"
+      ],
+      "answer": 0,
+      "explain": "Cultural cues about what low price signals determine how a message lands, so the positioning has to be adapted. Tariffs and incomes do not explain how the message is read.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-010",
+      "q": "In a PESTEL scan, a target country passes a new national data-privacy law that affects how foreign firms store customer data. Which category does this belong to?",
+      "choices": ["Economic", "Social", "Legal", "Technological"],
+      "answer": 2,
+      "explain": "Laws and regulations fall under the Legal factor of PESTEL. Data handling affects technology, but the source of the constraint is the law.",
+      "sub": "Global Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "ib-011",
+      "q": "Which framework compares a firm's internal strengths and weaknesses with external opportunities and threats before entering a foreign market?",
+      "choices": [
+        "Porter's five forces only",
+        "SWOT analysis",
+        "Break-even analysis",
+        "Hofstede's cultural model"
+      ],
+      "answer": 1,
+      "explain": "SWOT pairs internal factors (strengths, weaknesses) with external ones (opportunities, threats). Porter's five forces looks only at industry structure.",
+      "sub": "Global Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "ib-012",
+      "q": "A target market has high per-capita income, slow population growth and a rapidly aging population. Which PESTEL category most directly captures the aging population?",
+      "choices": ["Political", "Environmental", "Technological", "Social"],
+      "answer": 3,
+      "explain": "Demographic trends such as age structure are Social factors. Income levels would be Economic.",
+      "sub": "Global Business Environment",
+      "diff": 2
+    },
+    {
+      "id": "ib-013",
+      "q": "Which principle explains why countries benefit from specializing in goods they produce at lower opportunity cost, even when one country is more efficient at everything?",
+      "choices": [
+        "Absolute advantage",
+        "Mercantilism",
+        "Comparative advantage",
+        "Infant industry theory"
+      ],
+      "answer": 2,
+      "explain": "Comparative advantage rests on opportunity cost, so trade still benefits both sides even when one country has an absolute advantage in every good.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 2
+    },
+    {
+      "id": "ib-014",
+      "q": "Which statement best defines a free trade area?",
+      "choices": [
+        "Members remove tariffs among themselves but keep their own external tariffs",
+        "Members adopt a common external tariff and free movement of labour",
+        "Members use one currency and one central bank",
+        "Members set quotas on all imports from outside the group"
+      ],
+      "answer": 0,
+      "explain": "In a free trade area, internal tariffs are removed but each member sets its own tariffs on outside countries. A customs union adds the common external tariff.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 2
+    },
+    {
+      "id": "ib-015",
+      "q": "Which stage of economic integration includes a common external tariff, free trade among members, and free movement of labour and capital?",
+      "choices": [
+        "Free trade area",
+        "Customs union",
+        "Economic union",
+        "Common market"
+      ],
+      "answer": 3,
+      "explain": "A common market adds free movement of factors of production to a customs union. A customs union covers goods only.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 2
+    },
+    {
+      "id": "ib-016",
+      "q": "A country exports $220 billion of goods and services and imports $260 billion. Net primary income is +$10 billion and net transfers are -$5 billion. What is the current account balance?",
+      "choices": [
+        "-$30 billion",
+        "-$35 billion",
+        "-$40 billion",
+        "-$45 billion"
+      ],
+      "answer": 1,
+      "explain": "Goods and services balance is -40, plus net income of +10 gives -30, then net transfers of -5 give -35.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 3
+    },
+    {
+      "id": "ib-017",
+      "q": "Under the Heckscher-Ohlin model, a country with abundant skilled labour will tend to export:",
+      "choices": [
+        "Skill-intensive goods",
+        "Land-intensive goods",
+        "Unskilled-labour-intensive goods",
+        "Raw-material-intensive goods"
+      ],
+      "answer": 0,
+      "explain": "Heckscher-Ohlin predicts a country exports goods that intensively use its abundant factor. Abundant skilled labour points to skill-intensive exports.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 3
+    },
+    {
+      "id": "ib-018",
+      "q": "A tariff cut lowers the price of a U.S. product in a foreign market, but the foreign currency depreciates 10 percent against the dollar. Which is the most accurate description of the net effect on U.S. price competitiveness there?",
+      "choices": [
+        "Competitiveness improves fully, since both changes lower the price",
+        "Competitiveness falls, since tariff cuts never affect demand",
+        "Competitiveness is ambiguous: the tariff cut helps, but the weaker foreign currency raises the dollar price in local currency",
+        "Competitiveness is unchanged because the two changes cancel exactly in every case"
+      ],
+      "answer": 2,
+      "explain": "A weaker buyer currency makes a dollar price more expensive in local terms, which offsets part or all of the tariff benefit. The net effect depends on the size of each change.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 3
+    },
+    {
+      "id": "ib-019",
+      "q": "Which argument for trade protection is most consistent with the infant industry concept?",
+      "choices": [
+        "Protecting mature industries from competition for permanent job security",
+        "Temporarily protecting a new domestic industry until it can compete",
+        "Imposing tariffs to raise government revenue from all imports",
+        "Banning imports to conserve foreign exchange reserves permanently"
+      ],
+      "answer": 1,
+      "explain": "The infant industry argument is temporary protection for a new industry expected to become competitive. Permanent protection of mature industries is not the concept.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 3
+    },
+    {
+      "id": "ib-020",
+      "q": "Which WTO mechanism settles trade disputes through a binding, rules-based process?",
+      "choices": [
+        "Peer review by the IMF",
+        "Currency swap lines",
+        "Trade Policy Review Board",
+        "Dispute Settlement Body panels"
+      ],
+      "answer": 3,
+      "explain": "WTO disputes go to Dispute Settlement Body panels, which issue rulings. Trade Policy Reviews monitor policy but do not settle disputes.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 3
+    },
+    {
+      "id": "ib-021",
+      "q": "Which U.S. trade agreement covers the United States, the Dominican Republic and several Central American countries?",
+      "choices": ["NAFTA", "TPP", "CAFTA-DR", "APEC"],
+      "answer": 2,
+      "explain": "CAFTA-DR is the Central America-Dominican Republic Free Trade Agreement with the United States.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 1
+    },
+    {
+      "id": "ib-022",
+      "q": "Which group uses the euro as its common currency for most of its members?",
+      "choices": ["Eurozone", "Mercosur", "ASEAN", "NAFTA"],
+      "answer": 0,
+      "explain": "The eurozone is the group of European Union members that have adopted the euro. Not every EU member uses it.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 1
+    },
+    {
+      "id": "ib-023",
+      "q": "What is ASEAN?",
+      "choices": [
+        "A European currency union",
+        "A North American free trade pact",
+        "A Latin American customs union",
+        "The Association of Southeast Asian Nations, a regional bloc"
+      ],
+      "answer": 3,
+      "explain": "ASEAN is a regional bloc of Southeast Asian nations that promotes economic and political cooperation.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 1
+    },
+    {
+      "id": "ib-024",
+      "q": "Which principle requires a member to extend any trade advantage it gives one trading partner to all WTO members?",
+      "choices": [
+        "National treatment",
+        "Most-favoured-nation treatment",
+        "Reciprocity clause",
+        "Dumping margin"
+      ],
+      "answer": 1,
+      "explain": "Most-favoured-nation treatment makes non-discrimination the default among WTO members. National treatment concerns how imports are treated after they enter.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 1
+    },
+    {
+      "id": "ib-025",
+      "q": "What does the acronym WTO stand for?",
+      "choices": [
+        "World Trade Organization",
+        "World Tariff Office",
+        "Western Trade Office",
+        "World Treaty Organization"
+      ],
+      "answer": 0,
+      "explain": "The World Trade Organization is the international body that sets rules for trade among nations.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 1
+    },
+    {
+      "id": "ib-026",
+      "q": "Which document must a U.S. exporter file to report shipment details for export control and trade statistics?",
+      "choices": [
+        "Letter of credit",
+        "Certificate of insurance",
+        "Electronic Export Information (EEI) filing through AES",
+        "Bill of exchange"
+      ],
+      "answer": 2,
+      "explain": "U.S. exporters file Electronic Export Information through the Automated Export System for shipments above the reporting thresholds.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 1
+    },
+    {
+      "id": "ib-027",
+      "q": "Which document certifies where goods were produced and is often needed for preferential tariff treatment?",
+      "choices": [
+        "Commercial invoice",
+        "Certificate of origin",
+        "Packing list",
+        "Bill of lading"
+      ],
+      "answer": 1,
+      "explain": "A certificate of origin states the country where goods were made, which determines whether trade agreement rates apply.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 1
+    },
+    {
+      "id": "ib-028",
+      "q": "A U.S. exporter ships machinery and wants the buyer to pay only after the buyer's bank releases the shipping documents against payment. Which payment method fits?",
+      "choices": [
+        "Open account",
+        "Consignment",
+        "Cash in advance",
+        "Documentary collection (documents against payment)"
+      ],
+      "answer": 3,
+      "explain": "Documentary collection lets the exporter keep control of documents until payment, with less bank commitment than a letter of credit.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 2
+    },
+    {
+      "id": "ib-029",
+      "q": "Which payment method gives the exporter the strongest payment guarantee, because a bank commits to pay on compliant documents?",
+      "choices": [
+        "Open account",
+        "Documentary collection",
+        "Irrevocable letter of credit",
+        "Consignment"
+      ],
+      "answer": 2,
+      "explain": "An irrevocable letter of credit is the bank's own promise to pay once the seller presents compliant documents. Documentary collection involves no such bank commitment.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 2
+    },
+    {
+      "id": "ib-030",
+      "q": "Under a letter of credit, which bank is obligated to pay the seller once compliant documents are presented?",
+      "choices": [
+        "The issuing bank or a confirming bank",
+        "The seller's insurer",
+        "The freight forwarder",
+        "The customs broker"
+      ],
+      "answer": 0,
+      "explain": "The issuing bank (for the buyer) or a confirming bank that adds its own promise must pay against compliant documents.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 2
+    },
+    {
+      "id": "ib-031",
+      "q": "Which tariff type is a fixed amount per unit, such as $2 per kilogram?",
+      "choices": [
+        "An ad valorem tariff",
+        "A tariff that changes with exchange rates",
+        "A tariff that rises and falls with world prices",
+        "A specific tariff"
+      ],
+      "answer": 3,
+      "explain": "A specific tariff is a fixed dollar amount per physical unit. Ad valorem tariffs are percentages of value.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 2
+    },
+    {
+      "id": "ib-032",
+      "q": "A country allows 50,000 imported cars a year at a 5 percent tariff and charges 40 percent on any cars above that amount. Which policy is this?",
+      "choices": [
+        "Pure tariff",
+        "Tariff-rate quota",
+        "Embargo",
+        "Export subsidy"
+      ],
+      "answer": 1,
+      "explain": "A tariff-rate quota combines a lower in-quota tariff with a higher out-of-quota tariff. A pure tariff applies one rate to all units.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 2
+    },
+    {
+      "id": "ib-033",
+      "q": "A country imposes a special duty on imports sold below fair value that injure its domestic producers. What is this duty called?",
+      "choices": [
+        "Antidumping duty",
+        "Countervailing duty",
+        "Safeguard duty",
+        "Ad valorem tariff"
+      ],
+      "answer": 0,
+      "explain": "Antidumping duties offset sales below normal value. Countervailing duties offset foreign government subsidies.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 2
+    },
+    {
+      "id": "ib-034",
+      "q": "Which nontariff barrier requires products to meet specific technical, labelling or safety standards that favour domestic producers?",
+      "choices": [
+        "Quota",
+        "Embargo",
+        "Technical barrier to trade",
+        "Export credit"
+      ],
+      "answer": 2,
+      "explain": "Technical barriers to trade are standards and conformity rules that can be used to protect domestic producers, even when they are not meant as tariffs.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 2
+    },
+    {
+      "id": "ib-035",
+      "q": "Which is an example of an export subsidy?",
+      "choices": [
+        "A tariff on imported steel",
+        "A government grant that lowers a domestic firm's cost of shipping goods abroad",
+        "A quota on imported textiles",
+        "A licence requirement for dual-use goods"
+      ],
+      "answer": 1,
+      "explain": "An export subsidy lowers the cost of selling abroad. Tariffs, quotas and licence requirements restrict imports or exports rather than support them.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 2
+    },
+    {
+      "id": "ib-036",
+      "q": "A U.S. exporter's commercial invoice shows $50,000 FOB. Under U.S. customs transaction-value rules, which price is generally the basis for duty?",
+      "choices": [
+        "Price including ocean freight and insurance",
+        "The buyer's resale price in the United States",
+        "The seller's cost of production",
+        "The $50,000 FOB transaction price"
+      ],
+      "answer": 3,
+      "explain": "U.S. transaction value is generally the price actually paid or payable, with international freight and insurance usually excluded when the goods are valued FOB.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 3
+    },
+    {
+      "id": "ib-037",
+      "q": "Which statement about the Harmonized System (HS) is correct?",
+      "choices": [
+        "Classification determines only the country of origin",
+        "Each buyer sets its own classification for convenience",
+        "HS codes set a product's standard international classification, which countries extend with national tariff detail",
+        "HS codes apply only to services"
+      ],
+      "answer": 2,
+      "explain": "The HS is a standard international product nomenclature used for tariffs and statistics. Countries add their own subdivisions for duty rates.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 3
+    },
+    {
+      "id": "ib-038",
+      "q": "A U.S. exporter will receive EUR 250,000 in 180 days and fears the euro will weaken. Which hedge locks in the dollar value of the receivable?",
+      "choices": [
+        "Sell euros forward for dollars at the 180-day forward rate",
+        "Buy euros spot and hold them in a bank account",
+        "Buy a euro-denominated bond maturing in 30 days",
+        "Raise prices to European customers by 5 percent"
+      ],
+      "answer": 0,
+      "explain": "A forward sale of euros fixes the future conversion rate. Holding spot euros keeps the currency risk, and a price increase does not guarantee a dollar amount.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 3
+    },
+    {
+      "id": "ib-039",
+      "q": "A currency is quoted at a forward premium against the dollar, meaning its forward rate is above its spot rate. Under covered interest parity, which statement is correct?",
+      "choices": [
+        "The currency is expected to depreciate against the dollar",
+        "The currency's interest rates are typically lower than U.S. rates",
+        "U.S. interest rates must be lower than the foreign rate",
+        "The forward rate must equal the spot rate"
+      ],
+      "answer": 1,
+      "explain": "A forward premium reflects an interest-rate gap: the currency with the lower interest rate trades at a forward premium against the higher-rate currency.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 3
+    },
+    {
+      "id": "ib-040",
+      "q": "A U.S. importer owes EUR 500,000 in 60 days and expects the euro to appreciate. Which action best hedges the payable?",
+      "choices": [
+        "Sell euros forward",
+        "Delay payment until the euro weakens",
+        "Convert dollars to euros now and hold them in a non-interest account",
+        "Buy euros forward at the 60-day forward rate"
+      ],
+      "answer": 3,
+      "explain": "An importer owing euros is short euros, so it buys them forward to fix its dollar cost. Converting early earns no interest and delaying is speculation.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 3
+    },
+    {
+      "id": "ib-041",
+      "q": "The exchange rate moves from USD 1.10 per EUR to USD 1.20 per EUR. What happened to the euro?",
+      "choices": [
+        "The euro depreciated against the dollar",
+        "The dollar appreciated against the euro",
+        "The euro appreciated against the dollar",
+        "The rate is unchanged in real terms"
+      ],
+      "answer": 2,
+      "explain": "More dollars per euro means each euro buys more dollars, so the euro strengthened.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 1
+    },
+    {
+      "id": "ib-042",
+      "q": "A U.S. firm pays EUR 100,000 for parts. The rate moves from 1.10 to 1.20 USD per EUR. How many more dollars does the firm pay?",
+      "choices": [
+        "$10,000 more",
+        "$12,000 more",
+        "$8,333 more",
+        "$20,000 more"
+      ],
+      "answer": 0,
+      "explain": "EUR 100,000 costs $110,000 at 1.10 and $120,000 at 1.20, a difference of $10,000.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 1
+    },
+    {
+      "id": "ib-043",
+      "q": "A basket of goods costs $5 in the United States and 500 yen in Japan. What is the purchasing power parity exchange rate?",
+      "choices": ["$1 = 5 yen", "$1 = 50 yen", "$1 = 500 yen", "$1 = 100 yen"],
+      "answer": 3,
+      "explain": "Purchasing power parity sets the rate equal to the price ratio: 500 yen divided by $5 gives 100 yen per dollar.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 1
+    },
+    {
+      "id": "ib-044",
+      "q": "Which is the most accurate definition of a forward exchange rate?",
+      "choices": [
+        "The rate for immediate delivery of currency",
+        "A rate agreed today for exchanging currency on a set future date",
+        "The official rate set by a central bank",
+        "The average spot rate over the past year"
+      ],
+      "answer": 1,
+      "explain": "A forward rate is locked today for a future exchange date, which is why it is used to hedge.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 1
+    },
+    {
+      "id": "ib-045",
+      "q": "A U.S. multinational sends profits from its German subsidiary back to the parent company. What is this called?",
+      "choices": [
+        "Repatriation of profits",
+        "Transfer pricing",
+        "Dumping",
+        "Translation exposure"
+      ],
+      "answer": 0,
+      "explain": "Repatriation is moving earnings from a foreign operation to the home country.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 1
+    },
+    {
+      "id": "ib-046",
+      "q": "Which account in the balance of payments records a country's exports and imports of goods and services?",
+      "choices": [
+        "Capital account",
+        "Financial account",
+        "Current account",
+        "Reserve account"
+      ],
+      "answer": 2,
+      "explain": "The current account covers trade in goods and services, plus income and transfers. The financial account records investment flows.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 1
+    },
+    {
+      "id": "ib-047",
+      "q": "Which is an example of foreign direct investment?",
+      "choices": [
+        "A U.S. pension fund buys shares of a Japanese company on the Tokyo exchange",
+        "A U.S. manufacturer builds a new plant in Mexico that it fully owns",
+        "A Canadian bank lends money to a U.S. retailer",
+        "An American investor buys U.S. Treasury bonds"
+      ],
+      "answer": 1,
+      "explain": "FDI means lasting control or a significant stake in a foreign business. Buying shares as a passive investment is portfolio investment.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 1
+    },
+    {
+      "id": "ib-048",
+      "q": "A U.S. firm invoices a Brazilian customer in U.S. dollars, and the real weakens 15 percent before payment. Who bears the currency risk?",
+      "choices": [
+        "The U.S. firm, because the real weakened",
+        "Neither party, because the invoice is in dollars",
+        "The U.S. firm gains, because reais are cheaper",
+        "The customer, whose dollar cost rises and so raises default risk"
+      ],
+      "answer": 3,
+      "explain": "Dollar invoicing shifts currency risk to the buyer, who needs more reais per dollar. The seller's dollar receivable is fixed, but nonpayment risk rises.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 2
+    },
+    {
+      "id": "ib-049",
+      "q": "Which situation most clearly describes translation exposure rather than transaction exposure?",
+      "choices": [
+        "A payment due in 30 days in pounds",
+        "A bid priced in euros",
+        "A foreign subsidiary's balance sheet converted to dollars for consolidation",
+        "An import order already paid in yen"
+      ],
+      "answer": 2,
+      "explain": "Translation exposure arises when foreign-currency financial statements are restated in the parent's currency. Transaction exposure involves actual future cash flows.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 2
+    },
+    {
+      "id": "ib-050",
+      "q": "A firm's peso receipts are converted at 18 pesos per dollar today and 20 pesos per dollar in six months. What does this mean for a U.S. firm holding pesos?",
+      "choices": [
+        "The peso weakened, so each peso converts to fewer dollars",
+        "The peso strengthened, so each peso converts to more dollars",
+        "The dollar weakened against the peso",
+        "The peso and dollar are unchanged in value"
+      ],
+      "answer": 0,
+      "explain": "Needing more pesos per dollar means the peso lost value. A holder of pesos gets fewer dollars for each peso.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 2
+    },
+    {
+      "id": "ib-051",
+      "q": "A U.S. firm licenses its brand to a Korean company for a 6 percent royalty on net sales. Korean net sales are $4,000,000 this year. What royalty does the U.S. firm earn?",
+      "choices": ["$24,000", "$2,400,000", "$640,000", "$240,000"],
+      "answer": 3,
+      "explain": "6 percent of $4,000,000 is $240,000. Licensing earns royalties without the firm bearing the investment in production.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 2
+    },
+    {
+      "id": "ib-052",
+      "q": "A firm builds a plant from scratch in Vietnam rather than buying an existing one. Which term fits, and what is its main trade-off?",
+      "choices": [
+        "Acquisition; quick market access",
+        "Greenfield investment; full control but slower start-up and higher risk",
+        "Licensing; no capital needed",
+        "Brownfield merger; faster start-up"
+      ],
+      "answer": 1,
+      "explain": "A greenfield investment builds new facilities, giving control but taking longer and carrying more risk than buying an existing operation.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 2
+    },
+    {
+      "id": "ib-053",
+      "q": "Which entry mode gives the firm the most control but requires the most investment?",
+      "choices": [
+        "Wholly owned subsidiary",
+        "Exporting through agents",
+        "Licensing",
+        "Strategic alliance"
+      ],
+      "answer": 0,
+      "explain": "A wholly owned subsidiary gives full control of operations and profits, but the firm carries all the investment and risk.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 2
+    },
+    {
+      "id": "ib-054",
+      "q": "Two firms in different countries pool research on one product but remain separate companies. This is best described as:",
+      "choices": [
+        "Licensing",
+        "Acquisition",
+        "Strategic alliance",
+        "Export management company"
+      ],
+      "answer": 2,
+      "explain": "A strategic alliance is a cooperative agreement between independent firms, with no new legal entity and no ownership transfer.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 2
+    },
+    {
+      "id": "ib-055",
+      "q": "Which entry mode creates a new legal entity jointly owned by a foreign firm and a local partner, sharing profits and control?",
+      "choices": [
+        "Franchise agreement",
+        "Joint venture",
+        "Contract manufacturing",
+        "Direct export"
+      ],
+      "answer": 1,
+      "explain": "A joint venture is a new entity owned by two or more parents, usually used to share risk and gain local knowledge.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 2
+    },
+    {
+      "id": "ib-056",
+      "q": "A firm wants to enter a foreign market with little capital and is willing to share profits with a local company that knows the market. Which entry mode fits best?",
+      "choices": [
+        "Joint venture",
+        "Wholly owned greenfield plant",
+        "Direct exporting",
+        "Portfolio investment"
+      ],
+      "answer": 0,
+      "explain": "A joint venture shares the investment and the local know-how, at the cost of shared control and profits.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 3
+    },
+    {
+      "id": "ib-057",
+      "q": "A firm's entry plan has fixed costs of $600,000 and a contribution margin of $30 per unit. How many units must it sell to break even?",
+      "choices": ["12,000", "15,000", "20,000", "30,000"],
+      "answer": 2,
+      "explain": "Break-even units equal fixed costs divided by contribution margin per unit: $600,000 divided by $30 is 20,000.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 3
+    },
+    {
+      "id": "ib-058",
+      "q": "A U.S. firm enters Japan by buying an existing Japanese distributor to gain its channels quickly. Which mode is this, and what is the main risk?",
+      "choices": [
+        "Greenfield; the main risk is slow construction",
+        "Licensing; the main risk is low royalty income",
+        "Exporting; the main risk is tariffs",
+        "Acquisition; the main risk is overpaying and inheriting hidden liabilities"
+      ],
+      "answer": 3,
+      "explain": "Acquisitions give quick access but carry valuation and due-diligence risk, including liabilities the buyer did not expect.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 3
+    },
+    {
+      "id": "ib-059",
+      "q": "Which factor most favours a wholly owned subsidiary over a joint venture?",
+      "choices": [
+        "The host country requires a local majority partner",
+        "The firm lacks local market knowledge",
+        "The firm wants to share start-up costs",
+        "Strong intellectual property and firm-specific know-how the firm wants to protect"
+      ],
+      "answer": 3,
+      "explain": "Protecting valuable know-how is the main reason to keep full control. The other factors all push toward sharing ownership.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 3
+    },
+    {
+      "id": "ib-060",
+      "q": "A U.S. firm exports to Canada through a distributor that buys the goods outright. Who owns the goods and carries the sales risk?",
+      "choices": [
+        "The U.S. firm, until the goods are sold to end customers",
+        "The distributor, once it takes title and pays for the goods",
+        "Both share equally under consignment",
+        "The Canadian end customer, at the port of entry"
+      ],
+      "answer": 1,
+      "explain": "When a distributor buys outright, title and risk pass to it. Under consignment the exporter keeps title until resale.",
+      "sub": "Market Entry and Expansion Strategies",
+      "diff": 3
+    },
+    {
+      "id": "ib-061",
+      "q": "Which marketing approach uses the same product, message and packaging in every country?",
+      "choices": [
+        "Standardization",
+        "Adaptation",
+        "Segmentation by culture",
+        "Price skimming"
+      ],
+      "answer": 0,
+      "explain": "Standardization keeps the marketing mix the same across markets. Adaptation changes it to fit each market.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 1
+    },
+    {
+      "id": "ib-062",
+      "q": "Which Hofstede dimension measures how much less powerful members of a society accept an unequal distribution of power?",
+      "choices": [
+        "Individualism",
+        "Uncertainty avoidance",
+        "Power distance",
+        "Masculinity"
+      ],
+      "answer": 2,
+      "explain": "Power distance is the degree to which less powerful members accept and expect unequal power. Uncertainty avoidance measures tolerance for ambiguity.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 1
+    },
+    {
+      "id": "ib-063",
+      "q": "Which staffing approach fills key management posts with the parent company's nationals?",
+      "choices": ["Polycentric", "Ethnocentric", "Geocentric", "Regiocentric"],
+      "answer": 1,
+      "explain": "An ethnocentric approach relies on home-country nationals for key posts. Polycentric uses host-country managers.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 1
+    },
+    {
+      "id": "ib-064",
+      "q": "Which term describes a home-country employee sent to work abroad?",
+      "choices": [
+        "Host-country national",
+        "Third-country national",
+        "Repatriate",
+        "Expatriate"
+      ],
+      "answer": 3,
+      "explain": "An expatriate is an employee working outside the country of citizenship, usually sent from headquarters.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 1
+    },
+    {
+      "id": "ib-065",
+      "q": "Which pricing approach sets a low introductory price to gain market share quickly in a new market?",
+      "choices": [
+        "Price skimming",
+        "Cost-plus pricing",
+        "Penetration pricing",
+        "Prestige pricing"
+      ],
+      "answer": 2,
+      "explain": "Penetration pricing starts low to win share. Price skimming starts high and lowers the price over time.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 1
+    },
+    {
+      "id": "ib-066",
+      "q": "A product is sold in a foreign market below its home-market price or cost, which may trigger trade remedies. What is this called?",
+      "choices": [
+        "Dumping",
+        "Transfer pricing",
+        "Price skimming",
+        "Tariff escalation"
+      ],
+      "answer": 0,
+      "explain": "Dumping is selling abroad below normal value. It can lead to antidumping duties if it injures domestic producers.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 1
+    },
+    {
+      "id": "ib-067",
+      "q": "A brand changes its name for Chinese consumers, using characters with a similar sound and a positive meaning. This is an example of:",
+      "choices": [
+        "Standardization",
+        "Back translation",
+        "Dumping",
+        "Localization"
+      ],
+      "answer": 3,
+      "explain": "Localization adapts a product or message to local language and cultural meaning. Standardization keeps it the same everywhere.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 1
+    },
+    {
+      "id": "ib-068",
+      "q": "A U.S. snack brand must reduce sugar and offer vegetarian-friendly flavours in India, while keeping its brand name. Which strategy is this?",
+      "choices": [
+        "Standardization",
+        "Adaptation of the product and marketing mix",
+        "Ethnocentric staffing",
+        "Export licensing"
+      ],
+      "answer": 1,
+      "explain": "Changing the product to meet local tastes and rules, while keeping the brand, is product adaptation.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-069",
+      "q": "A marketing team runs the same campaign in five countries but adjusts the language and imagery in each. Which term best fits this approach?",
+      "choices": ["Glocalization", "Ethnocentrism", "Dumping", "Polycentrism"],
+      "answer": 0,
+      "explain": "Glocalization combines a global core strategy with local adaptation in execution.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-070",
+      "q": "Which reason most directly explains why a message that signals quality in one country may read as overpricing in another?",
+      "choices": [
+        "Different tariff rates",
+        "Different exchange rates",
+        "Different cultural cues about what price signals",
+        "Different interest rates"
+      ],
+      "answer": 2,
+      "explain": "Culture shapes how buyers read price, which is why a message must be tested in each market rather than assumed to transfer.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-071",
+      "q": "A U.S. toy company is considering entering Mexico. Which step should come first in its global marketing research?",
+      "choices": [
+        "Set prices for the Mexican market",
+        "Define the research problem and objectives",
+        "Choose a distributor",
+        "Launch a pilot campaign"
+      ],
+      "answer": 1,
+      "explain": "The research process starts by defining the problem and objectives. Pricing, distribution and launch decisions depend on that work.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-072",
+      "q": "A product must be sold at a lower purchase price in lower-income markets. Which element of the 4Ps needs the most adjustment?",
+      "choices": ["Product", "Place", "Promotion", "Price"],
+      "answer": 3,
+      "explain": "The price element changes first when the purchase price must fall, although the product may also change to support the lower price.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-073",
+      "q": "A product costs $40 per unit to make. The firm wants a 50 percent markup on cost. What is the target price?",
+      "choices": ["$20", "$50", "$60", "$80"],
+      "answer": 2,
+      "explain": "A 50 percent markup on $40 adds $20, for a target price of $60.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-074",
+      "q": "Which description best fits the Hofstede dimension of individualism?",
+      "choices": [
+        "The degree to which people expect to look after themselves and their immediate family",
+        "The degree of tolerance for uncertainty",
+        "The degree of gender role separation",
+        "The degree of long-term orientation"
+      ],
+      "answer": 0,
+      "explain": "Individualism contrasts with collectivism, where people rely more on group loyalty and extended family.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-075",
+      "q": "A U.S. fast-food chain changes its menu in Japan to suit local tastes. Which concept best explains the decision?",
+      "choices": [
+        "Ethnocentric staffing",
+        "Standardization",
+        "Dumping avoidance",
+        "Adaptation to local tastes"
+      ],
+      "answer": 3,
+      "explain": "Adapting the product to local preferences is the adaptation strategy, which contrasts with standardization.",
+      "sub": "Global Marketing and Cultural Adaptation",
+      "diff": 2
+    },
+    {
+      "id": "ib-076",
+      "q": "A manufacturer relies on a single Asian supplier for a critical component, holds almost no buffer stock, and a port closure halts production. Which risk is this?",
+      "choices": [
+        "Exchange rate risk",
+        "Supply chain concentration risk from single sourcing and lean inventory",
+        "Translation exposure",
+        "Tariff escalation"
+      ],
+      "answer": 1,
+      "explain": "Single sourcing combined with just-in-time inventory leaves the firm exposed to any disruption at one point in the chain.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 3
+    },
+    {
+      "id": "ib-077",
+      "q": "A manufacturer moves some production from China to Mexico to shorten lead times and reduce tariff exposure under USMCA. This is called:",
+      "choices": [
+        "Nearshoring",
+        "Offshoring",
+        "Reshoring",
+        "Outsourcing to a third party"
+      ],
+      "answer": 0,
+      "explain": "Nearshoring moves production closer to the home market. Reshoring brings it back home, and offshoring moves it farther away.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 3
+    },
+    {
+      "id": "ib-078",
+      "q": "Under which Incoterm does the seller make goods available at its own premises, while the buyer bears all costs and risks from there?",
+      "choices": ["FOB", "CIF", "EXW", "DDP"],
+      "answer": 2,
+      "explain": "Ex Works (EXW) puts the buyer in charge of export clearance and all transport from the seller's premises, which is the seller's minimum obligation.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 3
+    },
+    {
+      "id": "ib-079",
+      "q": "Under FOB shipping point terms, when does the risk of loss pass to the buyer?",
+      "choices": [
+        "When goods arrive at the buyer's warehouse",
+        "When goods are loaded on board the vessel at the origin port",
+        "When the buyer pays the invoice",
+        "When customs clears the goods at the destination"
+      ],
+      "answer": 1,
+      "explain": "Under FOB shipping point, risk passes once goods are on board the ship at the origin port, even though the seller pays the freight to that point.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 3
+    },
+    {
+      "id": "ib-080",
+      "q": "Under CIF terms, what does the seller pay for beyond the goods themselves?",
+      "choices": [
+        "Only export clearance",
+        "Import duties in the destination country",
+        "Warehousing at the buyer's dock",
+        "Cost, insurance and freight to the named destination port"
+      ],
+      "answer": 3,
+      "explain": "CIF means the seller pays cost, insurance and freight to the destination port. Import duties and clearance remain the buyer's responsibility.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 3
+    },
+    {
+      "id": "ib-081",
+      "q": "Which practice keeps inventory low by having parts arrive just as they are needed?",
+      "choices": [
+        "Batch production",
+        "Economic order quantity stockpiling",
+        "Just-in-time",
+        "Safety-stock hoarding"
+      ],
+      "answer": 2,
+      "explain": "Just-in-time inventory delivers materials when needed, which cuts carrying costs but increases dependence on reliable supply.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 1
+    },
+    {
+      "id": "ib-082",
+      "q": "What is the bullwhip effect?",
+      "choices": [
+        "Order variability grows as it moves upstream in a supply chain",
+        "Currency values swinging sharply after a trade deal",
+        "Tariffs rising in steps over several years",
+        "A shipping lane being shut by weather"
+      ],
+      "answer": 0,
+      "explain": "Small changes in customer demand are amplified as orders move back through distributors, manufacturers and suppliers.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 1
+    },
+    {
+      "id": "ib-083",
+      "q": "A U.S. company uses a freight forwarder to book ocean space and prepare documents. What is the forwarder's main role?",
+      "choices": [
+        "Set the tariff rate",
+        "Insure the cargo for the buyer",
+        "Issue letters of credit",
+        "Arrange transport and handle shipping documents"
+      ],
+      "answer": 3,
+      "explain": "Freight forwarders organize transport and paperwork for shippers. They do not set tariffs or issue bank credit.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 1
+    },
+    {
+      "id": "ib-084",
+      "q": "Which document is a receipt for goods shipped and evidence of the contract of carriage?",
+      "choices": [
+        "Commercial invoice",
+        "Bill of lading",
+        "Certificate of origin",
+        "Packing list"
+      ],
+      "answer": 1,
+      "explain": "The bill of lading is issued by the carrier. It is also a document of title that controls who may claim the goods.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 1
+    },
+    {
+      "id": "ib-085",
+      "q": "Which document is the seller's bill to the buyer, stating the goods, quantities and price, and is used for customs valuation?",
+      "choices": [
+        "Commercial invoice",
+        "Bill of lading",
+        "Export license",
+        "Letter of credit"
+      ],
+      "answer": 0,
+      "explain": "The commercial invoice is the basic transaction document customs uses to value goods.",
+      "sub": "Global Operations and Supply Chain",
+      "diff": 1
+    },
+    {
+      "id": "ib-086",
+      "q": "Which agency administers U.S. economic sanctions programs against certain countries and individuals?",
+      "choices": [
+        "Federal Trade Commission",
+        "Securities and Exchange Commission",
+        "Office of Foreign Assets Control (OFAC)",
+        "Consumer Financial Protection Bureau"
+      ],
+      "answer": 2,
+      "explain": "OFAC within the Treasury Department administers and enforces sanctions programs, which bar transactions with designated parties.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 1
+    },
+    {
+      "id": "ib-087",
+      "q": "A government takes over privately owned foreign assets, paying compensation. Which political risk is this?",
+      "choices": ["Dumping", "Expropriation", "Quota", "Countertrade"],
+      "answer": 1,
+      "explain": "Expropriation is government seizure of foreign-owned assets. Compensation does not change the classification as a political risk.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 1
+    },
+    {
+      "id": "ib-088",
+      "q": "A U.S. firm's Chinese distributor offers a consulting payment to a provincial official who controls permits, worth $25,000 in total. What is the main U.S. legal concern?",
+      "choices": [
+        "Sherman Act price-fixing",
+        "Robinson-Patman price discrimination",
+        "Missing export license paperwork",
+        "Potential FCPA violation through a third party paying an official"
+      ],
+      "answer": 3,
+      "explain": "The FCPA covers improper payments made through intermediaries, and the firm can be liable for what its agent does.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 2
+    },
+    {
+      "id": "ib-089",
+      "q": "Which trade remedy offsets a foreign government's subsidy to its exporters?",
+      "choices": [
+        "Antidumping duty",
+        "Section 232 tariff",
+        "Countervailing duty",
+        "Safeguard quota"
+      ],
+      "answer": 2,
+      "explain": "A countervailing duty offsets subsidies. An antidumping duty offsets sales below fair value.",
+      "sub": "Trade Barriers and Documentation",
+      "diff": 2
+    },
+    {
+      "id": "ib-090",
+      "q": "Which protection is most typical for a large mining investment in an unstable country?",
+      "choices": [
+        "Political risk insurance from a public or private insurer",
+        "Increasing dumping margins",
+        "Reducing tariffs on imported equipment",
+        "Shifting to countertrade in all markets"
+      ],
+      "answer": 0,
+      "explain": "Political risk insurance covers losses from expropriation, currency inconvertibility and political violence.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 2
+    },
+    {
+      "id": "ib-091",
+      "q": "Which description best fits ethical relativism in international business?",
+      "choices": [
+        "Ethics are identical in every country",
+        "Ethics apply only to home-country laws",
+        "Ethics depend only on profit targets",
+        "Right and wrong are judged by local cultural norms"
+      ],
+      "answer": 3,
+      "explain": "Ethical relativism holds that moral standards vary by culture. Critics argue it can excuse practices that are wrong everywhere.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 2
+    },
+    {
+      "id": "ib-092",
+      "q": "A foreign subsidiary must follow host-country labour laws even when the parent's home-country standards are higher. Which principle explains this?",
+      "choices": [
+        "Extraterritorial reach of home-country law only",
+        "Host-country laws apply to operations within that country",
+        "Most-favoured-nation treatment",
+        "Reciprocity clause"
+      ],
+      "answer": 1,
+      "explain": "Operations are generally governed by the laws of the country where they take place, though some home-country rules such as the FCPA also apply abroad.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 2
+    },
+    {
+      "id": "ib-093",
+      "q": "Which WTO-permitted measure lets a member temporarily restrict imports when a sudden surge seriously injures a domestic industry?",
+      "choices": [
+        "Safeguard measure",
+        "Dumping margin",
+        "Export subsidy",
+        "Reciprocal tariff cut"
+      ],
+      "answer": 0,
+      "explain": "Safeguards are temporary and non-discriminatory responses to import surges, and they are different from antidumping or countervailing action.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 2
+    },
+    {
+      "id": "ib-094",
+      "q": "Which principle requires that imported goods be treated no less favourably than domestic like goods once they cross the border?",
+      "choices": [
+        "Most-favoured-nation",
+        "Reciprocity",
+        "National treatment",
+        "Single undertaking"
+      ],
+      "answer": 2,
+      "explain": "National treatment bars discrimination against foreign goods after entry, including internal taxes and regulations.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 2
+    },
+    {
+      "id": "ib-095",
+      "q": "A firm sets the price of goods sold between its own subsidiaries so that profit shows up in a low-tax country. What is this called?",
+      "choices": ["Dumping", "Transfer pricing", "Countertrade", "Hedging"],
+      "answer": 1,
+      "explain": "Transfer pricing sets internal prices, and tax authorities require them to reflect arm's-length values.",
+      "sub": "Foreign Exchange and International Finance",
+      "diff": 2
+    },
+    {
+      "id": "ib-096",
+      "q": "A subsidiary in Brazil must buy a share of its inputs from local suppliers and reinvest 60 percent of profits locally. What kind of host-government measure is this?",
+      "choices": [
+        "Quota",
+        "Anti-dumping action",
+        "Countervailing duty",
+        "Local content or performance requirement"
+      ],
+      "answer": 3,
+      "explain": "Local content and reinvestment rules are performance requirements that tie market access or operation to specific local actions.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 3
+    },
+    {
+      "id": "ib-097",
+      "q": "Under the Export Administration Regulations (EAR), which situation most requires a license check?",
+      "choices": [
+        "Exporting controlled dual-use technology to a restricted foreign party",
+        "Exporting ordinary consumer goods to Canada",
+        "Shipping books to a university in France",
+        "Sending a sales catalogue abroad"
+      ],
+      "answer": 0,
+      "explain": "Dual-use technology sent to restricted parties needs a license or a license exception. Routine consumer goods and publications usually do not.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 3
+    },
+    {
+      "id": "ib-098",
+      "q": "A firm learns that its foreign agent has been making payments to customs officials. What is the firm's best immediate step?",
+      "choices": [
+        "Continue the payments, since they are standard in the country",
+        "End the agent immediately without any review",
+        "Launch an internal investigation with counsel and consider voluntary disclosure",
+        "Move the payments to a different subsidiary"
+      ],
+      "answer": 2,
+      "explain": "Counsel-led investigation and possible voluntary disclosure limit FCPA exposure. Ignoring the problem or moving it does not.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 3
+    },
+    {
+      "id": "ib-099",
+      "q": "Which statement about USMCA rules of origin is correct?",
+      "choices": [
+        "Goods qualify for zero tariffs regardless of where their parts originate",
+        "Goods must meet regional value content rules to receive preferential tariff treatment",
+        "Any product made in Canada qualifies automatically",
+        "Rules of origin apply only to agricultural goods"
+      ],
+      "answer": 1,
+      "explain": "Preferential treatment requires goods to meet regional value content and origin rules, so simply being assembled in a member country is not enough.",
+      "sub": "International Trade Theory and Agreements",
+      "diff": 3
+    },
+    {
+      "id": "ib-100",
+      "q": "A U.S. firm sells to a country whose currency cannot be converted into dollars. Which option best protects its ability to collect payment?",
+      "choices": [
+        "Open account terms with 90-day payment",
+        "Consignment shipments",
+        "Cash on delivery in local currency",
+        "Countertrade or a letter of credit confirmed by a bank able to transfer funds"
+      ],
+      "answer": 3,
+      "explain": "A confirmed letter of credit or countertrade gives payment assurance even when currency convertibility is blocked. Open account and consignment leave the firm exposed.",
+      "sub": "Legal, Ethical and Political Risk",
+      "diff": 3
+    }
+  ],
+  "vocab": [
+    {
+      "id": "ib-v001",
+      "term": "Absolute advantage",
+      "def": "A country can produce a good using fewer inputs than another country.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v002",
+      "term": "Comparative advantage",
+      "def": "A country can produce a good at a lower opportunity cost than another country, so specializing and trading benefits both.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v003",
+      "term": "Opportunity cost",
+      "def": "The value of the next best alternative given up when a choice is made.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v004",
+      "term": "Free trade area",
+      "def": "A group of countries that removes tariffs among its members while each keeps its own external tariffs.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v005",
+      "term": "Customs union",
+      "def": "A free trade area that also adopts a common external tariff toward non-members.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v006",
+      "term": "Common market",
+      "def": "A customs union that also allows free movement of labour and capital among members.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v007",
+      "term": "Economic union",
+      "def": "A common market that also harmonizes economic and monetary policy among members.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v008",
+      "term": "Most-favoured-nation treatment",
+      "def": "The obligation to extend any trade advantage given to one trading partner to all WTO members.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v009",
+      "term": "National treatment",
+      "def": "The rule that imported goods receive treatment no less favourable than domestic like goods after they enter a market.",
+      "sub": "Legal, Ethical and Political Risk"
+    },
+    {
+      "id": "ib-v010",
+      "term": "Ad valorem tariff",
+      "def": "A tariff set as a percentage of the declared value of the imported good.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v011",
+      "term": "Specific tariff",
+      "def": "A tariff set as a fixed amount per unit of the imported good, such as dollars per kilogram.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v012",
+      "term": "Quota",
+      "def": "A limit on the quantity or value of a good that may be imported or exported in a period.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v013",
+      "term": "Tariff-rate quota",
+      "def": "A two-tier system with a low tariff on imports within the quota and a higher tariff on imports above it.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v014",
+      "term": "Embargo",
+      "def": "A complete government ban on trade with a particular country or in a particular good.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v015",
+      "term": "Nontariff barrier",
+      "def": "A policy other than a tariff, such as quotas, standards or licensing rules, that restricts trade.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v016",
+      "term": "Dumping",
+      "def": "Selling a product in a foreign market below its normal value, usually its home-market price or cost.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v017",
+      "term": "Antidumping duty",
+      "def": "A duty imposed on dumped imports to offset the margin of dumping and protect domestic producers.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v018",
+      "term": "Countervailing duty",
+      "def": "A duty imposed to offset a subsidy that a foreign government provides to its exporters.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v019",
+      "term": "Export subsidy",
+      "def": "A government payment or benefit that lowers the cost of selling goods abroad.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v020",
+      "term": "Harmonized System",
+      "def": "The standard international product classification system used to assign codes for tariffs and trade statistics.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v021",
+      "term": "Incoterms",
+      "def": "Standard international trade terms, published by the ICC, that define the seller's and buyer's costs, risks and duties.",
+      "sub": "Global Operations and Supply Chain"
+    },
+    {
+      "id": "ib-v022",
+      "term": "FOB (Free On Board)",
+      "def": "An Incoterm under which the seller delivers goods on board the vessel at the origin port and risk passes to the buyer at that point.",
+      "sub": "Global Operations and Supply Chain"
+    },
+    {
+      "id": "ib-v023",
+      "term": "CIF (Cost, Insurance and Freight)",
+      "def": "An Incoterm under which the seller pays cost, insurance and freight to the named destination port, while risk passes at loading.",
+      "sub": "Global Operations and Supply Chain"
+    },
+    {
+      "id": "ib-v024",
+      "term": "EXW (Ex Works)",
+      "def": "An Incoterm under which the seller makes goods available at its own premises and the buyer bears all costs and risks from there.",
+      "sub": "Global Operations and Supply Chain"
+    },
+    {
+      "id": "ib-v025",
+      "term": "Commercial invoice",
+      "def": "The seller's bill to the buyer that states the goods, quantities and price, and is used for customs valuation.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v026",
+      "term": "Bill of lading",
+      "def": "A document issued by a carrier that serves as a receipt for goods shipped and evidence of the contract of carriage.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v027",
+      "term": "Certificate of origin",
+      "def": "A document that certifies the country where goods were produced, used to determine tariff treatment.",
+      "sub": "Trade Barriers and Documentation"
+    },
+    {
+      "id": "ib-v028",
+      "term": "Letter of credit",
+      "def": "A bank's commitment to pay the seller once compliant shipping documents are presented.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v029",
+      "term": "Documentary collection",
+      "def": "A payment method in which banks handle shipping documents and release them to the buyer only on payment or acceptance, without a bank payment guarantee.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v030",
+      "term": "Spot rate",
+      "def": "The exchange rate for currency delivered immediately, usually within two business days.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v031",
+      "term": "Forward rate",
+      "def": "An exchange rate agreed today for exchanging currency on a set future date.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v032",
+      "term": "Hedging",
+      "def": "Taking a position, such as a forward contract, that offsets the risk of an existing currency or price exposure.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v033",
+      "term": "Purchasing power parity",
+      "def": "The theory that exchange rates adjust so that identical goods cost the same across countries.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v034",
+      "term": "Current account",
+      "def": "The part of the balance of payments that records trade in goods and services, net income and net transfers.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v035",
+      "term": "Foreign direct investment",
+      "def": "Investment that gives a firm lasting control or a significant ownership stake in a foreign business.",
+      "sub": "Market Entry and Expansion Strategies"
+    },
+    {
+      "id": "ib-v036",
+      "term": "Greenfield investment",
+      "def": "Building new facilities from the ground up in a foreign country.",
+      "sub": "Market Entry and Expansion Strategies"
+    },
+    {
+      "id": "ib-v037",
+      "term": "Joint venture",
+      "def": "A new entity jointly owned by two or more parent firms that share control, profits and risk.",
+      "sub": "Market Entry and Expansion Strategies"
+    },
+    {
+      "id": "ib-v038",
+      "term": "Wholly owned subsidiary",
+      "def": "A foreign business entirely owned and controlled by the parent company.",
+      "sub": "Market Entry and Expansion Strategies"
+    },
+    {
+      "id": "ib-v039",
+      "term": "Licensing",
+      "def": "Granting a foreign firm the right to use intellectual property such as a patent, trademark or technology in exchange for royalties.",
+      "sub": "Market Entry and Expansion Strategies"
+    },
+    {
+      "id": "ib-v040",
+      "term": "Strategic alliance",
+      "def": "A cooperative agreement between independent firms to share resources or skills without creating a new legal entity.",
+      "sub": "Market Entry and Expansion Strategies"
+    },
+    {
+      "id": "ib-v041",
+      "term": "Standardization",
+      "def": "Using the same product, message and marketing mix in every country.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v042",
+      "term": "Adaptation",
+      "def": "Changing the product or marketing mix to fit the needs and preferences of each local market.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v043",
+      "term": "Glocalization",
+      "def": "Combining a global core strategy with local adaptation in how it is carried out.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v044",
+      "term": "Ethnocentric approach",
+      "def": "A staffing and management approach that fills key posts with parent-country nationals.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v045",
+      "term": "Expatriate",
+      "def": "An employee who works in a country other than the one where they hold citizenship, usually sent from headquarters.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v046",
+      "term": "Power distance",
+      "def": "The Hofstede dimension measuring how much less powerful members of a society accept unequal distribution of power.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v047",
+      "term": "Individualism",
+      "def": "The Hofstede dimension describing the degree to which people look after themselves and immediate family rather than a group.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v048",
+      "term": "Penetration pricing",
+      "def": "Setting a low initial price to gain market share quickly in a new market.",
+      "sub": "Global Marketing and Cultural Adaptation"
+    },
+    {
+      "id": "ib-v049",
+      "term": "Expropriation",
+      "def": "A government seizing privately owned foreign assets, with or without compensation.",
+      "sub": "Legal, Ethical and Political Risk"
+    },
+    {
+      "id": "ib-v050",
+      "term": "Political risk insurance",
+      "def": "Coverage that compensates a firm for losses from events such as expropriation, currency inconvertibility or political violence.",
+      "sub": "Legal, Ethical and Political Risk"
+    },
+    {
+      "id": "ib-v051",
+      "term": "Foreign Corrupt Practices Act",
+      "def": "A U.S. law that bans bribery of foreign officials to obtain or keep business and requires accurate books and records.",
+      "sub": "Legal, Ethical and Political Risk"
+    },
+    {
+      "id": "ib-v052",
+      "term": "OFAC",
+      "def": "The Office of Foreign Assets Control, which administers and enforces U.S. economic sanctions.",
+      "sub": "Legal, Ethical and Political Risk"
+    },
+    {
+      "id": "ib-v053",
+      "term": "Export Administration Regulations",
+      "def": "U.S. Commerce Department rules that control exports of dual-use goods, technology and software.",
+      "sub": "Legal, Ethical and Political Risk"
+    },
+    {
+      "id": "ib-v054",
+      "term": "Transfer pricing",
+      "def": "The prices charged between a firm's own units in different countries, which affect where profit and tax are reported.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v055",
+      "term": "Repatriation of profits",
+      "def": "Moving earnings from a foreign operation back to the parent company's home country.",
+      "sub": "Foreign Exchange and International Finance"
+    },
+    {
+      "id": "ib-v056",
+      "term": "Bullwhip effect",
+      "def": "The amplification of order variability as orders move upstream through a supply chain.",
+      "sub": "Global Operations and Supply Chain"
+    },
+    {
+      "id": "ib-v057",
+      "term": "Just-in-time inventory",
+      "def": "A system that delivers materials as they are needed, reducing inventory but increasing dependence on reliable supply.",
+      "sub": "Global Operations and Supply Chain"
+    },
+    {
+      "id": "ib-v058",
+      "term": "Nearshoring",
+      "def": "Moving production to a nearby country, often to shorten lead times and reduce logistics costs.",
+      "sub": "Global Operations and Supply Chain"
+    },
+    {
+      "id": "ib-v059",
+      "term": "USMCA rules of origin",
+      "def": "Regional value content and origin requirements that goods must meet to receive preferential tariff treatment under USMCA.",
+      "sub": "International Trade Theory and Agreements"
+    },
+    {
+      "id": "ib-v060",
+      "term": "Ethical relativism",
+      "def": "The view that moral standards are set by local cultural norms, so the same act may be judged differently in different places.",
+      "sub": "Legal, Ethical and Political Risk"
+    }
+  ]
+}

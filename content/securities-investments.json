@@ -1,0 +1,1781 @@
+{
+  "slug": "securities-investments",
+  "name": "Securities & Investments",
+  "group": "objective",
+  "notes": "Competency areas taken from the 2025-26 National FBLA Securities & Investments study guide (PDF mirror: https://www.pafbla.org/wp-content/uploads/2026/08/Securities-and-Investments.pdf; the fbla.org page returned 403 so the official host could not be confirmed). The guide lists 9 knowledge areas. Its test-composition chart is unlabelled and its bar order does not match the list, so the per-area question counts here are an approximation. Official sample items are in CONNECT and were not accessible. UK-only items in the guide (ISAs, FSMA, Data Protection Act 1998) were skipped; U.S. law and tax conventions are used throughout.",
+  "subs": [
+    "Investment Fundamentals",
+    "Investment Wrappers, Taxation, and Trusts",
+    "Investment Products and Funds",
+    "Stock Market",
+    "Stocks Versus Other Investments",
+    "Mutual Funds",
+    "Basics of Bonds",
+    "Derivatives",
+    "Financial Services Regulation"
+  ],
+  "questions": [
+    {
+      "id": "sec-001",
+      "q": "An investor who needs her money in two years and cannot accept a loss should prioritize which investment objective?",
+      "choices": [
+        "Speculative trading",
+        "Aggressive growth",
+        "Capital preservation",
+        "Leveraged income"
+      ],
+      "answer": 2,
+      "explain": "A short horizon and low loss tolerance point to capital preservation. The trap is choosing growth-oriented options that carry large drawdown risk.",
+      "sub": "Investment Fundamentals",
+      "diff": 1
+    },
+    {
+      "id": "sec-002",
+      "q": "Which statement best describes the risk-return tradeoff?",
+      "choices": [
+        "Higher expected return generally requires accepting higher risk",
+        "Low-risk investments always produce the highest returns",
+        "Risk and expected return are unrelated for diversified portfolios",
+        "Holding cash eliminates all investment risk"
+      ],
+      "answer": 0,
+      "explain": "Investors are compensated for bearing additional risk with higher expected returns, though outcomes are not guaranteed.",
+      "sub": "Investment Fundamentals",
+      "diff": 1
+    },
+    {
+      "id": "sec-003",
+      "q": "Diversification across many unrelated securities primarily reduces which type of risk?",
+      "choices": [
+        "Systematic (market-wide) risk",
+        "Broker counterparty risk",
+        "Tax-law change risk",
+        "Unsystematic (company-specific) risk"
+      ],
+      "answer": 3,
+      "explain": "Company-specific risk is diversifiable. Market-wide risk remains after diversification, which is the trap.",
+      "sub": "Investment Fundamentals",
+      "diff": 1
+    },
+    {
+      "id": "sec-004",
+      "q": "What is the value at the end of 2 years of $1,000 invested at 8% per year, compounded annually?",
+      "choices": [
+        "$1,080.00",
+        "$1,166.40",
+        "$1,160.00",
+        "$1,240.00"
+      ],
+      "answer": 1,
+      "explain": "1,000 x 1.08 x 1.08 = $1,166.40. The trap is simple interest, which gives $1,160.",
+      "sub": "Investment Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "sec-005",
+      "q": "Using the rule of 72, approximately how many years does it take an investment earning 6% per year to double?",
+      "choices": [
+        "9 years",
+        "12 years",
+        "10 years",
+        "14 years"
+      ],
+      "answer": 1,
+      "explain": "72 divided by 6 is 12. The rule is an approximation for compounding at a constant rate.",
+      "sub": "Investment Fundamentals",
+      "diff": 1
+    },
+    {
+      "id": "sec-006",
+      "q": "Which investor can generally take on the most short-term price volatility?",
+      "choices": [
+        "A retiree who depends on portfolio withdrawals next month",
+        "A 64-year-old who needs all savings within 12 months",
+        "A household saving for a down payment due next year",
+        "A 30-year-old saving for retirement 35 years away"
+      ],
+      "answer": 3,
+      "explain": "A long time horizon gives time to recover from short-term declines, so volatility is more tolerable.",
+      "sub": "Investment Fundamentals",
+      "diff": 1
+    },
+    {
+      "id": "sec-007",
+      "q": "What is the present value of $500 received one year from now, discounted at 5% per year?",
+      "choices": [
+        "$476.19",
+        "$500.00",
+        "$487.50",
+        "$525.00"
+      ],
+      "answer": 0,
+      "explain": "500 / 1.05 = $476.19. The trap is compounding forward to $525.",
+      "sub": "Investment Fundamentals",
+      "diff": 3
+    },
+    {
+      "id": "sec-008",
+      "q": "Which of the following is the most liquid asset?",
+      "choices": [
+        "Private real estate",
+        "Restricted private equity stake",
+        "Money market fund shares",
+        "Collectible art"
+      ],
+      "answer": 2,
+      "explain": "Money market fund shares can usually be redeemed quickly at close to their stated value. The others take time or a discount to sell.",
+      "sub": "Investment Fundamentals",
+      "diff": 1
+    },
+    {
+      "id": "sec-009",
+      "q": "An investment earns a 7% nominal return in a year when inflation is 3%. What is the exact real return?",
+      "choices": [
+        "3.88%",
+        "4.00%",
+        "3.50%",
+        "10.00%"
+      ],
+      "answer": 0,
+      "explain": "The exact real return is (1.07 / 1.03) - 1 = 3.88%. Subtracting inflation gives the 4% approximation, which is the trap.",
+      "sub": "Investment Fundamentals",
+      "diff": 3
+    },
+    {
+      "id": "sec-010",
+      "q": "What is the main benefit of dollar-cost averaging?",
+      "choices": [
+        "It guarantees a higher return than lump-sum investing",
+        "It eliminates market risk entirely",
+        "It spreads purchases over time, reducing the impact of a poorly timed entry",
+        "It avoids all brokerage fees"
+      ],
+      "answer": 2,
+      "explain": "Regular fixed-dollar purchases reduce the risk of investing everything at a market peak. It does not guarantee a better return.",
+      "sub": "Investment Fundamentals",
+      "diff": 2
+    },
+    {
+      "id": "sec-011",
+      "q": "Which statement about a Roth IRA is correct under current U.S. federal rules?",
+      "choices": [
+        "Contributions are deductible and withdrawals are taxed as ordinary income",
+        "Contributions are made with after-tax dollars and qualified withdrawals are tax-free",
+        "Contributions are deductible but withdrawals are always penalty-free",
+        "Earnings are taxed annually as they accrue"
+      ],
+      "answer": 1,
+      "explain": "Roth contributions are not deducted, so qualified distributions of contributions and earnings are not taxed again.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 1
+    },
+    {
+      "id": "sec-012",
+      "q": "To qualify as a long-term capital gain for U.S. tax purposes, an asset must be held for more than:",
+      "choices": [
+        "Six months",
+        "Five years",
+        "Three years",
+        "One year"
+      ],
+      "answer": 3,
+      "explain": "Holding for more than one year gives long-term treatment. Holding for exactly one year does not qualify.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 1
+    },
+    {
+      "id": "sec-013",
+      "q": "Under the U.S. wash sale rule, a loss on a sale is disallowed if a substantially identical security is bought within:",
+      "choices": [
+        "7 days after the sale only",
+        "14 days before the sale only",
+        "60 days in total",
+        "30 days before or after the sale"
+      ],
+      "answer": 3,
+      "explain": "The window is 30 days on each side of the sale, a 61-day span in total.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 2
+    },
+    {
+      "id": "sec-014",
+      "q": "Qualified dividends are generally taxed at:",
+      "choices": [
+        "Ordinary income rates",
+        "Preferential long-term capital gains rates",
+        "The state rate only",
+        "The 3.8% NIIT rate only"
+      ],
+      "answer": 1,
+      "explain": "Qualified dividends get the lower long-term capital gains rates if the holding-period rules are met.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 2
+    },
+    {
+      "id": "sec-015",
+      "q": "Earnings in a 529 college savings plan grow:",
+      "choices": [
+        "Taxable annually at ordinary rates",
+        "Tax-free, but withdrawals are always taxed",
+        "Tax-deferred, and qualified education withdrawals are federally tax-free",
+        "Only in cash equivalents with no tax benefit"
+      ],
+      "answer": 2,
+      "explain": "Growth is tax-deferred and qualified education withdrawals are federally tax-free. Non-qualified withdrawals are taxed on earnings.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 1
+    },
+    {
+      "id": "sec-016",
+      "q": "A revocable living trust generally:",
+      "choices": [
+        "Lets the grantor amend or revoke it, and the assets remain in the grantor's taxable estate",
+        "Removes assets from the grantor's estate immediately and permanently",
+        "Requires the trustee to be a bank",
+        "Gives creditor protection from the grantor's personal debts"
+      ],
+      "answer": 0,
+      "explain": "Because the grantor keeps control, the assets are generally still part of the taxable estate. The trap is assuming a trust always removes assets from the estate.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 3
+    },
+    {
+      "id": "sec-017",
+      "q": "Interest from most U.S. municipal bonds is generally exempt from:",
+      "choices": [
+        "Self-employment tax",
+        "Capital gains tax on a sale at a profit",
+        "Federal income tax",
+        "All federal and state taxes"
+      ],
+      "answer": 2,
+      "explain": "Muni interest is usually federally tax-exempt. Gains on selling a muni at a profit are still taxable.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 1
+    },
+    {
+      "id": "sec-018",
+      "q": "When an heir inherits appreciated stock, the cost basis is generally:",
+      "choices": [
+        "The fair market value at the date of death",
+        "Zero",
+        "The donor's original purchase price",
+        "The average price over the last year"
+      ],
+      "answer": 0,
+      "explain": "The basis steps up to fair market value at death, which often eliminates tax on gains that built up before death.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 2
+    },
+    {
+      "id": "sec-019",
+      "q": "In a traditional 401(k), pre-tax contributions are later taxed how?",
+      "choices": [
+        "Withdrawals are tax-free after five years",
+        "Contributions are taxed when made, but withdrawals are not",
+        "Withdrawals are taxed at long-term capital gains rates",
+        "Withdrawals are taxed as ordinary income"
+      ],
+      "answer": 3,
+      "explain": "The contributions were never taxed, so withdrawals are ordinary income. Capital gains rates do not apply to these distributions.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 3
+    },
+    {
+      "id": "sec-020",
+      "q": "An investor in the 32% federal bracket can buy a municipal bond yielding 4% tax-free. Its tax-equivalent yield is closest to:",
+      "choices": [
+        "4.00%",
+        "5.88%",
+        "6.80%",
+        "2.72%"
+      ],
+      "answer": 1,
+      "explain": "Tax-equivalent yield = 4% / (1 - 0.32) = 5.88%. Multiplying by 0.68 gives 2.72%, which is the trap.",
+      "sub": "Investment Wrappers, Taxation, and Trusts",
+      "diff": 3
+    },
+    {
+      "id": "sec-021",
+      "q": "Which statement best distinguishes an ETF from a traditional open-end mutual fund?",
+      "choices": [
+        "ETFs are priced once daily at NAV only",
+        "ETFs trade intraday on an exchange at market prices",
+        "ETFs cannot be held in a brokerage account",
+        "ETFs guarantee principal"
+      ],
+      "answer": 1,
+      "explain": "ETF shares trade throughout the day like stocks. Open-end mutual funds are bought and redeemed at the end-of-day NAV.",
+      "sub": "Investment Products and Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-022",
+      "q": "Money market mutual funds seek to maintain a stable net asset value of:",
+      "choices": [
+        "Whatever the market rate implies",
+        "$10.00 per share",
+        "$100.00 per share",
+        "$1.00 per share"
+      ],
+      "answer": 3,
+      "explain": "Money market funds target a stable $1.00 NAV. The NAV is not guaranteed, though.",
+      "sub": "Investment Products and Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-023",
+      "q": "Bank certificates of deposit are generally insured by the FDIC up to:",
+      "choices": [
+        "$250,000 per depositor, per bank, per ownership category",
+        "$100,000 per depositor, per bank",
+        "$500,000 per account",
+        "There is no FDIC coverage on CDs"
+      ],
+      "answer": 0,
+      "explain": "The standard limit is $250,000 per depositor, per insured bank, per ownership category.",
+      "sub": "Investment Products and Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-024",
+      "q": "Who bears the investment risk in a variable annuity?",
+      "choices": [
+        "The insurer, which guarantees all returns",
+        "The U.S. government through the FDIC",
+        "The contract owner",
+        "The state guaranty association"
+      ],
+      "answer": 2,
+      "explain": "In a variable annuity, returns depend on the chosen subaccounts, so the owner bears the market risk. Insurance guarantees are limited.",
+      "sub": "Investment Products and Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-025",
+      "q": "To keep its REIT status under U.S. tax law, a REIT must distribute at least what percent of taxable income to shareholders?",
+      "choices": [
+        "90%",
+        "50%",
+        "75%",
+        "100%"
+      ],
+      "answer": 0,
+      "explain": "The statutory requirement is 90% of taxable income, which is the figure most often confused with other thresholds.",
+      "sub": "Investment Products and Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-026",
+      "q": "As a target-date fund approaches its target date, its asset allocation typically:",
+      "choices": [
+        "Becomes more aggressive",
+        "Stays fixed forever",
+        "Shifts toward more conservative holdings",
+        "Moves entirely to cash on the first day"
+      ],
+      "answer": 2,
+      "explain": "This shift is called the glide path. The fund becomes more conservative as the investor's time horizon shortens.",
+      "sub": "Investment Products and Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-027",
+      "q": "Closed-end fund shares trade at a price that can differ from their net asset value. This is best described as:",
+      "choices": [
+        "Always equal to NAV",
+        "A premium or discount to NAV",
+        "Guaranteed by the sponsor",
+        "Fixed by the SEC"
+      ],
+      "answer": 1,
+      "explain": "Closed-end funds trade on exchanges at market prices, so they often trade at a premium or discount to NAV.",
+      "sub": "Investment Products and Funds",
+      "diff": 3
+    },
+    {
+      "id": "sec-028",
+      "q": "A unit investment trust (UIT) is typically characterized by:",
+      "choices": [
+        "Active management and frequent trading",
+        "An open-ended share count with daily NAV",
+        "A managed portfolio that changes monthly",
+        "A fixed portfolio that terminates at a set date"
+      ],
+      "answer": 3,
+      "explain": "A UIT holds a fixed, unmanaged portfolio and dissolves at a stated termination date.",
+      "sub": "Investment Products and Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-029",
+      "q": "Under SEC Regulation D, an individual generally qualifies as an accredited investor with net worth over:",
+      "choices": [
+        "$5 million in liquid assets only",
+        "$500,000, including the primary residence",
+        "$250,000 in annual income only",
+        "$1 million, excluding the primary residence"
+      ],
+      "answer": 3,
+      "explain": "The net-worth test excludes the primary residence. The income test is a separate route to accredited status.",
+      "sub": "Investment Products and Funds",
+      "diff": 3
+    },
+    {
+      "id": "sec-030",
+      "q": "A 2x daily-leveraged ETF held through several volatile months will most likely:",
+      "choices": [
+        "Return exactly twice the index's cumulative return",
+        "Diverge from twice the index's cumulative return because daily rebalancing compounds",
+        "Return half the index's cumulative return",
+        "Eliminate volatility drag"
+      ],
+      "answer": 1,
+      "explain": "Daily resetting compounds returns, so the multi-period result can differ substantially from 2x the index over longer holding periods.",
+      "sub": "Investment Products and Funds",
+      "diff": 3
+    },
+    {
+      "id": "sec-031",
+      "q": "Preferred stock typically differs from common stock because it:",
+      "choices": [
+        "Has unlimited upside and pays no dividend",
+        "Has voting rights only",
+        "Pays a fixed dividend and has priority over common in liquidation",
+        "Matures like a bond"
+      ],
+      "answer": 2,
+      "explain": "Preferred stock pays a stated dividend and ranks ahead of common equity in liquidation. It usually has no maturity date.",
+      "sub": "Investment Products and Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-032",
+      "q": "Ginnie Mae mortgage pass-through securities are backed by:",
+      "choices": [
+        "The full faith and credit of the U.S. government",
+        "Private mortgage insurance",
+        "A corporate guarantee",
+        "State bond insurance"
+      ],
+      "answer": 0,
+      "explain": "Ginnie Mae guarantees are backed by the full faith and credit of the U.S. government, unlike Fannie Mae or Freddie Mac securities.",
+      "sub": "Investment Products and Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-033",
+      "q": "Compared with an ETF, an exchange-traded note (ETN) carries:",
+      "choices": [
+        "No credit risk because it holds the assets directly",
+        "Government insurance on principal",
+        "Credit risk of the issuer, since it is unsecured debt",
+        "Lower tax efficiency only"
+      ],
+      "answer": 2,
+      "explain": "An ETN is an unsecured debt obligation of its issuer, so investors face the issuer's credit risk. An ETF holds the underlying assets.",
+      "sub": "Investment Products and Funds",
+      "diff": 3
+    },
+    {
+      "id": "sec-034",
+      "q": "A principal-protected structured note's guarantee is ultimately backed by:",
+      "choices": [
+        "The issuer's creditworthiness",
+        "The SEC",
+        "FDIC insurance",
+        "The underlying index"
+      ],
+      "answer": 0,
+      "explain": "Structured notes are debt of the issuer, so the principal protection is only as strong as the issuer's credit.",
+      "sub": "Investment Products and Funds",
+      "diff": 3
+    },
+    {
+      "id": "sec-035",
+      "q": "Which product is generally FDIC insured?",
+      "choices": [
+        "Money market mutual fund shares",
+        "Mutual fund shares",
+        "Variable annuity contract",
+        "Bank savings account"
+      ],
+      "answer": 3,
+      "explain": "Bank deposits are FDIC insured. Mutual fund shares, money market fund shares and annuities are not.",
+      "sub": "Investment Products and Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-036",
+      "q": "The New York Stock Exchange is best described as:",
+      "choices": [
+        "A dealer market with no central location",
+        "An auction market with designated market makers",
+        "An over-the-counter quote network",
+        "A market that lists only bonds"
+      ],
+      "answer": 1,
+      "explain": "The NYSE uses a centralized auction process with designated market makers. Nasdaq is the dealer-style market in this comparison.",
+      "sub": "Stock Market",
+      "diff": 1
+    },
+    {
+      "id": "sec-037",
+      "q": "Which order type guarantees a price but not execution?",
+      "choices": [
+        "Market order",
+        "Limit order",
+        "Stop order",
+        "Market-on-open order"
+      ],
+      "answer": 1,
+      "explain": "A limit order executes only at the limit price or better, so it may never fill. A market order fills but not at a guaranteed price.",
+      "sub": "Stock Market",
+      "diff": 1
+    },
+    {
+      "id": "sec-038",
+      "q": "Once its stop price is reached, a stop-loss order becomes:",
+      "choices": [
+        "A limit order at the stop price",
+        "A good-till-canceled order",
+        "A short sale",
+        "A market order"
+      ],
+      "answer": 3,
+      "explain": "A stop order converts to a market order when triggered, so the fill price may differ from the stop price.",
+      "sub": "Stock Market",
+      "diff": 3
+    },
+    {
+      "id": "sec-039",
+      "q": "A short sale profits when the stock price:",
+      "choices": [
+        "Falls",
+        "Stays unchanged",
+        "Rises and then falls back",
+        "Rises steadily"
+      ],
+      "answer": 0,
+      "explain": "The investor borrows shares, sells them, and buys them back later. A falling price produces a gain.",
+      "sub": "Stock Market",
+      "diff": 1
+    },
+    {
+      "id": "sec-040",
+      "q": "Under Regulation T, the initial margin requirement for buying stock on margin is:",
+      "choices": [
+        "75%",
+        "25%",
+        "50%",
+        "100%"
+      ],
+      "answer": 2,
+      "explain": "Reg T sets initial margin at 50% of the purchase price. The 25% figure is the FINRA maintenance minimum, which is the trap.",
+      "sub": "Stock Market",
+      "diff": 2
+    },
+    {
+      "id": "sec-041",
+      "q": "The Dow Jones Industrial Average is a:",
+      "choices": [
+        "Price-weighted index",
+        "Market-capitalization-weighted index",
+        "Equal-weighted index",
+        "Free-float index"
+      ],
+      "answer": 0,
+      "explain": "The DJIA weights each stock by share price, so high-priced stocks move it more than their market size would suggest.",
+      "sub": "Stock Market",
+      "diff": 3
+    },
+    {
+      "id": "sec-042",
+      "q": "The S&P 500 index is weighted by:",
+      "choices": [
+        "Share price",
+        "Equal weight per stock",
+        "Market capitalization",
+        "Trading volume"
+      ],
+      "answer": 2,
+      "explain": "The S&P 500 is a float-adjusted market-capitalization index.",
+      "sub": "Stock Market",
+      "diff": 2
+    },
+    {
+      "id": "sec-043",
+      "q": "The ask price is the price at which:",
+      "choices": [
+        "A dealer will buy a security from an investor",
+        "A dealer will sell a security to an investor",
+        "The security last traded",
+        "The security's par value is set"
+      ],
+      "answer": 1,
+      "explain": "The ask is what the investor pays. The bid is what the investor receives when selling, and the gap between them is the spread.",
+      "sub": "Stock Market",
+      "diff": 1
+    },
+    {
+      "id": "sec-044",
+      "q": "A Level 1 market-wide circuit breaker is triggered when the S&P 500 falls by:",
+      "choices": [
+        "5% at any time",
+        "20% at any time",
+        "10% at any time",
+        "7% before 3:25 p.m. Eastern"
+      ],
+      "answer": 3,
+      "explain": "Level 1 is a 7% decline before 3:25 p.m. Eastern, which produces a 15-minute halt. Level 3 (20%) halts trading for the rest of the day.",
+      "sub": "Stock Market",
+      "diff": 3
+    },
+    {
+      "id": "sec-045",
+      "q": "A stock trading at $80 with earnings of $4 per share has a P/E ratio of:",
+      "choices": [
+        "5",
+        "16",
+        "40",
+        "20"
+      ],
+      "answer": 3,
+      "explain": "P/E = price / earnings per share = 80 / 4 = 20. Dividing the other way gives 0.05.",
+      "sub": "Stock Market",
+      "diff": 2
+    },
+    {
+      "id": "sec-046",
+      "q": "In a corporate bankruptcy, which group is paid before common shareholders?",
+      "choices": [
+        "Preferred shareholders only",
+        "Bondholders and other creditors",
+        "Employees holding stock options only",
+        "No one; common shareholders are paid first"
+      ],
+      "answer": 1,
+      "explain": "Creditors, including bondholders, rank ahead of all equity holders. Preferred stock ranks ahead of common but behind creditors.",
+      "sub": "Stocks Versus Other Investments",
+      "diff": 1
+    },
+    {
+      "id": "sec-047",
+      "q": "Common stock dividends are:",
+      "choices": [
+        "Guaranteed by the issuing company",
+        "Fixed by contract at issuance",
+        "Declared at the discretion of the board and not guaranteed",
+        "Required by the Securities Act of 1933"
+      ],
+      "answer": 2,
+      "explain": "Common dividends are discretionary and can be cut or eliminated. Preferred dividends are usually stated in advance.",
+      "sub": "Stocks Versus Other Investments",
+      "diff": 1
+    },
+    {
+      "id": "sec-048",
+      "q": "Over long historical periods, which asset class has generally shown the highest volatility?",
+      "choices": [
+        "Common stocks",
+        "Investment-grade corporate bonds",
+        "Municipal bonds",
+        "Treasury bills"
+      ],
+      "answer": 0,
+      "explain": "Common stocks have historically had the highest returns and the highest volatility of these options.",
+      "sub": "Stocks Versus Other Investments",
+      "diff": 3
+    },
+    {
+      "id": "sec-049",
+      "q": "Preferred shareholders typically have:",
+      "choices": [
+        "Veto power over all board decisions",
+        "Full voting rights per share",
+        "Limited or no voting rights",
+        "Voting rights only in bankruptcy"
+      ],
+      "answer": 2,
+      "explain": "Preferred stock usually carries limited or no voting power, which is the trade-off for its priority and fixed dividend.",
+      "sub": "Stocks Versus Other Investments",
+      "diff": 2
+    },
+    {
+      "id": "sec-050",
+      "q": "Compared with direct real estate, publicly traded common stock is generally:",
+      "choices": [
+        "More liquid",
+        "Less liquid",
+        "Equally liquid",
+        "Not tradable"
+      ],
+      "answer": 0,
+      "explain": "Listed shares can be sold within seconds during trading hours. Direct property sales can take months.",
+      "sub": "Stocks Versus Other Investments",
+      "diff": 1
+    },
+    {
+      "id": "sec-051",
+      "q": "A mutual fund's net asset value (NAV) per share is calculated:",
+      "choices": [
+        "Only at the time of each share purchase",
+        "Continuously during market hours",
+        "Once a month",
+        "Once daily, after the market close"
+      ],
+      "answer": 3,
+      "explain": "Open-end funds price shares once per day, after the close, by dividing net assets by shares outstanding.",
+      "sub": "Mutual Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-052",
+      "q": "A front-end load is:",
+      "choices": [
+        "A fee charged when shares are redeemed",
+        "A sales charge deducted when shares are purchased",
+        "An annual management fee",
+        "A tax on dividends"
+      ],
+      "answer": 1,
+      "explain": "A front-end load is paid at purchase, which reduces the amount actually invested. A back-end load is charged on redemption.",
+      "sub": "Mutual Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-053",
+      "q": "A 12b-1 fee is used to pay for:",
+      "choices": [
+        "Fund audits required by the SEC",
+        "Marketing and distribution expenses",
+        "Brokerage commissions on portfolio trades",
+        "Custodian bank services only"
+      ],
+      "answer": 1,
+      "explain": "12b-1 fees, named for the SEC rule, cover distribution and marketing costs and are part of the expense ratio.",
+      "sub": "Mutual Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-054",
+      "q": "A fund with a 1.2% expense ratio costs an investor with $10,000 invested about how much per year?",
+      "choices": [
+        "$12",
+        "$1,200",
+        "$0",
+        "$120"
+      ],
+      "answer": 3,
+      "explain": "1.2% of $10,000 is $120. The trap is moving the decimal point to get $12.",
+      "sub": "Mutual Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-055",
+      "q": "Compared with actively managed funds, index funds generally have:",
+      "choices": [
+        "Lower expense ratios and lower turnover",
+        "Higher expense ratios and higher turnover",
+        "Guaranteed returns",
+        "No market exposure"
+      ],
+      "answer": 0,
+      "explain": "Index funds track a benchmark with little trading, which keeps costs and turnover low.",
+      "sub": "Mutual Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-056",
+      "q": "A mutual fund's capital gains distribution that is reinvested is:",
+      "choices": [
+        "Not taxable until the shares are sold",
+        "Tax-exempt for all investors",
+        "Taxable in the year it is distributed",
+        "Taxed only at the state level"
+      ],
+      "answer": 2,
+      "explain": "Reinvested distributions are still taxable income in the year paid. Reinvesting does not defer the tax.",
+      "sub": "Mutual Funds",
+      "diff": 3
+    },
+    {
+      "id": "sec-057",
+      "q": "Breakpoints in mutual fund sales charges:",
+      "choices": [
+        "Reduce the front-end load on larger purchases",
+        "Apply only to no-load funds",
+        "Eliminate all sales charges",
+        "Increase the load for larger purchases"
+      ],
+      "answer": 0,
+      "explain": "Breakpoints lower the sales charge percentage once a purchase reaches set dollar thresholds.",
+      "sub": "Mutual Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-058",
+      "q": "Open-end mutual fund shares are redeemed at:",
+      "choices": [
+        "The last exchange trade price",
+        "The offering price including the load",
+        "The next calculated net asset value",
+        "The fund's original purchase price"
+      ],
+      "answer": 2,
+      "explain": "Redemptions are priced at the next NAV after the request, not at the last trade or the original purchase price.",
+      "sub": "Mutual Funds",
+      "diff": 1
+    },
+    {
+      "id": "sec-059",
+      "q": "Class C mutual fund shares typically carry:",
+      "choices": [
+        "A large front-end load and no ongoing fees",
+        "A level annual 12b-1 fee and a contingent deferred sales charge for early redemption",
+        "No fees of any kind",
+        "Lower expense ratios than Class A shares"
+      ],
+      "answer": 1,
+      "explain": "Class C shares have no front-end load but higher ongoing 12b-1 fees, and a short-term redemption charge applies.",
+      "sub": "Mutual Funds",
+      "diff": 3
+    },
+    {
+      "id": "sec-060",
+      "q": "A fund with high portfolio turnover is most likely to generate:",
+      "choices": [
+        "Lower tax costs",
+        "No taxable distributions",
+        "Only long-term capital gains",
+        "More short-term capital gains taxed as ordinary income"
+      ],
+      "answer": 3,
+      "explain": "Assets held one year or less produce short-term gains, which are taxed at ordinary income rates. This raises the fund's tax cost for shareholders.",
+      "sub": "Mutual Funds",
+      "diff": 2
+    },
+    {
+      "id": "sec-061",
+      "q": "When market interest rates rise, the price of an existing fixed-rate bond generally:",
+      "choices": [
+        "Doubles",
+        "Rises",
+        "Stays the same",
+        "Falls"
+      ],
+      "answer": 3,
+      "explain": "Bond prices move inversely to rates, because existing bonds must fall in price to match the yield on newly issued bonds.",
+      "sub": "Basics of Bonds",
+      "diff": 1
+    },
+    {
+      "id": "sec-062",
+      "q": "A $1,000 par bond with a 5% annual coupon pays annual interest of:",
+      "choices": [
+        "$5",
+        "$50",
+        "$25",
+        "$500"
+      ],
+      "answer": 1,
+      "explain": "5% of $1,000 par is $50 per year.",
+      "sub": "Basics of Bonds",
+      "diff": 1
+    },
+    {
+      "id": "sec-063",
+      "q": "A $1,000 par, 5% coupon bond trades at $950. Its current yield is closest to:",
+      "choices": [
+        "5.00%",
+        "5.50%",
+        "5.26%",
+        "4.75%"
+      ],
+      "answer": 2,
+      "explain": "Current yield = $50 / $950 = 5.26%. The 5.00% figure is the coupon rate, not the current yield.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-064",
+      "q": "Holding other factors equal, which bond has the greatest sensitivity to interest rate changes?",
+      "choices": [
+        "Long-term zero-coupon bond",
+        "Bond with a high coupon and short maturity",
+        "Two-year Treasury note",
+        "Short-term floating-rate note"
+      ],
+      "answer": 0,
+      "explain": "Long maturity and no interim coupons give a zero-coupon bond the highest duration and so the highest price sensitivity.",
+      "sub": "Basics of Bonds",
+      "diff": 3
+    },
+    {
+      "id": "sec-065",
+      "q": "A zero-coupon bond is typically sold:",
+      "choices": [
+        "At par with monthly interest",
+        "At a premium with semiannual coupons",
+        "At a discount to par, with no periodic interest",
+        "Only at auction at face value plus accrued interest"
+      ],
+      "answer": 2,
+      "explain": "Investors earn the difference between the discounted purchase price and par at maturity, since no interest is paid along the way.",
+      "sub": "Basics of Bonds",
+      "diff": 1
+    },
+    {
+      "id": "sec-066",
+      "q": "Under standard rating scales, which rating is investment grade?",
+      "choices": [
+        "BBB-",
+        "B-",
+        "BB+",
+        "CCC"
+      ],
+      "answer": 0,
+      "explain": "BBB- (S&P) and Baa3 (Moody's) are the lowest investment-grade ratings. BB+ is the first speculative grade.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-067",
+      "q": "Interest from U.S. Treasury bonds is exempt from:",
+      "choices": [
+        "Federal income tax",
+        "Capital gains tax",
+        "Estate tax",
+        "State and local income taxes"
+      ],
+      "answer": 3,
+      "explain": "Treasury interest is taxable federally but exempt from state and local income taxes. Gains on sale are still taxable.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-068",
+      "q": "A callable bond's main risk to the investor is:",
+      "choices": [
+        "Default risk only",
+        "The issuer may redeem early when rates fall, forcing reinvestment at lower rates",
+        "Interest rate risk with no reinvestment risk",
+        "Loss of principal to inflation-indexed adjustments"
+      ],
+      "answer": 1,
+      "explain": "The issuer redeems when rates fall, so the investor must reinvest the principal at lower yields. This is call risk combined with reinvestment risk.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-069",
+      "q": "Yield to maturity assumes that:",
+      "choices": [
+        "Coupons are spent and the bond is sold at par after one year",
+        "Coupons are reinvested at the YTM rate and the bond is held to maturity",
+        "The bond's price never changes",
+        "Taxes are paid at the state level only"
+      ],
+      "answer": 1,
+      "explain": "YTM assumes all coupons are reinvested at the same yield and the bond is held to maturity. Those assumptions often fail in practice.",
+      "sub": "Basics of Bonds",
+      "diff": 3
+    },
+    {
+      "id": "sec-070",
+      "q": "A bond with a coupon above current market rates trades at:",
+      "choices": [
+        "A discount",
+        "Zero value",
+        "Par value always",
+        "A premium"
+      ],
+      "answer": 3,
+      "explain": "Investors pay more for the above-market coupon, so the price rises above par.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-071",
+      "q": "A 5% coupon bond priced when market rates are 6% trades at:",
+      "choices": [
+        "A discount to par",
+        "Par",
+        "A premium to par",
+        "Twice its face value"
+      ],
+      "answer": 0,
+      "explain": "A below-market coupon makes the bond worth less than par, so it trades at a discount.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-072",
+      "q": "Reinvestment risk is greatest for a bondholder when:",
+      "choices": [
+        "Interest rates rise and the investor holds a long bond",
+        "Bond prices are stable",
+        "Interest rates fall after coupons are received",
+        "The bond is a zero-coupon issue held to maturity"
+      ],
+      "answer": 2,
+      "explain": "Falling rates force coupons to be reinvested at lower yields. Zero-coupon bonds avoid this risk because they have no coupons to reinvest.",
+      "sub": "Basics of Bonds",
+      "diff": 3
+    },
+    {
+      "id": "sec-073",
+      "q": "Which bond has the highest interest rate risk?",
+      "choices": [
+        "A 30-year zero-coupon bond",
+        "A 2-year zero-coupon bond",
+        "A 5-year coupon bond with a high coupon",
+        "A floating-rate note"
+      ],
+      "answer": 0,
+      "explain": "The longest-duration bond has the most price sensitivity to rate changes. Floating-rate notes reset their coupons, so their price sensitivity is low.",
+      "sub": "Basics of Bonds",
+      "diff": 3
+    },
+    {
+      "id": "sec-074",
+      "q": "A general obligation municipal bond is backed primarily by:",
+      "choices": [
+        "A bank letter of credit only",
+        "Revenue from a specific toll road",
+        "The issuer's taxing power",
+        "A federal guarantee"
+      ],
+      "answer": 2,
+      "explain": "GO bonds are backed by the issuer's full taxing power. Revenue bonds rely on the revenue of a specific project.",
+      "sub": "Basics of Bonds",
+      "diff": 1
+    },
+    {
+      "id": "sec-075",
+      "q": "In bankruptcy, which debt ranks highest?",
+      "choices": [
+        "Subordinated debentures",
+        "Senior secured debt",
+        "Unsecured junior notes",
+        "Common equity"
+      ],
+      "answer": 1,
+      "explain": "Secured creditors with collateral are paid first, ahead of unsecured and subordinated debt, and well ahead of equity.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-076",
+      "q": "Treasury Inflation-Protected Securities (TIPS) adjust their:",
+      "choices": [
+        "Coupon rate only",
+        "Yield to maturity directly",
+        "Credit rating",
+        "Principal based on changes in the CPI"
+      ],
+      "answer": 3,
+      "explain": "TIPS principal rises and falls with the CPI, and coupons are paid on the adjusted principal.",
+      "sub": "Basics of Bonds",
+      "diff": 3
+    },
+    {
+      "id": "sec-077",
+      "q": "A floating-rate note's coupon typically:",
+      "choices": [
+        "Is fixed for the bond's life",
+        "Equals the issuer's stock dividend",
+        "Is paid only at maturity",
+        "Resets periodically to a benchmark rate plus a spread"
+      ],
+      "answer": 3,
+      "explain": "The coupon follows a benchmark such as SOFR plus a fixed spread, which keeps the price close to par.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-078",
+      "q": "A bond ladder reduces risk by:",
+      "choices": [
+        "Guaranteeing the highest yield",
+        "Staggering maturities so bonds mature at regular intervals",
+        "Eliminating default risk",
+        "Holding only zero-coupon bonds of one maturity"
+      ],
+      "answer": 1,
+      "explain": "Staggered maturities let the investor reinvest a portion regularly, which smooths the effect of rate changes.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-079",
+      "q": "A bond bought between coupon dates settles with the buyer paying:",
+      "choices": [
+        "Only the clean price",
+        "Only the par value",
+        "The clean price plus accrued interest to the seller",
+        "Nothing extra; the seller keeps the accrued interest"
+      ],
+      "answer": 2,
+      "explain": "The buyer pays accrued interest to the seller, who earned it, and the buyer collects the full coupon later.",
+      "sub": "Basics of Bonds",
+      "diff": 3
+    },
+    {
+      "id": "sec-080",
+      "q": "A bond's price is most likely to rise when:",
+      "choices": [
+        "Market yields for similar bonds fall",
+        "The issuer's credit rating is downgraded",
+        "Inflation expectations increase sharply",
+        "Market yields for similar bonds rise"
+      ],
+      "answer": 0,
+      "explain": "Falling market yields raise the value of existing fixed coupons. Rating downgrades and inflation expectations generally push yields up.",
+      "sub": "Basics of Bonds",
+      "diff": 2
+    },
+    {
+      "id": "sec-081",
+      "q": "A call option gives the holder the right, but not the obligation, to:",
+      "choices": [
+        "Buy the underlying at the market price only",
+        "Sell the underlying asset at the strike price",
+        "Buy the underlying asset at the strike price",
+        "Receive dividends from the issuer"
+      ],
+      "answer": 2,
+      "explain": "A call is the right to buy at the strike. The put is the right to sell at the strike.",
+      "sub": "Derivatives",
+      "diff": 1
+    },
+    {
+      "id": "sec-082",
+      "q": "A put option gives the holder the right to:",
+      "choices": [
+        "Sell the underlying asset at the strike price",
+        "Buy 100 shares at market",
+        "Collect interest on the premium",
+        "Convert bonds into stock"
+      ],
+      "answer": 0,
+      "explain": "A put is the right to sell at the strike price, which gains value when the underlying falls.",
+      "sub": "Derivatives",
+      "diff": 1
+    },
+    {
+      "id": "sec-083",
+      "q": "A call with a $50 strike on a stock trading at $55 has an intrinsic value of:",
+      "choices": [
+        "$0",
+        "$55",
+        "$50",
+        "$5"
+      ],
+      "answer": 3,
+      "explain": "Intrinsic value of a call = max(stock price - strike, 0) = $5.",
+      "sub": "Derivatives",
+      "diff": 2
+    },
+    {
+      "id": "sec-084",
+      "q": "A covered call strategy involves:",
+      "choices": [
+        "Buying a put on shares you do not own",
+        "Owning shares and selling a call on those shares",
+        "Buying calls on shares you are short",
+        "Short selling shares and buying calls"
+      ],
+      "answer": 1,
+      "explain": "The shares you own cover the obligation if the call is exercised. The strategy limits upside in exchange for premium income.",
+      "sub": "Derivatives",
+      "diff": 2
+    },
+    {
+      "id": "sec-085",
+      "q": "Futures positions are marked to market:",
+      "choices": [
+        "Once at contract expiration",
+        "Daily, with gains and losses settled through margin accounts",
+        "Only when the contract is delivered",
+        "Annually by the exchange"
+      ],
+      "answer": 1,
+      "explain": "Daily settlement is a defining feature of futures and is what distinguishes them from forwards.",
+      "sub": "Derivatives",
+      "diff": 3
+    },
+    {
+      "id": "sec-086",
+      "q": "Compared with futures contracts, forward contracts are typically:",
+      "choices": [
+        "Settled with daily margin",
+        "Standardized and exchange-traded",
+        "Guaranteed by a central clearinghouse",
+        "Privately negotiated over-the-counter agreements"
+      ],
+      "answer": 3,
+      "explain": "Forwards are customized private agreements with counterparty risk. Futures are standardized and cleared.",
+      "sub": "Derivatives",
+      "diff": 2
+    },
+    {
+      "id": "sec-087",
+      "q": "An investor who owns stock and buys a put on that stock is using a:",
+      "choices": [
+        "Protective put",
+        "Short hedge",
+        "Covered call",
+        "Straddle"
+      ],
+      "answer": 0,
+      "explain": "The put sets a floor on the value of the held shares, which is the definition of a protective put.",
+      "sub": "Derivatives",
+      "diff": 2
+    },
+    {
+      "id": "sec-088",
+      "q": "All else equal, an option's time value:",
+      "choices": [
+        "Increases as expiration approaches",
+        "Stays constant until expiration",
+        "Decreases as expiration approaches",
+        "Is unaffected by time"
+      ],
+      "answer": 2,
+      "explain": "Time decay (theta) erodes time value as expiration nears, and the decay accelerates near expiry.",
+      "sub": "Derivatives",
+      "diff": 3
+    },
+    {
+      "id": "sec-089",
+      "q": "An investor buys 100 shares at $100 and a $100 strike put for $4 per share. If the stock falls to $60 at expiration, the net loss per share is:",
+      "choices": [
+        "$4",
+        "$40",
+        "$36",
+        "$0"
+      ],
+      "answer": 0,
+      "explain": "The put pays $40, which offsets the $40 share loss. The only net cost is the $4 premium, so the loss is $4 per share.",
+      "sub": "Derivatives",
+      "diff": 3
+    },
+    {
+      "id": "sec-090",
+      "q": "A wheat farmer who sells wheat futures to lock in a price is acting as a:",
+      "choices": [
+        "Speculator",
+        "Arbitrageur",
+        "Hedger",
+        "Underwriter"
+      ],
+      "answer": 2,
+      "explain": "A hedger uses futures to reduce exposure to an existing price risk. A speculator takes on risk for profit.",
+      "sub": "Derivatives",
+      "diff": 2
+    },
+    {
+      "id": "sec-091",
+      "q": "The U.S. Securities and Exchange Commission was created by which act?",
+      "choices": [
+        "Securities Act of 1933",
+        "Securities Exchange Act of 1934",
+        "Investment Advisers Act of 1940",
+        "Sarbanes-Oxley Act of 2002"
+      ],
+      "answer": 1,
+      "explain": "The Exchange Act of 1934 created the SEC. The 1933 Act governs new issues and the registration of securities.",
+      "sub": "Financial Services Regulation",
+      "diff": 1
+    },
+    {
+      "id": "sec-092",
+      "q": "The Securities Act of 1933 primarily requires:",
+      "choices": [
+        "Exchange listing for all stocks",
+        "Federal insurance of brokerage accounts",
+        "Licensing of individual investment advisers only",
+        "Registration and prospectus disclosure for new securities offerings"
+      ],
+      "answer": 3,
+      "explain": "The 1933 Act is the primary-market law: issuers register offerings and provide a prospectus.",
+      "sub": "Financial Services Regulation",
+      "diff": 1
+    },
+    {
+      "id": "sec-093",
+      "q": "FINRA is best described as:",
+      "choices": [
+        "A federal government agency",
+        "A bank regulator",
+        "A mutual fund custodian",
+        "A self-regulatory organization overseeing broker-dealers"
+      ],
+      "answer": 3,
+      "explain": "FINRA is a private, SEC-overseen self-regulatory organization for broker-dealers and registered representatives.",
+      "sub": "Financial Services Regulation",
+      "diff": 1
+    },
+    {
+      "id": "sec-094",
+      "q": "SIPC protects customers of a failed brokerage up to:",
+      "choices": [
+        "$250,000 per customer, all cash",
+        "$500,000 per customer, including up to $250,000 in cash",
+        "$1 million per account",
+        "Unlimited for all accounts"
+      ],
+      "answer": 1,
+      "explain": "SIPC covers missing securities and cash up to $500,000, of which cash is capped at $250,000. It does not protect against market losses.",
+      "sub": "Financial Services Regulation",
+      "diff": 2
+    },
+    {
+      "id": "sec-095",
+      "q": "Regulation Best Interest requires broker-dealers to act in the:",
+      "choices": [
+        "Best interest of the firm",
+        "Interest of the exchange",
+        "Best interest of the retail customer when making a recommendation",
+        "Interest of the issuer"
+      ],
+      "answer": 2,
+      "explain": "Reg BI raises the standard for retail recommendations above suitability, requiring the broker to put the customer's interest first at the time of the recommendation.",
+      "sub": "Financial Services Regulation",
+      "diff": 2
+    },
+    {
+      "id": "sec-096",
+      "q": "Which SEC rule is the general antifraud provision most often used to prosecute insider trading?",
+      "choices": [
+        "Rule 10b-5",
+        "Regulation D",
+        "Rule 144",
+        "Regulation FD"
+      ],
+      "answer": 0,
+      "explain": "Rule 10b-5 prohibits fraud in connection with securities trading and is the basis for most insider trading cases.",
+      "sub": "Financial Services Regulation",
+      "diff": 2
+    },
+    {
+      "id": "sec-097",
+      "q": "The Sarbanes-Oxley Act of 2002 requires CEOs and CFOs to:",
+      "choices": [
+        "Own at least 5% of company stock",
+        "Register as broker-dealers",
+        "Certify the accuracy of periodic financial reports",
+        "Refrain from serving on the audit committee"
+      ],
+      "answer": 2,
+      "explain": "SOX Section 302 and 906 require personal certification of periodic reports, with criminal penalties for false certifications.",
+      "sub": "Financial Services Regulation",
+      "diff": 2
+    },
+    {
+      "id": "sec-098",
+      "q": "Under the Investment Advisers Act of 1940, registered investment advisers owe clients:",
+      "choices": [
+        "A fiduciary duty",
+        "Only a suitability duty",
+        "No duty of care",
+        "A duty only when managing retirement accounts"
+      ],
+      "answer": 0,
+      "explain": "Advisers owe a fiduciary duty of loyalty and care. The suitability standard is the lower broker-dealer standard, which is the trap.",
+      "sub": "Financial Services Regulation",
+      "diff": 2
+    },
+    {
+      "id": "sec-099",
+      "q": "The Investment Company Act of 1940 primarily regulates:",
+      "choices": [
+        "Corporate bond issuance",
+        "Bank deposit insurance",
+        "Commodity futures exchanges",
+        "Mutual funds and other investment companies"
+      ],
+      "answer": 3,
+      "explain": "The 1940 Investment Company Act sets the rules for mutual funds, closed-end funds and UITs.",
+      "sub": "Financial Services Regulation",
+      "diff": 2
+    },
+    {
+      "id": "sec-100",
+      "q": "State securities laws are commonly called:",
+      "choices": [
+        "Green sheet laws",
+        "Blue sky laws",
+        "Silver rules",
+        "Gold standard statutes"
+      ],
+      "answer": 1,
+      "explain": "Blue sky laws are state-level securities regulations, which supplement federal law. The name comes from fraud that was said to sell 'blue sky'.",
+      "sub": "Financial Services Regulation",
+      "diff": 2
+    }
+  ],
+  "vocab": [
+    {
+      "id": "sec-v001",
+      "term": "Risk tolerance",
+      "def": "The degree of investment loss an investor is willing and able to accept in pursuit of higher returns.",
+      "sub": "Investment Fundamentals"
+    },
+    {
+      "id": "sec-v002",
+      "term": "Time horizon",
+      "def": "The length of time an investor expects to hold an investment before needing the money.",
+      "sub": "Investment Fundamentals"
+    },
+    {
+      "id": "sec-v003",
+      "term": "Diversification",
+      "def": "Spreading investments across assets so that losses in one holding are offset by others.",
+      "sub": "Investment Fundamentals"
+    },
+    {
+      "id": "sec-v004",
+      "term": "Systematic risk",
+      "def": "Market-wide risk that affects nearly all investments and cannot be removed by diversification.",
+      "sub": "Investment Fundamentals"
+    },
+    {
+      "id": "sec-v005",
+      "term": "Unsystematic risk",
+      "def": "Risk specific to one company or industry that can be reduced through diversification.",
+      "sub": "Investment Fundamentals"
+    },
+    {
+      "id": "sec-v006",
+      "term": "Liquidity",
+      "def": "How quickly an asset can be converted to cash without a significant loss in value.",
+      "sub": "Investment Fundamentals"
+    },
+    {
+      "id": "sec-v007",
+      "term": "Asset allocation",
+      "def": "The division of a portfolio among asset classes such as stocks, bonds and cash based on goals and risk tolerance.",
+      "sub": "Investment Fundamentals"
+    },
+    {
+      "id": "sec-v008",
+      "term": "Roth IRA",
+      "def": "An individual retirement account funded with after-tax dollars, where qualified withdrawals are tax-free.",
+      "sub": "Investment Wrappers, Taxation, and Trusts"
+    },
+    {
+      "id": "sec-v009",
+      "term": "Traditional IRA",
+      "def": "An individual retirement account that may allow tax-deductible contributions, with withdrawals taxed as ordinary income.",
+      "sub": "Investment Wrappers, Taxation, and Trusts"
+    },
+    {
+      "id": "sec-v010",
+      "term": "Wash sale rule",
+      "def": "A U.S. tax rule that disallows a loss if a substantially identical security is bought within 30 days before or after the sale.",
+      "sub": "Investment Wrappers, Taxation, and Trusts"
+    },
+    {
+      "id": "sec-v011",
+      "term": "Qualified dividend",
+      "def": "A dividend that meets holding-period and issuer requirements and is taxed at long-term capital gains rates.",
+      "sub": "Investment Wrappers, Taxation, and Trusts"
+    },
+    {
+      "id": "sec-v012",
+      "term": "529 plan",
+      "def": "A tax-advantaged education savings plan in which earnings grow tax-deferred and qualified withdrawals are federally tax-free.",
+      "sub": "Investment Wrappers, Taxation, and Trusts"
+    },
+    {
+      "id": "sec-v013",
+      "term": "Step-up in basis",
+      "def": "The adjustment of an inherited asset's cost basis to its fair market value at the date of the owner's death.",
+      "sub": "Investment Wrappers, Taxation, and Trusts"
+    },
+    {
+      "id": "sec-v014",
+      "term": "Exchange-traded fund (ETF)",
+      "def": "A fund whose shares trade on an exchange throughout the day at market prices, typically tracking an index.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v015",
+      "term": "Money market fund",
+      "def": "A mutual fund investing in short-term, high-quality debt that seeks to maintain a stable $1.00 net asset value.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v016",
+      "term": "Certificate of deposit (CD)",
+      "def": "A bank time deposit with a fixed term and interest rate, with early withdrawal usually subject to a penalty.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v017",
+      "term": "Variable annuity",
+      "def": "An insurance contract whose payments depend on the investment performance of chosen subaccounts, so the owner bears the market risk.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v018",
+      "term": "Real estate investment trust (REIT)",
+      "def": "A company that owns income-producing real estate and must distribute at least 90% of taxable income to shareholders.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v019",
+      "term": "Target-date fund",
+      "def": "A fund that gradually shifts its asset allocation toward more conservative investments as its target retirement date approaches.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v020",
+      "term": "Unit investment trust (UIT)",
+      "def": "A fixed, unmanaged portfolio of securities that is sold in units and terminates on a stated date.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v021",
+      "term": "Accredited investor",
+      "def": "An investor who meets SEC Regulation D financial thresholds, such as net worth over $1 million excluding the primary residence, and may buy certain private offerings.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v022",
+      "term": "Exchange-traded note (ETN)",
+      "def": "An unsecured debt security whose return tracks an index, so the investor bears the issuer's credit risk.",
+      "sub": "Investment Products and Funds"
+    },
+    {
+      "id": "sec-v023",
+      "term": "Stock exchange",
+      "def": "A regulated marketplace where securities are listed and traded through an auction or dealer process.",
+      "sub": "Stock Market"
+    },
+    {
+      "id": "sec-v024",
+      "term": "Market order",
+      "def": "An order to buy or sell immediately at the best available price, guaranteeing execution but not the exact price.",
+      "sub": "Stock Market"
+    },
+    {
+      "id": "sec-v025",
+      "term": "Limit order",
+      "def": "An order to buy or sell only at a specified price or better, guaranteeing the price but not execution.",
+      "sub": "Stock Market"
+    },
+    {
+      "id": "sec-v026",
+      "term": "Stop-loss order",
+      "def": "An order that becomes a market order to sell once the stock falls to a specified stop price.",
+      "sub": "Stock Market"
+    },
+    {
+      "id": "sec-v027",
+      "term": "Short sale",
+      "def": "The sale of borrowed shares in the expectation of buying them back at a lower price to return to the lender.",
+      "sub": "Stock Market"
+    },
+    {
+      "id": "sec-v028",
+      "term": "Margin account",
+      "def": "A brokerage account that lets an investor borrow from the broker to buy securities, with the securities as collateral.",
+      "sub": "Stock Market"
+    },
+    {
+      "id": "sec-v029",
+      "term": "Circuit breaker",
+      "def": "A market-wide trading halt triggered when a major index falls by set percentages, designed to slow panic selling.",
+      "sub": "Stock Market"
+    },
+    {
+      "id": "sec-v030",
+      "term": "Common stock",
+      "def": "An equity security representing ownership in a corporation, with voting rights and residual claim on assets after creditors and preferred holders.",
+      "sub": "Stocks Versus Other Investments"
+    },
+    {
+      "id": "sec-v031",
+      "term": "Preferred stock",
+      "def": "An equity security that pays a stated dividend and ranks ahead of common stock in dividends and liquidation, usually with limited voting rights.",
+      "sub": "Stocks Versus Other Investments"
+    },
+    {
+      "id": "sec-v032",
+      "term": "Cumulative preferred stock",
+      "def": "Preferred stock that requires any missed dividends to be paid in full before common shareholders receive dividends.",
+      "sub": "Stocks Versus Other Investments"
+    },
+    {
+      "id": "sec-v033",
+      "term": "Net asset value (NAV)",
+      "def": "A mutual fund's total assets minus liabilities divided by shares outstanding, calculated once daily after the market close.",
+      "sub": "Mutual Funds"
+    },
+    {
+      "id": "sec-v034",
+      "term": "Front-end load",
+      "def": "A sales charge deducted from the amount invested when shares are purchased.",
+      "sub": "Mutual Funds"
+    },
+    {
+      "id": "sec-v035",
+      "term": "Back-end load",
+      "def": "A contingent deferred sales charge paid when shares are redeemed, often decreasing the longer shares are held.",
+      "sub": "Mutual Funds"
+    },
+    {
+      "id": "sec-v036",
+      "term": "12b-1 fee",
+      "def": "An annual fee taken from fund assets to pay for marketing and distribution, included in the expense ratio.",
+      "sub": "Mutual Funds"
+    },
+    {
+      "id": "sec-v037",
+      "term": "Expense ratio",
+      "def": "The annual percentage of a fund's assets used to pay operating and management costs.",
+      "sub": "Mutual Funds"
+    },
+    {
+      "id": "sec-v038",
+      "term": "Breakpoint",
+      "def": "A dollar investment level at which the sales charge on a mutual fund purchase is reduced.",
+      "sub": "Mutual Funds"
+    },
+    {
+      "id": "sec-v039",
+      "term": "Par value",
+      "def": "The face value of a bond, typically $1,000, which is repaid to the holder at maturity.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v040",
+      "term": "Coupon rate",
+      "def": "The fixed annual interest rate a bond pays, stated as a percentage of its par value.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v041",
+      "term": "Current yield",
+      "def": "A bond's annual coupon income divided by its current market price.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v042",
+      "term": "Yield to maturity (YTM)",
+      "def": "The annual return a bond earns if held to maturity with all coupons reinvested at the same rate.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v043",
+      "term": "Duration",
+      "def": "A measure of a bond's price sensitivity to interest rate changes, expressed in years.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v044",
+      "term": "Zero-coupon bond",
+      "def": "A bond that pays no periodic interest and is sold at a discount to par, with the return realized at maturity.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v045",
+      "term": "Callable bond",
+      "def": "A bond that the issuer may redeem before maturity, usually when interest rates have fallen.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v046",
+      "term": "Investment-grade bond",
+      "def": "A bond rated BBB- or higher by S&P (Baa3 or higher by Moody's), considered to have relatively low default risk.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v047",
+      "term": "Reinvestment risk",
+      "def": "The risk that cash flows such as coupons will have to be reinvested at lower rates than the original yield.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v048",
+      "term": "Bond ladder",
+      "def": "A portfolio of bonds with staggered maturities so that portions mature at regular intervals.",
+      "sub": "Basics of Bonds"
+    },
+    {
+      "id": "sec-v049",
+      "term": "Call option",
+      "def": "A contract giving the holder the right, but not the obligation, to buy the underlying asset at the strike price before or at expiration.",
+      "sub": "Derivatives"
+    },
+    {
+      "id": "sec-v050",
+      "term": "Put option",
+      "def": "A contract giving the holder the right, but not the obligation, to sell the underlying asset at the strike price before or at expiration.",
+      "sub": "Derivatives"
+    },
+    {
+      "id": "sec-v051",
+      "term": "Intrinsic value",
+      "def": "The amount by which an option is in the money, such as the stock price minus the strike for a call.",
+      "sub": "Derivatives"
+    },
+    {
+      "id": "sec-v052",
+      "term": "Covered call",
+      "def": "An options strategy in which the investor owns shares and sells a call against them to earn premium income.",
+      "sub": "Derivatives"
+    },
+    {
+      "id": "sec-v053",
+      "term": "Futures contract",
+      "def": "A standardized, exchange-traded agreement to buy or sell an asset at a set price on a future date, marked to market daily.",
+      "sub": "Derivatives"
+    },
+    {
+      "id": "sec-v054",
+      "term": "Protective put",
+      "def": "A strategy of owning shares and buying a put on them to set a floor on losses.",
+      "sub": "Derivatives"
+    },
+    {
+      "id": "sec-v055",
+      "term": "Securities Act of 1933",
+      "def": "The federal law requiring registration and prospectus disclosure for most new public securities offerings.",
+      "sub": "Financial Services Regulation"
+    },
+    {
+      "id": "sec-v056",
+      "term": "Securities Exchange Act of 1934",
+      "def": "The federal law that created the SEC and regulates secondary trading, exchanges and broker-dealers.",
+      "sub": "Financial Services Regulation"
+    },
+    {
+      "id": "sec-v057",
+      "term": "FINRA",
+      "def": "The Financial Industry Regulatory Authority, a self-regulatory organization that oversees broker-dealers and registered representatives.",
+      "sub": "Financial Services Regulation"
+    },
+    {
+      "id": "sec-v058",
+      "term": "SIPC",
+      "def": "The Securities Investor Protection Corporation, which protects customers up to $500,000 if a brokerage fails, including up to $250,000 in cash.",
+      "sub": "Financial Services Regulation"
+    },
+    {
+      "id": "sec-v059",
+      "term": "Regulation Best Interest (Reg BI)",
+      "def": "An SEC rule requiring broker-dealers to act in the best interest of a retail customer when making a recommendation.",
+      "sub": "Financial Services Regulation"
+    },
+    {
+      "id": "sec-v060",
+      "term": "Blue sky laws",
+      "def": "State-level securities laws that require registration and antifraud protection in addition to federal regulation.",
+      "sub": "Financial Services Regulation"
+    }
+  ]
+}

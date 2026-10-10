@@ -1,0 +1,1778 @@
+{
+  "slug": "entrepreneurship",
+  "name": "Entrepreneurship",
+  "group": "case",
+  "notes": "Competency areas are not verifiable: fbla.org event pages and the 2025-26 guideline PDFs returned 403 or were unreadable to the research tool (connect.fbla.org, fbla.org/competitive-events/entrepreneurship). Areas are the standard high-school entrepreneurship curriculum (business plan, marketing, finance and initial capital, legal and structure, operations and personnel, ethics/taxes/regulation), chosen to match the competencies in the older Alabama FBLA rating sheet (2019). The 2025-26 Competitive Events Overview slides (https://www.fbla.org/media/2025/10/2025-2026-Competitive-Events-Overview-Slides.pdf) list Entrepreneurship under the role-play category area; the event format (case study vs role play) should be confirmed against the official guideline. All questions are original practice items, U.S. conventions.",
+  "subs": [
+    "Business Plan and Opportunity Assessment",
+    "Marketing Management",
+    "Financial Management and Initial Capital",
+    "Legal Issues and Business Structure",
+    "Operations and Personnel Management",
+    "Ethics, Taxes and Government Regulation"
+  ],
+  "questions": [
+    {
+      "id": "ent-001",
+      "q": "A bakery owner wants to know whether customers will pay a premium for gluten-free bread before buying equipment. What is the best first step?",
+      "choices": [
+        "Run a small pre-order or pilot test to measure demand",
+        "Buy a commercial oven and sign a 10-year storefront lease",
+        "Hire two full-time bakers before knowing demand",
+        "Sign a distribution contract with a national grocery chain"
+      ],
+      "answer": 0,
+      "explain": "Validating demand cheaply before major spending reduces the risk of the business plan. Friends-and-family praise is not a demand test.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 1
+    },
+    {
+      "id": "ent-002",
+      "q": "In a SWOT analysis, which category describes an internal advantage the business has over its competitors?",
+      "choices": [
+        "Opportunity",
+        "Strength",
+        "Threat",
+        "Weakness"
+      ],
+      "answer": 1,
+      "explain": "Strengths and weaknesses are internal; opportunities and threats are external. Strength is the internal advantage.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 1
+    },
+    {
+      "id": "ent-003",
+      "q": "A company gives its basic app away for free and charges only for premium features. Which business model is this?",
+      "choices": [
+        "Franchising",
+        "Cost leadership",
+        "Freemium",
+        "Subscription-only pricing"
+      ],
+      "answer": 2,
+      "explain": "Freemium pairs a free base offering with paid upgrades. Subscription-only would charge for all access from the start.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 1
+    },
+    {
+      "id": "ent-004",
+      "q": "Which is the best description of a target market?",
+      "choices": [
+        "All consumers who might ever buy any product",
+        "Competitors' existing customers only",
+        "Customers who have already bought from a competitor in the past year",
+        "A specific group of customers with shared needs that the business chooses to serve"
+      ],
+      "answer": 3,
+      "explain": "A target market is a chosen, defined group. Trying to serve everyone is a common planning mistake.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 1
+    },
+    {
+      "id": "ent-005",
+      "q": "Which type of feasibility study asks whether the owner has the equipment, skills and suppliers needed to deliver the product?",
+      "choices": [
+        "Operational (technical) feasibility",
+        "Market feasibility",
+        "Financial feasibility",
+        "Legal feasibility"
+      ],
+      "answer": 0,
+      "explain": "Operational feasibility tests capability to produce and deliver. Market feasibility tests demand; financial feasibility tests funding and returns.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 1
+    },
+    {
+      "id": "ent-006",
+      "q": "A product sells for $25 per unit, has a variable cost of $15 per unit and fixed costs of $12,000 per year. How many units must be sold to break even?",
+      "choices": [
+        "480 units",
+        "1,200 units",
+        "600 units",
+        "1,800 units"
+      ],
+      "answer": 1,
+      "explain": "Contribution per unit is $25 minus $15, or $10, so $12,000 divided by $10 is 1,200 units. Dividing by the $25 price gives the wrong answer of 480.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 3
+    },
+    {
+      "id": "ent-007",
+      "q": "Why is the executive summary of a business plan usually written last, even though it appears first?",
+      "choices": [
+        "It is a legal requirement that must be signed last",
+        "It replaces the financial projections for lenders",
+        "It summarizes the key findings and the funding request from every other section",
+        "It lists every employee and job title in order of seniority"
+      ],
+      "answer": 2,
+      "explain": "The summary can only be accurate once the rest of the plan is complete. It does not replace any section.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 2
+    },
+    {
+      "id": "ent-008",
+      "q": "A new coffee shop opens near two national chains that charge less. Which strategy best supports a sustainable position?",
+      "choices": [
+        "Match the chains' prices to win price-sensitive customers",
+        "Offer the widest possible menu to appeal to everyone",
+        "Copy the chains' menu and open a location next to each one",
+        "Focus on an unmet need, such as locally roasted specialty drinks, and charge for the difference"
+      ],
+      "answer": 3,
+      "explain": "Differentiation on a need the chains do not serve is more defensible than a price war the shop cannot win.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 2
+    },
+    {
+      "id": "ent-009",
+      "q": "Which best describes a value proposition?",
+      "choices": [
+        "The specific benefit a customer receives that makes the offer worth choosing",
+        "The total value of the company's assets on its balance sheet",
+        "The price printed on the product label",
+        "The company's mission statement written for employees"
+      ],
+      "answer": 0,
+      "explain": "A value proposition states why a customer should choose this offer over alternatives, which is about benefit rather than price or assets.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 1
+    },
+    {
+      "id": "ent-010",
+      "q": "A founder builds a simple landing page to test sign-ups before building the full product. This approach is best described as:",
+      "choices": [
+        "Full-scale production planning",
+        "Testing a minimum viable product",
+        "Franchise feasibility analysis",
+        "Vertical integration"
+      ],
+      "answer": 1,
+      "explain": "A minimum viable product is the simplest version that tests whether customers want the idea, before full investment.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 2
+    },
+    {
+      "id": "ent-011",
+      "q": "Which term describes the portion of the total market a new business can realistically capture in its first few years?",
+      "choices": [
+        "Total addressable market (TAM)",
+        "Serviceable available market (SAM)",
+        "Serviceable obtainable market (SOM)",
+        "The gross domestic product share of the industry"
+      ],
+      "answer": 2,
+      "explain": "TAM is the whole market, SAM is the part the business can serve, and SOM is the realistic share it can win. The word realistically points to SOM.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 2
+    },
+    {
+      "id": "ent-012",
+      "q": "The threat that customers can easily switch to a substitute product is part of which analysis framework?",
+      "choices": [
+        "Maslow's hierarchy of needs",
+        "The marketing mix (4 Ps)",
+        "The Balanced Scorecard",
+        "Porter's Five Forces"
+      ],
+      "answer": 3,
+      "explain": "Porter's model includes the threat of substitutes among five competitive forces; the others are not competitive-analysis frameworks.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 2
+    },
+    {
+      "id": "ent-013",
+      "q": "In the BCG growth-share matrix, a product with high market share in a low-growth market is classified as a:",
+      "choices": [
+        "Cash cow",
+        "Star",
+        "Question mark",
+        "Dog"
+      ],
+      "answer": 0,
+      "explain": "Cash cows generate more cash than they need in a mature market. Stars have high share and high growth.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 3
+    },
+    {
+      "id": "ent-014",
+      "q": "A bakery plans a second location two kilometres from its first. Much of the new location's projected sales would come from customers who would otherwise buy at the first. This risk is called:",
+      "choices": [
+        "Vertical integration",
+        "Cannibalization",
+        "Supplier saturation",
+        "Price skimming"
+      ],
+      "answer": 1,
+      "explain": "Cannibalization is when a new outlet takes sales from an existing one, so total gain is smaller than the new location's sales suggest.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 2
+    },
+    {
+      "id": "ent-015",
+      "q": "A startup holds a patent but has few customers and needs capital. Which element of the business plan most directly shows investors how the patent turns into revenue?",
+      "choices": [
+        "Organizational chart",
+        "Lease terms for office space",
+        "Revenue model and go-to-market strategy",
+        "An employee handbook with the vacation policy"
+      ],
+      "answer": 2,
+      "explain": "Investors need to see how the technology becomes income. The org chart and lease matter but do not answer the revenue question.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 3
+    },
+    {
+      "id": "ent-016",
+      "q": "Which is the best example of a mission statement?",
+      "choices": [
+        "We sell sandwiches, salads and soup at lunch",
+        "Our revenue last year was $240,000",
+        "Our competitors are located on Main Street",
+        "To make healthy lunches affordable for every student at our school"
+      ],
+      "answer": 3,
+      "explain": "A mission states purpose and who benefits. Describing products, financials or competitors does not state the purpose.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 1
+    },
+    {
+      "id": "ent-017",
+      "q": "Which factor most makes a competitive advantage sustainable over time?",
+      "choices": [
+        "It is difficult for competitors to copy, such as a strong brand or a proprietary process",
+        "It relies on a low price that competitors can easily match",
+        "It depends on a single supplier who could leave",
+        "It is based on a temporary trend that fades quickly"
+      ],
+      "answer": 0,
+      "explain": "Advantages last when rivals cannot easily imitate them. Easily matched prices or fragile supplier ties do not protect the business.",
+      "sub": "Business Plan and Opportunity Assessment",
+      "diff": 3
+    },
+    {
+      "id": "ent-018",
+      "q": "Which element of the marketing mix refers to where the product is sold?",
+      "choices": [
+        "Price",
+        "Place",
+        "Promotion",
+        "Product"
+      ],
+      "answer": 1,
+      "explain": "Place covers distribution channels and locations. Price, promotion and product are the other three of the 4 Ps.",
+      "sub": "Marketing Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-019",
+      "q": "Which is an example of sales promotion?",
+      "choices": [
+        "Changing the size of the package",
+        "Lowering the wholesale cost paid to suppliers",
+        "A coupon mailed to nearby households",
+        "Opening a warehouse in another state"
+      ],
+      "answer": 2,
+      "explain": "Coupons are a sales promotion tool. Packaging, cost and distribution decisions belong to other mix elements.",
+      "sub": "Marketing Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-020",
+      "q": "A 10 percent price increase causes quantity demanded to fall by 20 percent. What is the price elasticity of demand?",
+      "choices": [
+        "0.5, which is inelastic",
+        "0.2, which is inelastic",
+        "10.0, which is elastic",
+        "2.0, which is elastic"
+      ],
+      "answer": 3,
+      "explain": "Elasticity is the percent change in quantity divided by the percent change in price, 20 divided by 10, which is 2.0. Demand is elastic because the magnitude exceeds 1.",
+      "sub": "Marketing Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-021",
+      "q": "Dividing a market by customers' lifestyles, values and interests is which type of segmentation?",
+      "choices": [
+        "Psychographic segmentation",
+        "Geographic segmentation",
+        "Demographic segmentation",
+        "Behavioural segmentation"
+      ],
+      "answer": 0,
+      "explain": "Psychographic segmentation uses attitudes and lifestyle. Demographic uses measurable traits such as age and income.",
+      "sub": "Marketing Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-022",
+      "q": "A company launches a new smartphone at a high price and lowers it over time as competitors enter. This strategy is called:",
+      "choices": [
+        "Penetration pricing",
+        "Price skimming",
+        "Loss leader pricing",
+        "Going-rate pricing"
+      ],
+      "answer": 1,
+      "explain": "Skimming starts high to capture early adopters and drops later. Penetration starts low to gain share fast.",
+      "sub": "Marketing Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-023",
+      "q": "A small firm has a $2,000 marketing budget and wants the lowest-cost awareness among local customers. Which choice fits best?",
+      "choices": [
+        "A full-page print ad in a national magazine",
+        "A television commercial during prime time",
+        "Local social media ads and a Google Business Profile that collects reviews",
+        "Billboards on a highway 300 kilometres away"
+      ],
+      "answer": 2,
+      "explain": "Local targeting and free profile listings give the most awareness per dollar for a small local budget.",
+      "sub": "Marketing Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-024",
+      "q": "A customer spends $60 per month and stays for 5 years at a 40 percent gross margin. What is the approximate lifetime gross-margin value of this customer?",
+      "choices": [
+        "$3,600",
+        "$720",
+        "$2,400",
+        "$1,440"
+      ],
+      "answer": 3,
+      "explain": "Annual spend is $720, five years is $3,600 of revenue, and 40 percent of that is $1,440. The $3,600 figure ignores margin.",
+      "sub": "Marketing Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-025",
+      "q": "A brand name, logo or design that identifies a product and distinguishes it from others is called a:",
+      "choices": [
+        "Trademark",
+        "Patent",
+        "Copyright",
+        "Franchise"
+      ],
+      "answer": 0,
+      "explain": "Trademarks protect brand identifiers. Patents protect inventions, copyrights protect creative works, and a franchise is a business model.",
+      "sub": "Marketing Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-026",
+      "q": "A business asks 300 customers to rate a new flavour on a 1-to-5 scale. This is which type of research?",
+      "choices": [
+        "Secondary qualitative research",
+        "Primary quantitative research",
+        "Primary qualitative research",
+        "Secondary quantitative research"
+      ],
+      "answer": 1,
+      "explain": "Primary means new data collected directly, and quantitative means numerical ratings. Focus groups would be qualitative.",
+      "sub": "Marketing Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-027",
+      "q": "In which stage of the product life cycle do sales grow fastest and competitors enter?",
+      "choices": [
+        "Introduction",
+        "Maturity",
+        "Growth",
+        "Decline"
+      ],
+      "answer": 2,
+      "explain": "Growth is marked by rapid sales increases and new entrants. Introduction has slow sales and maturity has flattening sales.",
+      "sub": "Marketing Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-028",
+      "q": "Which is an example of publicity rather than paid advertising?",
+      "choices": [
+        "A paid radio spot during the morning drive",
+        "A sponsored social media post",
+        "A printed flyer distributed for a fee",
+        "A local newspaper writing a story about the grand opening"
+      ],
+      "answer": 3,
+      "explain": "Publicity is unpaid media coverage the business does not control. Any paid placement is advertising.",
+      "sub": "Marketing Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-029",
+      "q": "A manufacturer sells directly to consumers through its own website. Which distribution channel is this?",
+      "choices": [
+        "Direct channel",
+        "Indirect channel through one retailer",
+        "Two-tier wholesale channel",
+        "Franchise channel with independent owners"
+      ],
+      "answer": 0,
+      "explain": "A direct channel skips intermediaries. The others all include at least one middleman.",
+      "sub": "Marketing Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-030",
+      "q": "A customer buys a product mainly because a friend recommended it. This is most influenced by:",
+      "choices": [
+        "Perceived price",
+        "Social influence",
+        "Packaging design",
+        "Brand loyalty program"
+      ],
+      "answer": 1,
+      "explain": "Peer recommendation is social influence. Price, packaging and loyalty programs are other drivers.",
+      "sub": "Marketing Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-031",
+      "q": "Which is the main risk of relying on frequent discounts?",
+      "choices": [
+        "It increases fixed costs immediately",
+        "It always raises the cost of goods sold",
+        "It trains customers to wait for sales and erodes brand value",
+        "It is illegal under federal consumer law"
+      ],
+      "answer": 2,
+      "explain": "Frequent discounting changes buying patterns and weakens perceived quality, though it does not directly change fixed costs.",
+      "sub": "Marketing Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-032",
+      "q": "A perceptual map shows a brand positioned as premium and eco-friendly. This is best described as:",
+      "choices": [
+        "Market segmentation",
+        "Product mix",
+        "Distribution intensity",
+        "Brand positioning"
+      ],
+      "answer": 3,
+      "explain": "Positioning is how a brand is perceived relative to competitors. Segmentation divides the market; the others are different mix decisions.",
+      "sub": "Marketing Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-033",
+      "q": "A retailer buys a jacket for $40 and sells it for $60. What is the gross margin percentage?",
+      "choices": [
+        "33.3%",
+        "50.0%",
+        "40.0%",
+        "66.7%"
+      ],
+      "answer": 0,
+      "explain": "Gross margin is $20 divided by the $60 selling price, about 33.3 percent. The 50 percent figure is markup on cost, a common trap.",
+      "sub": "Marketing Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-034",
+      "q": "Which promotional tool is most effective at quickly increasing short-term sales?",
+      "choices": [
+        "Corporate image advertising",
+        "Sales promotion, such as a limited-time discount",
+        "A public relations press release",
+        "Community sponsorship"
+      ],
+      "answer": 1,
+      "explain": "Sales promotions create immediate purchase incentives. The others build awareness or reputation over time.",
+      "sub": "Marketing Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-035",
+      "q": "Which is an equity source of financing?",
+      "choices": [
+        "Taking out a bank term loan",
+        "Using a bank line of credit",
+        "Selling an ownership stake to an angel investor",
+        "Negotiating supplier trade credit"
+      ],
+      "answer": 2,
+      "explain": "Equity means giving up ownership. Loans and trade credit are debt financing.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 1
+    },
+    {
+      "id": "ent-036",
+      "q": "Which equation is the basis of the balance sheet?",
+      "choices": [
+        "Assets = Revenue - Expenses",
+        "Net income = Assets - Liabilities",
+        "Equity = Revenue + Expenses",
+        "Assets = Liabilities + Owner's Equity"
+      ],
+      "answer": 3,
+      "explain": "The accounting equation states that assets equal liabilities plus equity, and the balance sheet must balance on this basis.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 1
+    },
+    {
+      "id": "ent-037",
+      "q": "A business has revenue of $180,000, cost of goods sold of $70,000, operating expenses of $55,000 and income taxes of $10,000. What is net income?",
+      "choices": [
+        "$45,000",
+        "$55,000",
+        "$65,000",
+        "$110,000"
+      ],
+      "answer": 0,
+      "explain": "Gross profit is $110,000, less $55,000 operating expenses gives $55,000, less $10,000 taxes gives $45,000. Stopping before taxes gives $55,000.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-038",
+      "q": "Under accrual accounting, when is a sale recorded?",
+      "choices": [
+        "Only when the customer pays in cash",
+        "When it is earned, regardless of when cash is received",
+        "Only when the year ends regardless of activity",
+        "At the moment the purchase order is issued"
+      ],
+      "answer": 1,
+      "explain": "Accrual accounting recognizes revenue when earned, under the matching and revenue-recognition principles, not when cash moves.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-039",
+      "q": "Current assets are $90,000 and current liabilities are $60,000. What is the current ratio?",
+      "choices": [
+        "0.67",
+        "2.0",
+        "1.5",
+        "0.5"
+      ],
+      "answer": 2,
+      "explain": "The current ratio is current assets divided by current liabilities, $90,000 divided by $60,000, which is 1.5. Inverting the ratio gives 0.67.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 3
+    },
+    {
+      "id": "ent-040",
+      "q": "A business has fixed costs of $40,000 and a contribution margin ratio of 40 percent. What are the break-even sales in dollars?",
+      "choices": [
+        "$16,000",
+        "$40,000",
+        "$160,000",
+        "$100,000"
+      ],
+      "answer": 3,
+      "explain": "Break-even sales equal fixed costs divided by the contribution margin ratio, $40,000 divided by 0.40, which is $100,000.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 3
+    },
+    {
+      "id": "ent-041",
+      "q": "A business has $50,000 in current assets and $38,000 in current liabilities. What is its working capital?",
+      "choices": [
+        "$12,000",
+        "$88,000",
+        "$38,000",
+        "$50,000"
+      ],
+      "answer": 0,
+      "explain": "Working capital is current assets minus current liabilities, $50,000 less $38,000.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 1
+    },
+    {
+      "id": "ent-042",
+      "q": "A $50,000 truck has a $5,000 salvage value and a 5-year life. What is annual straight-line depreciation?",
+      "choices": [
+        "$10,000 per year",
+        "$9,000 per year",
+        "$45,000 per year",
+        "$5,000 per year"
+      ],
+      "answer": 1,
+      "explain": "Straight-line depreciation is cost minus salvage value over useful life, $45,000 divided by 5, which is $9,000. Ignoring salvage gives $10,000.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-043",
+      "q": "Which category on the statement of cash flows includes cash paid to buy new equipment?",
+      "choices": [
+        "Operating activities",
+        "Financing activities",
+        "Investing activities",
+        "Balance sheet reconciliation"
+      ],
+      "answer": 2,
+      "explain": "Purchases of long-term assets are investing activities. Operating covers day-to-day income and expenses, and financing covers debt and equity.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-044",
+      "q": "A bank loan requires a personal guarantee from the owner. What is the main added risk?",
+      "choices": [
+        "The business's tax rate increases automatically",
+        "The owner must give up voting control",
+        "The loan interest becomes tax-exempt",
+        "The owner's personal assets could be at risk if the business defaults"
+      ],
+      "answer": 3,
+      "explain": "A personal guarantee makes the owner personally liable for the debt, which is a personal exposure rather than a tax or control change.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-045",
+      "q": "Which statement shows a business's financial position at a specific point in time?",
+      "choices": [
+        "Balance sheet",
+        "Income statement",
+        "Statement of cash flows",
+        "Budget variance report"
+      ],
+      "answer": 0,
+      "explain": "The balance sheet is a snapshot at one date. The income statement and cash flow statement cover a period.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 1
+    },
+    {
+      "id": "ent-046",
+      "q": "Revenue is $250,000 and cost of goods sold is $150,000. What is the gross profit margin?",
+      "choices": [
+        "60%",
+        "40%",
+        "66.7%",
+        "150%"
+      ],
+      "answer": 1,
+      "explain": "Gross profit is $100,000, and $100,000 divided by $250,000 is 40 percent. The 60 percent figure is the cost ratio.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-047",
+      "q": "A supplier offers terms of 2/10, net 30. A $1,000 invoice is paid on day 10. How much is paid?",
+      "choices": [
+        "$1,000 with no discount",
+        "$1,020",
+        "$980",
+        "$1,030"
+      ],
+      "answer": 2,
+      "explain": "Paying within the 10-day window takes a 2 percent discount, so $1,000 less $20 is $980.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-048",
+      "q": "During a period of rising costs, which inventory method usually reports the highest net income?",
+      "choices": [
+        "LIFO",
+        "Specific identification",
+        "Specific identification always gives the lowest income",
+        "FIFO"
+      ],
+      "answer": 3,
+      "explain": "FIFO assigns the older, cheaper costs to cost of goods sold when prices rise, so income is higher. LIFO does the opposite and is the trap.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 3
+    },
+    {
+      "id": "ent-049",
+      "q": "A budget that compares planned figures with actual results is used to identify:",
+      "choices": [
+        "Variances",
+        "Depreciation schedules",
+        "Break-even points",
+        "Equity ratios"
+      ],
+      "answer": 0,
+      "explain": "The gap between planned and actual amounts is the variance, which managers investigate.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 1
+    },
+    {
+      "id": "ent-050",
+      "q": "A $20,000 investment returns $5,000 of net profit in one year. What is the return on investment?",
+      "choices": [
+        "20%",
+        "25%",
+        "4%",
+        "5,000%"
+      ],
+      "answer": 1,
+      "explain": "ROI is net profit divided by the investment, $5,000 divided by $20,000, which is 25 percent.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 3
+    },
+    {
+      "id": "ent-051",
+      "q": "A $100,000 loan carries 6 percent simple annual interest for 3 years. What is the total interest?",
+      "choices": [
+        "$6,000",
+        "$16,000",
+        "$18,000",
+        "$20,000"
+      ],
+      "answer": 2,
+      "explain": "Annual interest is $6,000, and over 3 years on simple interest that is $18,000. The $6,000 figure is only one year.",
+      "sub": "Financial Management and Initial Capital",
+      "diff": 2
+    },
+    {
+      "id": "ent-052",
+      "q": "What is the main legal drawback of a sole proprietorship?",
+      "choices": [
+        "The business cannot hire employees",
+        "The business must file a corporate tax return",
+        "The business must have at least three owners",
+        "The owner has unlimited personal liability for business debts"
+      ],
+      "answer": 3,
+      "explain": "A sole proprietor and the business are legally one person, so personal assets are exposed. Hiring and tax filing are allowed.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 1
+    },
+    {
+      "id": "ent-053",
+      "q": "Which business structure gives owners limited liability and pass-through taxation by default?",
+      "choices": [
+        "Limited liability company (LLC)",
+        "C corporation",
+        "General partnership",
+        "Sole proprietorship"
+      ],
+      "answer": 0,
+      "explain": "An LLC shields owners from most business debts and, by default, its profits flow to owners' returns. A C corporation taxes entity profits separately.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 1
+    },
+    {
+      "id": "ent-054",
+      "q": "How is income of a C corporation taxed?",
+      "choices": [
+        "Taxed only once at the shareholder level",
+        "Taxed at the entity level, and dividends are taxed again to shareholders",
+        "Not taxed if all profits are reinvested",
+        "Taxed only on capital gains realized by the owners"
+      ],
+      "answer": 1,
+      "explain": "This is double taxation: corporate income tax, then tax on dividends. Pass-through entities avoid the first layer.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 2
+    },
+    {
+      "id": "ent-055",
+      "q": "Which intellectual property protects a company's logo and slogan used to identify its goods?",
+      "choices": [
+        "Patent",
+        "Copyright",
+        "Trademark",
+        "Trade secret"
+      ],
+      "answer": 2,
+      "explain": "Trademarks protect brand identifiers used in commerce. Patents cover inventions and copyrights cover creative works.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 1
+    },
+    {
+      "id": "ent-056",
+      "q": "Under U.S. law, how long does a standard utility patent generally last from the filing date?",
+      "choices": [
+        "10 years from the date granted",
+        "50 years after the author's death",
+        "5 years, renewable indefinitely",
+        "20 years from the filing date"
+      ],
+      "answer": 3,
+      "explain": "U.S. utility patents run 20 years from filing. Copyright is the one tied to the author's life.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 2
+    },
+    {
+      "id": "ent-057",
+      "q": "Which is NOT generally required for a valid contract?",
+      "choices": [
+        "Notarized signatures",
+        "Offer",
+        "Acceptance",
+        "Consideration"
+      ],
+      "answer": 0,
+      "explain": "A contract needs offer, acceptance and consideration, plus capacity and lawful purpose. Notarization is not required for most contracts.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 1
+    },
+    {
+      "id": "ent-058",
+      "q": "Under the U.S. Uniform Commercial Code, a contract for the sale of goods priced at or above which amount generally must be in writing?",
+      "choices": [
+        "$50",
+        "$500",
+        "$5,000",
+        "$50,000"
+      ],
+      "answer": 1,
+      "explain": "UCC section 2-201, the statute of frauds for goods, applies at $500 or more.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 3
+    },
+    {
+      "id": "ent-059",
+      "q": "Which federal law sets minimum wage and overtime rules in the United States?",
+      "choices": [
+        "Sherman Antitrust Act",
+        "Clayton Act",
+        "Fair Labor Standards Act",
+        "Securities Act of 1933"
+      ],
+      "answer": 2,
+      "explain": "The FLSA governs minimum wage, overtime and child labour. The others cover antitrust and securities.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 2
+    },
+    {
+      "id": "ent-060",
+      "q": "A business owner signs a contract through an agent without revealing the principal. Which legal concept describes this?",
+      "choices": [
+        "Apparent authority",
+        "Warranty of title",
+        "Promissory estoppel",
+        "Undisclosed principal"
+      ],
+      "answer": 3,
+      "explain": "An undisclosed principal is bound and can enforce the agent's contract. Apparent authority is a different agency concept.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 3
+    },
+    {
+      "id": "ent-061",
+      "q": "A customer is injured by a defective product sold by a retailer. Under strict product liability, who can be held liable?",
+      "choices": [
+        "The manufacturer and the retailer in the chain of distribution",
+        "Only the customer who used the product",
+        "Only the shipping company",
+        "The insurance company that wrote the policy"
+      ],
+      "answer": 0,
+      "explain": "Strict product liability reaches every seller in the distribution chain for a defective product, regardless of fault.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 2
+    },
+    {
+      "id": "ent-062",
+      "q": "In a general partnership, what is each partner's liability for partnership debts?",
+      "choices": [
+        "Limited to their capital contribution",
+        "Joint and several, so each partner may be personally liable for all of it",
+        "Zero, because the partnership is separate",
+        "Only for debts they personally signed"
+      ],
+      "answer": 1,
+      "explain": "General partners have unlimited joint and several liability. Limited liability is the feature of LLCs and some other structures.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 3
+    },
+    {
+      "id": "ent-063",
+      "q": "Which form of intellectual property protects confidential formulas such as a secret recipe, without registration?",
+      "choices": [
+        "Trademark",
+        "Copyright",
+        "Trade secret",
+        "Patent"
+      ],
+      "answer": 2,
+      "explain": "Trade secrets are protected by keeping the information confidential. Registration would destroy that secrecy.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 1
+    },
+    {
+      "id": "ent-064",
+      "q": "A sole proprietor operates under a business name other than the owner's legal name. What must the owner typically do?",
+      "choices": [
+        "Obtain a federal patent for the name",
+        "Register a copyright with the Library of Congress",
+        "Incorporate immediately to avoid the filing",
+        "File a doing-business-as (DBA) or assumed name certificate"
+      ],
+      "answer": 3,
+      "explain": "A DBA or assumed name filing discloses the owner behind a trade name. A patent or copyright does not cover business names.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 3
+    },
+    {
+      "id": "ent-065",
+      "q": "A tenant signs a commercial lease with a personal guarantee. What is the main personal risk?",
+      "choices": [
+        "The owner may lose personal assets if the business defaults on rent",
+        "The landlord takes ownership of the company",
+        "The lease ends automatically after one year",
+        "The business loses its trademark rights"
+      ],
+      "answer": 0,
+      "explain": "A personal guarantee makes the owner liable for the lease obligations, which reaches personal assets.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 2
+    },
+    {
+      "id": "ent-066",
+      "q": "Which federal law requires companies offering securities to the public to register them and disclose material information?",
+      "choices": [
+        "Sherman Antitrust Act of 1890",
+        "Securities Act of 1933",
+        "Fair Credit Reporting Act",
+        "Robinson-Patman Act"
+      ],
+      "answer": 1,
+      "explain": "The 1933 Act governs public offerings and disclosure. The others cover antitrust and credit reporting.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 2
+    },
+    {
+      "id": "ent-067",
+      "q": "Which doctrine protects directors who make good-faith business decisions that later prove wrong?",
+      "choices": [
+        "Promissory estoppel",
+        "Respondeat superior",
+        "Business judgment rule",
+        "Statute of frauds"
+      ],
+      "answer": 2,
+      "explain": "The business judgment rule presumes good-faith, informed decisions are not second-guessed for poor outcomes.",
+      "sub": "Legal Issues and Business Structure",
+      "diff": 3
+    },
+    {
+      "id": "ent-068",
+      "q": "Which inventory system places a new order when stock falls to a preset level?",
+      "choices": [
+        "Just-in-case stockpiling",
+        "Consignment inventory",
+        "ABC analysis",
+        "Reorder point system"
+      ],
+      "answer": 3,
+      "explain": "A reorder point is a set quantity that triggers an order. ABC analysis ranks items by value and does not trigger orders.",
+      "sub": "Operations and Personnel Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-069",
+      "q": "What is the first step in recruiting new employees?",
+      "choices": [
+        "Analyze the job and write a job description",
+        "Make a job offer to a candidate",
+        "Run background checks",
+        "Conduct interviews"
+      ],
+      "answer": 0,
+      "explain": "A clear job analysis and description define what to recruit for. Offers, checks and interviews come later.",
+      "sub": "Operations and Personnel Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-070",
+      "q": "Which formula calculates the economic order quantity (EOQ), where D is annual demand, S is ordering cost and H is holding cost per unit?",
+      "choices": [
+        "D times S times H",
+        "The square root of (2DS divided by H)",
+        "(D plus S) divided by H",
+        "2DH divided by S"
+      ],
+      "answer": 1,
+      "explain": "EOQ balances ordering and holding costs and equals the square root of 2DS/H.",
+      "sub": "Operations and Personnel Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-071",
+      "q": "In Maslow's hierarchy of needs, which need is at the bottom?",
+      "choices": [
+        "Self-actualization",
+        "Esteem",
+        "Physiological needs",
+        "Social belonging"
+      ],
+      "answer": 2,
+      "explain": "The hierarchy starts with basic physiological needs and moves up to self-actualization at the top.",
+      "sub": "Operations and Personnel Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-072",
+      "q": "A manager makes decisions alone with minimal employee input. Which leadership style is this?",
+      "choices": [
+        "Laissez-faire leadership",
+        "Democratic leadership",
+        "Transformational leadership",
+        "Autocratic leadership"
+      ],
+      "answer": 3,
+      "explain": "Autocratic leaders decide alone. Laissez-faire gives employees broad freedom and democratic leaders seek input.",
+      "sub": "Operations and Personnel Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-073",
+      "q": "What is the primary purpose of a Gantt chart?",
+      "choices": [
+        "To visualize a project timeline and the dependencies between tasks",
+        "To calculate break-even units",
+        "To measure employee satisfaction",
+        "To track customer demographics over time"
+      ],
+      "answer": 0,
+      "explain": "A Gantt chart shows task durations, sequence and overlap over time. Break-even and satisfaction are different tools.",
+      "sub": "Operations and Personnel Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-074",
+      "q": "A bakery's oven runs at full capacity during peak hours and customers wait. What is the best short-term operations response?",
+      "choices": [
+        "Permanently double the number of ovens immediately",
+        "Shift some production to off-peak hours and take pre-orders for peak items",
+        "Reduce product quality to speed up production",
+        "Raise prices by 50 percent during peak hours"
+      ],
+      "answer": 1,
+      "explain": "Shifting load and pre-ordering smooths demand at low cost. Doubling capacity is a long-term capital decision.",
+      "sub": "Operations and Personnel Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-075",
+      "q": "Which quality tool uses a fishbone-shaped diagram to organize possible causes of a defect?",
+      "choices": [
+        "Pareto chart",
+        "Control chart",
+        "Cause-and-effect (Ishikawa) diagram",
+        "Histogram"
+      ],
+      "answer": 2,
+      "explain": "The Ishikawa diagram organizes causes by category around an effect. Pareto charts rank problems by frequency.",
+      "sub": "Operations and Personnel Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-076",
+      "q": "What term describes the number of employees a manager directly supervises?",
+      "choices": [
+        "Chain of command",
+        "Line authority",
+        "Unity of direction",
+        "Span of control"
+      ],
+      "answer": 3,
+      "explain": "Span of control is the count of direct reports, which shapes how many layers an organization needs.",
+      "sub": "Operations and Personnel Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-077",
+      "q": "A business with 12 employees loses 3 in a year. What is the annual turnover rate?",
+      "choices": [
+        "25%",
+        "12%",
+        "33%",
+        "3%"
+      ],
+      "answer": 0,
+      "explain": "Turnover rate is separations divided by average headcount, 3 divided by 12, which is 25 percent.",
+      "sub": "Operations and Personnel Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-078",
+      "q": "Which training method has a new employee learn the job while working under a skilled coworker?",
+      "choices": [
+        "Classroom lecture",
+        "On-the-job training with mentoring",
+        "Online self-paced course",
+        "Simulation"
+      ],
+      "answer": 1,
+      "explain": "On-the-job training with a mentor builds skills in the real work setting. The others happen away from the job.",
+      "sub": "Operations and Personnel Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-079",
+      "q": "A worker sets their own hours, uses their own tools and is paid per project. How is this worker most likely classified?",
+      "choices": [
+        "W-2 employee",
+        "Part-time apprentice",
+        "Independent contractor",
+        "Salaried manager"
+      ],
+      "answer": 2,
+      "explain": "Control over how and when work is done and ownership of tools point to an independent contractor, which has tax and legal consequences.",
+      "sub": "Operations and Personnel Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-080",
+      "q": "What is the main goal of just-in-time (JIT) inventory?",
+      "choices": [
+        "Build large safety stocks to avoid any shortage",
+        "Increase warehouse space to hold more stock",
+        "Eliminate all supplier relationships",
+        "Reduce holding costs by receiving goods close to when they are needed"
+      ],
+      "answer": 3,
+      "explain": "JIT cuts holding costs by timing deliveries to need. Large safety stocks are the opposite approach.",
+      "sub": "Operations and Personnel Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-081",
+      "q": "Orders wait 8 minutes at the kitchen pass in a restaurant. Which tool best sets priorities among the causes of slow service?",
+      "choices": [
+        "Pareto analysis",
+        "Net present value",
+        "Break-even analysis",
+        "Ratio analysis of the balance sheet"
+      ],
+      "answer": 0,
+      "explain": "Pareto analysis ranks causes so the few that drive most delays get fixed first. The others evaluate money or profit, not causes.",
+      "sub": "Operations and Personnel Management",
+      "diff": 3
+    },
+    {
+      "id": "ent-082",
+      "q": "Which is a benefit of delegation?",
+      "choices": [
+        "It removes all accountability from the manager",
+        "It frees managers for strategic work and develops employees' skills",
+        "It eliminates the need for training",
+        "It guarantees higher profits immediately"
+      ],
+      "answer": 1,
+      "explain": "Delegation spreads work and builds capability while the manager keeps overall accountability.",
+      "sub": "Operations and Personnel Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-083",
+      "q": "A new employee arrives late repeatedly. What is the best first step under progressive discipline?",
+      "choices": [
+        "Terminate the employee immediately without notice",
+        "Post the employee's attendance record publicly",
+        "Document the issue and hold a private coaching conversation",
+        "Ignore the issue until the annual review"
+      ],
+      "answer": 2,
+      "explain": "Documentation and a private conversation are the fair first steps. Immediate termination skips the progressive process.",
+      "sub": "Operations and Personnel Management",
+      "diff": 2
+    },
+    {
+      "id": "ent-084",
+      "q": "A plant can produce 5,000 units per week and currently produces 4,000. What is its capacity utilization?",
+      "choices": [
+        "125%",
+        "20%",
+        "75%",
+        "80%"
+      ],
+      "answer": 3,
+      "explain": "Capacity utilization is actual output divided by capacity, 4,000 divided by 5,000, which is 80 percent.",
+      "sub": "Operations and Personnel Management",
+      "diff": 1
+    },
+    {
+      "id": "ent-085",
+      "q": "A retailer collects sales tax from customers and sends it to the state. In this role, the retailer is acting as:",
+      "choices": [
+        "A collection agent for the government",
+        "An employee of the state",
+        "The beneficiary of the tax",
+        "A tax-exempt organization"
+      ],
+      "answer": 0,
+      "explain": "Sales tax is paid by the customer but collected and remitted by the seller on the government's behalf.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 1
+    },
+    {
+      "id": "ent-086",
+      "q": "Which tax is withheld from employee paychecks for Social Security and Medicare?",
+      "choices": [
+        "Federal Unemployment Tax Act (FUTA) taxes",
+        "Federal Insurance Contributions Act (FICA) taxes",
+        "Corporate income tax",
+        "Self-employment tax"
+      ],
+      "answer": 1,
+      "explain": "FICA funds Social Security and Medicare and is split between employer and employee. FUTA is an employer-only unemployment tax.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 2
+    },
+    {
+      "id": "ent-087",
+      "q": "A manager finds that a supplier is falsifying safety certificates. Which action is most ethical?",
+      "choices": [
+        "Keep buying because the product is cheaper",
+        "Tell customers privately that the product is safe",
+        "Report the issue internally and stop purchasing until the supplier is verified",
+        "Ignore it since it is not the company's fault"
+      ],
+      "answer": 2,
+      "explain": "Reporting and pausing purchases addresses the safety risk and is transparent. Ignoring it or misleading customers is unethical.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 1
+    },
+    {
+      "id": "ent-088",
+      "q": "Corporate social responsibility is best defined as:",
+      "choices": [
+        "Compliance with mandatory tax filing",
+        "Paying only the legal minimum wage",
+        "Limiting liability through incorporation",
+        "Voluntary actions beyond legal requirements that benefit society"
+      ],
+      "answer": 3,
+      "explain": "CSR is voluntary action beyond what the law requires, such as environmental or community programs.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 1
+    },
+    {
+      "id": "ent-089",
+      "q": "Which federal law prohibits contracts, combinations and conspiracies that unreasonably restrain trade?",
+      "choices": [
+        "Sherman Antitrust Act",
+        "Clayton Act",
+        "Robinson-Patman Act",
+        "Federal Trade Commission Act"
+      ],
+      "answer": 0,
+      "explain": "The Sherman Act is the foundational antitrust statute on restraints of trade. The others address specific practices or agency powers.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 2
+    },
+    {
+      "id": "ent-090",
+      "q": "Which expense is generally fully deductible in the year it is paid by a small business?",
+      "choices": [
+        "Purchase of land",
+        "Ordinary and necessary business rent",
+        "An owner's personal vacation",
+        "A 15-year building improvement"
+      ],
+      "answer": 1,
+      "explain": "Ordinary and necessary business expenses are deductible when paid. Land is not depreciable, and capital improvements are depreciated over time.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 3
+    },
+    {
+      "id": "ent-091",
+      "q": "A business advertises that a product is 'clinically proven' without any supporting study. Which federal agency is most likely to act?",
+      "choices": [
+        "Securities and Exchange Commission",
+        "Federal Reserve",
+        "Federal Trade Commission",
+        "Internal Revenue Service"
+      ],
+      "answer": 2,
+      "explain": "The FTC polices deceptive advertising. The SEC covers securities and the Fed covers monetary policy.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 3
+    },
+    {
+      "id": "ent-092",
+      "q": "Sole proprietors report business income and expenses on which IRS schedule attached to Form 1040?",
+      "choices": [
+        "Schedule A",
+        "Form 1120",
+        "Schedule K-1",
+        "Schedule C"
+      ],
+      "answer": 3,
+      "explain": "Schedule C is the profit or loss from business form for sole proprietors. Form 1120 is a corporate return.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 3
+    },
+    {
+      "id": "ent-093",
+      "q": "Which federal law is the primary statute governing air pollution emissions?",
+      "choices": [
+        "Clean Air Act",
+        "Clean Water Act",
+        "Endangered Species Act",
+        "Resource Conservation and Recovery Act"
+      ],
+      "answer": 0,
+      "explain": "The Clean Air Act regulates air emissions. The others cover water, species and waste.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 2
+    },
+    {
+      "id": "ent-094",
+      "q": "A business owner awards a contract to a company owned by a relative without disclosing it. This is a:",
+      "choices": [
+        "Breach of warranty",
+        "Conflict of interest",
+        "Patent infringement",
+        "Sales tax violation"
+      ],
+      "answer": 1,
+      "explain": "A conflict of interest exists when personal ties could compromise business decisions, and undisclosed ties make it worse.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 1
+    },
+    {
+      "id": "ent-095",
+      "q": "Which business form generally passes its profits and losses through to the owners' personal tax returns?",
+      "choices": [
+        "C corporation",
+        "Publicly traded corporation",
+        "Partnership",
+        "Cooperative taxed at the entity level"
+      ],
+      "answer": 2,
+      "explain": "Partnerships are pass-through entities that report income on partners' returns. C corporations and cooperatives can be taxed at the entity level.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 2
+    },
+    {
+      "id": "ent-096",
+      "q": "A small business collects customers' emails for a newsletter. What is the best practice?",
+      "choices": [
+        "Share the list with partners without notice",
+        "Buy extra lists from unknown sellers",
+        "Store all data in a public folder",
+        "Obtain consent and provide an easy opt-out"
+      ],
+      "answer": 3,
+      "explain": "Consent and an easy opt-out respect customer privacy and anti-spam rules. Sharing or buying lists without consent breaks both.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 1
+    },
+    {
+      "id": "ent-097",
+      "q": "A stakeholder is best defined as:",
+      "choices": [
+        "Any person or group affected by the business's decisions",
+        "Only the business's owners and shareholders",
+        "Only the company's competitors",
+        "Only government regulators"
+      ],
+      "answer": 0,
+      "explain": "Stakeholders include employees, customers, communities and others affected, not only owners.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 1
+    },
+    {
+      "id": "ent-098",
+      "q": "Which tax concept requires a business to pay tax during the year rather than only at filing?",
+      "choices": [
+        "Withholding exemption",
+        "Estimated tax payments",
+        "Tax credit carryforward",
+        "Capital loss carryback"
+      ],
+      "answer": 1,
+      "explain": "Estimated tax payments are made quarterly by businesses and self-employed owners who do not have withholding.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 2
+    },
+    {
+      "id": "ent-099",
+      "q": "Which accounting principle requires reporting all information that could affect a user's decision?",
+      "choices": [
+        "Conservatism",
+        "Historical cost",
+        "Full disclosure",
+        "Matching"
+      ],
+      "answer": 2,
+      "explain": "Full disclosure requires material information to be reported. Historical cost, conservatism and matching are other principles.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 2
+    },
+    {
+      "id": "ent-100",
+      "q": "Which federal agency sets and enforces workplace safety standards?",
+      "choices": [
+        "Environmental Protection Agency",
+        "Federal Communications Commission",
+        "Wage and Hour Division",
+        "Occupational Safety and Health Administration (OSHA)"
+      ],
+      "answer": 3,
+      "explain": "OSHA sets and enforces workplace safety standards. The EPA covers environmental rules and the Wage and Hour Division covers pay.",
+      "sub": "Ethics, Taxes and Government Regulation",
+      "diff": 2
+    }
+  ],
+  "vocab": [
+    {
+      "id": "ent-v001",
+      "term": "Business plan",
+      "def": "A written document describing a business's goals, market, operations, and financial projections.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v002",
+      "term": "Executive summary",
+      "def": "A short opening section of a business plan that summarizes the key findings and the funding request.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v003",
+      "term": "Feasibility study",
+      "def": "An analysis of whether a business idea is practical in terms of market, operations, finance and law.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v004",
+      "term": "SWOT analysis",
+      "def": "A framework that lists a business's internal strengths and weaknesses and external opportunities and threats.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v005",
+      "term": "Value proposition",
+      "def": "The specific benefit a customer receives that makes an offer worth choosing over alternatives.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v006",
+      "term": "Target market",
+      "def": "The specific group of customers with shared needs that a business chooses to serve.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v007",
+      "term": "Market segmentation",
+      "def": "Dividing a broad market into groups of customers with similar needs or characteristics.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v008",
+      "term": "Competitive advantage",
+      "def": "A factor that lets a business outperform rivals and that rivals find hard to copy.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v009",
+      "term": "Break-even analysis",
+      "def": "A calculation of the sales volume at which total revenue equals total costs, so profit is zero.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v010",
+      "term": "Minimum viable product (MVP)",
+      "def": "The simplest version of a product that lets a business test customer demand with minimal investment.",
+      "sub": "Business Plan and Opportunity Assessment"
+    },
+    {
+      "id": "ent-v011",
+      "term": "Marketing mix",
+      "def": "The four controllable elements of marketing (product, price, place and promotion), also called the 4 Ps.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v012",
+      "term": "Price elasticity of demand",
+      "def": "The percentage change in quantity demanded divided by the percentage change in price.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v013",
+      "term": "Price skimming",
+      "def": "A pricing strategy that sets a high initial price and lowers it over time to reach successive market segments.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v014",
+      "term": "Penetration pricing",
+      "def": "A pricing strategy that sets a low initial price to gain market share quickly.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v015",
+      "term": "Product life cycle",
+      "def": "The stages a product passes through: introduction, growth, maturity and decline.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v016",
+      "term": "Brand equity",
+      "def": "The added value a brand name gives a product, based on customer awareness, loyalty and perceived quality.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v017",
+      "term": "Trademark",
+      "def": "A word, name, symbol or design that identifies the source of goods and distinguishes them from others.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v018",
+      "term": "Publicity",
+      "def": "Unpaid media coverage about a business, which the business does not directly control.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v019",
+      "term": "Primary research",
+      "def": "Data collected directly by the business for its own purpose, such as surveys or focus groups.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v020",
+      "term": "Customer lifetime value (CLV)",
+      "def": "The total gross profit a business expects from a customer over the full relationship.",
+      "sub": "Marketing Management"
+    },
+    {
+      "id": "ent-v021",
+      "term": "Equity financing",
+      "def": "Raising money by selling ownership shares or stakes in the business.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v022",
+      "term": "Debt financing",
+      "def": "Raising money by borrowing that must be repaid with interest.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v023",
+      "term": "Working capital",
+      "def": "Current assets minus current liabilities, a measure of short-term liquidity.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v024",
+      "term": "Current ratio",
+      "def": "Current assets divided by current liabilities, a measure of the ability to pay short-term obligations.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v025",
+      "term": "Gross profit margin",
+      "def": "Gross profit divided by revenue, showing the share of each sales dollar left after cost of goods sold.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v026",
+      "term": "Net income",
+      "def": "Revenue minus all expenses, including cost of goods sold, operating expenses, interest and taxes.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v027",
+      "term": "Depreciation",
+      "def": "The systematic allocation of a long-term asset's cost over its useful life.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v028",
+      "term": "Accrual accounting",
+      "def": "An accounting method that records revenue when earned and expenses when incurred, regardless of cash timing.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v029",
+      "term": "Return on investment (ROI)",
+      "def": "Net profit divided by the cost of an investment, expressed as a percentage.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v030",
+      "term": "Trade credit",
+      "def": "Payment terms from a supplier that allow a business to buy now and pay later, often with a discount for early payment.",
+      "sub": "Financial Management and Initial Capital"
+    },
+    {
+      "id": "ent-v031",
+      "term": "Sole proprietorship",
+      "def": "A business owned and run by one person with no legal separation between owner and business.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v032",
+      "term": "Partnership",
+      "def": "A business owned by two or more people who share profits, losses and management.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v033",
+      "term": "Limited liability company (LLC)",
+      "def": "A business entity that limits owners' personal liability for business debts and is taxed as a pass-through by default.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v034",
+      "term": "C corporation",
+      "def": "A corporation taxed separately from its owners, with dividends taxed again to shareholders.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v035",
+      "term": "Patent",
+      "def": "A government grant giving an inventor exclusive rights to make, use and sell an invention for a set period.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v036",
+      "term": "Copyright",
+      "def": "Legal protection for original creative works, such as writing, music and software, held by the creator.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v037",
+      "term": "Trade secret",
+      "def": "Confidential business information, such as a formula or process, that gives value because it is not public.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v038",
+      "term": "Contract consideration",
+      "def": "Something of value exchanged by each party to a contract, required for the contract to be enforceable.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v039",
+      "term": "Personal guarantee",
+      "def": "A promise by an owner to repay a business debt personally if the business cannot pay.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v040",
+      "term": "Product liability",
+      "def": "A seller's or manufacturer's legal responsibility for injuries caused by a defective product.",
+      "sub": "Legal Issues and Business Structure"
+    },
+    {
+      "id": "ent-v041",
+      "term": "Span of control",
+      "def": "The number of employees a manager directly supervises.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v042",
+      "term": "Just-in-time (JIT) inventory",
+      "def": "A system that receives materials only as they are needed for production, to cut holding costs.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v043",
+      "term": "Reorder point",
+      "def": "The inventory level that triggers a new purchase order.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v044",
+      "term": "Economic order quantity (EOQ)",
+      "def": "The order size that minimizes the combined cost of ordering and holding inventory.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v045",
+      "term": "Delegation",
+      "def": "Assigning work and the authority to complete it to subordinates, while the manager keeps accountability.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v046",
+      "term": "Turnover rate",
+      "def": "The percentage of employees who leave during a period, usually separations divided by average headcount.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v047",
+      "term": "Gantt chart",
+      "def": "A bar chart that shows project tasks, their durations and their timing over a schedule.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v048",
+      "term": "Pareto analysis",
+      "def": "A method that ranks problems by their contribution so the few causes responsible for most effects are addressed first.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v049",
+      "term": "Capacity utilization",
+      "def": "Actual output divided by maximum possible output, expressed as a percentage.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v050",
+      "term": "Autocratic leadership",
+      "def": "A leadership style in which the leader makes decisions alone with little input from others.",
+      "sub": "Operations and Personnel Management"
+    },
+    {
+      "id": "ent-v051",
+      "term": "Stakeholder",
+      "def": "Any person or group affected by a business's decisions or actions.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v052",
+      "term": "Corporate social responsibility",
+      "def": "A business's voluntary actions beyond legal requirements that benefit society or the environment.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v053",
+      "term": "Sales tax",
+      "def": "A tax on the sale of goods or services, collected by the seller and remitted to the government.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v054",
+      "term": "FICA",
+      "def": "Federal payroll taxes that fund Social Security and Medicare, shared by employer and employee.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v055",
+      "term": "Estimated tax payments",
+      "def": "Quarterly tax payments made during the year by those without enough withholding.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v056",
+      "term": "Conflict of interest",
+      "def": "A situation in which personal interests could improperly influence a business decision.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v057",
+      "term": "Full disclosure",
+      "def": "The principle that financial statements must report all material information that could affect users' decisions.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v058",
+      "term": "Sherman Antitrust Act",
+      "def": "A 1890 federal law that prohibits contracts and conspiracies that unreasonably restrain trade.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v059",
+      "term": "Schedule C",
+      "def": "The IRS form on which sole proprietors report business income and expenses with their Form 1040.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    },
+    {
+      "id": "ent-v060",
+      "term": "Occupational Safety and Health Administration (OSHA)",
+      "def": "The federal agency that sets and enforces workplace safety and health standards.",
+      "sub": "Ethics, Taxes and Government Regulation"
+    }
+  ]
+}
