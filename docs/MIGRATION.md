@@ -16,6 +16,12 @@ Started 2026-10-10. Two moves: the GitHub repo to Joseph's new GitHub account, a
 
 **Env:** `VITE_SUPABASE_URL`, `VITE_SUPABASE_KEY` (publishable key; both also hardcoded as fallbacks in `src/lib/backend.ts`), `PAGES_BASE` (build only).
 
+## Status
+
+- 2026-10-10: database moved (steps 2, 3 and 5). New project "kcb-fbla" `uhgzeuvybyohdbfuhfil`, ca-central-1, free plan, on the shared account's org. Migrations 0001, 0003, 0004, 0005 applied as four entries (0002 skipped, orbit-only); 7 tables with RLS, 4 functions, the trigger, 21 policies; `fbla_questions` 1,500 rows. Step 4 data copy skipped on purpose: orbit held test data only, so the new project starts fresh.
+- 2026-10-10: step 1 done. Repo is now `claudemaxforeveryone-hue/kcb-fbla` (old URLs redirect; `idontreallyknow-20` stays a collaborator; `D:\kcb-fbla` origin repointed). The Pages URL becomes `claudemaxforeveryone-hue.github.io/kcb-fbla/` (Pages links don't redirect).
+- Still open: step 6 (clearing `fbla_*` and the 0002 guard out of orbit, only when Joseph says so).
+
 ## Steps (each ends when its check passes)
 
 1. **New GitHub account.** Joseph gives the username. Transfer the repo (Settings > Transfer, or `gh api repos/idontreallyknow-20/kcb-fbla/transfer -f new_owner=<user>`) after Joseph confirms; the new owner accepts. Check: the repo opens under the new owner, and `git remote set-url origin` in `D:\kcb-fbla` pushes there.
