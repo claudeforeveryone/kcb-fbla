@@ -1,19 +1,20 @@
 # KCB FBLA
 
-FBLA chapter testing site. Read README.md first; PRODUCT.md holds product context and assumptions.
+FBLA chapter testing platform. **`docs/SPEC.md` is the contract for the 2026-10 rebuild**: look and feel, routes,
+file ownership, data model, RPCs and roles. It overrides anything older (README, PRODUCT.md, the old HOSA-style look).
 
 ## How to work
 
-- Impeccable first for any UI change. The look follows the HOSA Bayview site (`~\Documents\hosa-bayview`): square corners, flat, hairline rules, tabular numerals, navy field sidebar. FBLA navy `#0b2545`, cobalt for links, gold `#f0b323` reserved for "you" and the active item.
-- Before calling work done: `npx tsc -p tsconfig.json`, `npm test`, `npm run build`, then `npx vite preview` and `python tests/e2e/walk.py`.
-- After editing any `content/*.json`: `node scripts/check-all.mjs`, then `node scripts/catalogue-sql.mjs` and run `supabase/seed/fbla_questions.sql` on the kcb-fbla project (the database rejects answers to questions not in `fbla_questions`, and takes each question's event, area and difficulty from it).
-- Rating, mastery and readiness are separate systems; keep them that way. The Elo rule lives in two places that must match: `src/lib/score.ts` and `fbla_sync_stats()` (latest definition in `supabase/migrations/0005_fbla_catalogue_and_membership.sql`).
+- Look: FBLC palette (navy `#001E60`, red `#BF0D3E`, blue `#3F6FB3`, white), Work Sans + Open Sans, top nav bar with
+  the FBLC logo. Details in `docs/SPEC.md`.
+- Before calling work done: `npx tsc -p tsconfig.json`, `npm test`, `npm run build`.
+- After editing any `content/*.json`: `node scripts/check-all.mjs`, then `node scripts/catalogue-sql.mjs` and run
+  `supabase/seed/fbla_questions.sql` on the kcb-fbla project.
+- The Elo rule lives in two places that must match: `src/lib/elo.ts` and `fbla_submit_attempt()` in the migrations.
 
 ## Database
 
-- Supabase project "orbit" (`tezmxgexbqqgvpbkixzp`) is shared with the user's personal orbit app. Only touch `fbla_*` objects. Sign-ups carry `app: kcb-fbla` metadata so orbit's `seed_user_defaults()` skips them (migration 0002).
-- Migrations live in `supabase/migrations/` and are applied with the Supabase MCP.
-
-## Moving accounts
-- The repo is **public** since 2026-10-10 (so cloud sessions on the shared Claude account can clone it): secrets never go in the repo.
-- From 2026-10-10 the repo moves to Joseph's new GitHub account and `fbla_*` moves out of orbit into its own Supabase project. Before touching GitHub ownership, the database or the Supabase env, read `docs/MIGRATION.md`.
+- Supabase project **kcb-fbla** (`uhgzeuvybyohdbfuhfil`), its own project. Do not touch "orbit" (`tezmxgexbqqgvpbkixzp`)
+  or "hosa-bayview".
+- Migrations live in `supabase/migrations/` and are applied with the Supabase MCP `apply_migration`.
+- The repo is public: secrets never go in the repo (publishable keys are fine).
