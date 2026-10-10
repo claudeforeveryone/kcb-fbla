@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>KCB FBLA</title>
-    <meta name="description" content="KCB FBLA practice tests, vocab and chapter leaderboard." />
-    <meta name="theme-color" content="#0b2545" />
+    <meta name="description" content="KCB FBLA: official-style practice exams, vocab, 1v1 duels and chapter tools for FBLA members." />
+    <meta name="theme-color" content="#001E60" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Work+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <script>
-      // colour mode before first paint
+      // Apply the colour mode before first paint so there is no flash.
       (function () {
-        var p = null; try { p = localStorage.getItem('kcbfbla:theme'); } catch (e) {}
-        var dark = p === 'dark' || (p !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
-        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        var p = null;
+        try { p = localStorage.getItem('kcbfbla:theme'); } catch (e) {}
+        var dark = p === 'dark' || (p !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
       })();
     </script>
   </head>

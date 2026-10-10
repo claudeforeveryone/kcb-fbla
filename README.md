@@ -1,37 +1,37 @@
 # KCB FBLA
 
-Practice tests, vocab and a chapter leaderboard for KCB FBLA. Styled after the HOSA Bayview site, in FBLA navy and gold.
+Official-style practice exams, vocab, 1v1 duels and chapter tools for FBL Canada (FBLC) members.
+`docs/SPEC.md` is the product and engineering contract; `docs/EMAIL.md` covers notifications and email.
 
-- **Board:** the FBLA Glass (3D crystal award, engraved with the chapter leader) over an Elo leaderboard that starts everyone at 0.
-- **Play:** Keep going, Exam prep (Practice, Weak spots, Mock exam of 100, Endless), and Paper A / Paper B / Full paper for every event. 1v1 challenges.
-- **Vocab:** Cards (progress vs your rival, Today, Flip and Match, deck/topic/round filters) and My Words.
-- **Me:** candidate record, exam level and readiness, mastery rank (Iron I to Goatatron top g III), ten stats, Compare, Settings.
+- **Home:** rating, streak, daily challenge, duels and assignments waiting on you, weak spots.
+- **Play:** 15 events, Quick 10, daily challenge, endless, weak spots, area drills, mock exams, chapter assignments,
+  results with a per-question review, and redo runs. Elo moves with every official question.
+- **Vocab:** 60 terms per event plus chapter decks; Learn (spaced repetition), Flashcards, Match, Quiz.
+- **Arena:** challenge anyone to the same 10 questions on a server clock; most correct wins, time breaks ties.
+- **Chapter:** join by code or link, leaderboard, roster; admins manage members, roles, bans, trainers, attendance
+  and analytics; the classroom holds posts, newsletters, assignments, custom tests and decks.
+- **Me:** profile, career (every past exam, wrong-question redo), settings. Notifications live in the bell.
 
 ## Run it
 
 ```bash
 npm install
 npm run dev        # http://localhost:5173 (builds public/content from content/ first)
-npm test           # unit tests (rating, mastery, readiness, vocab scheduling, pickers, stats)
+npm test           # unit tests
 npm run build      # typecheck + production build in dist/
-python tests/e2e/walk.py http://localhost:4173   # full click-through after `npx vite preview`
-node scripts/check-all.mjs                       # validate every question bank
+node scripts/check-all.mjs   # validate every question bank
 ```
-
-Add `?local` to any URL to use on-device mode (no account, progress stays in the browser).
 
 ## Data
 
-- **Question banks:** `content/<event>.json`, 100 questions and 60 terms per event, written for this site from FBLA's published competency areas (each file's `notes` says where they came from). Not official FBLA items. `content/BRIEF.md` is the spec and `content/check.mjs` the validator.
-- **Progress:** Supabase project "orbit", tables prefixed `fbla_` (see `supabase/migrations/`). The browser keeps event logs (answers, vocab reviews, papers, duels); the database recomputes each member's rating, peak, answered, correct and mastered with `fbla_sync_stats()`, and members can't write those columns themselves. Answers must name a question in `fbla_questions` (seeded from `content/` by `scripts/catalogue-sql.mjs`), which also supplies its difficulty. Only chapter members (anyone with an `fbla_profiles` row) can read chapter data.
-
-## Three separate numbers
-
-1. **Rating:** Elo from your first try at each question vs its difficulty (easy −200, medium 0, hard +200, K = 32, floor 0).
-2. **Mastery rank:** questions mastered (right the first time, or right twice in a row). 9 ranks × 3 tiers.
-3. **Readiness:** predicted score out of 100 on your event, area by area, with a 90% range. Needs 15 first attempts in that event.
+- **Question banks:** `content/<event>.json`, 100 questions and 60 terms per event, written for this site from
+  FBLA's published competency areas. Not official FBLA items.
+- **Backend:** Supabase project `kcb-fbla` (`uhgzeuvybyohdbfuhfil`). All tables are `public.fbla_*` with RLS; stats,
+  grading and Elo are written only by security-definer RPCs (`fbla_submit_attempt` and friends). Migrations are in
+  `supabase/migrations/`, edge functions (weekly digest, newsletter, unsubscribe) in `supabase/functions/`.
+- **Elo:** starts at 0 (floor 0). K = 24 on a first try at a question, 8 on repeats; questions rate easy -200,
+  medium 0, hard +200. The rule lives in `src/lib/elo.ts` and `fbla_submit_attempt()` and must match.
 
 ## Deploy
 
-- Vercel: `vercel.json` handles SPA routes. Push to `main` once the project is linked.
-- GitHub Pages: `.github/workflows/pages.yml` builds with `PAGES_BASE=/kcb-fbla/` and only runs while the repo is public.
+Vercel: `vercel.json` handles SPA routes. The build also writes `dist/404.html` for static hosts.

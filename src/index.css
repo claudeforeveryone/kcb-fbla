@@ -1,337 +1,200 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+/* Dark mode is a class on <html>. index.html sets it before first paint from the saved
+   preference or prefers-color-scheme; src/components/layout/theme.ts keeps it in sync. */
+@custom-variant dark (&:where(.dark, .dark *));
 
-/* KCB FBLA. The HOSA Bayview system (square, flat, hairline rules, navy field) in FBLA colours:
-   navy ground/field, cobalt for links and hover, gold reserved for "you" and the active item.
-   Official FBLA hex values were not reachable; these sit close to the navy/cobalt/gold palette. */
+/* ---------------------------------------------------------------------------------------------
+   KCB FBLA design tokens (FBLC theme values, see docs/SPEC.md)
+   --------------------------------------------------------------------------------------------- */
 :root {
   color-scheme: light;
-  --ground: #f2f5fa;
-  --band: #e3e9f3;
-  --card: #f8fafd;
-  --ink: #0b2545;
-  --ink-2: #3c5376;
-  --rule: #c2cddf;
-  --rule-strong: #6c82a5;
-  --field: #0b2545;
-  --field-2: #15386a;
-  --on-field: #f2f5fa;
-  --on-field-2: #b3c3dc;
-  --cobalt: #1f4fc4;
-  --gold: #f0b323;
-  --gold-ink: #8a5a00;
-  --on-gold: #0b2545;
-  --danger: #b42318;
-  --danger-band: #fbe9e7;
-  --ok: #17643f;
-  --ok-band: #e3f2ea;
+  --navy: #001e60;
+  --navy-2: #0a2b78;
+  --navy-deep: #00143f;
+  --red: #bf0d3e;
+  --red-2: #a30b35;
+  --blue: #3f6fb3;
+  --white: #ffffff;
+
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef2f8;
+  --surface-3: #e4eaf4;
+  --ink: #211e1e;
+  --heading: #001e60;
+  --muted: #5b6478;
+  --line: #dde3ee;
+  --line-strong: #c3ccdc;
+  --link: #3f6fb3;
+  --success: #1e8e5a;
+  --warning: #c98a00;
+  --danger: #bf0d3e;
+  --bar: #001e60;
+  --ring: #3f6fb3;
+
+  --shadow-color: 0 30 96;
 }
 
-:root[data-theme="dark"] {
+.dark {
   color-scheme: dark;
-  --ground: #0b2545;
-  --band: #08203d;
-  --card: #0e2b50;
-  --ink: #eef3fa;
-  --ink-2: #b3c3dc;
-  --rule: #26466f;
-  --rule-strong: #6f8db6;
-  --field: #061732;
-  --field-2: #0f2c52;
-  --on-field: #eef3fa;
-  --on-field-2: #a8bad6;
-  --cobalt: #8fb0ff;
-  --gold: #f0b323;
-  --gold-ink: #f5c95c;
-  --on-gold: #0b2545;
-  --danger: #ffb4a8;
-  --danger-band: #3a1a22;
-  --ok: #8fe0b0;
-  --ok-band: #0f3a33;
+  --bg: #0a1230;
+  --surface: #111c40;
+  --surface-2: #17234d;
+  --surface-3: #1e2c5c;
+  --ink: #eef2fa;
+  --heading: #f4f7fd;
+  --muted: #a4afc8;
+  --line: #24315d;
+  --line-strong: #34437a;
+  --link: #7fa3dd;
+  --success: #3cc68a;
+  --warning: #f0b73a;
+  --danger: #ff5a7f;
+  --bar: #050d2b;
+  --ring: #7fa3dd;
+  --shadow-color: 0 0 0;
 }
 
 @theme inline {
-  --color-ground: var(--ground);
-  --color-band: var(--band);
-  --color-card: var(--card);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-navy-deep: var(--navy-deep);
+  --color-red: var(--red);
+  --color-red-2: var(--red-2);
+  --color-blue: var(--blue);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
   --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-rule: var(--rule);
-  --color-rule-strong: var(--rule-strong);
-  --color-field: var(--field);
-  --color-field-2: var(--field-2);
-  --color-on-field: var(--on-field);
-  --color-on-field-2: var(--on-field-2);
-  --color-cobalt: var(--cobalt);
-  --color-gold: var(--gold);
-  --color-gold-ink: var(--gold-ink);
-  --color-on-gold: var(--on-gold);
+  --color-heading: var(--heading);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-link: var(--link);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
   --color-danger: var(--danger);
-  --color-danger-band: var(--danger-band);
-  --color-ok: var(--ok);
-  --color-ok-band: var(--ok-band);
-  --font-sans: "Barlow", system-ui, sans-serif;
-  --font-display: "Barlow Condensed", "Barlow", sans-serif;
+  --color-bar: var(--bar);
+  --color-ring: var(--ring);
+
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Work Sans", "Open Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 12px;
+  --radius-control: 10px;
+
+  --shadow-card: 0 1px 2px rgb(var(--shadow-color) / 0.05);
+  --shadow-lift: 0 1px 2px rgb(var(--shadow-color) / 0.06), 0 8px 24px -6px rgb(var(--shadow-color) / 0.16);
+  --shadow-pop: 0 2px 6px rgb(var(--shadow-color) / 0.08), 0 20px 48px -12px rgb(var(--shadow-color) / 0.3);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-in: fade-in 200ms var(--ease-out-quint) both;
+  --animate-rise: rise 240ms var(--ease-out-quint) both;
+  --animate-pop: pop 200ms var(--ease-out-quint) both;
+  --animate-slide-in: slide-in 240ms var(--ease-out-quint) both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.96) translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
 }
 
 @layer base {
   html {
-    background: var(--ground);
+    background: var(--bg);
     color: var(--ink);
     -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
   }
   body {
-    background: var(--ground);
+    min-height: 100dvh;
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--font-sans);
-    font-size: 17px;
-    line-height: 1.5;
-    caret-color: var(--gold-ink);
-    font-feature-settings:
-      "tnum" 1,
-      "lnum" 1;
+    font-size: 15px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  *,
-  input,
-  button,
-  select,
-  textarea {
-    border-radius: 0;
+  @media (min-width: 768px) {
+    body { font-size: 16px; }
   }
-  ::selection {
-    background: var(--gold);
-    color: var(--on-gold);
-  }
-  :focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: 2px;
-  }
-  .bg-field :focus-visible {
-    outline-color: var(--gold);
-  }
-  a {
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
-  }
-  h1,
-  h2,
-  h3 {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--heading);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
     text-wrap: balance;
   }
-  button {
-    cursor: pointer;
+  p { text-wrap: pretty; }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  ::selection { background: color-mix(in srgb, var(--blue) 30%, transparent); }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 6px;
   }
-  button:disabled {
-    cursor: not-allowed;
-  }
-  input,
-  select,
-  textarea {
-    font: inherit;
-    color: inherit;
-  }
-  html {
-    scrollbar-color: var(--rule-strong) var(--ground);
-    scrollbar-width: thin;
-  }
+  input, textarea, select { font: inherit; }
+  img { max-width: 100%; }
 }
 
-@layer components {
-  .display {
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1;
-  }
-  .label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .num {
-    font-variant-numeric: tabular-nums lining-nums;
-  }
-  .rule {
-    border-color: var(--rule);
-  }
-  .panel {
-    border: 1px solid var(--rule);
-    background: var(--card);
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 44px;
-    padding: 0 1.1rem;
-    font-weight: 600;
-    border: 1px solid var(--ink);
-    background: transparent;
-    color: var(--ink);
-    transition:
-      background-color 0.15s,
-      color 0.15s,
-      border-color 0.15s;
-  }
-  .btn:hover:not(:disabled) {
-    background: var(--band);
-  }
-  .btn:disabled {
-    opacity: 0.45;
-  }
-  .btn-primary {
-    background: var(--field);
-    border-color: var(--field);
-    color: var(--on-field);
-  }
-  .btn-primary:hover:not(:disabled) {
-    background: var(--field-2);
-    border-color: var(--field-2);
-  }
-  [data-theme="dark"] .btn-primary {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--on-gold);
-  }
-  [data-theme="dark"] .btn-primary:hover:not(:disabled) {
-    background: #f5c450;
-    border-color: #f5c450;
-  }
-  .btn-gold {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--on-gold);
-  }
-  .btn-gold:hover:not(:disabled) {
-    background: #f5c450;
-    border-color: #f5c450;
-  }
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    min-height: 36px;
-    padding: 0 0.75rem;
-    border: 1px solid var(--rule-strong);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
-    transition:
-      background-color 0.12s,
-      border-color 0.12s;
-  }
-  .chip:hover {
-    border-color: var(--ink);
-  }
-  .chip[aria-pressed="true"],
-  .chip[aria-current="page"] {
-    background: var(--field);
-    border-color: var(--field);
-    color: var(--on-field);
-  }
-  [data-theme="dark"] .chip[aria-pressed="true"],
-  [data-theme="dark"] .chip[aria-current="page"] {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--on-gold);
-  }
-  .chip .count {
-    font-size: 13px;
-    color: var(--ink-2);
-  }
-  .chip[aria-pressed="true"] .count {
-    color: inherit;
-    opacity: 0.75;
-  }
-  .field-input {
-    width: 100%;
-    min-height: 44px;
-    padding: 0.5rem 0.75rem;
-    background: var(--card);
-    border: 1px solid var(--rule-strong);
-    color: var(--ink);
-  }
-  .field-input:focus {
-    outline: 2px solid var(--ink);
-    outline-offset: -1px;
-  }
-  .bar {
-    height: 6px;
-    background: var(--band);
-    position: relative;
-    overflow: hidden;
-  }
-  .bar > span {
-    position: absolute;
-    inset: 0 auto 0 0;
-    background: var(--field);
-    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  [data-theme="dark"] .bar > span {
-    background: var(--gold);
-  }
+@layer utilities {
+  .tabular { font-variant-numeric: tabular-nums; }
+  .font-display { font-family: var(--font-display); }
+  .text-link { color: var(--link); }
   .link {
-    color: var(--cobalt);
-    text-decoration: underline;
+    color: var(--link);
     font-weight: 600;
+    text-underline-offset: 3px;
+  }
+  .link:hover { text-decoration: underline; }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+  /* Faceted navy band: diagonal planes echoing the FBLC logo, no images. */
+  .facets {
+    background-color: var(--navy);
+    background-image:
+      linear-gradient(118deg, transparent 0 58%, rgb(255 255 255 / 0.05) 58% 72%, transparent 72%),
+      linear-gradient(62deg, transparent 0 70%, rgb(255 255 255 / 0.07) 70% 83%, transparent 83%),
+      linear-gradient(152deg, transparent 0 78%, rgb(63 111 179 / 0.32) 78% 100%),
+      linear-gradient(28deg, rgb(0 20 63 / 0.85) 0 22%, transparent 22%),
+      radial-gradient(120% 140% at 100% 0%, rgb(63 111 179 / 0.35), transparent 55%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  }
+  .dark .facets {
+    background-color: #071848;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-}
-
-/* the one authored entrance: the board rows settle in under the glass */
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.rise {
-  animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* flashcard flip */
-.flip {
-  perspective: 1200px;
-}
-.flip-inner {
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.flip-inner[data-flipped="true"] {
-  transform: rotateY(180deg);
-}
-.flip-face {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.flip-back {
-  position: absolute;
-  inset: 0;
-  transform: rotateY(180deg);
-}
-
-@layer components {
-  .login-input {
-    width: 100%; min-height: 48px; padding: .5rem .75rem; background: var(--field-2);
-    border: 1px solid color-mix(in srgb, var(--on-field-2) 45%, transparent); color: var(--on-field);
-  }
-  .login-input:focus { outline: 2px solid var(--gold); outline-offset: -1px; }
 }

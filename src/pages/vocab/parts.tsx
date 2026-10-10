@@ -1,0 +1,272 @@
+import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { cn } from '../../components/ui';
+import { STATUS_LABEL, type DeckStats, type TermStatus } from './leitner';
+
+/** Two-arc ring: studied (blue) under mastered (green); centre shows the mastered count. */
+export function DeckRing({
+  stats,
+  size = 64,
+  stroke = 6,
+  className,
+  inverse,
+}: {
+  stats: DeckStats;
+  size?: number;
+  stroke?: number;
+  className?: string;
+  /** On a navy background. */
+  inverse?: boolean;
+}) {
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const studied = stats.total ? (stats.total - stats.fresh) / stats.total : 0;
+  const mastered = stats.total ? stats.mastered / stats.total : 0;
+  const done = stats.total > 0 && stats.mastered === stats.total;
+  const arc = (frac: number) => ({
+    strokeDasharray: c,
+    strokeDashoffset: c - frac * c,
+    transition: 'stroke-dashoffset 700ms cubic-bezier(0.22,1,0.36,1)',
+  });
+  return (
+    <div
+      className={cn('relative inline-grid shrink-0 place-items-center', className)}
+      style={{ width: size, height: size }}
+      role="img"
+      aria-label={`${stats.mastered} of ${stats.total} mastered, ${stats.total - stats.fresh} studied`}
+    >
+      <svg width={size} height={size} className="-rotate-90" aria-hidden>
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke={inverse ? 'rgb(255 255 255 / 0.16)' : 'var(--surface-3)'}
+          strokeWidth={stroke}
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke={inverse ? 'rgb(127 163 221 / 0.75)' : 'color-mix(in srgb, var(--blue) 45%, transparent)'}
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          style={arc(studied)}
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke="var(--success)"
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          style={arc(mastered)}
+          opacity={mastered > 0 ? 1 : 0}
+        />
+      </svg>
+      <span
+        className={cn(
+          'tabular absolute inset-0 grid place-items-center text-center font-display leading-none',
+          inverse ? 'text-white' : 'text-heading',
+        )}
+      >
+        <span>
+          <span className={cn('block font-bold', size >= 80 ? 'text-xl' : 'text-sm')}>
+            {done ? '100%' : stats.mastered}
+          </span>
+          {size >= 64 && !done && (
+            <span className={cn('block text-[10px] font-semibold', inverse ? 'text-white/60' : 'text-muted')}>
+              of {stats.total}
+            </span>
+          )}
+        </span>
+      </span>
+    </div>
+  );
+}
+
+/** Thin stacked bar: mastered / reviewing / learning / new. */
+export function MixBar({ stats, className }: { stats: DeckStats; className?: string }) {
+  const seg = (n: number) => `${stats.total ? (n / stats.total) * 100 : 0}%`;
+  return (
+    <div className={cn('flex h-1.5 w-full overflow-hidden rounded-full bg-surface-3', className)} aria-hidden>
+      <span className="h-full bg-success transition-[width] duration-500" style={{ width: seg(stats.mastered) }} />
+      <span className="h-full bg-blue transition-[width] duration-500" style={{ width: seg(stats.review) }} />
+      <span className="h-full bg-warning/80 transition-[width] duration-500" style={{ width: seg(stats.learning) }} />
+    </div>
+  );
+}
+
+const STATUS_STYLE: Record<TermStatus, string> = {
+  new: 'bg-surface-2 text-muted ring-line',
+  learning: 'bg-warning/12 text-[#8a5f00] ring-warning/30 dark:text-warning',
+  review: 'bg-blue/10 text-blue ring-blue/25 dark:text-link',
+  mastered: 'bg-success/10 text-success ring-success/25',
+};
+
+export function StatusChip({ status, className }: { status: TermStatus; className?: string }) {
+  return (
+    <span
+      className={cn(
+        'inline-flex h-5 shrink-0 items-center gap-1 rounded-full px-2 text-[11px] font-semibold ring-1 ring-inset',
+        STATUS_STYLE[status],
+        className,
+      )}
+    >
+      <span className="size-1.5 rounded-full bg-current" aria-hidden />
+      {STATUS_LABEL[status]}
+    </span>
+  );
+}
+
+/** Wraps case-insensitive matches of `query` in <mark>. */
+export function Highlight({ text, query }: { text: string; query: string }) {
+  const q = query.trim();
+  if (!q) return <>{text}</>;
+  const parts: ReactNode[] = [];
+  const lower = text.toLowerCase();
+  const ql = q.toLowerCase();
+  let i = 0;
+  let k = 0;
+  while (i < text.length) {
+    const at = lower.indexOf(ql, i);
+    if (at < 0) {
+      parts.push(text.slice(i));
+      break;
+    }
+    if (at > i) parts.push(text.slice(i, at));
+    parts.push(
+      <mark key={k++} className="rounded-[3px] bg-warning/25 px-0.5 text-inherit dark:bg-warning/30">
+        {text.slice(at, at + q.length)}
+      </mark>,
+    );
+    i = at + q.length;
+  }
+  return <>{parts}</>;
+}
+
+/** Global key handler, ignored while typing in a field or when a modal is open. */
+export function useHotkeys(handler: (e: KeyboardEvent) => void, enabled = true) {
+  const ref = useRef(handler);
+  ref.current = handler;
+  useEffect(() => {
+    if (!enabled) return;
+    const on = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      // let a focused button or link handle its own activation keys
+      if (t && /^(BUTTON|A)$/.test(t.tagName) && t.getAttribute('role') !== 'tab' && (e.key === ' ' || e.key === 'Enter')) return;
+      // Space/Enter on the already-active mode tab do nothing useful, so the study session takes them
+      if (t?.getAttribute('role') === 'tab' && (e.key === ' ' || e.key === 'Enter')) e.preventDefault();
+      if (document.querySelector('[role="dialog"][aria-modal="true"]')) return;
+      ref.current(e);
+    };
+    window.addEventListener('keydown', on);
+    return () => window.removeEventListener('keydown', on);
+  }, [enabled]);
+}
+
+/** Big centred result panel used at the end of every mode. */
+export function SessionPanel({
+  icon,
+  eyebrow,
+  title,
+  children,
+  actions,
+  tone = 'navy',
+}: {
+  icon?: ReactNode;
+  eyebrow?: ReactNode;
+  title: ReactNode;
+  children?: ReactNode;
+  actions?: ReactNode;
+  tone?: 'navy' | 'success' | 'red';
+}) {
+  const ring = {
+    navy: 'bg-navy/8 text-navy dark:bg-blue/20 dark:text-link',
+    success: 'bg-success/12 text-success',
+    red: 'bg-red/10 text-red dark:text-danger',
+  }[tone];
+  return (
+    <div className="animate-pop mx-auto flex max-w-xl flex-col items-center rounded-[16px] border border-line bg-surface px-5 py-9 text-center shadow-card sm:px-10">
+      {icon && <div className={cn('mb-4 grid size-14 place-items-center rounded-2xl [&>svg]:size-7', ring)}>{icon}</div>}
+      {eyebrow && <div className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">{eyebrow}</div>}
+      <h2 className="text-2xl font-extrabold md:text-3xl">{title}</h2>
+      {children && <div className="mt-3 w-full text-[0.9375rem] text-muted">{children}</div>}
+      {actions && <div className="mt-6 flex w-full flex-col justify-center gap-2 sm:flex-row">{actions}</div>}
+    </div>
+  );
+}
+
+export function MiniStat({ label, value, tone }: { label: ReactNode; value: ReactNode; tone?: 'success' | 'red' | 'blue' }) {
+  return (
+    <div className="rounded-xl bg-surface-2 px-3 py-2.5 text-center">
+      <div
+        className={cn(
+          'tabular font-display text-2xl font-extrabold leading-none',
+          tone === 'success' ? 'text-success' : tone === 'red' ? 'text-red dark:text-danger' : tone === 'blue' ? 'text-link' : 'text-heading',
+        )}
+      >
+        {value}
+      </div>
+      <div className="mt-1 text-xs font-semibold text-muted">{label}</div>
+    </div>
+  );
+}
+
+export function formatMs(ms: number) {
+  const s = ms / 1000;
+  if (s < 60) return `${s.toFixed(1)}s`;
+  const m = Math.floor(s / 60);
+  return `${m}:${(s - m * 60).toFixed(1).padStart(4, '0')}`;
+}
+
+/** Keyframes used by the vocab games (rendered once per vocab page; index.css belongs to Foundation). */
+export function VocabStyles() {
+  return (
+    <style>{`
+@keyframes vocab-shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(2px)} }
+@keyframes vocab-match-out { 0%{transform:scale(1);opacity:1} 35%{transform:scale(1.06);opacity:1} 100%{transform:scale(.6);opacity:0} }
+@keyframes vocab-float-up { 0%{transform:translate(-50%,0);opacity:0} 15%{opacity:1} 100%{transform:translate(-50%,-36px);opacity:0} }
+@keyframes vocab-burst { 0%{transform:translate(0,0) rotate(0) scale(1);opacity:1} 100%{transform:translate(var(--bx),var(--by)) rotate(var(--br)) scale(.6);opacity:0} }
+@media (prefers-reduced-motion: reduce) { .vocab-burst { display:none } }
+`}</style>
+  );
+}
+
+/** A short celebratory burst of facet shards (decorative). */
+export function Burst({ seed = 0 }: { seed?: number }) {
+  const colors = ['var(--red)', 'var(--blue)', 'var(--success)', 'var(--warning)', 'var(--navy)'];
+  const bits = Array.from({ length: 22 }, (_, i) => {
+    const a = (i / 22) * Math.PI * 2 + seed;
+    const d = 90 + ((i * 37) % 70);
+    return {
+      bx: `${Math.cos(a) * d}px`,
+      by: `${Math.sin(a) * d - 30}px`,
+      br: `${(i * 67) % 360}deg`,
+      c: colors[i % colors.length],
+      delay: (i % 5) * 25,
+    };
+  });
+  return (
+    <div className="vocab-burst pointer-events-none absolute left-1/2 top-10 size-0" aria-hidden>
+      {bits.map((b, i) => (
+        <span
+          key={i}
+          className="absolute block h-2.5 w-1.5 rounded-[1px]"
+          style={
+            {
+              background: b.c,
+              '--bx': b.bx,
+              '--by': b.by,
+              '--br': b.br,
+              animation: `vocab-burst 900ms cubic-bezier(0.22,1,0.36,1) ${b.delay}ms both`,
+            } as CSSProperties
+          }
+        />
+      ))}
+    </div>
+  );
+}
