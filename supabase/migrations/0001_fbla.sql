@@ -80,7 +80,8 @@ create table if not exists public.fbla_duels (
   at timestamptz not null default now(),
   check (challenger <> opponent)
 );
-create index if not exists fbla_duels_players on public.fbla_duels (challenger, opponent);
+create index if not exists fbla_duels_challenger on public.fbla_duels (challenger);
+create index if not exists fbla_duels_opponent on public.fbla_duels (opponent);
 
 alter table public.fbla_profiles enable row level security;
 alter table public.fbla_answers enable row level security;

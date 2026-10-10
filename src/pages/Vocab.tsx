@@ -234,7 +234,7 @@ export default function Vocab() {
         aria-label="Study modes"
       >
         <button
-          className="panel group p-5 text-left transition-colors hover:border-ink hover:bg-band"
+          className="panel group flex flex-col justify-start p-5 text-left transition-colors hover:border-ink hover:bg-band disabled:opacity-50"
           onClick={() => start("flip")}
           disabled={!deck.length}
         >
@@ -251,7 +251,7 @@ export default function Vocab() {
           </p>
         </button>
         <button
-          className="panel group p-5 text-left transition-colors hover:border-ink hover:bg-band"
+          className="panel group flex flex-col justify-start p-5 text-left transition-colors hover:border-ink hover:bg-band disabled:opacity-50"
           onClick={() => start("match")}
           disabled={!deck.length}
         >

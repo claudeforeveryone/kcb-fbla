@@ -111,7 +111,7 @@ export function Shell({ children }: { children: ReactNode }) {
   const { backend, note, setNote } = useStore();
   return (
     <div className="min-h-dvh md:flex">
-      <aside className="bg-field text-on-field sticky top-0 hidden h-dvh w-60 shrink-0 flex-col justify-between md:flex">
+      <aside className="bg-field text-on-field fixed inset-y-0 left-0 z-20 hidden w-60 flex-col justify-between overflow-y-auto md:flex">
         <div>
           <div className="px-6 pb-8 pt-7">
             <Wordmark />
@@ -165,7 +165,7 @@ export function Shell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main id="main" className="min-w-0 flex-1">
+      <main id="main" className="min-w-0 flex-1 md:pl-60">
         {backend?.kind === "local" && (
           <div className="border-b border-rule bg-band px-4 py-2 text-sm text-ink-2 md:px-8">
             On-device mode: the chapter database isn't connected yet, so your

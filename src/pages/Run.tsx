@@ -395,7 +395,7 @@ function Session({
   const topicName = store.topicBy(q.topic)?.name;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 pb-32 pt-4 md:px-8 md:pt-8">
+    <div className="mx-auto w-full max-w-3xl px-4 pb-52 pt-4 md:px-8 md:pb-16 md:pt-8">
       <div className="sticky top-14 z-10 -mx-4 border-b border-rule bg-ground/95 px-4 py-3 backdrop-blur md:top-0 md:-mx-8 md:px-8">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">

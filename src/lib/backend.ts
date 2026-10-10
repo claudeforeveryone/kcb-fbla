@@ -333,7 +333,10 @@ export function cloudBackend(): Backend {
       const { data, error } = await s.auth.signUp({
         email,
         password,
-        options: { data: { name, grade } },
+        options: {
+          data: { name, grade, app: "kcb-fbla" },
+          emailRedirectTo: location.origin,
+        },
       });
       if (error) throw new Error(error.message);
       if (!data.session)
@@ -477,6 +480,14 @@ export function cloudBackend(): Backend {
   };
 }
 
+// A member can choose to study on this device while chapter sign-up isn't working for them.
+const MKEY = "kcbfbla:mode";
+export const cloudConfigured = () => !!URL && !!KEY;
+export const readMode = () => { try { return localStorage.getItem(MKEY); } catch { return null; } };
+export function setMode(mode: "local" | null) {
+  try { if (mode) localStorage.setItem(MKEY, mode); else localStorage.removeItem(MKEY); } catch { /* ignore */ }
+}
+
 // name and grade given at sign-up, for creating the profile row on first sign-in
 export async function authUser() {
   const { data } = await sb().auth.getUser();
@@ -491,7 +502,7 @@ export async function authUser() {
 
 // Cloud when the env is set and the fbla_ tables answer; otherwise this device.
 export async function pickBackend(): Promise<Backend> {
-  if (!URL || !KEY || new URLSearchParams(location.search).has("local"))
+  if (!URL || !KEY || new URLSearchParams(location.search).has("local") || readMode() === "local")
     return localBackend();
   try {
     const { error } = await Promise.race([

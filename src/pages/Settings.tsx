@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useStore } from "../state";
 import { GROUPS } from "../lib/content";
-import { LEVELS, type Level } from "../lib/backend";
+import { LEVELS, cloudConfigured, setMode, type Level } from "../lib/backend";
 import { applyTheme, readTheme, type ThemePref } from "../components/Shell";
 import { Page } from "../components/ui";
 
@@ -229,11 +229,17 @@ export default function Settings() {
           Account
         </h2>
         {backend?.kind === "local" ? (
-          <p className="text-ink-2">
-            You're in on-device mode. Your progress lives in this browser and
-            moves to your account the first time you sign in once the chapter
-            database is connected.
-          </p>
+          <>
+            <p className="text-ink-2">
+              You're in on-device mode. Your progress lives in this browser and
+              moves to your account the first time you sign in to the chapter.
+            </p>
+            {cloudConfigured() && (
+              <button className="btn" onClick={() => { setMode(null); location.assign("/"); }}>
+                Sign in to the chapter
+              </button>
+            )}
+          </>
         ) : (
           <button
             className="btn"

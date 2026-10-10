@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useStore } from "../state";
+import { setMode as setBackendMode } from "../lib/backend";
 import { Wordmark } from "../components/Shell";
 
 type Mode = "in" | "up" | "reset";
@@ -189,6 +190,15 @@ export default function Login() {
               </button>
             )}
           </div>
+        )}
+        {!local && (
+          <p className="mt-8 border-t border-on-field-2/20 pt-4 text-sm text-on-field-2">
+            Can't get into an account yet?{" "}
+            <button className="font-semibold text-on-field underline" onClick={() => { setBackendMode("local"); location.reload(); }}>
+              Study on this device
+            </button>
+            . Your progress moves to your account the first time you sign in.
+          </p>
         )}
       </div>
       <p className="px-4 pb-6 text-center text-xs text-on-field-2 opacity-60">
