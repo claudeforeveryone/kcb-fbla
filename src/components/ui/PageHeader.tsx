@@ -13,35 +13,36 @@ export function FacetArt({ className, intensity = 1 }: { className?: string; int
   const drift = (dur: number, delay: number, x: number, y: number, r: number) =>
     ({ '--facet-dur': `${dur}s`, '--facet-delay': `${delay}s`, '--facet-x': `${x}px`, '--facet-y': `${y}px`, '--facet-r': `${r}deg` }) as CSSProperties;
   return (
+    // Spans the whole banner. The right side carries the main cluster; shapes behind the text on the left are fainter.
     <svg
-      className={cn('pointer-events-none absolute inset-y-0 right-0 h-full w-[min(760px,100%)]', className)}
-      viewBox="0 0 760 320"
+      className={cn('pointer-events-none absolute inset-0 h-full w-full', className)}
+      viewBox="0 0 1440 320"
       preserveAspectRatio="xMaxYMid slice"
       aria-hidden
     >
-      {/* big rising shard */}
-      <polygon className="facet-drift" style={drift(16, 0, 12, -8, 1.5)} points="430,320 640,40 700,190 560,320" fill="#fff" fillOpacity={o(0.08)} />
-      {/* stepped lower plane, like the logo's base */}
-      <polygon className="facet-drift" style={drift(19, -6, -10, 4, -0.8)} points="520,320 620,250 650,250 690,200 760,170 760,320" fill="#3F6FB3" fillOpacity={o(0.35)} />
-      {/* left wedge */}
-      <polygon className="facet-drift" style={drift(13, -3, 8, -10, 2.5)} points="340,320 400,210 470,320" fill="#fff" fillOpacity={o(0.06)} />
-      {/* top-right flag plane */}
-      <polygon className="facet-drift" style={drift(17, -9, -8, 8, -1.5)} points="610,0 760,0 760,120 700,70" fill="#fff" fillOpacity={o(0.07)} />
-      {/* small floating triangles */}
-      <polygon className="facet-drift" style={drift(11, -2, 14, -12, 6)} points="300,70 330,40 342,92" fill="#fff" fillOpacity={o(0.09)} />
-      <polygon className="facet-drift" style={drift(14, -7, -12, 10, -5)} points="560,120 586,104 584,140" fill="#3F6FB3" fillOpacity={o(0.5)} />
-      {/* thin red accent edge */}
-      <polygon className="facet-drift" style={drift(16, 0, 12, -8, 1.5)} points="638,45 644,41 705,190 700,194" fill="#BF0D3E" fillOpacity={o(0.9)} />
-      {/* fine outline shard */}
-      <polyline
-        className="facet-drift"
-        style={drift(21, -4, 6, -6, 0.8)}
-        points="250,320 520,60 560,150"
-        fill="none"
-        stroke="#fff"
-        strokeOpacity={o(0.12)}
-        strokeWidth="1.5"
-      />
+      {/* far left: low planes and drifting slivers */}
+      <polygon className="facet-drift" style={drift(18, -5, 10, -6, 1)} points="0,320 0,200 120,320" fill="#fff" fillOpacity={o(0.05)} />
+      <polygon className="facet-drift" style={drift(22, -11, -8, 6, -1)} points="0,0 180,0 60,90" fill="#3F6FB3" fillOpacity={o(0.22)} />
+      <polygon className="facet-drift" style={drift(12, -1, 12, -10, 5)} points="150,190 178,168 186,212" fill="#fff" fillOpacity={o(0.08)} />
+      <polygon className="facet-drift" style={drift(15, -8, -10, 8, -4)} points="250,40 268,22 280,58" fill="#3F6FB3" fillOpacity={o(0.4)} />
+      <polygon className="facet-drift" style={drift(20, -3, 8, -8, 1.5)} points="200,320 330,170 380,320" fill="#3F6FB3" fillOpacity={o(0.18)} />
+      {/* middle band */}
+      <polygon className="facet-drift" style={drift(17, -6, -12, 6, -1.2)} points="420,0 600,0 520,110" fill="#fff" fillOpacity={o(0.05)} />
+      <polygon className="facet-drift" style={drift(13, -4, 14, -10, 6)} points="560,240 594,214 600,262" fill="#fff" fillOpacity={o(0.09)} />
+      <polygon className="facet-drift" style={drift(19, -9, 10, -6, 1)} points="620,320 760,150 820,320" fill="#fff" fillOpacity={o(0.05)} />
+      <polygon className="facet-drift" style={drift(14, -2, -14, 10, -5)} points="760,60 784,44 790,82" fill="#BF0D3E" fillOpacity={o(0.55)} />
+      <polygon className="facet-drift" style={drift(16, -12, 8, 8, 2)} points="880,0 980,0 940,70" fill="#3F6FB3" fillOpacity={o(0.3)} />
+      {/* right cluster: big rising shard, stepped base like the logo, flag plane, red edge */}
+      <polygon className="facet-drift" style={drift(16, 0, 12, -8, 1.5)} points="1110,320 1320,40 1380,190 1240,320" fill="#fff" fillOpacity={o(0.08)} />
+      <polygon className="facet-drift" style={drift(19, -6, -10, 4, -0.8)} points="1200,320 1300,250 1330,250 1370,200 1440,170 1440,320" fill="#3F6FB3" fillOpacity={o(0.35)} />
+      <polygon className="facet-drift" style={drift(13, -3, 8, -10, 2.5)} points="1020,320 1080,210 1150,320" fill="#fff" fillOpacity={o(0.06)} />
+      <polygon className="facet-drift" style={drift(17, -9, -8, 8, -1.5)} points="1290,0 1440,0 1440,120 1380,70" fill="#fff" fillOpacity={o(0.07)} />
+      <polygon className="facet-drift" style={drift(11, -2, 14, -12, 6)} points="980,70 1010,40 1022,92" fill="#fff" fillOpacity={o(0.09)} />
+      <polygon className="facet-drift" style={drift(14, -7, -12, 10, -5)} points="1240,120 1266,104 1264,140" fill="#3F6FB3" fillOpacity={o(0.5)} />
+      <polygon className="facet-drift" style={drift(16, 0, 12, -8, 1.5)} points="1318,45 1324,41 1385,190 1380,194" fill="#BF0D3E" fillOpacity={o(0.9)} />
+      {/* fine outline shards */}
+      <polyline className="facet-drift" style={drift(21, -4, 6, -6, 0.8)} points="930,320 1200,60 1240,150" fill="none" stroke="#fff" strokeOpacity={o(0.12)} strokeWidth="1.5" />
+      <polyline className="facet-drift" style={drift(24, -10, -6, 6, -0.6)} points="380,320 560,90 610,170" fill="none" stroke="#fff" strokeOpacity={o(0.08)} strokeWidth="1.5" />
     </svg>
   );
 }
