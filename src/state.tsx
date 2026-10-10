@@ -177,6 +177,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const syncedAt = useRef<number>(-1);
   // a failed recount tries again a little later instead of waiting for the next answer
   const [syncTry, setSyncTry] = useState(0);
+  const syncFails = useRef(0);
+  const retryTimer = useRef<number | undefined>(undefined);
+  useEffect(() => () => clearTimeout(retryTimer.current), []);
   // queued answers that finally went up: recount on the server
   const [flushed, setFlushed] = useState(0);
   useEffect(() => {
@@ -208,13 +211,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       backend
         .syncStats(me.id, mine)
         .then((stats) => {
+          syncFails.current = 0;
           setMe((m) => (m ? { ...m, ...stats } : m));
           setProfiles((ps) => ps.map((p) => (p.id === me.id ? { ...p, ...stats } : p)));
         })
         .catch(() => {
-          if (syncedAt.current !== n) return;
+          // back off 30 s, 1, 2, 4, 8 min, then wait for the next answer to try again
+          if (syncedAt.current !== n || syncFails.current >= 5) return;
           syncedAt.current = -2;
-          window.setTimeout(() => setSyncTry((t) => t + 1), 30000);
+          clearTimeout(retryTimer.current);
+          retryTimer.current = window.setTimeout(() => setSyncTry((t) => t + 1), 30000 * 2 ** syncFails.current++);
         });
     }, 1500);
   }, [d, backend, me, phase, logs.answers, syncTry]);
@@ -352,6 +358,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setProfiles([]);
     userCache.current.clear();
     syncedAt.current = -1;
+    syncFails.current = 0;
+    clearTimeout(retryTimer.current);
     setPhase("out");
   }, [backend]);
 

@@ -115,11 +115,12 @@ async function rawInsert(table: string, rows: object[]) {
   const { error } = await sb().from(table).insert(rows);
   if (error) throw error;
 }
-// A Postgres error code means the database looked at the rows and said no (say, a question retired from the
-// catalogue). Sending them again won't change that. Connection, rollback and capacity classes are worth a retry.
+// The database looked at the rows themselves and said no: our trigger's raise (a question retired from the
+// catalogue, P0001), bad data (22) or a broken constraint (23). Sending them again won't change that. Anything
+// else (network, auth, permissions, capacity) might pass later, so it stays queued.
 const rejected = (e: unknown) => {
   const c = (e as { code?: unknown } | null)?.code;
-  return typeof c === 'string' && /^[0-9A-Z]{5}$/.test(c) && !/^(08|40|53|57)/.test(c);
+  return typeof c === 'string' && (c === 'P0001' || /^(22|23)[0-9A-Z]{3}$/.test(c));
 };
 // Send what the database will take. A rejected batch is retried row by row and only the rows it refuses are
 // dropped, so one bad row can't hold the rest back. Stops at the first network error: rows[0..done) are handled
@@ -162,7 +163,7 @@ export function flushPending(): Promise<number> {
       for (const p of mine) {
         const r = await send(p.table, p.rows);
         sent += r.sent;
-        if (!r.done) continue; // untouched, stays queued
+        if (r.error && !r.done) continue; // untouched, stays queued
         done.add(JSON.stringify(p));
         if (r.done < p.rows.length) left.push({ ...p, rows: p.rows.slice(r.done) });
       }
