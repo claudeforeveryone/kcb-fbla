@@ -131,7 +131,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     if (b.kind === "cloud") {
       const up = await uploadLocal(b, id).catch(() => 0);
       if (up) setNote(`Moved ${up} records from this device to your account.`);
-      flushPending().catch(() => 0);
+      const sent = await flushPending().catch(() => 0);
+      // records that just landed change the leaderboard numbers; have the server recount before showing them
+      if (up || sent) {
+        const stats = await b.syncStats(id, p).catch(() => null);
+        if (stats) p = { ...p, ...stats };
+      }
     }
     const [l, w, ps] = await Promise.all([b.logs(id), b.words(), b.profiles()]);
     setMe(p);
@@ -157,7 +162,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setPhase("out");
     });
     const t = setInterval(() => {
-      flushPending().catch(() => 0);
+      flushPending()
+        .then((n) => { if (n) setFlushed((x) => x + 1); })
+        .catch(() => 0);
     }, 60_000);
     return () => clearInterval(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -168,6 +175,19 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // from the answer log a beat after answering stops (members can't write those columns themselves)
   const syncTimer = useRef<number | undefined>(undefined);
   const syncedAt = useRef<number>(-1);
+  // queued answers that finally went up: recount on the server
+  const [flushed, setFlushed] = useState(0);
+  useEffect(() => {
+    if (!flushed || !backend || !me) return;
+    backend
+      .syncStats(me.id, me)
+      .then((stats) => {
+        setMe((m) => (m ? { ...m, ...stats } : m));
+        setProfiles((ps) => ps.map((x) => (x.id === me.id ? { ...x, ...stats } : x)));
+      })
+      .catch(() => 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flushed]);
   useEffect(() => {
     if (!backend || !me || phase !== "in") return;
     const n = logs.answers.length;

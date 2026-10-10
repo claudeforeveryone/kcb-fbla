@@ -23,7 +23,7 @@ Add `?local` to any URL to use on-device mode (no account, progress stays in the
 ## Data
 
 - **Question banks:** `content/<event>.json`, 100 questions and 60 terms per event, written for this site from FBLA's published competency areas (each file's `notes` says where they came from). Not official FBLA items. `content/BRIEF.md` is the spec and `content/check.mjs` the validator.
-- **Progress:** Supabase project "orbit", tables prefixed `fbla_` (see `supabase/migrations/`). The browser keeps event logs (answers, vocab reviews, papers, duels); the database recomputes each member's rating, peak, answered, correct and mastered with `fbla_sync_stats()`, and members can't write those columns themselves.
+- **Progress:** Supabase project "orbit", tables prefixed `fbla_` (see `supabase/migrations/`). The browser keeps event logs (answers, vocab reviews, papers, duels); the database recomputes each member's rating, peak, answered, correct and mastered with `fbla_sync_stats()`, and members can't write those columns themselves. Answers must name a question in `fbla_questions` (seeded from `content/` by `scripts/catalogue-sql.mjs`), which also supplies its difficulty. Only chapter members (anyone with an `fbla_profiles` row) can read chapter data.
 
 ## Three separate numbers
 

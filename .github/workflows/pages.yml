@@ -27,6 +27,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - run: npm run check:content
       - run: npm run build
         env:
           PAGES_BASE: /kcb-fbla/

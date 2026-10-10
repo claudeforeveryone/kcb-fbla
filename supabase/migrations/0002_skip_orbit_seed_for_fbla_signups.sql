@@ -7,6 +7,9 @@ begin
   def := pg_get_functiondef('public.seed_user_defaults'::regproc);
   if position('kcb-fbla' in def) = 0 then
     def := regexp_replace(def, E'\nbegin\n', E'\nbegin\n  if new.raw_user_meta_data ->> ''app'' = ''kcb-fbla'' then return new; end if;\n', '');
+    if position('kcb-fbla' in def) = 0 then
+      raise exception 'seed_user_defaults() did not match the expected shape; guard not added';
+    end if;
     execute def;
   end if;
 end $$;
