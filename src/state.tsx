@@ -1,0 +1,405 @@
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  pickBackend,
+  flushPending,
+  uploadLocal,
+  authUser,
+  type Backend,
+  type Logs,
+  type Profile,
+  type Resume,
+  type Word,
+} from "./lib/backend";
+import { loadIndex, loadVocab, type Question, type Topic } from "./lib/content";
+import { mastery, rating, tierFor, type Answer } from "./lib/score";
+import { states, type Review, type Term } from "./lib/srs";
+import { summarize, type Paper } from "./lib/stats";
+
+const EMPTY: Logs = { answers: [], reviews: [], papers: [], duels: [] };
+
+export function derive(logs: Logs, me: string, words: Word[] = []) {
+  const r = rating(logs.answers);
+  const m = mastery(logs.answers);
+  return {
+    rating: r.rating,
+    peak: r.peak,
+    history: r.history,
+    mastery: m,
+    tier: tierFor(m.mastered),
+    summary: summarize({ ...logs, me, now: new Date() }),
+    srs: states(logs.reviews),
+    wordIds: new Set(words.map((w) => "w:" + w.id)),
+  };
+}
+export type Derived = ReturnType<typeof derive>;
+
+export type Graded = { q: Question; pick: number | null; ms: number };
+
+type Store = {
+  phase: "boot" | "out" | "in";
+  backend: Backend | null;
+  me: Profile | null;
+  logs: Logs;
+  words: Word[];
+  profiles: Profile[];
+  topics: Topic[];
+  vocab: Term[];
+  d: Derived;
+  note: string | null;
+  error: string | null;
+  setNote: (s: string | null) => void;
+  enter: () => Promise<void>;
+  signOut: () => Promise<void>;
+  recordAnswers: (list: Graded[], mode: string) => Answer[];
+  recordReview: (term: string, correct: boolean, ms: number) => void;
+  recordPaper: (p: Omit<Paper, "at">) => void;
+  saveProfile: (patch: Partial<Profile>) => Promise<void>;
+  setResume: (r: Resume | null) => void;
+  addWord: (w: {
+    term: string;
+    def: string;
+    ref: string | null;
+  }) => Promise<Word>;
+  deleteWord: (id: string) => Promise<void>;
+  refresh: () => Promise<void>;
+  loadUser: (id: string) => Promise<{ profile: Profile; logs: Logs } | null>;
+  rivalOf: (p: Profile | null) => Profile | null;
+  totalQuestions: number;
+  topicBy: (slug: string | null | undefined) => Topic | undefined;
+};
+
+const Ctx = createContext<Store | null>(null);
+export const useStore = () => {
+  const s = useContext(Ctx);
+  if (!s) throw new Error("no store");
+  return s;
+};
+
+const RESUME_KEY = "kcbfbla:resume";
+
+export function StoreProvider({ children }: { children: ReactNode }) {
+  const [phase, setPhase] = useState<Store["phase"]>("boot");
+  const [backend, setBackend] = useState<Backend | null>(null);
+  const [me, setMe] = useState<Profile | null>(null);
+  const [logs, setLogs] = useState<Logs>(EMPTY);
+  const [words, setWords] = useState<Word[]>([]);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const [vocab, setVocab] = useState<Term[]>([]);
+  const [note, setNote] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const logsRef = useRef(logs);
+  logsRef.current = logs;
+
+  const d = useMemo(
+    () => derive(logs, me?.id ?? "", words),
+    [logs, me?.id, words],
+  );
+
+  const enter = useCallback(async () => {
+    const b = backend ?? (await pickBackend());
+    setBackend(b);
+    const id = await b.userId();
+    if (!id) {
+      setPhase("out");
+      return;
+    }
+    let p = await b.profile(id);
+    if (!p && b.kind === "cloud") {
+      const u = await authUser();
+      p = await b.createProfile(
+        id,
+        String(u?.name || u?.email?.split("@")[0] || "Member").slice(0, 40),
+        u?.grade ?? null,
+      );
+    }
+    if (!p) {
+      setPhase("out");
+      return;
+    }
+    if (b.kind === "cloud") {
+      const up = await uploadLocal(b, id).catch(() => 0);
+      if (up) setNote(`Moved ${up} records from this device to your account.`);
+      flushPending().catch(() => 0);
+    }
+    const [l, w, ps] = await Promise.all([b.logs(id), b.words(), b.profiles()]);
+    setMe(p);
+    setLogs(l);
+    setWords(w);
+    setProfiles(ps);
+    setPhase("in");
+  }, [backend]);
+
+  useEffect(() => {
+    Promise.all([loadIndex(), loadVocab()])
+      .then(([t, v]) => {
+        setTopics(t);
+        setVocab(v);
+      })
+      .catch(() =>
+        setError(
+          "Could not load the question banks. Check your connection and reload.",
+        ),
+      );
+    enter().catch(() => {
+      setError("Could not reach the chapter database.");
+      setPhase("out");
+    });
+    const t = setInterval(() => {
+      flushPending().catch(() => 0);
+    }, 60_000);
+    return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // the profile row caches the computed numbers for the leaderboard; push them a beat after activity stops
+  const syncTimer = useRef<number | undefined>(undefined);
+  useEffect(() => {
+    if (!backend || !me || phase !== "in") return;
+    const patch = {
+      rating: Math.round(d.rating * 10) / 10,
+      peak: Math.round(d.peak * 10) / 10,
+      answered: d.summary.answered,
+      correct: logs.answers.filter((a) => a.correct).length,
+      mastered: d.mastery.mastered,
+    };
+    if (
+      patch.rating === me.rating &&
+      patch.answered === me.answered &&
+      patch.mastered === me.mastered &&
+      patch.peak === me.peak
+    )
+      return;
+    clearTimeout(syncTimer.current);
+    syncTimer.current = window.setTimeout(() => {
+      backend.updateProfile(me.id, patch).catch(() => 0);
+      setMe((m) => (m ? { ...m, ...patch } : m));
+      setProfiles((ps) =>
+        ps.map((p) => (p.id === me.id ? { ...p, ...patch } : p)),
+      );
+    }, 1500);
+  }, [d, backend, me, phase, logs.answers]);
+
+  const recordAnswers = useCallback(
+    (list: Graded[], mode: string) => {
+      const seen = new Set(logsRef.current.answers.map((a) => a.qid));
+      const t0 = Date.now() - list.length;
+      const rows: Answer[] = list
+        .filter((g) => g.pick !== null)
+        .map((g, i) => {
+          const first = !seen.has(g.q.id);
+          seen.add(g.q.id);
+          return {
+            qid: g.q.id,
+            topic: g.q.topic,
+            sub: g.q.sub,
+            diff: g.q.diff,
+            correct: g.pick === g.q.answer,
+            first,
+            ms: Math.max(0, Math.round(g.ms)),
+            mode,
+            at: new Date(t0 + i).toISOString(),
+          };
+        });
+      if (!rows.length) return rows;
+      setLogs((l) => ({ ...l, answers: [...l.answers, ...rows] }));
+      backend
+        ?.addAnswers(rows)
+        .catch(() =>
+          setNote(
+            "Saved on this device for now. It will sync when you are back online.",
+          ),
+        );
+      return rows;
+    },
+    [backend],
+  );
+
+  const recordReview = useCallback(
+    (term: string, correct: boolean, ms: number) => {
+      const row: Review = {
+        term,
+        correct,
+        ms: Math.round(ms),
+        at: new Date().toISOString(),
+      };
+      setLogs((l) => ({ ...l, reviews: [...l.reviews, row] }));
+      backend?.addReview(row).catch(() => 0);
+    },
+    [backend],
+  );
+
+  const recordPaper = useCallback(
+    (p: Omit<Paper, "at">) => {
+      const row = { ...p, at: new Date().toISOString() };
+      setLogs((l) => ({ ...l, papers: [...l.papers, row] }));
+      backend?.addPaper(row).catch(() => 0);
+    },
+    [backend],
+  );
+
+  const saveProfile = useCallback(
+    async (patch: Partial<Profile>) => {
+      if (!backend || !me) return;
+      await backend.updateProfile(me.id, patch);
+      setMe((m) => (m ? { ...m, ...patch } : m));
+      setProfiles((ps) =>
+        ps.map((p) => (p.id === me.id ? { ...p, ...patch } : p)),
+      );
+    },
+    [backend, me],
+  );
+
+  const resumeTimer = useRef<number | undefined>(undefined);
+  const setResume = useCallback(
+    (r: Resume | null) => {
+      try {
+        r
+          ? localStorage.setItem(RESUME_KEY, JSON.stringify(r))
+          : localStorage.removeItem(RESUME_KEY);
+      } catch {
+        /* ignore */
+      }
+      setMe((m) => (m ? { ...m, resume: r } : m));
+      clearTimeout(resumeTimer.current);
+      resumeTimer.current = window.setTimeout(
+        () => {
+          if (backend && me)
+            backend.updateProfile(me.id, { resume: r }).catch(() => 0);
+        },
+        r ? 3000 : 0,
+      );
+    },
+    [backend, me],
+  );
+
+  const addWord = useCallback(
+    async (w: { term: string; def: string; ref: string | null }) => {
+      if (!backend) throw new Error("not ready");
+      const word = await backend.addWord(w);
+      setWords((ws) => [word, ...ws]);
+      return word;
+    },
+    [backend],
+  );
+  const deleteWord = useCallback(
+    async (id: string) => {
+      if (!backend) return;
+      await backend.deleteWord(id);
+      setWords((ws) => ws.filter((w) => w.id !== id));
+    },
+    [backend],
+  );
+
+  const refresh = useCallback(async () => {
+    if (!backend || !me) return;
+    const [l, ps] = await Promise.all([
+      backend.logs(me.id),
+      backend.profiles(),
+    ]);
+    setLogs((cur) => ({
+      ...l,
+      answers: l.answers.length >= cur.answers.length ? l.answers : cur.answers,
+    }));
+    setProfiles(ps);
+  }, [backend, me]);
+
+  const signOut = useCallback(async () => {
+    await backend?.signOut();
+    setMe(null);
+    setLogs(EMPTY);
+    setWords([]);
+    setPhase("out");
+  }, [backend]);
+
+  const userCache = useRef(new Map<string, { profile: Profile; logs: Logs }>());
+  const loadUser = useCallback(
+    async (id: string) => {
+      if (!backend) return null;
+      if (me && id === me.id) return { profile: me, logs };
+      const hit = userCache.current.get(id);
+      if (hit) return hit;
+      const profile = await backend.profile(id);
+      if (!profile) return null;
+      const out = { profile, logs: await backend.logs(id) };
+      userCache.current.set(id, out);
+      return out;
+    },
+    [backend, me, logs],
+  );
+
+  // "Another user": your chosen rival, else the member just above you, else just below.
+  const rivalOf = useCallback(
+    (p: Profile | null) => {
+      if (!p) return null;
+      const others = profiles.filter((x) => x.id !== p.id);
+      if (!others.length) return null;
+      const chosen = p.rival ? others.find((x) => x.id === p.rival) : undefined;
+      if (chosen) return chosen;
+      const ranked = [...profiles].sort((a, b) => b.rating - a.rating);
+      const i = ranked.findIndex((x) => x.id === p.id);
+      return ranked[i - 1] ?? ranked[i + 1] ?? null;
+    },
+    [profiles],
+  );
+
+  // pick up an unfinished session saved on this device if the profile has none (or an older one)
+  useEffect(() => {
+    if (phase !== "in" || !me) return;
+    try {
+      const local = JSON.parse(
+        localStorage.getItem(RESUME_KEY) || "null",
+      ) as Resume | null;
+      if (local && (!me.resume || local.savedAt > me.resume.savedAt))
+        setMe((m) => (m ? { ...m, resume: local } : m));
+    } catch {
+      /* ignore */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
+  const totalQuestions = topics.reduce((s, t) => s + t.questions, 0);
+  const topicBy = useCallback(
+    (slug: string | null | undefined) => topics.find((t) => t.slug === slug),
+    [topics],
+  );
+
+  const value: Store = {
+    phase,
+    backend,
+    me,
+    logs,
+    words,
+    profiles,
+    topics,
+    vocab,
+    d,
+    note,
+    error,
+    setNote,
+    enter,
+    signOut,
+    recordAnswers,
+    recordReview,
+    recordPaper,
+    saveProfile,
+    setResume,
+    addWord,
+    deleteWord,
+    refresh,
+    loadUser,
+    rivalOf,
+    totalQuestions,
+    topicBy,
+  };
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+}

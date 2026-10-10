@@ -143,7 +143,7 @@ describe("readiness", () => {
       subs,
     );
     expect(r.ready).toBe(false);
-    expect(r.need).toBe(14);
+    expect(r.ready ? -1 : r.need).toBe(14);
   });
 
   it("predicts higher for a stronger record and keeps the range around the score", () => {
