@@ -33,7 +33,7 @@ export function Hero({ profile, stats, statsLoading }: { profile: HeroProfile; s
   else line = 'A quick set today starts a new streak.';
 
   return (
-    <header className="facets relative isolate overflow-hidden text-white">
+    <header className="band relative isolate overflow-hidden text-white">
       <FacetArt className="opacity-90 max-md:opacity-40" />
       <div className="relative mx-auto grid w-full max-w-6xl gap-6 px-4 pb-24 pt-8 sm:px-6 md:pb-28 md:pt-10 lg:grid-cols-[1fr_auto] lg:items-end">
         <div className="flex min-w-0 items-center gap-4 md:gap-5">

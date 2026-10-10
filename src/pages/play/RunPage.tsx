@@ -190,7 +190,7 @@ function ResultActions({ run, result }: { run: BuiltRun; result: ExamResultData 
 function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="relative">
-      <div className="facets absolute inset-x-0 top-0 h-64 overflow-hidden" aria-hidden>
+      <div className="band absolute inset-x-0 top-0 h-64 overflow-hidden" aria-hidden>
         <FacetArt className="opacity-70" />
       </div>
       <div className="relative px-4 pb-12 pt-10 sm:px-6 md:pt-16">{children}</div>

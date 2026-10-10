@@ -59,7 +59,7 @@ export default function ReviewPage() {
   if (state.s === 'loading')
     return (
       <div role="status" aria-label="Loading attempt">
-        <div className="facets h-64 w-full" />
+        <div className="band h-64 w-full" />
         <Page>
           <Skeleton className="mb-6 h-10 w-80" />
           <div className="space-y-3">

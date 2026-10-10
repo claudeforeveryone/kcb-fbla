@@ -990,7 +990,7 @@ function Confetti() {
 function DuelSkeleton() {
   return (
     <>
-      <div className="facets h-72 w-full" aria-hidden />
+      <div className="band h-72 w-full" aria-hidden />
       <Page width="narrow">
         <div className="space-y-3" role="status" aria-label="Loading duel">
           <Skeleton className="h-28 w-full" rounded="rounded-[2px]" />

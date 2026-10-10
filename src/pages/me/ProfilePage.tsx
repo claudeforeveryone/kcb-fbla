@@ -677,7 +677,7 @@ function FriendsCard() {
 function ProfileSkeleton() {
   return (
     <>
-      <header className="facets relative overflow-hidden">
+      <header className="band relative overflow-hidden">
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 pb-14 pt-12 sm:px-6">
           <Skeleton className="size-24 opacity-30" rounded="rounded-full" />
           <div className="flex-1 space-y-3">
