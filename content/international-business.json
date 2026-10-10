@@ -187,7 +187,7 @@
     },
     {
       "id": "ib-015",
-      "q": "Which stage of economic integration includes a common external tariff, free trade among members, and free movement of labour and capital?",
+      "q": "Which stage of economic integration has a common external tariff, free trade among members, and free movement of labour and capital, but no harmonized economic or monetary policy?",
       "choices": [
         "Free trade area",
         "Customs union",
@@ -195,7 +195,7 @@
         "Common market"
       ],
       "answer": 3,
-      "explain": "A common market adds free movement of factors of production to a customs union. A customs union covers goods only.",
+      "explain": "A common market adds free movement of factors of production to a customs union. A customs union covers goods only. An economic union also harmonizes economic and monetary policy.",
       "sub": "International Trade Theory and Agreements",
       "diff": 2
     },
@@ -950,10 +950,10 @@
     },
     {
       "id": "ib-072",
-      "q": "A product must be sold at a lower purchase price in lower-income markets. Which element of the 4Ps needs the most adjustment?",
+      "q": "A product must sell at a lower purchase price in lower-income markets, with its features and packaging left unchanged. Which element of the 4Ps needs the most adjustment?",
       "choices": ["Product", "Place", "Promotion", "Price"],
       "answer": 3,
-      "explain": "The price element changes first when the purchase price must fall, although the product may also change to support the lower price.",
+      "explain": "With the product held constant, the price element is the one that must change to lower the purchase price. Promotion and place do not set the amount paid.",
       "sub": "Global Marketing and Cultural Adaptation",
       "diff": 2
     },

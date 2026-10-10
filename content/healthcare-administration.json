@@ -302,7 +302,7 @@
         "The insured's percentage share of covered costs after the deductible",
         "A premium paid by the employer"
       ],
-      "answer": 3,
+      "answer": 2,
       "explain": "Coinsurance is a percentage the insured pays of allowed charges after the deductible. Copayment is a fixed amount.",
       "sub": "Healthcare Billing and Insurance",
       "diff": 2
@@ -367,7 +367,7 @@
         "Number of employees hired per year",
         "Terminations divided by hires"
       ],
-      "answer": 2,
+      "answer": 1,
       "explain": "Turnover rate = separations divided by average headcount, multiplied by 100. Hires are not part of the formula.",
       "sub": "Staffing and Training",
       "diff": 2

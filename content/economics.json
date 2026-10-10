@@ -316,7 +316,7 @@
         "Eliminates all opportunity costs",
         "Prevents shortages in every market"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "Prices ration scarce goods to those willing and able to pay. Prices do not guarantee fairness and do not eliminate opportunity costs.",
       "sub": "Fundamental Economic Concepts",
       "diff": 1

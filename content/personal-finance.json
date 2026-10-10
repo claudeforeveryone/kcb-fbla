@@ -803,7 +803,7 @@
         "Most of the minimum covers accrued interest, leaving little for principal"
       ],
       "answer": 3,
-      "explain": "Monthly interest is $3,000 times 2%, or $60, so the entire minimum goes to interest.",
+      "explain": "Monthly interest is $3,000 times 2%, or $60, so nearly all of the minimum covers interest and little reduces principal.",
       "sub": "Financial Literacy",
       "diff": 3
     },
@@ -823,7 +823,7 @@
     },
     {
       "id": "pf-062",
-      "q": "Under U.S. federal law, how often can a consumer get a free credit report from each nationwide credit bureau?",
+      "q": "Under the Fair Credit Reporting Act, how often is a consumer entitled to a free credit report from each nationwide credit bureau?",
       "choices": [
         "Once every five years",
         "Once every 12 months",
@@ -831,7 +831,7 @@
         "Once a month"
       ],
       "answer": 1,
-      "explain": "The Fair Credit Reporting Act entitles consumers to a free report from each nationwide bureau every 12 months.",
+      "explain": "The Fair Credit Reporting Act entitles consumers to one free report from each nationwide bureau every 12 months. The bureaus now also offer free weekly reports voluntarily, but that goes beyond the legal minimum.",
       "sub": "Financial Literacy",
       "diff": 2
     },

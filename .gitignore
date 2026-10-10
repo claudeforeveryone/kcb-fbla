@@ -5,3 +5,4 @@ public/content/
 *.log
 .superpowers/
 .omc/
+.env

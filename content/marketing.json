@@ -17,12 +17,7 @@
     {
       "id": "mkt-001",
       "q": "Which element of the marketing mix is most directly concerned with the amount a customer pays for a product?",
-      "choices": [
-        "Price",
-        "Place",
-        "Promotion",
-        "Product"
-      ],
+      "choices": ["Price", "Place", "Promotion", "Product"],
       "answer": 0,
       "explain": "Price is the mix variable that sets the amount a customer pays. Place covers distribution, not cost.",
       "sub": "Marketing Fundamentals",
@@ -199,12 +194,7 @@
     {
       "id": "mkt-014",
       "q": "A firm's SWOT analysis notes a strong brand reputation. Where does this belong?",
-      "choices": [
-        "Opportunities",
-        "Strengths",
-        "Threats",
-        "Weaknesses"
-      ],
+      "choices": ["Opportunities", "Strengths", "Threats", "Weaknesses"],
       "answer": 1,
       "explain": "A brand reputation is an internal advantage, so it is a strength.",
       "sub": "Market Planning",
@@ -213,12 +203,7 @@
     {
       "id": "mkt-015",
       "q": "A competitor announces it will leave the market, and the firm expects demand to shift toward it. In a SWOT, this is best classified as a(n):",
-      "choices": [
-        "Strength",
-        "Weakness",
-        "Opportunity",
-        "Threat"
-      ],
+      "choices": ["Strength", "Weakness", "Opportunity", "Threat"],
       "answer": 2,
       "explain": "An external factor that favors the firm is an opportunity.",
       "sub": "Market Planning",
@@ -269,12 +254,7 @@
     {
       "id": "mkt-019",
       "q": "A firm holds 12% market share in an industry with $50 million in total sales. What are the firm's sales?",
-      "choices": [
-        "$4 million",
-        "$5.5 million",
-        "$6 million",
-        "$12 million"
-      ],
+      "choices": ["$4 million", "$5.5 million", "$6 million", "$12 million"],
       "answer": 2,
       "explain": "0.12 x $50 million = $6 million.",
       "sub": "Market Planning",
@@ -297,12 +277,7 @@
     {
       "id": "mkt-021",
       "q": "A product has high market share in a slow-growing market. Under the BCG matrix, it is a:",
-      "choices": [
-        "Cash cow",
-        "Star",
-        "Question mark",
-        "Dog"
-      ],
+      "choices": ["Cash cow", "Star", "Question mark", "Dog"],
       "answer": 0,
       "explain": "High share and low growth define a cash cow.",
       "sub": "Market Planning",
@@ -367,12 +342,7 @@
     {
       "id": "mkt-026",
       "q": "In which product life cycle stage do sales growth slow and competition intensify, pushing firms to differentiate?",
-      "choices": [
-        "Introduction",
-        "Maturity",
-        "Growth",
-        "Decline"
-      ],
+      "choices": ["Introduction", "Maturity", "Growth", "Decline"],
       "answer": 1,
       "explain": "Maturity is when growth flattens and competition is strongest.",
       "sub": "Market Planning",
@@ -381,12 +351,7 @@
     {
       "id": "mkt-027",
       "q": "In a PESTEL analysis, a new federal rule restricting how sugar content can be labeled falls under which factor?",
-      "choices": [
-        "Economic",
-        "Social",
-        "Political-legal",
-        "Technological"
-      ],
+      "choices": ["Economic", "Social", "Political-legal", "Technological"],
       "answer": 2,
       "explain": "A regulation is a political-legal factor.",
       "sub": "Market Planning",
@@ -479,12 +444,7 @@
     {
       "id": "mkt-034",
       "q": "A survey gives the same results when repeated under the same conditions. This describes which research quality?",
-      "choices": [
-        "Validity",
-        "Reliability",
-        "Representativeness",
-        "Relevance"
-      ],
+      "choices": ["Validity", "Reliability", "Representativeness", "Relevance"],
       "answer": 1,
       "explain": "Reliability means consistent results across repeated measurements.",
       "sub": "Marketing-Information Management",
@@ -576,7 +536,7 @@
     },
     {
       "id": "mkt-041",
-      "q": "A company sells a basic phone, a premium phone, and an accessories bundle under one brand. This is best described as:",
+      "q": "A company sells a basic phone and a premium phone, built on the same platform and sold as one family of related models. This is best described as:",
       "choices": [
         "Product line management",
         "Product mix pruning",
@@ -647,12 +607,7 @@
     {
       "id": "mkt-046",
       "q": "In the diffusion of innovations, which adopter group tries new products first?",
-      "choices": [
-        "Late majority",
-        "Innovators",
-        "Laggards",
-        "Early majority"
-      ],
+      "choices": ["Late majority", "Innovators", "Laggards", "Early majority"],
       "answer": 1,
       "explain": "Innovators are the first group to adopt a new product.",
       "sub": "Product/Service Management",
@@ -661,12 +616,7 @@
     {
       "id": "mkt-047",
       "q": "A firm drops a product with falling sales, high costs, and a negative contribution margin. This is:",
-      "choices": [
-        "Harvesting",
-        "Penetration",
-        "Pruning",
-        "Repositioning"
-      ],
+      "choices": ["Harvesting", "Penetration", "Pruning", "Repositioning"],
       "answer": 2,
       "explain": "Pruning removes weak products from the product mix.",
       "sub": "Product/Service Management",
@@ -689,12 +639,7 @@
     {
       "id": "mkt-049",
       "q": "Which packaging function is mainly about keeping the product safe while it is shipped and stored?",
-      "choices": [
-        "Protection",
-        "Promotion",
-        "Positioning",
-        "Pricing"
-      ],
+      "choices": ["Protection", "Promotion", "Positioning", "Pricing"],
       "answer": 0,
       "explain": "Protection is the packaging function for transport and storage.",
       "sub": "Product/Service Management",
@@ -703,12 +648,7 @@
     {
       "id": "mkt-050",
       "q": "In the United States, which legal instrument primarily protects a brand's name, logo, and tagline?",
-      "choices": [
-        "Patent",
-        "Trademark",
-        "Copyright",
-        "Trade secret"
-      ],
+      "choices": ["Patent", "Trademark", "Copyright", "Trade secret"],
       "answer": 1,
       "explain": "Trademarks protect brand identifiers. Patents cover inventions and copyrights cover creative works.",
       "sub": "Product/Service Management",
@@ -717,12 +657,7 @@
     {
       "id": "mkt-051",
       "q": "Intermediaries that take title to goods and resell them to retailers are called:",
-      "choices": [
-        "Agents",
-        "Brokers",
-        "Wholesalers",
-        "Facilitators"
-      ],
+      "choices": ["Agents", "Brokers", "Wholesalers", "Facilitators"],
       "answer": 2,
       "explain": "Wholesalers take title and resell, typically to retailers or business users.",
       "sub": "Channel Management",
@@ -759,12 +694,7 @@
     {
       "id": "mkt-054",
       "q": "A luxury watch brand grants one authorized jeweler sole rights to sell its watches in each city. Which distribution strategy is this?",
-      "choices": [
-        "Intensive",
-        "Exclusive",
-        "Mass",
-        "Selective"
-      ],
+      "choices": ["Intensive", "Exclusive", "Mass", "Selective"],
       "answer": 1,
       "explain": "Exclusive distribution gives a limited number of dealers sole rights in a territory.",
       "sub": "Channel Management",
@@ -775,7 +705,7 @@
       "q": "A manufacturer sells directly online at prices below its retail partners, causing friction with them. This is:",
       "choices": [
         "Horizontal conflict",
-        "Vertical conflict",
+        "Supplier conflict over raw material costs",
         "Multichannel conflict",
         "Lateral conflict"
       ],
@@ -899,12 +829,7 @@
     {
       "id": "mkt-064",
       "q": "A product costs $20 per unit, and the firm applies a 25% markup on cost. What is the selling price?",
-      "choices": [
-        "$22.50",
-        "$24.00",
-        "$30.00",
-        "$25.00"
-      ],
+      "choices": ["$22.50", "$24.00", "$30.00", "$25.00"],
       "answer": 3,
       "explain": "0.25 x $20 = $5; $20 + $5 = $25.",
       "sub": "Pricing",
@@ -913,12 +838,7 @@
     {
       "id": "mkt-065",
       "q": "A retailer sells an item for $80 that cost $48. What is the gross margin percentage based on selling price?",
-      "choices": [
-        "40%",
-        "60%",
-        "67%",
-        "32%"
-      ],
+      "choices": ["40%", "60%", "67%", "32%"],
       "answer": 0,
       "explain": "($80 - $48) / $80 = 40%.",
       "sub": "Pricing",
@@ -927,12 +847,7 @@
     {
       "id": "mkt-066",
       "q": "Fixed costs are $12,000 per month. Price is $30 and variable cost is $18 per unit. How many units break even?",
-      "choices": [
-        "400 units",
-        "1,000 units",
-        "600 units",
-        "2,000 units"
-      ],
+      "choices": ["400 units", "1,000 units", "600 units", "2,000 units"],
       "answer": 1,
       "explain": "$12,000 / ($30 - $18) = 1,000 units.",
       "sub": "Pricing",
@@ -984,7 +899,7 @@
       "id": "mkt-070",
       "q": "A retailer discounts a printer and earns profit on the ink cartridges buyers must purchase. This is:",
       "choices": [
-        "Loss-leader pricing",
+        "Going-rate pricing",
         "Captive product pricing",
         "Price bundling",
         "Price lining"
@@ -1025,12 +940,7 @@
     {
       "id": "mkt-073",
       "q": "A product sells for $40 with a variable cost of $25 per unit. What is its contribution margin per unit?",
-      "choices": [
-        "$15",
-        "$40",
-        "$25",
-        "$65"
-      ],
+      "choices": ["$15", "$40", "$25", "$65"],
       "answer": 0,
       "explain": "$40 - $25 = $15 per unit toward fixed costs.",
       "sub": "Pricing",
@@ -1095,12 +1005,7 @@
     {
       "id": "mkt-078",
       "q": "In the AIDA model, which stage requires the ad to create a strong wish to own the product?",
-      "choices": [
-        "Attention",
-        "Desire",
-        "Interest",
-        "Action"
-      ],
+      "choices": ["Attention", "Desire", "Interest", "Action"],
       "answer": 1,
       "explain": "Desire follows interest and builds the want to own.",
       "sub": "Promotion",
@@ -1109,12 +1014,7 @@
     {
       "id": "mkt-079",
       "q": "In the AIDA model, which stage aims to get the consumer to buy now?",
-      "choices": [
-        "Attention",
-        "Desire",
-        "Action",
-        "Interest"
-      ],
+      "choices": ["Attention", "Desire", "Action", "Interest"],
       "answer": 2,
       "explain": "Action is the final stage.",
       "sub": "Promotion",
@@ -1165,12 +1065,7 @@
     {
       "id": "mkt-083",
       "q": "A media plan says the average consumer will see an ad three times. This measure is:",
-      "choices": [
-        "Reach",
-        "Impressions",
-        "Frequency",
-        "Cost per thousand"
-      ],
+      "choices": ["Reach", "Impressions", "Frequency", "Cost per thousand"],
       "answer": 2,
       "explain": "Frequency counts repeated exposures per person.",
       "sub": "Promotion",
@@ -1179,12 +1074,7 @@
     {
       "id": "mkt-084",
       "q": "An ad campaign costs $12,000 and reaches 2,000,000 people. What is its cost per thousand (CPM)?",
-      "choices": [
-        "$12.00",
-        "$60.00",
-        "$0.006",
-        "$6.00"
-      ],
+      "choices": ["$12.00", "$60.00", "$0.006", "$6.00"],
       "answer": 3,
       "explain": "$12,000 / 2,000 thousand people = $6.00.",
       "sub": "Promotion",
@@ -1235,12 +1125,7 @@
     {
       "id": "mkt-088",
       "q": "Identifying qualified potential customers is which selling step?",
-      "choices": [
-        "Closing",
-        "Demonstrating",
-        "Follow-up",
-        "Prospecting"
-      ],
+      "choices": ["Closing", "Demonstrating", "Follow-up", "Prospecting"],
       "answer": 3,
       "explain": "Prospecting finds and qualifies leads.",
       "sub": "Selling",
@@ -1291,12 +1176,7 @@
     {
       "id": "mkt-092",
       "q": "A rep sends a thank-you note two days after a purchase. This is which step?",
-      "choices": [
-        "Prospecting",
-        "Approach",
-        "Closing",
-        "Follow-up"
-      ],
+      "choices": ["Prospecting", "Approach", "Closing", "Follow-up"],
       "answer": 3,
       "explain": "Follow-up supports retention after the sale.",
       "sub": "Selling",

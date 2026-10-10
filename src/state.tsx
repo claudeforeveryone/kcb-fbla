@@ -14,6 +14,7 @@ import {
   uploadLocal,
   authUser,
   type Backend,
+  type Editable,
   type Logs,
   type Profile,
   type Resume,
@@ -62,7 +63,7 @@ type Store = {
   recordAnswers: (list: Graded[], mode: string) => Answer[];
   recordReview: (term: string, correct: boolean, ms: number) => void;
   recordPaper: (p: Omit<Paper, "at">) => void;
-  saveProfile: (patch: Partial<Profile>) => Promise<void>;
+  saveProfile: (patch: Editable) => Promise<void>;
   setResume: (r: Resume | null) => void;
   addWord: (w: {
     term: string;
@@ -162,30 +163,32 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // the profile row caches the computed numbers for the leaderboard; push them a beat after activity stops
+  // the profile row caches rating/peak/answered/correct/mastered for the leaderboard; the cloud recomputes them
+  // from the answer log a beat after answering stops (members can't write those columns themselves)
   const syncTimer = useRef<number | undefined>(undefined);
+  const syncedAt = useRef<number>(-1);
   useEffect(() => {
     if (!backend || !me || phase !== "in") return;
-    const patch = {
+    const n = logs.answers.length;
+    if (syncedAt.current === -1) { syncedAt.current = n; if (n === me.answered) return; }
+    if (n === syncedAt.current) return;
+    const mine = {
       rating: Math.round(d.rating * 10) / 10,
       peak: Math.round(d.peak * 10) / 10,
       answered: d.summary.answered,
       correct: logs.answers.filter((a) => a.correct).length,
       mastered: d.mastery.mastered,
     };
-    if (
-      patch.rating === me.rating &&
-      patch.answered === me.answered &&
-      patch.mastered === me.mastered &&
-      patch.peak === me.peak
-    )
-      return;
     clearTimeout(syncTimer.current);
     syncTimer.current = window.setTimeout(() => {
-      backend.updateProfile(me.id, patch).catch(() => 0);
-      setMe((m) => (m ? { ...m, ...patch } : m));
-      setProfiles((ps) =>
-        ps.map((p) => (p.id === me.id ? { ...p, ...patch } : p)),
-      );
+      syncedAt.current = n;
+      backend
+        .syncStats(me.id, mine)
+        .then((stats) => {
+          setMe((m) => (m ? { ...m, ...stats } : m));
+          setProfiles((ps) => ps.map((p) => (p.id === me.id ? { ...p, ...stats } : p)));
+        })
+        .catch(() => 0);
     }, 1500);
   }, [d, backend, me, phase, logs.answers]);
 
@@ -248,7 +251,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   );
 
   const saveProfile = useCallback(
-    async (patch: Partial<Profile>) => {
+    async (patch: Editable) => {
       if (!backend || !me) return;
       await backend.updateProfile(me.id, patch);
       setMe((m) => (m ? { ...m, ...patch } : m));

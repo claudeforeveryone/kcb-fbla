@@ -32,12 +32,7 @@
     {
       "id": "law-002",
       "q": "Which element of a valid contract is the bargained-for exchange of value between the parties?",
-      "choices": [
-        "Consideration",
-        "Capacity",
-        "Legality",
-        "Genuine assent"
-      ],
+      "choices": ["Consideration", "Capacity", "Legality", "Genuine assent"],
       "answer": 0,
       "explain": "Consideration is something of legal value given in exchange for a promise. Capacity, legality and genuine assent are separate elements.",
       "sub": "Contracts and sales",
@@ -88,12 +83,7 @@
     {
       "id": "law-006",
       "q": "Which dispute resolution method uses a neutral third party whose decision is binding on the parties?",
-      "choices": [
-        "Mediation",
-        "Conciliation",
-        "Negotiation",
-        "Arbitration"
-      ],
+      "choices": ["Mediation", "Conciliation", "Negotiation", "Arbitration"],
       "answer": 3,
       "explain": "Arbitration produces a binding decision by a neutral arbitrator. Mediation and conciliation help parties reach their own agreement and are not binding.",
       "sub": "Legal systems",
@@ -228,12 +218,7 @@
     {
       "id": "law-016",
       "q": "The party who brings a civil lawsuit is called the:",
-      "choices": [
-        "Plaintiff",
-        "Defendant",
-        "Prosecutor",
-        "Grand juror"
-      ],
+      "choices": ["Plaintiff", "Defendant", "Prosecutor", "Grand juror"],
       "answer": 0,
       "explain": "The plaintiff starts a civil suit. The defendant responds to it, and a prosecutor represents the government in criminal cases.",
       "sub": "Legal systems",
@@ -424,12 +409,7 @@
     {
       "id": "law-030",
       "q": "A relationship in which one party authorizes another to act on its behalf and under its control is:",
-      "choices": [
-        "Bailment",
-        "Agency",
-        "Partnership",
-        "Trust"
-      ],
+      "choices": ["Bailment", "Agency", "Partnership", "Trust"],
       "answer": 1,
       "explain": "Agency is created when a principal authorizes an agent to act for it under the principal's control. A bailment concerns temporary possession of goods.",
       "sub": "Agency and employment laws",
@@ -438,12 +418,7 @@
     {
       "id": "law-031",
       "q": "A legal claim against property to secure payment of a debt is called a:",
-      "choices": [
-        "Easement",
-        "Covenant",
-        "Lien",
-        "License"
-      ],
+      "choices": ["Easement", "Covenant", "Lien", "License"],
       "answer": 2,
       "explain": "A lien is a claim on property that secures a debt. An easement is a right to use land, and a covenant is a promise about land use.",
       "sub": "Property laws",
@@ -550,12 +525,7 @@
     {
       "id": "law-039",
       "q": "A process in which a neutral person helps the parties reach their own agreement but cannot impose a decision is:",
-      "choices": [
-        "Mediation",
-        "Arbitration",
-        "Litigation",
-        "Adjudication"
-      ],
+      "choices": ["Mediation", "Arbitration", "Litigation", "Adjudication"],
       "answer": 0,
       "explain": "A mediator facilitates a voluntary settlement and cannot impose an outcome. An arbitrator decides the dispute.",
       "sub": "Legal systems",
@@ -662,12 +632,7 @@
     {
       "id": "law-047",
       "q": "The doctrine requiring a party to have a sufficient personal stake in a case to bring it is:",
-      "choices": [
-        "Mootness",
-        "Ripeness",
-        "Standing",
-        "Venue"
-      ],
+      "choices": ["Mootness", "Ripeness", "Standing", "Venue"],
       "answer": 2,
       "explain": "Standing requires a concrete injury tied to the defendant's conduct. Mootness and ripeness concern timing, and venue concerns the proper place for trial.",
       "sub": "Legal systems",
@@ -676,12 +641,7 @@
     {
       "id": "law-048",
       "q": "Which intellectual property right protects a new and useful machine design?",
-      "choices": [
-        "Patent",
-        "Trademark",
-        "Copyright",
-        "Service mark"
-      ],
+      "choices": ["Patent", "Trademark", "Copyright", "Service mark"],
       "answer": 0,
       "explain": "Patents protect new, useful and non-obvious inventions. Trademarks protect brand identifiers, and copyrights protect creative works.",
       "sub": "Property laws",
@@ -734,12 +694,12 @@
       "q": "Presentment for acceptance is required for which type of instrument?",
       "choices": [
         "A promissory note payable on demand",
-        "A time draft payable at a future date",
+        "A draft payable a fixed number of days after sight",
         "A certificate of deposit",
         "A check payable on demand"
       ],
       "answer": 1,
-      "explain": "Under UCC 3-501, a time draft must be presented to the drawee for acceptance when acceptance is required. Demand instruments and CDs do not require acceptance.",
+      "explain": "Under UCC 3-501, a draft payable a fixed number of days after sight must be presented to the drawee for acceptance, which fixes its maturity. Demand instruments and certificates of deposit do not require acceptance.",
       "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
       "diff": 3
     },
@@ -788,12 +748,7 @@
     {
       "id": "law-056",
       "q": "Which document transfers title to real property?",
-      "choices": [
-        "Lease",
-        "Mortgage",
-        "Deed",
-        "Bill of sale"
-      ],
+      "choices": ["Lease", "Mortgage", "Deed", "Bill of sale"],
       "answer": 2,
       "explain": "A deed conveys title to real property. A lease grants possession, a mortgage secures a loan, and a bill of sale transfers personal property.",
       "sub": "Property laws",
@@ -886,12 +841,7 @@
     {
       "id": "law-063",
       "q": "Which insurance principle limits recovery to the actual loss suffered?",
-      "choices": [
-        "Underwriting",
-        "Premium",
-        "Indemnity",
-        "Reinsurance"
-      ],
+      "choices": ["Underwriting", "Premium", "Indemnity", "Reinsurance"],
       "answer": 2,
       "explain": "The indemnity principle restores the insured to the pre-loss position without profit. Underwriting decides whether to insure, and the premium is the price paid.",
       "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
@@ -942,12 +892,7 @@
     {
       "id": "law-067",
       "q": "A combination in which one company absorbs another, and only the absorbing company survives, is a:",
-      "choices": [
-        "Consolidation",
-        "Dissolution",
-        "Recapitalization",
-        "Merger"
-      ],
+      "choices": ["Consolidation", "Dissolution", "Recapitalization", "Merger"],
       "answer": 3,
       "explain": "In a merger, the surviving company absorbs the other. In a consolidation, both companies cease to exist and a new company is formed.",
       "sub": "Business organization",
@@ -1054,12 +999,7 @@
     {
       "id": "law-075",
       "q": "Charging an interest rate above the legal maximum on a loan is called:",
-      "choices": [
-        "Redlining",
-        "Usury",
-        "Amortization",
-        "Escrow"
-      ],
+      "choices": ["Redlining", "Usury", "Amortization", "Escrow"],
       "answer": 1,
       "explain": "Usury is charging interest above the lawful limit. Redlining is discriminatory lending, amortization is repayment scheduling, and escrow holds funds for a third party.",
       "sub": "Consumer protection and product/personal liability",
@@ -1082,12 +1022,7 @@
     {
       "id": "law-077",
       "q": "Which contract term describes a claim that a contract cannot be enforced in court because a required writing is missing?",
-      "choices": [
-        "Void",
-        "Voidable",
-        "Illusory",
-        "Unenforceable"
-      ],
+      "choices": ["Void", "Voidable", "Illusory", "Unenforceable"],
       "answer": 3,
       "explain": "An unenforceable contract is valid between the parties but cannot be enforced, such as one lacking a required writing. A void contract has no legal effect.",
       "sub": "Contracts and sales",
@@ -1096,12 +1031,7 @@
     {
       "id": "law-078",
       "q": "Which fiduciary holds property for another's benefit under a written trust instrument?",
-      "choices": [
-        "Bailee",
-        "Trustee",
-        "Surety",
-        "Principal"
-      ],
+      "choices": ["Bailee", "Trustee", "Surety", "Principal"],
       "answer": 1,
       "explain": "A trustee holds legal title and manages property for beneficiaries under a trust instrument. A bailee holds goods temporarily, and a surety guarantees another's debt.",
       "sub": "Agency and employment laws",
@@ -1194,12 +1124,7 @@
     {
       "id": "law-085",
       "q": "Which defense applies when a party is forced to sign a contract under threat of physical harm?",
-      "choices": [
-        "Undue influence",
-        "Duress",
-        "Mistake",
-        "Fraud"
-      ],
+      "choices": ["Undue influence", "Duress", "Mistake", "Fraud"],
       "answer": 1,
       "explain": "Duress is coercion by threats that overcome a party's free will, making the contract voidable. Undue influence arises from a relationship of trust.",
       "sub": "Contracts and sales",
@@ -1348,12 +1273,7 @@
     {
       "id": "law-096",
       "q": "Which corporate action creates a new company from two merging companies, which both cease to exist?",
-      "choices": [
-        "Consolidation",
-        "Merger",
-        "Dissolution",
-        "Recapitalization"
-      ],
+      "choices": ["Consolidation", "Merger", "Dissolution", "Recapitalization"],
       "answer": 0,
       "explain": "In a consolidation, the combining companies cease to exist and a new entity is formed. In a merger, one company survives.",
       "sub": "Business organization",
