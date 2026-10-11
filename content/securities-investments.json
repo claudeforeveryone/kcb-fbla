@@ -145,13 +145,13 @@
       "id": "sec-010",
       "q": "What is the main benefit of dollar-cost averaging?",
       "choices": [
-        "It guarantees a higher return than lump-sum investing",
-        "It eliminates market risk entirely",
+        "It usually beats lump-sum investing when prices rise steadily",
+        "It removes the need to diversify across holdings",
         "It spreads purchases over time, reducing the impact of a poorly timed entry",
-        "It avoids all brokerage fees"
+        "It locks in the lowest price reached during the buying period"
       ],
       "answer": 2,
-      "explain": "Regular fixed-dollar purchases reduce the risk of investing everything at a market peak. It does not guarantee a better return.",
+      "explain": "Regular fixed-dollar purchases reduce the risk of investing everything at a market peak. In a steadily rising market a lump sum usually does better, and DCA does not replace diversification.",
       "sub": "Investment Fundamentals",
       "diff": 2
     },
@@ -165,7 +165,7 @@
         "Earnings are taxed annually as they accrue"
       ],
       "answer": 1,
-      "explain": "Roth contributions are not deducted, so qualified distributions of contributions and earnings are not taxed again.",
+      "explain": "Roth IRA contributions are made with after-tax money (no deduction), and qualified distributions, including the earnings, are tax-free. Option A describes a traditional IRA.",
       "sub": "Investment Wrappers, Taxation, and Trusts",
       "diff": 1
     },
@@ -311,7 +311,7 @@
     },
     {
       "id": "sec-022",
-      "q": "Money market mutual funds seek to maintain a stable net asset value of:",
+      "q": "Government and retail money market mutual funds generally seek to maintain a stable net asset value of:",
       "choices": [
         "Whatever the market rate implies",
         "$10.00 per share",
@@ -319,7 +319,7 @@
         "$1.00 per share"
       ],
       "answer": 3,
-      "explain": "Money market funds target a stable $1.00 NAV. The NAV is not guaranteed, though.",
+      "explain": "Government and retail money market funds target a stable $1.00 share price, though it is not guaranteed. Since the 2014 SEC reform, institutional prime and institutional municipal funds use a floating NAV instead.",
       "sub": "Investment Products and Funds",
       "diff": 1
     },
@@ -381,15 +381,15 @@
     },
     {
       "id": "sec-027",
-      "q": "Closed-end fund shares trade at a price that can differ from their net asset value. This is best described as:",
+      "q": "How does the market price of a closed-end fund's shares relate to the fund's net asset value (NAV)?",
       "choices": [
-        "Always equal to NAV",
-        "A premium or discount to NAV",
-        "Guaranteed by the sponsor",
-        "Fixed by the SEC"
+        "It is reset to equal NAV at the end of each trading day",
+        "It can trade at a premium or a discount to NAV",
+        "It is guaranteed by the fund sponsor never to fall below NAV",
+        "It is set by the SEC at NAV plus any sales load"
       ],
       "answer": 1,
-      "explain": "Closed-end funds trade on exchanges at market prices, so they often trade at a premium or discount to NAV.",
+      "explain": "Closed-end funds have a fixed number of shares that trade on an exchange, so supply and demand set the price, often at a premium or discount to NAV. Open-end funds, by contrast, transact at NAV.",
       "sub": "Investment Products and Funds",
       "diff": 3
     },
@@ -647,15 +647,15 @@
     },
     {
       "id": "sec-046",
-      "q": "In a corporate bankruptcy, which group is paid before common shareholders?",
+      "q": "In a corporate bankruptcy liquidation, which group is generally paid first?",
       "choices": [
-        "Preferred shareholders only",
+        "Preferred shareholders",
         "Bondholders and other creditors",
-        "Employees holding stock options only",
-        "No one; common shareholders are paid first"
+        "Common shareholders",
+        "Employees who hold unexercised stock options"
       ],
       "answer": 1,
-      "explain": "Creditors, including bondholders, rank ahead of all equity holders. Preferred stock ranks ahead of common but behind creditors.",
+      "explain": "Creditors, including bondholders, are paid before any equity holders. Preferred shareholders come next, and common shareholders are last.",
       "sub": "Stocks Versus Other Investments",
       "diff": 1
     },
@@ -777,17 +777,17 @@
       "choices": [
         "Lower expense ratios and lower turnover",
         "Higher expense ratios and higher turnover",
-        "Guaranteed returns",
-        "No market exposure"
+        "Higher expense ratios but lower turnover",
+        "Lower expense ratios but higher turnover"
       ],
       "answer": 0,
-      "explain": "Index funds track a benchmark with little trading, which keeps costs and turnover low.",
+      "explain": "Index funds track a benchmark and trade only when the index changes, which keeps both costs and turnover low.",
       "sub": "Mutual Funds",
       "diff": 2
     },
     {
       "id": "sec-056",
-      "q": "A mutual fund's capital gains distribution that is reinvested is:",
+      "q": "A capital gains distribution from a mutual fund held in a taxable brokerage account is reinvested in more shares. The distribution is:",
       "choices": [
         "Not taxable until the shares are sold",
         "Tax-exempt for all investors",
@@ -795,7 +795,7 @@
         "Taxed only at the state level"
       ],
       "answer": 2,
-      "explain": "Reinvested distributions are still taxable income in the year paid. Reinvesting does not defer the tax.",
+      "explain": "Reinvested distributions are still taxable income in the year paid. Reinvesting does not defer the tax, though the reinvested amount adds to the investor's cost basis.",
       "sub": "Mutual Funds",
       "diff": 3
     },
@@ -997,17 +997,17 @@
     },
     {
       "id": "sec-071",
-      "q": "A 5% coupon bond priced when market rates are 6% trades at:",
+      "q": "A bond trades at a discount to its par value. Which ordering of its yields is correct?",
       "choices": [
-        "A discount to par",
-        "Par",
-        "A premium to par",
-        "Twice its face value"
+        "Yield to maturity > current yield > coupon rate",
+        "Coupon rate > current yield > yield to maturity",
+        "Current yield > yield to maturity > coupon rate",
+        "Coupon rate = current yield = yield to maturity"
       ],
       "answer": 0,
-      "explain": "A below-market coupon makes the bond worth less than par, so it trades at a discount.",
+      "explain": "Below par, the current yield (coupon / price) beats the coupon rate, and YTM is higher still because it adds the gain from the discount price up to par. All three are equal only at par.",
       "sub": "Basics of Bonds",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "sec-072",
@@ -1025,15 +1025,15 @@
     },
     {
       "id": "sec-073",
-      "q": "Which bond has the highest interest rate risk?",
+      "q": "A bond has a modified duration of 7. If market yields rise by 0.50 percentage point, its price will change by approximately:",
       "choices": [
-        "A 30-year zero-coupon bond",
-        "A 2-year zero-coupon bond",
-        "A 5-year coupon bond with a high coupon",
-        "A floating-rate note"
+        "-3.5%",
+        "+3.5%",
+        "-7.0%",
+        "-0.5%"
       ],
       "answer": 0,
-      "explain": "The longest-duration bond has the most price sensitivity to rate changes. Floating-rate notes reset their coupons, so their price sensitivity is low.",
+      "explain": "Percentage price change is about -(modified duration) x (change in yield) = -7 x 0.50% = -3.5%. Prices fall when yields rise, so the positive answer is the trap.",
       "sub": "Basics of Bonds",
       "diff": 3
     },
@@ -1123,15 +1123,15 @@
     },
     {
       "id": "sec-080",
-      "q": "A bond's price is most likely to rise when:",
+      "q": "A normal (upward-sloping) yield curve shows that:",
       "choices": [
-        "Market yields for similar bonds fall",
-        "The issuer's credit rating is downgraded",
-        "Inflation expectations increase sharply",
-        "Market yields for similar bonds rise"
+        "Longer-term bonds yield more than shorter-term bonds of similar credit quality",
+        "Short-term bonds yield more than long-term bonds of similar credit quality",
+        "Bonds of every maturity pay about the same yield",
+        "Investors expect interest rates to fall sharply soon"
       ],
       "answer": 0,
-      "explain": "Falling market yields raise the value of existing fixed coupons. Rating downgrades and inflation expectations generally push yields up.",
+      "explain": "A normal curve rises with maturity because investors want extra yield for tying up money longer. Short rates above long rates describe an inverted curve, often read as a sign that rate cuts are expected.",
       "sub": "Basics of Bonds",
       "diff": 2
     },
@@ -1154,12 +1154,12 @@
       "q": "A put option gives the holder the right to:",
       "choices": [
         "Sell the underlying asset at the strike price",
-        "Buy 100 shares at market",
-        "Collect interest on the premium",
-        "Convert bonds into stock"
+        "Buy the underlying asset at the strike price",
+        "Sell the underlying asset at the market price only",
+        "Buy the underlying asset at a discount to the market price"
       ],
       "answer": 0,
-      "explain": "A put is the right to sell at the strike price, which gains value when the underlying falls.",
+      "explain": "A put is the right, not the obligation, to sell at the strike price, so it gains value when the underlying falls. The right to buy at the strike is a call.",
       "sub": "Derivatives",
       "diff": 1
     },
@@ -1224,12 +1224,12 @@
       "q": "An investor who owns stock and buys a put on that stock is using a:",
       "choices": [
         "Protective put",
-        "Short hedge",
+        "Bear put spread",
         "Covered call",
         "Straddle"
       ],
       "answer": 0,
-      "explain": "The put sets a floor on the value of the held shares, which is the definition of a protective put.",
+      "explain": "Owning the stock plus a long put sets a floor on the position's value, which is a protective put. A bear put spread uses two puts and no stock; a covered call sells a call against owned shares.",
       "sub": "Derivatives",
       "diff": 2
     },
@@ -1504,7 +1504,7 @@
     {
       "id": "sec-v015",
       "term": "Money market fund",
-      "def": "A mutual fund investing in short-term, high-quality debt that seeks to maintain a stable $1.00 net asset value.",
+      "def": "A mutual fund investing in short-term, high-quality debt; government and retail money market funds seek a stable $1.00 NAV, while institutional prime funds float.",
       "sub": "Investment Products and Funds"
     },
     {
