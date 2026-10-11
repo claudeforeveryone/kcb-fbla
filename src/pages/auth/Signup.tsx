@@ -1,7 +1,8 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Mail, MailCheck, RefreshCw } from 'lucide-react';
 import { authErrorKind, safeNext, useAuth, type AuthErrorKind } from '../../lib/auth';
+import { useHydrated, useKeepTypedValue } from '../../lib/hydration';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Field';
 import { useToast } from '../../components/ui/Toast';
@@ -14,9 +15,18 @@ export default function Signup() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const next = safeNext(params.get('next'));
+  // This page is prerendered without a query string: add ?next= only once hydrated, or the link keeps the bare href.
+  const nextQuery = useHydrated() && params.get('next') ? `?next=${encodeURIComponent(next)}` : '';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  // The form is prerendered: keep anything typed before the app took over.
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmRef = useRef<HTMLInputElement>(null);
+  useKeepTypedValue(emailRef, setEmail);
+  useKeepTypedValue(passwordRef, setPassword);
+  useKeepTypedValue(confirmRef, setConfirm);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorKind, setErrorKind] = useState<AuthErrorKind>('other');
@@ -54,11 +64,11 @@ export default function Signup() {
   return (
     <AuthLayout
       title="Create your account"
-      subtitle="Free for every FBLC member. Takes about a minute."
+      subtitle="Free for FBL Canada members. Takes about a minute."
       footer={
         <>
           Already have an account?{' '}
-          <Link to={`/login${params.get('next') ? `?next=${encodeURIComponent(next)}` : ''}`} className="link">
+          <Link to={`/login${nextQuery}`} className="link">
             Sign in
           </Link>
         </>
@@ -85,6 +95,7 @@ export default function Signup() {
           </div>
         )}
         <Input
+          ref={emailRef}
           label="Email"
           type="email"
           autoComplete="email"
@@ -99,6 +110,7 @@ export default function Signup() {
         />
         <div>
           <PasswordInput
+            ref={passwordRef}
             label="Password"
             autoComplete="new-password"
             placeholder="At least 8 characters"
@@ -110,6 +122,7 @@ export default function Signup() {
           <StrengthMeter password={password} />
         </div>
         <PasswordInput
+          ref={confirmRef}
           label="Confirm password"
           autoComplete="new-password"
           placeholder="Type it again"
@@ -121,6 +134,18 @@ export default function Signup() {
         <Button type="submit" variant="accent" size="lg" block loading={busy} rightIcon={<ArrowRight className="size-4" />}>
           Create account
         </Button>
+        <p className="text-center text-sm leading-relaxed text-muted">
+          {/* New tab: reading the terms must not wipe the half-filled form. */}
+          By creating an account you agree to the{' '}
+          <Link to="/terms" target="_blank" rel="noopener" className="link underline">
+            Terms of use<span className="sr-only"> (opens in a new tab)</span>
+          </Link>{' '}
+          and{' '}
+          <Link to="/privacy" target="_blank" rel="noopener" className="link underline">
+            Privacy policy<span className="sr-only"> (opens in a new tab)</span>
+          </Link>
+          . Under 13? Ask a parent or guardian first.
+        </p>
         <p className="text-center text-xs text-muted">
           Next you will pick a username and your main event. You can change them later.
         </p>

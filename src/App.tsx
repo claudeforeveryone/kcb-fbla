@@ -20,6 +20,9 @@ function page(loader: () => Promise<Record<string, unknown>>, name: string) {
 // auth (foundation)
 const Login = page(() => import('./pages/auth/Login'), 'Login');
 const Signup = page(() => import('./pages/auth/Signup'), 'Signup');
+// legal (public, prerendered at build time like login and signup)
+const Terms = page(() => import('./pages/legal/Terms'), 'Terms');
+const Privacy = page(() => import('./pages/legal/Privacy'), 'Privacy');
 const Reset = page(() => import('./pages/auth/Reset'), 'Reset');
 const UpdatePassword = page(() => import('./pages/auth/UpdatePassword'), 'UpdatePassword');
 const Onboarding = page(() => import('./pages/auth/Onboarding'), 'Onboarding');
@@ -135,6 +138,10 @@ export default function App() {
           <Route path="/me/settings" element={<SettingsPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
         </Route>
+
+        {/* public legal pages */}
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
 
         <Route path="*" element={<NotFound />} />
       </Route>

@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { AUTH_STORAGE_KEY } from './sessionHint';
 
 // The publishable key is safe to ship in the client; RLS protects the data.
 export const SUPABASE_URL =
@@ -11,7 +12,7 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true,
-    storageKey: 'kcbfbla-auth-v2',
+    storageKey: AUTH_STORAGE_KEY,
   },
   realtime: { params: { eventsPerSecond: 10 } },
 });

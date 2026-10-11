@@ -1,12 +1,13 @@
-import { useState, type ReactNode } from 'react';
-import { Eye, EyeOff, Lock, Moon, Sun } from 'lucide-react';
+import { useState, type ReactNode, type Ref } from 'react';
+import { Link } from 'react-router-dom';
+import { Eye, EyeOff, Heart, Lock, Moon, Sun } from 'lucide-react';
 import { Brand } from '../../components/layout/Brand';
 import { useTheme } from '../../components/layout/theme';
 import { FacetArt } from '../../components/ui/PageHeader';
 import { Input, type InputProps } from '../../components/ui/Field';
 
 const features = [
-  { title: 'Official-style exams', body: 'Fifteen FBLC events, timed papers and Elo that moves with every answer.' },
+  { title: 'FBLA-style exams', body: 'Fifteen FBLC events, timed papers and Elo that moves with every answer.' },
   { title: 'Arena duels', body: 'Challenge a friend to ten questions. Fastest correct answers win.' },
   { title: 'Your chapter, organised', body: 'Assignments, newsletters, attendance and a coach view of every member.' },
 ];
@@ -60,13 +61,13 @@ export function AuthLayout({
             <>
               <p className="mb-3 hidden items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/65 lg:flex">
                 <span className="h-[3px] w-6 bg-red" />
-                Future Business Leaders of Canada
+                For FBL Canada members
               </p>
               <h2 className="max-w-md text-2xl font-extrabold leading-[1.08] tracking-tight text-white lg:text-[2.75rem]">
                 Train like it is nationals.
               </h2>
               <p className="mt-3 hidden max-w-md text-base text-white/75 lg:block">
-                Practice the way FBLC tests you, see exactly where you are weak, and climb the chapter leaderboard.
+                Practise the way FBLA events are tested, see exactly where you are weak, and climb the chapter leaderboard.
               </p>
               <ul className="mt-9 hidden space-y-5 lg:block">
                 {features.map((f) => (
@@ -106,13 +107,36 @@ export function AuthLayout({
             {footer && <div className="mt-8 border-t border-line pt-6 text-center text-sm text-muted">{footer}</div>}
           </div>
         </div>
+        <AuthFooter />
       </main>
     </div>
   );
 }
 
+/** Credits and legal links under the auth forms (these pages have no app footer). New tab, so a typed form survives. */
+function AuthFooter() {
+  const link = 'inline-flex min-h-10 items-center px-2 font-semibold text-muted underline-offset-4 hover:text-ink hover:underline';
+  return (
+    <footer className="flex flex-wrap items-center justify-center gap-x-3 px-5 pb-5 text-xs text-muted">
+      <span className="inline-flex min-h-10 items-center gap-1 px-2">
+        Built with{' '}
+        <Heart aria-label="love" role="img" className="size-3.5 shrink-0 fill-current text-red" />{' '}
+        by Joseph &amp; Kaden
+      </span>
+      <nav aria-label="Legal" className="flex">
+        <Link to="/terms" target="_blank" rel="noopener" className={link}>
+          Terms<span className="sr-only"> of use (opens in a new tab)</span>
+        </Link>
+        <Link to="/privacy" target="_blank" rel="noopener" className={link}>
+          Privacy<span className="sr-only"> policy (opens in a new tab)</span>
+        </Link>
+      </nav>
+    </footer>
+  );
+}
+
 /** Password input with a show/hide toggle. */
-export function PasswordInput(props: Omit<InputProps, 'type' | 'right'>) {
+export function PasswordInput(props: Omit<InputProps, 'type' | 'right'> & { ref?: Ref<HTMLInputElement> }) {
   const [show, setShow] = useState(false);
   return (
     <Input
