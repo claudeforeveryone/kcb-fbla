@@ -254,12 +254,15 @@ export function ObservatoryStage({
       className={cn("obs-stage absolute inset-0 overflow-hidden", className)}
       aria-hidden="true"
     >
-      <ObservatoryPoster
-        variant={variant}
-        state={posterState}
-        lite={tier === "lite"}
-        className={cn("obs-under", covered && "is-out")}
-      />
+      {/* the closing section's frame is far below the fold: drawn after mount, so it stays out of the first HTML */}
+      {(variant === "hero" || env) && (
+        <ObservatoryPoster
+          variant={variant}
+          state={posterState}
+          lite={tier === "lite"}
+          className={cn("obs-under", covered && "is-out")}
+        />
+      )}
       {wantsStill && (
         <ObservatoryStill
           variant={variant}

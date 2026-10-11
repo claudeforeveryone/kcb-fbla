@@ -4,7 +4,8 @@
 // in over it in place. Two framings ship (wide desktop, portrait phone); CSS shows the one that fits.
 //
 // `waiting` shows the stage and the gold light only (the room assembles when the scene arrives). `room` adds the
-// colonnade, the crystal and the armillary rings.
+// colonnade, the crystal and the armillary rings, mounted only then: they are most of the frame's markup (about 42 KB
+// of the prerendered page's 133 KB across the four frames) and invisible at first paint.
 import { useMemo } from "react";
 import { cn } from "../../components/ui/cn";
 import {
@@ -212,59 +213,61 @@ function Frame({
         strokeWidth="1.2"
       />
 
-      <g className={cn("obs-poster-room", state === "room" && "is-on")}>
-        <ellipse
-          cx={d.pool.x}
-          cy={d.pool.y}
-          rx={d.pool.r}
-          ry={d.pool.r * 0.32}
-          fill={`url(#${id}-pool)`}
-        />
-        {d.arches.map((a) => (
-          <g key={a.key}>
-            <path
-              d={a.outline}
-              fill={`url(#${id}-glass)`}
-              stroke="#D6E4FF"
-              strokeOpacity="0.55"
-              strokeWidth="1.2"
-            />
-            {a.flutes.map((fl, i) => (
-              <path
-                key={i}
-                d={fl}
-                stroke="#F6CC6B"
-                strokeOpacity="0.16"
-                strokeWidth="1"
-                fill="none"
-              />
-            ))}
-          </g>
-        ))}
-        {d.rings.map((r, i) => (
-          <path
-            key={i}
-            d={r}
-            fill="none"
-            stroke="#F4AB19"
-            strokeOpacity="0.85"
-            strokeWidth="1.4"
+      {state === "room" && (
+        <g className="obs-poster-room">
+          <ellipse
+            cx={d.pool.x}
+            cy={d.pool.y}
+            rx={d.pool.r}
+            ry={d.pool.r * 0.32}
+            fill={`url(#${id}-pool)`}
           />
-        ))}
-        <path
-          d={d.crystal}
-          fill={`url(#${id}-crystal)`}
-          stroke="#F6CC6B"
-          strokeOpacity="0.9"
-          strokeWidth="1.2"
-        />
-        <path
-          d={d.crystalSpine}
-          stroke="#FFE6A8"
-          strokeOpacity="0.45"
-          strokeWidth="1"
-        />
-      </g>
+          {d.arches.map((a) => (
+            <g key={a.key}>
+              <path
+                d={a.outline}
+                fill={`url(#${id}-glass)`}
+                stroke="#D6E4FF"
+                strokeOpacity="0.55"
+                strokeWidth="1.2"
+              />
+              {a.flutes.map((fl, i) => (
+                <path
+                  key={i}
+                  d={fl}
+                  stroke="#F6CC6B"
+                  strokeOpacity="0.16"
+                  strokeWidth="1"
+                  fill="none"
+                />
+              ))}
+            </g>
+          ))}
+          {d.rings.map((r, i) => (
+            <path
+              key={i}
+              d={r}
+              fill="none"
+              stroke="#F4AB19"
+              strokeOpacity="0.85"
+              strokeWidth="1.4"
+            />
+          ))}
+          <path
+            d={d.crystal}
+            fill={`url(#${id}-crystal)`}
+            stroke="#F6CC6B"
+            strokeOpacity="0.9"
+            strokeWidth="1.2"
+          />
+          <path
+            d={d.crystalSpine}
+            stroke="#FFE6A8"
+            strokeOpacity="0.45"
+            strokeWidth="1"
+          />
+        </g>
+      )}
     </svg>
   );
 }

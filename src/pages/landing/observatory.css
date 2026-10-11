@@ -401,13 +401,9 @@
   opacity: 1;
 }
 
+/* the outline drawing of the room mounts when it is shown, and fades in */
 .obs-poster-room {
-  opacity: 0;
-  transition: opacity 900ms var(--obs-ease);
-}
-
-.obs-poster-room.is-on {
-  opacity: 1;
+  animation: obs-fade-in 900ms var(--obs-ease) both;
 }
 
 /* ---------- platform ledger ------------------------------------------------------------------------------------ */
