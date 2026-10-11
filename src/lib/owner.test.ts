@@ -16,6 +16,7 @@ import {
   reasonProblem,
   seriesBars,
   seriesState,
+  signupFigure,
   totalPoints,
   type Count,
 } from './owner';
@@ -216,7 +217,9 @@ describe('audit wording', () => {
       'New to In progress, high priority',
     );
     expect(auditChange('trainer_assigned', { event: 'accounting' })).toBe('Accounting');
-    expect(auditChange('chapter_deleted', { name: 'KCB FBLA', members: 12 })).toBe('KCB FBLA, 12 members');
+    // The Affected column already names a deleted chapter, so the change line only gives its size.
+    expect(auditChange('chapter_deleted', { name: 'KCB FBLA', members: 12 })).toBe('12 members');
+    expect(auditChange('chapter_deleted', { name: 'Solo', members: 1 })).toBe('1 member');
     expect(auditChange('member_banned', {})).toBe('');
   });
 
@@ -256,6 +259,37 @@ describe('bucketsFor', () => {
     expect(bucketsFor(30)).toEqual(['day', 'week']);
     expect(bucketsFor(90)).toEqual(['day', 'week', 'month']);
     expect(bucketsFor(365)).toEqual(['week', 'month']);
+  });
+});
+
+describe('signupFigure (Finished sign-up on Overview)', () => {
+  it('shows the rate and "x of y" when the profile count is shown', () => {
+    expect(signupFigure({ created: n(40), onboarded: n(30), rate: 0.75 }, 'account')).toEqual({
+      value: '75%',
+      hidden: false,
+      sub: '30 of 40',
+    });
+  });
+
+  it('says Hidden in the figure and keeps the account count readable when the profile count is withheld', () => {
+    expect(signupFigure({ created: n(12), onboarded: hidden, rate: null }, 'new account')).toEqual({
+      value: 'Hidden',
+      hidden: true,
+      sub: '12 new accounts',
+    });
+    expect(signupFigure({ created: hidden, onboarded: hidden, rate: null }, 'account')).toEqual({
+      value: 'Hidden',
+      hidden: true,
+      sub: 'hidden for privacy',
+    });
+  });
+
+  it('says there is nothing yet instead of a dash over "0 of 0"', () => {
+    expect(signupFigure({ created: n(0), onboarded: n(0), rate: null }, 'new account')).toEqual({
+      value: '–',
+      hidden: false,
+      sub: 'No new accounts yet',
+    });
   });
 });
 

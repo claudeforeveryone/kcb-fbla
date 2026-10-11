@@ -3,6 +3,7 @@
 // is shown to the student who sent the report, so it is written for them. A question report shows the question with
 // its answer key (fbla_owner_question) so the owner can check the report without leaving the console.
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Inbox } from 'lucide-react';
 import { Badge, Button, EmptyState, Pill, SegmentedControl, Select, Skeleton, Textarea, useToast } from '../../components/ui';
 import { cn } from '../../components/ui/cn';
@@ -10,6 +11,7 @@ import type { FeedbackFilter, FeedbackSaved, OwnerFeedbackRow } from '../../api/
 import {
   KIND_LABELS,
   STATUS_LABELS,
+  triageFilters,
   triageSaved,
   type FeedbackKind,
   type FeedbackPriority,
@@ -47,8 +49,31 @@ const rowId = (r: OwnerFeedbackRow) => r.id;
 export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   const src = useOwnerSource();
   const toast = useToast();
-  const [status, setStatus] = useState<FeedbackFilter>('open');
-  const [kind, setKind] = useState<FeedbackKind | ''>('');
+  // Filters live in the URL (?status=&kind=), so Content's reported questions and status counts can open this view
+  // filtered, and a refresh keeps it. ?question= picks that question's first report once the list arrives.
+  const [params, setParams] = useSearchParams();
+  const [initial] = useState(() => triageFilters(params));
+  const [status, setStatusState] = useState<FeedbackFilter>(initial.status);
+  const [kind, setKindState] = useState<FeedbackKind | ''>(initial.kind);
+  const wantQuestion = useRef(initial.question);
+  const setFilter = (next: { status?: FeedbackFilter; kind?: FeedbackKind | '' }) => {
+    if (next.status !== undefined) setStatusState(next.status);
+    if (next.kind !== undefined) setKindState(next.kind);
+    wantQuestion.current = null;
+    setParams(
+      (p) => {
+        const q = new URLSearchParams(p);
+        if (next.status !== undefined) q.set('status', next.status);
+        if (next.kind !== undefined) {
+          if (next.kind) q.set('kind', next.kind);
+          else q.delete('kind');
+        }
+        q.delete('question');
+        return q;
+      },
+      { replace: true },
+    );
+  };
   const [selectedId, setSelectedId] = useState<string | null>(null);
   // The open report as last seen, so it stays open after a save moves it out of the current filter.
   const [snap, setSnap] = useState<OwnerFeedbackRow | null>(null);
@@ -66,6 +91,25 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   }, [selectedId]);
 
   const rows = state.rows;
+  // Arriving from a reported question: open its first report on the list (if it is on the first page), once.
+  useEffect(() => {
+    const q = wantQuestion.current;
+    if (!q || state.loading || !state.data) return;
+    wantQuestion.current = null;
+    const hit = rows.find((r) => r.question_id === q);
+    if (hit) {
+      setSelectedId(hit.id);
+      setSnap(hit);
+    }
+    setParams(
+      (p) => {
+        const n = new URLSearchParams(p);
+        n.delete('question');
+        return n;
+      },
+      { replace: true },
+    );
+  }, [rows, state.loading, state.data, setParams]);
   // The list's copy wins once it is at least as new as the saved one (the reload after a save lands a moment later).
   const listed = rows.find((r) => r.id === selectedId);
   const fresh = snap && snap.id === selectedId && (!listed || snap.updated_at >= listed.updated_at) ? snap : null;
@@ -86,7 +130,7 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
             <Pill
               key={f.value}
               active={status === f.value}
-              onClick={() => setStatus(f.value)}
+              onClick={() => setFilter({ status: f.value })}
               count={countFor(f.value)}
             >
               {f.label}
@@ -97,7 +141,7 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
           aria-label="Kind"
           className="w-full lg:w-48"
           value={kind}
-          onChange={(e) => setKind(e.target.value as FeedbackKind | '')}
+          onChange={(e) => setFilter({ kind: e.target.value as FeedbackKind | '' })}
           options={KIND_OPTIONS}
         />
       </div>

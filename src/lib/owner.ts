@@ -207,10 +207,9 @@ export function auditChange(action: string, detail: Detail | null | undefined): 
     case 'trainer_assigned':
     case 'trainer_removed':
       return str(d.event) ? words(str(d.event)) : '';
-    case 'chapter_deleted': {
-      const m = typeof d.members === 'number' ? `${d.members} member${d.members === 1 ? '' : 's'}` : '';
-      return [str(d.name), m].filter(Boolean).join(', ');
-    }
+    case 'chapter_deleted':
+      // The Affected column already names the chapter.
+      return typeof d.members === 'number' ? `${d.members} member${d.members === 1 ? '' : 's'}` : '';
     default:
       return '';
   }
@@ -278,6 +277,25 @@ export const FEATURE_LABELS: Record<string, string> = {
 
 export function featureLabel(name: string): string {
   return FEATURE_LABELS[name] ?? words(name);
+}
+
+/**
+ * The "Finished sign-up" figure for one window on Overview: the rate with "x of y" under it, or "Hidden" with the
+ * account count under it when the server withheld the profile count (the rate is withheld with it).
+ */
+export function signupFigure(
+  w: { created: Count; onboarded: Count; rate: number | null },
+  noun: string,
+): { value: string; hidden: boolean; sub: string } {
+  const created = w.created.suppressed ? null : w.created.value;
+  if (w.onboarded.suppressed)
+    return {
+      value: 'Hidden',
+      hidden: true,
+      sub: created == null ? 'hidden for privacy' : `${intFmt.format(created)} ${noun}${created === 1 ? '' : 's'}`,
+    };
+  if (created === 0) return { value: NO_DATA, hidden: false, sub: `No ${noun}s yet` };
+  return { value: fmtPercent(w.rate), hidden: false, sub: `${countLabel(w.onboarded)} of ${countLabel(w.created)}` };
 }
 
 /** Growth groupings that make a readable chart for a range: no 365 daily bars, no single monthly bar. */

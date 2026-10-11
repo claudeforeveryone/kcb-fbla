@@ -1,6 +1,8 @@
 // Read-only sections of the owner console: Overview, Growth, Engagement, Preparation and Content.
 // Every number comes from the owner RPCs (supabase/migrations/0105); nothing here invents or pads data.
 import { useState, type ReactNode } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 import { BarChart, ChartFigure, LineChart } from '../../components/charts';
 import { Badge, EmptyState, SegmentedControl, StatTile, Table, TBody, TD, TH, THead, TR } from '../../components/ui';
 import { cn } from '../../components/ui/cn';
@@ -13,14 +15,15 @@ import {
   fmtPercent,
   seriesBars,
   seriesState,
+  signupFigure,
   totalPoints,
   type Bucket,
   type Count,
   type GrowthRow,
 } from '../../lib/owner';
-import { STATUS_LABELS, type FeedbackStatus } from '../../lib/feedback';
+import { STATUS_LABELS, triageLink, type FeedbackStatus } from '../../lib/feedback';
 import { ATTEMPT_KIND_LABELS, eventName, type AttemptKind } from '../../lib/types';
-import { CountText, dateOnly, LoadState, num, Panel, PrivacyNote, useLoad, useOwnerSource } from './shared';
+import { CountText, dateOnly, HIDDEN_WHY, LoadState, num, Panel, PrivacyNote, useLoad, useOwnerSource } from './shared';
 
 const sub = (c: Count) => (c.suppressed ? 'hidden for privacy' : undefined);
 
@@ -85,20 +88,23 @@ export function OverviewView({ data: d }: { data: OwnerOverview }) {
           <h3 className="text-sm font-bold text-heading">Finished sign-up</h3>
           <p className="mt-1 text-xs text-muted">Accounts that went on to create a profile</p>
           <dl className="mt-3 grid grid-cols-2 gap-2">
-            <div>
-              <dt className="text-xs text-muted">Last 30 days</dt>
-              <dd className="tabular mt-0.5 font-display text-xl font-extrabold text-heading">{fmtPercent(d.onboarding.month.rate)}</dd>
-              <dd className="text-xs text-muted">
-                <CountText c={d.onboarding.month.onboarded} /> of <CountText c={d.onboarding.month.created} />
-              </dd>
-            </div>
-            <div>
-              <dt className="text-xs text-muted">All time</dt>
-              <dd className="tabular mt-0.5 font-display text-xl font-extrabold text-heading">{fmtPercent(d.onboarding.all_time.rate)}</dd>
-              <dd className="text-xs text-muted">
-                <CountText c={d.onboarding.all_time.onboarded} /> of <CountText c={d.onboarding.all_time.created} />
-              </dd>
-            </div>
+            {(
+              [
+                ['Last 30 days', signupFigure(d.onboarding.month, 'new account')],
+                ['All time', signupFigure(d.onboarding.all_time, 'account')],
+              ] as const
+            ).map(([label, f]) => (
+              <div key={label}>
+                <dt className="text-xs text-muted">{label}</dt>
+                <dd
+                  className={cn('tabular mt-0.5 font-display text-xl font-extrabold', f.hidden ? 'text-muted' : 'text-heading')}
+                  title={f.hidden ? HIDDEN_WHY : undefined}
+                >
+                  {f.value}
+                </dd>
+                <dd className="tabular text-xs text-muted">{f.sub}</dd>
+              </div>
+            ))}
           </dl>
         </Panel>
         <Panel>
@@ -410,8 +416,8 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
   return (
     <div className="space-y-3">
       <p className="text-sm text-muted">
-        Practice runs and mock exams only, not duels or chapter tests. Accuracy and the share of runs not finished show
-        only when 5 or more students took part.
+        Official questions only: duels and chapter-written tests are left out. Not finished counts practice runs and mock
+        exams started in the app. Accuracy and not finished show only when 5 or more students took part.
       </p>
       {/* Phones: one card per event, accuracy first. */}
       <ul className="divide-y divide-line border border-line bg-surface sm:hidden" aria-label="Events">
@@ -500,8 +506,39 @@ export function ContentSection({ refreshKey }: { refreshKey: number }) {
 }
 
 const STATUS_ORDER: FeedbackStatus[] = ['new', 'triaged', 'in_progress', 'resolved', 'wontfix'];
+const STATUS_TONE: Record<FeedbackStatus, 'red' | 'success' | 'neutral'> = {
+  new: 'red',
+  triaged: 'neutral',
+  in_progress: 'neutral',
+  resolved: 'success',
+  wontfix: 'neutral',
+};
+
+type BankRow = { easy: number; medium: number; hard: number; terms: number };
+
+/** Easy, Medium, Hard and Vocab counts for a phone card in Question bank. */
+function BankCounts({ e }: { e: BankRow }) {
+  return (
+    <dl className="grid grid-cols-4 gap-2 text-xs">
+      {(
+        [
+          ['Easy', e.easy],
+          ['Medium', e.medium],
+          ['Hard', e.hard],
+          ['Vocab', e.terms],
+        ] as const
+      ).map(([label, v]) => (
+        <div key={label}>
+          <dt className="text-muted">{label}</dt>
+          <dd className="tabular font-semibold text-ink">{num(v)}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 export function ContentView({ data: d }: { data: OwnerContent }) {
+  const [params] = useSearchParams();
   const totals = d.events.reduce(
     (t, e) => ({
       questions: t.questions + e.questions,
@@ -514,38 +551,64 @@ export function ContentView({ data: d }: { data: OwnerContent }) {
   );
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-1 text-sm font-semibold text-heading">All feedback</span>
+      {/* Each count opens Feedback with that status picked. */}
+      <nav aria-label="Feedback by status" className="flex flex-wrap items-center gap-x-2 gap-y-4">
+        <span className="mr-1 text-sm font-semibold text-heading">Feedback by status</span>
         {STATUS_ORDER.map((s) => (
-          <Badge key={s} tone={s === 'new' ? 'red' : s === 'resolved' ? 'success' : 'neutral'}>
-            {STATUS_LABELS[s]} <span className="tabular">{d.feedback_status[s] ?? 0}</span>
-          </Badge>
+          <Link
+            key={s}
+            to={{ search: triageLink(params, { status: s }) }}
+            className="group relative rounded-[2px] after:absolute after:-inset-y-2 after:inset-x-0"
+          >
+            <Badge tone={STATUS_TONE[s]} className="group-hover:underline group-hover:underline-offset-2">
+              {STATUS_LABELS[s]} <span className="tabular">{d.feedback_status[s] ?? 0}</span>
+            </Badge>
+          </Link>
         ))}
-      </div>
+      </nav>
 
       <section aria-labelledby="owner-reported">
         <h3 id="owner-reported" className="text-base font-bold text-heading">
           Reported questions
         </h3>
-        <p className="mt-0.5 text-sm text-muted">Questions students flagged from exam review, most open reports first.</p>
+        <p className="mt-0.5 text-sm text-muted">
+          Questions students flagged from exam review, most open reports first. Open one to read its reports in Feedback.
+        </p>
         {d.reported_questions.length ? (
           <ul className="mt-3 divide-y divide-line border border-line bg-surface">
             {d.reported_questions.map((q) => (
-              <li key={q.question_id} className="flex flex-col gap-2 p-3 sm:flex-row sm:items-start sm:gap-4 sm:p-4">
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-                    <code className="font-mono font-semibold text-ink">{q.question_id}</code>
-                    <span>{eventName(q.event)}</span>
-                    {q.area && <span>· {q.area}</span>}
+              <li key={q.question_id}>
+                <Link
+                  to={{
+                    search: triageLink(params, {
+                      status: q.open > 0 ? 'open' : 'all',
+                      kind: 'question_issue',
+                      question: q.question_id,
+                    }),
+                  }}
+                  className="group flex items-start gap-3 p-3 transition-colors hover:bg-surface-2/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ring)] sm:p-4"
+                >
+                  <div className="flex min-w-0 flex-1 flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+                        <code className="font-mono font-semibold text-ink">{q.question_id}</code>
+                        <span>{eventName(q.event)}</span>
+                        {q.area && <span>· {q.area}</span>}
+                      </div>
+                      {q.preview && <p className="mt-1 line-clamp-2 text-sm text-ink">{q.preview}</p>}
+                    </div>
+                    <div className="flex shrink-0 items-center gap-3 text-sm">
+                      {q.open > 0 ? <Badge tone="red">{q.open} open</Badge> : <Badge tone="success">All handled</Badge>}
+                      <span className="tabular text-muted">
+                        {q.reports} {q.reports === 1 ? 'report' : 'reports'}
+                      </span>
+                    </div>
                   </div>
-                  {q.preview && <p className="mt-1 line-clamp-2 text-sm text-ink">{q.preview}</p>}
-                </div>
-                <div className="flex shrink-0 items-center gap-3 text-sm">
-                  {q.open > 0 ? <Badge tone="red">{q.open} open</Badge> : <Badge tone="success">All handled</Badge>}
-                  <span className="tabular text-muted">
-                    {q.reports} {q.reports === 1 ? 'report' : 'reports'}
-                  </span>
-                </div>
+                  <ChevronRight
+                    className="mt-0.5 size-4 shrink-0 text-muted transition-transform motion-safe:group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
+                </Link>
               </li>
             ))}
           </ul>
@@ -560,35 +623,65 @@ export function ContentView({ data: d }: { data: OwnerContent }) {
         </h3>
         <p className="mt-0.5 text-sm text-muted">Lowest accuracy among questions answered by 5 or more students. Worth a check for a wrong key.</p>
         {d.hardest_questions.length ? (
-          <Table wrapClassName="mt-3">
-            <THead>
-              <tr>
-                <TH>Question</TH>
-                <TH align="right">Students</TH>
-                <TH align="right">Answers</TH>
-                <TH align="right">Accuracy</TH>
-              </tr>
-            </THead>
-            <TBody>
+          <>
+            {/* Phones and narrow tablets: one card per question, so the preview keeps two lines. */}
+            <ul className="mt-3 divide-y divide-line border border-line bg-surface md:hidden" aria-label="Hardest questions">
               {d.hardest_questions.map((q) => (
-                <TR key={q.question_id}>
-                  <TD className="max-w-xl">
-                    <div className="text-xs text-muted">
-                      <code className="font-mono font-semibold text-ink">{q.question_id}</code> · {eventName(q.event)}
+                <li key={q.question_id} className="space-y-2 p-4">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+                    <code className="font-mono font-semibold text-ink">{q.question_id}</code>
+                    <span>{eventName(q.event)}</span>
+                  </div>
+                  {q.preview && <p className="line-clamp-2 text-sm text-ink">{q.preview}</p>}
+                  <dl className="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                      <dt className="text-muted">Students</dt>
+                      <dd className="tabular font-semibold text-ink">
+                        <CountText c={q.students} />
+                      </dd>
                     </div>
-                    {q.preview && <div className="mt-0.5 line-clamp-1 text-sm text-ink">{q.preview}</div>}
-                  </TD>
-                  <TD align="right">
-                    <CountText c={q.students} />
-                  </TD>
-                  <TD align="right">{num(q.answers)}</TD>
-                  <TD align="right" className={cn('font-semibold', q.accuracy < 0.4 ? 'text-red' : 'text-heading')}>
-                    {fmtPercent(q.accuracy)}
-                  </TD>
-                </TR>
+                    <div>
+                      <dt className="text-muted">Answers</dt>
+                      <dd className="tabular font-semibold text-ink">{num(q.answers)}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-muted">Accuracy</dt>
+                      <dd className={cn('tabular font-semibold', q.accuracy < 0.4 ? 'text-red' : 'text-ink')}>{fmtPercent(q.accuracy)}</dd>
+                    </div>
+                  </dl>
+                </li>
               ))}
-            </TBody>
-          </Table>
+            </ul>
+            <Table wrapClassName="mt-3 hidden md:block">
+              <THead>
+                <tr>
+                  <TH>Question</TH>
+                  <TH align="right">Students</TH>
+                  <TH align="right">Answers</TH>
+                  <TH align="right">Accuracy</TH>
+                </tr>
+              </THead>
+              <TBody>
+                {d.hardest_questions.map((q) => (
+                  <TR key={q.question_id}>
+                    <TD className="max-w-xl">
+                      <div className="text-xs text-muted">
+                        <code className="font-mono font-semibold text-ink">{q.question_id}</code> · {eventName(q.event)}
+                      </div>
+                      {q.preview && <div className="mt-0.5 line-clamp-1 text-sm text-ink">{q.preview}</div>}
+                    </TD>
+                    <TD align="right">
+                      <CountText c={q.students} />
+                    </TD>
+                    <TD align="right">{num(q.answers)}</TD>
+                    <TD align="right" className={cn('font-semibold', q.accuracy < 0.4 ? 'text-red' : 'text-heading')}>
+                      {fmtPercent(q.accuracy)}
+                    </TD>
+                  </TR>
+                ))}
+              </TBody>
+            </Table>
+          </>
         ) : (
           <EmptyState compact className="mt-3" title="Not enough answers yet" description="A question shows here once 5 or more students have answered it." />
         )}
@@ -599,7 +692,30 @@ export function ContentView({ data: d }: { data: OwnerContent }) {
           Question bank
         </h3>
         <p className="mt-0.5 text-sm text-muted">Official questions and vocab terms per event.</p>
-        <Table wrapClassName="mt-3">
+        <ul className="mt-3 divide-y divide-line border border-line bg-surface md:hidden" aria-label="Question bank by event">
+          {d.events.map((e) => (
+            <li key={e.event} className="space-y-2 p-4">
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="min-w-0">
+                  <span className="font-semibold text-ink">{eventName(e.event)}</span>
+                  <span className="tabular ml-2 text-xs text-muted">{num(e.areas)} areas</span>
+                </span>
+                <span className={cn('tabular shrink-0 text-sm', e.questions < 100 ? 'font-semibold text-red' : 'text-ink')}>
+                  {num(e.questions)} questions
+                </span>
+              </div>
+              <BankCounts e={e} />
+            </li>
+          ))}
+          <li className="space-y-2 bg-surface-2/70 p-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="font-semibold text-heading">All events</span>
+              <span className="tabular text-sm font-semibold text-heading">{num(totals.questions)} questions</span>
+            </div>
+            <BankCounts e={totals} />
+          </li>
+        </ul>
+        <Table wrapClassName="mt-3 hidden md:block">
           <THead>
             <tr>
               <TH>Event</TH>

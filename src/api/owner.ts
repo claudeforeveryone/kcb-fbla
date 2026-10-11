@@ -6,7 +6,7 @@
 import type { PostgrestError } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import type { Bucket, Count, GrowthRow } from '../lib/owner';
-import type { FeedbackKind, FeedbackPriority, FeedbackStatus } from '../lib/feedback';
+import type { FeedbackFilter, FeedbackKind, FeedbackPriority, FeedbackStatus } from '../lib/feedback';
 import type { ChapterRole } from '../lib/types';
 import { toApiError } from './core';
 
@@ -152,7 +152,7 @@ export type OwnerFeedbackRow = {
   username: string | null;
   display_name: string | null;
 };
-export type FeedbackFilter = 'open' | 'all' | FeedbackStatus;
+export type { FeedbackFilter } from '../lib/feedback';
 export type OwnerFeedbackList = {
   total: number;
   rows: OwnerFeedbackRow[];

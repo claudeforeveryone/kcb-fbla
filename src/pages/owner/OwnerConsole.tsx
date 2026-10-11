@@ -72,6 +72,8 @@ export function OwnerConsole({ source }: { source: OwnerSource }) {
       />
 
       <div {...tabPanelProps('owner', tab)} className="pt-5 outline-none">
+        {/* The section's heading for screen readers (the selected tab shows it on screen); panels use h3 below it. */}
+        <h2 className="sr-only">{section.label}</h2>
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm font-semibold text-heading">{section.blurb}</p>
           {section.ranged && (

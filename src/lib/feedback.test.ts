@@ -9,8 +9,40 @@ import {
   feedbackProblem,
   REPORT_REASONS,
   STUDENT_FEEDBACK_COLUMNS,
+  triageFilters,
+  triageLink,
   triageSaved,
 } from './feedback';
+
+describe('triage links (Content and the status badges open Feedback filtered)', () => {
+  it('opens Feedback on one question, keeping the rest of the console URL and dropping old filters', () => {
+    const link = triageLink('?tab=content&range=90&status=resolved&kind=bug', {
+      status: 'open',
+      kind: 'question_issue',
+      question: 'acc-014',
+    });
+    const p = new URLSearchParams(link);
+    expect(p.get('tab')).toBe('feedback');
+    expect(p.get('range')).toBe('90');
+    expect(p.get('status')).toBe('open');
+    expect(p.get('kind')).toBe('question_issue');
+    expect(p.get('question')).toBe('acc-014');
+  });
+
+  it('reads the filters back, falling back to open reports of any kind', () => {
+    expect(triageFilters(new URLSearchParams('status=resolved&kind=question_issue&question=acc-014'))).toEqual({
+      status: 'resolved',
+      kind: 'question_issue',
+      question: 'acc-014',
+    });
+    expect(triageFilters(new URLSearchParams('status=closed&kind=nonsense&question=a%20b'))).toEqual({
+      status: 'open',
+      kind: '',
+      question: null,
+    });
+    expect(triageFilters(new URLSearchParams(''))).toEqual({ status: 'open', kind: '', question: null });
+  });
+});
 
 describe('STUDENT_FEEDBACK_COLUMNS', () => {
   // "Your reports" must ask only for columns inside the 0103 grant, or the database refuses the whole read.

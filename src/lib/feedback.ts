@@ -4,6 +4,8 @@
 export type FeedbackKind = 'bug' | 'feature' | 'general' | 'question_issue' | 'resource_issue' | 'accessibility';
 export type FeedbackStatus = 'new' | 'triaged' | 'in_progress' | 'resolved' | 'wontfix';
 export type FeedbackPriority = 'low' | 'normal' | 'high';
+/** What Feedback triage lists: open (new, triaged, in progress), one status, or all. */
+export type FeedbackFilter = 'open' | 'all' | FeedbackStatus;
 
 /**
  * What "Your reports" reads back: the report, its status and the team's note. Never priority or reviewed_by: 0103
@@ -63,6 +65,42 @@ export function triageSaved(changed: { status?: FeedbackStatus; priority?: Feedb
     return { title: `Priority set to ${p.charAt(0).toUpperCase()}${p.slice(1)}`, body: 'Only owners see priority.' };
   }
   return { title: 'Saved', body: 'Nothing changed.' };
+}
+
+const FILTERS: readonly string[] = ['open', 'all', 'new', 'triaged', 'in_progress', 'resolved', 'wontfix'];
+const QUESTION_ID = /^[A-Za-z0-9_:.-]{1,80}$/;
+
+/**
+ * The triage filters in the owner console URL (?status=&kind=&question=), so Content's reported questions and the
+ * status counts can open Feedback already filtered. Anything unknown falls back to open reports of any kind.
+ */
+export function triageFilters(params: URLSearchParams): {
+  status: FeedbackFilter;
+  kind: FeedbackKind | '';
+  question: string | null;
+} {
+  const status = params.get('status') ?? '';
+  const kind = params.get('kind') ?? '';
+  const question = params.get('question') ?? '';
+  return {
+    status: FILTERS.includes(status) ? (status as FeedbackFilter) : 'open',
+    kind: Object.hasOwn(KIND_LABELS, kind) ? (kind as FeedbackKind) : '',
+    question: QUESTION_ID.test(question) ? question : null,
+  };
+}
+
+/** A link into Feedback triage: keeps the rest of the console URL (range), replaces any earlier filters. */
+export function triageLink(
+  current: URLSearchParams | string,
+  f: { status?: FeedbackFilter; kind?: FeedbackKind; question?: string },
+): string {
+  const p = new URLSearchParams(current);
+  p.set('tab', 'feedback');
+  for (const key of ['status', 'kind', 'question']) p.delete(key);
+  if (f.status) p.set('status', f.status);
+  if (f.kind) p.set('kind', f.kind);
+  if (f.question) p.set('question', f.question);
+  return `?${p.toString()}`;
 }
 
 /** Null when the message can be sent, otherwise what to fix. */

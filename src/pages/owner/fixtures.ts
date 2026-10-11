@@ -1,8 +1,9 @@
 // DEV ONLY. Made-up data for the owner console in the component gallery (/dev/ui?only=owner for a busy site,
 // /dev/ui?only=owner-small for a small one). Imported only by src/components/ui/Gallery.tsx, which App.tsx loads only
-// when import.meta.env.DEV, so none of this reaches a production build (the build check greps dist/ for
-// FIXTURE_MARKER). Never use it anywhere else. Hidden counts follow the same rules as 0105: 1-4 is hidden, and a
-// running total is hidden when it would reveal a group of 1-4 next to the total after it.
+// when import.meta.env.DEV, so none of this reaches a production build: `npm run build` ends with
+// scripts/check-dist.mjs, which fails when dist/ contains FIXTURE_MARKER. Never use it anywhere else. Hidden counts
+// follow the same rules as 0105: 1-4 is hidden, a running total is hidden when it would reveal a group of 1-4 next to
+// the total after it, and a group is hidden when it is 1-4 above a smaller group inside it that is shown.
 import type {
   AuditRow,
   OwnerContent,
@@ -24,6 +25,9 @@ type Site = 'busy' | 'small';
 
 const c = (value: number): Count => (value >= 1 && value <= 4 ? { value: null, suppressed: true } : { value, suppressed: false });
 const hidden: Count = { value: null, suppressed: true };
+/** fbla_count_over: also hidden when 1-4 above any shown group inside it. */
+const cOver = (value: number, inside: Count[]): Count =>
+  inside.some((s) => !s.suppressed && s.value != null && value - s.value >= 1 && value - s.value <= 4) ? hidden : c(value);
 const NOW = '2026-10-11T14:20:00Z';
 
 const overviews: Record<Site, OwnerOverview> = {
@@ -142,7 +146,7 @@ function growth(site: Site, days: number, bucket: Bucket): OwnerGrowth {
     end: iso(b.e),
     signups: shown[i] && shown[i + 1] ? { value: totals[i + 1] - totals[i], suppressed: false } : hidden,
     onboarded: c(raw[i].onboarded),
-    active: c(raw[i].active),
+    active: cOver(raw[i].active, [c(raw[i].practising), c(raw[i].onboarded)]),
     practising: c(raw[i].practising),
     total: total(i + 1),
   }));
@@ -160,8 +164,6 @@ const engagement = (site: Site, days: number): OwnerEngagement => {
         { name: 'vocab_session_completed', users: hidden, events: null },
         { name: 'resource_opened', users: hidden, events: null },
         { name: 'feedback_submitted', users: hidden, events: null },
-        { name: 'duel_started', users: c(0), events: 0 },
-        { name: 'duel_completed', users: c(0), events: 0 },
       ],
       modes: [
         { mode: 'practice', users: c(6) },
@@ -183,8 +185,6 @@ const engagement = (site: Site, days: number): OwnerEngagement => {
       { name: 'practice_started', users: c(n(240)), events: n(1840) },
       { name: 'vocab_session_completed', users: c(n(131)), events: n(486) },
       { name: 'onboarding_completed', users: c(n(104)), events: n(104) },
-      { name: 'duel_started', users: c(n(64)), events: n(210) },
-      { name: 'duel_completed', users: c(n(61)), events: n(187) },
       { name: 'resource_opened', users: c(n(48)), events: n(133) },
       { name: 'feedback_submitted', users: c(n(9)), events: n(11) },
     ],
@@ -192,6 +192,7 @@ const engagement = (site: Site, days: number): OwnerEngagement => {
       { mode: 'practice', users: c(n(198)) },
       { mode: 'daily', users: c(n(150)) },
       { mode: 'mock', users: c(n(74)) },
+      { mode: 'duel', users: c(n(55)) },
       { mode: 'weak', users: c(n(41)) },
       { mode: 'area', users: c(n(33)) },
       { mode: 'redo', users: c(n(22)) },
@@ -202,7 +203,7 @@ const engagement = (site: Site, days: number): OwnerEngagement => {
       completed: { users: c(n(221)), events: n(1311) },
       completion_rate: 0.712,
     },
-    duels: { players: c(n(64)), created: n(210), completed: n(187) },
+    duels: { players: cOver(n(64), [c(n(55))]), created: n(210), completed: n(187) },
     popular_events: [
       { code: 'accounting', users: c(n(120)) },
       { code: 'marketing', users: c(n(96)) },
