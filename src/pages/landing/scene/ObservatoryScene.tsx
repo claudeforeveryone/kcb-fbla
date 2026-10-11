@@ -26,6 +26,8 @@ import {
 } from "@react-three/drei";
 import {
   AdditiveBlending,
+  BackSide,
+  BoxGeometry,
   BufferAttribute,
   BufferGeometry,
   CircleGeometry,
@@ -38,6 +40,8 @@ import {
   MeshBasicMaterial,
   MeshStandardMaterial,
   Object3D,
+  OrthographicCamera,
+  PerspectiveCamera,
   PMREMGenerator,
   Plane,
   PlaneGeometry,
@@ -49,7 +53,6 @@ import {
   Vector4,
   WebGLRenderTarget,
   type Material,
-  type PerspectiveCamera,
   type Texture,
   type WebGLProgramParametersWithUniforms,
   type WebGLRenderer,
@@ -356,44 +359,100 @@ const CLOSE_FILL: Panel = {
   scale: [5, 5, 1],
 };
 
+/** Private parts of three 0.186's PMREMGenerator that let its filter shader be compiled ahead of the bake. */
+type PmremInternals = {
+  _setSize?: (cubeSize: number) => void;
+  _allocateTargets?: () => WebGLRenderTarget;
+  _ggxMaterial?: Material | null;
+  _lodMeshes?: Mesh[];
+};
+
 /**
- * Bakes the studio panels into the scene's environment map once, before anything compiles. The same picture drei's
- * Environment and Lightformer made, built with three's own PMREMGenerator: drei's Environment brought HDR, EXR and
- * gain-map loaders (about 15 KB gzip) that a room lit by four flat panels never uses.
+ * Bakes the studio panels into an environment map: the picture drei's Environment and Lightformer made, built with
+ * three's own PMREMGenerator (drei's Environment brought HDR, EXR and gain-map loaders, about 15 KB gzip, that a room
+ * lit by four flat panels never uses).
+ *
+ * The bake itself is synchronous, and its first use of PMREM's GGX filter shader used to wait on that program's link:
+ * about 0.3 s of main thread on a desktop GPU under ANGLE/D3D11, in the same task as the room's mount. So the filter,
+ * the studio panels and PMREM's background box are compiled first with compileAsync (KHR_parallel_shader_compile,
+ * off the main thread), and the bake runs only once they are linked. The filter is compiled on PMREM's own LOD mesh:
+ * three keys programs on the geometry's attributes too (position, normal), so any other mesh compiles a sibling
+ * program and the bake still stalls. If three's internals ever change shape, the bake still works, with the old stall.
  */
-function StudioEnvironment({ variant }: { variant: SceneVariant }) {
-  const gl = useThree((s) => s.gl);
-  const scene = useThree((s) => s.scene);
-  useLayoutEffect(() => {
-    const studio = new Scene();
-    const parts: Array<{ dispose: () => void }> = [];
-    for (const p of variant === "close" ? [...PANELS, CLOSE_FILL] : PANELS) {
-      const geo = p.ring
-        ? new RingGeometry(0.25, 0.5, 64)
-        : new PlaneGeometry(1, 1);
-      const mat = new MeshBasicMaterial({
-        color: new Color(p.color).multiplyScalar(p.intensity),
-        side: DoubleSide,
-        toneMapped: false,
-      });
-      const panel = new Mesh(geo, mat);
-      panel.position.set(...p.position);
-      panel.scale.set(...p.scale);
-      panel.lookAt(0, 0, 0);
-      studio.add(panel);
-      parts.push(geo, mat);
-    }
-    const pmrem = new PMREMGenerator(gl);
-    const env = pmrem.fromScene(studio, 0, 0.1, 100, { size: 256 });
+async function bakeStudio(
+  gl: WebGLRenderer,
+  variant: SceneVariant,
+  live: () => boolean,
+): Promise<WebGLRenderTarget | null> {
+  const studio = new Scene();
+  const parts: Array<{ dispose: () => void }> = [];
+  for (const p of variant === "close" ? [...PANELS, CLOSE_FILL] : PANELS) {
+    const geo = p.ring
+      ? new RingGeometry(0.25, 0.5, 64)
+      : new PlaneGeometry(1, 1);
+    const mat = new MeshBasicMaterial({
+      color: new Color(p.color).multiplyScalar(p.intensity),
+      side: DoubleSide,
+      toneMapped: false,
+    });
+    const panel = new Mesh(geo, mat);
+    panel.position.set(...p.position);
+    panel.scale.set(...p.scale);
+    panel.lookAt(0, 0, 0);
+    studio.add(panel);
+    parts.push(geo, mat);
+  }
+  const pmrem = new PMREMGenerator(gl);
+  // the background box PMREM draws behind the scene is created inside the bake; a box with the same material settings
+  // compiles the same program now (kept alive until the bake has used it)
+  const box = new Mesh(
+    new BoxGeometry(),
+    new MeshBasicMaterial({ side: BackSide, depthWrite: false, depthTest: false }),
+  );
+  parts.push(box.geometry, box.material);
+  const release = () => {
     pmrem.dispose();
     parts.forEach((x) => x.dispose());
-    scene.environment = env.texture;
-    return () => {
-      if (scene.environment === env.texture) scene.environment = null;
-      env.dispose();
-    };
-  }, [gl, scene, variant]);
-  return null;
+  };
+
+  if (typeof gl.compileAsync === "function") {
+    const internals = pmrem as unknown as PmremInternals;
+    const target = new WebGLRenderTarget(1, 1, { type: HalfFloatType });
+    const cubeCamera = new PerspectiveCamera(90, 1, 0.1, 100);
+    const flat = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const pending: Array<Promise<unknown>> = [];
+    // the bake draws into half-float targets, so the programs are compiled for a target (linear output)
+    const prev = gl.getRenderTarget();
+    gl.setRenderTarget(target);
+    try {
+      if (internals._setSize && internals._allocateTargets) {
+        internals._setSize(256);
+        internals._allocateTargets().dispose();
+        const lod = internals._lodMeshes?.[1];
+        if (internals._ggxMaterial && lod)
+          pending.push(
+            gl.compileAsync(
+              new Mesh(lod.geometry, internals._ggxMaterial),
+              flat,
+              studio,
+            ),
+          );
+      }
+      pending.push(gl.compileAsync(studio, cubeCamera));
+      pending.push(gl.compileAsync(box, cubeCamera, studio));
+    } finally {
+      gl.setRenderTarget(prev);
+      target.dispose();
+    }
+    await Promise.all(pending);
+  }
+  if (!live()) {
+    release();
+    return null;
+  }
+  const env = pmrem.fromScene(studio, 0, 0.1, 100, { size: 256 });
+  release();
+  return env;
 }
 
 // ---- light ----------------------------------------------------------------------------------------------------------
@@ -798,8 +857,6 @@ function Room({
           on the glass and brass comes from the environment; the gold on the stage comes from the caustics. */}
       <directionalLight position={[-4, 5, 8]} intensity={0.35} color={ICE} />
 
-      <StudioEnvironment variant={variant} />
-
       {/* light source behind the colonnade */}
       <mesh
         geometry={horizonGeo}
@@ -922,9 +979,11 @@ function Room({
 function Precompile({
   onDone,
   toScreen,
+  variant,
 }: {
   onDone: () => void;
   toScreen: boolean;
+  variant: SceneVariant;
 }) {
   const gl = useThree((s) => s.gl);
   const scene = useThree((s) => s.scene);
@@ -951,7 +1010,17 @@ function Precompile({
     });
     const pending: Array<Promise<unknown>> = [];
     const yieldTask = () => new Promise<void>((r) => setTimeout(r, 0));
+    let env: WebGLRenderTarget | null = null;
     (async () => {
+      // the environment first: every lit material compiles with it in place (and would recompile without it)
+      env = await bakeStudio(gl, variant, () => live);
+      if (!live) {
+        env?.dispose();
+        env = null;
+        return;
+      }
+      if (env) scene.environment = env.texture;
+      await yieldTask();
       for (const m of meshes) {
         if (!live) return;
         // compile() picks the program variant from the current render target, synchronously, before it returns
@@ -971,8 +1040,13 @@ function Precompile({
       .finally(() => target.dispose());
     return () => {
       live = false;
+      const e = env as WebGLRenderTarget | null;
+      if (e) {
+        if (scene.environment === e.texture) scene.environment = null;
+        e.dispose();
+      }
     };
-  }, [gl, scene, camera, invalidate, onDone, toScreen]);
+  }, [gl, scene, camera, invalidate, onDone, toScreen, variant]);
   return null;
 }
 
@@ -1036,7 +1110,11 @@ export default function ObservatoryScene({
         clock={clock}
         age={age}
       />
-      <Precompile onDone={onCompiled} toScreen={tier !== "full"} />
+      <Precompile
+        onDone={onCompiled}
+        toScreen={tier !== "full"}
+        variant={variant}
+      />
       {animate && (
         <PerformanceMonitor
           flipflops={3}
