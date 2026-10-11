@@ -9,9 +9,10 @@
 // 3. Writes dist/sitemap.xml.
 // 4. Stamps dist/sw.js with a hash of the files it precaches, so changing one reaches installed users.
 //
-// A route whose render throws, times out or comes out without real page content (a heading and some text inside
-// <main>) still gets its own title, description and canonical over an empty #root, but `noindex` and no sitemap entry:
-// a crawler would only see an empty page. Set PRERENDER_STRICT=1 to fail the build instead.
+// A route that renders no page by design ("/" while it redirects signed-out visitors) gets its own title, description
+// and canonical over an empty #root, with `noindex` and no sitemap entry: a crawler would only see an empty page. Any
+// other failure stops the build (prerenderFallback in src/lib/prerender.ts): a render that throws, times out or leaves
+// a Suspense boundary pending, or a `required` route that comes out empty. PRERENDER_STRICT=1 fails on any fallback.
 import { build } from 'vite';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -74,10 +75,13 @@ async function main() {
       html = withHead(tags).replace(EMPTY_ROOT, () => `<div id="root" data-prerendered>${body}</div>`);
       console.log(`prerender ${route.path}: ${chars} characters of page text`);
     } catch (err) {
-      if (strict) throw err;
+      const why = err instanceof Error ? err.message : String(err);
+      if (mod.prerenderFallback(route, err, strict) === 'fail') {
+        const rule = route.required ? 'a required route' : 'a render error, not an empty page';
+        throw new Error(`prerender ${route.path} failed (${rule}): ${why}`, { cause: err });
+      }
       html = withHead(mod.headTags(route, { rendered: false }));
       headOnly.push(route.path);
-      const why = err instanceof Error ? err.message : String(err);
       console.warn(`prerender ${route.path}: head tags only (${why}); noindex and left out of sitemap.xml`);
     }
 

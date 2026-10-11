@@ -18,6 +18,11 @@ export type PublicRoute = {
   index: boolean;
   /** Listed in sitemap.xml. */
   sitemap: boolean;
+  /**
+   * The build fails unless this route prerenders as a real page. Off only for "/" while it redirects signed-out
+   * visitors to /login; turn it on when the signed-out landing renders there.
+   */
+  required: boolean;
   lastmod: string;
 };
 
@@ -30,6 +35,7 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
       'Practise FBLA-style exams, vocab decks and 1v1 duels, and watch your Elo climb. A free study tool for FBL Canada members.',
     index: true,
     sitemap: true,
+    required: false,
     lastmod: POLICY_DATE,
   },
   {
@@ -38,6 +44,7 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
     description: 'Sign in to your FBLC practice account to pick up your exams, vocab and duels.',
     index: false,
     sitemap: false,
+    required: true,
     lastmod: POLICY_DATE,
   },
   {
@@ -46,6 +53,7 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
     description: 'Make a free FBLC account for FBLA-style exams, vocab decks and 1v1 duels. Takes about a minute.',
     index: true,
     sitemap: true,
+    required: true,
     lastmod: POLICY_DATE,
   },
   {
@@ -55,6 +63,7 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
       'The rules for using FBLC, a free and independent FBLA-style study site: accounts, fair play, content and what we do not promise.',
     index: true,
     sitemap: true,
+    required: true,
     lastmod: POLICY_DATE,
   },
   {
@@ -64,6 +73,7 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
       'What FBLC collects from members, why, who can see it, how long we keep it, and how to ask us to change or delete it.',
     index: true,
     sitemap: true,
+    required: true,
     lastmod: POLICY_DATE,
   },
 ];

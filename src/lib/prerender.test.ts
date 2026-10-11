@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MIN_PAGE_TEXT, assertPageContent, mainText, splitLeadingHints } from './prerender';
+import { EmptyPageError, MIN_PAGE_TEXT, assertPageContent, mainText, prerenderFallback, splitLeadingHints } from './prerender';
 
 const page = (inner: string) => `<header><a href="/">FBLC</a></header><main id="main">${inner}</main><footer>Built with love</footer>`;
 
@@ -44,6 +44,53 @@ describe('assertPageContent', () => {
   it('does not count the header and footer chrome as page text', () => {
     const chrome = `<header>${'Sign in Join free '.repeat(10)}</header><main></main><footer>${'Terms Privacy '.repeat(10)}</footer>`;
     expect(() => assertPageContent(chrome)).toThrow();
+  });
+});
+
+describe('prerenderFallback', () => {
+  const home = { path: '/', required: false };
+  const terms = { path: '/terms', required: true };
+  const empty = () => {
+    try {
+      assertPageContent(page(''));
+    } catch (err) {
+      return err;
+    }
+  };
+  const pending = () => {
+    try {
+      assertPageContent(page('<!--$?--><template id="B:0"></template><!--/$-->'));
+    } catch (err) {
+      return err;
+    }
+  };
+
+  it('tells an empty render (a redirect) apart from a broken one', () => {
+    expect(empty()).toBeInstanceOf(EmptyPageError);
+    expect(pending()).toBeInstanceOf(Error);
+    expect(pending()).not.toBeInstanceOf(EmptyPageError);
+  });
+
+  it('writes head tags only for a route that renders no page by design ("/" while it redirects)', () => {
+    expect(prerenderFallback(home, empty(), false)).toBe('head-only');
+  });
+
+  it('fails the build when a required route comes out empty', () => {
+    expect(prerenderFallback(terms, empty(), false)).toBe('fail');
+  });
+
+  it('fails the build when any route throws, times out or leaves a boundary pending', () => {
+    // A landing whose canvas touches window during render, or suspends forever in Node, would otherwise ship as a
+    // noindex homepage with nothing but a warning in the build log.
+    for (const route of [home, terms]) {
+      expect(prerenderFallback(route, new ReferenceError('window is not defined'), false), route.path).toBe('fail');
+      expect(prerenderFallback(route, new Error('prerender of / timed out'), false), route.path).toBe('fail');
+      expect(prerenderFallback(route, pending(), false), route.path).toBe('fail');
+    }
+  });
+
+  it('fails on anything when PRERENDER_STRICT is set', () => {
+    expect(prerenderFallback(home, empty(), true)).toBe('fail');
   });
 });
 

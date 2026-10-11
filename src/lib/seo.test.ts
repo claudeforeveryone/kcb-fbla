@@ -25,6 +25,10 @@ describe('public routes', () => {
     }
   });
 
+  it('requires every page that renders today to keep prerendering ("/" joins once the landing renders there)', () => {
+    expect(PUBLIC_ROUTES.filter((r) => r.required).map((r) => r.path)).toEqual(['/login', '/signup', '/terms', '/privacy']);
+  });
+
   it('indexes every public page except sign-in, and lists exactly the indexed pages in the sitemap', () => {
     expect(PUBLIC_ROUTES.filter((r) => r.index).map((r) => r.path)).toEqual(['/', '/signup', '/terms', '/privacy']);
     expect(PUBLIC_ROUTES.filter((r) => r.sitemap).map((r) => r.path)).toEqual(

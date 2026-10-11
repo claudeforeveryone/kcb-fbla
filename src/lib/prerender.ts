@@ -3,6 +3,11 @@
  * rendered route is a real page worth shipping as static HTML. Pure string work, so it runs in Node and in tests.
  */
 
+/** The render came out with no page in it (a redirect or an empty route). By design for a route that is not required. */
+export class EmptyPageError extends Error {
+  override name = 'EmptyPageError';
+}
+
 /** Minimum visible text inside the page's <main> before it counts as real content. */
 export const MIN_PAGE_TEXT = 40;
 
@@ -19,9 +24,9 @@ export function mainText(html: string): { main: string; text: string } {
 }
 
 /**
- * Returns the length of the page text, or throws when the render is not a page: no <main>, no <h1> inside it, hardly
- * any text (a redirect, a spinner or an unfinished lazy chunk renders like that), or a Suspense boundary left pending
- * or handed to the client (its content would only appear after a script runs).
+ * Returns the length of the page text, or throws when the render is not a page: an EmptyPageError for no <main>, no
+ * <h1> inside it or hardly any text (a redirect renders like that, and so does a spinner), and a plain Error for a
+ * Suspense boundary left pending or handed to the client (its content would only appear after a script runs).
  */
 export function assertPageContent(html: string): number {
   if (html.includes('<!--$?-->') || html.includes('<!--$!-->'))
@@ -29,8 +34,22 @@ export function assertPageContent(html: string): number {
   const { main, text } = mainText(html);
   const hasHeading = /<h1[\s>]/.test(main);
   if (!hasHeading || text.length < MIN_PAGE_TEXT)
-    throw new Error(`no page content (${text.length} characters of text, heading ${hasHeading ? 'present' : 'missing'})`);
+    throw new EmptyPageError(`no page content (${text.length} characters of text, heading ${hasHeading ? 'present' : 'missing'})`);
   return text.length;
+}
+
+/**
+ * What the build does with a public route that did not prerender. Head tags only (noindex, left out of the sitemap)
+ * is right for a route that renders no page by design: "/" while it sends signed-out visitors to /login. Anything else
+ * fails the build, because that fallback would quietly take a real page out of search with only a warning in the log:
+ * - the render threw, timed out or left a Suspense boundary pending (say a canvas that touches `window` while
+ *   rendering, or a loader that never resolves in Node), whatever the route;
+ * - a `required` route came out empty;
+ * - PRERENDER_STRICT=1.
+ */
+export function prerenderFallback(route: { required: boolean }, err: unknown, strict: boolean): 'head-only' | 'fail' {
+  if (strict || route.required) return 'fail';
+  return err instanceof EmptyPageError ? 'head-only' : 'fail';
 }
 
 /**
