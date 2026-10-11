@@ -2,7 +2,7 @@
   "slug": "economics",
   "name": "Economics",
   "group": "objective",
-  "notes": "Competency areas from the FBLA Economics guideline PDF (official, marked 'Updated August 2026'): https://greektrack-fbla-public.s3.amazonaws.com/files/1/High%20School%20Competitive%20Events%20Resources/Individual%20Guidelines/Objective%20Tests/Economics.pdf . The PDF found is the 2026-2027 edition (the 2025-2026 edition was not located). Format: 50 minutes, 100 multiple-choice questions, online. Knowledge areas listed: Fundamental Economic Concepts, Nature of Business, Economic Systems, Government's Impact on Business, Cost/Profit Relationships, Economic Indicators, Global Trade. The PDF's percent weights were garbled in text extraction, so the question counts here (25/20/20/15/10/5/5) are an approximate split of the listed weights. Detailed objectives live in the PDF's study guide, which was not readable in extraction, so the topics follow the standard high-school economics areas named in the knowledge list. Questions are original practice items written for this site, not official FBLA items.",
+  "notes": "Competency areas and test-item counts from the official FBLA Economics guideline (2026-2027 edition, 'Updated August 2026', study guide pp. 5-6): https://greektrack-fbla-public.s3.amazonaws.com/files/1/High%20School%20Competitive%20Events%20Resources/Individual%20Guidelines/Objective%20Tests/Economics.pdf . Format: 50 minutes, 100 multiple-choice questions, online. Official items per area: Fundamental Economic Concepts 15, Nature of Business 15, Economic Systems 15, Government's Impact on Business 5, Cost/Profit Relationships 10, Economic Indicators 15, Global Trade 25. Objectives are aligned to MBA Research National Business Administration Standards (EC codes). This bank is still lighter on Global Trade and Economic Indicators, and heavier on Government's Impact on Business, than the official test. Questions are original practice items written for this site, not official FBLA items.",
   "subs": [
     "Fundamental Economic Concepts",
     "Nature of Business",
@@ -17,10 +17,10 @@
       "id": "eco-001",
       "q": "Which best describes economic scarcity?",
       "choices": [
-        "A temporary shortage caused by a price ceiling set below equilibrium",
-        "Only the goods a government chooses to ration during a war",
-        "The condition in which unlimited human wants exceed the limited resources available to satisfy them",
-        "The total amount of goods a country produces in one year"
+        "A temporary shortage that appears when a price ceiling is set below equilibrium",
+        "The goods a government decides to ration during a war or other emergency",
+        "Unlimited wants exceeding the limited resources available to satisfy them",
+        "The total amount of goods and services a country produces in one year"
       ],
       "answer": 2,
       "explain": "Scarcity is the gap between unlimited wants and limited resources. A shortage from a price ceiling is a symptom of a market problem, not the definition of scarcity.",
@@ -43,7 +43,7 @@
     },
     {
       "id": "eco-003",
-      "q": "Which factor of production is the risk-taking ability to combine land, labour and capital to create a new business?",
+      "q": "Which factor of production is the initiative to start a business and the willingness to bear its risks?",
       "choices": [
         "Labour",
         "Capital",
@@ -51,7 +51,7 @@
         "Entrepreneurship"
       ],
       "answer": 3,
-      "explain": "Entrepreneurship is the fourth factor of production: it organizes the other three and bears the risk of doing so.",
+      "explain": "Entrepreneurship is the fourth factor of production: the entrepreneur organizes land, labour and capital and bears the risk of the venture. Labour is human effort paid with wages, not the risk-taking role.",
       "sub": "Fundamental Economic Concepts",
       "diff": 1
     },
@@ -59,9 +59,9 @@
       "id": "eco-004",
       "q": "In the circular flow model, what do households provide to firms in the factor market?",
       "choices": [
-        "Goods and services",
-        "Consumer spending",
-        "Tax revenue",
+        "Finished goods and services",
+        "Consumer spending on products",
+        "Tax revenue and fees",
         "Labour, land and capital"
       ],
       "answer": 3,
@@ -108,16 +108,16 @@
       ],
       "answer": 3,
       "explain": "Comparative advantage depends on opportunity cost, not on absolute cost or productivity. A country can lack an absolute advantage and still have a comparative one.",
-      "sub": "Fundamental Economic Concepts",
+      "sub": "Global Trade",
       "diff": 1
     },
     {
       "id": "eco-008",
       "q": "Marginal cost is best defined as:",
       "choices": [
-        "total cost divided by total output",
-        "the price minus average variable cost",
-        "fixed costs spread over all units produced",
+        "total cost divided by the total number of units produced",
+        "the price of a unit minus its average variable cost",
+        "fixed costs spread evenly over all units produced",
         "the change in total cost from producing one additional unit"
       ],
       "answer": 3,
@@ -191,7 +191,7 @@
         "Luxury cars"
       ],
       "answer": 2,
-      "explain": "Gasoline has few close substitutes and is a modest share of most budgets in the short run, so demand is inelastic. The other options have many substitutes.",
+      "explain": "In the short run, drivers cannot quickly switch cars, commutes or transit, so gasoline has few substitutes and quantity demanded barely responds to price. Restaurant meals, one cereal brand and luxury cars all have close substitutes or can be put off.",
       "sub": "Fundamental Economic Concepts",
       "diff": 1
     },
@@ -200,13 +200,13 @@
       "q": "Diminishing marginal returns occur when:",
       "choices": [
         "total output begins to decline with any additional input",
-        "average costs fall as output increases",
-        "fixed costs rise with each unit produced",
-        "each additional unit of a variable input adds less output than the previous unit"
+        "average costs fall steadily as the firm's output increases",
+        "fixed costs rise with each additional unit the firm produces",
+        "each added unit of a variable input adds less output than the one before"
       ],
       "answer": 3,
       "explain": "Diminishing marginal returns mean the extra output from each added unit of a variable input falls, even while total output may still rise.",
-      "sub": "Fundamental Economic Concepts",
+      "sub": "Cost/Profit Relationships",
       "diff": 1
     },
     {
@@ -225,26 +225,26 @@
     },
     {
       "id": "eco-016",
-      "q": "A price floor set above the equilibrium price will most likely result in:",
+      "q": "Which type of trade agreement removes tariffs among its members but lets each member keep its own tariffs on goods from non-member countries?",
       "choices": [
-        "a surplus of the good",
-        "a shortage of the good",
-        "the quantity supplied falling to zero",
-        "no change in the quantity exchanged"
+        "A free trade area",
+        "A customs union",
+        "A common market",
+        "An economic and monetary union"
       ],
       "answer": 0,
-      "explain": "A binding price floor above equilibrium makes quantity supplied exceed quantity demanded, creating a surplus.",
-      "sub": "Fundamental Economic Concepts",
-      "diff": 1
+      "explain": "In a free trade area, members drop tariffs on each other's goods but each sets its own tariffs on outsiders. A customs union adds a common external tariff, a common market also frees the movement of labour and capital, and a monetary union adds a shared currency.",
+      "sub": "Global Trade",
+      "diff": 2
     },
     {
       "id": "eco-017",
       "q": "The Latin phrase ceteris paribus means:",
       "choices": [
-        "all prices change together",
-        "the economy is at full employment",
+        "all prices in the economy change together",
+        "the economy is operating at full employment",
         "all other relevant factors are held constant",
-        "consumers always act rationally"
+        "consumers always act in their own best interest"
       ],
       "answer": 2,
       "explain": "Economists use ceteris paribus to isolate the effect of one variable by holding others constant.",
@@ -281,17 +281,17 @@
     },
     {
       "id": "eco-020",
-      "q": "Which best describes macroeconomics?",
+      "q": "A savings account pays 3% interest a year while inflation runs at 5% a year. The saver's real rate of return is closest to:",
       "choices": [
-        "The study of the economy as a whole, including inflation, unemployment and growth",
-        "The study of individual households and firms in a single market",
-        "The study of how a firm maximizes its profit",
-        "The study of how one government sets tariffs on a single product"
+        "-2%",
+        "2%",
+        "8%",
+        "15%"
       ],
       "answer": 0,
-      "explain": "Macroeconomics analyzes aggregate outcomes such as GDP, inflation and unemployment. Studying a single market or a single firm is microeconomics.",
-      "sub": "Fundamental Economic Concepts",
-      "diff": 1
+      "explain": "Real return is roughly the nominal rate minus inflation: 3% - 5% = -2%. The balance grows, but it buys less each year, which is how inflation hurts savers and lenders.",
+      "sub": "Economic Indicators",
+      "diff": 2
     },
     {
       "id": "eco-021",
@@ -323,7 +323,7 @@
     },
     {
       "id": "eco-023",
-      "q": "If the price of tea rises and the quantity demanded of coffee rises, tea and coffee are:",
+      "q": "If the price of tea rises and, as a result, demand for coffee increases, tea and coffee are:",
       "choices": [
         "complements",
         "inferior goods",
@@ -331,32 +331,32 @@
         "substitutes"
       ],
       "answer": 3,
-      "explain": "Substitutes are goods that can replace each other, so a rise in one price increases demand for the other.",
+      "explain": "Substitutes can replace each other. A higher tea price pushes buyers toward coffee, so demand for coffee rises (the whole curve shifts right).",
       "sub": "Fundamental Economic Concepts",
       "diff": 1
     },
     {
       "id": "eco-024",
-      "q": "If the price of printers falls and the quantity demanded of ink cartridges rises, ink is a complement of printers. Why?",
+      "q": "Hot dogs and hot dog buns are complements. If the price of hot dogs rises, what happens in the market for buns?",
       "choices": [
-        "Both goods are used together, so a fall in one price raises demand for the other",
-        "Ink is an inferior good for every buyer",
-        "Ink and printers are perfect substitutes",
-        "Ink is a luxury good whose demand rises with income"
+        "Demand for buns shifts left, so their price and quantity both fall",
+        "Demand for buns shifts right, so their price and quantity both rise",
+        "Supply of buns shifts left, so their price rises and quantity falls",
+        "Quantity of buns demanded rises along an unchanged demand curve"
       ],
       "answer": 0,
-      "explain": "Complements are used together. Cheaper printers mean more printers are bought, which raises demand for the ink they need.",
+      "explain": "A higher hot dog price means fewer hot dogs are bought, so fewer buns are wanted at every price. Demand for buns shifts left, lowering their equilibrium price and quantity; bun supply has not changed.",
       "sub": "Fundamental Economic Concepts",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "eco-025",
       "q": "If both demand and supply increase, the equilibrium price:",
       "choices": [
-        "rises for certain",
-        "falls for certain",
-        "is indeterminate without knowing the relative sizes of the shifts",
-        "stays the same"
+        "rises, because demand growth always outweighs supply growth",
+        "falls, because more supply always pushes the price down",
+        "could rise, fall or stay the same, depending on which shift is larger",
+        "stays exactly the same, because the two shifts cancel out"
       ],
       "answer": 2,
       "explain": "Both shifts raise equilibrium quantity for certain, but their opposing effects on price depend on which shift is larger.",
@@ -381,41 +381,41 @@
       "id": "eco-027",
       "q": "A key disadvantage of a C corporation for U.S. federal tax purposes is:",
       "choices": [
-        "unlimited personal liability for all owners",
+        "unlimited personal liability for all of its shareholders",
         "owners must pay self-employment tax on all profit",
-        "owners cannot transfer their shares",
+        "shareholders are not allowed to sell or transfer their shares",
         "double taxation of corporate profits and of dividends paid to shareholders"
       ],
       "answer": 3,
-      "explain": "A C corporation pays corporate income tax, and shareholders pay tax again on dividends. S corporations and LLCs avoid this by default.",
+      "explain": "A C corporation pays corporate income tax on its profit, and shareholders pay personal tax again on dividends. LLCs (by default) and S corporations (by election) are pass-through entities that avoid this.",
       "sub": "Nature of Business",
       "diff": 1
     },
     {
       "id": "eco-028",
-      "q": "In a limited partnership, which partners have limited liability?",
+      "q": "Which statement about liability in a limited partnership is correct?",
       "choices": [
-        "General partners only",
-        "Neither type of partner",
-        "Both general and limited partners",
-        "Limited partners"
+        "Every partner has unlimited personal liability for the firm's debts",
+        "Every partner's liability is limited to the amount invested",
+        "Limited partners have unlimited liability; general partners are protected",
+        "General partners have unlimited liability; limited partners risk only their investment"
       ],
       "answer": 3,
-      "explain": "General partners manage the business and bear unlimited liability. Limited partners are generally liable only up to their investment.",
+      "explain": "A limited partnership needs at least one general partner, who manages the firm and has unlimited liability. Limited partners usually stay out of management and can lose only what they invested.",
       "sub": "Nature of Business",
       "diff": 1
     },
     {
       "id": "eco-029",
-      "q": "Which section of a business plan describes the target market and the competition?",
+      "q": "Which section of a business plan describes the target market and the competition in detail?",
       "choices": [
         "Market analysis",
-        "Income statement",
-        "Cash flow forecast",
-        "Balance sheet"
+        "Executive summary",
+        "Operations plan",
+        "Financial projections"
       ],
       "answer": 0,
-      "explain": "Market analysis covers target customers, industry size and competitors. The financial statements come later in the plan.",
+      "explain": "The market analysis covers target customers, industry size and competitors in detail. The executive summary only previews the whole plan, and the operations and financial sections cover how the business runs and its numbers.",
       "sub": "Nature of Business",
       "diff": 1
     },
@@ -477,43 +477,43 @@
     },
     {
       "id": "eco-034",
-      "q": "Which is the primary characteristic of an entrepreneur?",
+      "q": "A U.S. clothing company moves its sewing work from Ohio to a factory it owns in Vietnam, while its design team stays in New York. This practice is called:",
       "choices": [
-        "A guaranteed salary",
-        "Avoidance of all financial risk",
-        "Willingness to take calculated risks to pursue profit",
-        "Employment by a government agency"
+        "Insourcing",
+        "Licensing",
+        "Offshoring",
+        "Exporting"
       ],
       "answer": 2,
-      "explain": "Entrepreneurs take on risk in exchange for the possibility of profit, which is the reward for bearing uncertainty.",
-      "sub": "Nature of Business",
-      "diff": 1
+      "explain": "Offshoring moves business activities to another country, here to the company's own factory. Outsourcing would mean hiring an outside firm, licensing lets another firm use your brand or patent for a fee, and exporting is selling goods abroad.",
+      "sub": "Global Trade",
+      "diff": 2
     },
     {
       "id": "eco-035",
       "q": "A nonprofit corporation differs from a for-profit corporation mainly because:",
       "choices": [
-        "it cannot hire employees",
-        "it cannot earn revenue",
-        "it never pays any taxes",
+        "it is not allowed to hire paid employees",
+        "it is not allowed to charge for goods or services",
+        "it is exempt from every tax, including payroll taxes",
         "its earnings cannot be distributed to owners as profit"
       ],
       "answer": 3,
-      "explain": "Nonprofits may earn revenue and hire staff. The key difference is that surplus cannot be distributed to owners or directors as profit.",
+      "explain": "Nonprofits may charge fees, earn revenue and hire staff, and most still owe payroll taxes. The key difference is that any surplus cannot be distributed to owners, members or directors as profit.",
       "sub": "Nature of Business",
       "diff": 1
     },
     {
       "id": "eco-036",
-      "q": "Which business structure gives owners limited liability while being taxed as a partnership by default for U.S. federal tax purposes?",
+      "q": "Which business structure protects all of its owners' personal assets from business debts and, with two or more owners, is taxed as a partnership by default for U.S. federal tax purposes?",
       "choices": [
-        "A C corporation",
-        "A general partnership",
+        "A C corporation (C corp)",
+        "A general partnership (GP)",
         "A limited liability company (LLC)",
-        "A sole proprietorship that has filed incorporation papers"
+        "An S corporation (S corp)"
       ],
       "answer": 2,
-      "explain": "An LLC shields owners' personal assets from business debts and, by default with multiple members, is taxed as a partnership (pass-through).",
+      "explain": "A multi-member LLC shields every owner's personal assets and is taxed as a partnership (pass-through) unless it elects otherwise. A general partnership has the same tax default but unlimited liability, and an S corporation gets pass-through treatment only by election, under its own rules.",
       "sub": "Nature of Business",
       "diff": 2
     },
@@ -575,15 +575,15 @@
     },
     {
       "id": "eco-041",
-      "q": "Which U.S. law governs contracts for the sale of goods between merchants?",
+      "q": "Which body of U.S. law governs most contracts for the sale of goods, such as a retailer buying inventory from a manufacturer?",
       "choices": [
-        "Uniform Commercial Code, Article 2",
-        "Sherman Antitrust Act",
-        "Fair Labor Standards Act",
-        "Securities Act of 1933"
+        "Article 2 of the Uniform Commercial Code",
+        "Section 1 of the Sherman Antitrust Act",
+        "The Fair Labor Standards Act of 1938",
+        "The federal Securities Act of 1933"
       ],
       "answer": 0,
-      "explain": "UCC Article 2 governs sales of goods. The other laws cover antitrust, wages and securities.",
+      "explain": "UCC Article 2, adopted by every state except Louisiana, governs sales of goods, whether between merchants or with consumers. The other laws cover antitrust, wages and securities.",
       "sub": "Nature of Business",
       "diff": 2
     },
@@ -591,10 +591,10 @@
       "id": "eco-042",
       "q": "Besides offer, acceptance and consideration, a legally enforceable contract generally requires:",
       "choices": [
-        "a notary's signature",
-        "a written document in every case",
+        "a notary's signature and official seal",
+        "a signed written document in every case",
         "capacity of the parties and a legal purpose",
-        "witnesses to the signing"
+        "at least two witnesses to the signing"
       ],
       "answer": 2,
       "explain": "Enforceable contracts need capacity (parties able to contract) and lawful purpose. Writing is required only for certain contracts under the Statute of Frauds.",
@@ -620,9 +620,9 @@
       "q": "Which best describes a business's mission statement?",
       "choices": [
         "Its long-term purpose and reason for existing",
-        "Its annual sales target",
-        "A list of its current products",
-        "Its daily work schedule"
+        "Its sales target for the coming year",
+        "A list of its current products and prices",
+        "The daily schedule its employees follow"
       ],
       "answer": 0,
       "explain": "A mission statement states why the business exists. Sales targets are goals, which are narrower and time-bound.",
@@ -647,10 +647,10 @@
       "id": "eco-046",
       "q": "In a pure market economy, who primarily decides what goods are produced?",
       "choices": [
-        "Government planners",
-        "Labour unions",
+        "Government planners, through production quotas",
+        "Labour unions, through collective bargaining",
         "Consumers and producers, through prices",
-        "A central bank"
+        "The central bank, through interest rates"
       ],
       "answer": 2,
       "explain": "In a market economy, prices signal what consumers want, and producers respond to those signals to earn profit.",
@@ -662,9 +662,9 @@
       "q": "Which best describes a command economy?",
       "choices": [
         "A central government makes most production and allocation decisions",
-        "Prices are set by supply and demand alone",
-        "Private property is abolished in every case",
-        "Foreign trade is entirely prohibited"
+        "Prices are set by supply and demand, with no government role",
+        "All private property is abolished, including personal belongings",
+        "All trade with other countries is prohibited by law"
       ],
       "answer": 0,
       "explain": "In a command economy, a central authority plans what, how and for whom goods are produced. The other options describe a market economy or extreme cases.",
@@ -689,10 +689,10 @@
       "id": "eco-049",
       "q": "A traditional economy relies primarily on:",
       "choices": [
-        "custom, habit and tradition",
-        "central planning by government",
-        "auction markets",
-        "international aid"
+        "customs and beliefs passed down through generations",
+        "central planning by a national government agency",
+        "auction markets where prices change every day",
+        "international aid from wealthier countries"
       ],
       "answer": 0,
       "explain": "Traditional economies answer the basic economic questions through customs passed down over generations.",
@@ -704,9 +704,9 @@
       "q": "Which is a core feature of capitalism?",
       "choices": [
         "Government ownership of major industries",
-        "Fixed prices for all goods",
-        "Equal distribution of income",
-        "Private ownership of property and capital"
+        "Fixed prices set by law for all goods",
+        "Equal distribution of income to all households",
+        "Private ownership of businesses and productive resources"
       ],
       "answer": 3,
       "explain": "Capitalism is built on private ownership of the factors of production and market-determined prices.",
@@ -729,15 +729,15 @@
     },
     {
       "id": "eco-052",
-      "q": "Which basic economic question asks 'for whom' goods and services are produced?",
+      "q": "When a society decides how its output is shared among people, through wages, prices or rationing, which basic economic question is it answering?",
       "choices": [
         "What to produce",
         "How to produce",
         "For whom to produce",
-        "How much to save"
+        "When to produce"
       ],
       "answer": 2,
-      "explain": "Every economy answers three questions: what to produce, how to produce it, and for whom it is produced (how output is distributed).",
+      "explain": "Deciding who gets the output is the 'for whom' question. 'What' is about which goods to make, and 'how' is about which resources and methods to use.",
       "sub": "Economic Systems",
       "diff": 2
     },
@@ -745,10 +745,10 @@
       "id": "eco-053",
       "q": "The 'invisible hand' concept, associated with Adam Smith, refers to:",
       "choices": [
-        "government price controls",
-        "foreign aid programs",
-        "a central bank managing the money supply",
-        "self-interested individuals unintentionally promoting society's welfare through markets"
+        "government price controls that steer markets toward fair prices",
+        "foreign aid programs that move resources to poorer nations",
+        "a central bank quietly managing the money supply",
+        "self-interest in markets unintentionally promoting society's welfare"
       ],
       "answer": 3,
       "explain": "Smith argued that individuals pursuing their own gain through voluntary exchange can produce socially beneficial outcomes.",
@@ -759,10 +759,10 @@
       "id": "eco-054",
       "q": "Why are secure property rights important in a market economy?",
       "choices": [
-        "They eliminate the need for prices",
-        "They guarantee equal incomes",
+        "They eliminate the need for prices in most markets",
+        "They guarantee every household an equal income",
         "They give owners incentives to invest, save and trade",
-        "They prevent all forms of competition"
+        "They prevent all forms of competition between firms"
       ],
       "answer": 2,
       "explain": "Secure property rights let owners keep the returns from their investment and trade, which encourages productive activity.",
@@ -773,10 +773,10 @@
       "id": "eco-055",
       "q": "A major problem with central planning is:",
       "choices": [
-        "too much consumer choice",
-        "excessive competition between firms",
-        "an abundance of accurate information",
-        "persistent shortages and surpluses caused by the absence of market price signals"
+        "too much consumer choice, which wastes resources on variety",
+        "excessive competition between firms, which drives prices too low",
+        "too much accurate price information for planners to process",
+        "shortages and surpluses, because no market prices signal scarcity"
       ],
       "answer": 3,
       "explain": "Without prices that reflect scarcity, planners struggle to allocate resources efficiently, which leads to shortages and surpluses.",
@@ -788,9 +788,9 @@
       "q": "In economics, equity refers to:",
       "choices": [
         "the fairness of how income and goods are distributed",
-        "the lowest total cost of production",
-        "the speed of economic growth",
-        "the amount of money in circulation"
+        "producing goods at the lowest possible total cost",
+        "the speed at which the economy grows over time",
+        "the amount of money circulating in the economy"
       ],
       "answer": 0,
       "explain": "Equity is about fairness in distribution. Efficiency is about getting the most output from scarce resources. The two often trade off.",
@@ -801,10 +801,10 @@
       "id": "eco-057",
       "q": "An allocation of resources is Pareto efficient when:",
       "choices": [
-        "everyone has identical income",
-        "total output is maximized regardless of cost",
+        "every person in the economy receives an identical income",
+        "total output is maximized no matter what resources it uses",
         "no one can be made better off without making someone else worse off",
-        "the government sets all prices"
+        "the government sets every price equal to the cost of production"
       ],
       "answer": 2,
       "explain": "Pareto efficiency means no reallocation can improve one person's position without harming another. It says nothing about equal incomes.",
@@ -815,10 +815,10 @@
       "id": "eco-058",
       "q": "Which describes a market failure?",
       "choices": [
-        "Market outcomes that do not achieve efficient allocation, such as pollution from production",
-        "Perfect competition among many firms",
-        "Prices that reflect all costs and benefits",
-        "Full employment with stable prices"
+        "Markets allocating resources inefficiently, such as through unpriced pollution",
+        "Many small firms competing to sell an identical product at the market price",
+        "Prices that fully reflect every cost and benefit of producing a good",
+        "An economy at full employment with stable prices and steady growth"
       ],
       "answer": 0,
       "explain": "Market failure occurs when markets misallocate resources, often because of externalities, public goods or market power.",
@@ -844,12 +844,12 @@
       "q": "Which is the best example of a public good?",
       "choices": [
         "National defence",
-        "A private gym membership",
-        "A movie ticket",
+        "Fish in the open ocean",
+        "A streaming service subscription",
         "A restaurant meal"
       ],
       "answer": 0,
-      "explain": "National defence is non-rival and non-excludable, so private markets tend to underprovide it and government usually supplies it.",
+      "explain": "National defence is non-rival and non-excludable. Ocean fish are non-excludable but rival (a common resource), a streaming subscription is excludable (a club good), and a restaurant meal is a private good.",
       "sub": "Economic Systems",
       "diff": 2
     },
@@ -872,9 +872,9 @@
       "q": "Privatization refers to:",
       "choices": [
         "transferring government-owned enterprises to private ownership",
-        "government purchase of private companies",
-        "an increase in public spending on services",
-        "the creation of a new public corporation"
+        "the government buying private companies and running them",
+        "an increase in government spending on public services",
+        "the creation of a new government-owned corporation"
       ],
       "answer": 0,
       "explain": "Privatization moves assets or services from public to private ownership, such as through a sale of a state-owned company.",
@@ -899,28 +899,28 @@
       "id": "eco-064",
       "q": "Division of labour increases productivity mainly because:",
       "choices": [
-        "workers avoid all tasks they dislike",
+        "workers can avoid every task they find unpleasant or boring",
         "workers build skill in a task and lose less time switching between tasks",
-        "machines are no longer needed",
-        "output prices always fall"
+        "machines are no longer needed once tasks are split up",
+        "the prices of the goods produced always fall right away"
       ],
       "answer": 1,
       "explain": "Specialization builds skill and efficiency. Adam Smith's pin factory example illustrates the point.",
-      "sub": "Economic Systems",
+      "sub": "Cost/Profit Relationships",
       "diff": 2
     },
     {
       "id": "eco-065",
       "q": "Specialization and trade benefit nations because they allow each nation to:",
       "choices": [
-        "eliminate scarcity entirely",
+        "eliminate scarcity entirely for all of its citizens",
         "consume beyond what its own production possibilities would allow",
-        "remove the need for money",
-        "guarantee equal living standards"
+        "remove the need for money in international exchange",
+        "guarantee the same living standard as its trading partners"
       ],
       "answer": 1,
       "explain": "Trade lets countries consume combinations of goods outside their own production possibilities curve, which raises total welfare.",
-      "sub": "Economic Systems",
+      "sub": "Global Trade",
       "diff": 2
     },
     {
@@ -947,7 +947,7 @@
         "the Securities and Exchange Commission"
       ],
       "answer": 1,
-      "explain": "The Federal Reserve sets the federal funds target rate and manages the money supply. Congress makes fiscal decisions.",
+      "explain": "The Federal Reserve sets a target range for the federal funds rate and influences the money supply. Congress, with the President, makes fiscal decisions about taxes and spending.",
       "sub": "Government's Impact on Business",
       "diff": 2
     },
@@ -1011,19 +1011,19 @@
       "id": "eco-072",
       "q": "The Sherman Antitrust Act of 1890 primarily aims to:",
       "choices": [
-        "regulate interest rates",
-        "prohibit monopolies and restraints of trade",
-        "set minimum wages",
-        "protect copyrights"
+        "regulate the interest rates banks may charge",
+        "outlaw monopolization and agreements that restrain trade",
+        "set a national minimum wage for workers",
+        "protect copyrights on books, music and films"
       ],
       "answer": 1,
-      "explain": "The Sherman Act outlaws contracts and conspiracies that restrain trade and the monopolization of markets.",
+      "explain": "The Sherman Act bans contracts and conspiracies in restraint of trade and the monopolization (or attempted monopolization) of markets. Simply being the only seller because of a better product is not itself illegal.",
       "sub": "Government's Impact on Business",
       "diff": 2
     },
     {
       "id": "eco-073",
-      "q": "Which U.S. agency enforces federal securities laws and protects investors?",
+      "q": "Which U.S. federal agency requires public companies to disclose financial information and takes action against insider trading?",
       "choices": [
         "Federal Trade Commission",
         "Securities and Exchange Commission",
@@ -1031,7 +1031,7 @@
         "Department of Labor"
       ],
       "answer": 1,
-      "explain": "The SEC enforces federal securities laws. The FTC focuses on consumer protection and competition, and the Fed on monetary policy.",
+      "explain": "The SEC enforces federal securities laws, including disclosure rules for public companies and the ban on insider trading. The FTC handles consumer protection and competition, and the Fed runs monetary policy.",
       "sub": "Government's Impact on Business",
       "diff": 2
     },
@@ -1121,15 +1121,15 @@
     },
     {
       "id": "eco-080",
-      "q": "Which U.S. law is the main source of the FTC's authority to act against unfair or deceptive business practices?",
+      "q": "Which U.S. federal law prohibits 'unfair or deceptive acts or practices' in commerce and is the main basis for federal action against false advertising?",
       "choices": [
         "Section 5 of the Federal Trade Commission Act",
-        "The Clayton Act",
-        "The Glass-Steagall Act",
-        "The Fair Credit Reporting Act"
+        "Section 7 of the Clayton Act",
+        "The Glass-Steagall Banking Act of 1933",
+        "The Fair Credit Reporting Act of 1970"
       ],
       "answer": 0,
-      "explain": "Section 5 of the FTC Act prohibits unfair or deceptive acts or practices in commerce. The Clayton Act targets specific anticompetitive practices such as certain mergers.",
+      "explain": "Section 5 of the FTC Act (amended by the Wheeler-Lea Act of 1938) bans unfair or deceptive acts or practices, and the FTC uses it against false advertising. Clayton Act Section 7 covers mergers, Glass-Steagall separated commercial and investment banking, and the FCRA covers credit reports.",
       "sub": "Government's Impact on Business",
       "diff": 3
     },
@@ -1151,10 +1151,10 @@
       "id": "eco-082",
       "q": "Economic profit equals:",
       "choices": [
-        "total revenue minus accounting cost only",
-        "total revenue minus total opportunity cost, including implicit costs",
+        "total revenue minus accounting (explicit) costs only",
+        "total revenue minus explicit and implicit costs",
         "the net income reported on the income statement",
-        "revenue minus variable cost only"
+        "total revenue minus variable costs only"
       ],
       "answer": 1,
       "explain": "Economic profit subtracts implicit costs such as forgone wages. Accounting profit ignores them, so it is usually higher.",
@@ -1196,7 +1196,7 @@
         "$24",
         "$36",
         "$40",
-        "$4,800"
+        "$48"
       ],
       "answer": 2,
       "explain": "Average total cost is total cost divided by quantity: $4,800 / 120 = $40.",
@@ -1249,10 +1249,10 @@
       "id": "eco-089",
       "q": "Which cost is an implicit cost?",
       "choices": [
-        "Wages paid to employees",
-        "Rent paid for a store",
+        "Wages the business pays its part-time employees",
+        "Rent the business pays each month for its store",
         "The salary the owner gives up by not working elsewhere",
-        "Monthly utility bills"
+        "Electricity and water bills paid by the business"
       ],
       "answer": 2,
       "explain": "Implicit costs are the value of resources the owner supplies that are not paid in cash, such as forgone wages. The other three are explicit payments.",
@@ -1278,9 +1278,9 @@
       "q": "Gross domestic product measures:",
       "choices": [
         "the market value of all final goods and services produced within a country in a given period",
-        "total government spending only",
-        "the total value of all stocks traded",
-        "the total money supply"
+        "the total income earned by a country's citizens and firms, wherever they produce",
+        "the value of all goods sold in a country in a year, including intermediate goods",
+        "the total amount the federal government spends on goods and services in a year"
       ],
       "answer": 0,
       "explain": "GDP counts final goods and services produced domestically in a period. It excludes intermediate goods to avoid double counting.",
@@ -1291,13 +1291,13 @@
       "id": "eco-092",
       "q": "The Consumer Price Index measures:",
       "choices": [
-        "the price of gold",
-        "wholesale prices of raw materials only",
-        "the average change over time in prices paid by urban consumers for a basket of goods and services",
-        "the interest rate on government bonds"
+        "the average change in the selling prices that domestic producers receive",
+        "the total value of all final goods and services a country produces",
+        "the average change over time in prices urban consumers pay for a basket of goods and services",
+        "the interest rate banks charge their most creditworthy customers"
       ],
       "answer": 2,
-      "explain": "CPI tracks the cost of a fixed basket of consumer goods and services over time, and is the most common inflation gauge.",
+      "explain": "CPI tracks the cost of a fixed basket of consumer goods and services over time and is the most common inflation gauge. Producer selling prices are the PPI, and total final output is GDP.",
       "sub": "Economic Indicators",
       "diff": 3
     },
@@ -1334,9 +1334,9 @@
       "q": "A common definition of a recession in the business cycle is:",
       "choices": [
         "two consecutive quarters of declining real GDP",
-        "a rise in the CPI above 5%",
-        "a fall in the unemployment rate",
-        "a period of rising stock prices"
+        "a rise in the inflation rate (CPI) above 5% a year",
+        "a fall in the unemployment rate for two quarters",
+        "a long period of rising stock market prices"
       ],
       "answer": 0,
       "explain": "The two-consecutive-quarters rule is a common rule of thumb. The official U.S. call is made by the NBER and considers several indicators.",
@@ -1359,15 +1359,15 @@
     },
     {
       "id": "eco-097",
-      "q": "Which principle explains why nations benefit from trade even if one nation is more productive in every good?",
+      "q": "In one hour, Country A can make 10 shirts or 5 phones, and Country B can make 6 shirts or 2 phones. Which statement is correct?",
       "choices": [
-        "Absolute advantage",
-        "Comparative advantage",
-        "Mercantilism",
-        "Protectionism"
+        "Country A should make shirts, because it makes more shirts per hour than B",
+        "Country B has a comparative advantage in shirts, and Country A in phones",
+        "Country A has a comparative advantage in both goods, so trade cannot help",
+        "Country B has a comparative advantage in phones, since it makes fewer of them"
       ],
       "answer": 1,
-      "explain": "Comparative advantage, based on opportunity cost, shows that both nations gain by specializing where their opportunity cost is lowest.",
+      "explain": "Country A gives up 0.5 phone per shirt; Country B gives up only 1/3 phone, so B has the comparative advantage in shirts. A gives up 2 shirts per phone versus B's 3, so A has it in phones. A has the absolute advantage in both goods, but no country can have the comparative advantage in both.",
       "sub": "Global Trade",
       "diff": 3
     },
@@ -1376,9 +1376,9 @@
       "q": "The current account of the U.S. balance of payments includes:",
       "choices": [
         "trade in goods and services, plus net income and transfers",
-        "only foreign direct investment",
-        "changes in central bank reserves only",
-        "government bond sales only"
+        "only foreign direct investment flowing into the country",
+        "only changes in the central bank's foreign currency reserves",
+        "only sales of government bonds to foreign investors"
       ],
       "answer": 0,
       "explain": "The current account covers trade in goods and services, net primary income and net transfers. Capital and financial accounts track investment flows.",
@@ -1409,7 +1409,7 @@
         "the European Union"
       ],
       "answer": 1,
-      "explain": "USMCA (United States-Mexico-Canada Agreement) replaced NAFTA in 2020. It is a regional free trade agreement among these three countries.",
+      "explain": "USMCA (CUSMA in Canada) replaced NAFTA on July 1, 2020. At its first joint review on July 1, 2026 the U.S. declined to extend it, which starts annual reviews, but the agreement stays in force through 2036.",
       "sub": "Global Trade",
       "diff": 3
     }
@@ -1461,7 +1461,7 @@
       "id": "eco-v008",
       "term": "Comparative advantage",
       "def": "The ability of a producer to make a good at a lower opportunity cost than another producer.",
-      "sub": "Fundamental Economic Concepts"
+      "sub": "Global Trade"
     },
     {
       "id": "eco-v009",
@@ -1647,7 +1647,7 @@
       "id": "eco-v039",
       "term": "Division of labour",
       "def": "Splitting production into specialized tasks so each worker builds skill and output rises.",
-      "sub": "Economic Systems"
+      "sub": "Cost/Profit Relationships"
     },
     {
       "id": "eco-v040",
@@ -1682,19 +1682,19 @@
     {
       "id": "eco-v045",
       "term": "Price ceiling",
-      "def": "A legal maximum price set below equilibrium, which tends to create a shortage.",
+      "def": "A legal maximum price; when set below equilibrium, it causes a shortage.",
       "sub": "Government's Impact on Business"
     },
     {
       "id": "eco-v046",
       "term": "Price floor",
-      "def": "A legal minimum price set above equilibrium, which tends to create a surplus.",
+      "def": "A legal minimum price; when set above equilibrium, it causes a surplus.",
       "sub": "Government's Impact on Business"
     },
     {
       "id": "eco-v047",
       "term": "Sherman Antitrust Act",
-      "def": "A 1890 U.S. law that prohibits contracts and conspiracies in restraint of trade and the monopolization of markets.",
+      "def": "An 1890 U.S. law that prohibits contracts and conspiracies in restraint of trade and the monopolization of markets.",
       "sub": "Government's Impact on Business"
     },
     {

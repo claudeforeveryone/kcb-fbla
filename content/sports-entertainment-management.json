@@ -26,7 +26,7 @@
       "id": "sem-001",
       "q": "A regional team finds that family buyers cut back sharply when prices rise, while corporate buyers buy suites almost regardless of price. Which pricing approach best fits these findings?",
       "choices": [
-        "Charge different prices to each segment, such as family discounts alongside premium-priced corporate suite packages",
+        "Segmented pricing: family discounts and premium corporate suites",
         "Set one uniform price for all buyers so the pricing structure stays simple",
         "Raise every price to the level corporate buyers are willing to pay",
         "Price every seat at the arena average cost per seat to cover costs"
@@ -140,13 +140,13 @@
       "choices": [
         "Market segmentation by age",
         "Penetration pricing",
-        "Positioning the brand in the target market's mind",
+        "Brand positioning",
         "Test marketing in new regions"
       ],
       "answer": 2,
       "explain": "Positioning concerns the image a product holds in customers' minds relative to competitors. Segmentation identifies the group; positioning shapes perception of the brand.",
       "sub": "Sports and Entertainment Marketing/Strategic Marketing",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "sem-010",
@@ -180,7 +180,7 @@
       "id": "sem-012",
       "q": "A city is choosing a site for a 15,000-seat arena. Which factor is a core site-selection criterion?",
       "choices": [
-        "Access by highway and public transit, with enough parking for peak event days",
+        "Highway and transit access, plus event-day parking",
         "The number of employees the team plans to hire",
         "The team's current merchandise inventory",
         "The ticket prices set for opening night"
@@ -250,13 +250,13 @@
       "id": "sem-017",
       "q": "A city wants to fund a new arena without raising taxes on residents, so it issues bonds repaid from hotel and car rental taxes. What type of financing is this?",
       "choices": [
-        "Common stock sold by the city",
-        "Unsecured personal loans to the team owner",
-        "Revenue bonds backed by dedicated tax revenue",
-        "An unrestricted federal grant for luxury suites"
+        "General obligation bonds backed by the city's full taxing power",
+        "Private equity financing from the team's owner",
+        "Revenue bonds repaid from a dedicated tax stream",
+        "A federal grant for stadium construction"
       ],
       "answer": 2,
-      "explain": "Revenue bonds are repaid from a specific income stream, here dedicated tourism taxes. The other options are not a recognized way for a city to finance a facility this way.",
+      "explain": "Bonds repaid only from a pledged income stream, here hotel and car rental taxes, are revenue (special tax) bonds. General obligation bonds are backed by the city's full taxing power, which is what the city wanted to avoid.",
       "sub": "Facility and Event Management",
       "diff": 2
     },
@@ -278,7 +278,7 @@
       "id": "sem-019",
       "q": "A championship weekend needs security, medical, transport and ticketing teams to coordinate across several agencies. Which management approach best organizes this work?",
       "choices": [
-        "A single integrated operations plan with one lead responsible for communication",
+        "One integrated operations plan with a single command lead",
         "Separate budgets for each agency, with no shared schedule",
         "Delaying coordination until the day of the event",
         "Letting each vendor set its own safety procedures"
@@ -323,7 +323,7 @@
         "It is required by the sponsors' contracts",
         "It lowers the permit cost of the next event",
         "It replaces the need for a post-event budget review",
-        "It builds loyalty and encourages participants to return for future events"
+        "It builds loyalty and brings participants back next time"
       ],
       "answer": 3,
       "explain": "Post-event recognition supports retention and service for future events. The other options invent legal or cost effects the scenario does not imply.",
@@ -449,7 +449,7 @@
         "Free tickets for its executives every season",
         "Exemption from local advertising taxes",
         "Control over the league's rulebook",
-        "Brand exposure to the event's audience and association with the team's image"
+        "Brand exposure and association with the team"
       ],
       "answer": 3,
       "explain": "Sponsors buy visibility and image transfer. The other options are not standard benefits of naming rights.",
@@ -474,13 +474,13 @@
       "id": "sem-033",
       "q": "Which sequence correctly lists the steps in developing an effective advertising campaign?",
       "choices": [
-        "Choose media, create the message, then set objectives",
-        "Evaluate results, set the budget, then choose a target audience",
-        "Create the message, evaluate results, then set the budget",
-        "Set objectives and target audience, set the budget, create the message and choose media, then evaluate results"
+        "Choose media, set objectives, set the budget, create the message, evaluate results",
+        "Set the budget, choose media, set objectives, create the message, evaluate results",
+        "Set objectives, create the message, evaluate results, set the budget, choose media",
+        "Set objectives, set the budget, create the message, choose media, evaluate results"
       ],
       "answer": 3,
-      "explain": "Campaigns start with objectives and audience, then budget, message and media, and finally evaluation. Starting with media or evaluation is out of order.",
+      "explain": "Campaign planning follows the 5 Ms: mission (objectives), money (budget), message, media, then measurement (evaluation). The other sequences put media, budget or evaluation out of place.",
       "sub": "Promotion, Advertising, and Sponsorship for Sports and Entertainment Industry",
       "diff": 3
     },
@@ -503,7 +503,7 @@
       "q": "A minor league club holds a Halloween-themed game each October, with sponsor logos on the giveaways. What is the main promotional value of seasonal themed events?",
       "choices": [
         "They guarantee higher ticket prices all season",
-        "They create repeat attendance and give sponsors a fresh reason to feature their brands",
+        "They drive repeat visits and fresh sponsor exposure",
         "They eliminate the need for regular advertising",
         "They lower the club's fixed costs"
       ],
@@ -558,10 +558,10 @@
       "id": "sem-039",
       "q": "A community sports league is organized as a 501(c)(3) nonprofit. Which advantage does this status give?",
       "choices": [
-        "Freedom from all state regulation",
-        "The right to distribute profits to members",
-        "Exemption from federal income tax and eligibility for tax-deductible donations",
-        "Automatic access to broadcast rights"
+        "Freedom from all state regulation and reporting",
+        "The right to distribute profits to its members",
+        "Federal income tax exemption and tax-deductible donations",
+        "Automatic access to league broadcast rights"
       ],
       "answer": 2,
       "explain": "Section 501(c)(3) status exempts qualifying organizations from federal income tax and lets donors deduct gifts. It does not remove state oversight or allow profit distribution.",
@@ -630,11 +630,11 @@
       "choices": [
         "It ignores the multiplier effect of spending",
         "It uses too few years of data",
-        "It does not net out substitution effects, where the spending would have happened locally anyway",
-        "It counts only ticket revenue and not sponsorships"
+        "It fails to remove the substitution effect",
+        "It includes spending by out-of-town visitors"
       ],
       "answer": 2,
-      "explain": "Credible impact studies subtract spending that merely shifts from other local activities. The multiplier is a legitimate part of the analysis, so ignoring it is not the flaw.",
+      "explain": "Credible impact studies count only new money, so spending local residents would have made anyway (the substitution effect) must be removed. Visitor spending is exactly what should be counted, and the multiplier is a legitimate part of the analysis.",
       "sub": "Financing and Economic Input",
       "diff": 3
     },
@@ -678,19 +678,19 @@
       "answer": 2,
       "explain": "The multiplier effect explains how each round of spending creates income that is spent again. Substitution is the opposite concern in impact studies.",
       "sub": "Financing and Economic Input",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "sem-048",
       "q": "What is the main difference between a ticket broker and a ticket scalper?",
       "choices": [
-        "A broker sells only at face value, while a scalper sells above face value",
-        "A scalper is licensed by the venue, while a broker is not",
-        "A broker works only with season-ticket holders, while a scalper works with the public",
-        "A broker is a licensed reseller that follows venue and local rules, while a scalper resells tickets illegally or in violation of local law"
+        "A broker always sells at face value, while a scalper sells above face value",
+        "A scalper is licensed by the venue, while a broker resells without a license",
+        "A broker resells only season tickets, while a scalper resells single-game tickets",
+        "A broker is a licensed reselling business, while a scalper is an unlicensed individual"
       ],
       "answer": 3,
-      "explain": "Licensed brokers operate legally within the rules. Scalpers operate outside them. Reversing the licensing or pricing roles is the trap.",
+      "explain": "Ticket brokers are licensed or registered businesses that resell within the law. Scalpers are unlicensed individuals, often selling above face value where local law restricts resale. Both may charge above face value, so price is not the dividing line.",
       "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
       "diff": 2
     },
@@ -700,11 +700,11 @@
       "choices": [
         "Cost-plus pricing",
         "Price skimming",
-        "Dynamic (demand-based) pricing",
+        "Dynamic pricing",
         "Price ceiling"
       ],
       "answer": 2,
-      "explain": "Dynamic pricing adjusts price to real-time demand. Cost-plus pricing sets price from cost, and a price ceiling is a government limit.",
+      "explain": "Dynamic (demand-based) pricing adjusts price to real-time demand. Cost-plus pricing sets price from cost, and a price ceiling is a government limit.",
       "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
       "diff": 3
     },
@@ -726,10 +726,10 @@
       "id": "sem-051",
       "q": "Before setting a price for a new event package, which step should a planner take first?",
       "choices": [
-        "Print the price on all advertising",
-        "Define pricing objectives and estimate costs and likely demand",
-        "Match the rival venue's price exactly",
-        "Set the price after the event is held"
+        "Print the planned price on all advertising",
+        "Set pricing objectives and estimate costs and demand",
+        "Match the rival venue's current price exactly",
+        "Set the final price once the event is over"
       ],
       "answer": 1,
       "explain": "Pricing starts with objectives, cost and demand estimates. Copying a competitor or pricing after the fact skips the analysis.",
@@ -738,15 +738,15 @@
     },
     {
       "id": "sem-052",
-      "q": "In the sales process, which step comes directly before the presentation?",
+      "q": "In the classic seven-step sales process, which step comes directly before the presentation?",
       "choices": [
-        "The approach, the first contact with the prospect",
+        "The approach",
         "Closing the sale",
         "Post-sale follow-up",
-        "Handling objections after the presentation"
+        "Handling objections"
       ],
       "answer": 0,
-      "explain": "The sequence runs prospecting, preapproach, approach, presentation, then objections and close. The approach precedes the presentation.",
+      "explain": "The seven steps are prospecting, preapproach, approach, presentation, handling objections, closing and follow-up, so the approach comes directly before the presentation. Some models add a determine-needs step between them, which is why the stem names the seven-step model.",
       "sub": "Planning, Distribution, Marketing, Pricing, and Selling Sports and Entertainment Events",
       "diff": 3
     },
@@ -810,10 +810,10 @@
       "id": "sem-057",
       "q": "Title IX of the Education Amendments of 1972 primarily prohibits what?",
       "choices": [
-        "Racial segregation in public venues",
-        "Sex-based discrimination in federally funded education programs, including athletics",
-        "Employment discrimination based on age",
-        "Unfair labor practices by unions"
+        "Racial segregation in public sports venues",
+        "Sex discrimination in federally funded education programs",
+        "Age discrimination in hiring and employment",
+        "Unfair labor practices by unions and employers"
       ],
       "answer": 1,
       "explain": "Title IX bans sex discrimination in federally funded education programs, including school and college athletics.",
@@ -824,15 +824,15 @@
       "id": "sem-058",
       "q": "A promoter uses a copyrighted song in a video ad without permission. Which exclusive right of the copyright owner is most directly infringed?",
       "choices": [
-        "The right to set the song's ticket price",
-        "The right to reproduce and publicly perform the work",
-        "The right to collect the venue's concession revenue",
-        "The right to name the promoter's company"
+        "The right to register the song's title as a trademark",
+        "The right to reproduce the work and perform it publicly",
+        "The right of publicity in the songwriter's name and likeness",
+        "The first-sale right to resell lawfully bought copies"
       ],
       "answer": 1,
-      "explain": "Copyright gives the owner exclusive rights to reproduce, distribute and publicly perform the work. The distractors are not copyright rights.",
+      "explain": "Copyright gives the owner exclusive rights to reproduce, distribute, adapt, publicly perform and display the work (17 U.S.C. 106), and copying a song into an aired ad uses reproduction and public performance. Trademark and the right of publicity are separate bodies of law, and first sale limits the owner's rights rather than granting one.",
       "sub": "Sports Law",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "sem-059",
@@ -852,8 +852,8 @@
       "id": "sem-060",
       "q": "A league rule forbids its teams from negotiating with outside broadcasters, which reduces competition and raises prices. Which body of law is primarily at issue?",
       "choices": [
-        "Antitrust law, including the Sherman Act",
-        "Labor law under the NLRA only",
+        "Antitrust law",
+        "Labor law",
         "Copyright law",
         "Title IX"
       ],
@@ -878,29 +878,29 @@
     },
     {
       "id": "sem-062",
-      "q": "Which statement best describes publicity?",
+      "q": "Before the season opener, a team's public relations staff give reporters a package with player bios, team statistics, photos and the schedule. What is this package called?",
       "choices": [
-        "Paid placement of a message in media",
-        "Unpaid media coverage of an organization or event",
-        "A sales incentive offered to customers",
-        "A contract to use a person's image"
+        "A press release",
+        "A media kit",
+        "A rate card",
+        "An insertion order"
       ],
       "answer": 1,
-      "explain": "Publicity is earned, unpaid media coverage. Paid placement is advertising.",
+      "explain": "A media (press) kit bundles the background material reporters need to cover the team. A press release is a single news announcement, and rate cards and insertion orders are documents for buying advertising.",
       "sub": "Communication in Sports and Entertainment (Media)",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "sem-063",
-      "q": "A team hires a popular athlete to front its campaign. What is the main benefit the brand gains from this celebrity endorsement?",
+      "q": "A sports drink brand hires a popular athlete to front its campaign. What is the main benefit the brand gains from this celebrity endorsement?",
       "choices": [
         "Exemption from advertising regulation",
-        "Guaranteed ticket sales for each game",
-        "Lower production costs for the broadcast",
-        "Transfer of the celebrity's credibility and appeal to the brand"
+        "Guaranteed sales growth every quarter",
+        "Lower production costs for its TV ads",
+        "Transfer of the athlete's appeal to the brand"
       ],
       "answer": 3,
-      "explain": "Endorsements work by transferring a celebrity's credibility and appeal to the brand. The other options are not benefits of endorsement.",
+      "explain": "Endorsements work by transferring the athlete's credibility and appeal to the brand. The other options are not benefits of endorsement: ads stay regulated, sales are never guaranteed and a celebrity adds cost rather than cutting it.",
       "sub": "Communication in Sports and Entertainment (Media)",
       "diff": 2
     },
@@ -908,10 +908,10 @@
       "id": "sem-064",
       "q": "A star player is arrested for a DUI on the night before a playoff game. What is the best first communication step for the team?",
       "choices": [
-        "Say nothing until the court case is resolved",
-        "Blame the media for the coverage",
-        "Post highlight videos to change the focus",
-        "Issue a timely, honest statement that acknowledges the facts and describes next steps"
+        "Say nothing publicly until the court case is resolved",
+        "Criticize the media for overplaying the story",
+        "Post highlight videos to shift fan attention",
+        "Issue a prompt, honest statement on the facts and next steps"
       ],
       "answer": 3,
       "explain": "Crisis communication works best when the organization is prompt, honest and clear about next steps. Silence or deflection erodes trust.",
@@ -936,10 +936,10 @@
       "id": "sem-066",
       "q": "A team employee bets on the team's games. Which ethical concern is most directly raised?",
       "choices": [
-        "Conflict of interest and threat to the integrity of competition",
-        "Excessive advertising spending",
-        "Failure to pay the employee overtime",
-        "Poor seating arrangements for fans"
+        "Conflict of interest that threatens game integrity",
+        "Excessive spending on team advertising",
+        "Failure to pay the employee overtime wages",
+        "Poor seating arrangements for season-ticket fans"
       ],
       "answer": 0,
       "explain": "An insider betting on outcomes creates a conflict of interest and threatens the integrity of the competition. The other concerns are real but not the central ethical issue.",
@@ -964,10 +964,10 @@
       "id": "sem-068",
       "q": "A venue's advertising shows premium seats with unobstructed views, but many of those seats have pillars that block the view. What is the likely consequence of this behavior?",
       "choices": [
-        "A permanent increase in ticket sales",
+        "A permanent increase in premium ticket sales",
         "Automatic exemption from local regulation",
-        "Lower operating costs",
-        "Loss of customer trust and possible legal liability for misleading advertising"
+        "Lower operating costs from fewer complaints",
+        "Loss of fan trust and possible false-advertising liability"
       ],
       "answer": 3,
       "explain": "Misleading advertising damages trust and can create legal exposure. The other options describe benefits that unethical behavior does not produce.",
@@ -1065,7 +1065,7 @@
         "It removes the need for any sponsorship revenue",
         "It lets the league avoid all antitrust review",
         "It lets each team set sponsorship prices alone",
-        "It protects the sponsor's investment by keeping competitors from diluting the brand"
+        "It protects the sponsor's investment from rival brands"
       ],
       "answer": 3,
       "explain": "Category exclusivity protects what the sponsor pays for. The other options misstate what the rule does.",
@@ -1105,8 +1105,8 @@
       "q": "A candidate lacks industry experience for a sports marketing job. Which strategy best overcomes this barrier?",
       "choices": [
         "Apply only to positions that require no experience",
-        "Omit the education section of the résumé",
-        "Complete a volunteer role or internship that builds relevant event experience",
+        "Leave the education section off the résumé",
+        "Gain event experience through volunteering or an internship",
         "Wait until the posting closes before applying"
       ],
       "answer": 2,
@@ -1118,10 +1118,10 @@
       "id": "sem-079",
       "q": "A stadium uses one system that links ticketing, concession sales and attendance. What is the main purpose of this management information system?",
       "choices": [
-        "To replace all human staff",
-        "To set the official league schedule",
-        "To sell advertising directly to fans",
-        "To give managers timely information to support decisions"
+        "To replace all of the venue's human staff",
+        "To set the league's official game schedule",
+        "To sell advertising space directly to fans",
+        "To support managers' decisions with timely data"
       ],
       "answer": 3,
       "explain": "An MIS collects and organizes data so managers can make timely, informed decisions.",
@@ -1147,7 +1147,7 @@
       "q": "Offering a 10% discount this Tuesday to boost weekday attendance is an example of what?",
       "choices": [
         "A corporate strategy",
-        "A marketing tactic supporting a broader strategy",
+        "A marketing tactic",
         "A mission statement",
         "A permanent pricing policy"
       ],
@@ -1160,10 +1160,10 @@
       "id": "sem-082",
       "q": "A club wants to test whether a new pregame promotion raises attendance. Which research design is best?",
       "choices": [
-        "A controlled experiment comparing games with and without the promotion",
-        "A focus group after the season ends",
-        "A review of last season's ticket sales",
-        "A single survey of season-ticket holders"
+        "An experiment comparing games with and without it",
+        "A focus group with fans after the season ends",
+        "A review of last season's ticket sales data",
+        "A single survey of current season-ticket holders"
       ],
       "answer": 0,
       "explain": "A controlled comparison isolates the promotion's effect. The other designs cannot show cause and effect.",
@@ -1176,11 +1176,11 @@
       "choices": [
         "An online survey or app-based poll",
         "A paper questionnaire mailed to fans",
-        "A phone call from the ticket office",
+        "An in-person interview at the gate",
         "A handwritten suggestion box"
       ],
       "answer": 0,
-      "explain": "Online surveys and app polls collect data electronically. The other methods are paper-based or personal.",
+      "explain": "Online surveys and app polls collect data electronically. Mailed questionnaires, gate interviews and suggestion boxes are paper-based or face to face.",
       "sub": "Marketing/Management Information Technology and Research",
       "diff": 1
     },
@@ -1242,15 +1242,15 @@
     },
     {
       "id": "sem-088",
-      "q": "A group has unclear goals, and its members avoid disagreement to keep the peace. Which is the most likely reason the team will fail?",
+      "q": "A parade-planning team's meetings are polite and free of conflict, yet the team keeps missing deadlines and members are unsure who owns which tasks. Which change would most likely fix the problem?",
       "choices": [
-        "Too much diversity of thought",
-        "Unclear goals and roles, combined with suppressed conflict",
-        "Too many written procedures",
-        "Excessive recognition of member achievements"
+        "Add more members so more ideas come in",
+        "Clarify goals and roles, and invite open debate on ideas",
+        "Have the chair make every decision alone to save time",
+        "Cut meetings and share updates only by email"
       ],
       "answer": 1,
-      "explain": "Teams fail when goals and roles are unclear and healthy conflict is avoided. The distractors are not typical causes of failure.",
+      "explain": "Teams commonly fail when goals and roles are unclear and members avoid the healthy conflict that tests ideas. Adding people, centralizing every decision or cutting communication leaves both root causes in place.",
       "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
       "diff": 3
     },
@@ -1258,13 +1258,13 @@
       "id": "sem-089",
       "q": "What is a key disadvantage of group decision making?",
       "choices": [
-        "Groups are unable to reach any decision",
-        "Groups cannot share information",
-        "Groups cannot consider alternatives",
+        "Groups usually generate fewer alternatives than one person working alone",
+        "Members are less likely to accept decisions they helped make",
+        "Groups bring less total knowledge to a problem than individuals",
         "Groupthink can suppress dissent and lead to poor choices"
       ],
       "answer": 3,
-      "explain": "Groupthink, the suppression of dissent in the pursuit of harmony, is a major risk of group decisions. The other options are not typical disadvantages.",
+      "explain": "Groupthink, the suppression of dissent in pursuit of harmony, is a major risk of group decisions (along with the extra time they take). The other options reverse real advantages: groups generate more alternatives, pool more knowledge and build acceptance.",
       "sub": "Leadership and Managing Groups and Teams in the Sports and Entertainment Industry",
       "diff": 2
     },
@@ -1300,10 +1300,10 @@
       "id": "sem-092",
       "q": "Which sequence correctly describes the strategic management process?",
       "choices": [
-        "Implement first, then formulate, then evaluate",
-        "Formulate the strategy, implement it, then evaluate and control",
-        "Evaluate, implement, then formulate",
-        "Formulate, evaluate, then implement"
+        "Implement, then formulate, then evaluate and control",
+        "Formulate, then implement, then evaluate and control",
+        "Evaluate and control, then implement, then formulate",
+        "Formulate, then evaluate and control, then implement"
       ],
       "answer": 1,
       "explain": "The strategic management process runs formulation, implementation, then evaluation and control. Implementing before formulating reverses the logic.",
@@ -1314,10 +1314,10 @@
       "id": "sem-093",
       "q": "A premium arena adds budget family concession packages that conflict with its luxury image. What does this illustrate?",
       "choices": [
-        "Strong functional strategy alignment",
-        "A lack of strategic fit between the new offering and the venue's positioning",
-        "A successful blue ocean strategy",
-        "A reduction in fixed costs"
+        "Strong alignment of its functional strategies",
+        "A lack of strategic fit with its positioning",
+        "A successful blue ocean strategy for families",
+        "A reduction in the arena's fixed costs"
       ],
       "answer": 1,
       "explain": "Strategic fit means new offerings support the organization's positioning. A conflicting offering weakens the brand even if it adds sales.",
@@ -1413,9 +1413,9 @@
       "q": "A venue group uses a divisional structure with separate arena, hotel and concessions units. What is the main advantage?",
       "choices": [
         "Each unit avoids all reporting requirements",
-        "Each unit can focus on its market and be held accountable for its results",
+        "Each unit focuses on its market and owns its results",
         "The group no longer needs a chief executive",
-        "All units share one budget line"
+        "All units share one combined budget line"
       ],
       "answer": 1,
       "explain": "Divisional structures let each unit focus on its market and be measured on its own results. The other options describe drawbacks or misreadings.",

@@ -2,7 +2,7 @@
   "slug": "intro-business-concepts",
   "name": "Introduction to Business Concepts",
   "group": "objective",
-  "notes": "Competency areas and weighting from the National FBLA 2026-2027 Competitive Events Guidelines, Introduction to Business Concepts (updated Aug 2026), as hosted by PA FBLA: https://www.pafbla.org/wp-content/uploads/2026/09/26-27-Introduction-to-Business-Concepts-PA.pdf . The 2025-26 PDF was not reachable (NYS copy returned 404, fbla.org returned 403), so the 2026-27 areas are used; the knowledge-area list is the same family of areas. The guideline lists 100 multiple-choice questions in 50 minutes. The printed weights (30/25/20/15/10/5) do not map cleanly to the eight areas in text extraction, so per-area question counts are an approximate split (20/15/15/16/14/10/5/5). Tests use U.S. conventions.",
+  "notes": "Knowledge areas and per-area item counts from the National FBLA 2026-2027 Competitive Events Guidelines, Introduction to Business Concepts (updated Aug 2026, study guide section), as hosted by PA FBLA: https://www.pafbla.org/wp-content/uploads/2026/09/26-27-Introduction-to-Business-Concepts-PA.pdf . Official test: 100 multiple-choice questions in 50 minutes, 9th and 10th graders only. Official items per area: Fundamental Economic Concepts 10, Nature of Business 20, Economic Systems 15, Cost/Profit Relationships 5 (productivity, specialization/division of labor), Owning a Business 5 (types of ownership, entrepreneurship), Types of Business Activities 25 (accounting, finance, marketing, HR, operations, production, management, customer relations, information management), Career Planning 10, Job-Search Skills 10. Sub tags were realigned to those objectives on 2026-10-11; this bank is still heavier on cost/profit maths and lighter on career and job-search items than the real test. The 2025-26 PDF was not reachable (NYS copy 404, fbla.org 403), so 2026-27 areas are used. Tests use U.S. conventions.",
   "subs": [
     "Fundamental Economic Concepts",
     "Nature of Business",
@@ -44,16 +44,16 @@
     },
     {
       "id": "ibc-003",
-      "q": "A product's price rises from $20 to $25. What is the percentage increase?",
+      "q": "An employer tells new hires they must \"show up on time, meet deadlines, and do what you say you will do.\" Which work trait is the employer describing?",
       "choices": [
-        "5%",
-        "20%",
-        "25%",
-        "80%"
+        "Creativity",
+        "Leadership",
+        "Dependability",
+        "Assertiveness"
       ],
       "answer": 2,
-      "explain": "The change is $5 on a base of $20, so $5 / $20 = 25%. A common error is dividing by the new price.",
-      "sub": "Fundamental Economic Concepts",
+      "explain": "Arriving on time, meeting deadlines, and keeping commitments describe dependability (reliability), one of the traits employers expect most. Creativity and leadership are valued too, but they are not what this list describes.",
+      "sub": "Career Planning",
       "diff": 1
     },
     {
@@ -100,26 +100,26 @@
     },
     {
       "id": "ibc-007",
-      "q": "Which factor of production is the willingness to take on risk and combine the other resources to pursue profit?",
+      "q": "A student wants to find out which careers fit what she enjoys and does well. Which tool is built for this purpose?",
       "choices": [
-        "Labor",
-        "Capital",
-        "Entrepreneurship",
-        "Land"
+        "A credit history report",
+        "A monthly personal budget",
+        "A career interest assessment",
+        "A signed job offer letter"
       ],
       "answer": 2,
-      "explain": "Entrepreneurship is the fourth factor of production, and it is the factor that organizes and bears risk.",
-      "sub": "Fundamental Economic Concepts",
+      "explain": "A career interest assessment (for example, the O*NET Interest Profiler) asks about likes and strengths and suggests matching career areas. Self-assessment is the first step in career planning; the other documents serve money or hiring purposes.",
+      "sub": "Career Planning",
       "diff": 1
     },
     {
       "id": "ibc-008",
       "q": "In economics, which of the following best describes capital as a factor of production?",
       "choices": [
-        "Money held in a bank account",
-        "Natural resources such as timber and water",
-        "Workers' skills and education",
-        "Human-made goods, such as machinery and tools, used to produce other goods"
+        "Money a business holds in its bank accounts",
+        "Natural resources such as timber, water, and minerals",
+        "The skills and education that workers bring to a job",
+        "Tools, machines, and buildings used to produce other goods"
       ],
       "answer": 3,
       "explain": "Economic capital means produced goods used in production. Money is financial capital and is not counted as a factor of production in the classic model.",
@@ -131,9 +131,9 @@
       "q": "Which measure best describes gross domestic product (GDP)?",
       "choices": [
         "The total market value of all final goods and services produced within a country in a period",
-        "The total income earned by citizens living abroad",
-        "The total value of all goods a country imports",
-        "The total money supply in circulation"
+        "The total income that a country's citizens earn while working in other countries",
+        "The total value of the goods and services a country buys from other countries in a year",
+        "The total amount of money circulating in an economy, including bank deposits"
       ],
       "answer": 0,
       "explain": "GDP measures production within the borders of a country over a time period. Income earned abroad and imports are different measures.",
@@ -198,16 +198,16 @@
     },
     {
       "id": "ibc-014",
-      "q": "A business owner can earn $50,000 running her current company or $35,000 teaching. If she runs the company, what is her opportunity cost?",
+      "q": "Which resume bullet best shows a measurable accomplishment?",
       "choices": [
-        "$50,000 in company earnings",
-        "$35,000 in teaching income forgone",
-        "$15,000, the difference between the two",
-        "$85,000, the sum of both options"
+        "Was responsible for managing the club's social media accounts this year",
+        "Grew the club's social media following by 40% in six months",
+        "Hard-working, reliable team player with strong people skills",
+        "Duties included answering phones, filing, and greeting visitors"
       ],
       "answer": 1,
-      "explain": "Opportunity cost is the value of the next best alternative, here $35,000. The $50,000 is what she gains, not what she gives up.",
-      "sub": "Fundamental Economic Concepts",
+      "explain": "Strong resume bullets state a result with a number, such as 40% growth in six months. The other bullets list duties or personal traits without showing what the candidate achieved.",
+      "sub": "Job-Search Skills",
       "diff": 3
     },
     {
@@ -221,7 +221,7 @@
       ],
       "answer": 2,
       "explain": "Comparative advantage depends on opportunity cost, not on absolute output or wages. A country can hold a comparative advantage even if it is not the most productive at everything.",
-      "sub": "Fundamental Economic Concepts",
+      "sub": "Nature of Business",
       "diff": 3
     },
     {
@@ -249,7 +249,7 @@
       ],
       "answer": 0,
       "explain": "Perfect competition assumes identical products and free entry. Monopolistic competition has differentiated products, so it is the closest distractor.",
-      "sub": "Fundamental Economic Concepts",
+      "sub": "Economic Systems",
       "diff": 1
     },
     {
@@ -305,7 +305,7 @@
       ],
       "answer": 0,
       "explain": "A sole proprietor and the business are one legal person, so the owner is personally liable for business debts.",
-      "sub": "Nature of Business",
+      "sub": "Owning a Business",
       "diff": 1
     },
     {
@@ -319,7 +319,7 @@
       ],
       "answer": 1,
       "explain": "Shareholders are generally not personally liable for corporate debts. Corporations are more costly to form and may face double taxation.",
-      "sub": "Nature of Business",
+      "sub": "Owning a Business",
       "diff": 1
     },
     {
@@ -333,21 +333,21 @@
       ],
       "answer": 2,
       "explain": "A C corporation pays tax on profits, and shareholders pay tax again on dividends. An S corporation passes income through to owners and avoids this.",
-      "sub": "Nature of Business",
+      "sub": "Owning a Business",
       "diff": 3
     },
     {
       "id": "ibc-024",
       "q": "In a general partnership, what is the usual liability of each partner for business debts?",
       "choices": [
-        "Shielded by limited liability",
-        "Liable only up to the amount they invested",
-        "Not liable for debts incurred by other partners",
-        "Jointly and severally liable, so a creditor can pursue any partner for the full amount"
+        "Protected by limited liability, like a shareholder",
+        "Liable only up to the amount each partner invested",
+        "Liable only for debts that partner personally took on",
+        "Jointly and severally liable for all partnership debts"
       ],
       "answer": 3,
-      "explain": "General partners are personally liable for partnership debts, and each partner can be held responsible for the full amount. Limited liability is a feature of LLCs and corporations.",
-      "sub": "Nature of Business",
+      "explain": "General partners are personally liable for partnership debts, jointly and severally, so a creditor can pursue any one partner for the full amount (usually after partnership assets are used up). Limited liability belongs to LLC members, shareholders, and limited partners.",
+      "sub": "Owning a Business",
       "diff": 3
     },
     {
@@ -368,10 +368,10 @@
       "id": "ibc-026",
       "q": "What is the primary purpose of a company's mission statement?",
       "choices": [
-        "To forecast revenue for the next five years",
-        "To communicate the organization's core purpose and reason for existing",
-        "To list the company's main competitors",
-        "To set the quarterly financial targets"
+        "To forecast the company's revenue and expenses for five years",
+        "To state the organization's core purpose and reason for existing",
+        "To list the company's main competitors and their market share",
+        "To set the sales and profit targets for the coming quarter"
       ],
       "answer": 1,
       "explain": "A mission statement explains why the organization exists. Forecasts, competitors, and targets belong in other planning documents.",
@@ -438,14 +438,14 @@
       "id": "ibc-031",
       "q": "What distinguishes a limited liability company (LLC) from a general partnership?",
       "choices": [
-        "LLCs cannot have more than one owner",
-        "LLCs must issue shares of stock to the public",
+        "An LLC can have only one owner, while a partnership has two or more",
+        "An LLC must sell shares of its stock to the public to raise money",
         "LLC members generally have limited liability for business debts",
-        "LLC profits are always taxed at the corporate rate"
+        "An LLC's profits are always taxed at the corporate income tax rate"
       ],
       "answer": 2,
       "explain": "An LLC combines limited liability with flexible tax treatment. A general partnership has no such shield, and LLCs can have multiple owners and do not issue public stock by default.",
-      "sub": "Nature of Business",
+      "sub": "Owning a Business",
       "diff": 2
     },
     {
@@ -459,7 +459,7 @@
       ],
       "answer": 3,
       "explain": "The market analysis section covers the target market, customer needs, and competition. The executive summary is an overview placed at the front.",
-      "sub": "Nature of Business",
+      "sub": "Owning a Business",
       "diff": 2
     },
     {
@@ -473,7 +473,7 @@
       ],
       "answer": 0,
       "explain": "An entrepreneur starts and runs a business and bears its risk. An investor provides capital but may not operate the business.",
-      "sub": "Nature of Business",
+      "sub": "Owning a Business",
       "diff": 1
     },
     {
@@ -494,10 +494,10 @@
       "id": "ibc-035",
       "q": "Which is a benefit of buying a franchise for the franchisee?",
       "choices": [
-        "Full control over menu and pricing decisions",
-        "No royalty or fee payments",
+        "Full control over the menu, suppliers, and pricing decisions",
+        "No royalty, advertising, or other ongoing fee payments",
         "Access to an established brand and a proven business system",
-        "Freedom from any franchisor rules"
+        "Freedom from the franchisor's rules and operating standards"
       ],
       "answer": 2,
       "explain": "Franchisees gain brand recognition and a tested system, but they pay fees and follow standards. Full control and fee-free operation are not typical benefits.",
@@ -536,10 +536,10 @@
       "id": "ibc-038",
       "q": "A mixed economy is best described as:",
       "choices": [
-        "Equal government ownership of every business",
+        "Equal government ownership of every business in the country",
         "A combination of market forces and government intervention",
-        "A system with no private property at all",
-        "Production based entirely on tradition"
+        "A system in which no one is allowed to own private property",
+        "Production decided entirely by tradition and custom"
       ],
       "answer": 1,
       "explain": "Mixed economies combine private enterprise with government regulation or public services. Pure systems are rare.",
@@ -550,10 +550,10 @@
       "id": "ibc-039",
       "q": "Which characteristic is most central to a market economy?",
       "choices": [
-        "Central planning of all production",
-        "Government ownership of major industries",
+        "Central planning of what is produced, by whom, and for whom",
+        "Government ownership of major industries such as energy and banking",
         "Private ownership of resources, with prices set by supply and demand",
-        "Production based on tradition"
+        "Production methods and roles passed down from earlier generations"
       ],
       "answer": 2,
       "explain": "Market economies rely on private ownership and price signals. The other options describe command or traditional systems.",
@@ -562,7 +562,7 @@
     },
     {
       "id": "ibc-040",
-      "q": "The transfer of a government-owned business to private ownership is called:",
+      "q": "A national government sells its state-owned airline to investors through a share sale. This is an example of:",
       "choices": [
         "Nationalization",
         "Deregulation",
@@ -606,10 +606,10 @@
       "id": "ibc-043",
       "q": "Which characteristic is most associated with socialism?",
       "choices": [
-        "Unrestricted private ownership of all businesses",
-        "Prices set only by bidding between consumers",
-        "Significant collective or government ownership of major means of production",
-        "No public services provided to citizens"
+        "Unrestricted private ownership of all businesses and resources",
+        "Prices set only through bidding between private buyers and sellers",
+        "Collective or government ownership of major means of production",
+        "No public services such as health care or schools for citizens"
       ],
       "answer": 2,
       "explain": "Socialism emphasizes collective ownership of major industries. Private ownership and limited public services are the opposite.",
@@ -641,7 +641,7 @@
       ],
       "answer": 0,
       "explain": "Labeling rules protect consumers from harm and deception. Subsidies and tariffs are economic policy tools, not consumer protection.",
-      "sub": "Economic Systems",
+      "sub": "Nature of Business",
       "diff": 1
     },
     {
@@ -655,7 +655,7 @@
       ],
       "answer": 1,
       "explain": "A tariff is a tax on imports. A quota limits quantity, a subsidy pays producers, and an embargo bans trade.",
-      "sub": "Economic Systems",
+      "sub": "Nature of Business",
       "diff": 1
     },
     {
@@ -669,16 +669,16 @@
       ],
       "answer": 2,
       "explain": "Subsidies reduce a producer's costs or increase its revenue. Tariffs and excise taxes raise money, and a price ceiling caps prices.",
-      "sub": "Economic Systems",
+      "sub": "Nature of Business",
       "diff": 1
     },
     {
       "id": "ibc-048",
       "q": "Command economies are most likely to experience which problem?",
       "choices": [
-        "Prices that change every minute",
-        "Excessive competition among firms",
-        "Too many private property rights",
+        "Prices that rise and fall every minute as demand changes",
+        "Excessive competition among many privately owned firms",
+        "Too many private property rights held by individuals",
         "Shortages and surpluses caused by planners misjudging demand"
       ],
       "answer": 3,
@@ -690,13 +690,13 @@
       "id": "ibc-049",
       "q": "Which statement best explains why pure market economies rarely exist in practice?",
       "choices": [
-        "Governments usually provide public goods, regulate externalities, and redistribute income",
-        "Consumers never have enough information to buy anything",
-        "Markets always produce too many goods",
-        "Private firms are legally barred from earning profits"
+        "Governments step in to provide public goods and correct market failures",
+        "Consumers never have enough information to make any purchase at all",
+        "Markets always produce far more goods than consumers want to buy",
+        "Private firms in most countries are legally barred from earning profits"
       ],
       "answer": 0,
-      "explain": "Public goods, externalities, and inequality are market failures that most governments address, so real systems are mixed.",
+      "explain": "Markets underprovide public goods and ignore externalities, and most governments also redistribute some income, so real economies mix markets with government action. The other statements are false.",
       "sub": "Economic Systems",
       "diff": 3
     },
@@ -730,15 +730,15 @@
     },
     {
       "id": "ibc-052",
-      "q": "Which cost is a variable cost for a bakery?",
+      "q": "In a sandwich shop, one worker only slices bread, a second only adds fillings, and a third only wraps orders. What is this practice called?",
       "choices": [
-        "Annual insurance premium",
-        "Monthly rent for the shop",
-        "The owner's fixed salary",
-        "Flour used in each batch"
+        "Job rotation",
+        "Outsourcing",
+        "Job enlargement",
+        "Division of labor"
       ],
       "answer": 3,
-      "explain": "Variable costs change with output, and flour per batch rises with production. The others are fixed in the short run.",
+      "explain": "Division of labor splits a job into small tasks, each done by a worker who specializes in it, which usually raises output per worker. Job rotation and job enlargement give workers a wider range of tasks, which is the opposite idea.",
       "sub": "Cost/Profit Relationships",
       "diff": 1
     },
@@ -814,15 +814,15 @@
     },
     {
       "id": "ibc-058",
-      "q": "Which term refers to total revenue minus all costs, including taxes and interest?",
+      "q": "A bakery made 1,200 loaves using 300 labor hours last month. This month it made 1,350 loaves using the same 300 hours. What happened to labor productivity?",
       "choices": [
-        "Gross profit",
-        "Net income",
-        "Operating income",
-        "Owner's equity"
+        "It fell from 4.5 to 4.0 loaves per hour",
+        "It rose from 4.0 to 4.5 loaves per hour",
+        "It stayed at 4.0 loaves per hour",
+        "It rose from 4.0 to 5.0 loaves per hour"
       ],
       "answer": 1,
-      "explain": "Net income is the bottom line after every expense. Gross profit excludes operating costs, and operating income excludes interest and taxes.",
+      "explain": "Labor productivity is output per labor hour: 1,200 / 300 = 4.0 last month and 1,350 / 300 = 4.5 this month. Output grew with no extra hours, so productivity rose.",
       "sub": "Cost/Profit Relationships",
       "diff": 2
     },
@@ -859,9 +859,9 @@
       "q": "Which costs are included in cost of goods sold for a manufacturer?",
       "choices": [
         "Direct materials, direct labor, and factory overhead",
-        "Sales commissions and advertising",
-        "Office rent and executive salaries",
-        "Interest on long-term debt"
+        "Sales commissions, advertising, and shipping to customers",
+        "Office rent, executive salaries, and accounting fees",
+        "Interest on long-term debt and bank loan fees"
       ],
       "answer": 0,
       "explain": "COGS covers costs of making the product sold. Selling, administrative, and financing costs are reported separately as operating or other expenses.",
@@ -879,7 +879,7 @@
       ],
       "answer": 1,
       "explain": "Penetration pricing starts low to attract buyers and build share. Skimming starts high and lowers price over time.",
-      "sub": "Cost/Profit Relationships",
+      "sub": "Types of Business Activities",
       "diff": 1
     },
     {
@@ -948,8 +948,8 @@
         "Interest payments reduce taxable income"
       ],
       "answer": 2,
-      "explain": "Equity investors share ownership and profits, which dilutes the owner's control. The other options describe disadvantages of debt.",
-      "sub": "Owning a Business",
+      "explain": "Equity investors become part-owners and share future profits, which dilutes the founder's control. Fixed payments and asset claims are drawbacks of debt, and deductible interest is an advantage of debt.",
+      "sub": "Types of Business Activities",
       "diff": 2
     },
     {
@@ -963,7 +963,7 @@
       ],
       "answer": 3,
       "explain": "The accounting equation states that a company's assets are financed by liabilities and owner's equity. The other forms are incorrect.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 1
     },
     {
@@ -977,7 +977,7 @@
       ],
       "answer": 0,
       "explain": "The income statement summarizes performance over a period. The balance sheet is a snapshot at one date.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 1
     },
     {
@@ -991,7 +991,7 @@
       ],
       "answer": 1,
       "explain": "Profit is an accounting measure, and cash flow is the timing of actual money. A profitable firm can still fail if cash runs out.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 2
     },
     {
@@ -1005,7 +1005,7 @@
       ],
       "answer": 2,
       "explain": "SBA loan programs reduce lender risk by guaranteeing part of a loan made by a bank. The SBA is not the direct lender in most programs.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 2
     },
     {
@@ -1019,17 +1019,17 @@
       ],
       "answer": 3,
       "explain": "Angel investors are individuals funding young companies, often in exchange for equity. The other options describe lenders or public market investors.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 2
     },
     {
       "id": "ibc-073",
       "q": "The primary purpose of a business plan is to:",
       "choices": [
-        "Guide the business and communicate its strategy and financial projections",
-        "Meet legal requirements for incorporation",
-        "Report past taxes to the government",
-        "Replace the need for an accounting system"
+        "Set the business's direction and show its plans to investors",
+        "Meet the legal filing requirements for incorporating",
+        "Report the business's past income and taxes to the government",
+        "Replace the need for a bookkeeping and accounting system"
       ],
       "answer": 0,
       "explain": "A business plan is a planning and communication tool for owners, lenders, and investors. It does not replace accounting or legal filings.",
@@ -1038,7 +1038,7 @@
     },
     {
       "id": "ibc-074",
-      "q": "Which insurance covers claims that a customer was injured by the business's product?",
+      "q": "A parent sues a toy maker, claiming a toy's sharp edge cut her child. Which insurance is designed to cover this kind of claim?",
       "choices": [
         "Business interruption insurance",
         "Product liability insurance",
@@ -1061,7 +1061,7 @@
       ],
       "answer": 2,
       "explain": "The current ratio is current assets divided by current liabilities, so $180,000 / $90,000 = 2.0. Inverting the ratio gives 0.5 to 1.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 3
     },
     {
@@ -1075,7 +1075,7 @@
       ],
       "answer": 3,
       "explain": "Working capital measures short-term liquidity. Total assets minus total liabilities is net worth, and the other options are different measures.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 1
     },
     {
@@ -1089,7 +1089,7 @@
       ],
       "answer": 0,
       "explain": "A term loan provides a lump sum repaid on a fixed schedule, which matches a long-term asset. Lines of credit and trade credit suit short-term needs.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 2
     },
     {
@@ -1103,7 +1103,7 @@
       ],
       "answer": 1,
       "explain": "Straight-line depreciation spreads the cost evenly: $50,000 / 5 = $10,000 per year.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 3
     },
     {
@@ -1117,7 +1117,7 @@
       ],
       "answer": 2,
       "explain": "A line of credit lets the business draw and repay within a limit, which suits fluctuating cash needs. Fixed installment loans and equity investments work differently.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 2
     },
     {
@@ -1131,7 +1131,7 @@
       ],
       "answer": 3,
       "explain": "Debt-to-equity compares total liabilities to owner's equity. The other ratios measure liquidity, profitability, or efficiency.",
-      "sub": "Owning a Business",
+      "sub": "Types of Business Activities",
       "diff": 2
     },
     {
@@ -1164,15 +1164,15 @@
     },
     {
       "id": "ibc-083",
-      "q": "A bank that makes loans to customers is part of which sector?",
+      "q": "A growing company must hire 40 new workers, train them, and set up yearly performance reviews. Which business function handles this work?",
       "choices": [
-        "Primary sector",
-        "Secondary sector",
-        "Tertiary sector",
-        "Quaternary sector"
+        "Operations management",
+        "Marketing",
+        "Human resources",
+        "Finance and accounting"
       ],
       "answer": 2,
-      "explain": "The tertiary sector provides services. Banking, retail, and transportation all fall here.",
+      "explain": "Human resources management covers recruiting, hiring, training, and evaluating employees. Operations makes the product, marketing finds and keeps customers, and finance manages money.",
       "sub": "Types of Business Activities",
       "diff": 2
     },
@@ -1192,7 +1192,7 @@
     },
     {
       "id": "ibc-085",
-      "q": "A software company sells accounting software to other businesses. Its activity is primarily:",
+      "q": "A company sells payroll software only to restaurants and retail chains. Which e-commerce model does it use?",
       "choices": [
         "Business-to-business (B2B)",
         "Business-to-consumer (B2C)",
@@ -1208,10 +1208,10 @@
       "id": "ibc-086",
       "q": "Which description best defines e-commerce?",
       "choices": [
-        "Offline sales of goods in physical stores",
+        "Selling goods only through physical stores, with no online orders",
         "Buying and selling goods or services over the internet",
-        "Digital advertising without any sales",
-        "Online-only charitable donations"
+        "Running digital advertisements that never lead to a sale",
+        "Collecting charitable donations through online-only campaigns"
       ],
       "answer": 1,
       "explain": "E-commerce is any commercial transaction conducted electronically. It does not require a physical store.",
@@ -1222,13 +1222,13 @@
       "id": "ibc-087",
       "q": "What defines a nonprofit organization?",
       "choices": [
-        "It is not allowed to earn any revenue",
-        "It is owned by shareholders who receive dividends",
-        "It reinvests surplus revenue into its mission instead of paying profits to owners",
-        "It is automatically exempt from all taxes"
+        "It is not allowed to earn any revenue from sales or services",
+        "It is owned by shareholders who are paid dividends from profits",
+        "It uses any surplus for its mission rather than paying owners",
+        "It is automatically exempt from every federal, state, and local tax"
       ],
       "answer": 2,
-      "explain": "Nonprofits can earn revenue but cannot distribute profits to owners. Tax-exempt status must be applied for and is not automatic.",
+      "explain": "Nonprofits can earn revenue, but any surplus goes back into the mission instead of to owners. Most must apply to the IRS for tax-exempt status, and exemption from income tax does not cover every tax.",
       "sub": "Types of Business Activities",
       "diff": 2
     },
@@ -1236,9 +1236,9 @@
       "id": "ibc-088",
       "q": "Members of a cooperative are typically:",
       "choices": [
-        "Employees paid fixed wages only",
-        "Outside investors with no voting rights",
-        "Government appointees who run the business",
+        "Employees who are paid fixed wages and have no ownership",
+        "Outside investors who have no voting rights in the business",
+        "Government appointees who are assigned to run the business",
         "Owners who share in the business's profits or benefits"
       ],
       "answer": 3,
@@ -1250,10 +1250,10 @@
       "id": "ibc-089",
       "q": "Which of the following is a pure service business?",
       "choices": [
-        "A tax preparation firm",
-        "A steel mill",
-        "A corn farm",
-        "A shoe factory"
+        "A firm that prepares tax returns",
+        "A mill that produces steel beams",
+        "A farm that grows and sells corn",
+        "A factory that makes running shoes"
       ],
       "answer": 0,
       "explain": "A pure service business sells expertise or labor rather than physical goods. The others are primary or secondary producers.",
@@ -1266,11 +1266,11 @@
       "choices": [
         "Profit from reselling inventory to franchisees at cost",
         "Royalties and franchise fees paid by franchisees",
-        "Full sales revenue from every outlet it owns",
+        "The full sales revenue of every franchised outlet",
         "Membership charges paid directly by customers"
       ],
       "answer": 1,
-      "explain": "Franchisors earn ongoing royalties and initial fees rather than the sales of each outlet. The other options describe models the franchisor does not usually use.",
+      "explain": "Franchisors earn initial franchise fees and ongoing royalties, usually a percentage of each franchised outlet's sales, rather than keeping those outlets' full revenue. Selling inventory \"at cost\" earns no profit.",
       "sub": "Types of Business Activities",
       "diff": 2
     },
@@ -1292,9 +1292,9 @@
       "id": "ibc-092",
       "q": "What is the main purpose of a cover letter?",
       "choices": [
-        "To list every duty from your past roles",
-        "To provide a complete record of your education",
-        "To request a salary before the interview",
+        "To list every duty from each of your past jobs in detail",
+        "To provide a complete record of your education and grades",
+        "To ask for a specific salary before an interview is offered",
         "To introduce yourself and explain your fit for a specific job"
       ],
       "answer": 3,
@@ -1307,9 +1307,9 @@
       "q": "Which is an example of professional networking?",
       "choices": [
         "Connecting with an alumnus in your field to ask for an informational interview",
-        "Posting personal photos on social media for employers to see",
-        "Asking a classmate to write a fake reference",
-        "Sending unsolicited mass emails to every company in a state"
+        "Posting personal photos on social media so that employers can see them",
+        "Asking a classmate to write a reference describing work you never did",
+        "Sending the same unsolicited mass email to every company in the state"
       ],
       "answer": 0,
       "explain": "Networking builds relationships for career information and opportunities. Fabricated references and mass unsolicited emails are not effective or ethical networking.",
@@ -1332,15 +1332,15 @@
     },
     {
       "id": "ibc-095",
-      "q": "Which characteristic makes a career goal a SMART goal?",
+      "q": "Which career goal is written as a SMART goal?",
       "choices": [
-        "Vague but ambitious",
-        "Based only on salary",
-        "Specific, measurable, achievable, relevant, and time-bound",
-        "Set once and never revised"
+        "I want to become a much more confident and skilled public speaker.",
+        "I will become very successful and well known in the business world.",
+        "I will earn a spreadsheet certification by June 30 by studying 3 hours weekly.",
+        "I will try hard to network more often with professionals in my field."
       ],
       "answer": 2,
-      "explain": "SMART goals are specific, measurable, achievable, relevant, and time-bound, which makes progress trackable. The other options do not match the acronym.",
+      "explain": "Only this goal is specific (one certification), measurable (earned or not, 3 hours a week), achievable, relevant to a business career, and time-bound (June 30). The others have no measure or deadline.",
       "sub": "Career Planning",
       "diff": 2
     },
@@ -1402,7 +1402,7 @@
     },
     {
       "id": "ibc-100",
-      "q": "Which element of a job posting describes the duties and expectations of the role?",
+      "q": "Which part of a job posting tells applicants what tasks and responsibilities the role includes?",
       "choices": [
         "Company logo",
         "Application deadline",
@@ -1468,7 +1468,7 @@
       "id": "ibc-v009",
       "term": "Comparative advantage",
       "def": "The ability to produce a good at a lower opportunity cost than another producer.",
-      "sub": "Fundamental Economic Concepts"
+      "sub": "Nature of Business"
     },
     {
       "id": "ibc-v010",
@@ -1492,25 +1492,25 @@
       "id": "ibc-v013",
       "term": "Sole proprietorship",
       "def": "A business owned and run by one person, with no legal separation between owner and business.",
-      "sub": "Nature of Business"
+      "sub": "Owning a Business"
     },
     {
       "id": "ibc-v014",
       "term": "Partnership",
       "def": "A business owned by two or more people who share profits, losses, and management.",
-      "sub": "Nature of Business"
+      "sub": "Owning a Business"
     },
     {
       "id": "ibc-v015",
       "term": "Corporation",
       "def": "A legal entity separate from its owners, which gives shareholders limited liability.",
-      "sub": "Nature of Business"
+      "sub": "Owning a Business"
     },
     {
       "id": "ibc-v016",
       "term": "Limited liability company (LLC)",
       "def": "A business structure that offers owners limited liability and flexible pass-through tax treatment.",
-      "sub": "Nature of Business"
+      "sub": "Owning a Business"
     },
     {
       "id": "ibc-v017",
@@ -1534,7 +1534,7 @@
       "id": "ibc-v020",
       "term": "Entrepreneur",
       "def": "A person who organizes, operates, and assumes the risks of a business in pursuit of profit.",
-      "sub": "Nature of Business"
+      "sub": "Owning a Business"
     },
     {
       "id": "ibc-v021",
@@ -1582,7 +1582,7 @@
       "id": "ibc-v028",
       "term": "Tariff",
       "def": "A tax imposed on imported goods.",
-      "sub": "Economic Systems"
+      "sub": "Nature of Business"
     },
     {
       "id": "ibc-v029",
@@ -1660,49 +1660,49 @@
       "id": "ibc-v041",
       "term": "Equity financing",
       "def": "Raising money by selling ownership shares in the business.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v042",
       "term": "Debt financing",
       "def": "Raising money by borrowing, which must be repaid with interest.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v043",
       "term": "Term loan",
       "def": "A lump-sum loan repaid over a fixed schedule, often used to buy long-term assets.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v044",
       "term": "Line of credit",
       "def": "A revolving borrowing limit that a business can draw on and repay as needed.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v045",
       "term": "Working capital",
       "def": "Current assets minus current liabilities, a measure of short-term liquidity.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v046",
       "term": "Cash flow",
       "def": "The actual movement of money into and out of a business over a period.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v047",
       "term": "Balance sheet",
       "def": "A financial statement that reports assets, liabilities, and owner's equity at a specific date.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v048",
       "term": "Debt-to-equity ratio",
       "def": "A ratio comparing a company's total liabilities to its owner's equity.",
-      "sub": "Owning a Business"
+      "sub": "Types of Business Activities"
     },
     {
       "id": "ibc-v049",

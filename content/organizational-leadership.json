@@ -2,7 +2,7 @@
   "slug": "organizational-leadership",
   "name": "Organizational Leadership",
   "group": "objective",
-  "notes": "Could not open the official 2025-26 FBLA Organizational Leadership guideline: fbla.org returned HTTP 403 to every fetch (https://www.fbla.org/competitive-events/ and https://www.fbla.org/high-school/competitive-events/), and no PDF surfaced in search. Competency areas are therefore the standard high-school organizational leadership and management curriculum areas (leadership, motivation, communication, management functions, decision making, ethics, organizational structure and culture, change and conflict). The one partial reference found was a CliffsNotes page reproducing an archived 2018 FBLA-PBL Organizational Leadership competency list (https://www.cliffsnotes.com/study-notes/34046510), which I could not open to confirm. Re-check the sub areas and weights against the 2025-26 guideline PDF once it can be reached. Questions are original practice items written to FBLA state/NLC difficulty, with U.S. conventions.",
+  "notes": "Could not open the official 2025-26 FBLA Organizational Leadership guideline: fbla.org returned HTTP 403 to every fetch (https://www.fbla.org/competitive-events/ and https://www.fbla.org/high-school/competitive-events/), and no PDF surfaced in search. Competency areas are therefore the standard high-school organizational leadership and management curriculum areas (leadership, motivation, communication, management functions, decision making, ethics, organizational structure and culture, change and conflict). The one partial reference found was a CliffsNotes page reproducing an archived 2018 FBLA-PBL Organizational Leadership competency list (https://www.cliffsnotes.com/study-notes/34046510), which I could not open to confirm. Re-check the sub areas and weights against the 2025-26 guideline PDF once it can be reached. Questions are original practice items written to FBLA state/NLC difficulty, with U.S. conventions. Verified 2026-10-11 (Omega answer-key pass): fbla.org still returned HTTP 403; a school news item (https://www.nhsd.org/o/nhshs/article/2328531) describes the event as covering leadership theories, organizational structures, team dynamics, decision making, and change management, which matches these sub areas.",
   "subs": [
     "Leadership Concepts and Traits",
     "Motivation and Leadership Theories",
@@ -38,7 +38,7 @@
         "Physiological needs"
       ],
       "answer": 2,
-      "explain": "Self-actualization is the highest level, reached after physiological, safety, and belonging and esteem needs are met.",
+      "explain": "Self-actualization is the highest level, reached after physiological, safety, belonging, and esteem needs are met.",
       "sub": "Motivation and Leadership Theories",
       "diff": 2
     },
@@ -116,10 +116,10 @@
       "id": "ol-008",
       "q": "In a functional organizational structure, employees are grouped primarily by:",
       "choices": [
-        "Customer served",
-        "Geographic region",
-        "Product line",
-        "Area of specialty, such as marketing or finance"
+        "Customer group, such as retail or business",
+        "Geographic region, such as East or West",
+        "Product line, such as snacks or drinks",
+        "Specialty, such as marketing or finance"
       ],
       "answer": 3,
       "explain": "Functional structures group staff by specialty. Divisional structures group by product, region, or customer.",
@@ -128,7 +128,7 @@
     },
     {
       "id": "ol-009",
-      "q": "Which conflict management style gives up some of one's own goals to preserve the relationship?",
+      "q": "Which conflict management style sets aside one's own concerns to satisfy the other party and preserve the relationship?",
       "choices": [
         "Accommodating",
         "Competing",
@@ -136,7 +136,7 @@
         "Collaborating"
       ],
       "answer": 0,
-      "explain": "Accommodating yields to the other party's wishes. Competing pursues one's own goals at the other party's expense.",
+      "explain": "Accommodating yields to the other party's wishes to protect the relationship. Competing pursues one's own goals at the other party's expense, and collaborating looks for a win-win.",
       "sub": "Change Management and Conflict Resolution",
       "diff": 2
     },
@@ -172,10 +172,10 @@
       "id": "ol-012",
       "q": "Controlling as a management function primarily involves:",
       "choices": [
-        "Hiring and training staff",
-        "Designing the organizational chart",
-        "Setting the long-range vision",
-        "Comparing actual performance to standards and correcting deviations"
+        "Recruiting, hiring, and training staff for open positions",
+        "Designing the organizational chart and reporting lines",
+        "Setting the long-range vision and goals for the company",
+        "Comparing actual performance to standards and correcting gaps"
       ],
       "answer": 3,
       "explain": "Controlling measures performance against standards and takes corrective action. The other options describe staffing, organizing, and planning.",
@@ -188,11 +188,11 @@
       "choices": [
         "Rank alternatives by weighted criteria",
         "Forecast market demand",
-        "Map communication channels",
-        "Track employee attendance"
+        "Show the sequence of tasks in a project",
+        "Trace the root causes of a problem"
       ],
       "answer": 0,
-      "explain": "A decision matrix scores each option against weighted criteria so the totals can be compared. It is not a forecasting tool.",
+      "explain": "A decision matrix scores each option against weighted criteria so the totals can be compared. Forecasting, task scheduling, and root-cause analysis use other tools.",
       "sub": "Decision Making and Problem Solving",
       "diff": 2
     },
@@ -203,10 +203,10 @@
         "Maximizing shareholder returns only",
         "Avoiding all government regulation",
         "A company's obligations to society beyond what the law requires",
-        "Charitable donations made only during tax season"
+        "Meeting only the minimum legal requirements"
       ],
       "answer": 2,
-      "explain": "CSR covers voluntary responsibilities to employees, communities, and the environment beyond legal minimums.",
+      "explain": "CSR covers voluntary responsibilities to employees, communities, and the environment beyond legal minimums. Doing only what the law requires is compliance, not CSR.",
       "sub": "Ethics and Social Responsibility",
       "diff": 2
     },
@@ -298,13 +298,13 @@
       "id": "ol-021",
       "q": "An analysis shows that 80 percent of customer complaints come from 20 percent of causes. This pattern is known as:",
       "choices": [
-        "The 80/20 rule, or Pareto principle",
-        "The Gantt principle",
+        "The Pareto principle",
+        "The Peter principle",
         "The Hawthorne effect",
-        "The bell curve rule"
+        "Parkinson's law"
       ],
       "answer": 0,
-      "explain": "The Pareto principle says a small share of causes drives most results. It is used to prioritize problems.",
+      "explain": "The Pareto principle (the 80/20 rule) says a small share of causes drives most results, so it is used to prioritize problems. The Peter principle is about promotion to incompetence, and Parkinson's law says work expands to fill the time available.",
       "sub": "Decision Making and Problem Solving",
       "diff": 3
     },
@@ -312,10 +312,10 @@
       "id": "ol-022",
       "q": "Which of the following best describes a conflict of interest?",
       "choices": [
-        "Disagreement over project timelines",
-        "Two employees with different working styles",
-        "A situation where a personal interest could improperly influence professional judgment",
-        "Shared responsibility for a joint task"
+        "A disagreement between coworkers over project timelines",
+        "Two employees whose working styles clash on an assignment",
+        "A personal interest that could improperly sway professional judgment",
+        "A task that two departments are jointly responsible for"
       ],
       "answer": 2,
       "explain": "A conflict of interest exists when a personal interest could compromise professional duties, even if no wrong is done.",
@@ -340,13 +340,13 @@
       "id": "ol-024",
       "q": "Which is the most effective first step in resolving a workplace conflict?",
       "choices": [
-        "Escalate it to the board of directors",
-        "Ignore the issue until the next performance review",
-        "Publicly criticize the other party",
+        "Have both parties present their sides at the next team meeting",
+        "Wait to see whether the problem resolves on its own",
+        "Side with the more senior employee to end it quickly",
         "Meet privately with each party to understand the issue"
       ],
       "answer": 3,
-      "explain": "A private, direct conversation with each party gathers facts and keeps the issue contained before escalation is considered.",
+      "explain": "A private conversation with each party gathers facts and keeps the issue contained before escalation is considered. Airing it in front of the team, waiting, or siding by seniority tends to harden positions.",
       "sub": "Change Management and Conflict Resolution",
       "diff": 2
     },
@@ -355,12 +355,12 @@
       "q": "Which trait describes a leader's ability to remain effective when priorities change suddenly?",
       "choices": [
         "Adaptability",
-        "Rigidity",
-        "Authoritarianism",
-        "Indecision"
+        "Conscientiousness",
+        "Assertiveness",
+        "Empathy"
       ],
       "answer": 0,
-      "explain": "Adaptability is the capacity to adjust approach and priorities as conditions change.",
+      "explain": "Adaptability is the capacity to adjust approach and priorities as conditions change. Conscientiousness is dependability, assertiveness is stating needs directly, and empathy is understanding how others feel.",
       "sub": "Leadership Concepts and Traits",
       "diff": 2
     },
@@ -438,10 +438,10 @@
       "id": "ol-031",
       "q": "Which is an example of an informal organization?",
       "choices": [
-        "The official organizational chart",
-        "A group of coworkers who regularly lunch together and share information",
-        "The written employee handbook",
-        "The formal board of directors"
+        "The official chart showing who reports to whom",
+        "Coworkers who lunch together and swap news outside official channels",
+        "The written employee handbook of workplace policies",
+        "The board of directors elected to oversee strategy"
       ],
       "answer": 1,
       "explain": "The informal organization is the network of relationships that exists alongside the formal structure.",
@@ -494,10 +494,10 @@
       "id": "ol-035",
       "q": "Which communication channel is best for sensitive, complex, or emotionally charged messages?",
       "choices": [
-        "Mass email",
+        "Email sent to the whole department",
         "Face-to-face conversation",
-        "Text message",
-        "Posted memo"
+        "Text message to each person",
+        "Memo posted on the staff board"
       ],
       "answer": 1,
       "explain": "Face-to-face communication carries tone and nonverbal cues that reduce misunderstanding in difficult messages.",
@@ -536,15 +536,15 @@
       "id": "ol-038",
       "q": "A manager discovers that a subordinate has falsified expense reports. The most ethical first response is to:",
       "choices": [
-        "Ignore it to avoid conflict",
-        "Reduce the employee's pay privately",
+        "Confront the employee in front of the team to deter others",
+        "Have the employee quietly repay the money and drop the matter",
         "Investigate through proper channels and follow company policy",
-        "Post the findings on social media"
+        "Fire the employee on the spot before gathering the facts"
       ],
       "answer": 2,
-      "explain": "Ethical handling means verifying facts and following established policy and reporting channels, with due process for the employee.",
+      "explain": "Ethical handling means verifying facts and following established policy and reporting channels, with due process for the employee. A quiet repayment deal hides misconduct the company may need to address, and public confrontation or instant firing skips due process.",
       "sub": "Ethics and Social Responsibility",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "ol-039",
@@ -576,15 +576,15 @@
     },
     {
       "id": "ol-041",
-      "q": "Which is a core characteristic of an effective leader's vision?",
+      "q": "Which best describes an effective leader's vision?",
       "choices": [
-        "A clear, inspiring direction for the future",
-        "Frequent changes to avoid commitment",
-        "Focus only on daily tasks",
-        "Secrecy about goals"
+        "A clear, inspiring picture of where the group is headed",
+        "A detailed list of daily procedures and work rules",
+        "A one-year budget with spending targets",
+        "A ranked list of employee performance scores"
       ],
       "answer": 0,
-      "explain": "A vision gives people a clear and motivating destination. Vision is about direction, not day-to-day operations.",
+      "explain": "A vision gives people a clear, motivating destination. Procedures, budgets, and performance rankings are operational tools, not a vision.",
       "sub": "Leadership Concepts and Traits",
       "diff": 2
     },
@@ -660,15 +660,15 @@
     },
     {
       "id": "ol-047",
-      "q": "Which organizational structure is typically the flattest?",
+      "q": "When a company removes several layers of middle management to create a flatter structure, which change usually follows?",
       "choices": [
-        "Tall hierarchy",
-        "Flat structure with few management levels",
-        "Multi-divisional",
-        "Matrix"
+        "Each remaining manager supervises fewer people",
+        "Each remaining manager supervises more people",
+        "Decisions must pass through more levels of approval",
+        "The chain of command becomes longer"
       ],
       "answer": 1,
-      "explain": "A flat structure has few layers between top management and front-line staff, which usually means a wide span of control.",
+      "explain": "Flattening removes layers, so the remaining managers take on wider spans of control and decisions move faster. Fewer reports per manager, more approval levels, and a longer chain of command describe a tall structure.",
       "sub": "Organizational Structure and Culture",
       "diff": 2
     },
@@ -676,13 +676,13 @@
       "id": "ol-048",
       "q": "Resistance to change is most effectively reduced by:",
       "choices": [
-        "Imposing the change quickly without explanation",
-        "Removing employees who resist",
-        "Reducing communication until the change is complete",
+        "Announcing the change by email once every decision is final",
+        "Rolling it out quickly so there is less time to object",
+        "Limiting discussion of the change to senior managers",
         "Involving employees early and explaining the reasons"
       ],
       "answer": 3,
-      "explain": "Participation and clear reasoning build buy-in. Imposition and silence tend to increase resistance.",
+      "explain": "Participation and clear reasoning build buy-in. Late announcements, rushed rollouts, and keeping discussion at the top tend to increase resistance.",
       "sub": "Change Management and Conflict Resolution",
       "diff": 2
     },
@@ -690,10 +690,10 @@
       "id": "ol-049",
       "q": "Situational leadership theory suggests that:",
       "choices": [
-        "The most effective leadership style depends on the followers' readiness and the situation",
-        "One leadership style works in every situation",
-        "Leaders are born and cannot be developed",
-        "Leadership depends mainly on the leader's appearance"
+        "The best leadership style depends on followers' readiness and the situation",
+        "One proven leadership style works best in every situation",
+        "Effective leaders are born with traits that cannot be developed",
+        "Followers should adapt their behavior to the leader's fixed style"
       ],
       "answer": 0,
       "explain": "Hersey and Blanchard's model matches directive or supportive behavior to follower competence and commitment.",
@@ -718,13 +718,13 @@
       "id": "ol-051",
       "q": "Which is the best use of feedback in a team?",
       "choices": [
-        "Only point out mistakes",
+        "Focus comments on the person's personality traits",
         "Give specific, timely feedback on behavior and results",
-        "Save all feedback for annual reviews",
-        "Share feedback only with management"
+        "Save feedback for the annual review so it is complete",
+        "Give only positive feedback to protect morale"
       ],
       "answer": 1,
-      "explain": "Effective feedback is specific, timely, and focused on behavior and results, and it is useful in both directions.",
+      "explain": "Effective feedback is specific, timely, and focused on behavior and results. Feedback aimed at personality, saved for once a year, or kept only positive does not help people adjust.",
       "sub": "Communication and Teamwork",
       "diff": 1
     },
@@ -760,27 +760,27 @@
       "id": "ol-054",
       "q": "Which statement best reflects stakeholder theory?",
       "choices": [
-        "Only shareholders matter to management",
-        "Management should focus only on profit",
-        "A business should consider the interests of all groups its actions affect",
-        "Customers are the only stakeholders"
+        "Managers should answer only to the shareholders who own the firm",
+        "A business's only social duty is to increase its profits",
+        "A business should weigh the interests of all groups its actions affect",
+        "Customers are the only group whose interests a firm must weigh"
       ],
       "answer": 2,
-      "explain": "Stakeholder theory includes employees, customers, suppliers, communities, and owners, not shareholders alone.",
+      "explain": "Stakeholder theory includes employees, customers, suppliers, communities, and owners, not shareholders alone. The profit-only view is shareholder theory.",
       "sub": "Ethics and Social Responsibility",
       "diff": 1
     },
     {
       "id": "ol-055",
-      "q": "A chart showing job titles, reporting relationships, and lines of authority is called an:",
+      "q": "Which diagram shows job titles, reporting relationships, and lines of authority in a company?",
       "choices": [
-        "Budget",
+        "Project Gantt chart",
         "Organizational chart",
-        "Strategic plan",
-        "Mission statement"
+        "Process flowchart",
+        "Pareto chart of causes"
       ],
       "answer": 1,
-      "explain": "An organizational chart shows the formal structure of authority and reporting.",
+      "explain": "An organizational chart shows the formal structure of authority and reporting. A Gantt chart shows a schedule, a flowchart shows process steps, and a Pareto chart ranks causes by frequency.",
       "sub": "Organizational Structure and Culture",
       "diff": 1
     },
@@ -803,12 +803,12 @@
       "q": "Which leadership quality is most closely tied to earning trust over time?",
       "choices": [
         "Consistency and integrity",
-        "Frequent reorganizations",
-        "Strict secrecy",
-        "Constant competition"
+        "Charisma and a polished public image",
+        "Tight control over what information is shared",
+        "Frequent high-energy motivational speeches"
       ],
       "answer": 0,
-      "explain": "Trust grows when leaders act consistently with their stated values.",
+      "explain": "Trust grows when leaders act consistently with their stated values over time. Charisma and speeches can draw attention, but they do not build trust when actions do not match words.",
       "sub": "Leadership Concepts and Traits",
       "diff": 1
     },
@@ -842,29 +842,29 @@
     },
     {
       "id": "ol-060",
-      "q": "Which management function involves monitoring performance and taking corrective action?",
+      "q": "A restaurant manager inspects every produce delivery and rejects damaged items before they reach the kitchen. Which type of control is this?",
       "choices": [
-        "Planning",
-        "Organizing",
-        "Leading",
-        "Controlling"
+        "Feedback control",
+        "Concurrent control",
+        "Budgetary control",
+        "Feedforward control"
       ],
       "answer": 3,
-      "explain": "Controlling is the feedback loop of measuring results against standards and correcting deviations.",
+      "explain": "Feedforward (preventive) control catches problems at the input stage, before work begins. Concurrent control happens during the work, and feedback control happens after results are in.",
       "sub": "Managerial Functions",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "ol-061",
-      "q": "Which tool identifies an organization's strengths, weaknesses, opportunities, and threats?",
+      "q": "In a SWOT analysis, a new competitor entering the market and a rise in the minimum wage are best classified as:",
       "choices": [
-        "SWOT analysis",
-        "PERT chart",
-        "Break-even chart",
-        "Balanced scorecard"
+        "Threats",
+        "Weaknesses",
+        "Opportunities",
+        "Strengths"
       ],
       "answer": 0,
-      "explain": "SWOT pairs internal factors (strengths, weaknesses) with external factors (opportunities, threats).",
+      "explain": "Both are external conditions that could hurt the business, which makes them threats. Strengths and weaknesses are internal factors, and opportunities are favorable external conditions.",
       "sub": "Decision Making and Problem Solving",
       "diff": 1
     },
@@ -872,10 +872,10 @@
       "id": "ol-062",
       "q": "The Sarbanes-Oxley Act of 2002 primarily aimed to:",
       "choices": [
-        "Regulate consumer credit cards",
-        "Set the federal minimum wage",
+        "Regulate interest rates and fees on consumer credit cards",
+        "Raise the federal minimum wage for hourly workers",
         "Improve corporate financial disclosure and accountability",
-        "Create federal labor unions"
+        "Protect workers' rights to form and join labor unions"
       ],
       "answer": 2,
       "explain": "SOX was a U.S. federal response to corporate accounting scandals, and it strengthened internal controls and executive responsibility.",
@@ -884,15 +884,15 @@
     },
     {
       "id": "ol-063",
-      "q": "A company with separate divisions for each product line most likely uses which structure?",
+      "q": "A consumer goods company runs its snack, beverage, and personal care businesses as separate units, each with its own marketing, production, and finance teams. Which structure is this?",
       "choices": [
         "Functional",
         "Divisional",
-        "Simple",
+        "Matrix",
         "Network"
       ],
       "answer": 1,
-      "explain": "Divisional structures organize around products, markets, or regions, each with its own resources.",
+      "explain": "Divisional structures organize around products, markets, or regions, and each division has its own functional resources. A functional structure would put all marketing in one department across every product.",
       "sub": "Organizational Structure and Culture",
       "diff": 1
     },
@@ -900,13 +900,13 @@
       "id": "ol-064",
       "q": "Which is a common driver of organizational change?",
       "choices": [
-        "Stable customer demand",
-        "Unchanged technology",
-        "Identical competitors",
+        "A stable customer base with steady demand",
+        "Long-standing company traditions",
+        "Low employee turnover",
         "New technology or shifting market demand"
       ],
       "answer": 3,
-      "explain": "External forces such as technology and market shifts are a main reason organizations must change.",
+      "explain": "External forces such as new technology and market shifts are a main reason organizations must change. Stable demand, traditions, and low turnover tend to favor the status quo.",
       "sub": "Change Management and Conflict Resolution",
       "diff": 1
     },
@@ -915,26 +915,26 @@
       "q": "Which is the best definition of leadership?",
       "choices": [
         "The process of influencing a group toward achieving goals",
-        "The formal authority to give orders",
-        "The title given to a senior manager",
-        "The ability to win every argument"
+        "The formal authority to give orders to subordinates",
+        "The job title held by a senior manager or executive",
+        "The power to reward and punish employee behavior"
       ],
       "answer": 0,
-      "explain": "Leadership is influence. Authority and title do not guarantee that people will follow.",
+      "explain": "Leadership is influence. Authority, titles, and the power to reward or punish do not guarantee that people will follow.",
       "sub": "Leadership Concepts and Traits",
       "diff": 1
     },
     {
       "id": "ol-066",
-      "q": "In Herzberg's theory, which of the following is a hygiene factor?",
+      "q": "A company raises pay and improves office conditions, but employees say they feel no more motivated than before. Herzberg's two-factor theory explains this because pay and working conditions are:",
       "choices": [
-        "Achievement",
-        "Recognition",
-        "Company policy and supervision",
-        "Advancement"
+        "Motivators that take a year to have an effect",
+        "Higher-order needs in Maslow's hierarchy",
+        "Hygiene factors that prevent dissatisfaction but do not motivate",
+        "Valences that only matter to top performers"
       ],
       "answer": 2,
-      "explain": "Hygiene factors such as policy, supervision, and working conditions prevent dissatisfaction but do not create motivation.",
+      "explain": "Herzberg classed pay, policy, supervision, and working conditions as hygiene factors: improving them removes dissatisfaction, but motivation comes from motivators such as achievement and recognition.",
       "sub": "Motivation and Leadership Theories",
       "diff": 1
     },
@@ -942,10 +942,10 @@
       "id": "ol-067",
       "q": "A manager receives a message full of technical jargon from a remote team. Which step best ensures understanding?",
       "choices": [
-        "Reply with the same jargon",
-        "Paraphrase the message and confirm understanding through feedback",
-        "Ignore the message until a meeting",
-        "Forward it to the CEO"
+        "Reply using the same technical terms to show expertise",
+        "Paraphrase it back and ask the team to confirm",
+        "Wait until the next team meeting to ask about it",
+        "Forward it to a senior executive to interpret"
       ],
       "answer": 1,
       "explain": "Paraphrasing and asking for confirmation closes the feedback loop and catches misunderstandings early.",
@@ -1038,15 +1038,15 @@
     },
     {
       "id": "ol-074",
-      "q": "Which motivation theory holds that people act to reach goals they value and believe they can achieve?",
+      "q": "A sales rep makes no effort toward a quarterly bonus because she believes no amount of work will let her hit the target. In Vroom's expectancy theory, which element is low?",
       "choices": [
-        "Hierarchy of needs",
-        "Two-factor theory",
-        "Expectancy theory",
-        "Theory Y"
+        "Valence",
+        "Instrumentality",
+        "Expectancy",
+        "Equity"
       ],
       "answer": 2,
-      "explain": "Expectancy theory ties effort to the belief that effort produces performance and that performance produces valued rewards.",
+      "explain": "Expectancy is the belief that effort will lead to the required performance. Instrumentality is the belief that performance will bring the reward, and valence is how much the reward is valued.",
       "sub": "Motivation and Leadership Theories",
       "diff": 3
     },
@@ -1054,10 +1054,10 @@
       "id": "ol-075",
       "q": "What is the main purpose of an elevator pitch?",
       "choices": [
-        "To close a sale immediately",
-        "To quickly and clearly communicate who you are and what you offer",
-        "To read a full report aloud",
-        "To negotiate salary terms"
+        "To close a sale on the spot before the listener leaves",
+        "To quickly explain who you are and what you offer",
+        "To present a full business plan in detail",
+        "To negotiate salary and benefits with an employer"
       ],
       "answer": 1,
       "explain": "An elevator pitch is a short, clear introduction. It is meant to spark interest, not to close a deal.",
@@ -1083,12 +1083,12 @@
       "q": "A decision tree is most useful for:",
       "choices": [
         "Mapping sequential choices and their possible outcomes",
-        "Tracking employee attendance",
-        "Designing a company logo",
-        "Recording meeting minutes"
+        "Showing reporting relationships between positions",
+        "Scheduling project tasks along a timeline",
+        "Sorting the causes of a problem into categories"
       ],
       "answer": 0,
-      "explain": "Decision trees branch by choice and chance to show possible paths and outcomes for a decision.",
+      "explain": "Decision trees branch by choice and chance to show possible paths and outcomes for a decision. Reporting lines belong on an organizational chart, timelines on a Gantt chart, and cause categories on a fishbone diagram.",
       "sub": "Decision Making and Problem Solving",
       "diff": 3
     },
@@ -1110,13 +1110,13 @@
       "id": "ol-079",
       "q": "Organizational culture is most often passed on to new employees through:",
       "choices": [
-        "Stock option plans",
+        "Formal job descriptions and duty lists",
         "Stories, rituals, and observed leader behavior",
-        "Annual tax filings",
-        "Vendor contracts"
+        "Annual financial reports and budgets",
+        "The organizational chart and job titles"
       ],
       "answer": 1,
-      "explain": "Culture is learned through stories, ceremonies, and what leaders model and reward.",
+      "explain": "Culture is learned through stories, ceremonies, and what leaders model and reward. Job descriptions, financial reports, and the org chart describe the formal organization, not its unwritten norms.",
       "sub": "Organizational Structure and Culture",
       "diff": 1
     },
@@ -1124,13 +1124,13 @@
       "id": "ol-080",
       "q": "Which change management practice matters most when introducing new software?",
       "choices": [
-        "Keeping it secret until launch",
-        "Skipping training to save time",
-        "Making it optional forever",
+        "Switching every department over on the same day to save time",
+        "Letting each employee learn the software on their own",
+        "Announcing the switch on the day it goes live",
         "Providing training and support before and after launch"
       ],
       "answer": 3,
-      "explain": "User adoption depends on training and ongoing support, which is a core change management principle.",
+      "explain": "User adoption depends on training and ongoing support, which is a core change management principle. Rushed switchovers, self-teaching, and last-minute announcements raise errors and resistance.",
       "sub": "Change Management and Conflict Resolution",
       "diff": 1
     },
@@ -1150,15 +1150,15 @@
     },
     {
       "id": "ol-082",
-      "q": "According to Maslow, what is the lowest level of the hierarchy?",
+      "q": "An employee worried about losing her job in upcoming layoffs is focused on which level of Maslow's hierarchy?",
       "choices": [
         "Esteem",
-        "Safety",
         "Physiological needs",
+        "Safety",
         "Belonging"
       ],
       "answer": 2,
-      "explain": "Physiological needs such as food, water, and shelter form the base of the pyramid.",
+      "explain": "Job security is a classic safety need, the level just above basic physiological needs such as food and shelter.",
       "sub": "Motivation and Leadership Theories",
       "diff": 1
     },
@@ -1166,13 +1166,13 @@
       "id": "ol-083",
       "q": "What is the best way to close a presentation?",
       "choices": [
-        "Apologize for the content",
+        "Thank the audience and stop after the last data slide",
         "Summarize the key points and state the call to action",
-        "End abruptly after the last slide",
-        "Read unrelated notes aloud"
+        "Introduce a new topic to keep interest high",
+        "Apologize for running over time and stop"
       ],
       "answer": 1,
-      "explain": "A strong close summarizes the main message and tells the audience what to do next.",
+      "explain": "A strong close summarizes the main message and tells the audience what to do next. Ending on raw data, adding new material, or apologizing weakens the final impression.",
       "sub": "Communication and Teamwork",
       "diff": 1
     },
@@ -1192,15 +1192,15 @@
     },
     {
       "id": "ol-085",
-      "q": "Which problem-solving step involves generating several possible solutions?",
+      "q": "A team keeps missing shipping deadlines and wants to trace the problem to its root causes by sorting possible causes into categories such as people, methods, materials, and machines. Which tool fits best?",
       "choices": [
-        "Brainstorming alternatives",
-        "Implementing the plan",
-        "Evaluating results",
-        "Defining the root cause"
+        "Fishbone diagram",
+        "Gantt chart",
+        "Decision tree",
+        "SWOT analysis"
       ],
       "answer": 0,
-      "explain": "After the problem is defined, generating alternatives is the step that precedes evaluation and selection.",
+      "explain": "A fishbone (Ishikawa, or cause-and-effect) diagram sorts the possible causes of a problem into categories so the team can find root causes. A Gantt chart schedules tasks, a decision tree compares choices, and SWOT assesses strategic position.",
       "sub": "Decision Making and Problem Solving",
       "diff": 1
     },
@@ -1236,13 +1236,13 @@
       "id": "ol-088",
       "q": "Which best describes organizational resilience?",
       "choices": [
-        "Never changing processes",
-        "Avoiding all risk",
-        "Keeping the same structure for decades",
-        "The ability to adapt and recover from disruption"
+        "Keeping the same structure and processes regardless of conditions",
+        "The ability to grow faster than competitors",
+        "Avoiding risk by never entering new markets",
+        "The ability to adapt to and recover from disruption"
       ],
       "answer": 3,
-      "explain": "Resilience is the capacity to absorb shocks, adapt, and recover while continuing core operations.",
+      "explain": "Resilience is the capacity to absorb shocks, adapt, and recover while continuing core operations. Rigidity and risk avoidance reduce resilience, and growth speed is a different measure.",
       "sub": "Change Management and Conflict Resolution",
       "diff": 3
     },
@@ -1250,10 +1250,10 @@
       "id": "ol-089",
       "q": "Emotional intelligence in leadership most directly involves:",
       "choices": [
-        "Recognizing and managing one's own emotions and those of others",
-        "Avoiding all emotional topics",
-        "Making decisions without feedback",
-        "Ranking employees by performance alone"
+        "Recognizing and managing your own and others' emotions",
+        "Keeping emotions out of every workplace conversation",
+        "Making decisions based on logic and data alone",
+        "Reading body language to tell when people are lying"
       ],
       "answer": 0,
       "explain": "Emotional intelligence includes self-awareness, self-management, empathy, and relationship skills.",
@@ -1264,10 +1264,10 @@
       "id": "ol-090",
       "q": "Which type of reward is intrinsic?",
       "choices": [
-        "A year-end bonus check",
-        "A promotion with a higher salary",
-        "Personal satisfaction from completing meaningful work",
-        "A gift card from the manager"
+        "A year-end bonus for meeting sales targets",
+        "A promotion that comes with a higher salary",
+        "Satisfaction from completing meaningful work",
+        "A gift card from the manager for good work"
       ],
       "answer": 2,
       "explain": "Intrinsic rewards come from within the person, such as a sense of accomplishment. Pay and gifts are extrinsic.",
@@ -1292,10 +1292,10 @@
       "id": "ol-092",
       "q": "Which is an example of the organizing function?",
       "choices": [
-        "Setting a five-year goal",
-        "Monitoring monthly sales",
-        "Motivating a team",
-        "Creating a new department with defined reporting lines"
+        "Setting a five-year sales growth goal",
+        "Monitoring monthly sales against the budget",
+        "Motivating a team with a pep talk",
+        "Creating a department with clear reporting lines"
       ],
       "answer": 3,
       "explain": "Creating departments and reporting lines is organizing. The other options are planning, controlling, and leading.",
@@ -1306,7 +1306,7 @@
       "id": "ol-093",
       "q": "Which decision-making model assumes complete information and a fully logical process?",
       "choices": [
-        "Rational decision-making model",
+        "Rational model",
         "Garbage can model",
         "Intuitive model",
         "Satisficing model"
@@ -1320,27 +1320,27 @@
       "id": "ol-094",
       "q": "Which best describes a code of ethics?",
       "choices": [
-        "A list of employee vacation rules",
-        "A government tax form",
+        "A list of workplace rules on attendance and dress",
+        "A legally required government filing",
         "A written statement of values and standards of conduct",
-        "A list of product prices"
+        "A contract guaranteeing employees job security"
       ],
       "answer": 2,
-      "explain": "A code of ethics states the values and expected conduct for members of an organization.",
+      "explain": "A code of ethics states the values and expected conduct for members of an organization. Attendance and dress rules belong in an employee handbook.",
       "sub": "Ethics and Social Responsibility",
       "diff": 1
     },
     {
       "id": "ol-095",
-      "q": "Which structure groups employees by the customer segment they serve?",
+      "q": "A bank organizes its staff into separate units for retail customers, small businesses, and large corporations. Which type of departmentalization is this?",
       "choices": [
         "Functional",
-        "Customer-based",
+        "Customer",
         "Geographic",
         "Process"
       ],
       "answer": 1,
-      "explain": "Customer-based (or market-based) structures align teams with particular customer groups.",
+      "explain": "Customer departmentalization groups work around the needs of distinct customer segments. Functional groups by specialty, geographic by location, and process by stage of work.",
       "sub": "Organizational Structure and Culture",
       "diff": 1
     },
@@ -1362,29 +1362,29 @@
       "id": "ol-097",
       "q": "A leader uses 360-degree feedback primarily to:",
       "choices": [
-        "Gather input from peers, subordinates, and supervisors for development",
-        "Rank employees for layoffs",
-        "Set the annual budget",
-        "Choose a new office location"
+        "Gather input from peers, direct reports, and supervisors for development",
+        "Rate employees using only their direct supervisor's view",
+        "Compare each employee's sales with company averages",
+        "Collect customer ratings of the company's products"
       ],
       "answer": 0,
-      "explain": "360-degree feedback collects multi-rater input to support self-awareness and development, not punitive decisions.",
+      "explain": "360-degree feedback collects input from every direction around the person to support self-awareness and development. A single supervisor's rating is a traditional review.",
       "sub": "Leadership Concepts and Traits",
       "diff": 1
     },
     {
       "id": "ol-098",
-      "q": "Theory Y managers assume that employees are:",
+      "q": "A manager lets her team set their own weekly targets, asks for their ideas, and checks in rather than monitoring them constantly. Which set of assumptions does her approach reflect?",
       "choices": [
-        "Lazy and must be controlled",
-        "Motivated only by pay",
-        "Capable of self-direction and seek responsibility",
-        "Unable to contribute ideas"
+        "Theory X",
+        "Scientific management",
+        "Theory Y",
+        "Bureaucratic management"
       ],
       "answer": 2,
-      "explain": "Theory Y is the optimistic view that people can be committed and self-directed when conditions allow.",
+      "explain": "Theory Y assumes people can be self-directed and seek responsibility, so managers give autonomy and invite input. Theory X and scientific management assume close supervision and control are needed.",
       "sub": "Motivation and Leadership Theories",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "ol-099",
@@ -1393,10 +1393,10 @@
         "Planning your reply while the other person speaks",
         "Restating the speaker's point to confirm understanding",
         "Interrupting to share your own experience",
-        "Checking your phone during the conversation"
+        "Offering a solution as soon as you spot the problem"
       ],
       "answer": 1,
-      "explain": "Active listening includes paraphrasing and checking understanding. Planning a reply or multitasking blocks it.",
+      "explain": "Active listening includes paraphrasing and checking understanding. Planning a reply, interrupting, or jumping straight to solutions shifts the focus away from the speaker.",
       "sub": "Communication and Teamwork",
       "diff": 1
     },

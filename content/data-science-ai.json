@@ -35,10 +35,10 @@
         "The median",
         "The mode",
         "The mean",
-        "The most frequent value"
+        "A 10% trimmed mean"
       ],
       "answer": 2,
-      "explain": "The mean uses every value, so one extreme value pulls it. The median and mode are resistant to outliers.",
+      "explain": "The mean uses every value, so one extreme value pulls it. The median, the mode, and a trimmed mean (which drops the most extreme values first) all resist outliers.",
       "sub": "Probability and Statistics Foundations",
       "diff": 1
     },
@@ -186,10 +186,10 @@
       "id": "dsa-013",
       "q": "Which statement about the normal distribution is correct?",
       "choices": [
-        "It is always skewed to the right",
-        "Its mean is always larger than its median",
-        "It is symmetric and bell-shaped, with mean, median, and mode equal",
-        "It applies only to discrete data"
+        "It is skewed right, so its mean exceeds its median",
+        "It has one peak and a long left tail",
+        "It is symmetric, with equal mean, median, and mode",
+        "It describes only discrete, whole-number data"
       ],
       "answer": 2,
       "explain": "A normal distribution is symmetric about its mean, so the mean, median, and mode coincide. Skewed distributions are the ones with unequal measures.",
@@ -214,13 +214,13 @@
       "id": "dsa-015",
       "q": "Which problem is the most direct cause of sampling bias?",
       "choices": [
-        "A sample size that is too large",
-        "Reporting results to two decimal places",
-        "A sample that does not represent the population, such as surveying only online volunteers",
-        "Using a spreadsheet instead of a calculator"
+        "A sample size that is larger than needed",
+        "Random sampling error that shrinks as n grows",
+        "A sample drawn only from online volunteers",
+        "Rounding results to two decimal places"
       ],
       "answer": 2,
-      "explain": "Sampling bias occurs when some members of the population are systematically more or less likely to be selected, so the sample is unrepresentative.",
+      "explain": "Sampling bias occurs when some members of the population are systematically more or less likely to be selected. Online volunteers self-select, so the sample is unrepresentative. Random sampling error is chance variation, not bias, and it shrinks with larger samples.",
       "sub": "Probability and Statistics Foundations",
       "diff": 2
     },
@@ -450,7 +450,7 @@
     },
     {
       "id": "dsa-032",
-      "q": "Which SQL statement returns only distinct values from a column?",
+      "q": "In standard SQL, which statement returns only distinct values from a column?",
       "choices": [
         "SELECT UNIQUE",
         "SELECT ONLY",
@@ -458,7 +458,7 @@
         "SELECT DISTINCT"
       ],
       "answer": 3,
-      "explain": "SELECT DISTINCT removes duplicate values from the result. Other keywords are not standard SQL for this purpose.",
+      "explain": "SELECT DISTINCT removes duplicate values from the result in standard SQL. Oracle also accepts SELECT UNIQUE as a non-standard synonym, which is why the stem says standard SQL. SELECT ONLY and SELECT GROUP are not valid for this.",
       "sub": "Tools for Data and AI",
       "diff": 1
     },
@@ -578,7 +578,7 @@
       "id": "dsa-041",
       "q": "Generative AI is best described as AI that:",
       "choices": [
-        "Creates new content such as text, images, or code based on patterns in training data",
+        "Creates new text, images, or code from patterns learned in training",
         "Only classifies existing data into predefined labels",
         "Stores and retrieves data from a database",
         "Controls physical robots using fixed rules only"
@@ -718,7 +718,7 @@
       "id": "dsa-051",
       "q": "What is the core idea of machine learning?",
       "choices": [
-        "Algorithms learn patterns from data to make predictions without a programmer writing every rule",
+        "Algorithms learn patterns from data instead of following hand-coded rules",
         "Programmers write every decision rule by hand",
         "Computers store data without processing it",
         "Data is deleted after each analysis to protect privacy"
@@ -790,7 +790,7 @@
       "choices": [
         "Supervised regression",
         "Reinforcement learning",
-        "Unsupervised learning (clustering)",
+        "Unsupervised learning",
         "Supervised classification"
       ],
       "answer": 2,
@@ -816,13 +816,13 @@
       "id": "dsa-058",
       "q": "Which description best fits deep learning?",
       "choices": [
-        "Machine learning that never uses data",
-        "Storing large datasets in deep cloud storage",
-        "A subset of machine learning that uses neural networks with many layers to learn hierarchical features",
-        "Any algorithm that runs on a server"
+        "Machine learning that relies on hand-written rules instead of data",
+        "A storage method for very large datasets",
+        "Machine learning that uses neural networks with many layers",
+        "Any statistical model trained on over a million rows"
       ],
       "answer": 2,
-      "explain": "Deep learning uses multi-layer neural networks to learn increasingly abstract representations from data.",
+      "explain": "Deep learning is a subset of machine learning that uses multi-layer neural networks to learn increasingly abstract representations from data. Dataset size or storage does not make a model \"deep\".",
       "sub": "Machine Learning",
       "diff": 2
     },
@@ -844,13 +844,13 @@
       "id": "dsa-060",
       "q": "A model is 98% accurate on a dataset where 98% of cases are negative because it predicts negative every time. Which measure best reveals its weakness?",
       "choices": [
-        "Model file size",
-        "Number of hidden layers",
+        "Accuracy on a larger sample from the same data",
+        "Specificity (true negative rate)",
         "Training runtime in seconds",
         "Recall for the positive class"
       ],
       "answer": 3,
-      "explain": "Recall measures how many true positives are found. Predicting all negatives gives zero recall on the positive class, exposing the failure that accuracy hides.",
+      "explain": "Recall measures how many actual positives are found. Predicting all negatives gives zero recall on the positive class. Accuracy stays near 98% on more of the same data and specificity is a perfect 100%, so both hide the failure.",
       "sub": "Machine Learning",
       "diff": 3
     },
@@ -901,12 +901,12 @@
       "q": "What is the main difference between logic-based and probability-based reasoning?",
       "choices": [
         "Logic-based reasoning uses random sampling; probability-based reasoning uses fixed rules",
-        "Logic-based reasoning works only on numbers; probability-based reasoning works only on text",
-        "They are identical except for the programming language used",
-        "Logic-based reasoning draws certain conclusions from rules; probability-based reasoning assigns degrees of belief to uncertain conclusions"
+        "Logic-based reasoning needs labeled training data; probability-based reasoning needs none",
+        "Logic-based reasoning handles uncertain evidence better than probability-based reasoning",
+        "Logic-based reasoning derives certain conclusions from rules; probability-based reasoning weighs uncertain ones"
       ],
       "answer": 3,
-      "explain": "Logic-based systems derive conclusions that follow strictly from rules. Probabilistic systems quantify uncertainty.",
+      "explain": "Logic-based systems derive conclusions that follow strictly from rules, so they are true or false. Probabilistic systems assign degrees of belief, which is why they handle uncertain evidence better, not worse.",
       "sub": "Perception, Representation, and Reasoning",
       "diff": 3
     },
@@ -968,15 +968,15 @@
     },
     {
       "id": "dsa-069",
-      "q": "Which statement about logic-based AI systems is most accurate?",
+      "q": "A logic-based AI system has the rule 'If it rains, the ground is wet' and the fact 'It rains.' Which inference rule lets it conclude 'The ground is wet'?",
       "choices": [
-        "They always produce probabilistic answers",
-        "They require no rules to be written",
-        "They cannot represent relationships between objects",
-        "They can be explained step by step but struggle with uncertain or incomplete information"
+        "Modus tollens",
+        "Abduction",
+        "Induction",
+        "Modus ponens"
       ],
       "answer": 3,
-      "explain": "Logic systems are transparent and deductive, but they handle uncertainty poorly compared with probabilistic methods.",
+      "explain": "Modus ponens: from P implies Q and P, conclude Q. Modus tollens runs the other way (from not Q, conclude not P), and abduction (guessing P because Q is true) and induction (generalizing from examples) are not guaranteed deductions.",
       "sub": "Perception, Representation, and Reasoning",
       "diff": 2
     },
@@ -998,7 +998,7 @@
       "id": "dsa-071",
       "q": "Which best describes algorithmic bias?",
       "choices": [
-        "Systematic unfair outcomes that arise when training data or design choices favor some groups over others",
+        "Systematic, unfair outcomes that favor some groups over others",
         "Random errors that average out over large datasets",
         "A software bug that only occurs on mobile devices",
         "Deliberate fraud by a software vendor"
@@ -1024,29 +1024,29 @@
     },
     {
       "id": "dsa-073",
-      "q": "Which privacy risk is specific to large language models?",
+      "q": "Which privacy risk is most closely associated with large language models?",
       "choices": [
-        "Slow response times on mobile networks",
-        "Storing too many images in a cache",
-        "Using too many decimal places in output",
-        "Training data memorization that could expose personal information in responses"
+        "Slower response times on mobile networks",
+        "Higher electricity use during model training",
+        "Rounding errors in numeric output",
+        "Memorizing and repeating personal data from training text"
       ],
       "answer": 3,
-      "explain": "LLMs can memorize and regurgitate fragments of training data, which may include personal information, so this is a distinct privacy risk.",
+      "explain": "LLMs can memorize and regurgitate fragments of training data, which may include personal information. The other options are performance, environmental, or accuracy issues, not privacy risks.",
       "sub": "Privacy and Ethics",
       "diff": 2
     },
     {
       "id": "dsa-074",
-      "q": "What is a hallucination in the credibility sense?",
+      "q": "A student asks an AI chatbot for sources, and it lists five journal articles with authors, titles, and page numbers. What is the most responsible next step?",
       "choices": [
-        "A deliberate attempt by the model to deceive the user",
-        "Fluent output presented as fact that is not supported by the data or sources",
-        "A display glitch in the chat interface",
-        "Any output longer than 500 words"
+        "Cite them as given, since the formatting looks professional",
+        "Confirm each article exists in a library database before citing it",
+        "Ask the same chatbot if the articles are real and trust its reply",
+        "Cite only the articles that list the most authors"
       ],
       "answer": 1,
-      "explain": "Hallucinations are unsupported outputs that read as confident fact. The model is not intentionally deceiving anyone.",
+      "explain": "LLMs can hallucinate citations that look completely real. Checking an independent source such as a library database is the reliable test. Asking the same model to vouch for itself can simply repeat the fabrication.",
       "sub": "Privacy and Ethics",
       "diff": 2
     },
@@ -1054,7 +1054,7 @@
       "id": "dsa-075",
       "q": "Which is an ethical dilemma raised by self-driving vehicles?",
       "choices": [
-        "Which fuel type should be used for charging",
+        "Which charging network the vehicle should use",
         "How the vehicle should act in unavoidable collision scenarios",
         "What color the vehicle body should be",
         "Which songs the radio should play"
@@ -1248,15 +1248,15 @@
     },
     {
       "id": "dsa-089",
-      "q": "Which stage of the data science process involves communicating insights to stakeholders?",
+      "q": "An analyst presents charts and a one-page summary so managers can act on what the analysis found. Which stage of the data science process is this?",
       "choices": [
-        "Data collection from sensors",
-        "Communication and visualization of results",
+        "Data collection",
+        "Communication of results",
         "Feature engineering",
         "Hyperparameter tuning"
       ],
       "answer": 1,
-      "explain": "Communicating findings clearly is the final stage, where visualizations and summaries turn analysis into decisions.",
+      "explain": "Communicating findings is the final stage, where visualizations and summaries turn analysis into decisions. Collection, feature engineering, and tuning all happen before there are results to share.",
       "sub": "Data Literacy and Foundations",
       "diff": 1
     },
@@ -1270,7 +1270,7 @@
         "country"
       ],
       "answer": 2,
-      "explain": "Purchase totals can take any value in a range, so they are continuous. Cities and countries are categorical, and IDs are labels.",
+      "explain": "Purchase totals are measured amounts that can take almost any value in a range, so they are treated as continuous. Cities and countries are categorical, and customer_id is a numeric-looking label, not a quantity.",
       "sub": "Data Literacy and Foundations",
       "diff": 2
     },
@@ -1304,7 +1304,7 @@
     },
     {
       "id": "dsa-093",
-      "q": "Which source is the best source of retail transaction data?",
+      "q": "Which source would most directly provide a retailer's sales transaction data?",
       "choices": [
         "Weather station readings",
         "Satellite images of the ocean",
@@ -1374,15 +1374,15 @@
     },
     {
       "id": "dsa-098",
-      "q": "A dataset of 1,000 rows has 300 missing ages. Which statement is most accurate?",
+      "q": "A 1,000-row dataset has 300 rows missing age and 200 rows missing income, and 100 of those rows are missing both. Every other column is complete. How many rows are fully complete?",
       "choices": [
-        "The dataset is unusable and must be discarded",
-        "The missing ages can safely be set to zero",
-        "The missingness rate is 30%, which should be investigated before choosing a handling method",
-        "Missing values only matter when computing the mean"
+        "500",
+        "700",
+        "600",
+        "400"
       ],
       "answer": 2,
-      "explain": "A 30% missingness rate is large. Its cause determines whether imputation or other handling is valid, and zero-filling distorts results.",
+      "explain": "Rows with any gap = 300 + 200 - 100 = 400 (the overlap would otherwise be counted twice), so 1,000 - 400 = 600 rows are complete. 500 forgets the overlap and 400 is the incomplete count. Dropping incomplete rows would discard 40% of the data, so check why values are missing first.",
       "sub": "Data Literacy and Foundations",
       "diff": 3
     },
@@ -1402,15 +1402,15 @@
     },
     {
       "id": "dsa-100",
-      "q": "Which of these is inherently unstructured data?",
+      "q": "Why is video from a security camera harder to analyze directly than a store inventory table?",
       "choices": [
-        "A table of store inventory",
-        "Video footage from a security camera",
-        "A list of employee IDs and salaries",
-        "A database of customer addresses"
+        "Video is always stored inside a relational database",
+        "Video has no predefined fields, so features must be extracted first",
+        "Video cannot be stored in digital form",
+        "Video files are too small to hold useful information"
       ],
       "answer": 1,
-      "explain": "Video has no predefined rows and columns. Inventory, salary, and address tables are structured.",
+      "explain": "Video is unstructured: it has no rows, columns, or fixed fields, so methods such as computer vision must first extract features (objects, counts, timestamps) before standard analysis. The inventory table is structured and ready to query.",
       "sub": "Data Literacy and Foundations",
       "diff": 1
     }
@@ -1437,7 +1437,7 @@
     {
       "id": "dsa-v004",
       "term": "Variance",
-      "def": "The average of the squared deviations from the mean, measuring how spread out the values are.",
+      "def": "A measure of spread equal to the average squared deviation from the mean (dividing by n for a population, or by n - 1 for a sample).",
       "sub": "Probability and Statistics Foundations"
     },
     {

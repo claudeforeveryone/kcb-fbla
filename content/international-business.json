@@ -2,7 +2,7 @@
   "slug": "international-business",
   "name": "International Business",
   "group": "case",
-  "notes": "Official FBLA 2025-26 International Business guideline PDF could not be read (fbla.org returned 403, PDFs unreadable). Snippets from a Virginia CTE copy (https://www.cteresource.org/media/i25hvwuw/2526-international-business-va-fbla.pdf) list treaties and trade agreements, currency exchange, finance, HR management, ethics, international travel and career development. Those snippets could not be verified, so subs use the standard international business areas instead. The event is a role play with a team objective test per FBLA materials, not a written case; group is set to case as requested. Check https://www.fbla.org/high-school/competitive-events/ for the official areas and weights.",
+  "notes": "Official 2026-27 FBLA International Business guideline (national text in the PA FBLA copy, updated August 2026: https://www.pafbla.org/wp-content/uploads/2026/09/26-27-International-Business-PA.pdf): teams of 1 to 3, each member takes a 100-question, 50-minute objective test (scores averaged), and the top 15 teams give a 7-minute interactive role play. Test knowledge areas (items): Fundamental Economic Concepts (20), The Nature of Business (20), Economic Systems (20), Impact of Government (5), Business Law: import/export law and customs regulations (5), Global Trade (30). This bank was written before that guideline was found, so its subs use standard international business areas and over-weight trade finance and logistics; the economics and economic-systems areas still need questions. Group is set to case as requested.",
   "subs": [
     "Global Business Environment",
     "International Trade Theory and Agreements",
@@ -138,7 +138,7 @@
       "id": "ib-011",
       "q": "Which framework compares a firm's internal strengths and weaknesses with external opportunities and threats before entering a foreign market?",
       "choices": [
-        "Porter's five forces only",
+        "Porter's five forces",
         "SWOT analysis",
         "Break-even analysis",
         "Hofstede's cultural model"
@@ -159,7 +159,7 @@
     },
     {
       "id": "ib-013",
-      "q": "Which principle explains why countries benefit from specializing in goods they produce at lower opportunity cost, even when one country is more efficient at everything?",
+      "q": "Which principle explains why two countries can both gain from specializing and trading, even when one country is more efficient at producing everything?",
       "choices": [
         "Absolute advantage",
         "Mercantilism",
@@ -231,13 +231,13 @@
       "id": "ib-018",
       "q": "A tariff cut lowers the price of a U.S. product in a foreign market, but the foreign currency depreciates 10 percent against the dollar. Which is the most accurate description of the net effect on U.S. price competitiveness there?",
       "choices": [
-        "Competitiveness improves fully, since both changes lower the price",
-        "Competitiveness falls, since tariff cuts never affect demand",
-        "Competitiveness is ambiguous: the tariff cut helps, but the weaker foreign currency raises the dollar price in local currency",
-        "Competitiveness is unchanged because the two changes cancel exactly in every case"
+        "Competitiveness improves for certain, since both changes lower the local price",
+        "Competitiveness falls for certain, since currency moves always outweigh tariffs",
+        "Ambiguous: the tariff cut helps, but the weaker currency raises the local price",
+        "Competitiveness is unchanged, since the two changes always cancel out exactly"
       ],
       "answer": 2,
-      "explain": "A weaker buyer currency makes a dollar price more expensive in local terms, which offsets part or all of the tariff benefit. The net effect depends on the size of each change.",
+      "explain": "A weaker local currency means buyers need more of it to cover a dollar price, which offsets part or all of the tariff saving. The net effect depends on the size of each change.",
       "sub": "Foreign Exchange and International Finance",
       "diff": 3
     },
@@ -261,11 +261,11 @@
       "choices": [
         "Peer review by the IMF",
         "Currency swap lines",
-        "Trade Policy Review Board",
+        "Trade Policy Review Mechanism",
         "Dispute Settlement Body panels"
       ],
       "answer": 3,
-      "explain": "WTO disputes go to Dispute Settlement Body panels, which issue rulings. Trade Policy Reviews monitor policy but do not settle disputes.",
+      "explain": "Disputes go to panels under the Dispute Settlement Body, and adopted rulings bind the parties. The Trade Policy Review Mechanism only monitors policies. Since December 2019 the Appellate Body has had no members, so a losing party can stall a panel ruling by appealing it.",
       "sub": "International Trade Theory and Agreements",
       "diff": 3
     },
@@ -280,24 +280,29 @@
     },
     {
       "id": "ib-022",
-      "q": "Which group uses the euro as its common currency for most of its members?",
-      "choices": ["Eurozone", "Mercosur", "ASEAN", "NAFTA"],
+      "q": "What is the group of European Union countries that have adopted the euro as their currency called?",
+      "choices": [
+        "Eurozone",
+        "Schengen Area",
+        "European Free Trade Association",
+        "European Economic Area"
+      ],
       "answer": 0,
-      "explain": "The eurozone is the group of European Union members that have adopted the euro. Not every EU member uses it.",
+      "explain": "The eurozone (euro area) is the EU members that use the euro: 21 of 27 since Bulgaria joined on January 1, 2026. Schengen covers border-free travel, EFTA is a separate bloc of non-EU countries, and the EEA links the EU single market to three of them.",
       "sub": "International Trade Theory and Agreements",
       "diff": 1
     },
     {
       "id": "ib-023",
-      "q": "What is ASEAN?",
+      "q": "Which regional bloc includes Indonesia, Vietnam, Thailand and the Philippines?",
       "choices": [
-        "A European currency union",
-        "A North American free trade pact",
-        "A Latin American customs union",
-        "The Association of Southeast Asian Nations, a regional bloc"
+        "Mercosur",
+        "Pacific Alliance",
+        "Gulf Cooperation Council",
+        "ASEAN"
       ],
       "answer": 3,
-      "explain": "ASEAN is a regional bloc of Southeast Asian nations that promotes economic and political cooperation.",
+      "explain": "ASEAN, the Association of Southeast Asian Nations, promotes economic and political cooperation in Southeast Asia. Mercosur and the Pacific Alliance are Latin American blocs, and the GCC groups Gulf states.",
       "sub": "International Trade Theory and Agreements",
       "diff": 1
     },
@@ -331,15 +336,15 @@
     },
     {
       "id": "ib-026",
-      "q": "Which document must a U.S. exporter file to report shipment details for export control and trade statistics?",
+      "q": "A U.S. exporter ships $40,000 of machine parts to Germany. Which filing reports the shipment to the U.S. government for export control and trade statistics?",
       "choices": [
-        "Letter of credit",
-        "Certificate of insurance",
-        "Electronic Export Information (EEI) filing through AES",
-        "Bill of exchange"
+        "Certificate of origin",
+        "Bill of lading",
+        "Electronic Export Information (EEI) in AES",
+        "Commercial invoice"
       ],
       "answer": 2,
-      "explain": "U.S. exporters file Electronic Export Information through the Automated Export System for shipments above the reporting thresholds.",
+      "explain": "EEI is filed electronically through the Automated Export System when any Schedule B line is worth more than $2,500 or an export licence is required. The other documents go to the buyer, the carrier or foreign customs.",
       "sub": "Trade Barriers and Documentation",
       "diff": 1
     },
@@ -359,15 +364,15 @@
     },
     {
       "id": "ib-028",
-      "q": "A U.S. exporter ships machinery and wants the buyer to pay only after the buyer's bank releases the shipping documents against payment. Which payment method fits?",
+      "q": "A U.S. exporter ships machinery and wants the buyer's bank to release the shipping documents only when the buyer pays, without any bank guaranteeing payment. Which payment method fits?",
       "choices": [
         "Open account",
         "Consignment",
         "Cash in advance",
-        "Documentary collection (documents against payment)"
+        "Documentary collection"
       ],
       "answer": 3,
-      "explain": "Documentary collection lets the exporter keep control of documents until payment, with less bank commitment than a letter of credit.",
+      "explain": "In a documentary collection (documents against payment), banks hand the documents to the buyer only on payment, so the exporter keeps control of the goods without the bank guarantee or cost of a letter of credit. Cash in advance is paid before shipping.",
       "sub": "Foreign Exchange and International Finance",
       "diff": 2
     },
@@ -392,24 +397,24 @@
         "The issuing bank or a confirming bank",
         "The seller's insurer",
         "The freight forwarder",
-        "The customs broker"
+        "The advising bank, even if it has not confirmed"
       ],
       "answer": 0,
-      "explain": "The issuing bank (for the buyer) or a confirming bank that adds its own promise must pay against compliant documents.",
+      "explain": "The issuing bank (for the buyer) or a confirming bank that adds its own promise must pay against compliant documents. An advising bank only passes the credit on to the seller unless it also confirms it.",
       "sub": "Foreign Exchange and International Finance",
       "diff": 2
     },
     {
       "id": "ib-031",
-      "q": "Which tariff type is a fixed amount per unit, such as $2 per kilogram?",
+      "q": "A country charges a compound tariff of $0.50 per kilogram plus 5 percent of customs value. An importer brings in 2,000 kg of cheese valued at $10,000. What is the total duty?",
       "choices": [
-        "An ad valorem tariff",
-        "A tariff that changes with exchange rates",
-        "A tariff that rises and falls with world prices",
-        "A specific tariff"
+        "$500",
+        "$1,000",
+        "$1,050",
+        "$1,500"
       ],
       "answer": 3,
-      "explain": "A specific tariff is a fixed dollar amount per physical unit. Ad valorem tariffs are percentages of value.",
+      "explain": "The specific part is 2,000 kg x $0.50 = $1,000 and the ad valorem part is 5% of $10,000 = $500, so the duty is $1,500. A compound tariff combines a per-unit (specific) duty with a percentage-of-value (ad valorem) duty.",
       "sub": "Trade Barriers and Documentation",
       "diff": 2
     },
@@ -459,10 +464,10 @@
       "id": "ib-035",
       "q": "Which is an example of an export subsidy?",
       "choices": [
-        "A tariff on imported steel",
-        "A government grant that lowers a domestic firm's cost of shipping goods abroad",
-        "A quota on imported textiles",
-        "A licence requirement for dual-use goods"
+        "A tariff that raises the price of imported steel",
+        "A government grant that cuts a firm's cost of shipping goods abroad",
+        "A quota that caps imported textiles each year",
+        "A licence requirement for exports of dual-use goods"
       ],
       "answer": 1,
       "explain": "An export subsidy lowers the cost of selling abroad. Tariffs, quotas and licence requirements restrict imports or exports rather than support them.",
@@ -471,7 +476,7 @@
     },
     {
       "id": "ib-036",
-      "q": "A U.S. exporter's commercial invoice shows $50,000 FOB. Under U.S. customs transaction-value rules, which price is generally the basis for duty?",
+      "q": "A U.S. importer's commercial invoice shows a $50,000 FOB price at the foreign port of export. Under U.S. customs transaction-value rules, which amount is generally the basis for duty?",
       "choices": [
         "Price including ocean freight and insurance",
         "The buyer's resale price in the United States",
@@ -479,7 +484,7 @@
         "The $50,000 FOB transaction price"
       ],
       "answer": 3,
-      "explain": "U.S. transaction value is generally the price actually paid or payable, with international freight and insurance usually excluded when the goods are valued FOB.",
+      "explain": "U.S. transaction value is the price actually paid or payable and excludes international freight and insurance, so the FOB price is the base. Many other countries, such as EU members, value imports CIF instead.",
       "sub": "Trade Barriers and Documentation",
       "diff": 3
     },
@@ -487,13 +492,13 @@
       "id": "ib-037",
       "q": "Which statement about the Harmonized System (HS) is correct?",
       "choices": [
-        "Classification determines only the country of origin",
-        "Each buyer sets its own classification for convenience",
-        "HS codes set a product's standard international classification, which countries extend with national tariff detail",
-        "HS codes apply only to services"
+        "HS codes identify only the country where the goods were made",
+        "Each importer assigns its own codes, so they vary by buyer",
+        "Countries share a 6-digit HS code and add their own digits for tariffs",
+        "HS codes classify services and are not used for physical goods"
       ],
       "answer": 2,
-      "explain": "The HS is a standard international product nomenclature used for tariffs and statistics. Countries add their own subdivisions for duty rates.",
+      "explain": "The HS, run by the World Customs Organization, gives goods a common 6-digit code used for tariffs and trade statistics. Countries add digits for their own tariff lines, such as the 10-digit U.S. HTS.",
       "sub": "Trade Barriers and Documentation",
       "diff": 3
     },
@@ -580,10 +585,10 @@
       "id": "ib-044",
       "q": "Which is the most accurate definition of a forward exchange rate?",
       "choices": [
-        "The rate for immediate delivery of currency",
+        "The rate for delivery of currency within two business days",
         "A rate agreed today for exchanging currency on a set future date",
-        "The official rate set by a central bank",
-        "The average spot rate over the past year"
+        "The official rate a central bank sets for its currency",
+        "The average of daily spot rates over the past year"
       ],
       "answer": 1,
       "explain": "A forward rate is locked today for a future exchange date, which is why it is used to hedge.",
@@ -636,13 +641,13 @@
       "id": "ib-048",
       "q": "A U.S. firm invoices a Brazilian customer in U.S. dollars, and the real weakens 15 percent before payment. Who bears the currency risk?",
       "choices": [
-        "The U.S. firm, because the real weakened",
-        "Neither party, because the invoice is in dollars",
-        "The U.S. firm gains, because reais are cheaper",
-        "The customer, whose dollar cost rises and so raises default risk"
+        "The U.S. firm, since its dollar receivable shrinks",
+        "Neither party, since the price was fixed in dollars",
+        "Both parties equally, since the rate change is shared",
+        "The Brazilian customer, who now needs more reais to pay"
       ],
       "answer": 3,
-      "explain": "Dollar invoicing shifts currency risk to the buyer, who needs more reais per dollar. The seller's dollar receivable is fixed, but nonpayment risk rises.",
+      "explain": "Invoicing in dollars fixes the seller's receivable, so the buyer carries the exchange risk and must spend more reais. The seller's remaining exposure is indirect: a squeezed customer is more likely to pay late or default.",
       "sub": "Foreign Exchange and International Finance",
       "diff": 2
     },
@@ -650,10 +655,10 @@
       "id": "ib-049",
       "q": "Which situation most clearly describes translation exposure rather than transaction exposure?",
       "choices": [
-        "A payment due in 30 days in pounds",
-        "A bid priced in euros",
-        "A foreign subsidiary's balance sheet converted to dollars for consolidation",
-        "An import order already paid in yen"
+        "A supplier payment due in 30 days in British pounds",
+        "A bid on a German contract priced in euros",
+        "A subsidiary's balance sheet restated in dollars for consolidation",
+        "An import order that has already been paid in yen"
       ],
       "answer": 2,
       "explain": "Translation exposure arises when foreign-currency financial statements are restated in the parent's currency. Transaction exposure involves actual future cash flows.",
@@ -662,7 +667,7 @@
     },
     {
       "id": "ib-050",
-      "q": "A firm's peso receipts are converted at 18 pesos per dollar today and 20 pesos per dollar in six months. What does this mean for a U.S. firm holding pesos?",
+      "q": "The exchange rate moves from 18 pesos per dollar today to 20 pesos per dollar six months later. What does this mean for a U.S. firm holding pesos?",
       "choices": [
         "The peso weakened, so each peso converts to fewer dollars",
         "The peso strengthened, so each peso converts to more dollars",
@@ -687,10 +692,10 @@
       "id": "ib-052",
       "q": "A firm builds a plant from scratch in Vietnam rather than buying an existing one. Which term fits, and what is its main trade-off?",
       "choices": [
-        "Acquisition; quick market access",
+        "Acquisition; fast market access but integration risk",
         "Greenfield investment; full control but slower start-up and higher risk",
-        "Licensing; no capital needed",
-        "Brownfield merger; faster start-up"
+        "Licensing; little capital needed but less control",
+        "Brownfield investment; faster start-up using existing facilities"
       ],
       "answer": 1,
       "explain": "A greenfield investment builds new facilities, giving control but taking longer and carrying more risk than buying an existing operation.",
@@ -741,15 +746,15 @@
     },
     {
       "id": "ib-056",
-      "q": "A firm wants to enter a foreign market with little capital and is willing to share profits with a local company that knows the market. Which entry mode fits best?",
+      "q": "A U.S. fitness chain wants 200 locations across Southeast Asia within three years while committing little of its own capital. Its value lies in its brand and operating system, and it can enforce standards by contract. Which entry mode fits best?",
       "choices": [
-        "Joint venture",
-        "Wholly owned greenfield plant",
-        "Direct exporting",
-        "Portfolio investment"
+        "Franchising",
+        "Wholly owned greenfield subsidiaries",
+        "Acquiring a local gym chain",
+        "Contract manufacturing"
       ],
       "answer": 0,
-      "explain": "A joint venture shares the investment and the local know-how, at the cost of shared control and profits.",
+      "explain": "Franchising lets local owners fund each outlet while paying fees and royalties for the brand and system, so growth is fast and light on capital. Greenfield sites and acquisitions need heavy investment, and contract manufacturing is for making goods, not running service outlets.",
       "sub": "Market Entry and Expansion Strategies",
       "diff": 3
     },
@@ -766,9 +771,9 @@
       "id": "ib-058",
       "q": "A U.S. firm enters Japan by buying an existing Japanese distributor to gain its channels quickly. Which mode is this, and what is the main risk?",
       "choices": [
-        "Greenfield; the main risk is slow construction",
-        "Licensing; the main risk is low royalty income",
-        "Exporting; the main risk is tariffs",
+        "Greenfield; the main risk is slow construction and permits",
+        "Licensing; the main risk is low royalty income and weak control",
+        "Exporting; the main risk is tariffs and shipping delays",
         "Acquisition; the main risk is overpaying and inheriting hidden liabilities"
       ],
       "answer": 3,
@@ -783,7 +788,7 @@
         "The host country requires a local majority partner",
         "The firm lacks local market knowledge",
         "The firm wants to share start-up costs",
-        "Strong intellectual property and firm-specific know-how the firm wants to protect"
+        "Valuable proprietary know-how the firm must protect"
       ],
       "answer": 3,
       "explain": "Protecting valuable know-how is the main reason to keep full control. The other factors all push toward sharing ownership.",
@@ -922,15 +927,15 @@
     },
     {
       "id": "ib-070",
-      "q": "Which reason most directly explains why a message that signals quality in one country may read as overpricing in another?",
+      "q": "A U.S. negotiator in Japan finds that counterparts rely on implied meaning, relationships and nonverbal cues more than on explicit wording. This is typical of which kind of culture?",
       "choices": [
-        "Different tariff rates",
-        "Different exchange rates",
-        "Different cultural cues about what price signals",
-        "Different interest rates"
+        "Low-context culture",
+        "Monochronic culture",
+        "High-context culture",
+        "Low power distance culture"
       ],
       "answer": 2,
-      "explain": "Culture shapes how buyers read price, which is why a message must be tested in each market rather than assumed to transfer.",
+      "explain": "In Edward Hall's model, high-context cultures carry meaning in context, relationships and nonverbal signals, while low-context cultures such as the U.S. rely on explicit words and written terms. Monochronic describes attitudes to time, not communication style.",
       "sub": "Global Marketing and Cultural Adaptation",
       "diff": 2
     },
@@ -950,10 +955,15 @@
     },
     {
       "id": "ib-072",
-      "q": "A product must sell at a lower purchase price in lower-income markets, with its features and packaging left unchanged. Which element of the 4Ps needs the most adjustment?",
-      "choices": ["Product", "Place", "Promotion", "Price"],
+      "q": "A U.S. firm's product sells poorly in a lower-income market even though research shows local buyers like the product, find it easily in stores and recognize the brand. Which element of the 4Ps most likely needs adjustment?",
+      "choices": [
+        "Product",
+        "Place",
+        "Promotion",
+        "Price"
+      ],
       "answer": 3,
-      "explain": "With the product held constant, the price element is the one that must change to lower the purchase price. Promotion and place do not set the amount paid.",
+      "explain": "Buyers like the product (product), can find it (place) and know the brand (promotion), which leaves price as the likely barrier in a lower-income market.",
       "sub": "Global Marketing and Cultural Adaptation",
       "diff": 2
     },
@@ -971,9 +981,9 @@
       "q": "Which description best fits the Hofstede dimension of individualism?",
       "choices": [
         "The degree to which people expect to look after themselves and their immediate family",
-        "The degree of tolerance for uncertainty",
-        "The degree of gender role separation",
-        "The degree of long-term orientation"
+        "The degree to which people tolerate uncertainty and ambiguity",
+        "The degree to which gender roles are clearly separated",
+        "The degree to which people focus on long-term rewards"
       ],
       "answer": 0,
       "explain": "Individualism contrasts with collectivism, where people rely more on group loyalty and extended family.",
@@ -982,29 +992,29 @@
     },
     {
       "id": "ib-075",
-      "q": "A U.S. fast-food chain changes its menu in Japan to suit local tastes. Which concept best explains the decision?",
+      "q": "A U.S. sales manager is travelling to meet clients in a country that requires business visitors to get permission to enter, for a stated purpose and length of stay, before arriving. Which document provides that permission?",
       "choices": [
-        "Ethnocentric staffing",
-        "Standardization",
-        "Dumping avoidance",
-        "Adaptation to local tastes"
+        "Passport",
+        "Certificate of origin",
+        "ATA Carnet",
+        "Business visa"
       ],
       "answer": 3,
-      "explain": "Adapting the product to local preferences is the adaptation strategy, which contrasts with standardization.",
-      "sub": "Global Marketing and Cultural Adaptation",
+      "explain": "A visa is the host country's permission to enter for a set purpose and stay, and it is used together with a passport, which proves identity and citizenship. An ATA Carnet covers temporary import of commercial samples, not the traveller.",
+      "sub": "Global Business Environment",
       "diff": 2
     },
     {
       "id": "ib-076",
       "q": "A manufacturer relies on a single Asian supplier for a critical component, holds almost no buffer stock, and a port closure halts production. Which risk is this?",
       "choices": [
-        "Exchange rate risk",
-        "Supply chain concentration risk from single sourcing and lean inventory",
+        "Bullwhip effect",
+        "Single-source supply disruption risk",
         "Translation exposure",
-        "Tariff escalation"
+        "Demand forecasting error"
       ],
       "answer": 1,
-      "explain": "Single sourcing combined with just-in-time inventory leaves the firm exposed to any disruption at one point in the chain.",
+      "explain": "Relying on one supplier with almost no buffer stock leaves the firm exposed to any disruption at a single point. The bullwhip effect is about demand signals growing as they move upstream, not a supply halt.",
       "sub": "Global Operations and Supply Chain",
       "diff": 3
     },
@@ -1033,7 +1043,7 @@
     },
     {
       "id": "ib-079",
-      "q": "Under FOB shipping point terms, when does the risk of loss pass to the buyer?",
+      "q": "Under the Incoterms 2020 rule FOB (Free On Board), when does the risk of loss pass from seller to buyer?",
       "choices": [
         "When goods arrive at the buyer's warehouse",
         "When goods are loaded on board the vessel at the origin port",
@@ -1041,21 +1051,21 @@
         "When customs clears the goods at the destination"
       ],
       "answer": 1,
-      "explain": "Under FOB shipping point, risk passes once goods are on board the ship at the origin port, even though the seller pays the freight to that point.",
+      "explain": "Under FOB, risk passes once the goods are on board the vessel at the named port of shipment. The seller covers costs to that point and the buyer pays the main ocean freight. FOB shipping point is a U.S. domestic (UCC) term, not an Incoterm.",
       "sub": "Global Operations and Supply Chain",
       "diff": 3
     },
     {
       "id": "ib-080",
-      "q": "Under CIF terms, what does the seller pay for beyond the goods themselves?",
+      "q": "Under the Incoterms 2020 rule CIF (Cost, Insurance and Freight), which cost does the seller NOT pay?",
       "choices": [
-        "Only export clearance",
-        "Import duties in the destination country",
-        "Warehousing at the buyer's dock",
-        "Cost, insurance and freight to the named destination port"
+        "Ocean freight to the named destination port",
+        "Minimum cargo insurance for the voyage",
+        "Export customs clearance",
+        "Import duties in the destination country"
       ],
       "answer": 3,
-      "explain": "CIF means the seller pays cost, insurance and freight to the destination port. Import duties and clearance remain the buyer's responsibility.",
+      "explain": "Under CIF the seller clears the goods for export and pays freight and minimum insurance to the destination port, but import clearance and duties stay with the buyer. Risk passes to the buyer once the goods are on board at the port of shipment.",
       "sub": "Global Operations and Supply Chain",
       "diff": 3
     },
@@ -1091,9 +1101,9 @@
       "id": "ib-083",
       "q": "A U.S. company uses a freight forwarder to book ocean space and prepare documents. What is the forwarder's main role?",
       "choices": [
-        "Set the tariff rate",
-        "Insure the cargo for the buyer",
-        "Issue letters of credit",
+        "Set the tariff rate on the imported goods",
+        "Insure the cargo as the buyer's underwriter",
+        "Issue letters of credit for the buyer",
         "Arrange transport and handle shipping documents"
       ],
       "answer": 3,
@@ -1121,7 +1131,7 @@
       "choices": [
         "Commercial invoice",
         "Bill of lading",
-        "Export license",
+        "Export licence",
         "Letter of credit"
       ],
       "answer": 0,
@@ -1154,15 +1164,15 @@
     },
     {
       "id": "ib-088",
-      "q": "A U.S. firm's Chinese distributor offers a consulting payment to a provincial official who controls permits, worth $25,000 in total. What is the main U.S. legal concern?",
+      "q": "Which payment is most likely to fall within the FCPA's narrow exception for facilitating payments?",
       "choices": [
-        "Sherman Act price-fixing",
-        "Robinson-Patman price discrimination",
-        "Missing export license paperwork",
-        "Potential FCPA violation through a third party paying an official"
+        "A $25,000 consulting fee to an official who approves permits",
+        "A payment to a minister's relative to help win a contract",
+        "A gift to a tax judge to reduce a penalty the firm owes",
+        "A small fee to a clerk to speed up routine visa processing"
       ],
       "answer": 3,
-      "explain": "The FCPA covers improper payments made through intermediaries, and the firm can be liable for what its agent does.",
+      "explain": "The FCPA exempts small facilitating payments that speed up routine, non-discretionary government action, such as processing visas. Payments meant to sway a discretionary decision, like a permit, contract or ruling, are bribes. Canada and the UK ban facilitating payments outright.",
       "sub": "Legal, Ethical and Political Risk",
       "diff": 2
     },
@@ -1182,15 +1192,15 @@
     },
     {
       "id": "ib-090",
-      "q": "Which protection is most typical for a large mining investment in an unstable country?",
+      "q": "A U.S. firm is planning a large mining investment in a politically unstable country and fears expropriation and civil unrest. Which tool most directly covers those losses?",
       "choices": [
-        "Political risk insurance from a public or private insurer",
-        "Increasing dumping margins",
-        "Reducing tariffs on imported equipment",
-        "Shifting to countertrade in all markets"
+        "Political risk insurance",
+        "A forward currency contract",
+        "A confirmed letter of credit",
+        "Product liability insurance"
       ],
       "answer": 0,
-      "explain": "Political risk insurance covers losses from expropriation, currency inconvertibility and political violence.",
+      "explain": "Political risk insurance, from agencies such as the World Bank's MIGA or private insurers, covers expropriation, currency inconvertibility and political violence. Forward contracts hedge exchange rates, and a confirmed letter of credit secures payment for a sale.",
       "sub": "Legal, Ethical and Political Risk",
       "diff": 2
     },
@@ -1275,15 +1285,15 @@
     },
     {
       "id": "ib-097",
-      "q": "Under the Export Administration Regulations (EAR), which situation most requires a license check?",
+      "q": "Under the Export Administration Regulations (EAR), which situation most requires a licence check?",
       "choices": [
         "Exporting controlled dual-use technology to a restricted foreign party",
-        "Exporting ordinary consumer goods to Canada",
-        "Shipping books to a university in France",
-        "Sending a sales catalogue abroad"
+        "Exporting ordinary consumer goods to a retailer in Canada",
+        "Shipping published textbooks to a university in France",
+        "Sending a printed sales catalogue to a foreign buyer"
       ],
       "answer": 0,
-      "explain": "Dual-use technology sent to restricted parties needs a license or a license exception. Routine consumer goods and publications usually do not.",
+      "explain": "Dual-use technology sent to restricted parties needs a licence or a licence exception. Routine consumer goods and publications usually do not.",
       "sub": "Legal, Ethical and Political Risk",
       "diff": 3
     },
@@ -1306,12 +1316,12 @@
       "q": "Which statement about USMCA rules of origin is correct?",
       "choices": [
         "Goods qualify for zero tariffs regardless of where their parts originate",
-        "Goods must meet regional value content rules to receive preferential tariff treatment",
+        "Goods must meet product-specific rules of origin to get preferential tariffs",
         "Any product made in Canada qualifies automatically",
         "Rules of origin apply only to agricultural goods"
       ],
       "answer": 1,
-      "explain": "Preferential treatment requires goods to meet regional value content and origin rules, so simply being assembled in a member country is not enough.",
+      "explain": "Each product has a specific origin rule, such as a tariff classification change, a regional value content threshold or both, so simply being assembled in a member country is not enough.",
       "sub": "International Trade Theory and Agreements",
       "diff": 3
     },
@@ -1319,13 +1329,13 @@
       "id": "ib-100",
       "q": "A U.S. firm sells to a country whose currency cannot be converted into dollars. Which option best protects its ability to collect payment?",
       "choices": [
-        "Open account terms with 90-day payment",
-        "Consignment shipments",
-        "Cash on delivery in local currency",
-        "Countertrade or a letter of credit confirmed by a bank able to transfer funds"
+        "Open account terms with payment due in 90 days",
+        "Consignment through a local distributor's warehouse",
+        "Cash on delivery paid in the local currency",
+        "Countertrade, or a letter of credit confirmed by a U.S. bank"
       ],
       "answer": 3,
-      "explain": "A confirmed letter of credit or countertrade gives payment assurance even when currency convertibility is blocked. Open account and consignment leave the firm exposed.",
+      "explain": "Countertrade avoids converting the currency, and a U.S. bank's confirmation means it pays in dollars even if the buyer's bank cannot transfer funds. Open account, consignment and local-currency cash leave the firm exposed.",
       "sub": "Legal, Ethical and Political Risk",
       "diff": 3
     }
