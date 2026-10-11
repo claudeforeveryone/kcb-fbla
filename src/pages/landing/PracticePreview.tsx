@@ -116,7 +116,7 @@ export function PracticePreview() {
           aria-valuenow={answered}
         >
           <div
-            className="h-full bg-blue transition-[width] duration-500 ease-out"
+            className="h-full bg-blue transition-[width] duration-500 ease-out motion-reduce:transition-none"
             style={{ width: `${(answered / n) * 100}%` }}
           />
         </div>

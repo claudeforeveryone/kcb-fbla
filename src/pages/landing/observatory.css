@@ -471,6 +471,19 @@
   stroke-dashoffset: 0;
 }
 
+/* reduced motion: the lit path is simply there, faded in, not drawn along its length */
+@media (prefers-reduced-motion: reduce) {
+  .obs-link-lit {
+    stroke-dashoffset: 0;
+    opacity: 0;
+    transition: opacity 160ms linear;
+  }
+
+  .obs-link-lit.is-on {
+    opacity: 1;
+  }
+}
+
 .obs-node {
   position: absolute;
   display: flex;
@@ -667,6 +680,23 @@
 
 .obs-js .obs-path.is-in::before {
   transform: none;
+}
+
+/* reduced motion: no rule draw (design brief section 12); the path fades in where it stands */
+@media (prefers-reduced-motion: reduce) {
+  .obs-js .obs-path::before {
+    transform: none;
+    opacity: 0;
+    transition: opacity 400ms linear;
+  }
+
+  .obs-js .obs-path.is-in::before {
+    opacity: 1;
+  }
+
+  .obs-row-chevron {
+    transition: none;
+  }
 }
 
 /* ---------- sample question (the real app look inside the room) -------------------------------------------- */
