@@ -38,8 +38,9 @@ export default function Privacy() {
       <LegalSection {...S.who}>
         <p>
           FBLC is a free, independent practice site built and run by two students, Joseph and Kaden. It is not a company,
-          and it is not run by Future Business Leaders of America (FBLA-PBL), FBL Canada (FBLC) or any school. Joseph is
-          responsible for this policy. Send questions, requests and complaints to <ContactEmail />.
+          and it is not run by Future Business Leaders of America (FBLA-PBL), FBL Canada or any school. In this policy,
+          &ldquo;FBLC&rdquo; means this study site, never the organisation FBL Canada. Joseph is responsible for this
+          policy. Send questions, requests and complaints to <ContactEmail />.
         </p>
       </LegalSection>
 

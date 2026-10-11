@@ -43,15 +43,16 @@ export default function Terms() {
       <LegalSection {...S.what}>
         <p>
           FBLC is a study site with practice exams, vocab decks, 1v1 duels and chapter tools for FBL Canada members. It is
-          free, has no ads, and is built and run by two students, Joseph and Kaden. By making an account or using the
-          site, you agree to these terms and to the {privacy}.
+          free, has no ads, and is built and run by two students, Joseph and Kaden. In these terms, &ldquo;FBLC&rdquo;
+          means this study site, never the organisation FBL Canada. By making an account or using the site, you agree to
+          these terms and to the {privacy}.
         </p>
       </LegalSection>
 
       <LegalSection {...S.affiliation}>
         <p>
-          FBLC is an independent study tool. It is not affiliated with, sponsored by or endorsed by Future Business
-          Leaders of America (FBLA-PBL), FBL Canada (FBLC) or any school. The FBLA, FBL Canada and FBLC names and logos
+          This site is an independent study tool. It is not affiliated with, sponsored by or endorsed by Future Business
+          Leaders of America (FBLA-PBL), FBL Canada or any school. The FBLA, FBL Canada and FBLC names and logos
           belong to their owners and appear here only to show which competitions the practice is for. For official
           rules, events and results, go to your chapter adviser or{' '}
           <a className={PROSE_LINK} href="https://fblc.ca" target="_blank" rel="noreferrer">
