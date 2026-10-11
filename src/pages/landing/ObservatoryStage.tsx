@@ -8,6 +8,8 @@
 // - The animation clock belongs to this stage, not to a mount, so a rebuilt room (a tier step-down, the slot coming
 //   back) carries on settled instead of assembling again.
 // - Under reduced motion a capable GPU still gets the real glass, drawn once and held still.
+// - Performance declines count for the visit, not the section (roomSlot.ts), and the device facts are read again when
+//   a resize crosses the phone width (a desktop window opened narrow, then widened).
 import {
   Component,
   lazy,
@@ -22,7 +24,13 @@ import {
 import { cn } from "../../components/ui/cn";
 import { ObservatoryPoster, type PosterVariant } from "./ObservatoryPoster";
 import { mayHoldRoom, RoomSlotContext } from "./roomSlot";
-import { readLandingEnv, tierFor, type LandingEnv, type Tier } from "./tier";
+import {
+  readLandingEnv,
+  tierFor,
+  widthChangesTier,
+  type LandingEnv,
+  type Tier,
+} from "./tier";
 
 const ObservatoryScene = lazy(() => import("./scene/ObservatoryScene"));
 
@@ -65,7 +73,7 @@ export function ObservatoryStage({
   const clock = useRef(0);
   const [env, setEnv] = useState<LandingEnv | null>(null);
   const [reduced, setReduced] = useState(false);
-  const [declines, setDeclines] = useState(0);
+  const [ownDeclines, setOwnDeclines] = useState(0);
   const [failed, setFailed] = useState(false);
   // the tier whose room has drawn its first frames; cleared when the room goes, so a new mount (a tier change, the
   // slot coming back) always starts behind the static frame instead of showing an unpainted canvas
@@ -86,6 +94,24 @@ export function ObservatoryStage({
     mq?.addEventListener?.("change", onChange);
     return () => mq?.removeEventListener?.("change", onChange);
   }, []);
+
+  // Width is the one device fact that changes during a visit; only a resize across the phone line is worth a re-read.
+  useEffect(() => {
+    if (!env) return;
+    let timer: number | undefined;
+    const onResize = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        if (widthChangesTier(env.width, window.innerWidth))
+          setEnv(readLandingEnv(0));
+      }, 250);
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.clearTimeout(timer);
+    };
+  }, [env]);
 
   // The page's own load (fonts, logo, the headline settled as the largest paint) comes first, then two frames, then
   // an idle slot, and only then is the 3D chunk requested. On a slow connection the room must not compete with the
@@ -156,6 +182,7 @@ export function ObservatoryStage({
     return () => document.removeEventListener("visibilitychange", onVis);
   }, []);
 
+  const declines = slot ? slot.declines : ownDeclines;
   const tier: Tier = env && !failed ? tierFor({ ...env, declines }) : "poster";
   const wantsRoom = tier !== "poster" && idle;
 
@@ -187,7 +214,11 @@ export function ObservatoryStage({
 
   const onReady = useCallback(() => setReadyTier(tier), [tier]);
   const onSettled = useCallback(() => setSettled(true), []);
-  const onDecline = useCallback(() => setDeclines((d) => d + 1), []);
+  const slotDecline = slot?.decline;
+  const onDecline = useCallback(
+    () => (slotDecline ? slotDecline() : setOwnDeclines((d) => d + 1)),
+    [slotDecline],
+  );
   const onFail = useCallback(() => setFailed(true), []);
 
   // The static frame shows the whole room when that is what the visitor gets, and once the live room has assembled

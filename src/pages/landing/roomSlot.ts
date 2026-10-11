@@ -10,6 +10,12 @@ export type RoomOwner = PosterVariant | null;
 export type RoomSlot = {
   owner: RoomOwner;
   claim: (who: PosterVariant) => void;
+  /**
+   * Times the performance monitor stepped the room down this visit. Shared, so a GPU that could not hold the hero
+   * does not make the closing section mount the full room, compile and decline all over again.
+   */
+  declines: number;
+  decline: () => void;
 };
 
 /** May this section hold a canvas? Without a provider (a stage used on its own) it always may. */

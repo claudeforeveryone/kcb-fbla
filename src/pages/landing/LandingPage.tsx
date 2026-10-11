@@ -95,10 +95,12 @@ const STEPS = [
 export default function LandingPage() {
   // the hero and the closing section share one WebGL room (see roomSlot.ts)
   const [roomOwner, setRoomOwner] = useState<RoomOwner>(null);
+  const [declines, setDeclines] = useState(0);
   const claimRoom = useCallback((who: PosterVariant) => setRoomOwner(who), []);
+  const decline = useCallback(() => setDeclines((d) => d + 1), []);
   const roomSlot = useMemo(
-    () => ({ owner: roomOwner, claim: claimRoom }),
-    [roomOwner, claimRoom],
+    () => ({ owner: roomOwner, claim: claimRoom, declines, decline }),
+    [roomOwner, claimRoom, declines, decline],
   );
   return (
     <RoomSlotContext.Provider value={roomSlot}>

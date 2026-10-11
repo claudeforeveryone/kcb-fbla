@@ -21,11 +21,19 @@ export type LandingEnv = {
   software: boolean;
   /** no fine pointer anywhere (phones, tablets): `(any-pointer: fine)` does not match */
   touchOnly: boolean;
-  /** how many times the performance monitor has declined the scene this visit */
+  /** how many times the performance monitor has declined the scene this visit (shared by both rooms, roomSlot.ts) */
   declines: number;
 };
 
 export const PHONE_WIDTH = 768;
+
+/**
+ * The device facts are read once, at mount. Width is the one that changes during a visit (a desktop window opened
+ * narrow, then widened): a resize across the phone line is worth reading them again, any other resize is not.
+ */
+export function widthChangesTier(before: number, after: number): boolean {
+  return before < PHONE_WIDTH !== after < PHONE_WIDTH;
+}
 
 export function tierFor(env: LandingEnv): Tier {
   if (!env.webgl2 || env.software) return "poster";

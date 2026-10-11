@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { isSoftwareRenderer, tierFor, type LandingEnv } from "./tier";
+import {
+  isSoftwareRenderer,
+  tierFor,
+  widthChangesTier,
+  type LandingEnv,
+} from "./tier";
 
 const desktop: LandingEnv = {
   width: 1440,
@@ -78,5 +83,27 @@ describe("isSoftwareRenderer", () => {
     expect(isSoftwareRenderer("Apple GPU")).toBe(false);
     expect(isSoftwareRenderer("Adreno (TM) 640")).toBe(false);
     expect(isSoftwareRenderer(null)).toBe(false);
+  });
+});
+
+describe("widthChangesTier: when a resize is worth re-reading the device", () => {
+  it("a desktop window opened narrow and then widened past the phone width", () => {
+    expect(widthChangesTier(700, 1200)).toBe(true);
+  });
+
+  it("a wide window narrowed below the phone width", () => {
+    expect(widthChangesTier(1440, 600)).toBe(true);
+  });
+
+  it("resizes that stay on one side of the line change nothing", () => {
+    expect(widthChangesTier(1440, 900)).toBe(false);
+    expect(widthChangesTier(390, 700)).toBe(false);
+  });
+
+  it("the line itself counts as wide, as in tierFor", () => {
+    expect(widthChangesTier(767, 768)).toBe(true);
+    expect(widthChangesTier(768, 1024)).toBe(false);
+    expect(tierFor({ ...desktop, width: 768 })).toBe("full");
+    expect(tierFor({ ...desktop, width: 767 })).toBe("poster");
   });
 });
