@@ -133,7 +133,7 @@
     },
     {
       "id": "law-010",
-      "q": "Which federal law makes it a crime to access a computer without authorization or to exceed authorized access?",
+      "q": "A former employee logs into his old employer's file server with a password he kept after being fired and copies customer files. Which federal law most directly makes this a crime?",
       "choices": [
         "Digital Millennium Copyright Act",
         "Electronic Communications Privacy Act",
@@ -141,7 +141,7 @@
         "Fair Credit Reporting Act"
       ],
       "answer": 2,
-      "explain": "The Computer Fraud and Abuse Act (1986) is the main federal anti-hacking statute. The DMCA addresses copyright protection technology.",
+      "explain": "The Computer Fraud and Abuse Act (18 U.S.C. 1030) is the main federal anti-hacking law, and using a revoked password to enter a protected computer is access without authorization. The DMCA covers copyright protection technology, the ECPA covers interception of communications, and the FCRA covers credit reports.",
       "sub": "Computer law",
       "diff": 2
     },
@@ -254,7 +254,7 @@
     },
     {
       "id": "law-019",
-      "q": "Which federal law regulates the collection of debts by third-party debt collectors?",
+      "q": "A collection agency calls a consumer at 11 p.m. and tells her she will be arrested if she does not pay an old credit card bill. Which federal law do these tactics most directly violate?",
       "choices": [
         "Truth in Lending Act",
         "Equal Credit Opportunity Act",
@@ -262,7 +262,7 @@
         "Fair Debt Collection Practices Act"
       ],
       "answer": 3,
-      "explain": "The FDCPA limits abusive and deceptive collection practices by third-party collectors. TILA governs credit cost disclosures.",
+      "explain": "The FDCPA bars third-party collectors from calling before 8 a.m. or after 9 p.m. without the consumer's consent and from falsely threatening arrest (15 U.S.C. 1692c(a)(1), 1692e(4)). TILA, ECOA and the EFTA cover credit disclosures, lending discrimination and electronic transfers.",
       "sub": "Consumer protection and product/personal liability",
       "diff": 2
     },
@@ -352,7 +352,7 @@
     },
     {
       "id": "law-026",
-      "q": "A court order requiring a party to perform the exact promised act is:",
+      "q": "A seller backs out of a contract to sell a one-of-a-kind antique painting. Which remedy lets the buyer get a court order making the seller hand over the painting itself rather than pay money?",
       "choices": [
         "Rescission",
         "Restitution",
@@ -360,7 +360,7 @@
         "Liquidated damages"
       ],
       "answer": 2,
-      "explain": "Specific performance compels the promised act and is used when money damages are inadequate, such as for unique goods or land.",
+      "explain": "Specific performance compels the promised act and is used when money damages are inadequate, as with unique goods or land. Rescission cancels the contract, restitution returns benefits conferred, and liquidated damages are a preset money amount.",
       "sub": "Contracts and sales",
       "diff": 2
     },
@@ -426,7 +426,7 @@
     },
     {
       "id": "law-032",
-      "q": "Which law gives electronic signatures the same legal effect as handwritten signatures in interstate commerce?",
+      "q": "A borrower accepts a loan agreement online by typing her name and clicking 'I agree.' Which federal law says the agreement cannot be denied legal effect just because it was signed this way?",
       "choices": [
         "E-SIGN Act",
         "Gramm-Leach-Bliley Act",
@@ -434,13 +434,13 @@
         "Telephone Consumer Protection Act"
       ],
       "answer": 0,
-      "explain": "The Electronic Signatures in Global and National Commerce (E-SIGN) Act gives electronic signatures and records legal effect. The others regulate financial privacy, corporate reporting and telemarketing.",
+      "explain": "The Electronic Signatures in Global and National Commerce (E-SIGN) Act gives electronic signatures and records legal effect in interstate and foreign commerce. GLBA covers financial privacy, Sarbanes-Oxley covers corporate reporting, and the TCPA covers telemarketing.",
       "sub": "Computer law",
       "diff": 2
     },
     {
       "id": "law-033",
-      "q": "Which court typically hears appeals and reviews the trial record for legal errors rather than retrying the facts?",
+      "q": "Which court reviews the trial record for legal errors and generally does not hear witnesses or retry the facts?",
       "choices": [
         "Small claims court",
         "Trial court of general jurisdiction",
@@ -454,15 +454,15 @@
     },
     {
       "id": "law-034",
-      "q": "Besides offer and acceptance, what must be present for a contract to be enforceable?",
+      "q": "Besides offer, acceptance and consideration, which element is required for a valid contract?",
       "choices": [
-        "Consideration",
-        "Notarization",
-        "Witness signatures",
-        "Recording with the county"
+        "Contractual capacity of the parties",
+        "Notarization by a public notary",
+        "Signatures of two witnesses",
+        "Recording with the county clerk"
       ],
       "answer": 0,
-      "explain": "Enforceable contracts generally require offer, acceptance and consideration. Notarization and recording are not general requirements.",
+      "explain": "A valid contract also needs parties with legal capacity and a legal purpose. Notarization, witnesses and recording are not general requirements for a contract.",
       "sub": "Contracts and sales",
       "diff": 1
     },
@@ -537,11 +537,11 @@
       "choices": [
         "Tenancy in common",
         "Tenancy at sufferance",
-        "Joint tenancy with right of survivorship",
+        "Joint tenancy",
         "Life estate"
       ],
       "answer": 2,
-      "explain": "Joint tenancy with right of survivorship passes a deceased owner's interest to the surviving owners automatically. Tenants in common pass their shares through their estates.",
+      "explain": "Joint tenancy carries a right of survivorship, so a deceased owner's interest passes to the surviving owners automatically. Tenants in common pass their shares through their estates.",
       "sub": "Property laws",
       "diff": 2
     },
@@ -577,19 +577,19 @@
       "id": "law-043",
       "q": "A principal is bound to a contract made with a third party by its agent when the agent had:",
       "choices": [
-        "No authority of any kind",
+        "No authority, and the principal never ratified the contract",
         "Actual or apparent authority",
         "Authority only if the contract is notarized",
-        "Authority acquired after signing"
+        "Authority based solely on the agent's own claims to the third party"
       ],
       "answer": 1,
-      "explain": "Principals are bound by acts within actual or apparent authority. Notarization is not a general requirement, and later-acquired authority does not bind retroactively.",
+      "explain": "A principal is bound by acts within the agent's actual (express or implied) or apparent authority, and by unauthorized acts it later ratifies. Apparent authority must come from the principal's conduct, not the agent's own claims, and notarization is not required.",
       "sub": "Agency and employment laws",
       "diff": 2
     },
     {
       "id": "law-044",
-      "q": "Which federal law limits the online collection of personal information from children under 13?",
+      "q": "A gaming app aimed at 10-year-olds wants to collect players' names and email addresses. Which federal law requires it to get verifiable parental consent first?",
       "choices": [
         "Health Insurance Portability and Accountability Act",
         "Gramm-Leach-Bliley Act",
@@ -597,7 +597,7 @@
         "Children's Online Privacy Protection Act"
       ],
       "answer": 3,
-      "explain": "COPPA requires parental consent and limits data collection for children under 13. HIPAA covers health records, and GLBA covers financial privacy.",
+      "explain": "COPPA requires operators of sites and apps directed to children under 13 to get verifiable parental consent before collecting personal information. HIPAA covers health records, GLBA covers financial privacy, and the FCRA covers credit reports.",
       "sub": "Computer law",
       "diff": 2
     },
@@ -679,13 +679,13 @@
       "id": "law-051",
       "q": "Which is a common no-fault ground for divorce?",
       "choices": [
-        "Adultery in every state",
-        "Desertion for one day",
-        "Fraud before the marriage",
+        "Adultery",
+        "Desertion",
+        "Cruel and inhuman treatment",
         "Irreconcilable differences"
       ],
       "answer": 3,
-      "explain": "No-fault divorce is generally based on irreconcilable differences or an irretrievable breakdown of the marriage. Fault grounds such as adultery are not required and are not used in every state.",
+      "explain": "No-fault divorce rests on irreconcilable differences or an irretrievable breakdown of the marriage, so neither spouse must prove misconduct. Adultery, desertion and cruelty are fault grounds.",
       "sub": "Domestic and private law",
       "diff": 2
     },
@@ -699,7 +699,7 @@
         "A check payable on demand"
       ],
       "answer": 1,
-      "explain": "Under UCC 3-501, a draft payable a fixed number of days after sight must be presented to the drawee for acceptance, which fixes its maturity. Demand instruments and certificates of deposit do not require acceptance.",
+      "explain": "Under UCC 3-502(b)(4), a draft payable a set period after sight must be presented to the drawee for acceptance, because its due date runs from that acceptance. Demand instruments are presented for payment, and notes and certificates of deposit have no drawee to accept them.",
       "sub": "Negotiable instruments, insurance, secured transactions, bankruptcy",
       "diff": 3
     },
@@ -784,29 +784,29 @@
     },
     {
       "id": "law-059",
-      "q": "A promise to keep an offer open for 30 days, made without payment or other consideration, is generally:",
+      "q": "Under common law, a seller's promise to keep an offer to sell land open for 30 days, made without payment or other consideration, is generally:",
       "choices": [
         "Binding for the full 30 days",
         "Revocable by the offeror before acceptance",
-        "Binding because it was in writing",
+        "Binding if the promise was put in writing",
         "Binding only if notarized"
       ],
       "answer": 1,
-      "explain": "Without consideration or a separate option contract, a promise to hold an offer open is revocable before acceptance under common law. Writing and notarization do not supply consideration.",
+      "explain": "At common law, a promise to hold an offer open needs consideration (an option contract) to bind the offeror, so it can be revoked before acceptance. The UCC firm-offer rule (2-205), which binds a merchant's signed written offer without consideration, covers only goods, not land.",
       "sub": "Contracts and sales",
       "diff": 3
     },
     {
       "id": "law-060",
-      "q": "Which document names someone to make health care decisions if the principal cannot communicate?",
+      "q": "Which document names someone to make medical decisions for a person who can no longer communicate?",
       "choices": [
-        "Last will and testament",
-        "Trust instrument",
+        "Living will",
         "Codicil",
+        "Financial power of attorney",
         "Health care proxy"
       ],
       "answer": 3,
-      "explain": "A health care proxy appoints an agent for medical decisions. A will governs property at death, and a codicil amends a will.",
+      "explain": "A health care proxy (health care power of attorney) appoints an agent for medical decisions. A living will states treatment wishes but names no decision-maker, a financial power of attorney covers money matters, and a codicil amends a will.",
       "sub": "Domestic and private law",
       "diff": 2
     },
@@ -928,7 +928,7 @@
     },
     {
       "id": "law-070",
-      "q": "A party signs a contract after being told a false fact that induced the signing. This defense is:",
+      "q": "A seller knowingly lies about a material fact to get a buyer to sign a contract, and the buyer relies on the lie. Which defense can the buyer raise?",
       "choices": [
         "Duress",
         "Undue influence",
@@ -936,7 +936,7 @@
         "Fraudulent misrepresentation"
       ],
       "answer": 3,
-      "explain": "Fraudulent misrepresentation makes a contract voidable when a party relies on a knowingly false material fact. Duress involves threats, and undue influence involves a dominant relationship.",
+      "explain": "Fraudulent misrepresentation makes a contract voidable when a party justifiably relies on a knowingly false statement of material fact. Duress involves threats, undue influence involves a dominant relationship, and unconscionability concerns grossly unfair terms.",
       "sub": "Contracts and sales",
       "diff": 3
     },
@@ -945,18 +945,18 @@
       "q": "Which requirement must be met for a federal court to hear a state-law claim under diversity jurisdiction?",
       "choices": [
         "Complete diversity of citizenship and more than $75,000 in controversy",
-        "Both parties reside in the same state",
-        "The federal government must be a party",
-        "The claim must arise under a federal statute"
+        "Complete diversity of citizenship and more than $25,000 in controversy",
+        "One plaintiff and one defendant from different states, with any amount at stake",
+        "A claim arising under a federal statute, with any amount at stake"
       ],
       "answer": 0,
-      "explain": "Diversity requires complete diversity among parties and an amount in controversy above the statutory threshold, currently $75,000. Federal-question cases need a federal claim.",
+      "explain": "Under 28 U.S.C. 1332, diversity jurisdiction needs complete diversity (no plaintiff shares a state with any defendant) and an amount in controversy over $75,000. Federal-question jurisdiction is a separate basis that needs a federal claim.",
       "sub": "Legal systems",
       "diff": 3
     },
     {
       "id": "law-072",
-      "q": "A doctrine excusing performance because an unforeseen event made it impossible is:",
+      "q": "A concert hall burns down through no one's fault the week before a band's contracted show there. Which doctrine most likely excuses the hall owner from hosting the show?",
       "choices": [
         "Anticipatory repudiation",
         "Accord and satisfaction",
@@ -964,7 +964,7 @@
         "Novation"
       ],
       "answer": 2,
-      "explain": "Impossibility of performance excuses a duty when an unforeseeable event, not the party's own choice, makes performance impossible. Anticipatory repudiation is a breach.",
+      "explain": "Impossibility of performance excuses a duty when an unforeseeable event the party did not cause, such as destruction of the subject matter, makes performance impossible (Taylor v. Caldwell). Anticipatory repudiation is an advance refusal to perform, which is a breach.",
       "sub": "Contracts and sales",
       "diff": 3
     },
@@ -1021,7 +1021,7 @@
     },
     {
       "id": "law-077",
-      "q": "Which contract term describes a claim that a contract cannot be enforced in court because a required writing is missing?",
+      "q": "A contract that meets every element of a valid contract but lacks a writing the Statute of Frauds requires is best classified as:",
       "choices": ["Void", "Voidable", "Illusory", "Unenforceable"],
       "answer": 3,
       "explain": "An unenforceable contract is valid between the parties but cannot be enforced, such as one lacking a required writing. A void contract has no legal effect.",
@@ -1030,7 +1030,7 @@
     },
     {
       "id": "law-078",
-      "q": "Which fiduciary holds property for another's benefit under a written trust instrument?",
+      "q": "Which party holds legal title to property and manages it for the benefit of beneficiaries?",
       "choices": ["Bailee", "Trustee", "Surety", "Principal"],
       "answer": 1,
       "explain": "A trustee holds legal title and manages property for beneficiaries under a trust instrument. A bailee holds goods temporarily, and a surety guarantees another's debt.",
@@ -1039,15 +1039,15 @@
     },
     {
       "id": "law-079",
-      "q": "Which business form combines limited liability for owners with pass-through taxation and fewer formal requirements than a corporation?",
+      "q": "Which business form shields every owner from personal liability for business debts, is taxed as a pass-through by default, and has fewer formal requirements than a corporation?",
       "choices": [
-        "Business trust",
-        "Cooperative",
+        "S corporation",
+        "Limited partnership",
         "Limited liability company",
-        "Franchise"
+        "General partnership"
       ],
       "answer": 2,
-      "explain": "An LLC gives owners limited liability and can be taxed as a partnership, with fewer formalities than a corporation. A franchise is a licensing arrangement, not an entity type.",
+      "explain": "An LLC protects all of its members, is taxed like a partnership or sole proprietorship by default, and needs fewer formalities than a corporation. An S corporation must elect pass-through status and follow corporate formalities, a limited partnership needs a general partner with unlimited liability, and general partners are personally liable.",
       "sub": "Business organization",
       "diff": 2
     },
@@ -1095,15 +1095,15 @@
     },
     {
       "id": "law-083",
-      "q": "Which federal statute regulates consumer credit reports?",
+      "q": "Which federal law gives consumers the right to see what credit bureaus have on file about them and to dispute inaccurate entries?",
       "choices": [
+        "Equal Credit Opportunity Act",
+        "Truth in Lending Act",
         "Electronic Fund Transfer Act",
-        "Fair Packaging and Labeling Act",
-        "Telephone Consumer Protection Act",
         "Fair Credit Reporting Act"
       ],
       "answer": 3,
-      "explain": "The FCRA governs the accuracy, privacy and use of consumer credit reports. The other statutes address electronic transfers, product packaging and telemarketing.",
+      "explain": "The FCRA governs the accuracy, privacy and use of consumer reports, including the rights to see a file and dispute errors. ECOA bans lending discrimination, TILA requires credit cost disclosures, and the EFTA covers electronic transfers.",
       "sub": "Consumer protection and product/personal liability",
       "diff": 1
     },
@@ -1134,9 +1134,9 @@
       "id": "law-086",
       "q": "Under the parol evidence rule, which statement is correct?",
       "choices": [
-        "It allows oral evidence to override any written term",
-        "It applies only to oral contracts",
-        "It requires contracts to be notarized",
+        "It lets earlier oral agreements override any conflicting written term",
+        "It applies only to contracts that were never put in writing",
+        "It requires every written contract to be notarized to be enforced",
         "It generally bars prior or contemporaneous oral terms that contradict a fully integrated written contract"
       ],
       "answer": 3,
@@ -1202,7 +1202,7 @@
     },
     {
       "id": "law-091",
-      "q": "Which type of authority is expressly stated by the principal?",
+      "q": "A store owner gives her manager a signed letter saying, 'You may order inventory up to $5,000 per month on my behalf.' What type of authority does the manager have to place those orders?",
       "choices": [
         "Implied authority",
         "Express authority",
@@ -1210,7 +1210,7 @@
         "Inherent authority"
       ],
       "answer": 1,
-      "explain": "Express authority is granted in words, orally or in writing. Implied authority is inferred from duties, and apparent authority comes from the principal's conduct toward third parties.",
+      "explain": "Authority the principal grants in words, written or oral, is express authority. Implied authority is inferred from the agent's duties, and apparent authority comes from the principal's conduct toward third parties.",
       "sub": "Agency and employment laws",
       "diff": 2
     },
@@ -1230,7 +1230,7 @@
     },
     {
       "id": "law-093",
-      "q": "Which law requires employers to provide unpaid, job-protected leave for certain family and medical reasons?",
+      "q": "Which federal law lets eligible employees take up to 12 weeks of unpaid time off per year, with their jobs protected, to care for a newborn or a seriously ill parent?",
       "choices": [
         "Equal Pay Act",
         "Fair Labor Standards Act",
@@ -1238,7 +1238,7 @@
         "Family and Medical Leave Act"
       ],
       "answer": 3,
-      "explain": "The FMLA provides up to 12 weeks of unpaid, job-protected leave for qualifying reasons. The other statutes address pay equity, minimum wage and mass layoffs.",
+      "explain": "The FMLA provides up to 12 workweeks of unpaid, job-protected leave in a 12-month period for qualifying reasons. The Equal Pay Act covers pay equity, the FLSA covers minimum wage and overtime, and the WARN Act requires notice of mass layoffs.",
       "sub": "Agency and employment laws",
       "diff": 1
     },
@@ -1323,7 +1323,7 @@
     },
     {
       "id": "law-100",
-      "q": "Which term describes a court's power to review whether a law violates the Constitution?",
+      "q": "Which power, established in Marbury v. Madison (1803), lets courts strike down laws that conflict with the Constitution?",
       "choices": [
         "Stare decisis",
         "Judicial review",
@@ -1331,7 +1331,7 @@
         "Appellate jurisdiction"
       ],
       "answer": 1,
-      "explain": "Judicial review, established in Marbury v. Madison, lets courts strike down unconstitutional laws. Stare decisis is the rule of following precedent.",
+      "explain": "Judicial review lets courts invalidate unconstitutional laws. Stare decisis is the rule of following precedent, and original and appellate jurisdiction describe which court hears a case first or on appeal.",
       "sub": "Legal systems",
       "diff": 2
     }
