@@ -1,0 +1,120 @@
+import { describe, expect, it } from 'vitest';
+import {
+  PUBLIC_ROUTES,
+  SITE_URL,
+  canonicalFor,
+  findPublicRoute,
+  headTags,
+  jsonLd,
+  normalizePath,
+  scriptJson,
+  sitemapXml,
+  titleForPrivate,
+} from './seo';
+
+describe('public routes', () => {
+  it('covers the five routes the prerender script writes', () => {
+    expect(PUBLIC_ROUTES.map((r) => r.path)).toEqual(['/', '/login', '/signup', '/terms', '/privacy']);
+  });
+
+  it('keeps titles and descriptions inside search-result lengths', () => {
+    for (const r of PUBLIC_ROUTES) {
+      expect(r.title.length).toBeLessThanOrEqual(60);
+      expect(r.description.length).toBeGreaterThanOrEqual(70);
+      expect(r.description.length).toBeLessThanOrEqual(160);
+    }
+  });
+
+  it('indexes every public page except sign-in, and lists exactly the indexed pages in the sitemap', () => {
+    expect(PUBLIC_ROUTES.filter((r) => r.index).map((r) => r.path)).toEqual(['/', '/signup', '/terms', '/privacy']);
+    expect(PUBLIC_ROUTES.filter((r) => r.sitemap).map((r) => r.path)).toEqual(
+      PUBLIC_ROUTES.filter((r) => r.index).map((r) => r.path),
+    );
+  });
+});
+
+describe('paths', () => {
+  it('normalises query, hash and trailing slashes', () => {
+    expect(normalizePath('/play/')).toBe('/play');
+    expect(normalizePath('/?ref=share')).toBe('/');
+    expect(normalizePath('/terms#top')).toBe('/terms');
+    expect(normalizePath('/')).toBe('/');
+  });
+
+  it('finds public routes whatever their trailing slash', () => {
+    expect(findPublicRoute('/privacy/')?.path).toBe('/privacy');
+    expect(findPublicRoute('/play')).toBeUndefined();
+  });
+
+  it('builds canonical URLs on the live domain', () => {
+    expect(canonicalFor('/')).toBe(`${SITE_URL}/`);
+    expect(canonicalFor('/privacy/')).toBe(`${SITE_URL}/privacy`);
+  });
+});
+
+describe('private page titles', () => {
+  it('labels signed-in pages without matching look-alike paths', () => {
+    expect(titleForPrivate('/play/accounting')).toBe('Play | FBLC');
+    expect(titleForPrivate('/me/settings')).toBe('Profile | FBLC');
+    expect(titleForPrivate('/u/ada')).toBe('Profile | FBLC');
+    expect(titleForPrivate('/meow')).toBe('FBLC');
+    expect(titleForPrivate('/dev/ui')).toBe('FBLC');
+  });
+});
+
+describe('head tags', () => {
+  const terms = PUBLIC_ROUTES.find((r) => r.path === '/terms')!;
+  const login = PUBLIC_ROUTES.find((r) => r.path === '/login')!;
+
+  it('sets the title, canonical and social images for a content page', () => {
+    const head = headTags(terms);
+    expect(head).toContain('<title>Terms of use | FBLC</title>');
+    expect(head).toContain(`<link rel="canonical" href="${SITE_URL}/terms" />`);
+    expect(head).toContain('<meta name="robots" content="index, follow, max-image-preview:large" />');
+    expect(head).toContain('<meta name="twitter:card" content="summary_large_image" />');
+    expect(head).toContain(`<meta property="og:image" content="${SITE_URL}/og-image.png" />`);
+  });
+
+  it('keeps sign-in pages out of the index but still follows their links', () => {
+    expect(headTags(login)).toContain('<meta name="robots" content="noindex, follow" />');
+  });
+
+  it('escapes attribute text', () => {
+    const head = headTags({ ...terms, description: 'Rules "for" <you> & me' });
+    expect(head).toContain('content="Rules &quot;for&quot; &lt;you&gt; &amp; me"');
+  });
+});
+
+describe('structured data and sitemap', () => {
+  it('emits valid JSON-LD with WebSite and Organization, and no raw "<"', () => {
+    const raw = jsonLd();
+    expect(raw).not.toContain('<');
+    const parsed = JSON.parse(raw) as { '@graph': Array<{ '@type': string }> };
+    expect(parsed['@graph'].map((n) => n['@type'])).toEqual(['WebSite', 'Organization']);
+  });
+
+  it('escapes "<" in inline script JSON so data cannot close the tag', () => {
+    const out = scriptJson({ name: '</script><script>alert(1)</script>' });
+    expect(out).not.toContain('<');
+    expect(out).toContain(`${String.fromCharCode(92)}u003c/script>`);
+    expect(JSON.parse(out)).toEqual({ name: '</script><script>alert(1)</script>' });
+  });
+
+  it('describes the student project, not FBLA-PBL or FBL Canada, and claims no logo', () => {
+    const parsed = JSON.parse(jsonLd()) as { '@graph': Array<Record<string, unknown>> };
+    const org = parsed['@graph'].find((n) => n['@type'] === 'Organization')!;
+    expect(org.name).toBe('FBLC Practice');
+    expect(org.logo).toBeUndefined();
+    expect(String(org.description)).toMatch(/Not affiliated with or endorsed by FBLA-PBL or FBL Canada/);
+  });
+
+  it('lists only the indexable public routes in sitemap.xml', () => {
+    const xml = sitemapXml();
+    expect(xml).toContain(`<loc>${SITE_URL}/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_URL}/signup</loc>`);
+    expect(xml).toContain(`<loc>${SITE_URL}/terms</loc>`);
+    expect(xml).toContain(`<loc>${SITE_URL}/privacy</loc>`);
+    expect(xml).not.toContain('/login');
+    expect(xml.match(/<url>/g)).toHaveLength(4);
+  });
+});
