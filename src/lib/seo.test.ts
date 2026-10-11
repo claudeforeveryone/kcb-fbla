@@ -8,6 +8,7 @@ import {
   headTags,
   jsonLd,
   normalizePath,
+  returnPathAfterAuth,
   scriptJson,
   sitemapXml,
   titleForPrivate,
@@ -54,6 +55,27 @@ describe('paths', () => {
   it('builds canonical URLs on the live domain', () => {
     expect(canonicalFor('/')).toBe(`${SITE_URL}/`);
     expect(canonicalFor('/privacy/')).toBe(`${SITE_URL}/privacy`);
+  });
+});
+
+describe('where sign-in and sign-up send a visitor back to', () => {
+  it('returns to an app page the visitor needs an account for', () => {
+    expect(returnPathAfterAuth('/chapter/join/abc123')).toBe('/chapter/join/abc123');
+    expect(returnPathAfterAuth('/play/accounting')).toBe('/play/accounting');
+    expect(returnPathAfterAuth('/u/omega_qa_test')).toBe('/u/omega_qa_test');
+    expect(returnPathAfterAuth('/me/settings/')).toBe('/me/settings');
+  });
+
+  it('does not return to a public page: a new member would finish onboarding on the Terms', () => {
+    for (const path of ['/', '/terms', '/privacy', '/terms/', '/login', '/signup']) {
+      expect(returnPathAfterAuth(path), path).toBeNull();
+    }
+  });
+
+  it('does not return to an auth step or to a page the app does not have', () => {
+    for (const path of ['/onboarding', '/reset', '/reset/update', '/no-such-page', '/terms-of-use', '/players']) {
+      expect(returnPathAfterAuth(path), path).toBeNull();
+    }
   });
 });
 

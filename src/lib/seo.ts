@@ -78,7 +78,10 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
   },
 ];
 
-/** Titles for signed-in pages. They are noindex, so these only label the browser tab and history. */
+/**
+ * The app's signed-in sections. Their titles only label the browser tab and history (the pages are noindex); the list
+ * also tells returnPathAfterAuth which paths are real app pages.
+ */
 const PRIVATE_TITLES: Array<[RegExp, string]> = [
   [/^\/$/, 'Home'],
   [/^\/leaderboard(\/|$)/, 'Leaderboard'],
@@ -103,6 +106,20 @@ export function normalizePath(path: string): string {
 export function findPublicRoute(path: string): PublicRoute | undefined {
   const p = normalizePath(path);
   return PUBLIC_ROUTES.find((r) => r.path === p);
+}
+
+/** Steps of signing in or up: never a page to come back to afterwards. */
+const AUTH_STEPS = /^\/(login|signup|onboarding|reset)(\/|$)/;
+
+/**
+ * Where the top bar's "Sign in" and "Join free" bring a visitor back to once they are in: the app page they were on (a
+ * chapter invite link, say), or null (home) for a public page, an auth step or a path the app doesn't have. Someone
+ * who reads the Terms and taps Join free should finish onboarding on their dashboard, not back on the Terms.
+ */
+export function returnPathAfterAuth(path: string): string | null {
+  const p = normalizePath(path);
+  if (findPublicRoute(p) || AUTH_STEPS.test(p)) return null;
+  return PRIVATE_TITLES.some(([re]) => re.test(p)) ? p : null;
 }
 
 export function canonicalFor(path: string): string {

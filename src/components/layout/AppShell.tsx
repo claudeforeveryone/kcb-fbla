@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { BarChart3, ChevronDown, LogOut, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
-import { useHydrated } from '../../lib/hydration';
 import { Avatar } from '../ui/Avatar';
 import { buttonClasses } from '../ui/Button';
 import { Dropdown } from '../ui/Dropdown';
@@ -10,6 +9,8 @@ import { EloBadge } from '../ui/EloBadge';
 import { cn } from '../ui/cn';
 import { useToast } from '../ui/Toast';
 import { NotificationBell } from '../notifications/NotificationBell';
+import { useHydrated } from '../../lib/hydration';
+import { returnPathAfterAuth } from '../../lib/seo';
 import { Brand } from './Brand';
 import { NAV } from './nav';
 import { useTheme, type ThemePref } from './theme';
@@ -118,7 +119,9 @@ function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string })
 
 function SignedOutActions({ pathname }: { pathname: string }) {
   const { loading, session } = useAuth();
-  const next = encodeURIComponent(pathname);
+  // Bring the visitor back only to an app page (a chapter invite); from Terms, Privacy or a 404 they land on home.
+  const back = returnPathAfterAuth(pathname);
+  const next = back ? `?next=${encodeURIComponent(back)}` : '';
   // A stored session is still being checked: offering "Sign in" to someone who is signed in would be wrong.
   if (loading) return null;
   if (session)
@@ -129,10 +132,10 @@ function SignedOutActions({ pathname }: { pathname: string }) {
     );
   return (
     <>
-      <Link to={`/login?next=${next}`} className={buttonClasses('ghost', 'sm', 'text-white hover:bg-white/10')}>
+      <Link to={`/login${next}`} className={buttonClasses('ghost', 'sm', 'text-white hover:bg-white/10')}>
         Sign in
       </Link>
-      <Link to={`/signup?next=${next}`} className={buttonClasses('accent', 'sm')}>
+      <Link to={`/signup${next}`} className={buttonClasses('accent', 'sm')}>
         Join free
       </Link>
     </>
