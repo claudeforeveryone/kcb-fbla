@@ -1,13 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
+import { AUTH_STORAGE_KEY } from './sessionHint';
 
 // The publishable key is safe to ship in the client; RLS protects the data.
 export const SUPABASE_URL =
   (import.meta.env.VITE_SUPABASE_URL as string | undefined) || 'https://uhgzeuvybyohdbfuhfil.supabase.co';
 export const SUPABASE_KEY =
   (import.meta.env.VITE_SUPABASE_KEY as string | undefined) || 'sb_publishable_F127HhwYm4XDMDLpmOtKIg_erImORLk';
-
-/** localStorage key Supabase keeps the signed-in session under. */
-export const AUTH_STORAGE_KEY = 'kcbfbla-auth-v2';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: {

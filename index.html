@@ -34,6 +34,26 @@
         if (dark) document.documentElement.classList.add('dark');
       })();
     </script>
+    <script>
+      // Public pages arrive as signed-out HTML. Anyone who may be signed in (a stored session or an auth link, the
+      // same test as mayHaveSession in src/lib/sessionHint.ts) is flagged so that HTML never paints for them.
+      (function () {
+        var flag = false;
+        try {
+          flag =
+            /access_token=|[?&]code=|type=(recovery|signup|invite|magiclink)/.test(location.href) ||
+            localStorage.getItem('kcbfbla-auth-v2') !== null;
+        } catch (e) {
+          flag = true;
+        }
+        if (flag) document.documentElement.setAttribute('data-session', '');
+      })();
+    </script>
+    <style>
+      /* Splash navy until main.tsx replaces the prerendered markup (it drops data-prerendered on its first commit). */
+      html[data-session] #root[data-prerendered] { position: fixed; inset: 0; z-index: 100; background: #001e60; }
+      html[data-session] #root[data-prerendered] > * { display: none !important; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

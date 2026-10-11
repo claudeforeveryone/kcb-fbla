@@ -102,8 +102,10 @@ function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string })
 }
 
 function SignedOutActions({ pathname }: { pathname: string }) {
-  const { session } = useAuth();
+  const { loading, session } = useAuth();
   const next = encodeURIComponent(pathname);
+  // A stored session is still being checked: offering "Sign in" to someone who is signed in would be wrong.
+  if (loading) return null;
   if (session)
     return (
       <Link to="/onboarding" className={buttonClasses('accent', 'sm')}>
