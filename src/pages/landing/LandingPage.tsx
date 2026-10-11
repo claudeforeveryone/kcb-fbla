@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { buttonClasses } from "../../components/ui/Button";
 import { cn } from "../../components/ui/cn";
-import { EventNetwork } from "./EventNetwork";
+import { EventNetwork, type EventsView } from "./EventNetwork";
 import type { PosterVariant } from "./ObservatoryPoster";
 import { ObservatoryStage } from "./ObservatoryStage";
 import { PracticePreview } from "./PracticePreview";
@@ -124,6 +124,7 @@ export default function LandingPage() {
 
 function Landing() {
   const root = useRef<HTMLDivElement>(null);
+  const [eventsView, setEventsView] = useState<EventsView>("map");
   const [intro, setIntro] = useState(false);
   const [js, setJs] = useState(false);
 
@@ -286,8 +287,14 @@ function Landing() {
             <div>
               <h2 id="events-title" className="obs-h2 max-w-[18ch]">
                 Fifteen events. Five disciplines.
-                {/* the map is drawn from xl up (EventNetwork); below that the events are a list, so no map is promised */}
-                <span className="hidden xl:inline"> One map.</span>
+                {/* the map is drawn from xl up (EventNetwork), and only while Map is chosen; otherwise the events are a
+                    list, so no map is promised */}
+                <span
+                  className={cn("hidden", eventsView === "map" && "xl:inline")}
+                >
+                  {" "}
+                  One map.
+                </span>
               </h2>
               <p className="obs-body mt-6">
                 Every event has its own {QUESTIONS_PER_EVENT}-question bank and{" "}
@@ -297,7 +304,7 @@ function Landing() {
             </div>
           </div>
           <div className="mt-10">
-            <EventNetwork />
+            <EventNetwork view={eventsView} onViewChange={setEventsView} />
           </div>
         </div>
       </section>

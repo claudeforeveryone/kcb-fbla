@@ -22,15 +22,21 @@ import {
   type LandingEvent,
 } from "./observatoryEvents";
 
-type View = "map" | "list";
+export type EventsView = "map" | "list";
 
 const GROUPS = DISCIPLINES.map((d) => ({
   id: d.id,
   events: eventsIn(d.id).map((e) => e.slug),
 }));
 
-export function EventNetwork() {
-  const [view, setView] = useState<View>("map");
+/** `view` is held by the page, whose heading names the map only while it is shown. */
+export function EventNetwork({
+  view,
+  onViewChange: setView,
+}: {
+  view: EventsView;
+  onViewChange: (view: EventsView) => void;
+}) {
   const [slug, setSlug] = useState(EVENTS[0].slug);
   const [hover, setHover] = useState<string | null>(null);
   const selected = eventBySlug(slug) ?? EVENTS[0];
