@@ -27,4 +27,16 @@ describe('offline page', () => {
     expect(offlineHtml).not.toMatch(/\s(?:src|href)="(?!data:|#)/);
     expect(offlineHtml).toMatch(/<img [^>]*src="data:image\/webp;base64,/);
   });
+
+  it('loads the page by itself once the connection is back', () => {
+    const scripts = [...offlineHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+    const listeners: Record<string, Array<() => void>> = {};
+    let reloads = 0;
+    const addEventListener = (type: string, fn: () => void) => (listeners[type] ??= []).push(fn);
+    const location = { reload: () => reloads++ };
+    for (const body of scripts) new Function('addEventListener', 'location', body)(addEventListener, location);
+    expect(reloads).toBe(0);
+    for (const fn of listeners.online ?? []) fn();
+    expect(reloads).toBe(1);
+  });
 });
