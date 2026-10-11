@@ -1,8 +1,9 @@
 // Geometry for the event network (a bracket: a root, five discipline hubs, fifteen events). Pure so the SVG paths and
 // the HTML nodes are placed from the same numbers, and so the layout can be unit tested.
 //
-// Vertical positions are in CSS pixels inside the network box. Horizontal positions are percentages of its width, so
-// the SVG uses a viewBox 100 wide with preserveAspectRatio="none" and non-scaling strokes.
+// Vertical positions are in CSS pixels inside the network box. Horizontal positions are percentages of its width:
+// the HTML nodes use them as-is, and EventNetwork converts them to pixels of the measured width for the SVG paths (an
+// unstretched viewBox the size of the box, so the lit link's dash is drawn in its own units).
 
 import type { DisciplineId } from "./observatoryEvents";
 
