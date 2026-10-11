@@ -237,7 +237,12 @@ function Map({
 function Detail({ event }: { event: LandingEvent }) {
   const d = disciplineOf(event);
   return (
-    <div className="obs-panel relative overflow-hidden" aria-live="polite">
+    <div className="obs-panel relative overflow-hidden">
+      {/* One line is announced when the selection changes, not the whole panel (heading, stats, every area and the
+          button). The region stays mounted, so only changes are read. */}
+      <p className="sr-only" aria-live="polite">
+        {`${event.name}: ${FORMAT_LABEL[event.format].toLowerCase()} in ${d.name}, ${event.areas.length} areas.`}
+      </p>
       {/* keyed: a new event remounts and fades in (obs-swap) */}
       <div key={event.slug} className="obs-swap p-6 sm:p-8">
         <EventFacts event={event} discipline={d.name} headingLevel="h3" />

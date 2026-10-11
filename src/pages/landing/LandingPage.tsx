@@ -10,7 +10,7 @@ import {
   type MouseEvent,
 } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { buttonClasses } from "../../components/ui/Button";
 import { cn } from "../../components/ui/cn";
 import { EventNetwork } from "./EventNetwork";
@@ -198,8 +198,8 @@ function Landing() {
               className="obs-body obs-up mt-4 max-w-[44ch]"
               style={{ ["--d" as string]: "730ms" }}
             >
-              Timed FBLA practice papers for {EVENTS.length} events, a first-try
-              Elo rating, vocab drills and 1v1 duels.
+              Timed FBLA-style papers for FBLC members: {EVENTS.length} events,
+              a first-try Elo rating, vocab drills and 1v1 duels.
             </p>
             <div
               className="obs-up mt-8 flex flex-wrap items-center gap-3"
@@ -211,8 +211,10 @@ function Landing() {
               <Link to="/login" className="obs-btn-line">
                 Sign in
               </Link>
+              {/* the skip path: moves focus to the first section's heading */}
               <a href="#platform" className="obs-skip sm:ml-2" onClick={skip}>
-                Skip the intro
+                See what’s inside
+                <ArrowDown className="ml-1.5 size-4" aria-hidden />
               </a>
             </div>
           </div>
@@ -241,7 +243,7 @@ function Landing() {
             </p>
             <p className="obs-small mt-6 max-w-[52ch]">
               Questions are written for study from FBLA’s published competency
-              areas. They are not official FBLA test items.
+              areas. They are not official FBLA or FBLC test items.
             </p>
           </div>
           <div className="obs-ledger">
