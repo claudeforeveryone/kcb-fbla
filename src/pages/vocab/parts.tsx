@@ -48,7 +48,7 @@ export function DeckBlock({
   watermark?: boolean;
 }) {
   return (
-    <ColorBlock color={deckColor(deck)} icon={deckIcon(deck)} seed={String(deck)} className={className} style={style} watermark={watermark}>
+    <ColorBlock color={deckColor(deck)} icon={deckIcon(deck)} seed={deck.key} className={className} style={style} watermark={watermark}>
       {children}
     </ColorBlock>
   );
