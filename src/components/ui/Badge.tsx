@@ -7,8 +7,9 @@ const soft: Record<BadgeTone, string> = {
   neutral: 'bg-surface-2 text-muted ring-line',
   navy: 'bg-navy/8 text-navy ring-navy/15 dark:bg-blue/20 dark:text-link dark:ring-blue/30',
   red: 'bg-red/10 text-red ring-red/20 dark:text-danger',
-  blue: 'bg-blue/10 text-blue ring-blue/20 dark:text-link',
-  success: 'bg-success/10 text-success ring-success/25',
+  // Text a shade darker than the brand colour so a 12px label clears 4.5:1 on its tint (blue 5.7:1, success 6.2:1).
+  blue: 'bg-blue/10 text-[color-mix(in_srgb,var(--blue)_85%,black)] ring-blue/20 dark:text-link',
+  success: 'bg-success/10 text-[color-mix(in_srgb,var(--success)_72%,black)] ring-success/25 dark:text-success',
   warning: 'bg-warning/12 text-[#8a5f00] ring-warning/30 dark:text-warning',
 };
 const solid: Record<BadgeTone, string> = {

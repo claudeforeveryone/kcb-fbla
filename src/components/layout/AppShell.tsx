@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { BarChart3, ChevronDown, LogOut, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
+import { BarChart3, ChevronDown, Gauge, LogOut, MessageSquare, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
+import { useIsOwner } from '../../lib/useIsOwner';
 import { Avatar } from '../ui/Avatar';
 import { buttonClasses } from '../ui/Button';
-import { Dropdown } from '../ui/Dropdown';
+import { Dropdown, type DropdownItem } from '../ui/Dropdown';
 import { EloBadge } from '../ui/EloBadge';
 import { cn } from '../ui/cn';
 import { useToast } from '../ui/Toast';
@@ -15,6 +16,7 @@ import { Brand } from './Brand';
 import { NAV } from './nav';
 import { useTheme, type ThemePref } from './theme';
 import { Footer } from './Footer';
+import { FeedbackDialog } from '../feedback/FeedbackDialog';
 
 /** App chrome: navy top bar, page outlet, footer, and the phone bottom tab bar. */
 export function AppShell({ children }: { children?: ReactNode }) {
@@ -126,9 +128,12 @@ function SignedOutActions({ pathname }: { pathname: string }) {
   if (loading) return null;
   if (session)
     return (
-      <Link to="/onboarding" className={buttonClasses('accent', 'sm')}>
-        Finish setup
-      </Link>
+      <>
+        <Link to="/onboarding" className={buttonClasses('accent', 'sm')}>
+          Finish setup
+        </Link>
+        <SessionMenu />
+      </>
     );
   return (
     <>
@@ -142,6 +147,50 @@ function SignedOutActions({ pathname }: { pathname: string }) {
   );
 }
 
+/**
+ * Signed in without a student profile (sign-up not finished, or an owner account that never made one): no profile
+ * to show, but the owner console and signing out still need a way in.
+ */
+function SessionMenu() {
+  const { signOut } = useAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
+  const owner = useIsOwner() === 'owner';
+  const items: DropdownItem[] = [
+    ...(owner ? ([{ label: 'Owner console', icon: <Gauge />, to: '/owner' }, { type: 'separator' }] satisfies DropdownItem[]) : []),
+    {
+      label: 'Sign out',
+      icon: <LogOut />,
+      danger: true,
+      onSelect: async () => {
+        await signOut();
+        toast.info('Signed out', 'See you next practice.');
+        navigate('/login', { replace: true });
+      },
+    },
+  ];
+  return (
+    <Dropdown
+      width="w-56"
+      items={items}
+      trigger={({ open, ...props }) => (
+        <button
+          type="button"
+          {...props}
+          aria-label="Account menu"
+          className={cn(
+            'flex h-9 items-center gap-1 rounded-[2px] px-1.5 text-white/85 transition-colors hover:bg-white/10 hover:text-white',
+            open && 'bg-white/10 text-white',
+          )}
+        >
+          <UserRound className="size-5" />
+          <ChevronDown className={cn('size-4 text-white/70 transition-transform duration-200', open && 'rotate-180')} />
+        </button>
+      )}
+    />
+  );
+}
+
 const themeOptions: { value: ThemePref; label: string; icon: typeof Sun }[] = [
   { value: 'light', label: 'Light', icon: Sun },
   { value: 'dark', label: 'Dark', icon: Moon },
@@ -152,9 +201,13 @@ function UserMenu() {
   const { theme, setTheme } = useTheme();
   const toast = useToast();
   const navigate = useNavigate();
+  const owner = useIsOwner() === 'owner';
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
   if (!profile) return null;
 
   return (
+    <>
+    <FeedbackDialog open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
     <Dropdown
       width="w-72"
       header={
@@ -175,6 +228,8 @@ function UserMenu() {
         { label: 'Profile', icon: <UserRound />, to: '/me' },
         { label: 'Career', icon: <BarChart3 />, to: '/me/career' },
         { label: 'Settings', icon: <Settings />, to: '/me/settings' },
+        { label: 'Send feedback', icon: <MessageSquare />, onSelect: () => setFeedbackOpen(true) },
+        ...(owner ? [{ label: 'Owner console', icon: <Gauge />, to: '/owner' }] : []),
         { type: 'separator' },
         {
           type: 'custom',
@@ -233,6 +288,7 @@ function UserMenu() {
         </button>
       )}
     />
+    </>
   );
 }
 

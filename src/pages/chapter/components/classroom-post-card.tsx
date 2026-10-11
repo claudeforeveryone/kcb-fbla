@@ -1,6 +1,7 @@
 import { ArrowUpRight, MoreHorizontal } from 'lucide-react';
 import { Avatar, Button, Card, Dropdown, cn, type DropdownItem } from '../../../components/ui';
 import { ROLE_LABELS } from '../../../lib/types';
+import { track } from '../../../api/track';
 import { canDeletePost, canEditPost, type ClassPost, type ClassroomContext } from '../../../api/classroom';
 import { excerpt, Markdown, readingMinutes } from './classroom-markdown';
 import { EventTag, KindLabel, POST_META, timeAgo } from './classroom-shared';
@@ -19,6 +20,7 @@ export function LinkPreview({ url, compact }: { url: string; compact?: boolean }
       href={url}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => void track('resource_opened', null, { kind: 'link', source: 'classroom' })}
       className={cn(
         'group/link flex min-w-0 items-center gap-3 rounded-[2px] border border-line border-l-4 border-l-blue bg-surface-2 transition-colors hover:border-blue',
         compact ? 'px-3 py-2' : 'px-3.5 py-3',

@@ -1,5 +1,6 @@
 // Dev-only component gallery at /dev/ui (registered in App.tsx only when import.meta.env.DEV).
 import { useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Bell, Inbox, Plus } from 'lucide-react';
 import { Page, Section } from '../layout/Page';
 import { BarChart, Donut, LineChart, RadarChart, Sparkline } from '../charts';
@@ -7,6 +8,7 @@ import {
   Avatar,
   Badge,
   Button,
+  ButtonLink,
   Card,
   CardHeader,
   ConfirmDialog,
@@ -39,6 +41,10 @@ import {
   Tooltip,
   useToast,
 } from '.';
+import { OwnerConsole } from '../../pages/owner/OwnerConsole';
+import { NotAuthorized } from '../../pages/owner/OwnerPage';
+import { FIXTURE_MARKER, fixtureSource, smallFixtureSource } from '../../pages/owner/fixtures';
+import { FeedbackDialog, ReportQuestionDialog } from '../feedback/FeedbackDialog';
 
 const days = Array.from({ length: 14 }, (_, i) => new Date(Date.UTC(2026, 8, 20 + i)).toISOString());
 
@@ -50,6 +56,22 @@ export default function Gallery() {
   const [modal, setModal] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [pill, setPill] = useState('all');
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [reportId, setReportId] = useState<string | null>(null);
+  const [params] = useSearchParams();
+  const only = params.get('only');
+
+  // Owner console on made-up data (src/pages/owner/fixtures.ts). /dev/ui?only=owner shows a busy site alone,
+  // /dev/ui?only=owner-small a small one where most groups are hidden.
+  if (only === 'owner' || only === 'owner-small')
+    return (
+      <Page>
+        <div data-fixture={FIXTURE_MARKER}>
+          <OwnerConsole key={only} source={only === 'owner' ? fixtureSource : smallFixtureSource} />
+        </div>
+      </Page>
+    );
+  if (only === 'denied') return <NotAuthorized />;
 
   return (
     <>
@@ -164,6 +186,17 @@ export default function Gallery() {
             </TBody>
           </Table>
         </Section>
+        <Section
+          title="Owner console"
+          description="Made-up data. Open it alone to try every section."
+          action={<Link className="link text-sm font-semibold" to="/dev/ui?only=owner">Open the console</Link>}
+        >
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" onClick={() => setFeedbackOpen(true)}>Send feedback dialog</Button>
+            <Button variant="outline" onClick={() => setReportId('acc-118')}>Report a question dialog</Button>
+            <ButtonLink variant="outline" to="/dev/ui?only=denied">Not authorized page</ButtonLink>
+          </div>
+        </Section>
         <Section title="States">
           <div className="grid gap-4 lg:grid-cols-2">
             <EmptyState icon={<Inbox />} title="No assignments yet" description="When an executive assigns a test, it shows up here." action={<Button size="sm">Browse events</Button>} />
@@ -173,6 +206,8 @@ export default function Gallery() {
           <SkeletonCards className="mt-4" />
         </Section>
       </Page>
+      <FeedbackDialog open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+      <ReportQuestionDialog questionId={reportId} onClose={() => setReportId(null)} />
       <Modal open={modal} onClose={() => setModal(false)} title="Start a mock exam?" description="100 questions, 50 minutes." footer={<><Button variant="ghost" onClick={() => setModal(false)}>Cancel</Button><Button variant="accent" onClick={() => setModal(false)}>Start</Button></>}>
         <p className="text-sm text-muted">The timer starts as soon as you begin.</p>
       </Modal>

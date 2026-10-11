@@ -46,6 +46,8 @@ const ProfilePage = page(() => import('./pages/me/ProfilePage'), 'ProfilePage');
 const CareerPage = page(() => import('./pages/me/CareerPage'), 'CareerPage');
 const SettingsPage = page(() => import('./pages/me/SettingsPage'), 'SettingsPage');
 const NotificationsPage = page(() => import('./pages/notifications/NotificationsPage'), 'NotificationsPage');
+// Owner console: its own chunk; the page asks the server whether the viewer is an owner before showing anything.
+const OwnerPage = page(() => import('./pages/owner/OwnerPage'), 'OwnerPage');
 
 // Dev-only component gallery (tree-shaken from production builds).
 const Gallery = import.meta.env.DEV ? page(() => import('./components/ui/Gallery'), 'Gallery') : null;
@@ -88,6 +90,11 @@ export default function App() {
         {/* public inside the shell */}
         <Route path="/chapter/join/:token" element={<JoinPage />} />
         {Gallery && <Route path="/dev/ui" element={<Gallery />} />}
+
+        {/* signed in (owners may not have a student profile) */}
+        <Route element={<RequireAuth />}>
+          <Route path="/owner" element={<OwnerPage />} />
+        </Route>
 
         {/* signed in + profile */}
         <Route element={<RequireProfile />}>

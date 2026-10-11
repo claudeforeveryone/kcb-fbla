@@ -90,7 +90,9 @@ export function Pill({
     >
       {icon}
       {children}
-      {count != null && <span className={cn('tabular text-xs', active ? 'text-red/70' : 'text-muted')}>{count}</span>}
+      {/* Full-strength red on the tint (dark mode swaps .text-red for the lighter danger tone): a faded red count fell
+          below AA, 1.9:1 in dark mode. */}
+      {count != null && <span className={cn('tabular text-xs', active ? 'text-red' : 'text-muted')}>{count}</span>}
     </button>
   );
 }

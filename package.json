@@ -9,6 +9,7 @@
     "dev": "vite",
     "prebuild": "node scripts/build-content.mjs",
     "build": "tsc -p tsconfig.json && vite build && node scripts/prerender.mjs",
+    "postbuild": "node scripts/check-dist.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "check:content": "node scripts/check-all.mjs"

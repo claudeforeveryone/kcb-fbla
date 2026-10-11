@@ -11,10 +11,12 @@ import { useProfile } from '../../lib/auth';
 import { eventInfo, eventName, parseCustomQuestionId } from '../../lib/types';
 import { questionsByIds } from './buildRun';
 import { runHref } from './runLogic';
+import { useQuestionReport } from '../../components/feedback/FeedbackDialog';
 
 type Loaded = { data: ExamResultData; questions: ExamQuestion[]; ownerName: string | null; mine: boolean };
 
 export default function ReviewPage() {
+  const report = useQuestionReport();
   const { attemptId = '' } = useParams();
   const me = useProfile();
   const [state, setState] = useState<{ s: 'loading' } | { s: 'missing' } | { s: 'error'; e: unknown } | { s: 'ok'; v: Loaded }>({
@@ -107,10 +109,13 @@ export default function ReviewPage() {
   const ev = eventInfo(data.event);
   const isChapter = data.kind === 'custom' || data.kind === 'assignment';
   return (
+    <>
+    {report.dialog}
     <ExamResults
       data={data}
       questions={questions}
       animate={false}
+      onReport={report.onReport}
       note={!mine ? `Viewing ${ownerName ?? 'a member'}'s attempt` : undefined}
       actions={
         mine ? (
@@ -143,5 +148,6 @@ export default function ReviewPage() {
         )
       }
     />
+    </>
   );
 }

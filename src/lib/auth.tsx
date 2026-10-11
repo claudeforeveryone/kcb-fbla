@@ -220,7 +220,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data, error } = await supabase.auth.signUp({
       email: email.trim(),
       password,
-      options: { emailRedirectTo: appUrl('onboarding') },
+      // app marks which site created the account (the FBLA and DECA sites share one auth project); the owner
+      // metrics count only FBLA accounts. Not a permission: nothing authorizes on user metadata.
+      options: { emailRedirectTo: appUrl('onboarding'), data: { app: 'kcb-fbla' } },
     });
     if (error) throw toAuthError(error, 'signup');
     // Supabase returns a user with no identities when the email is already registered (and confirmations are on).
