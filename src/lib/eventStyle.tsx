@@ -79,9 +79,37 @@ export function EventCrest({ slug, size = 72, className }: { slug: string; size?
   return <Crest icon={icon} color={color} size={size} className={className} />;
 }
 
+// Ambient drift for ColorBlock: the facets slide a few percent and the watermark bobs and tilts, on long
+// alternating ease-in-out loops of different lengths per layer. Only transform is animated. The watermark's
+// resting offset/tilt come from Tailwind v4's `translate`/`rotate` properties, which compose with `transform`.
+const COLOR_BLOCK_CSS = `
+@keyframes cb-facet-a { from { transform: translate3d(-2.5%, -1%, 0) } to { transform: translate3d(2.5%, 1.5%, 0) } }
+@keyframes cb-facet-b { from { transform: translate3d(2%, 1%, 0) } to { transform: translate3d(-3%, -1.5%, 0) } }
+@keyframes cb-mark { from { transform: translate3d(0, 2.5%, 0) rotate(-2deg) } to { transform: translate3d(-1.5%, -2.5%, 0) rotate(2.5deg) } }
+.cb-facet-a, .cb-facet-b, .cb-mark {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: var(--cb-delay, 0s);
+}
+.cb-facet-a { animation-name: cb-facet-a; animation-duration: 11s }
+.cb-facet-b { animation-name: cb-facet-b; animation-duration: 15s }
+.cb-mark { animation-name: cb-mark; animation-duration: 9s }
+@media (prefers-reduced-motion: reduce) { .cb-facet-a, .cb-facet-b, .cb-mark { animation: none } }
+`;
+
+/** A stable negative delay (0 to -16s) from a string, so neighbouring blocks don't drift in lockstep. */
+function driftDelay(seed: string): string {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) | 0;
+  return `-${(Math.abs(h) % 16000) / 1000}s`;
+}
+
 /**
  * A block of the event colour with flat decoration so it isn't an empty slab: two angled facets
  * (a lighter and a darker tint, like the FBLC logo) and the icon repeated large and faint in the corner.
+ * The decoration drifts slowly (off under prefers-reduced-motion); children never move.
+ * `seed` staggers the drift phase per instance (defaults to the colour).
  */
 export function ColorBlock({
   color,
@@ -90,6 +118,7 @@ export function ColorBlock({
   style,
   children,
   watermark = true,
+  seed,
 }: {
   color: string;
   icon: LucideIcon;
@@ -97,16 +126,23 @@ export function ColorBlock({
   style?: CSSProperties;
   children?: ReactNode;
   watermark?: boolean;
+  seed?: string;
 }) {
+  const vars = { '--cb-delay': driftDelay(seed ?? color) } as CSSProperties;
+  // Each facet SVG is oversized (inset -10%, i.e. 120% of the block) so its edges never show while it
+  // drifts. Points are remapped (v = (b + 10) / 1.2) so the resting shapes match the original layout.
   return (
-    <div className={'relative overflow-hidden ' + (className ?? '')} style={{ ...style, background: color }}>
-      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-        <polygon points="0,0 38,0 14,100 0,100" fill="#fff" fillOpacity={0.07} />
-        <polygon points="72,0 100,0 100,100 50,100" fill="#000" fillOpacity={0.1} />
+    <div className={'relative overflow-hidden ' + (className ?? '')} style={{ ...style, ...vars, background: color }}>
+      <style href="kcb-color-block" precedence="default">{COLOR_BLOCK_CSS}</style>
+      <svg className="cb-facet-a pointer-events-none absolute -inset-[10%] h-[120%] w-[120%]" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+        <polygon points="0,0 42,0 18,100 0,100" fill="#fff" fillOpacity={0.07} />
+      </svg>
+      <svg className="cb-facet-b pointer-events-none absolute -inset-[10%] h-[120%] w-[120%]" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+        <polygon points="70.17,0 100,0 100,100 48.17,100" fill="#000" fillOpacity={0.1} />
       </svg>
       {watermark && (
         <Icon
-          className="pointer-events-none absolute -right-[6%] top-1/2 aspect-square h-[135%] w-auto -translate-y-1/2 -rotate-12 opacity-[0.1]"
+          className="cb-mark pointer-events-none absolute -right-[6%] top-1/2 aspect-square h-[135%] w-auto -translate-y-1/2 -rotate-12 opacity-[0.1]"
           style={{ color: '#fff' }}
           strokeWidth={1.75}
           aria-hidden
@@ -120,5 +156,5 @@ export function ColorBlock({
 /** ColorBlock for an event slug. */
 export function EventBlock({ slug, ...rest }: Omit<Parameters<typeof ColorBlock>[0], 'color' | 'icon'> & { slug: string }) {
   const { icon, color } = eventStyle(slug);
-  return <ColorBlock color={color} icon={icon} {...rest} />;
+  return <ColorBlock color={color} icon={icon} seed={slug} {...rest} />;
 }
