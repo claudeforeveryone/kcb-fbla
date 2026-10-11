@@ -25,7 +25,8 @@ export function LegalPage({
   useScrollToHash();
   return (
     <>
-      <PageHeader size="sm" title={title} subtitle={intro} />
+      {/* Balanced lines: at desktop width the intro otherwise leaves its last two words alone on a second line. */}
+      <PageHeader size="sm" title={title} subtitle={intro} className="[&_p]:text-balance" />
       <div className="mx-auto w-full max-w-[1440px] px-4 pb-16 pt-8 sm:px-6 md:pt-12 lg:grid lg:grid-cols-[14rem_minmax(0,68ch)] lg:gap-16 lg:px-10 xl:gap-24">
         <Contents sections={sections} />
         <article className="min-w-0 text-base leading-[1.7] text-ink">{children}</article>
