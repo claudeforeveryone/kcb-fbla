@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import type { Session, User } from '@supabase/supabase-js';
 import { appUrl, supabase } from './supabase';
+import { mayHaveSession } from './sessionHint';
 import { SplashScreen } from '../components/layout/SplashScreen';
 
 /** Row of public.fbla_profiles (see docs/SPEC.md). */
@@ -152,7 +153,7 @@ export function authErrorKind(e: unknown): AuthErrorKind {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<AuthProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(mayHaveSession);
   const [recovering, setRecovering] = useState(false);
   // The user id whose profile lookup has finished (so guards never act on a half-loaded state).
   const [checkedUid, setCheckedUid] = useState<string | null>(null);

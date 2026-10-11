@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { BarChart3, ChevronDown, LogOut, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
@@ -9,6 +9,8 @@ import { EloBadge } from '../ui/EloBadge';
 import { cn } from '../ui/cn';
 import { useToast } from '../ui/Toast';
 import { NotificationBell } from '../notifications/NotificationBell';
+import { useHydrated } from '../../lib/hydration';
+import { returnPathAfterAuth } from '../../lib/seo';
 import { Brand } from './Brand';
 import { NAV } from './nav';
 import { useTheme, type ThemePref } from './theme';
@@ -20,13 +22,9 @@ export function AppShell({ children }: { children?: ReactNode }) {
   const { pathname } = useLocation();
   const signedIn = !!session && !!profile;
 
-  // New page: start at the top (keep position for in-page hash links).
-  useEffect(() => {
-    if (!window.location.hash) window.scrollTo({ top: 0 });
-  }, [pathname]);
-
   return (
     <div className="flex min-h-dvh flex-col">
+      <ScrollToTop pathname={pathname} />
       <a
         href="#main"
         className="sr-only z-[200] rounded-[2px] bg-white px-3 py-2 font-semibold text-navy focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
@@ -42,6 +40,24 @@ export function AppShell({ children }: { children?: ReactNode }) {
       {signedIn && <BottomTabs pathname={pathname} />}
     </div>
   );
+}
+
+/**
+ * New page: start at the top (keep position for in-page hash links). Not when the shell first hydrates a prerendered
+ * page: the visitor may already have scrolled it while the app was loading, and the browser has placed a fresh load.
+ * A shell mounted by in-app navigation (say from /login) still resets, since it inherits the last page's scroll.
+ */
+function ScrollToTop({ pathname }: { pathname: string }) {
+  const hydrated = useHydrated(); // false only during hydration
+  const skip = useRef(!hydrated);
+  useEffect(() => {
+    if (skip.current) {
+      skip.current = false;
+      return;
+    }
+    if (!window.location.hash) window.scrollTo({ top: 0 });
+  }, [pathname]);
+  return null;
 }
 
 function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string }) {
@@ -102,8 +118,12 @@ function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string })
 }
 
 function SignedOutActions({ pathname }: { pathname: string }) {
-  const { session } = useAuth();
-  const next = encodeURIComponent(pathname);
+  const { loading, session } = useAuth();
+  // Bring the visitor back only to an app page (a chapter invite); from Terms, Privacy or a 404 they land on home.
+  const back = returnPathAfterAuth(pathname);
+  const next = back ? `?next=${encodeURIComponent(back)}` : '';
+  // A stored session is still being checked: offering "Sign in" to someone who is signed in would be wrong.
+  if (loading) return null;
   if (session)
     return (
       <Link to="/onboarding" className={buttonClasses('accent', 'sm')}>
@@ -112,10 +132,10 @@ function SignedOutActions({ pathname }: { pathname: string }) {
     );
   return (
     <>
-      <Link to={`/login?next=${next}`} className={buttonClasses('ghost', 'sm', 'text-white hover:bg-white/10')}>
+      <Link to={`/login${next}`} className={buttonClasses('ghost', 'sm', 'text-white hover:bg-white/10')}>
         Sign in
       </Link>
-      <Link to={`/signup?next=${next}`} className={buttonClasses('accent', 'sm')}>
+      <Link to={`/signup${next}`} className={buttonClasses('accent', 'sm')}>
         Join free
       </Link>
     </>
@@ -255,7 +275,8 @@ function BottomTabs({ pathname }: { pathname: string }) {
 }
 
 function OfflineBanner() {
-  const [online, setOnline] = useState(() => (typeof navigator === 'undefined' ? true : navigator.onLine));
+  // Node has a navigator without onLine (build-time prerender): only an explicit false means offline.
+  const [online, setOnline] = useState(() => typeof navigator === 'undefined' || navigator.onLine !== false);
   useEffect(() => {
     const up = () => setOnline(true);
     const down = () => setOnline(false);
