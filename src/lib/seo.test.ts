@@ -3,6 +3,7 @@ import {
   PUBLIC_ROUTES,
   SITE_URL,
   canonicalFor,
+  documentMetaFor,
   findPublicRoute,
   headTags,
   jsonLd,
@@ -65,6 +66,30 @@ describe('private page titles', () => {
     expect(titleForPrivate('/u/ada')).toBe('Profile | FBLC');
     expect(titleForPrivate('/meow')).toBe('FBLC');
     expect(titleForPrivate('/dev/ui')).toBe('FBLC');
+  });
+});
+
+describe('document meta in the browser', () => {
+  it("gives a member's home page (their dashboard) a private title and keeps it out of the index", () => {
+    expect(documentMetaFor('/', { member: true })).toEqual({ title: 'Home | FBLC', robots: 'noindex, nofollow', canonical: null });
+  });
+
+  it('gives a signed-out visitor the public home page', () => {
+    expect(documentMetaFor('/?ref=share', { member: false })).toMatchObject({
+      title: PUBLIC_ROUTES[0].title,
+      robots: 'index, follow, max-image-preview:large',
+      canonical: `${SITE_URL}/`,
+    });
+  });
+
+  it('shows the legal pages to members as the same public pages', () => {
+    expect(documentMetaFor('/terms', { member: true })).toMatchObject({ title: 'Terms of use | FBLC', canonical: `${SITE_URL}/terms` });
+  });
+
+  it('labels signed-in pages for anyone', () => {
+    for (const member of [true, false]) {
+      expect(documentMetaFor('/play/accounting', { member })).toEqual({ title: 'Play | FBLC', robots: 'noindex, nofollow', canonical: null });
+    }
   });
 });
 

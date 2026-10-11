@@ -80,6 +80,7 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
 
 /** Titles for signed-in pages. They are noindex, so these only label the browser tab and history. */
 const PRIVATE_TITLES: Array<[RegExp, string]> = [
+  [/^\/$/, 'Home'],
   [/^\/leaderboard(\/|$)/, 'Leaderboard'],
   [/^\/play(\/|$)/, 'Play'],
   [/^\/vocab(\/|$)/, 'Vocab'],
@@ -212,27 +213,53 @@ function upsert(kind: 'name' | 'property' | 'rel', key: string, value: string) {
   el.setAttribute(attr, value);
 }
 
-/** In-app navigation: keep the tab title and search tags in step with the route being shown. */
-export function applyDocumentMeta(pathname: string): void {
+export type DocumentMeta = {
+  title: string;
+  robots: string;
+  /** null: a signed-in page, which has no canonical URL. */
+  canonical: string | null;
+  /** Public pages only. */
+  description?: string;
+};
+
+/**
+ * The head a route should carry in the browser. `member`: a visitor who is signed in (or whose stored session is still
+ * being checked). For them "/" is their dashboard, so it gets a private title and stays out of the index; every other
+ * public page is the same page for everyone.
+ */
+export function documentMetaFor(pathname: string, { member = false }: { member?: boolean } = {}): DocumentMeta {
+  const route = member && normalizePath(pathname) === '/' ? undefined : findPublicRoute(pathname);
+  if (!route) return { title: titleForPrivate(pathname), robots: 'noindex, nofollow', canonical: null };
+  return {
+    title: route.title,
+    description: route.description,
+    robots: route.index ? 'index, follow, max-image-preview:large' : 'noindex, follow',
+    canonical: canonicalFor(route.path),
+  };
+}
+
+/**
+ * Keeps the tab title and search tags in step with the route being shown. `firstLoad`: the document's head came from
+ * the server. If that head was written for this very URL (a prerendered page, or head tags only for "/" while it
+ * redirects), its robots rule stands: the build knows whether the page rendered, the browser does not.
+ */
+export function applyDocumentMeta(pathname: string, { member = false, firstLoad = false } = {}): void {
   if (typeof document === 'undefined') return;
-  const route = findPublicRoute(pathname);
-  if (route) {
-    const url = canonicalFor(route.path);
-    document.title = route.title;
-    upsert('name', 'description', route.description);
-    upsert('name', 'robots', route.index ? 'index, follow, max-image-preview:large' : 'noindex, follow');
-    upsert('rel', 'canonical', url);
-    upsert('property', 'og:title', route.title);
-    upsert('property', 'og:description', route.description);
-    upsert('property', 'og:url', url);
-    upsert('name', 'twitter:title', route.title);
-    upsert('name', 'twitter:description', route.description);
+  const meta = documentMetaFor(pathname, { member });
+  document.title = meta.title;
+  upsert('property', 'og:title', meta.title);
+  upsert('name', 'twitter:title', meta.title);
+  if (meta.canonical === null) {
+    upsert('name', 'robots', meta.robots);
+    document.head.querySelector('link[rel="canonical"]')?.remove();
     return;
   }
-  const title = titleForPrivate(pathname);
-  document.title = title;
-  upsert('name', 'robots', 'noindex, nofollow');
-  upsert('property', 'og:title', title);
-  upsert('name', 'twitter:title', title);
-  document.head.querySelector('link[rel="canonical"]')?.remove();
+  const serverHead =
+    firstLoad && document.head.querySelector('link[rel="canonical"]')?.getAttribute('href') === meta.canonical;
+  if (!serverHead) upsert('name', 'robots', meta.robots);
+  upsert('rel', 'canonical', meta.canonical);
+  upsert('name', 'description', meta.description ?? '');
+  upsert('property', 'og:description', meta.description ?? '');
+  upsert('property', 'og:url', meta.canonical);
+  upsert('name', 'twitter:description', meta.description ?? '');
 }
