@@ -232,6 +232,15 @@ type GlassLook = {
   warm?: boolean;
   /** the crystal's own warmth: higher where the camera does not see the slit through it (the closing scene) */
   glow?: number;
+  /**
+   * The crystal's per-pixel sample jitter (roughness, anisotropic blur, chromatic aberration). drei gives every pixel one
+   * hashed random offset that spreads its samples over a range of thicknesses and, with aberration, three IORs; over
+   * the slit's hard gold-to-navy edges that offset is grain, and it crawls as the crystal turns. The full tier's bloom
+   * and FXAA hide it. The lite tier has neither (its hero crop measured 20.3 high-frequency energy against 9.5 on the
+   * full tier; 6 samples instead of 3 only took it to 18.6), so its crystal drops the jitter: no random term is left,
+   * and one refraction fetch per sample replaces three.
+   */
+  jitter?: boolean;
 };
 
 /**
@@ -250,7 +259,13 @@ function useOwnEnvMap(ref: MutableRefObject<Material | null>) {
   });
 }
 
-function Glass({ samples, reeded, warm, glow = 0.06 }: GlassLook) {
+function Glass({
+  samples,
+  reeded,
+  warm,
+  glow = 0.06,
+  jitter = true,
+}: GlassLook) {
   const buffer = useContext(BufferContext);
   const ref = useRef<PatchableMaterial | null>(null);
   useOwnEnvMap(ref);
@@ -275,10 +290,10 @@ function Glass({ samples, reeded, warm, glow = 0.06 }: GlassLook) {
       samples={samples}
       transmission={1}
       thickness={0.9}
-      roughness={0.02}
+      roughness={jitter ? 0.02 : 0}
       ior={1.55}
-      chromaticAberration={0.1}
-      anisotropicBlur={0.08}
+      chromaticAberration={jitter ? 0.1 : 0}
+      anisotropicBlur={jitter ? 0.08 : 0}
       distortion={0.04}
       distortionScale={0.35}
       temporalDistortion={0}
@@ -957,7 +972,12 @@ function Room({
           geometry={crystalGeo}
           position={[0, 0.25, ROOM.crystal.position[2]]}
         >
-          <Glass samples={samples} reeded={false} warm />
+          <Glass
+            samples={samples}
+            reeded={false}
+            warm
+            jitter={tier === "full"}
+          />
         </mesh>
       </group>
 
