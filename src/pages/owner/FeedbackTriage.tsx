@@ -12,6 +12,7 @@ import type { FeedbackFilter, FeedbackSaved, OwnerFeedbackRow } from '../../api/
 import {
   KIND_LABELS,
   STATUS_LABELS,
+  STUDENT_STATUS_LABELS,
   triageFilters,
   triageSaved,
   type FeedbackKind,
@@ -57,15 +58,24 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   const src = useOwnerSource();
   const toast = useToast();
   // Filters live in the URL (?status=&kind=), so Content's reported questions and status counts can open this view
-  // filtered, and a refresh keeps it. ?question= picks that question's first report once the list arrives.
+  // filtered, and a refresh keeps it. ?question= picks that question's first report once the list arrives; ?report=
+  // (from the audit log) opens one report by id, wherever it sits in the list.
   const [params, setParams] = useSearchParams();
   const [initial] = useState(() => triageFilters(params));
   const [status, setStatusState] = useState<FeedbackFilter>(initial.status);
   const [kind, setKindState] = useState<FeedbackKind | ''>(initial.kind);
   const wantQuestion = useRef(initial.question);
+  const wantReport = useRef(initial.report);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  // The open report as last seen, so it stays open after a save moves it out of the current filter.
+  const [snap, setSnap] = useState<OwnerFeedbackRow | null>(null);
+  // A new filter closes the open report: on a phone the list is hidden while a report is open, so otherwise the tap
+  // would seem to do nothing (or show a New report under Triaged). Unsaved edits stay in `drafts`.
   const setFilter = (next: { status?: FeedbackFilter; kind?: FeedbackKind | '' }) => {
     if (next.status !== undefined) setStatusState(next.status);
     if (next.kind !== undefined) setKindState(next.kind);
+    setSelectedId(null);
+    setSnap(null);
     wantQuestion.current = null;
     setParams(
       (p) => {
@@ -81,11 +91,8 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
       { replace: true },
     );
   };
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   // Re-renders the list when a report gains or loses unsaved edits, so its row can say so.
   const [, draftsChanged] = useReducer((n: number) => n + 1, 0);
-  // The open report as last seen, so it stays open after a save moves it out of the current filter.
-  const [snap, setSnap] = useState<OwnerFeedbackRow | null>(null);
   const state = usePaged(
     (offset) => src.feedbackList({ status, kind: kind || null, limit: PAGE, offset }),
     `fb:${status}:${kind}:${refreshKey}`,
@@ -98,6 +105,31 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
     document.getElementById(`fb-row-${returnTo.current}`)?.focus();
     returnTo.current = null;
   }, [selectedId]);
+
+  // Arriving from the audit log: fetch that one report by id and open it (the list itself shows every status).
+  useEffect(() => {
+    const id = wantReport.current;
+    if (!id) return;
+    wantReport.current = null;
+    src
+      .feedbackList({ status: 'all', id, limit: 1 })
+      .then((r) => {
+        const hit = r.rows[0];
+        if (hit) {
+          setSelectedId(hit.id);
+          setSnap(hit);
+        } else toast.info('That report no longer exists', 'It may have been deleted with the account that sent it.');
+      })
+      .catch((e: unknown) => toast.error('Could not open that report', e instanceof Error ? e.message : undefined));
+    setParams(
+      (p) => {
+        const n = new URLSearchParams(p);
+        n.delete('report');
+        return n;
+      },
+      { replace: true },
+    );
+  }, [src, toast, setParams]);
 
   const rows = state.rows;
   // Arriving from a reported question: open its first report on the list (if it is on the first page), once.
@@ -171,7 +203,8 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
 
       <LoadState state={state} skeleton="table">
         {() =>
-          rows.length === 0 ? (
+          // A report stays open after a save moves it out of the filter, even when it was the last one in the list.
+          rows.length === 0 && !selected ? (
             <EmptyState
               icon={<Inbox />}
               title={status === 'open' ? 'Nothing waiting' : 'No feedback here'}
@@ -180,37 +213,46 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
           ) : (
             <div className="grid gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
               <div className={cn('min-w-0', selected && 'hidden lg:block')}>
-                <ul className="divide-y divide-line border border-line bg-surface" aria-label="Feedback">
-                  {rows.map((r) => (
-                    <li key={r.id}>
-                      <button
-                        type="button"
-                        id={`fb-row-${r.id}`}
-                        onClick={() => {
-                          setSelectedId(r.id);
-                          setSnap(r);
-                        }}
-                        aria-current={r.id === selectedId ? 'true' : undefined}
-                        className={cn(
-                          'block w-full scroll-mt-24 px-4 py-3 text-left transition-colors hover:bg-surface-2/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue/40',
-                          r.id === selectedId && 'bg-red/[0.04] shadow-[inset_3px_0_0_var(--red)]',
-                        )}
-                      >
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <KindBadge kind={r.kind} />
-                          {r.priority === 'high' && <Badge tone="red">High</Badge>}
-                          {r.priority === 'low' && <Badge>Low</Badge>}
-                          <StatusBadge status={r.status} />
-                          {drafts.has(r.id) && <span className="text-xs font-semibold text-warning">Unsaved changes</span>}
-                        </div>
-                        <p className="mt-1.5 line-clamp-2 text-sm text-ink">{r.message}</p>
-                        <p className="mt-1 truncate text-xs text-muted">
-                          {r.username ? `@${r.username}` : NO_PROFILE} · {when(r.created_at)}
-                        </p>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                {rows.length === 0 ? (
+                  <EmptyState
+                    compact
+                    icon={<Inbox />}
+                    title={status === 'open' ? 'Nothing else waiting' : 'Nothing else here'}
+                    description={status === 'open' ? 'Every other report has been handled.' : 'Try another status or kind.'}
+                  />
+                ) : (
+                  <ul className="divide-y divide-line border border-line bg-surface" aria-label="Feedback">
+                    {rows.map((r) => (
+                      <li key={r.id}>
+                        <button
+                          type="button"
+                          id={`fb-row-${r.id}`}
+                          onClick={() => {
+                            setSelectedId(r.id);
+                            setSnap(r);
+                          }}
+                          aria-current={r.id === selectedId ? 'true' : undefined}
+                          className={cn(
+                            'block w-full scroll-mt-24 px-4 py-3 text-left transition-colors hover:bg-surface-2/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue/40',
+                            r.id === selectedId && 'bg-red/[0.04] shadow-[inset_3px_0_0_var(--red)]',
+                          )}
+                        >
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <KindBadge kind={r.kind} />
+                            {r.priority === 'high' && <Badge tone="red">High</Badge>}
+                            {r.priority === 'low' && <Badge>Low</Badge>}
+                            <StatusBadge status={r.status} />
+                            {drafts.has(r.id) && <span className="text-xs font-semibold text-warning">Unsaved changes</span>}
+                          </div>
+                          <p className="mt-1.5 line-clamp-2 text-sm text-ink">{r.message}</p>
+                          <p className="mt-1 truncate text-xs text-muted">
+                            {r.username ? `@${r.username}` : NO_PROFILE} · {when(r.created_at)}
+                          </p>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <MoreButton state={state} />
               </div>
               <div className={cn('min-w-0', !selected && 'hidden lg:block')}>
@@ -362,7 +404,13 @@ export function FeedbackDetail({
         {row.question_id && !row.question_id.startsWith('custom:') && <QuestionCheck id={row.question_id} />}
 
         <div className="grid gap-4 border-t border-line pt-4 sm:grid-cols-2">
-          <Select label="Status" value={status} onChange={(e) => setStatus(e.target.value as FeedbackStatus)} options={STATUS_OPTIONS} />
+          <Select
+            label="Status"
+            hint={`The student sees "${STUDENT_STATUS_LABELS[status]}".`}
+            value={status}
+            onChange={(e) => setStatus(e.target.value as FeedbackStatus)}
+            options={STATUS_OPTIONS}
+          />
           <div>
             <div className="mb-1.5 text-sm font-semibold text-ink" id={`prio-${row.id}`}>
               Priority

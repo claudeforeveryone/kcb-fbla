@@ -1,10 +1,12 @@
 // Audit log: every sensitive change (roles, bans, removals, admin adds, trainers, deleted chapters, owner access,
 // feedback triage, email lookups), append-only in fbla_audit_log (0104). Searchable by action, text and time window.
 import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ScrollText, Search } from 'lucide-react';
 import { Badge, EmptyState, Input, Select, Table, TBody, TD, TH, THead, TR } from '../../components/ui';
 import type { AuditRow } from '../../api/owner';
-import { auditActionLabel, auditChange, auditSource } from '../../lib/owner';
+import { triageLink } from '../../lib/feedback';
+import { auditActionLabel, auditChange, auditSource, auditTarget } from '../../lib/owner';
 import { EmptyValue, LoadState, MoreButton, useOwnerSource, usePaged, when } from './shared';
 
 const WINDOWS = [
@@ -94,12 +96,17 @@ function who(r: AuditRow): string {
   return r.actor_id ? 'Account without a profile' : 'System';
 }
 
-function target(r: AuditRow): string {
-  if (r.target_username) return `@${r.target_username}`;
-  if (r.target_type === 'chapter' && typeof r.detail?.name === 'string') return r.detail.name;
-  if (r.target_type === 'feedback') return 'A feedback report';
-  if (!r.target_id) return '';
-  return `${r.target_type ?? 'item'} ${r.target_id.slice(0, 8)}`;
+/** What the entry is about. A feedback report links to that report in Feedback triage. */
+function Target({ r, at }: { r: AuditRow; at: 'start' | 'inline' }) {
+  const [params] = useSearchParams();
+  const text = auditTarget(r, at);
+  if (r.target_type === 'feedback' && r.target_id)
+    return (
+      <Link className="link" to={{ search: triageLink(params, { status: 'all', report: r.target_id }) }}>
+        {text}
+      </Link>
+    );
+  return <>{text}</>;
 }
 
 const sourceTone = (source: string): 'red' | 'neutral' | 'blue' => (source === 'Owner console' ? 'red' : source === 'Database' ? 'neutral' : 'blue');
@@ -112,7 +119,7 @@ export function AuditCards({ rows }: { rows: AuditRow[] }) {
         const change = auditChange(r.action, r.detail);
         const reason = typeof r.detail?.reason === 'string' ? r.detail.reason : '';
         const source = auditSource(r.action, r.detail, r.actor_id);
-        const affected = target(r);
+        const affected = auditTarget(r, 'inline');
         return (
           <li key={r.id} className="space-y-1.5 p-4 text-sm">
             <div className="flex items-baseline justify-between gap-3">
@@ -122,7 +129,11 @@ export function AuditCards({ rows }: { rows: AuditRow[] }) {
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-ink">
               <span>{who(r)}</span>
               <Badge tone={sourceTone(source)}>{source}</Badge>
-              {affected && <span className="text-muted">on {affected}</span>}
+              {affected && (
+                <span className="text-muted">
+                  on <Target r={r} at="inline" />
+                </span>
+              )}
             </div>
             {change && <p className="text-ink">{change}</p>}
             {reason && <p className="break-words text-muted">Reason: {reason}</p>}
@@ -160,7 +171,9 @@ export function AuditTable({ rows }: { rows: AuditRow[] }) {
                   {source}
                 </Badge>
               </TD>
-              <TD className="whitespace-nowrap text-ink">{target(r)}</TD>
+              <TD className="whitespace-nowrap text-ink">
+                <Target r={r} at="start" />
+              </TD>
               <TD className="min-w-56 text-sm">
                 {change && <div className="text-ink">{change}</div>}
                 {reason && <div className="text-muted">Reason: {reason}</div>}
