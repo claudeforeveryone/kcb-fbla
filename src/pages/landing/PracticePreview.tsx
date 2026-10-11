@@ -1,7 +1,8 @@
 // A three-question sample run inside the room, built from the app's own pieces (Badge, EloBadge,
 // Button, the runner's answer styling) on the app's own white surface. The questions are written for this page in the
 // banks' format (samples.ts); the rating is a sample that starts at 0 like a new member's and moves by the app's Elo
-// rule (src/lib/elo.ts). Nothing is sent or saved.
+// rule (sampleRun.ts): first tries only, so a second pass after "Try again" keeps the rating and moves nothing.
+// Nothing is sent or saved.
 //
 // Keyboard and screen readers: an answered choice stays focusable (aria-disabled, not disabled), the feedback is
 // announced from a live region that was mounted empty, and moving on puts focus on the next question's heading (or
@@ -20,22 +21,22 @@ import { Badge } from "../../components/ui/Badge";
 import { Button, buttonClasses } from "../../components/ui/Button";
 import { EloBadge } from "../../components/ui/EloBadge";
 import { cn } from "../../components/ui/cn";
-import { nextRatingExact } from "../../lib/elo";
 import { DIFFICULTY_LABELS } from "../../lib/types";
+import {
+  answerSample,
+  isRepeat,
+  nextSample,
+  ratingNow,
+  sampleDelta,
+  startSampleRun,
+  tryAgain,
+} from "./sampleRun";
 import { SAMPLE_QUESTIONS } from "./samples";
 
 const LETTERS = ["A", "B", "C", "D"];
 
-type Run = { index: number; chosen: Array<number | null>; ratings: number[] };
-
-const fresh = (): Run => ({
-  index: 0,
-  chosen: SAMPLE_QUESTIONS.map(() => null),
-  ratings: [0],
-});
-
 export function PracticePreview() {
-  const [run, setRun] = useState<Run>(fresh);
+  const [run, setRun] = useState(startSampleRun);
   const headingRef = useRef<HTMLHeadingElement>(null);
   // set by Next and Try again: the visitor moved on, so focus follows (never on the first render)
   const moved = useRef(false);
@@ -48,37 +49,25 @@ export function PracticePreview() {
   const right = run.chosen.filter(
     (c, i) => c === SAMPLE_QUESTIONS[i].answer,
   ).length;
-  const rating = run.ratings[run.ratings.length - 1];
-  const shown = Math.round(rating);
-  const delta = revealed
-    ? Math.round(run.ratings[run.index + 1]) -
-      Math.round(run.ratings[run.index])
-    : 0;
+  const shown = Math.round(ratingNow(run));
+  const delta = sampleDelta(run);
+  const repeat = isRepeat(run);
+  // a second pass: every key has been shown, so nothing in it moves the rating
+  const secondPass = run.seen.length > 0;
 
   const pick = (choice: number) => {
     if (revealed || done) return;
-    setRun((r) => {
-      const c = [...r.chosen];
-      c[r.index] = choice;
-      const before = r.ratings[r.ratings.length - 1];
-      const after = nextRatingExact(
-        before,
-        SAMPLE_QUESTIONS[r.index].diff,
-        choice === SAMPLE_QUESTIONS[r.index].answer,
-        true,
-      );
-      return { ...r, chosen: c, ratings: [...r.ratings, after] };
-    });
+    setRun((r) => answerSample(r, choice));
   };
 
   const next = () => {
     moved.current = true;
-    setRun((r) => ({ ...r, index: r.index + 1 }));
+    setRun(nextSample);
   };
 
   const again = () => {
     moved.current = true;
-    setRun(fresh());
+    setRun(tryAgain);
   };
 
   useEffect(() => {
@@ -133,12 +122,22 @@ export function PracticePreview() {
             >
               You got {right} of {n}.
             </h3>
-            <p className="mt-2 max-w-prose text-[0.975rem] text-ink">
-              A new member who answered like that would sit at{" "}
-              <span className="tabular font-semibold">{shown}</span> Elo now. In
-              the app every first try counts, every paper is kept, and missed
-              questions wait for you in a redo run.
-            </p>
+            {secondPass ? (
+              <p className="mt-2 max-w-prose text-[0.975rem] text-ink">
+                Your sample rating stays at{" "}
+                <span className="tabular font-semibold">{shown}</span> Elo:
+                you had seen these answers, and only a first try moves Elo. The
+                app works the same way, keeps every paper, and saves missed
+                questions for a redo run.
+              </p>
+            ) : (
+              <p className="mt-2 max-w-prose text-[0.975rem] text-ink">
+                A new member who answered like that would sit at{" "}
+                <span className="tabular font-semibold">{shown}</span> Elo now.
+                In the app every first try counts, every paper is kept, and
+                missed questions wait for you in a redo run.
+              </p>
+            )}
             <div className="mt-6 flex flex-wrap gap-2">
               <Link to="/signup" className={buttonClasses("accent", "md")}>
                 Join free <ArrowRight className="size-4" aria-hidden />
@@ -263,7 +262,10 @@ export function PracticePreview() {
                           className="size-5 text-success"
                           aria-hidden
                         />
-                        <span className="text-success">Correct</span>
+                        {/* darker than --success: the token measures 3.84:1 on this tint, under AA for 16 px text */}
+                        <span className="text-[#17734a] dark:text-success">
+                          Correct
+                        </span>
                       </>
                     ) : (
                       <>
@@ -284,9 +286,11 @@ export function PracticePreview() {
                     {q.explain}
                   </p>
                   <p className="mt-2 text-xs text-muted">
-                    {delta === 0 && chosen !== q.answer
-                      ? "Ratings never go below 0, so a miss costs nothing yet."
-                      : `First try at a ${DIFFICULTY_LABELS[q.diff].toLowerCase()} question. A repeat would not move Elo.`}
+                    {repeat
+                      ? "You have seen this answer before, so it doesn’t move Elo. Same rule in the app."
+                      : delta === 0 && chosen !== q.answer
+                        ? "Ratings never go below 0, so a miss costs nothing yet."
+                        : `First try at a ${DIFFICULTY_LABELS[q.diff].toLowerCase()} question. A repeat would not move Elo.`}
                   </p>
                 </div>
               )}
