@@ -10,10 +10,10 @@
 --   2. Tied numbers. Event counts (times, runs, answers) that belong to a hidden group are hidden too.
 --   3. Nested groups. When a response shows a group and a smaller group inside it (active this week and active
 --      today), the larger count is also hidden whenever the gap between them is 1 to 4, because subtracting would give
---      that small group away (fbla_count_over). The pairs: Overview, active today / answering this week / returning /
---      this month's finished sign-ups inside active this week and this month; Growth, practising and finished sign-up
---      inside active, per bucket; Engagement, each practice mode inside students who finished, and students who played
---      a duel run inside duel players.
+--      that small group away (fbla_count_over). The pairs: Overview, active today and answering this week inside
+--      active this week, and those two plus active this week, returning and this month's finished sign-ups inside
+--      active this month; Growth, practising and finished sign-up inside active, per bucket; Engagement, each practice
+--      mode inside students who finished, and students who played a duel run inside duel players.
 --   4. Rates are worked out only from counts the response shows, so a rate never brings back a hidden count.
 --   5. Account totals. Overview and Growth share one series of end-of-day account totals (fbla_account_totals).
 --      Walking back from today, a total is shown only when it is 0 or 5+ and differs from the last shown (later) total
