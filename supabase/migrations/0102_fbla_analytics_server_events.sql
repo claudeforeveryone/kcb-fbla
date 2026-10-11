@@ -11,10 +11,15 @@
 --   practice_completed       a graded attempt of any kind except mock and duel; meta.mode = attempt kind
 --   exam_completed           a graded mock exam attempt
 --   duel_started             a player opens their run of an accepted duel (one fbla_duel_runs row per player)
---   duel_completed           a duel reaches status complete; one event per player, meta.outcome win|loss|draw
---   vocab_session_completed  a burst of recorded vocab reviews: the first review after 30 quiet minutes counts as one
---                            session for that user (fbla_vocab_review flushes in debounced batches, so "session" is
---                            defined by the quiet gap, not by the client)
+--   duel_completed           a duel reaches status complete; one event per player, meta.outcome win|loss|draw. The
+--                            second player's submission settles the duel, so the first player did nothing at that
+--                            moment: the owner metrics do not count this event as activity (0105 fbla_activity).
+--   vocab_session_completed  one vocab study session. A session starts with a review that comes after 30 quiet
+--                            minutes (no review by that student in the 30 minutes before it), and the event is
+--                            recorded at that first review, so a long unbroken sitting is one session however long
+--                            it runs. fbla_vocab_review flushes reviews in debounced batches and stamps every term in a
+--                            batch with the same now(), so one batch never counts twice. The name comes from the
+--                            shared taxonomy; read it as "vocab session".
 
 create or replace function fbla_private.fbla_trg_analytics_onboarding()
 returns trigger
@@ -117,7 +122,7 @@ create trigger fbla_analytics_duel_completed
   after update of status on public.fbla_duels
   for each row execute function fbla_private.fbla_trg_analytics_duel_completed();
 
--- Vocab: fbla_vocab_review stamps last_reviewed_at on every reviewed term (insert-then-update for new terms).
+-- Vocab: fbla_vocab_review stamps last_reviewed_at = now() on every reviewed term (insert-then-update for new terms).
 create or replace function fbla_private.fbla_trg_analytics_vocab()
 returns trigger
 language plpgsql
@@ -132,11 +137,19 @@ begin
     return new;
   end if;
   begin
+    -- Same session: this batch already recorded it (its events carry this transaction's now()), or the student
+    -- reviewed something, this term included, in the 30 minutes before this batch.
     if exists (
-      select 1 from public.fbla_analytics_events e
-       where e.user_id = new.user_id
-         and e.event_name = 'vocab_session_completed'
-         and e.created_at > now() - interval '30 minutes') then
+         select 1 from public.fbla_analytics_events e
+          where e.user_id = new.user_id
+            and e.event_name = 'vocab_session_completed'
+            and e.created_at >= now())
+       or (old.last_reviewed_at >= now() - interval '30 minutes' and old.last_reviewed_at < now())
+       or exists (
+         select 1 from public.fbla_vocab_progress p
+          where p.user_id = new.user_id
+            and p.last_reviewed_at >= now() - interval '30 minutes'
+            and p.last_reviewed_at < now()) then
       return new;
     end if;
     if new.term_id like 'deck:%' then

@@ -3,19 +3,36 @@
 -- Aggregate, read-only RPCs for the owner console. Every public function starts with the public.is_platform_owner()
 -- check and runs as definer, so the underlying tables stay closed to clients.
 --
--- Privacy rules:
---   * Small-group suppression: any count of distinct users from 1 to 4 comes back as {"value": null, "suppressed":
---     true}; 0 and 5+ come back exact. Totals tied to a suppressed bucket (event counts, accuracy) are nulled too.
---   * Rates are null unless the denominator is 5+ and neither the numerator nor the remainder is 1-4, so a rate can
---     never be multiplied back into a hidden count.
---   * No email, no free text, no per-user rows. Question previews (site content, never keys or explanations) appear
---     in content health.
+-- Privacy. A count of people comes back as a Count: {"value": n, "suppressed": false} when shown, or
+-- {"value": null, "suppressed": true} when hidden. The rules below keep a group of 1 to 4 people from being shown, or
+-- from being worked out by adding or subtracting other numbers in the same response:
+--   1. Small groups. A count of 1 to 4 people is hidden; 0 and 5+ are shown (fbla_count).
+--   2. Tied numbers. Event counts (times, runs, answers) that belong to a hidden group are hidden too.
+--   3. Nested groups. When a response shows a group and a smaller group inside it (active this week and active
+--      today), the larger count is also hidden whenever the gap between them is 1 to 4, because subtracting would give
+--      that small group away (fbla_count_over).
+--   4. Rates are worked out only from counts the response shows, so a rate never brings back a hidden count.
+--   5. Account totals. Overview and Growth share one series of end-of-day account totals (fbla_account_totals).
+--      Walking back from today, a total is shown only when it is 0 or 5+ and differs from the last shown (later) total
+--      by 0 or 5+. Every new-account count is the gap between two shown totals, and hidden when either is hidden. Any
+--      two shown totals, in any range, bucket size or section, therefore differ by 0 or 5+, and no hidden sign-up
+--      count can be rebuilt from them. A day gets the same answer whatever range asks for it, because the walk always
+--      starts from today.
+-- Hidden does not always mean "under 5": a count can be hidden by rule 3 or 5 and be larger. The console says
+-- "Hidden" for all of them and never says which rule applied (saying it would narrow the value down).
+-- What this does not cover: numbers from different responses that are not additive, such as a Sunday's weekly
+-- active bucket in Growth against Overview's 7-day active count, Growth's per-bucket "finished sign-up" profiles
+-- against Overview's onboarding cohorts, or today's figures against yesterday's. Comparing those can narrow a hidden
+-- value down. Closing that needs noise or rounding, which the console does not use at this size. No email, no free
+-- text, no per-user rows: question previews (site content, never keys or explanations) appear in content health.
 --
 -- Scope: FBLA and DECA share auth.users. An account counts for FBLA when it has an FBLA profile, or its sign-up
 -- metadata says app = 'kcb-fbla' / 'fbla', or it carries no app marker (every account before DECA's backend).
 -- DECA sign-ups must set raw_user_meta_data.app = 'deca' to stay out of these numbers.
 --
--- Activity = an analytics event or a graded attempt. Days are America/Toronto calendar days.
+-- Activity = an analytics event the student caused, or a graded attempt. duel_completed is left out: the second
+-- player's submission records it for both players, so it is not something the first player did that day.
+-- Days are America/Toronto calendar days.
 
 create or replace function fbla_private.fbla_count(p_n bigint)
 returns jsonb
@@ -28,6 +45,56 @@ as $$
     'suppressed', coalesce(p_n, 0) between 1 and 4);
 $$;
 
+-- The shown value of a Count, or null when it is hidden.
+create or replace function fbla_private.fbla_shown(p_c jsonb)
+returns bigint
+language sql
+immutable
+set search_path = ''
+as $$
+  select case when p_c is null or coalesce((p_c ->> 'suppressed')::boolean, true) then null
+              else (p_c ->> 'value')::bigint end;
+$$;
+
+-- A count of a group that contains other groups the same response shows (p_subs: their shown values; nulls, for
+-- hidden ones, are ignored). Hidden when it is 1-4, or when it is 1-4 more than any of them.
+create or replace function fbla_private.fbla_count_over(p_n bigint, p_subs bigint[])
+returns jsonb
+language sql
+immutable
+set search_path = ''
+as $$
+  select case
+    when coalesce(p_n, 0) between 1 and 4
+      or exists (select 1 from unnest(coalesce(p_subs, '{}'::bigint[])) as s(v)
+                  where s.v is not null and coalesce(p_n, 0) - s.v between 1 and 4)
+      then jsonb_build_object('value', null, 'suppressed', true)
+    else jsonb_build_object('value', coalesce(p_n, 0), 'suppressed', false) end;
+$$;
+
+-- A Count that some other rule already decided to show or hide.
+create or replace function fbla_private.fbla_count_if(p_n bigint, p_shown boolean)
+returns jsonb
+language sql
+immutable
+set search_path = ''
+as $$
+  select case when coalesce(p_shown, false) then jsonb_build_object('value', coalesce(p_n, 0), 'suppressed', false)
+              else jsonb_build_object('value', null, 'suppressed', true) end;
+$$;
+
+-- The gap between two account totals (accounts created between two days): shown only when both totals are shown.
+create or replace function fbla_private.fbla_count_between(p_hi bigint, p_hi_shown boolean, p_lo bigint, p_lo_shown boolean)
+returns jsonb
+language sql
+immutable
+set search_path = ''
+as $$
+  select fbla_private.fbla_count_if(p_hi - p_lo, coalesce(p_hi_shown, false) and coalesce(p_lo_shown, false));
+$$;
+
+-- A 0-1 rate, null unless the denominator is 5+ and neither the numerator nor the remainder is 1-4. Callers pass shown
+-- values only (a null in, for a hidden count, gives a null rate).
 create or replace function fbla_private.fbla_rate(p_num bigint, p_den bigint)
 returns numeric
 language sql
@@ -73,7 +140,7 @@ as $$
           or exists (select 1 from public.fbla_profiles p where p.id = u.id));
 $$;
 
--- Activity rows (one per analytics event or graded attempt) in [p_from, p_to).
+-- Activity rows (one per analytics event the student caused, or graded attempt) in [p_from, p_to).
 create or replace function fbla_private.fbla_activity(p_from timestamptz, p_to timestamptz)
 returns table (user_id uuid, ts timestamptz)
 language sql
@@ -82,18 +149,64 @@ security definer
 set search_path = ''
 as $$
   select e.user_id, e.created_at from public.fbla_analytics_events e
-   where e.created_at >= p_from and e.created_at < p_to
+   where e.created_at >= p_from and e.created_at < p_to and e.event_name <> 'duel_completed'
   union all
   select a.user_id, a.created_at from public.fbla_attempts a
    where a.created_at >= p_from and a.created_at < p_to;
 $$;
 
+-- End-of-day FBLA account totals for every Toronto day from p_from - 1 to today, and whether each may be shown
+-- (rule 5 above). Newest first.
+create or replace function fbla_private.fbla_account_totals(p_from date)
+returns table (day date, total bigint, shown boolean)
+language plpgsql
+stable
+security definer
+set search_path = ''
+as $$
+declare
+  v_today date := fbla_private.fbla_local_day(now());
+  v_start date := least(p_from, v_today) - 1;
+  v_before bigint;
+  v_last bigint;
+  r record;
+begin
+  select count(*) into v_before
+    from fbla_private.fbla_accounts() a
+   where fbla_private.fbla_local_day(a.created_at) < v_start;
+
+  for r in
+    select x.d, x.t
+      from (select g::date as d,
+                   v_before + coalesce(sum(coalesce(c.n, 0)) over (order by g::date), 0)::bigint as t
+              from generate_series(v_start::timestamp, v_today::timestamp, interval '1 day') as g
+              left join (select fbla_private.fbla_local_day(a.created_at) as d, count(*) as n
+                           from fbla_private.fbla_accounts() a
+                          group by 1) c on c.d = g::date) x
+     order by x.d desc
+  loop
+    day := r.d;
+    total := r.t;
+    shown := not (r.t between 1 and 4) and (v_last is null or not (v_last - r.t between 1 and 4));
+    if shown then
+      v_last := r.t;
+    end if;
+    return next;
+  end loop;
+end;
+$$;
+
 revoke all on function fbla_private.fbla_count(bigint) from public, anon, authenticated;
+revoke all on function fbla_private.fbla_shown(jsonb) from public, anon, authenticated;
+revoke all on function fbla_private.fbla_count_over(bigint, bigint[]) from public, anon, authenticated;
+revoke all on function fbla_private.fbla_count_if(bigint, boolean) from public, anon, authenticated;
+revoke all on function fbla_private.fbla_count_between(bigint, boolean, bigint, boolean) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_rate(bigint, bigint) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_local_day(timestamptz) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_day_start(date) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_accounts() from public, anon, authenticated;
 revoke all on function fbla_private.fbla_activity(timestamptz, timestamptz) from public, anon, authenticated;
+revoke all on function fbla_private.fbla_account_totals(date) from public, anon, authenticated;
 
 -- Overview: accounts, sign-ups, onboarding conversion, active users, returning users.
 create or replace function public.fbla_owner_overview()
@@ -108,35 +221,63 @@ declare
   v_day timestamptz := fbla_private.fbla_day_start(v_today);
   v_week timestamptz := fbla_private.fbla_day_start(v_today - 6);
   v_month timestamptz := fbla_private.fbla_day_start(v_today - 29);
-  v_accounts bigint;
-  v_profiles bigint;
-  v_new_day bigint;
-  v_new_week bigint;
+  v_t0 bigint;
+  v_t1 bigint;
+  v_t7 bigint;
+  v_t30 bigint;
+  v_s0 boolean;
+  v_s1 boolean;
+  v_s7 boolean;
+  v_s30 boolean;
   v_new_month bigint;
   v_onb_month bigint;
   v_onb_all bigint;
+  v_month_ok boolean;
+  v_all_ok boolean;
   v_dau bigint;
   v_wau bigint;
   v_mau bigint;
   v_returning bigint;
   v_answer_users bigint;
   v_answered bigint;
+  v_dau_c jsonb;
+  v_ans_c jsonb;
+  v_ret_c jsonb;
+  v_wau_c jsonb;
+  v_mau_c jsonb;
   v_since timestamptz;
 begin
   if not public.is_platform_owner() then
     raise exception 'not authorized' using errcode = '42501';
   end if;
 
-  select count(*),
-         count(*) filter (where a.created_at >= v_day),
-         count(*) filter (where a.created_at >= v_week),
-         count(*) filter (where a.created_at >= v_month),
-         count(*) filter (where a.created_at >= v_month and exists (select 1 from public.fbla_profiles p where p.id = a.user_id)),
-         count(*) filter (where exists (select 1 from public.fbla_profiles p where p.id = a.user_id))
-    into v_accounts, v_new_day, v_new_week, v_new_month, v_onb_month, v_onb_all
-    from fbla_private.fbla_accounts() a;
+  -- Account totals at the end of today, yesterday, 7 and 30 days ago (shared with Growth, rule 5).
+  select max(t.total) filter (where t.day = v_today), bool_or(t.shown) filter (where t.day = v_today),
+         max(t.total) filter (where t.day = v_today - 1), bool_or(t.shown) filter (where t.day = v_today - 1),
+         max(t.total) filter (where t.day = v_today - 7), bool_or(t.shown) filter (where t.day = v_today - 7),
+         max(t.total) filter (where t.day = v_today - 30), bool_or(t.shown) filter (where t.day = v_today - 30)
+    into v_t0, v_s0, v_t1, v_s1, v_t7, v_s7, v_t30, v_s30
+    from fbla_private.fbla_account_totals(v_today - 29) t;
+  v_new_month := v_t0 - v_t30;
 
-  select count(*) into v_profiles from public.fbla_profiles;
+  -- Onboarding: accounts that went on to make a profile, for all accounts and for those created in the last 30 days.
+  -- With the account totals shown, these four numbers fix a 2 x 2 table (recent or older, profile or not), so each
+  -- window is shown only when its cells are 0 or 5+, and both windows together only when every cell is.
+  select count(*) filter (where a.created_at >= v_month and a.created_at < fbla_private.fbla_day_start(v_today + 1)
+                                and exists (select 1 from public.fbla_profiles p where p.id = a.user_id)),
+         count(*) filter (where a.created_at < fbla_private.fbla_day_start(v_today + 1)
+                                and exists (select 1 from public.fbla_profiles p where p.id = a.user_id))
+    into v_onb_month, v_onb_all
+    from fbla_private.fbla_accounts() a;
+  v_month_ok := v_s0 and v_s30
+    and not (v_onb_month between 1 and 4)
+    and not ((v_new_month - v_onb_month) between 1 and 4);
+  v_all_ok := v_s0
+    and not (v_onb_all between 1 and 4)
+    and not ((v_t0 - v_onb_all) between 1 and 4)
+    and (not v_month_ok
+         or (not ((v_onb_all - v_onb_month) between 1 and 4)
+             and not ((v_t30 - (v_onb_all - v_onb_month)) between 1 and 4)));
 
   select count(distinct x.user_id) filter (where x.ts >= v_day),
          count(distinct x.user_id) filter (where x.ts >= v_week),
@@ -156,42 +297,49 @@ begin
     from public.fbla_attempts a
    where a.created_at >= v_week;
 
+  -- Nested windows (rule 3): today, answering this week and returning sit inside this week or this month.
+  v_dau_c := fbla_private.fbla_count(v_dau);
+  v_ans_c := fbla_private.fbla_count(v_answer_users);
+  v_ret_c := fbla_private.fbla_count(v_returning);
+  v_wau_c := fbla_private.fbla_count_over(v_wau,
+    array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c)]);
+  v_mau_c := fbla_private.fbla_count_over(v_mau,
+    array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c), fbla_private.fbla_shown(v_wau_c),
+          fbla_private.fbla_shown(v_ret_c)]);
+
   select min(e.created_at) into v_since from public.fbla_analytics_events e;
 
   return jsonb_build_object(
     'generated_at', now(),
     'timezone', 'America/Toronto',
     'tracking_since', v_since,
-    'accounts', fbla_private.fbla_count(v_accounts),
-    'profiles', fbla_private.fbla_count(v_profiles),
+    'accounts', fbla_private.fbla_count_if(v_t0, v_s0),
     'new_accounts', jsonb_build_object(
-      'day', fbla_private.fbla_count(v_new_day),
-      'week', fbla_private.fbla_count(v_new_week),
-      'month', fbla_private.fbla_count(v_new_month)),
-    'active', jsonb_build_object(
-      'dau', fbla_private.fbla_count(v_dau),
-      'wau', fbla_private.fbla_count(v_wau),
-      'mau', fbla_private.fbla_count(v_mau)),
-    'returning', fbla_private.fbla_count(v_returning),
-    'returning_rate', fbla_private.fbla_rate(v_returning, v_mau),
+      'day', fbla_private.fbla_count_between(v_t0, v_s0, v_t1, v_s1),
+      'week', fbla_private.fbla_count_between(v_t0, v_s0, v_t7, v_s7),
+      'month', fbla_private.fbla_count_between(v_t0, v_s0, v_t30, v_s30)),
+    'active', jsonb_build_object('dau', v_dau_c, 'wau', v_wau_c, 'mau', v_mau_c),
+    'returning', v_ret_c,
+    'returning_rate', fbla_private.fbla_rate(fbla_private.fbla_shown(v_ret_c), fbla_private.fbla_shown(v_mau_c)),
     'onboarding', jsonb_build_object(
       'month', jsonb_build_object(
-        'created', fbla_private.fbla_count(v_new_month),
-        'onboarded', fbla_private.fbla_count(v_onb_month),
-        'rate', fbla_private.fbla_rate(v_onb_month, v_new_month)),
+        'created', fbla_private.fbla_count_between(v_t0, v_s0, v_t30, v_s30),
+        'onboarded', fbla_private.fbla_count_if(v_onb_month, v_month_ok),
+        'rate', case when v_month_ok and v_new_month > 0 then round(v_onb_month::numeric / v_new_month, 3) end),
       'all_time', jsonb_build_object(
-        'created', fbla_private.fbla_count(v_accounts),
-        'onboarded', fbla_private.fbla_count(v_onb_all),
-        'rate', fbla_private.fbla_rate(v_onb_all, v_accounts))),
+        'created', fbla_private.fbla_count_if(v_t0, v_s0),
+        'onboarded', fbla_private.fbla_count_if(v_onb_all, v_all_ok),
+        'rate', case when v_all_ok and v_t0 > 0 then round(v_onb_all::numeric / v_t0, 3) end)),
     'answered_week', jsonb_build_object(
-      'users', fbla_private.fbla_count(v_answer_users),
-      'questions', case when v_answer_users between 1 and 4 then null else v_answered end));
+      'users', v_ans_c,
+      'questions', case when fbla_private.fbla_shown(v_ans_c) is null then null else v_answered end));
 end;
 $$;
 
 -- Growth: buckets of a day, week (Monday start) or month over the last p_days (7 to 400) Toronto days.
--- Per bucket: new FBLA accounts, profiles created (onboarded), distinct active users, distinct users who practised,
--- and the running account total at the end of the bucket.
+-- Per bucket: new FBLA accounts and the running account total at the end of the bucket (both from the shared totals,
+-- rule 5), profiles created (onboarded), distinct active users and distinct users who practised. `baseline` is the
+-- running total the day before the first bucket.
 create or replace function public.fbla_owner_growth(p_days int default 90, p_bucket text default 'day')
 returns jsonb
 language plpgsql
@@ -205,6 +353,7 @@ declare
   v_step interval;
   v_today date := fbla_private.fbla_local_day(now());
   v_first date;
+  v_baseline jsonb;
   v_series jsonb;
 begin
   if not public.is_platform_owner() then
@@ -214,22 +363,20 @@ begin
   v_step := ('1 ' || v_bucket)::interval;
   v_first := v_today - (v_days - 1);
 
-  with b as (
+  with tot as materialized (
+    select t.day, t.total, t.shown from fbla_private.fbla_account_totals(v_first) t
+  ), b as (
     select greatest(g::date, v_first) as d_from,
            least((g + v_step)::date - 1, v_today) as d_to
       from generate_series(date_trunc(v_bucket, v_first::timestamp), v_today::timestamp, v_step) as g
-  ), acc as (
-    select * from fbla_private.fbla_accounts()
   ), act as (
     select * from fbla_private.fbla_activity(fbla_private.fbla_day_start(v_first), 'infinity')
   )
   select coalesce(jsonb_agg(jsonb_build_object(
            'start', b.d_from,
            'end', b.d_to,
-           'signups', fbla_private.fbla_count((
-             select count(*) from acc
-              where acc.created_at >= fbla_private.fbla_day_start(b.d_from)
-                and acc.created_at < fbla_private.fbla_day_start(b.d_to + 1))),
+           'signups', fbla_private.fbla_count_between(t_end.total, t_end.shown, t_prev.total, t_prev.shown),
+           'total', fbla_private.fbla_count_if(t_end.total, t_end.shown),
            'onboarded', fbla_private.fbla_count((
              select count(*) from public.fbla_profiles p
               where p.created_at >= fbla_private.fbla_day_start(b.d_from)
@@ -241,14 +388,16 @@ begin
            'practising', fbla_private.fbla_count((
              select count(distinct a.user_id) from public.fbla_attempts a
               where a.created_at >= fbla_private.fbla_day_start(b.d_from)
-                and a.created_at < fbla_private.fbla_day_start(b.d_to + 1))),
-           'total', fbla_private.fbla_count((
-             select count(*) from acc where acc.created_at < fbla_private.fbla_day_start(b.d_to + 1)))
-         ) order by b.d_from), '[]'::jsonb)
-    into v_series
-    from b;
+                and a.created_at < fbla_private.fbla_day_start(b.d_to + 1)))
+         ) order by b.d_from), '[]'::jsonb),
+         (select fbla_private.fbla_count_if(t.total, t.shown) from tot t where t.day = v_first - 1)
+    into v_series, v_baseline
+    from b
+    join tot t_end on t_end.day = b.d_to
+    join tot t_prev on t_prev.day = b.d_from - 1;
 
-  return jsonb_build_object('days', v_days, 'bucket', v_bucket, 'timezone', 'America/Toronto', 'series', v_series);
+  return jsonb_build_object('days', v_days, 'bucket', v_bucket, 'timezone', 'America/Toronto',
+                            'baseline', v_baseline, 'series', v_series);
 end;
 $$;
 
@@ -271,6 +420,10 @@ declare
   v_started bigint;
   v_done_users bigint;
   v_done bigint;
+  v_started_c jsonb;
+  v_done_c jsonb;
+  v_started_shown bigint;
+  v_done_shown bigint;
   v_duel_users bigint;
   v_duels bigint;
   v_duels_done bigint;
@@ -279,16 +432,18 @@ begin
     raise exception 'not authorized' using errcode = '42501';
   end if;
 
+  -- Features, by the students who used each. Finished practice and mock exams are not here: Practice modes and the
+  -- practice funnel cover them, and listing them twice would let one number be rebuilt from the others. The install
+  -- and push events are left out until FBLA sends them. Hidden groups sort by name, not by their hidden size.
   select coalesce(jsonb_agg(jsonb_build_object(
            'name', n.name,
            'users', fbla_private.fbla_count(coalesce(s.users, 0)),
            'events', case when coalesce(s.users, 0) between 1 and 4 then null else coalesce(s.events, 0) end)
-         order by coalesce(s.users, 0) desc, n.ord), '[]'::jsonb)
+         order by case when coalesce(s.users, 0) between 1 and 4 then 0 else coalesce(s.users, 0) end desc, n.ord), '[]'::jsonb)
     into v_features
     from unnest(array[
-      'onboarding_completed', 'event_selected', 'practice_started', 'practice_completed', 'exam_completed',
-      'vocab_session_completed', 'duel_started', 'duel_completed', 'resource_opened', 'feedback_submitted',
-      'install_prompt_shown', 'app_installed', 'push_enabled'
+      'event_selected', 'practice_started', 'vocab_session_completed', 'duel_started', 'duel_completed',
+      'resource_opened', 'onboarding_completed', 'feedback_submitted'
     ]) with ordinality as n(name, ord)
     left join (
       select e.event_name, count(distinct e.user_id) as users, count(*) as events
@@ -297,18 +452,17 @@ begin
        group by e.event_name
     ) s on s.event_name = n.name;
 
-  -- Practice modes from graded attempts (history before analytics existed is included).
-  select coalesce(jsonb_agg(jsonb_build_object(
-           'mode', m.kind,
-           'users', fbla_private.fbla_count(m.users),
-           'attempts', case when m.users between 1 and 4 then null else m.attempts end)
-         order by m.attempts desc, m.kind), '[]'::jsonb)
+  -- Practice modes from graded attempts (history before analytics existed is included): students per mode. Runs per
+  -- mode are left out, since they add up to the funnel's finished total and would expose a hidden mode.
+  select coalesce(jsonb_agg(jsonb_build_object('mode', m.kind, 'users', fbla_private.fbla_count(m.users))
+         order by case when m.users between 1 and 4 then 0 else m.users end desc, m.kind), '[]'::jsonb)
     into v_modes
-    from (select a.kind, count(distinct a.user_id) as users, count(*) as attempts
+    from (select a.kind, count(distinct a.user_id) as users
             from public.fbla_attempts a
            where a.created_at >= v_from
            group by a.kind) m;
 
+  -- The funnel: practice started in the app (client event) against graded runs (server events, every kind but duel).
   select count(distinct e.user_id) filter (where e.event_name = 'practice_started'),
          count(*) filter (where e.event_name = 'practice_started'),
          count(distinct e.user_id) filter (where e.event_name in ('practice_completed', 'exam_completed')),
@@ -316,6 +470,12 @@ begin
     into v_started_users, v_started, v_done_users, v_done
     from public.fbla_analytics_events e
    where e.created_at >= v_from;
+  v_started_c := fbla_private.fbla_count(v_started_users);
+  -- Students who finished include the students of each practice mode (rule 3).
+  v_done_c := fbla_private.fbla_count_over(v_done_users,
+    array(select fbla_private.fbla_shown(m -> 'users') from jsonb_array_elements(v_modes) m where m ->> 'mode' <> 'duel'));
+  v_started_shown := case when fbla_private.fbla_shown(v_started_c) is null then null else v_started end;
+  v_done_shown := case when fbla_private.fbla_shown(v_done_c) is null then null else v_done end;
 
   select count(distinct p.uid), count(distinct d.id), count(distinct d.id) filter (where d.status = 'complete')
     into v_duel_users, v_duels, v_duels_done
@@ -323,21 +483,21 @@ begin
     cross join lateral (values (d.challenger_id), (d.opponent_id)) as p(uid)
    where d.created_at >= v_from;
 
-  select coalesce(jsonb_agg(t.obj order by t.users desc, t.code), '[]'::jsonb)
+  -- Events students chose or started practising: real FBLA events only, students per event.
+  select coalesce(jsonb_agg(t.obj order by t.sort_users desc, t.code), '[]'::jsonb)
     into v_popular
     from (
-      select s.code, s.users,
-             jsonb_build_object(
-               'code', s.code,
-               'users', fbla_private.fbla_count(s.users),
-               'events', case when s.users between 1 and 4 then null else s.events end) as obj
-        from (select e.event_code as code, count(distinct e.user_id) as users, count(*) as events
+      select s.code,
+             case when s.users between 1 and 4 then 0 else s.users end as sort_users,
+             jsonb_build_object('code', s.code, 'users', fbla_private.fbla_count(s.users)) as obj
+        from (select e.event_code as code, count(distinct e.user_id) as users
                 from public.fbla_analytics_events e
                where e.created_at >= v_from and e.event_code is not null
                  and e.event_name in ('event_selected', 'practice_started')
-               group by e.event_code
-               order by count(distinct e.user_id) desc, e.event_code
-               limit 15) s
+                 and e.event_code in (select q.event from public.fbla_questions q)
+               group by e.event_code) s
+       order by case when s.users between 1 and 4 then 0 else s.users end desc, s.code
+       limit 15
     ) t;
 
   return jsonb_build_object(
@@ -345,14 +505,10 @@ begin
     'features', v_features,
     'modes', v_modes,
     'practice', jsonb_build_object(
-      'started', jsonb_build_object(
-        'users', fbla_private.fbla_count(v_started_users),
-        'events', case when v_started_users between 1 and 4 then null else v_started end),
-      'completed', jsonb_build_object(
-        'users', fbla_private.fbla_count(v_done_users),
-        'events', case when v_done_users between 1 and 4 then null else v_done end),
-      'completion_rate', case when v_started_users >= 5 and v_started > 0
-                              then round(least(1, v_done::numeric / v_started), 3) end),
+      'started', jsonb_build_object('users', v_started_c, 'events', v_started_shown),
+      'completed', jsonb_build_object('users', v_done_c, 'events', v_done_shown),
+      'completion_rate', case when v_started_shown > 0 and v_done_shown is not null
+                              then round(least(1, v_done_shown::numeric / v_started_shown), 3) end),
     'duels', jsonb_build_object(
       'players', fbla_private.fbla_count(v_duel_users),
       'created', case when v_duel_users between 1 and 4 then null else v_duels end,
@@ -379,12 +535,11 @@ begin
     raise exception 'not authorized' using errcode = '42501';
   end if;
 
-  select coalesce(jsonb_agg(r.obj order by r.sort_users desc, r.sort_attempts desc, r.event), '[]'::jsonb)
+  select coalesce(jsonb_agg(r.obj order by r.sort_users desc, r.event), '[]'::jsonb)
     into v_rows
     from (
       select ev.event,
-             coalesce(a.users, 0) as sort_users,
-             coalesce(a.attempts, 0) as sort_attempts,
+             case when coalesce(a.users, 0) between 1 and 4 then 0 else coalesce(a.users, 0) end as sort_users,
              jsonb_build_object(
                'event', ev.event,
                'users', fbla_private.fbla_count(coalesce(a.users, 0)),
@@ -393,7 +548,10 @@ begin
                'accuracy', case when coalesce(a.users, 0) >= 5 and coalesce(a.answered, 0) > 0
                                 then round(a.correct::numeric / a.answered, 3) end,
                'started', fbla_private.fbla_count(coalesce(p.started_users, 0)),
-               'abandonment', case when coalesce(p.started_users, 0) >= 5 and coalesce(p.started, 0) > 0
+               -- Shown only when 5+ started and the students who finished are not a hidden group of 1-4.
+               'abandonment', case when coalesce(p.started_users, 0) >= 5
+                                        and not (coalesce(p.done_users, 0) between 1 and 4)
+                                        and coalesce(p.started, 0) > 0
                                    then round(greatest(0, 1 - least(1, coalesce(p.completed, 0)::numeric / p.started)), 3)
                               end) as obj
         from (select distinct q.event from public.fbla_questions q) ev
@@ -408,6 +566,7 @@ begin
           select e.event_code,
                  count(distinct e.user_id) filter (where e.event_name = 'practice_started') as started_users,
                  count(*) filter (where e.event_name = 'practice_started') as started,
+                 count(distinct e.user_id) filter (where e.event_name in ('practice_completed', 'exam_completed')) as done_users,
                  count(*) filter (where e.event_name in ('practice_completed', 'exam_completed')) as completed
             from public.fbla_analytics_events e
            where e.created_at >= v_from and e.event_code is not null

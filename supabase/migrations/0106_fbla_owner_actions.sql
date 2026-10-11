@@ -1,7 +1,8 @@
 -- 0106 FBLA owner actions (Omega owner console). Ledger name: fbla_0106_owner_actions.
 --
--- Feedback triage, audit search, minimal user search, the audited support-email lookup, and owner wrappers for
--- chapter bans and roles. Every function starts with the public.is_platform_owner() check. Writes are audited:
+-- Feedback triage (with the reported question and its key), audit search, minimal user search, the audited
+-- support-email lookup, and owner wrappers for chapter bans and roles. An owner needs only a signed-in account, not a
+-- student profile, so nothing here writes auth.uid() into a column that references fbla_profiles. Every function starts with the public.is_platform_owner() check. Writes are audited:
 -- feedback and support lookups call fbla_private.fbla_audit directly; ban and role changes are caught by the 0104
 -- triggers, which read the transaction-local settings these wrappers set (fbla.via = 'owner_console', fbla.reason)
 -- and clear again before returning, so nothing later in the same transaction is attributed to the console.
@@ -125,6 +126,33 @@ begin
   return jsonb_build_object(
     'id', v_new.id, 'status', v_new.status, 'priority', v_new.priority,
     'resolution_note', v_new.resolution_note, 'resolved_at', v_new.resolved_at, 'updated_at', v_new.updated_at);
+end;
+$$;
+
+-- One official question with its key, for judging a question report in triage: the stem, the choices, the keyed
+-- answer (0-based) and the explanation. Owners only; students get keys only through the grading RPCs (0014).
+create or replace function public.fbla_owner_question(p_id text)
+returns jsonb
+language plpgsql
+stable
+security definer
+set search_path = ''
+as $$
+declare
+  v_q jsonb;
+begin
+  if not public.is_platform_owner() then
+    raise exception 'not authorized' using errcode = '42501';
+  end if;
+  select jsonb_build_object('id', q.id, 'event', q.event, 'area', q.sub, 'difficulty', q.diff, 'question', q.q,
+                            'choices', q.choices, 'answer', q.answer, 'explanation', q.explain)
+    into v_q
+    from public.fbla_questions q
+   where q.id = p_id;
+  if v_q is null then
+    raise exception 'question not found' using errcode = 'P0002';
+  end if;
+  return v_q;
 end;
 $$;
 
@@ -307,8 +335,10 @@ begin
     if v_role = 'executive' then
       raise exception 'make them a member before banning them' using errcode = '42501';
     end if;
+    -- banned_by references fbla_profiles, and an owner may never have made a student profile (the console only
+    -- needs a signed-in account): name them only when they have one. The audit row records the actor either way.
     insert into public.fbla_chapter_bans (chapter_id, user_id, banned_by, reason)
-    values (p_chapter, p_user, auth.uid(), v_reason)
+    values (p_chapter, p_user, (select p.id from public.fbla_profiles p where p.id = auth.uid()), v_reason)
     on conflict (chapter_id, user_id) do update set reason = excluded.reason, banned_by = excluded.banned_by;
     -- fbla_bans_after_insert removes the membership on a new ban; this also covers a re-ban.
     delete from public.fbla_chapter_members where chapter_id = p_chapter and user_id = p_user;
@@ -392,6 +422,7 @@ $$;
 
 revoke all on function public.fbla_owner_feedback_list(text, text, int, int) from public, anon;
 revoke all on function public.fbla_owner_feedback_update(uuid, text, text, text) from public, anon;
+revoke all on function public.fbla_owner_question(text) from public, anon;
 revoke all on function public.fbla_owner_audit_search(int, text, text, int, int) from public, anon;
 revoke all on function public.fbla_owner_user_search(text, int) from public, anon;
 revoke all on function public.fbla_owner_support_email(uuid, text) from public, anon;
@@ -399,6 +430,7 @@ revoke all on function public.fbla_owner_set_chapter_ban(uuid, uuid, boolean, te
 revoke all on function public.fbla_owner_set_chapter_role(uuid, uuid, text, text) from public, anon;
 grant execute on function public.fbla_owner_feedback_list(text, text, int, int) to authenticated;
 grant execute on function public.fbla_owner_feedback_update(uuid, text, text, text) to authenticated;
+grant execute on function public.fbla_owner_question(text) to authenticated;
 grant execute on function public.fbla_owner_audit_search(int, text, text, int, int) to authenticated;
 grant execute on function public.fbla_owner_user_search(text, int) to authenticated;
 grant execute on function public.fbla_owner_support_email(uuid, text) to authenticated;

@@ -4,7 +4,8 @@
 -- A member can insert rows as themselves (only the report columns; status, priority and notes are server-side)
 -- and read their own rows, including the status and the note the team leaves for them. They cannot update or
 -- delete. Owners list and triage everything through the SECURITY DEFINER owner RPCs (0106); the table grants
--- clients nothing else. Rate limit: 10 reports an hour, 40 a day per member.
+-- clients nothing else. Rate limit: 10 reports an hour, 40 a day per member, counted under a per-member advisory
+-- lock so parallel requests cannot all pass the check at once.
 
 create table if not exists public.fbla_feedback (
   id uuid primary key default gen_random_uuid(),
@@ -73,6 +74,8 @@ begin
   new.created_at := now();
   new.updated_at := now();
 
+  -- Parallel inserts from one member queue here, so each one counts the rows the others committed.
+  perform pg_advisory_xact_lock(hashtextextended('fbla_feedback:' || new.user_id::text, 0));
   select count(*) filter (where f.created_at > now() - interval '1 hour'), count(*)
     into v_hour, v_day
     from public.fbla_feedback f

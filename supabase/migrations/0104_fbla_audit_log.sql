@@ -2,10 +2,11 @@
 --
 -- Append-only record of privileged changes. It is written two ways:
 --   1. Triggers on the tables the privileged RPCs change, so every path is covered whichever RPC made the change
---      (existing chapter RPCs fbla_set_role, fbla_transfer_presidency, fbla_ban_member, fbla_unban_member,
---      fbla_remove_member, fbla_set_event_trainers, fbla_delete_chapter, and the owner wrappers in 0106):
---        chapter_role_changed, member_banned, member_unbanned, member_removed, trainer_assigned, trainer_removed,
---        chapter_deleted, owner_granted, owner_revoked.
+--      (existing chapter RPCs fbla_add_member, fbla_set_role, fbla_transfer_presidency, fbla_ban_member,
+--      fbla_unban_member, fbla_remove_member, fbla_set_event_trainers, fbla_delete_chapter, and the owner wrappers in
+--      0106):
+--        member_added, chapter_role_changed, member_banned, member_unbanned, member_removed, trainer_assigned,
+--        trainer_removed, chapter_deleted, owner_granted, owner_revoked.
 --   2. Direct calls from the owner RPCs (0106): feedback_updated, support_email_viewed.
 -- The owner RPCs set the transaction-local settings fbla.via ('owner_console') and fbla.reason, which the writer
 -- folds into the row's detail, so a row says who acted (auth.uid(), null for direct SQL / cron), through which
@@ -103,6 +104,28 @@ create trigger fbla_audit_member_role
   after update of role on public.fbla_chapter_members
   for each row when (old.role is distinct from new.role)
   execute function fbla_private.fbla_trg_audit_member_role();
+
+-- Additions by someone else (fbla_add_member puts a player in a chapter by username, with no consent step).
+-- Skipped: joining on your own with a code or invite link, and the president row a new chapter makes for the person
+-- who registered it (both have user_id = auth.uid()).
+create or replace function fbla_private.fbla_trg_audit_member_added()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  if new.user_id is not distinct from auth.uid() then return new; end if;
+  perform fbla_private.fbla_audit('member_added', 'chapter_member', new.user_id::text,
+    jsonb_build_object('chapter_id', new.chapter_id, 'role', new.role::text));
+  return new;
+end;
+$$;
+
+drop trigger if exists fbla_audit_member_added on public.fbla_chapter_members;
+create trigger fbla_audit_member_added
+  after insert on public.fbla_chapter_members
+  for each row execute function fbla_private.fbla_trg_audit_member_added();
 
 -- Removals by someone else (fbla_remove_member, owner tools). Skipped: leaving on your own, the removal a ban makes
 -- (the ban row says it), and cascades from a deleted chapter (chapter_deleted says it) or a deleted account.
@@ -216,7 +239,8 @@ create trigger fbla_audit_chapter_delete
   for each row execute function fbla_private.fbla_trg_audit_chapter_delete();
 
 -- Owner grants and revocations on the shared allowlist (FBLA and DECA). Grants happen by manual SQL, so the actor is
--- usually null; the row still proves when ownership changed.
+-- usually null; the row still proves when ownership changed. Moving a row to another account (an UPDATE of user_id)
+-- logs the revocation and the grant.
 create or replace function fbla_private.fbla_trg_audit_platform_owner()
 returns trigger
 language plpgsql
@@ -228,6 +252,13 @@ begin
     perform fbla_private.fbla_audit('owner_granted', 'user', new.user_id::text, '{}'::jsonb);
     return new;
   end if;
+  if tg_op = 'UPDATE' then
+    if new.user_id is distinct from old.user_id then
+      perform fbla_private.fbla_audit('owner_revoked', 'user', old.user_id::text, jsonb_build_object('op', 'update'));
+      perform fbla_private.fbla_audit('owner_granted', 'user', new.user_id::text, jsonb_build_object('op', 'update'));
+    end if;
+    return new;
+  end if;
   perform fbla_private.fbla_audit('owner_revoked', 'user', old.user_id::text, '{}'::jsonb);
   return old;
 end;
@@ -235,12 +266,13 @@ $$;
 
 drop trigger if exists fbla_audit_platform_owner on private.platform_owners;
 create trigger fbla_audit_platform_owner
-  after insert or delete on private.platform_owners
+  after insert or update or delete on private.platform_owners
   for each row execute function fbla_private.fbla_trg_audit_platform_owner();
 
 revoke all on function fbla_private.fbla_audit_immutable() from public, anon, authenticated;
 revoke all on function fbla_private.fbla_audit(text, text, text, jsonb) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_trg_audit_member_role() from public, anon, authenticated;
+revoke all on function fbla_private.fbla_trg_audit_member_added() from public, anon, authenticated;
 revoke all on function fbla_private.fbla_trg_audit_member_removed() from public, anon, authenticated;
 revoke all on function fbla_private.fbla_trg_audit_ban() from public, anon, authenticated;
 revoke all on function fbla_private.fbla_trg_audit_unban() from public, anon, authenticated;

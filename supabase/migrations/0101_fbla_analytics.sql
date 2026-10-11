@@ -88,8 +88,10 @@ $$;
 -- Client entry point (fire-and-forget from the browser).
 -- Accepts only events the browser is the right source for. Everything the database already knows (attempts graded,
 -- duels settled, vocab reviews, profiles created, feedback filed) is recorded server-side and refused here, so a
--- client cannot inflate those numbers. Over the rate limit (30 client events a minute, 500 a day per user; server
--- events do not count against it) it quietly does nothing.
+-- client cannot inflate those numbers. An event code must be a real FBLA event (one with questions in
+-- fbla_questions), so made-up codes cannot crowd the owner's lists. Over the rate limit (30 client events a minute,
+-- 500 a day per user; server events do not count against it) it quietly does nothing. Calls from one user queue on a
+-- per-user advisory lock before the limit is counted, so parallel requests cannot all slip under it.
 create or replace function public.fbla_track(
   p_name text, p_event_code text default null, p_meta jsonb default '{}'::jsonb)
 returns void
@@ -112,10 +114,14 @@ begin
   if p_event_code is not null and p_event_code !~ '^[a-z0-9_-]{1,40}$' then
     raise exception 'bad event code' using errcode = '22023';
   end if;
+  if p_event_code is not null and not exists (select 1 from public.fbla_questions q where q.event = p_event_code) then
+    raise exception 'unknown event code' using errcode = '22023';
+  end if;
   if not fbla_private.fbla_meta_ok(coalesce(p_meta, '{}'::jsonb)) then
     raise exception 'metadata not allowed' using errcode = '22023';
   end if;
 
+  perform pg_advisory_xact_lock(hashtextextended('fbla_track:' || v_uid::text, 0));
   select count(*) filter (where e.created_at > now() - interval '1 minute'), count(*)
     into v_minute, v_day
     from public.fbla_analytics_events e
