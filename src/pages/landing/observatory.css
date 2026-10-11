@@ -16,6 +16,8 @@
   /* the same curve as the app's --ease-out-quint */
   --obs-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --obs-bar: 64px;
+  /* the hero headline's size; .obs-keep sizes its band from it */
+  --obs-h1-size: clamp(2.4rem, 5.6vw, 4.85rem);
 
   position: relative;
   isolation: isolate;
@@ -81,7 +83,7 @@
 .obs-h1 {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.4rem, 5.6vw, 4.85rem);
+  font-size: var(--obs-h1-size);
   line-height: 0.96;
   letter-spacing: -0.03em;
   color: #fff;
@@ -251,6 +253,43 @@
         rgb(0 20 63 / 0) 68%
       ),
       linear-gradient(to top, var(--obs-stage) 0%, rgb(0 20 63 / 0) 22%);
+  }
+}
+
+/* Phones (the tall framing): the room stands above the copy, but on a short screen the headline still reaches into it.
+   Whatever of it is left behind the headline sits under at least 0.62 of the stage colour, the level at which even a
+   white pixel keeps white heading text above 3:1, fading out above and below so it reads as the stage's own shadow,
+   not a band. It hangs off the hero's copy block, whose first line is the headline, so it holds wherever the copy puts
+   it; as the block's own stacking context it paints under all of the block's text (on the h1 itself it would cover
+   the lead below it). The still of the room also keeps its bright core above the headline (ObservatoryStill,
+   stillPlacement.ts). Wide framings put the copy beside the room, under the side scrim, and do without it. */
+.obs-keep {
+  position: relative;
+  z-index: 0;
+}
+
+.obs-keep::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -100vw;
+  right: -100vw;
+  top: -3rem;
+  /* 3rem above the two headline lines (0.96 line height) to 7.5rem below them */
+  height: calc(3rem + 1.92 * var(--obs-h1-size) + 7.5rem);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 20 63 / 0) 0,
+    rgb(0 20 63 / 0.62) 2.5rem,
+    rgb(0 20 63 / 0.62) calc(100% - 7rem),
+    rgb(0 20 63 / 0) 100%
+  );
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) {
+  .obs-keep::before {
+    content: none;
   }
 }
 

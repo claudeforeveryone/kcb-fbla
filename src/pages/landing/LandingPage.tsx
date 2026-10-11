@@ -188,10 +188,10 @@ function Landing() {
         aria-labelledby="hero-title"
         className={cn("obs-hero", intro && "obs-intro")}
       >
-        <ObservatoryStage variant="hero" />
+        <ObservatoryStage variant="hero" clearOf="hero-title" />
         <div className="obs-scrim" aria-hidden="true" />
         <div className="obs-wrap relative pb-14 pt-24 md:pb-20">
-          <div className="max-w-[44rem]">
+          <div className="obs-keep max-w-[44rem]">
             <h1 id="hero-title" className="obs-h1">
               <span className="obs-line">
                 <span style={{ ["--d" as string]: "0ms" }}>The Leadership</span>

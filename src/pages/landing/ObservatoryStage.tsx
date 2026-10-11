@@ -68,9 +68,12 @@ function prefersReducedMotion() {
 
 export function ObservatoryStage({
   variant,
+  clearOf,
   className,
 }: {
   variant: PosterVariant;
+  /** id of the section's heading, which a phone's still of the room keeps clear of (ObservatoryStill) */
+  clearOf?: string;
   className?: string;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -278,6 +281,7 @@ export function ObservatoryStage({
       {wantsStill && (
         <ObservatoryStill
           variant={variant}
+          clearOf={clearOf}
           load={still !== "none"}
           onShown={onStillShown}
           onFailed={onStillFailed}
