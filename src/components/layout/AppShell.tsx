@@ -1,7 +1,8 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { BarChart3, ChevronDown, LogOut, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
+import { useHydrated } from '../../lib/hydration';
 import { Avatar } from '../ui/Avatar';
 import { buttonClasses } from '../ui/Button';
 import { Dropdown } from '../ui/Dropdown';
@@ -20,13 +21,9 @@ export function AppShell({ children }: { children?: ReactNode }) {
   const { pathname } = useLocation();
   const signedIn = !!session && !!profile;
 
-  // New page: start at the top (keep position for in-page hash links).
-  useEffect(() => {
-    if (!window.location.hash) window.scrollTo({ top: 0 });
-  }, [pathname]);
-
   return (
     <div className="flex min-h-dvh flex-col">
+      <ScrollToTop pathname={pathname} />
       <a
         href="#main"
         className="sr-only z-[200] rounded-[2px] bg-white px-3 py-2 font-semibold text-navy focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
@@ -42,6 +39,24 @@ export function AppShell({ children }: { children?: ReactNode }) {
       {signedIn && <BottomTabs pathname={pathname} />}
     </div>
   );
+}
+
+/**
+ * New page: start at the top (keep position for in-page hash links). Not when the shell first hydrates a prerendered
+ * page: the visitor may already have scrolled it while the app was loading, and the browser has placed a fresh load.
+ * A shell mounted by in-app navigation (say from /login) still resets, since it inherits the last page's scroll.
+ */
+function ScrollToTop({ pathname }: { pathname: string }) {
+  const hydrated = useHydrated(); // false only during hydration
+  const skip = useRef(!hydrated);
+  useEffect(() => {
+    if (skip.current) {
+      skip.current = false;
+      return;
+    }
+    if (!window.location.hash) window.scrollTo({ top: 0 });
+  }, [pathname]);
+  return null;
 }
 
 function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string }) {
