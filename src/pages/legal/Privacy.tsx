@@ -157,9 +157,6 @@ export default function Privacy() {
             Delivers our weekly and chapter emails to the address on your account. Resend is based in the United States,
             so these emails pass through the US.
           </Item>
-          <Item term="Google Fonts">
-            The site's fonts load from Google, so your browser contacts Google when you open a page.
-          </Item>
         </Items>
         <p>We don't use advertising networks or third-party tracking tools, and we never sell or rent your information.</p>
       </LegalSection>

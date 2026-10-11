@@ -3,7 +3,7 @@
 // - Pages always come from the network; with no connection the offline page is shown instead of a browser error.
 // - Hashed build files (assets/) are cached after their first load: their names change whenever their content does.
 // - Everything else (icons, manifest, images) is left to the browser's normal HTTP cache, so updates always arrive.
-// - Never touches other origins (Supabase, Google Fonts) or Supabase API paths, so no account or practice data is
+// - Never touches other origins (Supabase) or Supabase API paths, so no account or practice data is
 //   ever stored here. No push notifications.
 // Paths are relative to this file, so the same worker works at / (Vercel) and under a sub-path (GitHub Pages).
 // The build (scripts/prerender.mjs) replaces VERSION with a hash of the precached files: no hand bumping.

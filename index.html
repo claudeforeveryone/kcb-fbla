@@ -19,12 +19,10 @@
     <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Work+Sans:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Brand fonts are self-hosted (@font-face in src/index.css). Preloading the Latin cuts starts them with the CSS
+         instead of after it, so the swap from the fallback comes sooner. -->
+    <link rel="preload" href="/src/assets/fonts/open-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/work-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <script>
       // Apply the colour mode before first paint so there is no flash.
       (function () {

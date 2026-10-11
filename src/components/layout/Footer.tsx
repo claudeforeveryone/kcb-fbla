@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLink, Heart } from 'lucide-react';
 import { cn } from '../ui/cn';
 import { useCurrentYear } from '../../lib/hydration';
-import { LOGO_WHITE } from './Brand';
+import { LOGO_SIZE, LOGO_WHITE } from './Brand';
 
 const LINK = 'text-white/85 underline-offset-4 hover:text-white hover:underline';
 /** Footer list links: a 44 px row on phones (thumb-sized), plain text rows from md up. */
@@ -16,7 +16,7 @@ export function Footer({ className }: { className?: string }) {
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-2 gap-x-6 gap-y-8 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8 lg:px-10">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-3">
-            <img src={LOGO_WHITE} alt="" className="h-10 w-auto" />
+            <img src={LOGO_WHITE} {...LOGO_SIZE} alt="" loading="lazy" className="h-10 w-auto" />
             <div>
               <div className="font-display text-lg font-extrabold text-white">FBLC</div>
               <div className="text-xs text-white/70">Practise. Compete. Lead.</div>
