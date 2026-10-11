@@ -1,0 +1,815 @@
+/* The Leadership Observatory (signed-out "/"). Everything is scoped to .observatory so nothing reaches in-app pages.
+   The landing is always dark: the app's navy tokens plus one landing-only light colour, FBLA gold. The sample
+   question window (.obs-app) keeps the app's own tokens, so the real white FBLC interface shows inside the room. */
+
+.observatory {
+  --obs-stage: #00143f;
+  --obs-navy: #001e60;
+  --obs-navy-2: #0a2b78;
+  --obs-gold: #f4ab19;
+  --obs-gold-soft: #f6cc6b;
+  --obs-ink: #f4f7fd;
+  --obs-ink-2: rgb(244 247 253 / 0.86);
+  --obs-ink-3: rgb(244 247 253 / 0.72);
+  --obs-line: rgb(255 255 255 / 0.14);
+  --obs-line-2: rgb(255 255 255 / 0.26);
+  /* the same curve as the app's --ease-out-quint */
+  --obs-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --obs-bar: 64px;
+  /* the hero headline's size; .obs-keep sizes its band from it */
+  --obs-h1-size: clamp(2.4rem, 5.6vw, 4.85rem);
+
+  position: relative;
+  isolation: isolate;
+  background: var(--obs-stage);
+  color: var(--obs-ink);
+  color-scheme: dark;
+  /* the shared footer sits 4rem below <main>; pull it up so no white band shows between the room and the footer */
+  margin-bottom: -4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .observatory {
+    --obs-bar: 76px;
+  }
+}
+
+.observatory ::selection {
+  background: rgb(246 204 107 / 0.32);
+  color: #fff;
+}
+
+.observatory :focus-visible {
+  outline: 2px solid var(--obs-gold-soft);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.obs-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+@media (min-width: 640px) {
+  .obs-wrap {
+    padding-inline: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .obs-wrap {
+    padding-inline: 48px;
+  }
+}
+
+.obs-section {
+  border-top: 1px solid var(--obs-line);
+  padding-block: 88px;
+  /* anchors (#platform, #events, ...) land below the fixed top bar */
+  scroll-margin-top: var(--obs-bar);
+}
+
+@media (min-width: 768px) {
+  .obs-section {
+    padding-block: 128px;
+  }
+}
+
+/* ---------- type ------------------------------------------------------------------------------------------------- */
+
+.obs-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--obs-h1-size);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.obs-lead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--obs-ink);
+}
+
+.obs-body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--obs-ink-2);
+  max-width: 60ch;
+}
+
+@media (min-width: 768px) {
+  .obs-body {
+    font-size: 17px;
+  }
+}
+
+.obs-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.obs-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.obs-fact {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.005em;
+  color: var(--obs-gold-soft);
+}
+
+.obs-small {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--obs-ink-3);
+}
+
+/* ---------- actions ------------------------------------------------------------------------------------------- */
+
+.obs-btn-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding-inline: 24px;
+  border: 1px solid rgb(255 255 255 / 0.5);
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+  color: #fff;
+  transition:
+    background-color 180ms var(--obs-ease),
+    border-color 180ms var(--obs-ease),
+    transform 160ms var(--obs-ease);
+}
+
+.obs-btn-line:hover {
+  background: rgb(255 255 255 / 0.08);
+  border-color: #fff;
+}
+
+.obs-btn-line:active {
+  transform: translateY(1px);
+}
+
+.obs-skip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--obs-ink-2);
+  text-decoration: underline;
+  text-decoration-color: rgb(246 204 107 / 0.6);
+  text-underline-offset: 5px;
+  transition: color 180ms var(--obs-ease);
+}
+
+.obs-skip:hover {
+  color: #fff;
+}
+
+/* ---------- hero -------------------------------------------------------------------------------------------------- */
+
+.obs-hero {
+  position: relative;
+  min-height: max(620px, calc(100svh - var(--obs-bar)));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) {
+  .obs-hero {
+    justify-content: center;
+  }
+}
+
+.obs-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    var(--obs-stage) 0%,
+    var(--obs-stage) 36%,
+    rgb(0 20 63 / 0.72) 50%,
+    rgb(0 20 63 / 0) 66%
+  );
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) {
+  .obs-scrim {
+    background:
+      linear-gradient(
+        to right,
+        var(--obs-stage) 0%,
+        rgb(0 20 63 / 0.94) 26%,
+        rgb(0 20 63 / 0.5) 42%,
+        rgb(0 20 63 / 0) 56%
+      ),
+      linear-gradient(to top, var(--obs-stage) 0%, rgb(0 20 63 / 0) 22%);
+  }
+}
+
+/* Tablets and narrow desktop windows (4:3 to 3:2): the room's framing keeps the colonnade on the right, but the copy
+   column reaches further across, so the scrim holds solid longer and the leftmost arches sit under it, not behind
+   the body copy. */
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) and (max-aspect-ratio: 3/2) {
+  .obs-scrim {
+    background:
+      linear-gradient(
+        to right,
+        var(--obs-stage) 0%,
+        rgb(0 20 63 / 0.94) 38%,
+        rgb(0 20 63 / 0.55) 54%,
+        rgb(0 20 63 / 0) 68%
+      ),
+      linear-gradient(to top, var(--obs-stage) 0%, rgb(0 20 63 / 0) 22%);
+  }
+}
+
+/* Phones (the tall framing): the room stands above the copy, but on a short screen the headline still reaches into it.
+   Whatever of it is left behind the headline sits under at least 0.62 of the stage colour, the level at which even a
+   white pixel keeps white heading text above 3:1, fading out above and below so it reads as the stage's own shadow,
+   not a band. It hangs off the hero's copy block, whose first line is the headline, so it holds wherever the copy puts
+   it; as the block's own stacking context it paints under all of the block's text (on the h1 itself it would cover
+   the lead below it). The still of the room also keeps its bright core above the headline (ObservatoryStill,
+   stillPlacement.ts). Wide framings put the copy beside the room, under the side scrim, and do without it. */
+.obs-keep {
+  position: relative;
+  z-index: 0;
+}
+
+.obs-keep::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -100vw;
+  right: -100vw;
+  top: -3rem;
+  /* 3rem above the two headline lines (0.96 line height) to 7.5rem below them */
+  height: calc(3rem + 1.92 * var(--obs-h1-size) + 7.5rem);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 20 63 / 0) 0,
+    rgb(0 20 63 / 0.62) 2.5rem,
+    rgb(0 20 63 / 0.62) calc(100% - 7rem),
+    rgb(0 20 63 / 0) 100%
+  );
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) {
+  .obs-keep::before {
+    content: none;
+  }
+}
+
+.obs-rule {
+  display: block;
+  height: 1px;
+  width: min(15rem, 60%);
+  background: var(--obs-gold);
+  transform-origin: left center;
+}
+
+.obs-line {
+  display: block;
+  overflow: hidden;
+  /* room for descenders inside the mask */
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.obs-line > span {
+  display: block;
+}
+
+/* The headline reveal: the two lines rise inside their masks and the gold rule draws. Transform only, so the text is
+   painted, and readable, from the first frame and the largest-paint timing is untouched. It is in the prerendered
+   page's CSS, so a first visit sees it from the very first paint; hydration keeps the same elements, so it never
+   replays. Nothing moves under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .obs-hero .obs-line > span {
+    animation: obs-rise 900ms var(--obs-ease) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .obs-hero .obs-rule {
+    animation: obs-draw 700ms var(--obs-ease) 500ms both;
+  }
+}
+
+/* The lead, body and actions fade up only when the landing is rendered fresh as the first paint (obs-intro, see
+   intro.ts). On the prerendered page they are simply there: the body paragraph is the largest paint. */
+.obs-intro .obs-up {
+  animation: obs-up 600ms var(--obs-ease) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes obs-rise {
+  from {
+    transform: translateY(0.62em);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes obs-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes obs-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Answers to the visitor: a new event in the detail panel, the next sample question, the answer feedback. These
+   elements are keyed, so each change remounts them and a short enter on mount is the whole animation. Under reduced
+   motion only the fade remains. */
+.obs-swap {
+  animation: obs-swap-y 240ms var(--obs-ease) both;
+}
+
+.obs-swap-x {
+  animation: obs-swap-x 240ms var(--obs-ease) both;
+}
+
+@keyframes obs-swap-y {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes obs-swap-x {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+
+@keyframes obs-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obs-swap,
+  .obs-swap-x {
+    animation-name: obs-fade-in;
+    animation-duration: 160ms;
+  }
+}
+
+/* ---------- stage (poster and canvas) --------------------------------------------------------------------------- */
+
+/* The canvas fades in over the static frame once it has drawn, and leaves at once (an unpainted or rebuilt canvas
+   must never show). The frame stays underneath until the canvas fully covers it, then stops painting; it is back the
+   moment the canvas goes. */
+.obs-fade {
+  transition: opacity 800ms var(--obs-ease);
+}
+
+.obs-fade.is-out {
+  opacity: 0;
+  transition: none;
+}
+
+.obs-under.is-out {
+  visibility: hidden;
+  transition: visibility 0s linear 850ms;
+}
+
+.obs-poster--wide {
+  display: none;
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) {
+  .obs-poster--wide {
+    display: block;
+  }
+
+  .obs-poster--tall {
+    display: none;
+  }
+}
+
+/* the still of the room (phones, tablets, no GPU) fades in over the frame's stage and light; opacity only, so it
+   stays under reduced motion */
+.obs-still {
+  opacity: 0;
+  transition: opacity 900ms var(--obs-ease);
+}
+
+.obs-still.is-on {
+  opacity: 1;
+}
+
+/* the outline drawing of the room mounts when it is shown, and fades in */
+.obs-poster-room {
+  animation: obs-fade-in 900ms var(--obs-ease) both;
+}
+
+/* ---------- platform ledger ------------------------------------------------------------------------------------ */
+
+.obs-ledger {
+  display: grid;
+  gap: 0 48px;
+}
+
+@media (min-width: 640px) {
+  .obs-ledger {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.obs-ledger > div {
+  border-top: 1px solid var(--obs-line-2);
+  padding-block: 28px 32px;
+}
+
+/* ---------- event network ---------------------------------------------------------------------------------------- */
+
+.obs-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding-inline: 14px;
+  border: 1px solid var(--obs-line-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--obs-ink-2);
+  transition:
+    background-color 180ms var(--obs-ease),
+    color 180ms var(--obs-ease),
+    border-color 180ms var(--obs-ease);
+}
+
+.obs-toggle:first-child {
+  border-radius: 2px 0 0 2px;
+}
+
+.obs-toggle:last-child {
+  border-radius: 0 2px 2px 0;
+  margin-left: -1px;
+}
+
+.obs-toggle:hover {
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.5);
+}
+
+.obs-toggle[aria-pressed="true"] {
+  background: #fff;
+  border-color: #fff;
+  color: var(--obs-stage);
+}
+
+.obs-map {
+  position: relative;
+}
+
+.obs-map-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.obs-link {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.16);
+  stroke-width: 1;
+}
+
+.obs-link-lit {
+  fill: none;
+  stroke: var(--obs-gold);
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 520ms var(--obs-ease);
+}
+
+.obs-link-lit.is-on {
+  stroke-dashoffset: 0;
+}
+
+/* reduced motion: the lit path is simply there, faded in, not drawn along its length */
+@media (prefers-reduced-motion: reduce) {
+  .obs-link-lit {
+    stroke-dashoffset: 0;
+    opacity: 0;
+    transition: opacity 160ms linear;
+  }
+
+  .obs-link-lit.is-on {
+    opacity: 1;
+  }
+}
+
+.obs-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding-inline: 14px 12px;
+  border: 1px solid var(--obs-line);
+  border-radius: 2px;
+  background: rgb(0 30 96 / 0.55);
+  color: var(--obs-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    background-color 180ms var(--obs-ease),
+    border-color 180ms var(--obs-ease),
+    color 180ms var(--obs-ease);
+}
+
+.obs-node::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--obs-stage);
+  border: 1px solid rgb(255 255 255 / 0.35);
+  transform: translateY(-50%) rotate(45deg);
+  transition:
+    background-color 180ms var(--obs-ease),
+    border-color 180ms var(--obs-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .obs-node:hover {
+    background: rgb(10 43 120 / 0.85);
+    border-color: rgb(255 255 255 / 0.32);
+  }
+}
+
+.obs-node[aria-pressed="true"] {
+  background: var(--obs-navy-2);
+  border-color: var(--obs-gold-soft);
+  color: #fff;
+}
+
+.obs-node[aria-pressed="true"]::before,
+.obs-node.is-path::before {
+  background: var(--obs-gold);
+  border-color: var(--obs-gold);
+}
+
+.obs-hub {
+  /* centred on its row; a long discipline name wraps to a second line instead of being cut */
+  transform: translateY(-50%);
+  padding: 6px 14px 6px 16px;
+  line-height: 1.15;
+  background: var(--obs-navy);
+  font-family: var(--font-display);
+  font-size: 15px;
+}
+
+.obs-hub.is-path {
+  color: var(--obs-gold-soft);
+  border-color: rgb(246 204 107 / 0.55);
+}
+
+.obs-root {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--obs-gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.obs-panel {
+  border: 1px solid var(--obs-line-2);
+  border-radius: 2px;
+  background: rgb(0 30 96 / 0.45);
+}
+
+.obs-areas li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.obs-areas li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  background: var(--obs-gold);
+  transform: rotate(45deg);
+}
+
+.obs-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding-block: 10px;
+  text-align: left;
+  color: var(--obs-ink);
+}
+
+.obs-row-chevron {
+  transition: transform 200ms var(--obs-ease);
+}
+
+.obs-row[aria-expanded="true"] .obs-row-chevron {
+  transform: rotate(180deg);
+}
+
+/* ---------- how it works ------------------------------------------------------------------------------------------- */
+
+.obs-path {
+  position: relative;
+  display: grid;
+  gap: 40px;
+  padding-left: 28px;
+}
+
+.obs-path::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--obs-gold);
+  transform-origin: top center;
+}
+
+.obs-step {
+  position: relative;
+}
+
+.obs-step::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 0.4em;
+  width: 13px;
+  height: 13px;
+  background: var(--obs-stage);
+  border: 1px solid var(--obs-gold);
+  transform: rotate(45deg);
+}
+
+.obs-step:last-child::before {
+  background: var(--obs-gold);
+}
+
+@media (min-width: 900px) {
+  .obs-path {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+    padding-left: 0;
+    padding-top: 44px;
+  }
+
+  .obs-path::before {
+    left: 0;
+    right: 0;
+    top: 6px;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+    transform-origin: left center;
+  }
+
+  .obs-step::before {
+    left: 0;
+    top: -44px;
+  }
+}
+
+/* the path draws once when the section comes into view (storytelling: the route from pick to climb) */
+.obs-js .obs-path::before {
+  transform: scaleY(0);
+  transition: transform 1200ms var(--obs-ease);
+}
+
+@media (min-width: 900px) {
+  .obs-js .obs-path::before {
+    transform: scaleX(0);
+  }
+}
+
+.obs-js .obs-path.is-in::before {
+  transform: none;
+}
+
+/* reduced motion: no rule draw (design brief section 12); the path fades in where it stands */
+@media (prefers-reduced-motion: reduce) {
+  .obs-js .obs-path::before {
+    transform: none;
+    opacity: 0;
+    transition: opacity 400ms linear;
+  }
+
+  .obs-js .obs-path.is-in::before {
+    opacity: 1;
+  }
+
+  .obs-row-chevron {
+    transition: none;
+  }
+}
+
+/* ---------- sample question (the real app look inside the room) -------------------------------------------- */
+
+.obs-app {
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 4px;
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 0.18),
+    0 40px 80px -40px rgb(0 0 0 / 0.65);
+  color-scheme: light;
+}
+
+.dark .obs-app {
+  color-scheme: dark;
+}
+
+.obs-app :focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.obs-app ::selection {
+  background: color-mix(in srgb, var(--blue) 30%, transparent);
+  color: inherit;
+}
+
+/* ---------- close ---------------------------------------------------------------------------------------------------- */
+
+.obs-close {
+  position: relative;
+  overflow: hidden;
+  /* on a phone the room takes the upper half and the copy the lower, as in the hero */
+  min-height: max(680px, calc(100svh - var(--obs-bar)));
+  display: flex;
+  align-items: flex-end;
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) {
+  .obs-close {
+    min-height: 720px;
+    align-items: center;
+  }
+}

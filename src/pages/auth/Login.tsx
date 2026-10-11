@@ -53,7 +53,7 @@ export default function Login() {
     const to = email.trim();
     setResending(true);
     try {
-      await resendConfirmation(to);
+      await resendConfirmation(to, next);
       setResentTo(to);
       toast.success('Confirmation email sent', `Check ${to} (and your spam folder).`);
     } catch (err) {
