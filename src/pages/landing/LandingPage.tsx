@@ -29,9 +29,13 @@ import {
   TERMS_PER_EVENT,
   TOTAL_TERMS,
 } from "./observatoryEvents";
-import "./observatory.css";
+// observatory.css is imported by App.tsx, not here: this module is a lazy chunk, and the prerendered HTML needs the
+// styles before it loads.
 
-// Read once, before React replaces the document: was this page's static HTML already on screen?
+// Read once, when this chunk first runs: is this page's static HTML on screen? Hydration keeps the prerendered markup
+// in place until this chunk has loaded, so for a hydrated visit it is still there. A fresh render (someone who may be
+// signed in, whose prerendered copy stayed hidden behind the navy splash) has replaced it by then; whether the reveal
+// plays is then intro.ts's first-paint rule (the splash painted first, so usually not).
 const PRERENDERED =
   typeof document !== "undefined" &&
   !!document.querySelector("#root .observatory");

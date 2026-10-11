@@ -4,9 +4,11 @@ import { RedirectIfAuthed, RequireAuth, RequireProfile, useAuth } from './lib/au
 import { AppShell } from './components/layout/AppShell';
 import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { RouteFallback, SplashScreen } from './components/layout/SplashScreen';
-// Signed-out front door. Imported eagerly so it paints on the first client render (the 3D room inside it is lazy).
-import LandingPage from './pages/landing/LandingPage';
+// The signed-out front door's stylesheet is part of the app's own CSS: the prerendered "/" is styled before any script
+// runs. Its code is a lazy chunk (below), so members never download it.
+import './pages/landing/observatory.css';
 import { indexView } from './pages/landing/indexView';
+import { loadLandingPage } from './pages/landing/loadLanding';
 import { mayHaveSession } from './lib/sessionHint';
 
 /** Lazy page that accepts either a default export or a named export matching `name`. */
@@ -27,6 +29,10 @@ const Reset = page(() => import('./pages/auth/Reset'), 'Reset');
 const UpdatePassword = page(() => import('./pages/auth/UpdatePassword'), 'UpdatePassword');
 const Onboarding = page(() => import('./pages/auth/Onboarding'), 'Onboarding');
 const NotFound = page(() => import('./pages/NotFound'), 'NotFound');
+// Signed-out "/". A visitor with no session gets it prerendered and hydrated (main.tsx): the HTML stays on screen while
+// this chunk loads (after the first paint, loadLanding.ts), and nothing inside it changes before it hydrates (auth sets
+// the same signed-out values it started with). Rendered fresh, it shows the route fallback for that moment.
+const LandingPage = lazy(loadLandingPage);
 
 // features
 const HomePage = page(() => import('./pages/home/HomePage'), 'HomePage');
