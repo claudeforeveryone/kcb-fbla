@@ -6,6 +6,7 @@ import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { RouteFallback, SplashScreen } from './components/layout/SplashScreen';
 // Signed-out front door. Imported eagerly so it paints on the first client render (the 3D room inside it is lazy).
 import LandingPage from './pages/landing/LandingPage';
+import { indexView } from './pages/landing/indexView';
 import { mayHaveSessionNow } from './pages/landing/session';
 
 /** Lazy page that accepts either a default export or a named export matching `name`. */
@@ -59,10 +60,16 @@ function IndexRoute() {
   const loc = useLocation();
   // A first visit (no stored session, no sign-in link in the URL) gets the landing at once, not a splash first.
   const [signedOutAtLoad] = useState(() => !mayHaveSessionNow());
-  if (loading) return signedOutAtLoad ? <LandingPage /> : <SplashScreen />;
-  if (!session) return <LandingPage />;
-  if (!profile) return <Navigate to={`/onboarding?next=${encodeURIComponent(loc.pathname + loc.search)}`} replace />;
-  return <HomePage />;
+  switch (indexView({ loading, signedOutAtLoad, session, profile })) {
+    case 'landing':
+      return <LandingPage />;
+    case 'splash':
+      return <SplashScreen />;
+    case 'onboarding':
+      return <Navigate to={`/onboarding?next=${encodeURIComponent(loc.pathname + loc.search)}`} replace />;
+    case 'home':
+      return <HomePage />;
+  }
 }
 
 /** Full-screen pages (auth): splash while the chunk loads. */
