@@ -43,7 +43,7 @@ import {
 } from '.';
 import { OwnerConsole } from '../../pages/owner/OwnerConsole';
 import { NotAuthorized } from '../../pages/owner/OwnerPage';
-import { FIXTURE_MARKER, fixtureSource } from '../../pages/owner/fixtures';
+import { FIXTURE_MARKER, fixtureSource, smallFixtureSource } from '../../pages/owner/fixtures';
 import { FeedbackDialog, ReportQuestionDialog } from '../feedback/FeedbackDialog';
 
 const days = Array.from({ length: 14 }, (_, i) => new Date(Date.UTC(2026, 8, 20 + i)).toISOString());
@@ -61,12 +61,13 @@ export default function Gallery() {
   const [params] = useSearchParams();
   const only = params.get('only');
 
-  // Owner console on made-up data (src/pages/owner/fixtures.ts). /dev/ui?only=owner shows it alone.
-  if (only === 'owner')
+  // Owner console on made-up data (src/pages/owner/fixtures.ts). /dev/ui?only=owner shows a busy site alone,
+  // /dev/ui?only=owner-small a small one where most groups are hidden.
+  if (only === 'owner' || only === 'owner-small')
     return (
       <Page>
         <div data-fixture={FIXTURE_MARKER}>
-          <OwnerConsole source={fixtureSource} />
+          <OwnerConsole key={only} source={only === 'owner' ? fixtureSource : smallFixtureSource} />
         </div>
       </Page>
     );

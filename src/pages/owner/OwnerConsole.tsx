@@ -1,6 +1,6 @@
 // The owner console shell: header, section tabs and the time range. Section and range live in the URL
 // (?tab=growth&range=90) so a view can be bookmarked or shared between owners.
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { RefreshCw } from 'lucide-react';
 import { Button, SegmentedControl, Tabs, tabPanelProps } from '../../components/ui';
@@ -33,7 +33,9 @@ export function OwnerConsole({ source }: { source: OwnerSource }) {
   const tab = SECTIONS.find((s) => s.value === params.get('tab'))?.value ?? 'overview';
   const range = clampRange(params.get('range'));
   const [refreshKey, setRefreshKey] = useState(0);
-  const [refreshedAt, setRefreshedAt] = useState(() => new Date());
+  // When the data on screen arrived, not when a button was pressed. Hidden while the last load failed.
+  const [loaded, setLoaded] = useState<{ at: Date | null; failed: boolean }>({ at: null, failed: false });
+  const onLoad = useCallback((ok: boolean) => setLoaded((l) => (ok ? { at: new Date(), failed: false } : { ...l, failed: true })), []);
   const section = SECTIONS.find((s) => s.value === tab)!;
 
   const set = (next: { tab?: SectionId; range?: RangeDays }) => {
@@ -44,25 +46,17 @@ export function OwnerConsole({ source }: { source: OwnerSource }) {
   };
 
   return (
-    <OwnerSourceProvider source={source}>
+    <OwnerSourceProvider source={source} onLoad={onLoad}>
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <div className="min-w-0">
           <h1 className="text-[1.75rem] font-extrabold leading-tight tracking-tight sm:text-3xl">Owner console</h1>
-          <p className="mt-1 text-sm text-muted">FBLA site health. Metrics are totals, with groups under 5 hidden. Times are Toronto.</p>
+          <p className="mt-1 text-sm text-muted">FBLA site health. Metrics are totals, with small groups hidden. Times are Toronto.</p>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-xs text-muted" aria-live="polite">
-            Updated {timeFmt.format(refreshedAt)}
+            {loaded.at && !loaded.failed ? `Updated ${timeFmt.format(loaded.at)}` : ''}
           </span>
-          <Button
-            variant="outline"
-            size="sm"
-            leftIcon={<RefreshCw className="size-3.5" />}
-            onClick={() => {
-              setRefreshKey((k) => k + 1);
-              setRefreshedAt(new Date());
-            }}
-          >
+          <Button variant="outline" size="sm" leftIcon={<RefreshCw className="size-3.5" />} onClick={() => setRefreshKey((k) => k + 1)}>
             Refresh
           </Button>
         </div>

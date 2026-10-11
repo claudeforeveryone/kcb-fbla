@@ -12,6 +12,8 @@ import {
   featureLabel,
   fmtPercent,
   seriesBars,
+  seriesState,
+  totalPoints,
   type Bucket,
   type Count,
   type GrowthRow,
@@ -21,6 +23,16 @@ import { ATTEMPT_KIND_LABELS, eventName, type AttemptKind } from '../../lib/type
 import { CountText, dateOnly, LoadState, num, Panel, PrivacyNote, useLoad, useOwnerSource } from './shared';
 
 const sub = (c: Count) => (c.suppressed ? 'hidden for privacy' : undefined);
+
+/** "12 students", or "students hidden" (never "Hidden students"). */
+function Students({ c, strong }: { c: Count; strong?: boolean }) {
+  if (c.suppressed) return <span className="text-muted">students hidden</span>;
+  return (
+    <>
+      <CountText c={c} className={strong ? 'font-semibold text-heading' : undefined} /> students
+    </>
+  );
+}
 
 // ------------------------------------------------------------------------------------------------ overview
 
@@ -34,7 +46,16 @@ export function OverviewView({ data: d }: { data: OwnerOverview }) {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatTile tone="navy" label="Accounts" value={<CountText c={d.accounts} />} sub={`${countLabel(d.profiles)} finished sign-up`} />
+        <StatTile
+          tone="navy"
+          label="Accounts"
+          value={<CountText c={d.accounts} />}
+          sub={
+            d.onboarding.all_time.onboarded.suppressed
+              ? 'finished sign-up: hidden'
+              : `${countLabel(d.onboarding.all_time.onboarded)} finished sign-up`
+          }
+        />
         <StatTile tone="navy" label="Active today" value={<CountText c={d.active.dau} />} sub={sub(d.active.dau) ?? 'since midnight, Toronto'} />
         <StatTile tone="navy" label="Active this week" value={<CountText c={d.active.wau} />} sub={sub(d.active.wau) ?? 'last 7 days'} />
         <StatTile tone="navy" label="Active this month" value={<CountText c={d.active.mau} />} sub={sub(d.active.mau) ?? 'last 30 days'} />
@@ -104,7 +125,7 @@ export function OverviewView({ data: d }: { data: OwnerOverview }) {
           <p className="text-sm text-muted">
             <span className="tabular font-display text-xl font-extrabold text-heading">{num(d.answered_week.questions)}</span>
             <span className="ml-2">
-              by <CountText c={d.answered_week.users} /> students
+              by <Students c={d.answered_week.users} />
             </span>
           </p>
         </div>
@@ -138,6 +159,12 @@ const BUCKETS: { value: Bucket; label: string }[] = [
   { value: 'month', label: 'Months' },
 ];
 
+/** The next longer grouping the range allows, to suggest when a series is all 0 or hidden. */
+function coarserThan(bucket: Bucket, allowed: Bucket[]): string | undefined {
+  const order = BUCKETS.map((b) => b.value);
+  return BUCKETS.find((b) => allowed.includes(b.value) && order.indexOf(b.value) > order.indexOf(bucket))?.label;
+}
+
 export function GrowthSection({ days, refreshKey }: { days: number; refreshKey: number }) {
   const src = useOwnerSource();
   const allowed = bucketsFor(days);
@@ -147,9 +174,7 @@ export function GrowthSection({ days, refreshKey }: { days: number; refreshKey: 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted">
-          One bar per {bucket}, Toronto time. A dashed stub is a group of 1 to 4 people, hidden for privacy.
-        </p>
+        <p className="text-sm text-muted">One bar per {bucket}, Toronto time. A dashed stub is a number hidden for privacy.</p>
         <SegmentedControl
           size="sm"
           aria-label="Group by"
@@ -159,7 +184,7 @@ export function GrowthSection({ days, refreshKey }: { days: number; refreshKey: 
         />
       </div>
       <LoadState state={state} skeleton="chart">
-        {(d) => <GrowthView data={d} />}
+        {(d) => <GrowthView data={d} coarser={coarserThan(d.bucket, allowed)} />}
       </LoadState>
     </div>
   );
@@ -172,7 +197,15 @@ function growthTable(rows: GrowthRow[], bucket: Bucket, key: keyof Omit<GrowthRo
   };
 }
 
-export function GrowthView({ data }: { data: OwnerGrowth }) {
+/** Says why a chart looks empty instead of leaving a bare grid. Null when the chart has something to show. */
+function quietNote(counts: Count[], bucket: Bucket, coarser?: string): string | null {
+  const state = seriesState(counts);
+  if (state === 'zero') return 'None in this range.';
+  if (state !== 'hidden') return null;
+  return `Every ${bucket} here is 0 or hidden. ${coarser ? `Try ${coarser}: bigger groups can be shown.` : 'A longer range may show more.'}`;
+}
+
+export function GrowthView({ data, coarser }: { data: OwnerGrowth; coarser?: string }) {
   const rows = data.series;
   const b = data.bucket;
   if (!rows.length) return <EmptyState compact title="No data in this range" description="Pick a longer range." />;
@@ -182,33 +215,47 @@ export function GrowthView({ data }: { data: OwnerGrowth }) {
     { key: 'practising', title: 'Students who practised', description: 'Finished at least one practice run or exam' },
     { key: 'onboarded', title: 'Finished sign-up', description: 'Profiles created' },
   ];
-  const total = rows.filter((r) => !r.total.suppressed && r.total.value != null);
+  const points = totalPoints(rows, data.baseline);
+  const totals = growthTable(rows, b, 'total');
+  const totalNote = quietNote([data.baseline, ...rows.map((r) => r.total)], b, coarser);
   return (
     <div className="space-y-4">
       <div className="grid gap-4 xl:grid-cols-2">
-        {charts.map((c) => (
-          <Panel key={c.key}>
-            <ChartFigure title={c.title} description={c.description} table={growthTable(rows, b, c.key)}>
-              <BarChart
-                title={`${c.title} per ${b}`}
-                orientation="vertical"
-                height={200}
-                color={c.key === 'signups' ? 'var(--red)' : undefined}
-                data={seriesBars(rows, c.key, b)}
-              />
-            </ChartFigure>
-          </Panel>
-        ))}
+        {charts.map((c) => {
+          const note = quietNote(rows.map((r) => r[c.key]), b, coarser);
+          return (
+            <Panel key={c.key}>
+              <ChartFigure title={c.title} description={c.description} table={growthTable(rows, b, c.key)}>
+                <BarChart
+                  title={`${c.title} per ${b}`}
+                  orientation="vertical"
+                  integer
+                  height={200}
+                  color={c.key === 'signups' ? 'var(--red)' : undefined}
+                  data={seriesBars(rows, c.key, b)}
+                />
+                {note && <p className="mt-2 text-sm text-muted">{note}</p>}
+              </ChartFigure>
+            </Panel>
+          );
+        })}
       </div>
       <Panel>
-        <ChartFigure title="Total accounts" description="Running total at the end of each period" table={growthTable(rows, b, 'total')}>
+        <ChartFigure
+          title="Total accounts"
+          description="Running total at the end of each period, from the day before the range"
+          table={{ columns: totals.columns, rows: [[`Before ${bucketLabel(rows[0].start, rows[0].start, 'day')}`, countLabel(data.baseline)], ...totals.rows] }}
+        >
           <LineChart
             title="Total accounts over time"
             height={200}
-            series={[{ name: 'Accounts', data: total.map((r) => ({ x: r.end, y: r.total.value ?? 0 })) }]}
+            yMin={0}
+            dots={points.length < 12}
+            series={[{ name: 'Accounts', data: points }]}
             formatX={axisDay}
-            emptyLabel="Under 5 accounts so far"
+            emptyLabel="Every total in this range is hidden"
           />
+          {points.length > 0 && totalNote && <p className="mt-2 text-sm text-muted">{totalNote}</p>}
         </ChartFigure>
       </Panel>
       <PrivacyNote />
@@ -237,8 +284,8 @@ export function EngagementView({ data: d }: { data: OwnerEngagement }) {
           <h3 className="text-sm font-bold text-heading">Practice runs</h3>
           <p className="mt-1 text-xs text-muted">Started in the app, then finished and graded</p>
           <div className="mt-4 grid grid-cols-3 items-end gap-3">
-            <Metric label="Started" value={num(d.practice.started.events)} sub={<><CountText c={d.practice.started.users} /> students</>} />
-            <Metric label="Finished" value={num(d.practice.completed.events)} sub={<><CountText c={d.practice.completed.users} /> students</>} />
+            <Metric label="Started" value={num(d.practice.started.events)} sub={<Students c={d.practice.started.users} />} />
+            <Metric label="Finished" value={num(d.practice.completed.events)} sub={<Students c={d.practice.completed.users} />} />
             <Metric label="Finish rate" value={fmtPercent(d.practice.completion_rate)} accent />
           </div>
         </Panel>
@@ -280,8 +327,8 @@ export function EngagementView({ data: d }: { data: OwnerEngagement }) {
             title="Most practised events"
             description="Students who chose or practised each event"
             table={{
-              columns: ['Event', 'Students', 'Times'],
-              rows: popular.map((e) => [eventName(e.code), countLabel(e.users), num(e.events)]),
+              columns: ['Event', 'Students'],
+              rows: popular.map((e) => [eventName(e.code), countLabel(e.users)]),
             }}
           >
             <BarChart
@@ -301,7 +348,7 @@ export function EngagementView({ data: d }: { data: OwnerEngagement }) {
       <Panel>
         <div>
           <h3 className="text-sm font-bold text-heading">Practice modes</h3>
-          <p className="mt-0.5 text-xs text-muted">Graded runs by mode</p>
+          <p className="mt-0.5 text-xs text-muted">Students who finished a graded run in each mode</p>
         </div>
         {d.modes.length ? (
           <Table wrapClassName="mt-3">
@@ -309,7 +356,6 @@ export function EngagementView({ data: d }: { data: OwnerEngagement }) {
               <tr>
                 <TH>Mode</TH>
                 <TH align="right">Students</TH>
-                <TH align="right">Runs</TH>
               </tr>
             </THead>
             <TBody>
@@ -319,7 +365,6 @@ export function EngagementView({ data: d }: { data: OwnerEngagement }) {
                   <TD align="right">
                     <CountText c={m.users} />
                   </TD>
-                  <TD align="right">{num(m.attempts)}</TD>
                 </TR>
               ))}
             </TBody>
@@ -368,14 +413,42 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
         Practice runs and mock exams only, not duels or chapter tests. Accuracy and the share of runs not finished show
         only when 5 or more students took part.
       </p>
-      <Table>
+      {/* Phones: one card per event, accuracy first. */}
+      <ul className="divide-y divide-line border border-line bg-surface sm:hidden" aria-label="Events">
+        {rows.map((r) => (
+          <li key={r.event} className="space-y-2 p-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="min-w-0 font-semibold text-ink">{eventName(r.event)}</span>
+              <span className="shrink-0 text-sm text-muted">
+                <Students c={r.users} strong />
+              </span>
+            </div>
+            <AccuracyBar rate={r.accuracy} />
+            <dl className="grid grid-cols-3 gap-2 text-xs">
+              <div>
+                <dt className="text-muted">Runs</dt>
+                <dd className="tabular font-semibold text-ink">{num(r.attempts)}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">Answered</dt>
+                <dd className="tabular font-semibold text-ink">{num(r.answered)}</dd>
+              </div>
+              <div>
+                <dt className="text-muted">Not finished</dt>
+                <dd className="tabular font-semibold text-ink">{fmtPercent(r.abandonment)}</dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <Table wrapClassName="hidden sm:block">
         <THead>
           <tr>
             <TH>Event</TH>
+            <TH className="min-w-40">Accuracy</TH>
             <TH align="right">Students</TH>
             <TH align="right">Runs</TH>
             <TH align="right">Answered</TH>
-            <TH className="min-w-40">Accuracy</TH>
             <TH align="right">Not finished</TH>
           </tr>
         </THead>
@@ -383,14 +456,14 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
           {rows.map((r) => (
             <TR key={r.event}>
               <TD className="font-medium text-ink">{eventName(r.event)}</TD>
+              <TD>
+                <AccuracyBar rate={r.accuracy} />
+              </TD>
               <TD align="right">
                 <CountText c={r.users} />
               </TD>
               <TD align="right">{num(r.attempts)}</TD>
               <TD align="right">{num(r.answered)}</TD>
-              <TD>
-                <AccuracyBar rate={r.accuracy} />
-              </TD>
               <TD align="right">{fmtPercent(r.abandonment)}</TD>
             </TR>
           ))}

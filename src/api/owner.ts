@@ -1,6 +1,7 @@
 // Owner console (supabase/migrations/0100, 0105, 0106). Every call is checked server-side against
 // private.platform_owners by auth uid: a non-owner gets 42501 whatever the client shows. Metrics are aggregates only,
-// and any group of 1-4 people comes back as { value: null, suppressed: true }. The owner check itself is in
+// and a count that is 1-4, or that would reveal a group of 1-4 by subtraction, comes back as
+// { value: null, suppressed: true }. The owner check itself is in
 // src/lib/useIsOwner.ts so the app shell can use it without loading this module.
 import type { PostgrestError } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
@@ -23,7 +24,6 @@ export type OwnerOverview = {
   timezone: string;
   tracking_since: string | null;
   accounts: Count;
-  profiles: Count;
   new_accounts: { day: Count; week: Count; month: Count };
   active: { dau: Count; wau: Count; mau: Count };
   returning: Count;
@@ -35,19 +35,20 @@ export type OwnerOverview = {
   answered_week: { users: Count; questions: number | null };
 };
 
-export type OwnerGrowth = { days: number; bucket: Bucket; timezone: string; series: GrowthRow[] };
+/** `baseline` is the running account total the day before the first bucket (hidden like any other total). */
+export type OwnerGrowth = { days: number; bucket: Bucket; timezone: string; baseline: Count; series: GrowthRow[] };
 
 export type OwnerEngagement = {
   days: number;
   features: { name: string; users: Count; events: number | null }[];
-  modes: { mode: string; users: Count; attempts: number | null }[];
+  modes: { mode: string; users: Count }[];
   practice: {
     started: { users: Count; events: number | null };
     completed: { users: Count; events: number | null };
     completion_rate: Rate;
   };
   duels: { players: Count; created: number | null; completed: number | null };
-  popular_events: { code: string; users: Count; events: number | null }[];
+  popular_events: { code: string; users: Count }[];
 };
 
 export type PrepRow = {
@@ -95,6 +96,19 @@ export type OwnerContent = {
   feedback_status: Partial<Record<FeedbackStatus, number>>;
 };
 
+/** One official question with its answer key, for checking a student's report from triage. */
+export type OwnerQuestion = {
+  id: string;
+  event: string;
+  area: string | null;
+  difficulty: number | null;
+  question: string;
+  choices: string[];
+  /** Index into `choices` of the keyed answer. */
+  answer: number;
+  explanation: string | null;
+};
+
 export async function ownerOverview(): Promise<OwnerOverview> {
   return must(await supabase.rpc('fbla_owner_overview'), 'Could not load the overview.');
 }
@@ -113,6 +127,10 @@ export async function ownerPreparation(days: number): Promise<OwnerPreparation> 
 
 export async function ownerContent(): Promise<OwnerContent> {
   return must(await supabase.rpc('fbla_owner_content'), 'Could not load content health.');
+}
+
+export async function ownerQuestion(id: string): Promise<OwnerQuestion> {
+  return must(await supabase.rpc('fbla_owner_question', { p_id: id }), 'Could not load this question.');
 }
 
 // ------------------------------------------------------------------------------------------------ feedback triage

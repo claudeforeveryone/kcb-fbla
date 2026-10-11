@@ -1,13 +1,17 @@
-// DEV ONLY. Made-up data for the owner console in the component gallery (/dev/ui?only=owner). Imported only by
-// src/components/ui/Gallery.tsx, which App.tsx loads only when import.meta.env.DEV, so none of this reaches a
-// production build (the build check greps dist/ for FIXTURE_MARKER). Never use it anywhere else.
+// DEV ONLY. Made-up data for the owner console in the component gallery (/dev/ui?only=owner for a busy site,
+// /dev/ui?only=owner-small for a small one). Imported only by src/components/ui/Gallery.tsx, which App.tsx loads only
+// when import.meta.env.DEV, so none of this reaches a production build (the build check greps dist/ for
+// FIXTURE_MARKER). Never use it anywhere else. Hidden counts follow the same rules as 0105: 1-4 is hidden, and a
+// running total is hidden when it would reveal a group of 1-4 next to the total after it.
 import type {
   AuditRow,
   OwnerContent,
   OwnerEngagement,
   OwnerFeedbackRow,
+  OwnerGrowth,
   OwnerOverview,
   OwnerPreparation,
+  OwnerQuestion,
   OwnerUserRow,
 } from '../../api/owner';
 import type { FeedbackStatus } from '../../lib/feedback';
@@ -16,36 +20,54 @@ import type { OwnerSource } from './shared';
 
 export const FIXTURE_MARKER = 'omega-owner-fixture-data';
 
+type Site = 'busy' | 'small';
+
 const c = (value: number): Count => (value >= 1 && value <= 4 ? { value: null, suppressed: true } : { value, suppressed: false });
 const hidden: Count = { value: null, suppressed: true };
 const NOW = '2026-10-11T14:20:00Z';
 
-const overview: OwnerOverview = {
-  generated_at: NOW,
-  timezone: 'America/Toronto',
-  tracking_since: '2026-09-02T13:05:00Z',
-  accounts: c(412),
-  profiles: c(371),
-  new_accounts: { day: hidden, week: c(38), month: c(121) },
-  active: { dau: c(57), wau: c(188), mau: c(301) },
-  returning: c(164),
-  returning_rate: 0.545,
-  onboarding: {
-    month: { created: c(121), onboarded: c(104), rate: 0.86 },
-    all_time: { created: c(412), onboarded: c(371), rate: 0.9 },
+const overviews: Record<Site, OwnerOverview> = {
+  busy: {
+    generated_at: NOW,
+    timezone: 'America/Toronto',
+    tracking_since: '2026-09-02T13:05:00Z',
+    accounts: c(412),
+    new_accounts: { day: hidden, week: c(38), month: c(121) },
+    active: { dau: c(57), wau: c(188), mau: c(301) },
+    returning: c(164),
+    returning_rate: 0.545,
+    onboarding: {
+      month: { created: c(121), onboarded: c(104), rate: 0.86 },
+      all_time: { created: c(412), onboarded: c(371), rate: 0.901 },
+    },
+    answered_week: { users: c(143), questions: 9874 },
   },
-  answered_week: { users: c(143), questions: 9874 },
+  // 23 accounts. This month's sign-up split is 10 and 2, so both halves are hidden (the 2x2 rule in 0105).
+  small: {
+    generated_at: NOW,
+    timezone: 'America/Toronto',
+    tracking_since: '2026-09-20T13:05:00Z',
+    accounts: c(23),
+    new_accounts: { day: c(0), week: hidden, month: c(12) },
+    active: { dau: hidden, wau: c(11), mau: c(17) },
+    returning: c(9),
+    returning_rate: 0.529,
+    onboarding: {
+      month: { created: c(12), onboarded: hidden, rate: null },
+      all_time: { created: c(23), onboarded: c(18), rate: 0.783 },
+    },
+    answered_week: { users: c(6), questions: 212 },
+  },
 };
 
-// Deterministic wiggle so the charts look like real traffic without randomness between renders.
-const wave = (i: number, base: number, amp: number) => Math.max(0, Math.round(base + amp * Math.sin(i * 0.9) + (i % 5) * (amp / 4)));
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 
-function growth(days: number, bucket: Bucket): { days: number; bucket: Bucket; timezone: string; series: GrowthRow[] } {
+/** Day, week (Monday start) or month buckets over the last `days` days up to Oct 11, 2026. */
+function bucketsOf(days: number, bucket: Bucket): { s: Date; e: Date }[] {
   const end = new Date(Date.UTC(2026, 9, 11));
   const start = new Date(end);
   start.setUTCDate(start.getUTCDate() - (days - 1));
-  const buckets: { s: Date; e: Date }[] = [];
+  const out: { s: Date; e: Date }[] = [];
   const cur = new Date(start);
   if (bucket === 'week') cur.setUTCDate(cur.getUTCDate() - ((cur.getUTCDay() + 6) % 7));
   if (bucket === 'month') cur.setUTCDate(1);
@@ -56,54 +78,124 @@ function growth(days: number, bucket: Bucket): { days: number; bucket: Bucket; t
     else cur.setUTCMonth(cur.getUTCMonth() + 1);
     const e = new Date(cur);
     e.setUTCDate(e.getUTCDate() - 1);
-    buckets.push({ s: s < start ? start : s, e: e > end ? end : e });
+    out.push({ s: s < start ? start : s, e: e > end ? end : e });
   }
-  const scale = bucket === 'day' ? 1 : bucket === 'week' ? 6 : 24;
-  let total = 412 - buckets.length * 4 * scale;
-  const series = buckets.map((b, i) => {
-    const signups = i % 7 === 3 && bucket === 'day' ? 2 : wave(i, 4 * scale, 2 * scale);
-    total += signups;
-    return {
-      start: iso(b.s),
-      end: iso(b.e),
-      signups: c(signups),
-      onboarded: c(Math.round(signups * 0.86)),
-      active: c(wave(i + 2, 52 * Math.sqrt(scale) * (bucket === 'day' ? 1 : 1.6), 12)),
-      practising: c(wave(i + 4, 38 * Math.sqrt(scale) * (bucket === 'day' ? 1 : 1.5), 10)),
-      total: c(Math.max(5, total)),
-    };
-  });
-  return { days, bucket, timezone: 'America/Toronto', series };
+  return out;
 }
 
-const engagement = (days: number): OwnerEngagement => {
+// Deterministic wiggle so the charts look like real traffic without randomness between renders.
+const wave = (i: number, base: number, amp: number) => Math.max(0, Math.round(base + amp * Math.sin(i * 0.9) + (i % 5) * (amp / 4)));
+
+/** Raw per-bucket numbers before hiding: sign-ups, profiles made, active and practising students. */
+function rawBucket(site: Site, bucket: Bucket, i: number) {
+  if (site === 'small') {
+    if (bucket === 'day')
+      return {
+        signups: [0, 1, 0, 0, 2, 0, 0, 0, 1, 0][i % 10],
+        onboarded: [0, 1, 0, 0, 1, 0, 0, 0, 1, 0][i % 10],
+        active: [2, 0, 3, 1, 0, 4, 2][i % 7],
+        practising: [1, 0, 2, 0, 0, 3, 1][i % 7],
+      };
+    if (bucket === 'week')
+      return { signups: i % 3 === 0 ? 6 : 3, onboarded: i % 3 === 0 ? 5 : 2, active: 7 + (i % 3), practising: 5 + (i % 2) };
+    return { signups: 13 + (i % 2) * 2, onboarded: 11, active: 12, practising: 8 };
+  }
+  const scale = bucket === 'day' ? 1 : bucket === 'week' ? 6 : 24;
+  const signups = i % 7 === 3 && bucket === 'day' ? 2 : wave(i, 4 * scale, 2 * scale);
+  return {
+    signups,
+    onboarded: Math.round(signups * 0.86),
+    active: wave(i + 2, 52 * Math.sqrt(scale) * (bucket === 'day' ? 1 : 1.6), 12),
+    practising: wave(i + 4, 38 * Math.sqrt(scale) * (bucket === 'day' ? 1 : 1.5), 10),
+  };
+}
+
+/**
+ * Running totals hidden the way fbla_account_totals does it: walking back from the newest, a total shows only when
+ * it is 0 or 5+ and 0 or 5+ away from the last total shown after it. Sign-ups show only between two shown totals.
+ */
+function hideTotals(totals: number[]): boolean[] {
+  const shown = totals.map(() => false);
+  let later: number | null = null;
+  for (let i = totals.length - 1; i >= 0; i--) {
+    const t = totals[i];
+    const gap = later == null ? 0 : later - t;
+    if ((t === 0 || t >= 5) && (gap === 0 || gap >= 5)) {
+      shown[i] = true;
+      later = t;
+    }
+  }
+  return shown;
+}
+
+function growth(site: Site, days: number, bucket: Bucket): OwnerGrowth {
+  const buckets = bucketsOf(days, bucket);
+  const raw = buckets.map((_, i) => rawBucket(site, bucket, i));
+  const now = site === 'small' ? 23 : 412;
+  const baseline = now - raw.reduce((t, r) => t + r.signups, 0);
+  const totals = [baseline];
+  for (const r of raw) totals.push(totals[totals.length - 1] + r.signups);
+  const shown = hideTotals(totals);
+  const total = (i: number): Count => (shown[i] ? { value: totals[i], suppressed: false } : hidden);
+  const series: GrowthRow[] = buckets.map((b, i) => ({
+    start: iso(b.s),
+    end: iso(b.e),
+    signups: shown[i] && shown[i + 1] ? { value: totals[i + 1] - totals[i], suppressed: false } : hidden,
+    onboarded: c(raw[i].onboarded),
+    active: c(raw[i].active),
+    practising: c(raw[i].practising),
+    total: total(i + 1),
+  }));
+  return { days, bucket, timezone: 'America/Toronto', baseline: total(0), series };
+}
+
+const engagement = (site: Site, days: number): OwnerEngagement => {
+  if (site === 'small')
+    return {
+      days,
+      features: [
+        { name: 'event_selected', users: c(9), events: 14 },
+        { name: 'practice_started', users: c(7), events: 15 },
+        { name: 'onboarding_completed', users: c(6), events: 6 },
+        { name: 'vocab_session_completed', users: hidden, events: null },
+        { name: 'resource_opened', users: hidden, events: null },
+        { name: 'feedback_submitted', users: hidden, events: null },
+        { name: 'duel_started', users: c(0), events: 0 },
+        { name: 'duel_completed', users: c(0), events: 0 },
+      ],
+      modes: [
+        { mode: 'practice', users: c(6) },
+        { mode: 'daily', users: hidden },
+      ],
+      practice: { started: { users: c(7), events: 15 }, completed: { users: hidden, events: null }, completion_rate: null },
+      duels: { players: c(0), created: 0, completed: 0 },
+      popular_events: [
+        { code: 'accounting', users: c(6) },
+        { code: 'marketing', users: hidden },
+      ],
+    };
   const k = days / 30;
   const n = (v: number) => Math.round(v * Math.min(k, 3));
   return {
     days,
     features: [
-      { name: 'practice_started', users: c(n(240)), events: n(1840) },
-      { name: 'practice_completed', users: c(n(221)), events: n(1311) },
-      { name: 'exam_completed', users: c(n(74)), events: n(102) },
       { name: 'event_selected', users: c(n(266)), events: n(902) },
+      { name: 'practice_started', users: c(n(240)), events: n(1840) },
       { name: 'vocab_session_completed', users: c(n(131)), events: n(486) },
+      { name: 'onboarding_completed', users: c(n(104)), events: n(104) },
       { name: 'duel_started', users: c(n(64)), events: n(210) },
       { name: 'duel_completed', users: c(n(61)), events: n(187) },
-      { name: 'onboarding_completed', users: c(n(104)), events: n(104) },
       { name: 'resource_opened', users: c(n(48)), events: n(133) },
       { name: 'feedback_submitted', users: c(n(9)), events: n(11) },
-      { name: 'install_prompt_shown', users: c(n(37)), events: n(52) },
-      { name: 'app_installed', users: hidden, events: null },
-      { name: 'push_enabled', users: hidden, events: null },
     ],
     modes: [
-      { mode: 'practice', users: c(n(198)), attempts: n(820) },
-      { mode: 'daily', users: c(n(150)), attempts: n(611) },
-      { mode: 'mock', users: c(n(74)), attempts: n(102) },
-      { mode: 'weak', users: c(n(41)), attempts: n(96) },
-      { mode: 'area', users: c(n(33)), attempts: n(71) },
-      { mode: 'redo', users: c(n(22)), attempts: n(40) },
-      { mode: 'endless', users: hidden, attempts: null },
+      { mode: 'practice', users: c(n(198)) },
+      { mode: 'daily', users: c(n(150)) },
+      { mode: 'mock', users: c(n(74)) },
+      { mode: 'weak', users: c(n(41)) },
+      { mode: 'area', users: c(n(33)) },
+      { mode: 'redo', users: c(n(22)) },
+      { mode: 'endless', users: hidden },
     ],
     practice: {
       started: { users: c(n(240)), events: n(1840) },
@@ -112,31 +204,70 @@ const engagement = (days: number): OwnerEngagement => {
     },
     duels: { players: c(n(64)), created: n(210), completed: n(187) },
     popular_events: [
-      { code: 'accounting', users: c(n(120)), events: n(390) },
-      { code: 'marketing', users: c(n(96)), events: n(301) },
-      { code: 'personal-finance', users: c(n(88)), events: n(254) },
-      { code: 'business-law', users: c(n(61)), events: n(170) },
-      { code: 'economics', users: c(n(40)), events: n(118) },
-      { code: 'entrepreneurship', users: c(n(33)), events: n(80) },
-      { code: 'data-science-ai', users: c(n(12)), events: n(31) },
-      { code: 'sports-entertainment-management', users: hidden, events: null },
+      { code: 'accounting', users: c(n(120)) },
+      { code: 'marketing', users: c(n(96)) },
+      { code: 'personal-finance', users: c(n(88)) },
+      { code: 'business-law', users: c(n(61)) },
+      { code: 'economics', users: c(n(40)) },
+      { code: 'entrepreneurship', users: c(n(33)) },
+      { code: 'data-science-ai', users: c(n(12)) },
+      { code: 'sports-entertainment-management', users: hidden },
     ],
   };
 };
 
-const preparation = (days: number): OwnerPreparation => ({
-  days,
-  events: [
-    { event: 'accounting', users: c(118), attempts: 512, answered: 10240, accuracy: 0.68, started: c(124), abandonment: 0.09 },
-    { event: 'marketing', users: c(92), attempts: 377, answered: 7540, accuracy: 0.74, started: c(97), abandonment: 0.12 },
-    { event: 'personal-finance', users: c(85), attempts: 301, answered: 6020, accuracy: 0.79, started: c(90), abandonment: 0.07 },
-    { event: 'business-law', users: c(58), attempts: 190, answered: 3800, accuracy: 0.57, started: c(66), abandonment: 0.21 },
-    { event: 'economics', users: c(39), attempts: 120, answered: 2400, accuracy: 0.63, started: c(42), abandonment: 0.15 },
-    { event: 'entrepreneurship', users: c(31), attempts: 74, answered: 1480, accuracy: 0.71, started: c(33), abandonment: 0.1 },
-    { event: 'data-science-ai', users: c(11), attempts: 25, answered: 500, accuracy: 0.52, started: c(14), abandonment: 0.29 },
-    { event: 'healthcare-administration', users: hidden, attempts: null, answered: null, accuracy: null, started: hidden, abandonment: null },
-  ],
-});
+const preparation = (site: Site, days: number): OwnerPreparation =>
+  site === 'small'
+    ? {
+        days,
+        events: [
+          { event: 'accounting', users: c(5), attempts: 14, answered: 280, accuracy: 0.66, started: c(6), abandonment: null },
+          { event: 'marketing', users: hidden, attempts: null, answered: null, accuracy: null, started: hidden, abandonment: null },
+        ],
+      }
+    : {
+        days,
+        events: [
+          { event: 'accounting', users: c(118), attempts: 512, answered: 10240, accuracy: 0.68, started: c(124), abandonment: 0.09 },
+          { event: 'marketing', users: c(92), attempts: 377, answered: 7540, accuracy: 0.74, started: c(97), abandonment: 0.12 },
+          { event: 'personal-finance', users: c(85), attempts: 301, answered: 6020, accuracy: 0.79, started: c(90), abandonment: 0.07 },
+          { event: 'business-law', users: c(58), attempts: 190, answered: 3800, accuracy: 0.57, started: c(66), abandonment: 0.21 },
+          { event: 'economics', users: c(39), attempts: 120, answered: 2400, accuracy: 0.63, started: c(42), abandonment: 0.15 },
+          { event: 'entrepreneurship', users: c(31), attempts: 74, answered: 1480, accuracy: 0.71, started: c(33), abandonment: 0.1 },
+          { event: 'data-science-ai', users: c(11), attempts: 25, answered: 500, accuracy: 0.52, started: c(14), abandonment: 0.29 },
+          { event: 'healthcare-administration', users: hidden, attempts: null, answered: null, accuracy: null, started: hidden, abandonment: null },
+        ],
+      };
+
+/** Made-up questions behind the fixture reports. acc-118 is keyed wrong on purpose, so the report checks out. */
+const questions: Record<string, OwnerQuestion> = {
+  'acc-118': {
+    id: 'acc-118',
+    event: 'accounting',
+    area: 'Adjusting entries',
+    difficulty: 2,
+    question:
+      'On December 31, a company owes three days of wages ($1,800) that it will pay on January 4. Which adjusting entry does it record on December 31?',
+    choices: [
+      'Debit Wages Payable $1,800; credit Cash $1,800',
+      'Debit Wages Expense $1,800; credit Wages Payable $1,800',
+      'Debit Wages Expense $1,800; credit Cash $1,800',
+      'No entry until the wages are paid',
+    ],
+    answer: 2,
+    explanation: 'Wages earned in December are an expense of December, whenever they are paid.',
+  },
+  'law-042': {
+    id: 'law-042',
+    event: 'business-law',
+    area: 'Contracts',
+    difficulty: 1,
+    question: 'A minor signs a contract to buy a car. Which of the following best describes the contract?',
+    choices: ['Void', 'Voidable by the minor', 'Voidable by the seller', 'Fully enforceable by both parties'],
+    answer: 1,
+    explanation: "A contract with a minor is generally voidable at the minor's choice. The adult party stays bound.",
+  },
+};
 
 const content: OwnerContent = {
   events: [
@@ -182,7 +313,7 @@ const content: OwnerContent = {
     { question_id: 'eco-090', event: 'economics', area: 'Elasticity', preview: 'If the price elasticity of demand is 0.4, a 10% price increase will...', students: c(19), answers: 22, accuracy: 0.36 },
     { question_id: 'pf-151', event: 'personal-finance', area: 'Credit', preview: 'Which factor has the largest weight in a FICO credit score?', students: c(33), answers: 35, accuracy: 0.43 },
   ],
-  feedback_status: { new: 3, triaged: 2, in_progress: 1, resolved: 7, wontfix: 1 },
+  feedback_status: {},
 };
 
 let feedback: OwnerFeedbackRow[] = [
@@ -230,6 +361,7 @@ function fb(
 
 const audit: AuditRow[] = [
   a(12, '2026-10-11T13:02:00Z', 'feedback_updated', 'feedback', 'f7', { from: 'in_progress', to: 'resolved', priority: 'high', note_changed: true }, 'joseph', null),
+  a(13, '2026-10-11T09:30:00Z', 'member_added', 'chapter_member', 'u-new', { chapter_id: 'c1', role: 'member' }, 'maya.chen', 'new.student'),
   a(11, '2026-10-10T21:15:00Z', 'support_email_viewed', 'user', 'u-noah', { reason: 'Student asked for help resetting their sign-in email' }, 'joseph', 'noah.k'),
   a(10, '2026-10-10T17:48:00Z', 'member_banned', 'chapter_member', 'u-x', { chapter_id: 'c1', op: 'insert', has_reason: true, via: 'owner_console', reason: 'Posted spam links in the chapter feed' }, 'joseph', 'spam.account'),
   a(9, '2026-10-09T15:30:00Z', 'chapter_role_changed', 'chapter_member', 'u-priya', { chapter_id: 'c1', from: 'member', to: 'executive' }, 'maya.chen', 'priya.s'),
@@ -284,50 +416,78 @@ function u(
 
 const OPEN: FeedbackStatus[] = ['new', 'triaged', 'in_progress'];
 
-export const fixtureSource: OwnerSource = {
-  overview: async () => overview,
-  growth: async (days, bucket) => growth(days, bucket),
-  engagement: async (days) => engagement(days),
-  preparation: async (days) => preparation(days),
-  content: async () => content,
-  feedbackList: async ({ status = 'open', kind, limit = 50, offset = 0 }) => {
-    const byKind = feedback.filter((f) => !kind || f.kind === kind);
-    const rows = byKind
-      .filter((f) => (status === 'all' ? true : status === 'open' ? OPEN.includes(f.status) : f.status === status))
-      .sort((x, y) => ['high', 'normal', 'low'].indexOf(x.priority) - ['high', 'normal', 'low'].indexOf(y.priority) || y.created_at.localeCompare(x.created_at));
-    const counts = { new: 0, triaged: 0, in_progress: 0, resolved: 0, wontfix: 0 } as Record<FeedbackStatus, number>;
-    for (const f of byKind) counts[f.status]++;
-    return { total: rows.length, rows: rows.slice(offset, offset + limit), counts };
-  },
-  feedbackUpdate: async (id, patch) => {
-    feedback = feedback.map((f) =>
-      f.id === id
-        ? {
-            ...f,
-            status: patch.status ?? f.status,
-            priority: patch.priority ?? f.priority,
-            resolution_note: patch.resolution_note === undefined ? f.resolution_note : patch.resolution_note || null,
-            updated_at: new Date().toISOString(),
-          }
-        : f,
-    );
-    const r = feedback.find((f) => f.id === id)!;
-    return { id, status: r.status, priority: r.priority, resolution_note: r.resolution_note, resolved_at: r.resolved_at, updated_at: r.updated_at };
-  },
-  auditSearch: async ({ action, q, limit = 50, offset = 0 }) => {
-    const needle = (q ?? '').toLowerCase();
-    const rows = audit.filter(
-      (r) =>
-        (!action || r.action === action) &&
-        (!needle || [r.action, r.actor_username, r.target_username, JSON.stringify(r.detail)].some((s) => s?.toLowerCase().includes(needle))),
-    );
-    return { total: rows.length, rows: rows.slice(offset, offset + limit), actions: [...new Set(audit.map((r) => r.action))] };
-  },
-  userSearch: async (query) => {
-    const n = query.toLowerCase();
-    return users.filter((x) => x.username.includes(n) || x.display_name.toLowerCase().includes(n));
-  },
-  supportEmail: async (userId) => `${userId.replace('user-', '').replace(/[^a-z]/g, '')}@student.example`,
-  setChapterBan: async () => {},
-  setChapterRole: async () => ({ changed: true }),
-};
+/** Status counts straight from the feedback rows, so Content and Feedback always agree. */
+function statusCounts(rows: OwnerFeedbackRow[]): Record<FeedbackStatus, number> {
+  const counts: Record<FeedbackStatus, number> = { new: 0, triaged: 0, in_progress: 0, resolved: 0, wontfix: 0 };
+  for (const f of rows) counts[f.status]++;
+  return counts;
+}
+
+function makeSource(site: Site): OwnerSource {
+  const fbRows = () => (site === 'small' ? feedback.filter((f) => f.id === 'f1' || f.id === 'f2') : feedback);
+  return {
+    overview: async () => overviews[site],
+    growth: async (days, bucket) => growth(site, days, bucket),
+    engagement: async (days) => engagement(site, days),
+    preparation: async (days) => preparation(site, days),
+    content: async () => ({
+      ...content,
+      reported_questions: site === 'small' ? content.reported_questions.slice(0, 1) : content.reported_questions,
+      hardest_questions: site === 'small' ? [] : content.hardest_questions,
+      feedback_status: statusCounts(fbRows()),
+    }),
+    question: async (id) => {
+      const q = questions[id];
+      if (!q) throw Object.assign(new Error('Question not found'), { code: 'P0002' });
+      return q;
+    },
+    feedbackList: async ({ status = 'open', kind, limit = 50, offset = 0 }) => {
+      const byKind = fbRows().filter((f) => !kind || f.kind === kind);
+      const rows = byKind
+        .filter((f) => (status === 'all' ? true : status === 'open' ? OPEN.includes(f.status) : f.status === status))
+        .sort(
+          (x, y) =>
+            ['high', 'normal', 'low'].indexOf(x.priority) - ['high', 'normal', 'low'].indexOf(y.priority) ||
+            y.created_at.localeCompare(x.created_at),
+        );
+      return { total: rows.length, rows: rows.slice(offset, offset + limit), counts: statusCounts(byKind) };
+    },
+    feedbackUpdate: async (id, patch) => {
+      feedback = feedback.map((f) => {
+        if (f.id !== id) return f;
+        const status = patch.status ?? f.status;
+        const closed = status === 'resolved' || status === 'wontfix';
+        return {
+          ...f,
+          status,
+          priority: patch.priority ?? f.priority,
+          resolution_note: patch.resolution_note === undefined ? f.resolution_note : patch.resolution_note || null,
+          resolved_at: closed ? (f.resolved_at ?? new Date().toISOString()) : null,
+          updated_at: new Date().toISOString(),
+        };
+      });
+      const r = feedback.find((f) => f.id === id)!;
+      return { id, status: r.status, priority: r.priority, resolution_note: r.resolution_note, resolved_at: r.resolved_at, updated_at: r.updated_at };
+    },
+    auditSearch: async ({ action, q, limit = 50, offset = 0 }) => {
+      const needle = (q ?? '').toLowerCase();
+      const all = site === 'small' ? audit.slice(0, 3) : audit;
+      const rows = all.filter(
+        (r) =>
+          (!action || r.action === action) &&
+          (!needle || [r.action, r.actor_username, r.target_username, JSON.stringify(r.detail)].some((s) => s?.toLowerCase().includes(needle))),
+      );
+      return { total: rows.length, rows: rows.slice(offset, offset + limit), actions: [...new Set(all.map((r) => r.action))] };
+    },
+    userSearch: async (query) => {
+      const n = query.toLowerCase();
+      return users.filter((x) => x.username.includes(n) || x.display_name.toLowerCase().includes(n));
+    },
+    supportEmail: async (userId) => `${userId.replace('user-', '').replace(/[^a-z]/g, '')}@student.example`,
+    setChapterBan: async () => {},
+    setChapterRole: async () => ({ changed: true }),
+  };
+}
+
+export const fixtureSource: OwnerSource = makeSource('busy');
+export const smallFixtureSource: OwnerSource = makeSource('small');

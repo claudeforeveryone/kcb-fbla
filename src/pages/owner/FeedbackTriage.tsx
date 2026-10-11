@@ -1,20 +1,22 @@
 // Feedback triage: every report students send (Send feedback, Report this question), newest high-priority first.
 // Changing a status, priority or note goes through fbla_owner_feedback_update, which writes an audit row. The note
-// is shown to the student who sent the report, so it is written for them.
-import { useState } from 'react';
+// is shown to the student who sent the report, so it is written for them. A question report shows the question with
+// its answer key (fbla_owner_question) so the owner can check the report without leaving the console.
+import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Inbox } from 'lucide-react';
-import { Badge, Button, EmptyState, Pill, SegmentedControl, Select, Textarea, useToast } from '../../components/ui';
+import { Badge, Button, EmptyState, Pill, SegmentedControl, Select, Skeleton, Textarea, useToast } from '../../components/ui';
 import { cn } from '../../components/ui/cn';
-import type { FeedbackFilter, OwnerFeedbackRow } from '../../api/owner';
+import type { FeedbackFilter, FeedbackSaved, OwnerFeedbackRow } from '../../api/owner';
 import {
   KIND_LABELS,
   STATUS_LABELS,
+  triageSaved,
   type FeedbackKind,
   type FeedbackPriority,
   type FeedbackStatus,
 } from '../../lib/feedback';
-import { eventName } from '../../lib/types';
-import { LoadState, useLoad, useOwnerSource, when } from './shared';
+import { DIFFICULTY_LABELS, eventName, type Difficulty } from '../../lib/types';
+import { LoadState, MoreButton, useLoad, useOwnerSource, usePaged, when } from './shared';
 
 const FILTERS: { value: FeedbackFilter; label: string }[] = [
   { value: 'open', label: 'Open' },
@@ -40,23 +42,34 @@ const PRIORITY_OPTIONS: { value: FeedbackPriority; label: string }[] = [
 ];
 
 const PAGE = 50;
+const rowId = (r: OwnerFeedbackRow) => r.id;
 
 export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   const src = useOwnerSource();
   const toast = useToast();
   const [status, setStatus] = useState<FeedbackFilter>('open');
   const [kind, setKind] = useState<FeedbackKind | ''>('');
-  const [limit, setLimit] = useState(PAGE);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [bump, setBump] = useState(0);
-  const state = useLoad(
-    () => src.feedbackList({ status, kind: kind || null, limit }),
-    `fb:${status}:${kind}:${limit}:${refreshKey}:${bump}`,
+  // The open report as last seen, so it stays open after a save moves it out of the current filter.
+  const [snap, setSnap] = useState<OwnerFeedbackRow | null>(null);
+  const state = usePaged(
+    (offset) => src.feedbackList({ status, kind: kind || null, limit: PAGE, offset }),
+    `fb:${status}:${kind}:${refreshKey}`,
+    rowId,
   );
+  // On a phone the list hides while a report is open; going back puts focus on the row that was open.
+  const returnTo = useRef<string | null>(null);
+  useEffect(() => {
+    if (selectedId || !returnTo.current) return;
+    document.getElementById(`fb-row-${returnTo.current}`)?.focus();
+    returnTo.current = null;
+  }, [selectedId]);
 
-
-  const rows = state.data?.rows ?? [];
-  const selected = rows.find((r) => r.id === selectedId) ?? null;
+  const rows = state.rows;
+  // The list's copy wins once it is at least as new as the saved one (the reload after a save lands a moment later).
+  const listed = rows.find((r) => r.id === selectedId);
+  const fresh = snap && snap.id === selectedId && (!listed || snap.updated_at >= listed.updated_at) ? snap : null;
+  const selected = fresh ?? listed ?? null;
   const counts = state.data?.counts;
   const countFor = (f: FeedbackFilter) => {
     if (!counts) return undefined;
@@ -73,10 +86,7 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
             <Pill
               key={f.value}
               active={status === f.value}
-              onClick={() => {
-                setStatus(f.value);
-                setLimit(PAGE);
-              }}
+              onClick={() => setStatus(f.value)}
               count={countFor(f.value)}
             >
               {f.label}
@@ -87,17 +97,14 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
           aria-label="Kind"
           className="w-full lg:w-48"
           value={kind}
-          onChange={(e) => {
-            setKind(e.target.value as FeedbackKind | '');
-            setLimit(PAGE);
-          }}
+          onChange={(e) => setKind(e.target.value as FeedbackKind | '')}
           options={KIND_OPTIONS}
         />
       </div>
 
       <LoadState state={state} skeleton="table">
-        {(d) =>
-          d.rows.length === 0 ? (
+        {() =>
+          rows.length === 0 ? (
             <EmptyState
               icon={<Inbox />}
               title={status === 'open' ? 'Nothing waiting' : 'No feedback here'}
@@ -107,14 +114,18 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
             <div className="grid gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
               <div className={cn('min-w-0', selected && 'hidden lg:block')}>
                 <ul className="divide-y divide-line border border-line bg-surface" aria-label="Feedback">
-                  {d.rows.map((r) => (
+                  {rows.map((r) => (
                     <li key={r.id}>
                       <button
                         type="button"
-                        onClick={() => setSelectedId(r.id)}
+                        id={`fb-row-${r.id}`}
+                        onClick={() => {
+                          setSelectedId(r.id);
+                          setSnap(r);
+                        }}
                         aria-current={r.id === selectedId ? 'true' : undefined}
                         className={cn(
-                          'block w-full px-4 py-3 text-left transition-colors hover:bg-surface-2/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue/40',
+                          'block w-full scroll-mt-24 px-4 py-3 text-left transition-colors hover:bg-surface-2/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue/40',
                           r.id === selectedId && 'bg-red/[0.04] shadow-[inset_3px_0_0_var(--red)]',
                         )}
                       >
@@ -132,21 +143,22 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
                     </li>
                   ))}
                 </ul>
-                {d.total > d.rows.length && (
-                  <Button variant="outline" size="sm" block className="mt-3" onClick={() => setLimit((l) => l + PAGE)} loading={state.loading}>
-                    Show more ({d.total - d.rows.length} left)
-                  </Button>
-                )}
+                <MoreButton state={state} />
               </div>
               <div className={cn('min-w-0', !selected && 'hidden lg:block')}>
                 {selected ? (
                   <FeedbackDetail
                     key={selected.id}
                     row={selected}
-                    onBack={() => setSelectedId(null)}
-                    onSaved={() => {
-                      toast.success('Saved', 'The student sees the new status.');
-                      setBump((n) => n + 1);
+                    onBack={() => {
+                      returnTo.current = selected.id;
+                      setSelectedId(null);
+                    }}
+                    onSaved={(changed, saved) => {
+                      setSnap({ ...selected, ...saved });
+                      const t = triageSaved(changed);
+                      toast.success(t.title, t.body);
+                      state.reload();
                     }}
                   />
                 ) : (
@@ -176,9 +188,24 @@ function StatusBadge({ status }: { status: FeedbackStatus }) {
   );
 }
 
-export function FeedbackDetail({ row, onBack, onSaved }: { row: OwnerFeedbackRow; onBack: () => void; onSaved: () => void }) {
+type Changed = { status?: FeedbackStatus; priority?: FeedbackPriority; note?: string };
+
+export function FeedbackDetail({
+  row,
+  onBack,
+  onSaved,
+}: {
+  row: OwnerFeedbackRow;
+  onBack: () => void;
+  onSaved: (changed: Changed, saved: FeedbackSaved) => void;
+}) {
   const src = useOwnerSource();
   const toast = useToast();
+  // On a phone, opening a report hides the list, so focus moves to the report instead of being dropped.
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!window.matchMedia('(min-width: 1024px)').matches) ref.current?.focus();
+  }, []);
   const [status, setStatus] = useState<FeedbackStatus>(row.status);
   const [priority, setPriority] = useState<FeedbackPriority>(row.priority);
   const [note, setNote] = useState(row.resolution_note ?? '');
@@ -188,13 +215,14 @@ export function FeedbackDetail({ row, onBack, onSaved }: { row: OwnerFeedbackRow
 
   const save = async () => {
     setBusy(true);
+    const changed: Changed = {
+      status: status !== row.status ? status : undefined,
+      priority: priority !== row.priority ? priority : undefined,
+      note: note.trim() !== (row.resolution_note ?? '') ? note.trim() : undefined,
+    };
     try {
-      await src.feedbackUpdate(row.id, {
-        status: status !== row.status ? status : undefined,
-        priority: priority !== row.priority ? priority : undefined,
-        resolution_note: note.trim() !== (row.resolution_note ?? '') ? note.trim() : undefined,
-      });
-      onSaved();
+      const saved = await src.feedbackUpdate(row.id, { status: changed.status, priority: changed.priority, resolution_note: changed.note });
+      onSaved(changed, saved);
     } catch (e) {
       toast.error('Could not save', e instanceof Error ? e.message : undefined);
     } finally {
@@ -203,7 +231,7 @@ export function FeedbackDetail({ row, onBack, onSaved }: { row: OwnerFeedbackRow
   };
 
   return (
-    <article className="border border-line bg-surface" aria-label="Feedback detail">
+    <article ref={ref} tabIndex={-1} className="scroll-mt-24 border border-line bg-surface outline-none focus-visible:ring-2 focus-visible:ring-blue/40" aria-label="Feedback detail">
       <div className="flex items-center gap-2 border-b border-line px-4 py-3 sm:px-5">
         <Button variant="ghost" size="sm" className="-ml-2 lg:hidden" onClick={onBack} leftIcon={<ArrowLeft className="size-4" />}>
           All feedback
@@ -251,6 +279,8 @@ export function FeedbackDetail({ row, onBack, onSaved }: { row: OwnerFeedbackRow
           )}
         </dl>
 
+        {row.question_id && !row.question_id.startsWith('custom:') && <QuestionCheck id={row.question_id} />}
+
         <div className="grid gap-4 border-t border-line pt-4 sm:grid-cols-2">
           <Select label="Status" value={status} onChange={(e) => setStatus(e.target.value as FeedbackStatus)} options={STATUS_OPTIONS} />
           <div>
@@ -276,5 +306,68 @@ export function FeedbackDetail({ row, onBack, onSaved }: { row: OwnerFeedbackRow
         </div>
       </div>
     </article>
+  );
+}
+
+const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+/** The reported question with its answer key and explanation, so a report can be checked on the spot. */
+function QuestionCheck({ id }: { id: string }) {
+  const src = useOwnerSource();
+  const state = useLoad(() => src.question(id), `question:${id}`, { quiet: true });
+  const gone = (state.error as { code?: string } | null)?.code === 'P0002';
+  return (
+    <section aria-label="Reported question" className="border border-line bg-surface-2/60 p-4">
+      <h3 className="text-sm font-bold text-heading">The question</h3>
+      {state.error ? (
+        gone ? (
+          <p className="mt-1 text-sm text-muted">This question is no longer in the bank.</p>
+        ) : (
+          <div className="mt-2 flex flex-wrap items-center gap-3">
+            <p className="text-sm text-muted">Could not load the question.</p>
+            <Button variant="outline" size="sm" onClick={state.reload}>
+              Try again
+            </Button>
+          </div>
+        )
+      ) : !state.data ? (
+        <div className="mt-2 space-y-2" role="status" aria-label="Loading the question">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-9" />
+          <Skeleton className="h-9" />
+        </div>
+      ) : (
+        <>
+          <p className="mt-0.5 text-xs text-muted">
+            {[eventName(state.data.event), state.data.area, DIFFICULTY_LABELS[state.data.difficulty as Difficulty]].filter(Boolean).join(' · ')}
+          </p>
+          <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-ink">{state.data.question}</p>
+          <ol className="mt-3 space-y-1.5" aria-label="Choices">
+            {state.data.choices.map((choice, i) => {
+              const keyed = i === state.data!.answer;
+              return (
+                <li
+                  key={i}
+                  className={cn(
+                    'flex items-start gap-2.5 border px-3 py-2 text-sm',
+                    keyed ? 'border-success bg-success/[0.07]' : 'border-line bg-surface',
+                  )}
+                >
+                  <span className="tabular w-4 shrink-0 font-bold text-muted">{LETTERS[i] ?? i + 1}</span>
+                  <span className="min-w-0 flex-1 text-ink">{choice}</span>
+                  {keyed && <Badge tone="success">Answer key</Badge>}
+                </li>
+              );
+            })}
+          </ol>
+          {state.data.explanation && (
+            <div className="mt-3 text-sm">
+              <div className="font-semibold text-heading">Explanation</div>
+              <p className="mt-0.5 whitespace-pre-wrap leading-relaxed text-ink">{state.data.explanation}</p>
+            </div>
+          )}
+        </>
+      )}
+    </section>
   );
 }

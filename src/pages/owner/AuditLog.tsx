@@ -1,11 +1,11 @@
-// Audit log: every sensitive change (roles, bans, removals, trainers, deleted chapters, owner access, feedback
-// triage, email lookups), append-only in fbla_audit_log (0104). Searchable by action, text and time window.
+// Audit log: every sensitive change (roles, bans, removals, admin adds, trainers, deleted chapters, owner access,
+// feedback triage, email lookups), append-only in fbla_audit_log (0104). Searchable by action, text and time window.
 import { useEffect, useState } from 'react';
 import { ScrollText, Search } from 'lucide-react';
-import { Badge, Button, EmptyState, Input, Select, Table, TBody, TD, TH, THead, TR } from '../../components/ui';
+import { Badge, EmptyState, Input, Select, Table, TBody, TD, TH, THead, TR } from '../../components/ui';
 import type { AuditRow } from '../../api/owner';
 import { auditActionLabel, auditChange, auditSource } from '../../lib/owner';
-import { LoadState, useLoad, useOwnerSource, when } from './shared';
+import { LoadState, MoreButton, useOwnerSource, usePaged, when } from './shared';
 
 const WINDOWS = [
   { value: '7', label: 'Last 7 days' },
@@ -16,6 +16,7 @@ const WINDOWS = [
 ];
 
 const PAGE = 50;
+const rowId = (r: AuditRow) => r.id;
 
 function useDebounced<T>(value: T, ms = 300): T {
   const [v, setV] = useState(value);
@@ -31,13 +32,12 @@ export function AuditLog({ refreshKey }: { refreshKey: number }) {
   const [q, setQ] = useState('');
   const [action, setAction] = useState('');
   const [days, setDays] = useState('90');
-  const [limit, setLimit] = useState(PAGE);
   const query = useDebounced(q.trim());
-  const state = useLoad(
-    () => src.auditSearch({ days: Number(days), action: action || null, q: query, limit }),
-    `audit:${days}:${action}:${query}:${limit}:${refreshKey}`,
+  const state = usePaged(
+    (offset) => src.auditSearch({ days: Number(days), action: action || null, q: query, limit: PAGE, offset }),
+    `audit:${days}:${action}:${query}:${refreshKey}`,
+    rowId,
   );
-  useEffect(() => setLimit(PAGE), [days, action, query]);
 
   const actions = state.data?.actions ?? [];
   const actionOptions = [
@@ -62,8 +62,8 @@ export function AuditLog({ refreshKey }: { refreshKey: number }) {
         <Select aria-label="Time window" value={days} onChange={(e) => setDays(e.target.value)} options={WINDOWS} />
       </div>
       <LoadState state={state} skeleton="table">
-        {(d) =>
-          d.rows.length === 0 ? (
+        {() =>
+          state.rows.length === 0 ? (
             <EmptyState
               icon={<ScrollText />}
               title={query || action ? 'No matching entries' : 'No changes logged yet'}
@@ -76,14 +76,11 @@ export function AuditLog({ refreshKey }: { refreshKey: number }) {
           ) : (
             <>
               <p className="text-sm text-muted" aria-live="polite">
-                {d.total === 1 ? '1 entry' : `${d.total.toLocaleString('en-CA')} entries`}
+                {state.total === 1 ? '1 entry' : `${state.total.toLocaleString('en-CA')} entries`}
               </p>
-              <AuditTable rows={d.rows} />
-              {d.total > d.rows.length && (
-                <Button variant="outline" size="sm" block onClick={() => setLimit((l) => l + PAGE)} loading={state.loading}>
-                  Show more ({d.total - d.rows.length} left)
-                </Button>
-              )}
+              <AuditCards rows={state.rows} />
+              <AuditTable rows={state.rows} />
+              <MoreButton state={state} />
             </>
           )
         }
@@ -105,9 +102,40 @@ function target(r: AuditRow): string {
   return `${r.target_type ?? 'item'} ${r.target_id.slice(0, 8)}`;
 }
 
+const sourceTone = (source: string): 'red' | 'neutral' | 'blue' => (source === 'Owner console' ? 'red' : source === 'Database' ? 'neutral' : 'blue');
+
+/** Phones: one card per entry (what, when, who, affected, details) instead of a five-column table. */
+export function AuditCards({ rows }: { rows: AuditRow[] }) {
+  return (
+    <ul className="divide-y divide-line border border-line bg-surface sm:hidden" aria-label="Audit log entries">
+      {rows.map((r) => {
+        const change = auditChange(r.action, r.detail);
+        const reason = typeof r.detail?.reason === 'string' ? r.detail.reason : '';
+        const source = auditSource(r.action, r.detail, r.actor_id);
+        const affected = target(r);
+        return (
+          <li key={r.id} className="space-y-1.5 p-4 text-sm">
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="min-w-0 font-semibold text-ink">{auditActionLabel(r.action)}</span>
+              <span className="shrink-0 text-xs text-muted">{when(r.created_at)}</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-ink">
+              <span>{who(r)}</span>
+              <Badge tone={sourceTone(source)}>{source}</Badge>
+              {affected && <span className="text-muted">on {affected}</span>}
+            </div>
+            {change && <p className="text-ink">{change}</p>}
+            {reason && <p className="break-words text-muted">Reason: {reason}</p>}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 export function AuditTable({ rows }: { rows: AuditRow[] }) {
   return (
-    <Table>
+    <Table wrapClassName="hidden sm:block">
       <THead>
         <tr>
           <TH>When</TH>
@@ -128,7 +156,7 @@ export function AuditTable({ rows }: { rows: AuditRow[] }) {
               <TD className="whitespace-nowrap font-medium text-ink">{auditActionLabel(r.action)}</TD>
               <TD className="whitespace-nowrap">
                 <div className="text-ink">{who(r)}</div>
-                <Badge className="mt-1" tone={source === 'Owner console' ? 'red' : source === 'Database' ? 'neutral' : 'blue'}>
+                <Badge className="mt-1" tone={sourceTone(source)}>
                   {source}
                 </Badge>
               </TD>
