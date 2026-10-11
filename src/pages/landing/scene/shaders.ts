@@ -51,20 +51,36 @@ void main() {
   ${tail}
 }`;
 
-/** A soft beam of light: bright at its source edge, thinning toward the floor, feathered at the sides. */
+/** The beam quad's vertex stage: also passes how squarely the quad faces the camera (1 face on, 0 edge on). */
+export const beamVertex = /* glsl */ `
+varying vec2 vUv;
+varying float vFacing;
+void main() {
+  vUv = uv;
+  vec4 view = modelViewMatrix * vec4(position, 1.0);
+  vFacing = abs(dot(normalize(normalMatrix * normal), normalize(-view.xyz)));
+  gl_Position = projectionMatrix * view;
+}`;
+
+/**
+ * A soft beam of light: bright at its source edge, thinning toward the floor, feathered at the sides. A beam is a flat
+ * quad, so it fades as the camera comes round to its edge (the closing scene's turned camera saw a hard-edged band).
+ */
 export const beamFragment = /* glsl */ `
 uniform vec3 uColor;
 uniform float uIntensity;
 uniform float uTime;
 uniform float uSeed;
 varying vec2 vUv;
+varying float vFacing;
 void main() {
   float x = abs(vUv.x - 0.5) * 2.0;
   float side = 1.0 - smoothstep(0.15, 1.0, x);
   // visible in the air above the stage, gone before it reaches the floor (the caustics carry it from there)
   float along = smoothstep(0.3, 1.0, vUv.y) * pow(vUv.y, 1.5) * (1.0 - smoothstep(0.92, 1.0, vUv.y));
   float breathe = 0.9 + 0.1 * sin(uTime * 0.7 + uSeed * 3.1);
-  vec3 col = uColor * side * side * along * 0.075 * uIntensity * breathe;
+  float facing = smoothstep(0.12, 0.5, vFacing);
+  vec3 col = uColor * side * side * along * 0.075 * uIntensity * breathe * facing;
   gl_FragColor = vec4(col, 1.0);
   ${tail}
 }`;
@@ -154,6 +170,8 @@ vFluteTangent = normalize(normalMatrix * vec3(1.0, 0.0, 0.0));
 export const fluteFragmentHead = /* glsl */ `
 uniform float uFluteFreq;
 uniform float uFluteAmp;
+uniform float uRim;
+uniform vec3 uRimColor;
 varying float vFluteX;
 varying float vFluteFacing;
 varying vec3 vFluteTangent;
@@ -163,5 +181,16 @@ export const fluteFragmentBody = /* glsl */ `
 {
   float fl = sin(vFluteX * uFluteFreq) * uFluteAmp * smoothstep(0.55, 0.9, vFluteFacing);
   normal = normalize(normal + vFluteTangent * fl);
+}
+`;
+
+/**
+ * A thin cool rim where the glass turns away from the camera (silhouettes, the arch's side faces), so each arch keeps
+ * a glass edge against the navy even where little light comes through it. Added before the colour-space encode.
+ */
+export const glassRimBody = /* glsl */ `
+{
+  float facing = clamp(dot(normalize(vViewPosition), normal), 0.0, 1.0);
+  gl_FragColor.rgb += uRimColor * pow(1.0 - facing, 3.0) * uRim;
 }
 `;

@@ -1,8 +1,10 @@
 // The signed-out front door, "/" when no one is signed in (App.tsx IndexRoute). Every word is HTML in reading
 // order; the glass room behind the hero and the closing section is decoration that arrives after first paint.
 import {
+  useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
   type MouseEvent,
@@ -12,9 +14,11 @@ import { ArrowRight } from "lucide-react";
 import { buttonClasses } from "../../components/ui/Button";
 import { cn } from "../../components/ui/cn";
 import { EventNetwork } from "./EventNetwork";
+import type { PosterVariant } from "./ObservatoryPoster";
 import { ObservatoryStage } from "./ObservatoryStage";
 import { PracticePreview } from "./PracticePreview";
 import { shouldPlayIntro } from "./intro";
+import { RoomSlotContext, type RoomOwner } from "./roomSlot";
 import {
   DUEL_ACCEPT_HOURS,
   DUEL_QUESTIONS,
@@ -89,6 +93,21 @@ const STEPS = [
 ];
 
 export default function LandingPage() {
+  // the hero and the closing section share one WebGL room (see roomSlot.ts)
+  const [roomOwner, setRoomOwner] = useState<RoomOwner>(null);
+  const claimRoom = useCallback((who: PosterVariant) => setRoomOwner(who), []);
+  const roomSlot = useMemo(
+    () => ({ owner: roomOwner, claim: claimRoom }),
+    [roomOwner, claimRoom],
+  );
+  return (
+    <RoomSlotContext.Provider value={roomSlot}>
+      <Landing />
+    </RoomSlotContext.Provider>
+  );
+}
+
+function Landing() {
   const root = useRef<HTMLDivElement>(null);
   const [intro, setIntro] = useState(false);
   const [js, setJs] = useState(false);

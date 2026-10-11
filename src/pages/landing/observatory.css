@@ -342,12 +342,21 @@
 
 /* ---------- stage (poster and canvas) --------------------------------------------------------------------------- */
 
+/* The canvas fades in over the static frame once it has drawn, and leaves at once (an unpainted or rebuilt canvas
+   must never show). The frame stays underneath until the canvas fully covers it, then stops painting; it is back the
+   moment the canvas goes. */
 .obs-fade {
   transition: opacity 800ms var(--obs-ease);
 }
 
 .obs-fade.is-out {
   opacity: 0;
+  transition: none;
+}
+
+.obs-under.is-out {
+  visibility: hidden;
+  transition: visibility 0s linear 850ms;
 }
 
 .obs-poster--wide {

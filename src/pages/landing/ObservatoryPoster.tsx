@@ -43,8 +43,8 @@ const path = (pts: Array<[number, number]>, close = false) =>
     .map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`)
     .join(" ") + (close ? " Z" : "");
 
-function drawing(preset: Preset, variant: PosterVariant) {
-  const base = framing(preset.width, preset.height, preset.spec);
+function drawing(preset: Preset, variant: PosterVariant, spec: ColonnadeSpec) {
+  const base = framing(preset.width, preset.height, spec);
   const f: Framing = variant === "close" ? closeFraming(base) : base;
   const P = (p: Vec3) => project(p, f, preset.width, preset.height);
 
@@ -58,7 +58,7 @@ function drawing(preset: Preset, variant: PosterVariant) {
   const [poolX, poolY] = P([0, 0, ROOM.crystal.position[2]]);
   const [poolRight] = P([1.4, 0, ROOM.crystal.position[2]]);
 
-  const arches = archLayout(preset.spec)
+  const arches = archLayout(spec)
     .slice()
     .sort((a, b) => a.z - b.z)
     .map((a) => {
@@ -128,12 +128,19 @@ function Frame({
   preset,
   variant,
   state,
+  lite,
 }: {
   preset: Preset;
   variant: PosterVariant;
   state: PosterState;
+  lite: boolean;
 }) {
-  const d = useMemo(() => drawing(preset, variant), [preset, variant]);
+  // the frame under a lite-tier room shows the lite colonnade, so the room cross-fades in over the same arches
+  const spec = lite ? COLONNADE_LITE : preset.spec;
+  const d = useMemo(
+    () => drawing(preset, variant, spec),
+    [preset, variant, spec],
+  );
   const id = `obs-${preset.key}-${variant}`;
   const { width: W, height: H } = preset;
   return (
@@ -273,16 +280,25 @@ function Frame({
 export function ObservatoryPoster({
   variant,
   state,
+  lite = false,
   className,
 }: {
   variant: PosterVariant;
   state: PosterState;
+  /** the live room behind this frame is the lite tier's (five arches) */
+  lite?: boolean;
   className?: string;
 }) {
   return (
     <div className={cn("absolute inset-0", className)} aria-hidden="true">
       {PRESETS.map((p) => (
-        <Frame key={p.key} preset={p} variant={variant} state={state} />
+        <Frame
+          key={p.key}
+          preset={p}
+          variant={variant}
+          state={state}
+          lite={lite}
+        />
       ))}
     </div>
   );

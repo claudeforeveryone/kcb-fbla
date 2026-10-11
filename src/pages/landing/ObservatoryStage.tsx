@@ -1,14 +1,19 @@
 // Decides when the WebGL room is worth paying for, and shows the static frame until it is.
+// - Phones and touch-only devices never load it (tier.ts): they get the static frame, drawn from the same layout.
 // - The 3D chunk is a separate dynamic import, requested only after the page has loaded (fonts included), an idle
-//   slot, and the section being near the viewport, on a tier that allows WebGL (see tier.ts). The landing's first
-//   paint never waits on three.js.
-// - Rendering pauses while the canvas is off-screen or the tab is hidden. Phones release the canvas entirely when
-//   the section is far away; desktops keep it paused so scrolling back does not recompile shaders.
+//   slot, and the section being near the viewport, on a tier that allows WebGL. The first paint never waits on it.
+// - One room at a time (roomSlot.ts): the hero and the closing section share a slot, so only one canvas exists.
+// - Rendering pauses while the canvas is off-screen or the tab is hidden; a room that owns the slot stays mounted
+//   (paused) so scrolling back does not rebuild it.
+// - The animation clock belongs to this stage, not to a mount, so a rebuilt room (a tier step-down, the slot coming
+//   back) carries on settled instead of assembling again.
 // - Under reduced motion a capable GPU still gets the real glass, drawn once and held still.
 import {
   Component,
   lazy,
   Suspense,
+  useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -16,6 +21,7 @@ import {
 } from "react";
 import { cn } from "../../components/ui/cn";
 import { ObservatoryPoster, type PosterVariant } from "./ObservatoryPoster";
+import { mayHoldRoom, RoomSlotContext } from "./roomSlot";
 import { readLandingEnv, tierFor, type LandingEnv, type Tier } from "./tier";
 
 const ObservatoryScene = lazy(() => import("./scene/ObservatoryScene"));
@@ -55,11 +61,16 @@ export function ObservatoryStage({
   className?: string;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
+  const slot = useContext(RoomSlotContext);
+  const clock = useRef(0);
   const [env, setEnv] = useState<LandingEnv | null>(null);
   const [reduced, setReduced] = useState(false);
   const [declines, setDeclines] = useState(0);
   const [failed, setFailed] = useState(false);
-  const [ready, setReady] = useState(false);
+  // the tier whose room has drawn its first frames; cleared when the room goes, so a new mount (a tier change, the
+  // slot coming back) always starts behind the static frame instead of showing an unpainted canvas
+  const [readyTier, setReadyTier] = useState<Tier | null>(null);
+  const [settled, setSettled] = useState(false);
   const [idle, setIdle] = useState(false);
   const [near, setNear] = useState(false);
   const [onScreen, setOnScreen] = useState(false);
@@ -77,8 +88,8 @@ export function ObservatoryStage({
   }, []);
 
   // The page's own load (fonts, logo, the headline settled as the largest paint) comes first, then two frames, then
-  // an idle slot, and only then is the 3D chunk requested. On a slow connection the 350 KB room must not compete
-  // with the fonts for bandwidth.
+  // an idle slot, and only then is the 3D chunk requested. On a slow connection the room must not compete with the
+  // fonts for bandwidth.
   useEffect(() => {
     let cancelled = false;
     let idleId: number | undefined;
@@ -146,21 +157,43 @@ export function ObservatoryStage({
   }, []);
 
   const tier: Tier = env && !failed ? tierFor({ ...env, declines }) : "poster";
-  const live = tier !== "poster" && idle && (near || keep);
+  const wantsRoom = tier !== "poster" && idle;
 
-  // Desktops keep a mounted room (paused) once it exists; phones let it go when it is far away.
+  // coming near the viewport takes the room slot from the other section
+  const claim = slot?.claim;
   useEffect(() => {
-    if (live && tier === "full") setKeep(true);
-    if (tier !== "full") setKeep(false);
+    if (wantsRoom && near) claim?.(variant);
+  }, [wantsRoom, near, claim, variant]);
+
+  const holds = mayHoldRoom(slot, variant);
+  const live = wantsRoom && holds && (near || keep);
+
+  // A room that has been built stays mounted (paused) while this section owns the slot, so scrolling back does not
+  // rebuild it; losing the slot or falling back to the static frame lets it go.
+  useEffect(() => {
+    if (live) setKeep(true);
+    if (!wantsRoom || !holds) setKeep(false);
+  }, [live, wantsRoom, holds]);
+
+  useEffect(() => {
+    if (!live) setReadyTier(null);
+  }, [live]);
+  const ready = live && readyTier === tier;
+
+  // the full tier's effects chunk (bloom, FXAA) downloads beside the scene's, not after it
+  useEffect(() => {
+    if (live && tier === "full") void import("./scene/Effects");
   }, [live, tier]);
 
-  // A remount (tier change, phone scrolling back) starts from the static frame again.
-  useEffect(() => {
-    if (!live) setReady(false);
-  }, [live, tier]);
+  const onReady = useCallback(() => setReadyTier(tier), [tier]);
+  const onSettled = useCallback(() => setSettled(true), []);
+  const onDecline = useCallback(() => setDeclines((d) => d + 1), []);
+  const onFail = useCallback(() => setFailed(true), []);
 
-  const posterState = env && (tier === "poster" || failed) ? "room" : "waiting";
-  const showPoster = !(live && ready);
+  // The static frame shows the whole room when that is what the visitor gets, and once the live room has assembled
+  // (so a rebuilt room cross-fades from the same picture); before that it shows only the stage and the light.
+  const posterState =
+    env && (tier === "poster" || failed || settled) ? "room" : "waiting";
 
   return (
     <div
@@ -171,10 +204,11 @@ export function ObservatoryStage({
       <ObservatoryPoster
         variant={variant}
         state={posterState}
-        className={cn("obs-fade", !showPoster && "is-out")}
+        lite={tier === "lite"}
+        className={cn("obs-under", ready && "is-out")}
       />
       {live && (
-        <SceneBoundary onFail={() => setFailed(true)}>
+        <SceneBoundary onFail={onFail}>
           <Suspense fallback={null}>
             <div
               className={cn("obs-fade absolute inset-0", !ready && "is-out")}
@@ -185,8 +219,10 @@ export function ObservatoryStage({
                 variant={variant}
                 animate={!reduced}
                 running={(onScreen && tabVisible) || !ready}
-                onReady={() => setReady(true)}
-                onDecline={() => setDeclines((d) => d + 1)}
+                clock={clock}
+                onReady={onReady}
+                onSettled={onSettled}
+                onDecline={onDecline}
               />
             </div>
           </Suspense>

@@ -7,6 +7,9 @@
 // scene without its glass is rendered once per frame into one shared buffer, and every glass mesh reads it.
 import {
   createContext,
+  lazy,
+  Suspense,
+  useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -17,13 +20,10 @@ import {
 } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
-  Environment,
-  Lightformer,
   MeshTransmissionMaterial,
   PerformanceMonitor,
   useFBO,
 } from "@react-three/drei";
-import { Bloom, EffectComposer, SMAA } from "@react-three/postprocessing";
 import {
   AdditiveBlending,
   BufferAttribute,
@@ -35,11 +35,17 @@ import {
   Group,
   HalfFloatType,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   Object3D,
+  PMREMGenerator,
+  Plane,
   PlaneGeometry,
+  RingGeometry,
+  Scene,
   ShaderMaterial,
   TorusGeometry,
+  Vector3,
   Vector4,
   WebGLRenderTarget,
   type Material,
@@ -64,15 +70,20 @@ import {
 import { archGeometry, crystalGeometry } from "./geometry";
 import {
   beamFragment,
+  beamVertex,
   causticFragment,
   fluteFragmentBody,
   fluteFragmentHead,
   fluteVertexBody,
   fluteVertexHead,
+  glassRimBody,
   horizonFragment,
   passVertex,
   slitFragment,
 } from "./shaders";
+
+/** Bloom and FXAA: a separate chunk that only the full tier loads (see Effects.tsx). */
+const Effects = lazy(() => import("./Effects"));
 
 export type SceneTier = "full" | "lite";
 export type SceneVariant = "hero" | "close";
@@ -84,11 +95,24 @@ export type ObservatorySceneProps = {
   animate: boolean;
   /** false while the canvas is off-screen or the tab is hidden */
   running: boolean;
+  /**
+   * Seconds of animation played so far. Owned by the stage and shared by every mount, so a remount (a tier step-down,
+   * scrolling back to a released room) carries on from where the room was instead of assembling again.
+   */
+  clock: MutableRefObject<number>;
   /** the first frames have been drawn (the static frame can fade out) */
   onReady: () => void;
+  /** the room has finished assembling (or was drawn settled) */
+  onSettled: () => void;
   /** the frame rate stayed too low: step down a tier */
   onDecline: () => void;
 };
+
+/** Everything below the stage's top surface is cut away, so glass rising out of the floor never shows under the disc. */
+const FLOOR_CLIP = [new Plane(new Vector3(0, 1, 0), 0)];
+
+/** Seconds a mount runs before the performance monitor may step it down (shader warm-up frames are slow). */
+const DECLINE_GRACE = 3;
 
 const GOLD = "#F4AB19";
 const GOLD_SOFT = "#F6CC6B";
@@ -148,11 +172,24 @@ type PatchableMaterial = Material & {
   ) => void;
 };
 
-/** Wraps drei's transmission shader so the arch's normal is tilted across its width (fluted glass). */
-function applyFlutes(mat: PatchableMaterial, freq: number, amp: number) {
+/**
+ * Wraps drei's transmission shader so the arch's normal is tilted across its width (fluted glass) and its edges carry
+ * a thin rim of light (see glassRimBody).
+ */
+function applyFlutes(
+  mat: PatchableMaterial,
+  freq: number,
+  amp: number,
+  rim: number,
+) {
   if (mat.userData.fluted) return;
   const base = mat.onBeforeCompile;
-  const uniforms = { uFluteFreq: { value: freq }, uFluteAmp: { value: amp } };
+  const uniforms = {
+    uFluteFreq: { value: freq },
+    uFluteAmp: { value: amp },
+    uRim: { value: rim },
+    uRimColor: { value: new Color(ICE) },
+  };
   mat.onBeforeCompile = (shader, renderer) => {
     base.call(mat, shader, renderer);
     Object.assign(shader.uniforms, uniforms);
@@ -164,50 +201,183 @@ function applyFlutes(mat: PatchableMaterial, freq: number, amp: number) {
       );
     shader.fragmentShader =
       fluteFragmentHead +
-      shader.fragmentShader.replace(
-        "#include <normal_fragment_maps>",
-        `#include <normal_fragment_maps>\n${fluteFragmentBody}`,
-      );
+      shader.fragmentShader
+        .replace(
+          "#include <normal_fragment_maps>",
+          `#include <normal_fragment_maps>\n${fluteFragmentBody}`,
+        )
+        .replace(
+          "#include <tonemapping_fragment>",
+          `${glassRimBody}\n#include <tonemapping_fragment>`,
+        );
   };
   mat.customProgramCacheKey = () => "obs-reeded-glass";
   mat.userData.fluted = true;
   mat.needsUpdate = true;
 }
 
-type GlassLook = { samples: number; reeded: boolean; warm?: boolean };
+type GlassLook = {
+  samples: number;
+  reeded: boolean;
+  warm?: boolean;
+  /** the crystal's own warmth: higher where the camera does not see the slit through it (the closing scene) */
+  glow?: number;
+};
 
-function Glass({ samples, reeded, warm }: GlassLook) {
+/**
+ * Hands a material the scene's environment as its own map. three.js ignores `envMapIntensity` for a material lit by
+ * `scene.environment` alone (it applies the scene's intensity instead), so without this the glass and the stage would
+ * all reflect at one strength whatever they ask for. Same texture, same shader program: nothing recompiles.
+ */
+function useOwnEnvMap(ref: MutableRefObject<Material | null>) {
+  useFrame(({ scene }) => {
+    const m = ref.current as (Material & { envMap: Texture | null }) | null;
+    const env = scene.environment;
+    if (m && env && m.envMap !== env) {
+      m.envMap = env;
+      m.needsUpdate = true;
+    }
+  });
+}
+
+function Glass({ samples, reeded, warm, glow = 0.06 }: GlassLook) {
   const buffer = useContext(BufferContext);
   const ref = useRef<PatchableMaterial | null>(null);
+  useOwnEnvMap(ref);
   useLayoutEffect(() => {
     if (reeded && ref.current)
-      applyFlutes(ref.current, (2 * Math.PI * FLUTES) / ROOM.arch.width, 0.42);
+      applyFlutes(
+        ref.current,
+        (2 * Math.PI * FLUTES) / ROOM.arch.width,
+        0.42,
+        // the lite tier has no bloom to lift its edges, so its rim is a little stronger
+        samples < 6 ? 0.16 : 0.1,
+      );
   }, [reeded, samples]);
-  return (
+  return warm ? (
+    // The quartz: gold light passing through it, not an amber block. A low ior and a long attenuation keep the slit
+    // behind it readable through the faces (at ior 2.0 and thickness 1.8 the faces bent the view off the slit onto
+    // navy and the gold absorption turned what was left brown); a faint gold emission keeps the darkest facet warm.
     <MeshTransmissionMaterial
       ref={ref as never}
       buffer={buffer ?? undefined}
       resolution={2}
       samples={samples}
       transmission={1}
-      thickness={warm ? 1.8 : 1.1}
-      roughness={warm ? 0.02 : 0.06}
-      ior={warm ? 2.0 : 1.48}
-      chromaticAberration={warm ? 0.14 : 0.06}
-      anisotropicBlur={0.12}
-      distortion={warm ? 0.05 : 0.12}
+      thickness={0.9}
+      roughness={0.02}
+      ior={1.55}
+      chromaticAberration={0.1}
+      anisotropicBlur={0.08}
+      distortion={0.04}
       distortionScale={0.35}
-      temporalDistortion={warm ? 0 : 0.04}
+      temporalDistortion={0}
+      clearcoat={1}
+      clearcoatRoughness={0.04}
+      specularIntensity={1}
+      envMapIntensity={1.6}
+      color="#FFFFFF"
+      attenuationColor={GOLD_HOT}
+      attenuationDistance={5}
+      emissive={GOLD}
+      emissiveIntensity={glow}
+      flatShading
+      clippingPlanes={FLOOR_CLIP}
+    />
+  ) : (
+    <MeshTransmissionMaterial
+      ref={ref as never}
+      buffer={buffer ?? undefined}
+      resolution={2}
+      samples={samples}
+      transmission={1}
+      thickness={1.1}
+      roughness={0.06}
+      ior={1.48}
+      chromaticAberration={0.06}
+      anisotropicBlur={0.12}
+      distortion={0.12}
+      distortionScale={0.35}
+      temporalDistortion={0.04}
       clearcoat={1}
       clearcoatRoughness={0.05}
       specularIntensity={1}
-      envMapIntensity={warm ? 1.8 : 1.4}
-      color={warm ? "#FFFFFF" : "#F4F7FF"}
-      attenuationColor={warm ? GOLD_SOFT : ICE}
-      attenuationDistance={warm ? 3.6 : 4}
-      flatShading={warm}
+      envMapIntensity={1.4}
+      color="#F4F7FF"
+      attenuationColor={ICE}
+      attenuationDistance={4}
+      clippingPlanes={FLOOR_CLIP}
     />
   );
+}
+
+// ---- studio light ---------------------------------------------------------------------------------------------------
+
+type Panel = {
+  ring?: boolean;
+  color: string;
+  intensity: number;
+  position: [number, number, number];
+  scale: [number, number, number];
+};
+
+/** The studio the glass and brass reflect: a tall gold panel behind the room, a cool key, a blue fill, a gold ring. */
+const PANELS: Panel[] = [
+  {
+    color: GOLD_SOFT,
+    intensity: 3,
+    position: [0, 2.5, -8],
+    scale: [2.2, 10, 1],
+  },
+  { color: ICE, intensity: 1.2, position: [-5, 6, 6], scale: [6, 3, 1] },
+  { color: "#3F6FB3", intensity: 0.5, position: [6, 1, 4], scale: [4, 4, 1] },
+  {
+    ring: true,
+    color: GOLD_HOT,
+    intensity: 1.5,
+    position: [0, 7, 2],
+    scale: [2, 2, 2],
+  },
+];
+
+/**
+ * Bakes the studio panels into the scene's environment map once, before anything compiles. The same picture drei's
+ * Environment and Lightformer made, built with three's own PMREMGenerator: drei's Environment brought HDR, EXR and
+ * gain-map loaders (about 15 KB gzip) that a room lit by four flat panels never uses.
+ */
+function StudioEnvironment() {
+  const gl = useThree((s) => s.gl);
+  const scene = useThree((s) => s.scene);
+  useLayoutEffect(() => {
+    const studio = new Scene();
+    const parts: Array<{ dispose: () => void }> = [];
+    for (const p of PANELS) {
+      const geo = p.ring
+        ? new RingGeometry(0.25, 0.5, 64)
+        : new PlaneGeometry(1, 1);
+      const mat = new MeshBasicMaterial({
+        color: new Color(p.color).multiplyScalar(p.intensity),
+        side: DoubleSide,
+        toneMapped: false,
+      });
+      const panel = new Mesh(geo, mat);
+      panel.position.set(...p.position);
+      panel.scale.set(...p.scale);
+      panel.lookAt(0, 0, 0);
+      studio.add(panel);
+      parts.push(geo, mat);
+    }
+    const pmrem = new PMREMGenerator(gl);
+    const env = pmrem.fromScene(studio, 0, 0.1, 100, { size: 256 });
+    pmrem.dispose();
+    parts.forEach((x) => x.dispose());
+    scene.environment = env.texture;
+    return () => {
+      if (scene.environment === env.texture) scene.environment = null;
+      env.dispose();
+    };
+  }, [gl, scene]);
+  return null;
 }
 
 // ---- light ----------------------------------------------------------------------------------------------------------
@@ -268,6 +438,7 @@ function beamGeometry(
   g.setAttribute("position", new BufferAttribute(v, 3));
   g.setAttribute("uv", new BufferAttribute(uv, 2));
   g.setIndex([0, 2, 1, 1, 2, 3]);
+  g.computeVertexNormals();
   return g;
 }
 
@@ -278,9 +449,13 @@ type RoomProps = {
   variant: SceneVariant;
   animate: boolean;
   onReady: () => void;
+  onSettled: () => void;
   clock: MutableRefObject<number>;
+  /** seconds this mount has been drawing (unlike `clock`, starts at 0 on every mount) */
+  age: MutableRefObject<number>;
   glassRef: MutableRefObject<Group | null>;
   frontRef: MutableRefObject<Group | null>;
+  lightRef: MutableRefObject<Group | null>;
 };
 
 function Room({
@@ -288,9 +463,12 @@ function Room({
   variant,
   animate,
   onReady,
+  onSettled,
   clock,
+  age,
   glassRef,
   frontRef,
+  lightRef,
 }: RoomProps) {
   const spec: ColonnadeSpec = tier === "full" ? COLONNADE_FULL : COLONNADE_LITE;
   const samples = tier === "full" ? 6 : 3;
@@ -304,6 +482,10 @@ function Room({
   const ringRefs = useRef<Array<Group | null>>([]);
   const pointer = useRef({ x: 0, y: 0, ex: 0, ey: 0 });
   const frames = useRef(0);
+  const settled = useRef(false);
+  // the stage's low reflection strength only applies with the environment as its own map (see useOwnEnvMap): at full
+  // strength the gold Lightformer glared off it and turned the navy olive
+  useOwnEnvMap(stageMat);
 
   // geometry
   const archGeos = useMemo(
@@ -397,7 +579,7 @@ function Room({
         (uniforms) =>
           new ShaderMaterial({
             uniforms,
-            vertexShader: passVertex,
+            vertexShader: beamVertex,
             fragmentShader: beamFragment,
             transparent: true,
             depthWrite: false,
@@ -456,6 +638,7 @@ function Room({
 
   useFrame((state, delta) => {
     if (animate) clock.current += Math.min(delta, 1 / 20);
+    age.current += delta;
     // the close scene starts assembled and only brings its light up
     const t = animate ? clock.current + (variant === "close" ? 3 : 0) : 60;
     const light =
@@ -542,21 +725,19 @@ function Room({
     causticUniforms.uIntensity.value = step(t, 1.4, 2.0) * light;
     causticUniforms.uTime.value = t;
 
-    // three.js ignores envMapIntensity for materials lit by scene.environment alone (it uses the scene's intensity),
-    // and at full strength the gold Lightformer glared off the stage and turned it olive. Handing the stage the
-    // environment as its own map makes its low intensity apply.
-    const sm = stageMat.current;
-    const env = state.scene.environment;
-    if (sm && env && sm.envMap !== env) {
-      sm.envMap = env;
-      sm.needsUpdate = true;
-    }
-
     frames.current += 1;
     // a settled (reduced motion) room renders on demand: draw a few frames so the environment and the refraction
     // buffer are both in place, then hold still
     if (!animate && frames.current < 3) state.invalidate();
     if (frames.current === 3) onReady();
+    if (
+      !settled.current &&
+      frames.current >= 3 &&
+      (!animate || clock.current >= ASSEMBLY_SECONDS)
+    ) {
+      settled.current = true;
+      onSettled();
+    }
   }, -2);
 
   return (
@@ -568,36 +749,7 @@ function Room({
           on the glass and brass comes from the environment; the gold on the stage comes from the caustics. */}
       <directionalLight position={[-4, 5, 8]} intensity={0.35} color={ICE} />
 
-      <Environment resolution={256} frames={1}>
-        <Lightformer
-          form="rect"
-          intensity={3}
-          color={GOLD_SOFT}
-          position={[0, 2.5, -8]}
-          scale={[2.2, 10, 1]}
-        />
-        <Lightformer
-          form="rect"
-          intensity={1.2}
-          color={ICE}
-          position={[-5, 6, 6]}
-          scale={[6, 3, 1]}
-        />
-        <Lightformer
-          form="rect"
-          intensity={0.5}
-          color="#3F6FB3"
-          position={[6, 1, 4]}
-          scale={[4, 4, 1]}
-        />
-        <Lightformer
-          form="ring"
-          intensity={1.5}
-          color={GOLD_HOT}
-          position={[0, 7, 2]}
-          scale={2}
-        />
-      </Environment>
+      <StudioEnvironment />
 
       {/* light source behind the colonnade */}
       <mesh
@@ -622,13 +774,6 @@ function Room({
         />
       </mesh>
       <mesh
-        geometry={inlayGeo}
-        position={[0, 0.004, 0]}
-        rotation={[Math.PI / 2, 0, 0]}
-      >
-        <meshStandardMaterial color={GOLD} metalness={1} roughness={0.3} />
-      </mesh>
-      <mesh
         geometry={floorGeo}
         material={causticMat}
         position={[0, 0.006, 0]}
@@ -636,15 +781,26 @@ function Room({
         renderOrder={1}
       />
 
-      {/* light shafts */}
-      {beams.map((b, i) => (
+      {/* Thin, bright things kept out of the refraction buffer: through the reeded arches the beams and the inlay ring
+          came out as zigzag lines, and the beams are additive light, so seeing them refracted added nothing. Behind
+          the glass they are simply hidden; the light reads as leaving the arches. */}
+      <group ref={lightRef}>
         <mesh
-          key={b.k}
-          geometry={b.geo}
-          material={beamMats[i]}
-          renderOrder={2}
-        />
-      ))}
+          geometry={inlayGeo}
+          position={[0, 0.004, 0]}
+          rotation={[Math.PI / 2, 0, 0]}
+        >
+          <meshStandardMaterial color={GOLD} metalness={1} roughness={0.3} />
+        </mesh>
+        {beams.map((b, i) => (
+          <mesh
+            key={b.k}
+            geometry={b.geo}
+            material={beamMats[i]}
+            renderOrder={2}
+          />
+        ))}
+      </group>
 
       {/* brass armillary: in front of the colonnade, so kept out of the refraction buffer */}
       <group ref={frontRef}>
@@ -688,7 +844,12 @@ function Room({
           geometry={crystalGeo}
           position={[0, 0.25, ROOM.crystal.position[2]]}
         >
-          <Glass samples={samples} reeded={false} warm />
+          <Glass
+            samples={samples}
+            reeded={false}
+            warm
+            glow={variant === "close" ? 0.35 : 0.06}
+          />
         </mesh>
       </group>
     </>
@@ -725,6 +886,8 @@ function Precompile({
       // the frame loop switches on with the next render; a settled (demand) room needs one nudge to draw
       requestAnimationFrame(() => live && invalidate());
     };
+    // the clipped glass compiles as a clipped program only if local clipping is already on
+    gl.localClippingEnabled = true;
     if (typeof gl.compileAsync !== "function") {
       done();
       return;
@@ -766,31 +929,42 @@ export default function ObservatoryScene({
   variant,
   animate,
   running,
+  clock,
   onReady,
+  onSettled,
   onDecline,
 }: ObservatorySceneProps) {
-  const clock = useRef(0);
+  const age = useRef(0);
   const [compiled, setCompiled] = useState(false);
-  const onCompiled = useMemo(() => () => setCompiled(true), []);
+  // the full tier draws through its composer from the first frame: drawing even one frame without it would compile
+  // every material again for the screen (the 1.4 s stall Precompile exists to avoid)
+  const [effectsOn, setEffectsOn] = useState(tier !== "full");
+  const onCompiled = useCallback(() => setCompiled(true), []);
+  const onEffects = useCallback(() => setEffectsOn(true), []);
   const dpr: [number, number] = tier === "full" ? [1, 1.75] : [1, 1.5];
-  const frameloop = !compiled
-    ? "never"
-    : !animate
-      ? "demand"
-      : running
-        ? "always"
-        : "never";
+  const frameloop =
+    !compiled || !effectsOn
+      ? "never"
+      : !animate
+        ? "demand"
+        : running
+          ? "always"
+          : "never";
   return (
     <Canvas
       frameloop={frameloop}
       dpr={dpr}
       flat
       gl={{
-        // the full tier antialiases in the composer (SMAA, below); the lite tier has no composer, so the canvas does
+        // the full tier antialiases in its composer (FXAA); the lite tier has no composer, so the canvas does
         antialias: tier !== "full",
         alpha: false,
         stencil: false,
         powerPreference: "high-performance",
+      }}
+      onCreated={({ gl }) => {
+        // the glass rises out of the floor: FLOOR_CLIP cuts away what is still below it
+        gl.localClippingEnabled = true;
       }}
       camera={{ position: [0, 1.6, 14], fov: 30, near: 0.1, far: 80 }}
       style={{ position: "absolute", inset: 0 }}
@@ -802,44 +976,40 @@ export default function ObservatoryScene({
         variant={variant}
         animate={animate}
         onReady={onReady}
+        onSettled={onSettled}
         clock={clock}
+        age={age}
       />
       <Precompile onDone={onCompiled} toScreen={tier !== "full"} />
       {animate && (
         <PerformanceMonitor
           flipflops={3}
           onDecline={() => {
-            if (clock.current > 3) onDecline();
+            // a fresh mount's first frames are slow (shader warm-up), so each mount gets a grace period
+            if (age.current > DECLINE_GRACE) onDecline();
           }}
         />
       )}
       {tier === "full" && (
-        // MSAA on the composer target rendered black under ANGLE/D3D11 in testing, so edges are smoothed with SMAA
-        <EffectComposer multisampling={0} enableNormalPass={false}>
-          {/* a tight bloom: the default mipmap radius spread the slit's gold over the whole stage */}
-          <Bloom
-            intensity={0.5}
-            luminanceThreshold={0.78}
-            luminanceSmoothing={0.2}
-            mipmapBlur
-            radius={0.5}
-            levels={6}
-          />
-          <SMAA />
-        </EffectComposer>
+        <Suspense fallback={null}>
+          <Effects onMounted={onEffects} />
+        </Suspense>
       )}
     </Canvas>
   );
 }
 
-/** Owns the glass and front groups so the refraction pass can hide them and the room can fill them. */
-function BufferRoot(props: Omit<RoomProps, "glassRef" | "frontRef">) {
+/** Owns the groups the refraction pass leaves out (glass, armillary, thin light) and hands them to the room. */
+function BufferRoot(
+  props: Omit<RoomProps, "glassRef" | "frontRef" | "lightRef">,
+) {
   const glass = useRef<Group | null>(null);
   const front = useRef<Group | null>(null);
-  const hide = useMemo(() => [glass, front], []);
+  const light = useRef<Group | null>(null);
+  const hide = useMemo(() => [glass, front, light], []);
   return (
     <RefractionBuffer hide={hide} scale={props.tier === "full" ? 0.75 : 0.5}>
-      <Room {...props} glassRef={glass} frontRef={front} />
+      <Room {...props} glassRef={glass} frontRef={front} lightRef={light} />
     </RefractionBuffer>
   );
 }
