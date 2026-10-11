@@ -228,7 +228,7 @@ function Session({
           {i + 1} <span className="font-semibold text-muted">/ {queue.length}</span>
         </span>
         <div className="h-1 flex-1 overflow-hidden rounded-none bg-surface-3">
-          <div className="h-full bg-blue transition-[width] duration-300" style={{ width: `${(i / queue.length) * 100}%` }} />
+          <div className="h-full bg-[var(--ev,var(--blue))] transition-[width] duration-300" style={{ width: `${(i / queue.length) * 100}%` }} />
         </div>
         <span className="tabular flex items-center gap-2 text-xs font-semibold">
           <span className="text-success">{known.length} known</span>
@@ -355,7 +355,7 @@ function Face({
       )}
       style={side === 'back' ? { transform: 'rotateY(180deg)' } : undefined}
     >
-      {side === 'back' && <div className="absolute inset-x-0 top-0 h-[3px] bg-red" aria-hidden />}
+      {side === 'back' && <div className="absolute inset-x-0 top-0 h-[3px] bg-[var(--ev,var(--red))]" aria-hidden />}
       <div className="flex items-center justify-between gap-2">
         <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">{label}</span>
         <StatusChip status={status} />

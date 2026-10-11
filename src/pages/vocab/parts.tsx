@@ -1,6 +1,63 @@
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { Layers, RotateCcw } from 'lucide-react';
 import { cn } from '../../components/ui';
+import { EventCrest, eventStyle } from '../../lib/eventStyle';
+import type { StudyDeck } from '../../api/vocab';
 import { STATUS_LABEL, type DeckStats, type TermStatus } from './leitner';
+
+const NAVY = '#001E60';
+type DeckId = Pick<StudyDeck, 'event' | 'key'>;
+
+/** The colour a deck wears: its event's colour, or navy for the review deck and event-less chapter decks. */
+export function deckColor(deck: DeckId): string {
+  return deck.event && deck.key !== 'review' ? eventStyle(deck.event).color : NAVY;
+}
+
+/** CSS variables for a deck's colour: --ev (solid), --ev-2 (hover), --ev-soft (light tint). */
+export function deckVars(color: string): CSSProperties {
+  return {
+    '--ev': color,
+    '--ev-2': `color-mix(in srgb, ${color} 82%, black)`,
+    '--ev-soft': `color-mix(in srgb, ${color} 9%, var(--surface))`,
+  } as CSSProperties;
+}
+
+/** White outline icon in a thin white ring, for use on the deck's colour. Stays real white inside the page band. */
+export function DeckCrest({ deck, size = 64, className }: { deck: DeckId; size?: number; className?: string }) {
+  const white = { '--color-white': '#fff' } as CSSProperties;
+  if (deck.event && deck.key !== 'review') {
+    return (
+      <span className={cn('inline-grid', className)} style={white}>
+        <EventCrest slug={deck.event} size={size} />
+      </span>
+    );
+  }
+  const Icon = deck.key === 'review' ? RotateCcw : Layers;
+  return (
+    <span
+      className={cn('grid shrink-0 place-items-center rounded-full border-2 border-white/90 text-white', className)}
+      style={{ ...white, width: size, height: size }}
+      aria-hidden
+    >
+      <Icon style={{ width: size * 0.46, height: size * 0.46 }} strokeWidth={1.75} />
+    </span>
+  );
+}
+
+/** Slim progress bar in the deck's colour: solid for mastered, a light tint for studied but not yet mastered. */
+export function EventBar({ stats, color, className }: { stats: DeckStats; color: string; className?: string }) {
+  const pct = (n: number) => `${stats.total ? (n / stats.total) * 100 : 0}%`;
+  const studied = stats.total - stats.fresh;
+  return (
+    <div className={cn('relative h-1.5 w-full overflow-hidden bg-surface-3', className)} aria-hidden>
+      <span
+        className="absolute inset-y-0 left-0 transition-[width] duration-500"
+        style={{ width: pct(studied), background: `color-mix(in srgb, ${color} 32%, transparent)` }}
+      />
+      <span className="absolute inset-y-0 left-0 transition-[width] duration-500" style={{ width: pct(stats.mastered), background: color }} />
+    </div>
+  );
+}
 
 /** Two-arc ring: studied (blue) under mastered (green); centre shows the mastered count. */
 export function DeckRing({
@@ -183,7 +240,7 @@ export function SessionPanel({
   tone?: 'navy' | 'success' | 'red';
 }) {
   const bar = {
-    navy: 'bg-navy dark:bg-link',
+    navy: 'bg-[var(--ev,var(--navy))]',
     success: 'bg-success',
     red: 'bg-red',
   }[tone];

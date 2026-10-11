@@ -19,6 +19,7 @@ import { useProfile } from '../../lib/auth';
 import { loadIndex, type Topic } from '../../lib/content';
 import { readiness } from '../../lib/score';
 import { EVENT_GROUPS, eventInfo } from '../../lib/types';
+import { EventCrest, eventStyle } from '../../lib/eventStyle';
 import {
   bestEndless,
   loadPlayHistory,
@@ -27,7 +28,7 @@ import {
   summariseEvents,
   type PlayHistory,
 } from '../../api/play';
-import { AccuracyRing, AttemptList, EventTitle, accTone, pctText } from './parts';
+import { AccuracyRing, AttemptList, EventTitle, PlaySection, accTone, pctText } from './parts';
 import { runHref } from './runLogic';
 
 export default function EventPage() {
@@ -81,6 +82,14 @@ export default function EventPage() {
     <>
       <PageHeader
         back={{ to: '/play', label: 'All events' }}
+        leading={
+          <span
+            className="hidden size-[72px] shrink-0 place-items-center rounded-[4px] sm:grid"
+            style={{ backgroundColor: eventStyle(info.slug).color, ['--color-white' as string]: '#fff' }}
+          >
+            <EventCrest slug={info.slug} size={52} />
+          </span>
+        }
         eyebrow={`${group?.label ?? ''} / ${info.short}`}
         title={<EventTitle e={info} />}
         subtitle={
@@ -114,9 +123,9 @@ export default function EventPage() {
         )}
       </PageHeader>
 
-      <Page>
+      <Page className="md:py-12">
         {ineligible && (
-          <div className="mb-6 flex items-start gap-3 rounded-[4px] border border-warning/40 bg-warning/10 p-4 text-sm">
+          <div className="mb-10 flex items-start gap-3 rounded-[4px] border border-warning/40 bg-warning/10 p-4 text-sm">
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" />
             <span>
               Introduction to Business Concepts is for grades 9 and 10 only. You can still practise it, but you
@@ -129,10 +138,11 @@ export default function EventPage() {
         ) : !data || !stats ? (
           <EventSkeleton />
         ) : (
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="space-y-6 lg:col-span-2">
-              <Card>
+          <div className="grid gap-10 lg:grid-cols-3 lg:gap-8">
+            <div className="space-y-14 lg:col-span-2">
+              <Card className="p-6 md:p-7">
                 <CardHeader
+                  className="mb-5"
                   title="Competency areas"
                   subtitle="Your accuracy in each area of the official guide. Drill any area for 10 focused questions."
                 />
@@ -141,20 +151,20 @@ export default function EventPage() {
                     {data.topic.subs.map((s) => {
                       const a = stats.areas.get(s.name);
                       return (
-                        <li key={s.name} className="flex flex-col gap-2 px-2 py-3 sm:flex-row sm:items-center sm:gap-4">
+                        <li key={s.name} className="flex items-center gap-4 px-2 py-4 sm:gap-5">
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
                               <span className="font-semibold text-heading">{s.name}</span>
                               {stats.weakest === s.name && <Badge tone="red">Weakest</Badge>}
                             </div>
-                            <div className="mt-1.5 flex items-center gap-3">
+                            <div className="mt-2 flex items-center gap-3">
                               <ProgressBar
                                 className="flex-1"
                                 size="sm"
                                 value={a ? a.accuracy * 100 : 0}
                                 tone={a ? accTone(a.accuracy) : 'blue'}
                               />
-                              <span className="tabular w-28 shrink-0 text-right text-xs text-muted">
+                              <span className="tabular shrink-0 text-right text-xs text-muted sm:w-28">
                                 {a ? `${pctText(a.accuracy)} / ${a.correct} of ${a.answered}` : `Not tried / ${s.count} q`}
                               </span>
                             </div>
@@ -163,7 +173,7 @@ export default function EventPage() {
                             to={runHref({ mode: 'area', event: info.slug, area: s.name, n: 10 })}
                             variant="secondary"
                             size="sm"
-                            className="self-start sm:self-center"
+                            className="shrink-0"
                             rightIcon={<ArrowRight className="size-3.5" />}
                           >
                             Drill
@@ -177,17 +187,19 @@ export default function EventPage() {
                 )}
               </Card>
 
-              <section>
-                <div className="mb-3 flex items-end justify-between">
-                  <h2 className="text-xl font-bold">Past attempts</h2>
-                  {stats.attempts.length > 0 && (
-                    <Link to="/me/career" className="link text-sm">
-                      All in Career
+              <PlaySection
+                title="Past attempts"
+                description="Open any attempt to review every question and explanation."
+                action={
+                  stats.attempts.length > 0 ? (
+                    <Link to="/me/career" className="link inline-flex items-center gap-1 text-sm font-semibold">
+                      See all in Career <ArrowRight className="size-3.5" />
                     </Link>
-                  )}
-                </div>
+                  ) : undefined
+                }
+              >
                 {stats.attempts.length ? (
-                  <AttemptList attempts={stats.attempts.slice(0, 10)} />
+                  <AttemptList attempts={stats.attempts.slice(0, 5)} />
                 ) : (
                   <EmptyState
                     compact
@@ -200,12 +212,12 @@ export default function EventPage() {
                     }
                   />
                 )}
-              </section>
+              </PlaySection>
             </div>
 
-            <div className="space-y-6">
-              <Card>
-                <CardHeader title="Predicted score" subtitle="From your first tries, weighted by area." />
+            <div className="space-y-8">
+              <Card className="p-6">
+                <CardHeader className="mb-5" title="Predicted score" subtitle="From your first tries, weighted by area." />
                 {stats.ready?.ready ? (
                   <div className="flex items-center gap-4">
                     <AccuracyRing accuracy={stats.ready.score / 100} answered={1} size={84} />
@@ -237,7 +249,7 @@ export default function EventPage() {
               </Card>
 
               <Card padded={false} className="overflow-hidden">
-                <div className="px-5 pb-2 pt-5">
+                <div className="px-6 pb-3 pt-6">
                   <h3 className="text-base font-bold">Ways to practise</h3>
                 </div>
                 <ul className="divide-y divide-line">
@@ -300,7 +312,7 @@ function Chip({ label, value }: { label: string; value: string }) {
 function ModeRow({ to, title, sub }: { to: string; title: string; sub: string }) {
   return (
     <li>
-      <Link to={to} className="group flex items-center gap-3 px-5 py-3 transition-colors hover:bg-surface-2/70">
+      <Link to={to} className="group flex items-center gap-3 px-6 py-3.5 transition-colors hover:bg-surface-2/70">
         <span className="min-w-0 flex-1">
           <span className="block text-sm font-semibold text-heading">{title}</span>
           <span className="block truncate text-xs text-muted">{sub}</span>
@@ -313,7 +325,7 @@ function ModeRow({ to, title, sub }: { to: string; title: string; sub: string })
 
 function EventSkeleton() {
   return (
-    <div className="grid gap-6 lg:grid-cols-3" role="status" aria-label="Loading">
+    <div className="grid gap-10 lg:grid-cols-3 lg:gap-8" role="status" aria-label="Loading">
       <div className="space-y-6 lg:col-span-2">
         <div className="rounded-[4px] border border-line bg-surface p-5">
           <Skeleton className="h-5 w-48" />

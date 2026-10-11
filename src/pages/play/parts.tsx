@@ -64,6 +64,36 @@ export function EventTitle({ e, className }: { e: EventInfo; className?: string 
   );
 }
 
+/** Calm section: large heading, one line of helper text, a hairline rule under the header row. */
+export function PlaySection({
+  id,
+  title,
+  description,
+  action,
+  children,
+  className,
+}: {
+  id?: string;
+  title: ReactNode;
+  description?: ReactNode;
+  action?: ReactNode;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <section id={id} className={cn('scroll-mt-24', className)}>
+      <div className="mb-7 flex flex-col gap-4 border-b border-line pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="min-w-0">
+          <h2 className="text-2xl font-extrabold tracking-tight md:text-[1.75rem]">{title}</h2>
+          {description && <p className="mt-1.5 max-w-2xl text-[0.9375rem] text-muted">{description}</p>}
+        </div>
+        {action && <div className="shrink-0">{action}</div>}
+      </div>
+      {children}
+    </section>
+  );
+}
+
 /** Choose an event (grouped like the competition guide). */
 export function EventPickerModal({
   open,

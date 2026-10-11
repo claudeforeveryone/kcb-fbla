@@ -14,10 +14,11 @@ import {
   SkeletonCards,
   cn,
 } from '../../components/ui';
-import { Page, Section } from '../../components/layout/Page';
+import { Page } from '../../components/layout/Page';
+import { EventCrest, eventStyle } from '../../lib/eventStyle';
 import { useProfile } from '../../lib/auth';
 import { loadIndex, type Topic } from '../../lib/content';
-import { EVENTS, EVENT_GROUPS, eventInfo, eventName } from '../../lib/types';
+import { EVENTS, EVENT_GROUPS, eventInfo, eventName, type EventInfo } from '../../lib/types';
 import {
   bestEndless,
   dailyStreak,
@@ -30,7 +31,7 @@ import {
   type MyAssignment,
   type PlayHistory,
 } from '../../api/play';
-import { AccuracyRing, AreaPickerModal, AttemptList, EventPickerModal, EventTitle, MockPickerModal, pctText, useUntilReset } from './parts';
+import { AreaPickerModal, AttemptList, EventPickerModal, EventTitle, MockPickerModal, PlaySection, pctText, useUntilReset } from './parts';
 import { DAILY_SIZE, runHref } from './runLogic';
 
 const FOCUS_KEY = 'kcbfbla:play:focus';
@@ -115,28 +116,31 @@ export default function PlayPage() {
           <HeaderChip label="Answered" value={answered.toLocaleString()} />
           <HeaderChip label="Accuracy" value={answered ? pctText(acc) : '--'} />
           <HeaderChip label="Day streak" value={String(profile.current_streak ?? 0)} />
-          <HeaderChip label="Best answer streak" value={String(profile.best_answer_streak ?? 0)} />
         </div>
       </PageHeader>
 
-      <Page>
+      <Page className="md:py-12">
         {error ? (
           <ErrorState error={error} onRetry={load} />
         ) : !data || !summary ? (
           <LoadingPlay />
         ) : (
-          <>
+          <div className="space-y-14 md:space-y-20">
             <DailyCard history={data.history} />
 
-            <Section
-              title="Modes"
-              description={focus ? `Focused on ${eventName(focus)}` : 'Mixed across every event'}
+            <PlaySection
+              title="Practice modes"
+              description={
+                focus
+                  ? `Focused on ${eventName(focus)}. Change the event to practise something else.`
+                  : 'Mixed across every event. Pick one event to focus every mode on it.'
+              }
               action={
                 <Select
                   aria-label="Focus event"
                   value={focus}
                   onChange={(e) => setFocus(e.target.value)}
-                  className="w-44 sm:w-64"
+                  className="w-full sm:w-72"
                   options={[
                     { value: '', label: 'All events (mixed)' },
                     ...EVENTS.map((e) => ({ value: e.slug, label: e.name })),
@@ -151,75 +155,40 @@ export default function PlayPage() {
                 onArea={() => startNeedsEvent('area')}
                 onMock={() => startNeedsEvent('mock')}
               />
-            </Section>
+            </PlaySection>
 
             <Assigned assignments={data.assignments} />
 
             {EVENT_GROUPS.map((g) => (
-              <Section key={g.id} title={g.label} description={g.blurb}>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {EVENTS.filter((e) => e.group === g.id).map((e) => {
-                    const s = summary.get(e.slug);
-                    const t = topicFor(e.slug);
-                    const seen = seenByEvent.get(e.slug)?.size ?? 0;
-                    const mine = profile.main_event === e.slug;
-                    return (
-                      <Link key={e.slug} to={`/play/${e.slug}`} className="group block rounded-[4px] focus-visible:outline-offset-4">
-                        <Card interactive className={cn('flex h-full flex-col p-4', mine && 'border-red/40')}>
-                          <div className="flex items-start gap-3">
-                            <div className="min-w-0 flex-1">
-                              <div className="mb-1 flex items-center gap-2">
-                                <span className="font-display text-[11px] font-bold tracking-wider text-muted">{e.short}</span>
-                                {mine && (
-                                  <Badge tone="red" className="h-5 px-2 text-[10px]">
-                                    Your event
-                                  </Badge>
-                                )}
-                              </div>
-                              <h3 className="text-[1.05rem] font-bold leading-snug">
-                                <EventTitle e={e} />
-                              </h3>
-                              {e.gradeNote && <p className="mt-0.5 text-xs font-semibold text-warning">{e.gradeNote}</p>}
-                            </div>
-                            <AccuracyRing accuracy={s?.accuracy ?? 0} answered={s?.answered ?? 0} />
-                          </div>
-                          <div className="mt-auto pt-4">
-                            <div className="mb-1.5 flex items-center justify-between text-xs text-muted">
-                              <span className="tabular">
-                                {s?.attempts ? `${s.attempts} ${s.attempts === 1 ? 'attempt' : 'attempts'}` : 'No attempts yet'}
-                                {s?.answered ? ` / ${s.answered} answered` : ''}
-                              </span>
-                              <span className="tabular">
-                                {seen}/{t?.questions ?? 100} seen
-                              </span>
-                            </div>
-                            <div className="h-1 overflow-hidden rounded-none bg-surface-3">
-                              <div
-                                className="h-full bg-blue transition-[width] duration-500 group-hover:bg-navy dark:group-hover:bg-link"
-                                style={{ width: `${(seen / (t?.questions || 100)) * 100}%` }}
-                              />
-                            </div>
-                          </div>
-                        </Card>
-                      </Link>
-                    );
-                  })}
+              <PlaySection key={g.id} title={g.label} description={g.blurb}>
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+                  {EVENTS.filter((e) => e.group === g.id).map((e) => (
+                    <EventCard
+                      key={e.slug}
+                      e={e}
+                      s={summary.get(e.slug)}
+                      seen={seenByEvent.get(e.slug)?.size ?? 0}
+                      total={topicFor(e.slug)?.questions || 100}
+                      mine={profile.main_event === e.slug}
+                    />
+                  ))}
                 </div>
-              </Section>
+              </PlaySection>
             ))}
 
-            <Section
+            <PlaySection
               title="Recent attempts"
+              description="Open any attempt to review every question and explanation."
               action={
                 data.history.attempts.length > 0 ? (
-                  <Link to="/me/career" className="link text-sm">
-                    All in Career
+                  <Link to="/me/career" className="link inline-flex items-center gap-1 text-sm font-semibold">
+                    See all in Career <ArrowRight className="size-3.5" />
                   </Link>
                 ) : undefined
               }
             >
               {data.history.attempts.length ? (
-                <AttemptList attempts={data.history.attempts.slice(0, 6)} showEvent />
+                <AttemptList attempts={data.history.attempts.slice(0, 4)} showEvent />
               ) : (
                 <EmptyState
                   compact
@@ -232,8 +201,8 @@ export default function PlayPage() {
                   }
                 />
               )}
-            </Section>
-          </>
+            </PlaySection>
+          </div>
         )}
       </Page>
 
@@ -275,19 +244,21 @@ function DailyCard({ history }: { history: PlayHistory }) {
   const streak = dailyStreak(history);
   const until = useUntilReset();
   return (
-    <div className="relative mb-8 overflow-hidden rounded-[4px] border border-line bg-surface">
-      <div className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />
-      <div className="flex flex-col gap-4 p-5 pl-6 md:flex-row md:items-center md:gap-6 md:p-6 md:pl-7">
+    <div className="relative overflow-hidden rounded-[4px] border border-line bg-surface">
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-red" aria-hidden />
+      <div className="flex flex-col gap-6 px-6 pb-7 pt-8 md:flex-row md:items-center md:gap-10 md:px-10 md:pb-9 md:pt-10">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-display text-[11px] font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
-              {DAILY_SIZE} questions · same for everyone
+            <span className="font-display text-xs font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
+              Daily challenge
             </span>
             {streak > 1 && <Badge tone="warning">{streak}-day daily streak</Badge>}
             {done && <Badge tone="success">Done today</Badge>}
           </div>
-          <h2 className="mt-1 text-xl font-extrabold">Daily challenge</h2>
-          <p className="mt-1 text-sm text-muted">
+          <h2 className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">
+            {done ? "Today's set is done" : `Today's ${DAILY_SIZE} questions`}
+          </h2>
+          <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-muted">
             {done ? (
               <>
                 You scored <b className="tabular text-heading">{done.correct}/{done.total}</b>
@@ -308,11 +279,23 @@ function DailyCard({ history }: { history: PlayHistory }) {
           </p>
         </div>
         {done ? (
-          <ButtonLink to={`/play/review/${done.id}`} variant="outline" rightIcon={<ArrowRight className="size-4" />}>
+          <ButtonLink
+            to={`/play/review/${done.id}`}
+            variant="outline"
+            size="lg"
+            className="shrink-0 self-start md:self-center"
+            rightIcon={<ArrowRight className="size-4" />}
+          >
             Review answers
           </ButtonLink>
         ) : (
-          <ButtonLink to={runHref({ mode: 'daily' })} variant="accent" size="lg" rightIcon={<ArrowRight className="size-4" />}>
+          <ButtonLink
+            to={runHref({ mode: 'daily' })}
+            variant="accent"
+            size="lg"
+            className="shrink-0 self-start md:self-center"
+            rightIcon={<ArrowRight className="size-4" />}
+          >
             Play today's set
           </ButtonLink>
         )}
@@ -339,75 +322,77 @@ function ModeGrid({
   const misses = openMisses(history, ev).length;
   const open = assignments?.filter((a) => !a.done && a.kind !== 'deck').length ?? 0;
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      <ModeCard
-        accent="blue"
-        title="Quick 10"
-        text="Ten questions, new ones first. The fastest way to keep your streak alive."
-        meta="10 questions · about 5 min"
-        to={runHref({ mode: 'quick', event: ev })}
-        cta="Play"
-      />
-      <ModeCard
-        accent="red"
-        title="Endless"
-        text="Keep answering until your third miss. How long can your run go?"
-        meta={best ? `Best run ${best.correct}` : 'No run yet'}
-        to={runHref({ mode: 'endless', event: ev })}
-        cta="Start a run"
-      />
-      <ModeCard
-        accent="red"
-        title="Weak spots"
-        text="Your misses plus your lowest-scoring competency areas, in one set."
-        meta={misses ? `${misses} open ${misses === 1 ? 'miss' : 'misses'}` : history.log.length ? 'No open misses' : 'Needs some history'}
-        to={runHref({ mode: 'weak', event: ev })}
-        cta="Target them"
-        extra={
-          misses > 0 ? (
-            <Link to={runHref({ redo: 'wrong', event: ev })} className="link inline-flex items-center gap-1 text-sm">
-              Redo just the misses <ArrowRight className="size-3.5" />
-            </Link>
-          ) : null
-        }
-      />
-      <ModeCard
-        accent="navy"
-        title="Area drill"
-        text="Pick one competency area and drill ten questions from it."
-        meta={ev ? `10 questions · ${eventName(ev)}` : '10 questions · choose an event'}
-        onClick={onArea}
-        cta="Pick an area"
-      />
-      <ModeCard
-        accent="navy"
-        title="Mock exam"
-        text="100 questions in 50 minutes, weighted like the real test. Results at the end."
-        meta={ev ? `100 questions · ${eventName(ev)}` : '100 questions · 50 min'}
-        onClick={onMock}
-        cta="Set it up"
-        badge={<Badge tone="navy">Official format</Badge>}
-      />
-      {assignments ? (
+    <div>
+      <div className="grid gap-5 md:grid-cols-3 lg:gap-6">
         <ModeCard
           accent="blue"
-          title="Assigned"
-          text="Tests and question sets your chapter leaders assigned to you."
-          meta={open ? `${open} to do` : assignments.length ? 'All caught up' : 'Nothing assigned yet'}
-          to="/play#assigned"
-          cta={open ? 'See assignments' : 'View'}
-          highlight={open > 0}
+          title="Quick 10"
+          text="Ten questions, new ones first. The fastest way to keep your streak alive."
+          meta="10 questions · about 5 min"
+          to={runHref({ mode: 'quick', event: ev })}
+          cta="Play"
         />
-      ) : (
         <ModeCard
-          accent="blue"
-          title="Assigned"
-          text="Join your school's chapter to get tests and question sets from your leaders."
-          meta="Not in a chapter"
-          to="/chapter"
-          cta="Find your chapter"
+          accent="red"
+          title="Weak spots"
+          text="Your misses plus your lowest-scoring competency areas, in one set."
+          meta={misses ? `${misses} open ${misses === 1 ? 'miss' : 'misses'}` : history.log.length ? 'No open misses' : 'Needs some history'}
+          to={runHref({ mode: 'weak', event: ev })}
+          cta="Target them"
+          extra={
+            misses > 0 ? (
+              <Link to={runHref({ redo: 'wrong', event: ev })} className="link inline-flex items-center gap-1 text-sm">
+                Redo just the misses <ArrowRight className="size-3.5" />
+              </Link>
+            ) : null
+          }
         />
-      )}
+        <ModeCard
+          accent="navy"
+          title="Mock exam"
+          text="100 questions in 50 minutes, weighted like the real test. Results at the end."
+          meta={ev ? `100 questions · ${eventName(ev)}` : '100 questions · 50 min'}
+          onClick={onMock}
+          cta="Set it up"
+          badge={<Badge tone="navy">Official format</Badge>}
+        />
+      </div>
+
+      <div className="mt-10 text-xs font-bold uppercase tracking-[0.14em] text-muted">More ways to play</div>
+      <div className="mt-4 grid gap-4 md:grid-cols-3 lg:gap-6">
+        <ModeRowCard
+          title="Endless"
+          text="Keep answering until your third miss."
+          meta={best ? `Best run ${best.correct}` : 'No run yet'}
+          to={runHref({ mode: 'endless', event: ev })}
+          cta="Start a run"
+        />
+        <ModeRowCard
+          title="Area drill"
+          text="Ten questions from one competency area."
+          meta={ev ? eventInfo(ev)?.short ?? '' : 'Choose an event'}
+          onClick={onArea}
+          cta="Pick an area"
+        />
+        {assignments ? (
+          <ModeRowCard
+            title="Assigned"
+            text="Tests and question sets from your chapter leaders."
+            meta={open ? `${open} to do` : assignments.length ? 'All caught up' : 'Nothing yet'}
+            to="/play#assigned"
+            cta={open ? 'See assignments' : 'View'}
+            highlight={open > 0}
+          />
+        ) : (
+          <ModeRowCard
+            title="Assigned"
+            text="Join your school's chapter to get tests from your leaders."
+            meta="Not in a chapter"
+            to="/chapter"
+            cta="Find your chapter"
+          />
+        )}
+      </div>
     </div>
   );
 }
@@ -418,6 +403,7 @@ const ACCENTS = {
   blue: 'bg-blue',
 };
 
+/** Primary mode: big, roomy, one clear purpose. */
 function ModeCard({
   accent,
   title,
@@ -428,7 +414,6 @@ function ModeCard({
   cta,
   extra,
   badge,
-  highlight,
 }: {
   accent: keyof typeof ACCENTS;
   title: string;
@@ -439,20 +424,16 @@ function ModeCard({
   cta: string;
   extra?: ReactNode;
   badge?: ReactNode;
-  highlight?: boolean;
 }) {
   const inner = (
     <>
-      <span className={cn('absolute inset-x-0 top-0 h-[3px]', ACCENTS[accent])} aria-hidden />
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-display text-lg font-extrabold leading-tight">{title}</h3>
-        <div className="flex shrink-0 items-center gap-2">
-          {badge}
-          {highlight && <span className="size-2 rounded-full bg-red" aria-label="Has work to do" />}
-        </div>
+      <span className={cn('absolute inset-x-0 top-0 h-1', ACCENTS[accent])} aria-hidden />
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <h3 className="font-display text-xl font-extrabold leading-tight md:text-[1.375rem]">{title}</h3>
+        {badge}
       </div>
-      <p className="mt-1.5 text-sm text-muted">{text}</p>
-      <div className="mt-auto flex items-center justify-between gap-2 border-t border-line pt-3">
+      <p className="mb-8 mt-3 text-[0.9375rem] leading-relaxed text-muted">{text}</p>
+      <div className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-5">
         <span className="tabular truncate text-xs font-bold uppercase tracking-wide text-heading">{meta}</span>
         <span className="inline-flex shrink-0 items-center gap-1 font-display text-sm font-bold text-blue transition-transform group-hover:translate-x-0.5 dark:text-link">
           {cta} <ArrowRight className="size-4" />
@@ -461,7 +442,7 @@ function ModeCard({
     </>
   );
   const cls =
-    'group relative flex h-full w-full flex-col overflow-hidden rounded-[2px] border border-line bg-surface p-5 pt-6 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2';
+    'group relative flex w-full flex-1 flex-col overflow-hidden rounded-[4px] border border-line bg-surface p-6 pt-8 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2 md:p-7 md:pt-9';
   return (
     <div className="flex flex-col">
       {to ? (
@@ -473,8 +454,115 @@ function ModeCard({
           {inner}
         </button>
       )}
-      {extra && <div className="px-1 pt-2">{extra}</div>}
+      {extra ? <div className="px-1 pt-3">{extra}</div> : <div className="hidden h-8 md:block" aria-hidden />}
     </div>
+  );
+}
+
+/** Secondary mode: lighter, smaller, no accent bar. */
+function ModeRowCard({
+  title,
+  text,
+  meta,
+  to,
+  onClick,
+  cta,
+  highlight,
+}: {
+  title: string;
+  text: string;
+  meta: string;
+  to?: string;
+  onClick?: () => void;
+  cta: string;
+  highlight?: boolean;
+}) {
+  const inner = (
+    <>
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="flex items-center gap-2 font-display text-base font-bold leading-tight">
+          {title}
+          {highlight && <span className="size-2 rounded-full bg-red" aria-label="Has work to do" />}
+        </h3>
+        <span className="tabular truncate text-xs font-semibold text-muted">{meta}</span>
+      </div>
+      <p className="mt-1.5 text-sm text-muted">{text}</p>
+      <span className="mt-auto inline-flex items-center gap-1 pt-3 font-display text-sm font-bold text-blue transition-transform group-hover:translate-x-0.5 dark:text-link">
+        {cta} <ArrowRight className="size-3.5" />
+      </span>
+    </>
+  );
+  const cls =
+    'group flex h-full w-full flex-col rounded-[4px] border border-line bg-surface-2/60 px-5 py-4 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2';
+  return to ? (
+    <Link to={to} className={cls}>
+      {inner}
+    </Link>
+  ) : (
+    <button type="button" onClick={onClick} className={cls}>
+      {inner}
+    </button>
+  );
+}
+
+/** Event card: solid event-colour strip with its crest and code, white body with progress in the event colour. */
+function EventCard({
+  e,
+  s,
+  seen,
+  total,
+  mine,
+}: {
+  e: EventInfo;
+  s: { accuracy: number; answered: number; attempts: number } | undefined;
+  seen: number;
+  total: number;
+  mine: boolean;
+}) {
+  const { color } = eventStyle(e.slug);
+  return (
+    <Link to={`/play/${e.slug}`} className="group block rounded-[4px] focus-visible:outline-offset-4">
+      <Card interactive padded={false} className={cn('flex h-full flex-col overflow-hidden', mine && 'border-red/50')}>
+        <div className="flex h-14 items-center justify-between gap-3 px-4 sm:h-[72px] sm:px-5" style={{ backgroundColor: color }}>
+          <EventCrest slug={e.slug} size={44} className="max-sm:!size-9" />
+          <div className="flex items-center gap-2">
+            {mine && (
+              <span className="rounded-[2px] border border-white/70 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+                Your event
+              </span>
+            )}
+            <span className="rounded-[2px] bg-white px-2 py-0.5 font-display text-xs font-bold tracking-wider" style={{ color }}>
+              {e.short}
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col px-4 pb-4 pt-4 sm:p-5">
+          <h3 className="text-[1.0625rem] font-bold leading-snug">
+            <EventTitle e={e} />
+          </h3>
+          {e.gradeNote && <p className="mt-1 text-xs font-semibold text-warning">{e.gradeNote}</p>}
+          <div className="mt-auto pt-4 sm:pt-6">
+            <div className="mb-2 flex items-baseline justify-between gap-3">
+              <span className="tabular text-sm font-semibold text-heading">
+                {s?.answered ? `${pctText(s.accuracy)} accuracy` : 'Not started'}
+              </span>
+              <span className="tabular text-xs text-muted">
+                {s?.attempts ? `${s.attempts} ${s.attempts === 1 ? 'attempt' : 'attempts'}` : 'No attempts yet'}
+              </span>
+            </div>
+            <div className="h-1.5 overflow-hidden bg-surface-3">
+              <div
+                className="h-full transition-[width] duration-500"
+                style={{ width: `${Math.min(100, (seen / total) * 100)}%`, backgroundColor: color }}
+              />
+            </div>
+            <div className="tabular mt-2 text-xs text-muted">
+              {seen}/{total} questions seen
+            </div>
+          </div>
+        </div>
+      </Card>
+    </Link>
   );
 }
 
@@ -483,16 +571,16 @@ function Assigned({ assignments }: { assignments: MyAssignment[] | null }) {
   const items = assignments.filter((a) => a.kind !== 'deck');
   const decks = assignments.filter((a) => a.kind === 'deck' && !a.done).length;
   return (
-    <section id="assigned" className="mt-8 scroll-mt-24">
-      <div className="mb-4 flex items-end justify-between gap-4">
-        <div>
-          <h2 className="text-xl font-bold">Assigned to you</h2>
-          <p className="mt-0.5 text-sm text-muted">From your chapter leaders. Your scores are shared with them.</p>
-        </div>
-        <Link to="/chapter/classroom" className="link shrink-0 text-sm">
-          Classroom
+    <PlaySection
+      id="assigned"
+      title="Assigned to you"
+      description="From your chapter leaders. Your scores are shared with them."
+      action={
+        <Link to="/chapter/classroom" className="link inline-flex items-center gap-1 text-sm font-semibold">
+          Classroom <ArrowRight className="size-3.5" />
         </Link>
-      </div>
+      }
+    >
       {items.length === 0 ? (
         <EmptyState
           compact
@@ -508,13 +596,13 @@ function Assigned({ assignments }: { assignments: MyAssignment[] | null }) {
         />
       ) : (
         <>
-          <ul className="grid gap-2">
+          <ul className="grid gap-3">
             {items.map((a) => (
               <AssignmentRow key={a.id} a={a} />
             ))}
           </ul>
           {decks > 0 && (
-            <p className="mt-3 text-sm text-muted">
+            <p className="mt-5 text-sm text-muted">
               Plus {decks} flashcard {decks === 1 ? 'deck' : 'decks'} assigned in{' '}
               <Link to="/vocab" className="link">
                 Vocab
@@ -524,7 +612,7 @@ function Assigned({ assignments }: { assignments: MyAssignment[] | null }) {
           )}
         </>
       )}
-    </section>
+    </PlaySection>
   );
 }
 
@@ -535,7 +623,7 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
   return (
     <li
       className={cn(
-        'relative flex flex-col gap-3 overflow-hidden rounded-[2px] border bg-surface p-4 pl-5 sm:flex-row sm:items-center',
+        'relative flex flex-col gap-4 overflow-hidden rounded-[4px] border bg-surface px-6 py-5 sm:flex-row sm:items-center',
         a.overdue ? 'border-red/40' : 'border-line',
       )}
     >
@@ -548,7 +636,7 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
           {a.overdue && <Badge tone="red">Overdue</Badge>}
           {soon && <Badge tone="warning">Due soon</Badge>}
         </div>
-        <div className="mt-0.5 text-xs text-muted">
+        <div className="mt-1 text-xs text-muted">
           {size}
           {due && ` / due ${due.toLocaleString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}`}
           {a.best && ` / best ${a.best.correct}/${a.best.total}`}
@@ -570,12 +658,16 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
 
 function LoadingPlay() {
   return (
-    <div role="status" aria-label="Loading">
-      <Skeleton className="mb-8 h-28 w-full" rounded="rounded-[4px]" />
-      <Skeleton className="mb-4 h-6 w-32" />
-      <SkeletonCards count={6} />
-      <Skeleton className="mb-4 mt-8 h-6 w-48" />
-      <SkeletonCards count={6} />
+    <div role="status" aria-label="Loading" className="space-y-14 md:space-y-20">
+      <Skeleton className="h-40 w-full" rounded="rounded-[4px]" />
+      <div>
+        <Skeleton className="mb-7 h-8 w-48" />
+        <SkeletonCards count={3} />
+      </div>
+      <div>
+        <Skeleton className="mb-7 h-8 w-64" />
+        <SkeletonCards count={6} />
+      </div>
     </div>
   );
 }

@@ -110,7 +110,7 @@ function StreakPanel({ streak, best, lit }: { streak: number; best: number; lit:
   return (
     <div
       className={cn(
-        'flex items-center justify-between gap-3 rounded-[4px] border p-4 sm:w-[150px] sm:flex-col sm:items-start',
+        'flex items-center justify-between gap-3 rounded-[4px] border p-4 text-white sm:w-[150px] sm:flex-col sm:items-start',
         lit ? 'border-red bg-red' : 'border-white/15 bg-white/10',
       )}
       title={lit ? 'You practised today' : 'Practise today to keep your streak'}

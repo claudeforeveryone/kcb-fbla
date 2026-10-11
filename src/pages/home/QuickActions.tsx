@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Skeleton, cn, formatUntil } from '../../components/ui';
 import { eventInfo } from '../../lib/types';
+import { eventStyle } from '../../lib/eventStyle';
 import { nextTorontoMidnight, runLink, type DailyStatus } from './homeData';
 
 /** The three big "do something now" tiles under the hero. */
@@ -27,6 +28,7 @@ export function QuickActions({
       <ActionTile
         to={ev ? runLink({ kind: 'practice', event: ev.slug }) : '/play'}
         tone="navy"
+        color={ev ? eventStyle(ev.slug).color : undefined}
         eyebrow={ev ? (continueReason === 'last' ? 'Continue' : 'Your main event') : 'Get started'}
         title={ev ? ev.name : 'Pick your first event'}
         body={ev ? 'A fresh practice set, weighted to questions you haven’t mastered.' : '15 events, 1,500 official-style questions.'}
@@ -62,8 +64,8 @@ export function QuickActions({
           eyebrow={
             <span className="inline-flex items-center gap-1.5">
               <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full rounded-full bg-white opacity-75 motion-safe:animate-ping" />
-                <span className="relative inline-flex size-2 rounded-full bg-white" />
+                <span className="absolute inline-flex size-full rounded-full bg-red opacity-60 motion-safe:animate-ping" />
+                <span className="relative inline-flex size-2 rounded-full bg-red" />
               </span>
               Daily challenge
             </span>
@@ -91,7 +93,7 @@ function EloShift({ before, after }: { before: number; after: number }) {
   const d = after - before;
   if (d === 0) return null;
   return (
-    <span className={cn('ml-2 align-middle text-sm font-bold', d > 0 ? 'text-[#7ee2b0]' : 'text-white/80')}>
+    <span className={cn('ml-2 align-middle text-sm font-bold', d > 0 ? 'text-success' : 'text-muted')}>
       {d > 0 ? '+' : ''}
       {d} Elo
     </span>
@@ -107,16 +109,18 @@ function useResetCountdown() {
   return formatUntil(nextTorontoMidnight(now), now);
 }
 
+// White cards (like the stat boxes on fblc.ca); the tone only colours the top bar, the eyebrow and the link.
 const TONES = {
-  navy: 'bg-navy text-white border-navy dark:bg-[#18275a] dark:border-white/10',
-  red: 'bg-red text-white border-red',
-  blue: 'bg-blue text-white border-blue',
-  done: 'bg-[#1E8E5A] text-white border-[#1E8E5A] dark:bg-[#17704a] dark:border-[#17704a]',
+  navy: '#001E60',
+  red: '#BF0D3E',
+  blue: '#3F6FB3',
+  done: '#1E8E5A',
 } as const;
 
 function ActionTile({
   to,
   tone,
+  color,
   eyebrow,
   title,
   body,
@@ -124,23 +128,26 @@ function ActionTile({
 }: {
   to: string;
   tone: keyof typeof TONES;
+  /** Overrides the tone colour, e.g. with the event's own colour. */
+  color?: string;
   eyebrow: ReactNode;
   title: ReactNode;
   body: ReactNode;
   cta: string;
 }) {
+  const c = color ?? TONES[tone];
   return (
     <Link
       to={to}
-      className={cn(
-        'group relative flex flex-col overflow-hidden rounded-[4px] border p-4 sm:p-5 shadow-card transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lift focus-visible:-translate-y-0.5',
-        TONES[tone],
-      )}
+      className="group relative flex flex-col overflow-hidden rounded-[4px] border border-line border-t-4 bg-surface p-5 transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong focus-visible:-translate-y-0.5 sm:p-6"
+      style={{ borderTopColor: c }}
     >
-      <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/80">{eyebrow}</span>
-      <h2 className="mt-2 truncate font-display sm:mt-3 text-xl font-extrabold tracking-tight text-white md:text-2xl">{title}</h2>
-      <p className="mt-1 flex-1 text-sm text-white/80">{body}</p>
-      <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold sm:mt-4">
+      <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em]" style={{ color: c }}>
+        {eyebrow}
+      </span>
+      <h2 className="mt-2 truncate font-display text-xl font-extrabold tracking-tight text-heading sm:mt-3 md:text-2xl">{title}</h2>
+      <p className="mt-1 flex-1 text-sm text-muted">{body}</p>
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold sm:mt-5" style={{ color: c }}>
         {cta}
         <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
       </span>

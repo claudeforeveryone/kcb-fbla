@@ -76,7 +76,7 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
     return (
       <div className="mx-auto grid max-w-2xl gap-4">
         <div className="relative overflow-hidden rounded-[4px] border border-line bg-surface p-6 sm:p-8">
-          <div className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />
+          <div className="absolute inset-y-0 left-0 w-[3px] bg-[var(--ev,var(--red))]" aria-hidden />
           <div className="flex items-start gap-4">
             <div className="min-w-0 flex-1">
               <h2 className="text-xl font-extrabold">Today's session</h2>
@@ -94,7 +94,7 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
             <MiniStat label="New" value={newN} tone="blue" />
             <MiniStat label="Mastered" value={stats.mastered} tone="success" />
           </div>
-          <Button size="lg" block className="mt-6" rightIcon={<ArrowRight className="size-5" />} onClick={() => setMode('srs')}>
+          <Button size="lg" block className="mt-6 bg-[var(--ev,var(--navy))]! hover:bg-[var(--ev-2,var(--navy-2))]!" rightIcon={<ArrowRight className="size-5" />} onClick={() => setMode('srs')}>
             Start learning
           </Button>
         </div>
@@ -280,7 +280,7 @@ function Session({
           {cleared} <span className="font-semibold text-muted">/ {total} cleared</span>
         </span>
         <div className="h-1 flex-1 overflow-hidden rounded-none bg-surface-3">
-          <div className="h-full bg-success transition-[width] duration-300" style={{ width: `${(cleared / total) * 100}%` }} />
+          <div className="h-full bg-[var(--ev,var(--success))] transition-[width] duration-300" style={{ width: `${(cleared / total) * 100}%` }} />
         </div>
         <Button variant="ghost" size="xs" onClick={onExit}>
           End

@@ -1,8 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  ChevronRight,
   Pencil,
   Plus,
   Search,
@@ -27,7 +26,7 @@ import { EVENT_GROUPS, type Assignment, type Deck } from '../../lib/types';
 import { canManageDeck, isDeckStaff, type StudyDeck, type VocabTerm } from '../../api/vocab';
 import { deckStats, isDue, relativeDue, statusOf, type DeckStats, type ProgressLike } from './leitner';
 import { assignmentFor, reloadVocab, useVocab, type VocabState } from './store';
-import { DeckRing, Highlight, MixBar, StatusChip } from './parts';
+import { DeckCrest, EventBar, Highlight, StatusChip, deckColor, deckVars } from './parts';
 import { DeckEditor } from './DeckEditor';
 
 export default function VocabPage() {
@@ -139,7 +138,7 @@ export default function VocabPage() {
                   if (!decks.length) return null;
                   return (
                     <Section key={g.id} title={g.label} description={`${decks.length} events, ${decks.reduce((n, d) => n + d.terms.length, 0)} terms`}>
-                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
                         {decks.map((d) => (
                           <DeckTile key={d.key} deck={d} stats={stats.get(d.key)!} main={d.key === mainEvent} />
                         ))}
@@ -197,14 +196,23 @@ function HeaderStat({
 
 function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
   const started = stats.total - stats.fresh > 0;
+  const color = deckColor(deck);
   return (
-    <Card className="relative mt-6 overflow-hidden p-0" as="section">
-      <div className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />
-      <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:p-6">
-        <DeckRing stats={stats} size={88} stroke={8} />
+    <section
+      className="mt-6 flex flex-col overflow-hidden rounded-[4px] border border-line bg-surface sm:flex-row"
+      style={deckVars(color)}
+      aria-label={`Your event: ${deck.title}`}
+    >
+      <div className="grid h-28 shrink-0 place-items-center sm:h-auto sm:w-48" style={{ background: color }}>
+        <DeckCrest deck={deck} size={72} />
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-center">
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
-            Your event
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-[0.14em]" style={{ color }}>
+              Your event
+            </span>
+            <CodeTag>{deck.short}</CodeTag>
           </div>
           <h2 className="mt-1 text-2xl font-extrabold">{deck.title}</h2>
           <p className="mt-1 text-sm text-muted">
@@ -214,10 +222,19 @@ function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
                 ? `${stats.due} due today, ${stats.mastered} mastered, ${stats.fresh} still new.`
                 : `All caught up. ${stats.mastered} mastered${stats.nextDue ? `, next review ${relativeDue(stats.nextDue)}` : ''}.`}
           </p>
-          <MixBar stats={stats} className="mt-3 max-w-md" />
+          <div className="mt-3 flex max-w-md items-center gap-3">
+            <EventBar stats={stats} color={color} className="flex-1" />
+            <span className="tabular shrink-0 text-xs font-semibold text-muted">
+              {stats.mastered} / {stats.total}
+            </span>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2 sm:flex-col sm:items-stretch">
-          <ButtonLink to={`/vocab/${deck.key}?mode=learn`} rightIcon={<ArrowRight className="size-4" />}>
+        <div className="flex flex-wrap gap-2 lg:flex-col lg:items-stretch">
+          <ButtonLink
+            to={`/vocab/${deck.key}?mode=learn`}
+            className="bg-(--ev)! hover:bg-(--ev-2)!"
+            rightIcon={<ArrowRight className="size-4" />}
+          >
             {stats.due > 0 ? `Review ${stats.due}` : started ? 'Keep learning' : 'Start learning'}
           </ButtonLink>
           <ButtonLink to={`/vocab/${deck.key}?mode=cards`} variant="outline">
@@ -225,7 +242,16 @@ function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
           </ButtonLink>
         </div>
       </div>
-    </Card>
+    </section>
+  );
+}
+
+/** Small grey bordered chip for an event's short code (ACCT, LAW...). */
+function CodeTag({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex h-5 shrink-0 items-center rounded-[2px] border border-line px-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-muted">
+      {children}
+    </span>
   );
 }
 
@@ -244,50 +270,86 @@ function DeckTile({
 }) {
   const started = stats.total - stats.fresh > 0;
   const complete = stats.total > 0 && stats.mastered === stats.total;
+  const color = deckColor(deck);
+  const status = complete
+    ? 'Fully mastered'
+    : stats.due > 0
+      ? `${stats.due} due today`
+      : !started
+        ? 'Not started'
+        : `${stats.mastered} of ${stats.total} mastered`;
   return (
-    <Card interactive padded={false} className="group relative">
-      <Link to={`/vocab/${deck.key}`} className="flex h-full items-start gap-4 rounded-[4px] p-4 outline-none">
-        <DeckRing stats={stats} size={60} />
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">{deck.short}</span>
-            {deck.isNew && (
-              <Badge tone="red" className="h-5 px-2 text-[10px]">
-                New event
-              </Badge>
-            )}
-            {main && (
-              <Badge tone="navy" className="h-5 px-2 text-[10px]">
-                Your event
-              </Badge>
-            )}
-          </div>
-          <h3 className={cn('mt-0.5 font-bold leading-snug text-heading', onEdit && 'pr-8')}>{deck.title}</h3>
-          <p className="mt-1 text-xs text-muted">
-            {complete ? (
-              <span className="font-semibold text-success">Fully mastered</span>
-            ) : !started ? (
-              `${stats.total} terms, not started`
-            ) : (
-              <>
-                {stats.due > 0 && <span className="font-semibold text-red dark:text-danger">{stats.due} due · </span>}
-                {stats.mastered} mastered · {stats.fresh} new
-              </>
-            )}
-          </p>
-          {assignment && <AssignmentLine a={assignment} />}
-          <MixBar stats={stats} className="mt-3" />
+    <div className="group relative h-full" style={deckVars(color)}>
+      <Link
+        to={`/vocab/${deck.key}`}
+        className="flex h-full flex-col overflow-hidden rounded-[4px] border border-line bg-surface outline-none transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong focus-visible:ring-2 focus-visible:ring-blue"
+      >
+        <div className="relative grid h-[120px] shrink-0 place-items-center" style={{ background: color }}>
+          <DeckCrest deck={deck} size={64} className="transition-transform duration-200 group-hover:scale-[1.04]" />
+          {(main || deck.isNew) && (
+            <div className="absolute left-3 top-3 flex gap-1.5">
+              {main && (
+                <span className="inline-flex h-5 items-center rounded-[2px] bg-white px-1.5 text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color }}>
+                  Your event
+                </span>
+              )}
+              {deck.isNew && (
+                <span className="inline-flex h-5 items-center rounded-[2px] border border-white/80 px-1.5 text-[10px] font-bold tracking-[0.08em] text-white">
+                  *NEW
+                </span>
+              )}
+            </div>
+          )}
         </div>
-        <ChevronRight className="mt-1 size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5" aria-hidden />
+        <div className="flex flex-1 flex-col p-5">
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="font-bold leading-snug text-heading">{deck.title}</h3>
+            <CodeTag>{deck.short}</CodeTag>
+          </div>
+          {deck.gradeNote && <p className="mt-1 text-xs font-semibold text-[#8a5f00] dark:text-warning">{deck.gradeNote}</p>}
+          <p className="tabular mt-1.5 text-sm text-muted">
+            {stats.total} {stats.total === 1 ? 'term' : 'terms'}
+            {started && ` · ${stats.mastered} mastered`}
+            {stats.due > 0 && ` · ${stats.due} due`}
+          </p>
+          {assignment && (
+            <div>
+              <AssignmentLine a={assignment} />
+            </div>
+          )}
+          <EventBar stats={stats} color={color} className="mt-4" />
+          <div className="mt-auto pt-4">
+            <div className="flex items-center justify-between gap-3 border-t border-line pt-3 text-sm">
+              <span
+                className={cn(
+                  'font-semibold',
+                  complete ? 'text-success' : stats.due > 0 ? 'text-red dark:text-danger' : started ? 'text-ink' : 'text-muted',
+                )}
+              >
+                {status}
+              </span>
+              <ArrowRight
+                className="size-4 shrink-0 text-muted transition-[transform,color] duration-200 group-hover:translate-x-0.5 group-hover:text-(--ev)"
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
       </Link>
       {onEdit && (
-        <span className="absolute right-9 top-3">
-          <Button variant="ghost" size="icon-sm" aria-label={`Edit ${deck.title}`} className="text-muted" onClick={onEdit}>
+        <span className="absolute right-2 top-2" style={{ '--color-white': '#fff' } as CSSProperties}>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label={`Edit ${deck.title}`}
+            className="text-white hover:bg-white/15"
+            onClick={onEdit}
+          >
             <Pencil className="size-4" />
           </Button>
         </span>
       )}
-    </Card>
+    </div>
   );
 }
 
@@ -378,7 +440,7 @@ function ChapterDecks({
           }
         />
       ) : (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {sorted.map((d) => (
             <DeckTile
               key={d.key}
@@ -455,7 +517,15 @@ function SearchResults({
                   <Highlight text={t.def} query={query} />
                 </p>
                 <div className="mt-1 flex items-center gap-2 sm:mt-0 sm:flex-col sm:items-end sm:gap-1">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">{d?.short}</span>
+                  {d && (
+                    <span
+                      className="inline-flex h-5 items-center rounded-[2px] px-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-white"
+                      style={{ background: deckColor(d) }}
+                      title={d.title}
+                    >
+                      {d.short}
+                    </span>
+                  )}
                   <StatusChip status={statusOf(p)} />
                   {p && isDue(p) && <span className="text-[11px] font-semibold text-red dark:text-danger">Due</span>}
                 </div>

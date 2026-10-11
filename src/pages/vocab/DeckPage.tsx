@@ -8,7 +8,7 @@ import { EVENT_GROUPS } from '../../lib/types';
 import { canManageDeck, eventName, type StudyDeck } from '../../api/vocab';
 import { deckStats, isDue, relativeDue } from './leitner';
 import { assignmentFor, findDeck, reloadVocab, useVocab } from './store';
-import { DeckRing, VocabStyles } from './parts';
+import { DeckCrest, EventBar, VocabStyles, deckColor, deckVars } from './parts';
 import { Learn } from './Learn';
 import { Flashcards } from './Flashcards';
 import { Match } from './Match';
@@ -129,14 +129,44 @@ export default function DeckPage() {
   else if (active === 'quiz') body = <Quiz deck={deck} />;
   else body = <TermList deck={deck} progress={s.progress} initialQuery={params.get('q') ?? ''} />;
 
+  const color = deckColor(deck);
+
   return (
-    <>
+    <div style={deckVars(color)}>
       <VocabStyles />
+      <div className="h-1.5" style={{ background: color }} aria-hidden />
       <PageHeader
-        eyebrow={eyebrow}
+        eyebrow={
+          eyebrow || deck.short ? (
+            <span className="inline-flex flex-wrap items-center gap-2">
+              {eyebrow}
+              {deck.key !== REVIEW_KEY && (
+                <span
+                  className="inline-flex h-5 items-center rounded-[2px] px-1.5 text-[10px] font-bold tracking-[0.1em]"
+                  style={{ background: color, color: '#fff' }}
+                >
+                  {deck.short}
+                </span>
+              )}
+              {deck.isNew && <span style={{ color }}>*NEW</span>}
+            </span>
+          ) : undefined
+        }
         title={deck.title}
         back={{ to: '/vocab', label: 'All decks' }}
-        leading={<DeckRing stats={stats} size={76} stroke={7} inverse className="hidden sm:inline-grid" />}
+        leading={
+          <span
+            className="grid size-16 shrink-0 place-items-center rounded-[4px] sm:size-[84px]"
+            style={{ background: color }}
+          >
+            <span className="hidden sm:contents">
+              <DeckCrest deck={deck} size={56} />
+            </span>
+            <span className="contents sm:hidden">
+              <DeckCrest deck={deck} size={42} />
+            </span>
+          </span>
+        }
         subtitle={
           assignment ? (
             <>
@@ -178,10 +208,23 @@ export default function DeckPage() {
             {stats.due > 0 ? `${stats.due} due today` : stats.nextDue ? `Next review ${relativeDue(stats.nextDue)}` : ''}
           </span>
         </div>
+        <div className="mt-4 flex max-w-xl items-center gap-3">
+          <EventBar stats={stats} color={color} className="flex-1" />
+          <span className="tabular shrink-0 text-xs font-semibold text-muted">
+            {stats.total ? Math.round((stats.mastered / stats.total) * 100) : 0}% mastered
+          </span>
+        </div>
       </PageHeader>
 
       <Page>
-        <Tabs<Mode> id="vocab-mode" aria-label="Study mode" items={tabs} value={active} onChange={setMode} className="mb-6" />
+        <Tabs<Mode>
+          id="vocab-mode"
+          aria-label="Study mode"
+          items={tabs}
+          value={active}
+          onChange={setMode}
+          className="mb-6 [&_[aria-selected=true]]:after:bg-(--ev) [&_[aria-selected=true]>span]:bg-(--ev)"
+        />
         <div key={`${deck.key}-${active}`} id={`vocab-mode-panel-${active}`} role="tabpanel" aria-labelledby={`vocab-mode-tab-${active}`}>
           {body}
         </div>
@@ -196,7 +239,7 @@ export default function DeckPage() {
           deck={deck.deck}
         />
       )}
-    </>
+    </div>
   );
 }
 
