@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
-import { Eye, EyeOff, Lock, Moon, Sun } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Eye, EyeOff, Heart, Lock, Moon, Sun } from 'lucide-react';
 import { Brand } from '../../components/layout/Brand';
 import { useTheme } from '../../components/layout/theme';
 import { FacetArt } from '../../components/ui/PageHeader';
@@ -60,7 +61,7 @@ export function AuthLayout({
             <>
               <p className="mb-3 hidden items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/65 lg:flex">
                 <span className="h-[3px] w-6 bg-red" />
-                Future Business Leaders of Canada
+                For FBL Canada members
               </p>
               <h2 className="max-w-md text-2xl font-extrabold leading-[1.08] tracking-tight text-white lg:text-[2.75rem]">
                 Train like it is nationals.
@@ -106,8 +107,31 @@ export function AuthLayout({
             {footer && <div className="mt-8 border-t border-line pt-6 text-center text-sm text-muted">{footer}</div>}
           </div>
         </div>
+        <AuthFooter />
       </main>
     </div>
+  );
+}
+
+/** Credits and legal links under the auth forms (these pages have no app footer). */
+function AuthFooter() {
+  const link = 'inline-flex min-h-10 items-center px-2 font-semibold text-muted underline-offset-4 hover:text-ink hover:underline';
+  return (
+    <footer className="flex flex-wrap items-center justify-center gap-x-3 px-5 pb-5 text-xs text-muted">
+      <span className="inline-flex min-h-10 items-center gap-1 px-2">
+        Built with
+        <Heart aria-label="love" role="img" className="size-3.5 shrink-0 fill-current text-red" />
+        by Joseph &amp; Kaden
+      </span>
+      <nav aria-label="Legal" className="flex">
+        <Link to="/terms" className={link}>
+          Terms
+        </Link>
+        <Link to="/privacy" className={link}>
+          Privacy
+        </Link>
+      </nav>
+    </footer>
   );
 }
 

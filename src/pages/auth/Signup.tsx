@@ -121,6 +121,17 @@ export default function Signup() {
         <Button type="submit" variant="accent" size="lg" block loading={busy} rightIcon={<ArrowRight className="size-4" />}>
           Create account
         </Button>
+        <p className="text-center text-sm leading-relaxed text-muted">
+          By creating an account you agree to the{' '}
+          <Link to="/terms" className="link underline">
+            Terms of use
+          </Link>{' '}
+          and{' '}
+          <Link to="/privacy" className="link underline">
+            Privacy policy
+          </Link>
+          . Under 13? Ask a parent or guardian first.
+        </p>
         <p className="text-center text-xs text-muted">
           Next you will pick a username and your main event. You can change them later.
         </p>

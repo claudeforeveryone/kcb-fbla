@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Heart } from 'lucide-react';
 import { cn } from '../ui/cn';
 import { LOGO_WHITE } from './Brand';
 
@@ -21,6 +21,11 @@ export function Footer({ className }: { className?: string }) {
           <p className="mt-4 max-w-sm text-sm text-white/80">
             Official-style practice exams, vocab and 1v1 duels for FBL Canada members, plus the tools our chapter
             executives use to run the club.
+          </p>
+          <p className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-white">
+            Built with
+            <Heart aria-label="love" role="img" className="size-4 shrink-0 fill-current text-[#ff7d98]" />
+            by Joseph &amp; Kaden
           </p>
         </div>
         <nav aria-label="Practice" className="text-sm">
@@ -55,9 +60,19 @@ export function Footer({ className }: { className?: string }) {
         </nav>
       </div>
       <div className="bg-[#00143f]">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-1 px-4 py-4 text-xs text-white/75 sm:flex-row sm:justify-between sm:px-6 lg:px-10">
-          <span>&copy; {year} FBLC. Student-run practice platform.</span>
-          <span>Practice questions are unofficial and written for study.</span>
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-2 px-4 py-3 text-xs text-white/75 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-6 lg:px-10">
+          <p className="max-w-3xl leading-relaxed">
+            &copy; {year} Joseph &amp; Kaden. An independent student study site, not affiliated with or endorsed by FBLA-PBL
+            or FBL Canada. Practice questions are unofficial and written for study.
+          </p>
+          <nav aria-label="Legal" className="-mx-2 flex shrink-0">
+            <Link className={cn('px-2 py-2.5', LINK)} to="/terms">
+              Terms of use
+            </Link>
+            <Link className={cn('px-2 py-2.5', LINK)} to="/privacy">
+              Privacy policy
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
