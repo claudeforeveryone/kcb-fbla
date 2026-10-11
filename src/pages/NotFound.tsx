@@ -7,8 +7,8 @@ export default function NotFound() {
   const { pathname } = useLocation();
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 md:py-20">
-      <div className="relative isolate overflow-hidden rounded-[4px] bg-navy px-6 py-14 text-center text-white sm:px-12">
-        <FacetArt className="w-full opacity-80" />
+      <div className="relative isolate overflow-hidden band rounded-[4px] border border-t-4 border-line border-t-red px-6 py-14 text-center text-white sm:px-12">
+        <FacetArt className="w-full opacity-60" />
         <div className="relative">
           <p className="tabular font-display text-7xl font-extrabold tracking-tight text-white sm:text-8xl">
             4<span className="text-red">0</span>4

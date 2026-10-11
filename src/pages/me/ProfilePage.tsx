@@ -488,8 +488,8 @@ function BestPaper({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   const b = stats.best_paper!;
   const body = (
     <div className="flex items-center gap-4">
-      <div className="grid size-16 shrink-0 place-items-center rounded-[4px] bg-navy text-white dark:bg-blue">
-        <span className="tabular font-display text-lg font-extrabold">{Math.round(Number(b.accuracy) * 100)}%</span>
+      <div className="grid size-16 shrink-0 place-items-center rounded-[4px] border border-line border-t-[3px] border-t-red bg-surface">
+        <span className="tabular font-display text-lg font-extrabold text-red dark:text-danger">{Math.round(Number(b.accuracy) * 100)}%</span>
       </div>
       <div className="min-w-0">
         <div className="truncate font-semibold text-heading">{b.label || eventName(b.event)}</div>

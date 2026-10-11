@@ -83,7 +83,7 @@ export function Tabs<T extends string>({
                   )
                 : cn(
                     'h-9 px-3.5',
-                    active ? 'bg-navy text-white dark:bg-blue' : 'text-muted hover:bg-surface-3 hover:text-ink',
+                    active ? 'bg-surface text-heading shadow-[inset_0_-2px_0_var(--red)] ring-1 ring-line-strong dark:bg-surface-3' : 'text-muted hover:bg-surface-3 hover:text-ink',
                   ),
             )}
           >

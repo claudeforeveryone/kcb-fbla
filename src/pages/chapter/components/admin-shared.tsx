@@ -159,7 +159,7 @@ export function InviteCard({ chapterId, className }: { chapterId: string; classN
             <div className="text-xs text-muted">Join code</div>
             <div className="mt-1 flex items-center gap-2">
               <span
-                className="tabular rounded-[2px] bg-navy px-3 py-1.5 font-display text-2xl font-extrabold tracking-[0.25em] text-white dark:bg-surface-3"
+                className="tabular rounded-[2px] border border-line-strong bg-surface px-3 py-1.5 font-display text-2xl font-extrabold tracking-[0.25em] text-red"
                 aria-label={`Join code ${inv.data.join_code.split('').join(' ')}`}
               >
                 {inv.data.join_code}

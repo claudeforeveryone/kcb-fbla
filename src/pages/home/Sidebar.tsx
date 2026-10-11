@@ -243,7 +243,7 @@ export function MiniLeaderboard({
   );
 }
 
-const PODIUM = ['bg-red text-white', 'bg-navy text-white dark:bg-blue', 'bg-navy text-white dark:bg-blue'];
+const PODIUM = ['bg-red text-white', 'border border-heading bg-surface text-heading', 'border border-heading bg-surface text-heading'];
 
 function Row({ rank, name, username, avatar, elo, isMe }: { rank: number; name: string; username: string; avatar: string | null; elo: number; isMe: boolean }) {
   return (
@@ -291,16 +291,16 @@ export function ChapterCard({
 }) {
   if (!hasChapter) {
     return (
-      <div className="facets relative overflow-hidden rounded-[4px] p-5 text-white">
-        <h3 className="text-lg font-extrabold text-white">Practise with your chapter</h3>
-        <p className="mt-1 text-sm text-white/75">
+      <div className="relative overflow-hidden rounded-[4px] border border-line border-t-[3px] border-t-red bg-surface p-5">
+        <h3 className="text-lg font-extrabold text-heading">Practise with your chapter</h3>
+        <p className="mt-1 text-sm text-muted">
           Join your school's chapter for assignments, chapter tests and a spot on the chapter leaderboard.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <ButtonLink to="/chapter" variant="inverse" size="sm">
+          <ButtonLink to="/chapter" variant="primary" size="sm">
             Join with a code
           </ButtonLink>
-          <ButtonLink to="/chapter/new" size="sm" leftIcon={<Plus className="size-4" />} className="bg-white/10 text-white ring-1 ring-inset ring-white/25 hover:bg-white/20">
+          <ButtonLink to="/chapter/new" variant="ghost" size="sm" leftIcon={<Plus className="size-4" />}>
             Start a chapter
           </ButtonLink>
         </div>
@@ -324,7 +324,7 @@ export function ChapterCard({
     <Link to="/chapter" className="block rounded-[4px] focus-visible:outline-offset-4">
       <Card interactive>
         <div className="flex items-start gap-3">
-          <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-navy font-display text-sm font-extrabold text-white dark:bg-blue">
+          <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line-strong bg-surface font-display text-sm font-extrabold text-heading">
             {chapter.name
               .split(/\s+/)
               .filter(Boolean)

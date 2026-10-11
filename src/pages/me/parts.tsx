@@ -262,19 +262,19 @@ export function AchievementsSection({ stats }: { stats: ProfileStats }) {
           {showcase.map((def, i) => (
             <div
               key={def.code}
-              className="facets relative overflow-hidden rounded-[4px] border-l-[3px] border-red p-4 text-white"
+              className="relative overflow-hidden rounded-[4px] border border-line border-l-[3px] border-l-red bg-surface p-4"
               style={{ animationDelay: `${i * 60}ms` }}
             >
               <div>
                 <div className="min-w-0">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/60">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
                     {i === 0 ? 'Top achievement' : 'Highlight'}
                   </div>
-                  <div className="truncate font-display text-base font-bold">{def.title}</div>
-                  <div className="text-xs text-white/70">Earned {formatDate(earnedAt.get(def.code)!, true)}</div>
+                  <div className="truncate font-display text-base font-bold text-heading">{def.title}</div>
+                  <div className="text-xs text-muted">Earned {formatDate(earnedAt.get(def.code)!, true)}</div>
                 </div>
               </div>
-              <p className="mt-3 text-sm text-white/80">{def.description}</p>
+              <p className="mt-3 text-sm text-ink">{def.description}</p>
             </div>
           ))}
         </div>
@@ -293,7 +293,9 @@ export function AchievementsSection({ stats }: { stats: ProfileStats }) {
               onClick={() => setFilter(f)}
               className={cn(
                 'h-8 rounded-[2px] px-3 text-xs font-semibold capitalize transition-colors',
-                filter === f ? 'bg-navy text-white dark:bg-blue' : 'bg-surface-2 text-muted hover:text-ink',
+                filter === f
+                  ? 'bg-surface text-heading shadow-[inset_0_-2px_0_var(--red)] ring-1 ring-inset ring-line-strong'
+                  : 'bg-surface-2 text-muted hover:text-ink',
               )}
             >
               {f}

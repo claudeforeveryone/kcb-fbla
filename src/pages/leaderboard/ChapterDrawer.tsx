@@ -135,9 +135,9 @@ export function ChapterDrawer({ chapter, onClose }: { chapter: ChapterLeaderboar
 
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <div className={cn('rounded-[4px] border px-3 py-2.5', accent ? 'border-navy bg-navy text-white dark:border-blue/40' : 'border-line bg-surface-2/50')}>
-      <dt className={cn('text-[11px] font-bold uppercase tracking-wider', accent ? 'text-white/70' : 'text-muted')}>{label}</dt>
-      <dd className={cn('tabular mt-0.5 font-display text-xl font-extrabold', accent ? 'text-white' : 'text-heading')}>{value}</dd>
+    <div className={cn('rounded-[4px] border border-line bg-surface px-3 py-2.5', accent && 'border-t-[3px] border-t-red')}>
+      <dt className="text-[11px] font-bold uppercase tracking-wider text-muted">{label}</dt>
+      <dd className={cn('tabular mt-0.5 font-display text-xl font-extrabold', accent ? 'text-red' : 'text-heading')}>{value}</dd>
     </div>
   );
 }

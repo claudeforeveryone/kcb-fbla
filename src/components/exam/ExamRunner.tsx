@@ -418,7 +418,7 @@ export function ExamRunner({
                       className={cn(
                         'mt-px grid size-7 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold transition-colors',
                         state === 'idle' && 'bg-surface-2 text-muted ring-1 ring-inset ring-line group-hover:bg-blue/10 group-hover:text-blue',
-                        state === 'chosen' && 'bg-navy text-white dark:bg-link dark:text-navy',
+                        state === 'chosen' && 'bg-surface text-navy ring-2 ring-inset ring-navy dark:text-link dark:ring-link',
                         state === 'right' && 'exam-pop bg-success text-white',
                         state === 'wrong' && 'exam-pop bg-red text-white',
                         state === 'dim' && 'bg-surface-2 text-muted',
@@ -704,7 +704,7 @@ function Navigator({ s, n, onGo }: { s: RunnerSnapshot; n: number; onGo: (i: num
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
         <span className="inline-flex items-center gap-1.5">
-          <span className="size-2.5 rounded-[1px] bg-navy dark:bg-link" /> Answered
+          <span className="size-2.5 rounded-[1px] border border-navy/40 bg-navy/10 dark:border-link/50 dark:bg-blue/25" /> Answered
         </span>
         <span className="inline-flex items-center gap-1.5">
           <span className="size-2.5 rounded-[1px] border border-line-strong bg-surface" /> Blank
@@ -728,7 +728,7 @@ function Navigator({ s, n, onGo }: { s: RunnerSnapshot; n: number; onGo: (i: num
               className={cn(
                 'tabular relative grid h-8 place-items-center rounded-[2px] text-xs font-bold transition-colors',
                 done
-                  ? 'bg-navy text-white hover:bg-navy-2 dark:bg-link dark:text-navy'
+                  ? 'border border-navy/40 bg-navy/10 text-navy hover:bg-navy/15 dark:border-link/50 dark:bg-blue/25 dark:text-link'
                   : 'border border-line-strong bg-surface text-muted hover:border-blue hover:text-heading',
                 cur && 'ring-2 ring-red ring-offset-2 ring-offset-surface',
               )}

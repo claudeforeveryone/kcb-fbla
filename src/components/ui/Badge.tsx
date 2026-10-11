@@ -13,7 +13,7 @@ const soft: Record<BadgeTone, string> = {
 };
 const solid: Record<BadgeTone, string> = {
   neutral: 'bg-muted text-white ring-transparent',
-  navy: 'bg-navy text-white ring-transparent dark:bg-blue',
+  navy: 'bg-surface text-navy ring-navy/50 dark:text-link dark:ring-link/50',
   red: 'bg-red text-white ring-transparent',
   blue: 'bg-blue text-white ring-transparent',
   success: 'bg-success text-white ring-transparent',

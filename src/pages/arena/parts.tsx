@@ -386,7 +386,7 @@ export function VersusBanner({
             <span
               className={cn(
                 'tabular min-w-[4.5rem] border-b-4 px-3 py-2 text-center font-display text-5xl font-black leading-none sm:min-w-24 sm:text-6xl',
-                won ? 'border-red bg-white text-navy' : 'border-transparent bg-navy-2 text-white',
+                won ? 'border-red bg-surface text-red' : 'border-line bg-surface text-white',
                 score == null && 'text-white/35',
               )}
             >

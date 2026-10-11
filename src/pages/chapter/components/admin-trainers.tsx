@@ -95,7 +95,7 @@ export function TrainersPanel({
               return (
                 <Card key={e.slug} className={cn('flex flex-col', ids.length === 0 && 'border-dashed')}>
                   <div className="flex items-start gap-3">
-                    <span className="rounded-[2px] bg-navy px-2 py-1 font-display text-[0.6875rem] font-bold text-white dark:bg-surface-3">
+                    <span className="rounded-[2px] border border-navy/50 bg-surface px-2 py-1 font-display text-[0.6875rem] font-bold text-navy dark:border-line-strong dark:text-heading">
                       {e.short}
                     </span>
                     <div className="min-w-0 flex-1">

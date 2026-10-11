@@ -54,8 +54,8 @@ export function PostReader({
     <div className="fixed inset-0 z-[85] flex justify-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="reader-title">
       <div className="animate-fade-in absolute inset-0 bg-[#00143f]/70" onClick={onClose} aria-hidden />
       <article className="animate-pop relative flex h-full w-full max-w-3xl flex-col overflow-hidden bg-surface shadow-pop sm:h-auto sm:max-h-[94dvh] sm:rounded-[2px] sm:border sm:border-line">
-        <header className="facets relative isolate shrink-0 overflow-hidden px-5 pb-7 pt-5 text-white sm:px-10 sm:pb-9 sm:pt-7">
-          <FacetArt className="opacity-80" />
+        <header className="band relative isolate shrink-0 overflow-hidden border-t-4 border-t-red px-5 pb-7 pt-5 text-white sm:px-10 sm:pb-9 sm:pt-7">
+          <FacetArt className="opacity-60" />
           <div className="relative flex items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/75">
               <span className="h-[3px] w-5 bg-red" aria-hidden />
@@ -63,7 +63,7 @@ export function PostReader({
             </div>
             <div className="flex items-center gap-1">
               {onEdit && (
-                <Button variant="ghost" size="sm" onClick={onEdit} className="text-white hover:bg-white/10" leftIcon={<Pencil className="size-4" />}>
+                <Button variant="ghost" size="sm" onClick={onEdit} className="text-white hover:bg-surface-2" leftIcon={<Pencil className="size-4" />}>
                   Edit
                 </Button>
               )}
@@ -72,7 +72,7 @@ export function PostReader({
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="grid size-9 place-items-center rounded-[2px] text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                className="grid size-9 place-items-center rounded-[2px] text-white/80 transition-colors hover:bg-surface-2 hover:text-white"
               >
                 <X className="size-5" />
               </button>

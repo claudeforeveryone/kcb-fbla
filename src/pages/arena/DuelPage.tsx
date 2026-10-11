@@ -324,7 +324,7 @@ export function DuelPage() {
           rightMs={duel.status === 'accepted' ? (side.theyPlayed ? 'finished, score hidden' : 'not played') : undefined}
         />
         {duel.message && (
-          <p className="mx-auto mt-6 max-w-md rounded-[2px] border border-white/15 bg-navy-2 px-4 py-2.5 text-center text-sm italic text-white/85">
+          <p className="mx-auto mt-6 max-w-md rounded-[2px] border border-line bg-surface px-4 py-2.5 text-center text-sm italic text-white/85">
             "{duel.message}"
             <span className="ml-1 not-italic text-white/55">- {displayName(players[duel.challenger_id])}</span>
           </p>

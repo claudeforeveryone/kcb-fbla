@@ -132,8 +132,8 @@ function DuelRow({ item }: { item: DuelItem }) {
         ) : (
           <span
             className={cn(
-              'inline-flex h-8 shrink-0 items-center rounded-[2px] px-3 text-sm font-bold text-white transition-colors',
-              state === 'incoming' ? 'bg-red group-hover:bg-red-2' : 'bg-navy group-hover:bg-navy-2 dark:bg-blue',
+              'inline-flex h-8 shrink-0 items-center rounded-[2px] px-3 text-sm font-bold transition-colors',
+              state === 'incoming' ? 'bg-red text-white group-hover:bg-red-2' : 'border border-heading bg-surface text-heading group-hover:bg-surface-2',
             )}
           >
             {state === 'incoming' ? 'Respond' : 'Play'}

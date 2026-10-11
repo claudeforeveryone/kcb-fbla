@@ -260,7 +260,7 @@ function EloPanel({ data, animate }: { data: ExamResultData; animate: boolean })
   }, [data]);
   return (
     <div
-      className="exam-rise rounded-[2px] border border-white/20 bg-navy-deep p-4 md:col-span-2 lg:col-span-1"
+      className="exam-rise rounded-[2px] border border-line border-t-[3px] border-t-navy bg-surface p-4 dark:border-t-link md:col-span-2 lg:col-span-1"
       style={{ animationDelay: '260ms' }}
     >
       <div className="flex items-center justify-between">

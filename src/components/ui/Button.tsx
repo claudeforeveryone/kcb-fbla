@@ -13,7 +13,7 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'bg-navy text-white hover:bg-navy-2 dark:bg-blue dark:hover:bg-[#4b7cc2]',
+    'border border-navy bg-white text-navy hover:bg-navy/[0.06] dark:border-link dark:bg-transparent dark:text-link dark:hover:bg-white/5',
   accent:
     'bg-red text-white hover:bg-red-2',
   secondary:

@@ -46,7 +46,7 @@ export function SegmentedControl<T extends string | number>({
               size === 'sm' ? 'h-7 px-2.5 text-xs' : 'h-8 px-3.5 text-sm',
               block && 'flex-1',
               active
-                ? 'bg-navy text-white dark:bg-blue'
+                ? 'bg-surface text-heading shadow-[inset_0_-2px_0_var(--red)] ring-1 ring-line-strong dark:bg-surface-3'
                 : 'text-muted hover:text-ink',
             )}
           >
@@ -83,14 +83,14 @@ export function Pill({
       className={cn(
         'inline-flex h-8 shrink-0 items-center gap-1.5 rounded-[2px] border px-3 text-sm font-semibold transition-colors duration-150 [&>svg]:size-3.5',
         active
-          ? 'border-navy bg-navy text-white dark:border-blue dark:bg-blue'
+          ? 'border-red bg-red/[0.07] text-red dark:text-danger'
           : 'border-line-strong bg-surface text-ink hover:border-blue/60 hover:text-heading',
         className,
       )}
     >
       {icon}
       {children}
-      {count != null && <span className={cn('tabular text-xs', active ? 'text-white/75' : 'text-muted')}>{count}</span>}
+      {count != null && <span className={cn('tabular text-xs', active ? 'text-red/70' : 'text-muted')}>{count}</span>}
     </button>
   );
 }

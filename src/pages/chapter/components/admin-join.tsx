@@ -2,25 +2,24 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Button, FacetArt, Spinner, cn, errorMessage, useToast } from '../../../components/ui';
+import { Button, Spinner, cn, errorMessage, useToast } from '../../../components/ui';
 import { useAuth } from '../../../lib/auth';
 import type { ChapterPreview } from '../../../lib/types';
 import { joinChapter, previewChapter } from '../../../api/chapter';
 
 export function ChapterPreviewCard({ preview, footer, className }: { preview: ChapterPreview; footer?: ReactNode; className?: string }) {
   return (
-    <div className={cn('overflow-hidden rounded-[2px] border border-line bg-surface', className)}>
-      <div className="facets relative overflow-hidden px-5 pb-5 pt-6 text-white">
-        <FacetArt className="opacity-80" />
-        <div className="relative">
+    <div className={cn('overflow-hidden rounded-[2px] border border-t-4 border-line border-t-red bg-surface', className)}>
+      <div className="border-b border-line px-5 pb-5 pt-5">
+        <div>
           {preview.region && (
-            <div className="text-xs font-bold uppercase tracking-[0.14em] text-white/70">
+            <div className="text-xs font-bold uppercase tracking-[0.14em] text-red">
               {preview.region}
             </div>
           )}
-          <div className="mt-2 break-words font-display text-2xl font-extrabold leading-tight">{preview.name}</div>
+          <div className="mt-2 break-words font-display text-2xl font-extrabold leading-tight text-heading">{preview.name}</div>
           {preview.school && (
-            <div className="mt-1 text-sm text-white/75">
+            <div className="mt-1 text-sm text-muted">
               {preview.school}
             </div>
           )}

@@ -124,18 +124,18 @@ export default function CreatePage() {
 
             <aside className="space-y-4">
               <div className="text-xs font-bold uppercase tracking-wider text-muted">Preview</div>
-              <div className="relative overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-5 text-white">
+              <div className="relative overflow-hidden rounded-[2px] border border-t-4 border-line border-t-red bg-surface p-5">
                 <div className="relative">
-                  <div className="text-xs font-bold uppercase tracking-[0.14em] text-white/70">{region}</div>
-                  <div className="mt-2 break-words font-display text-2xl font-extrabold leading-tight">
+                  <div className="text-xs font-bold uppercase tracking-[0.14em] text-red">{region}</div>
+                  <div className="mt-2 break-words font-display text-2xl font-extrabold leading-tight text-heading">
                     {name.trim() || 'Your chapter'}
                   </div>
-                  <div className="mt-1 text-sm text-white/75">{school.trim() || 'Your school'}</div>
+                  <div className="mt-1 text-sm text-muted">{school.trim() || 'Your school'}</div>
                   <div className="mt-5 flex items-center gap-3">
-                    <Avatar src={profile?.avatar_url} name={profile?.display_name} size="sm" ring />
+                    <Avatar src={profile?.avatar_url} name={profile?.display_name} size="sm" />
                     <div className="text-sm">
-                      <div className="font-semibold">{profile?.display_name}</div>
-                      <div className="text-white/70">President</div>
+                      <div className="font-semibold text-heading">{profile?.display_name}</div>
+                      <div className="text-muted">President</div>
                     </div>
                   </div>
                 </div>

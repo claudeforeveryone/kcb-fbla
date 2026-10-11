@@ -535,15 +535,15 @@ export default function ClassroomPage() {
 
 function HeaderChip({ label, alert, onClick }: { label: string; alert?: string; onClick?: () => void }) {
   const cls =
-    'inline-flex h-9 max-w-full items-center gap-2 rounded-[2px] border border-white/15 bg-navy-2 px-3.5 text-sm font-semibold text-white transition-colors';
+    'inline-flex h-9 max-w-full items-center gap-2 rounded-[2px] border border-navy/40 bg-surface px-3.5 text-sm font-semibold text-heading transition-colors dark:border-line-strong';
   const inner = (
     <>
       <span className="truncate">{label}</span>
-      {alert && <span className="rounded-[2px] bg-red px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide">{alert}</span>}
+      {alert && <span className="rounded-[2px] bg-red px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">{alert}</span>}
     </>
   );
   return onClick ? (
-    <button type="button" onClick={onClick} className={cn(cls, 'hover:border-white/40')}>
+    <button type="button" onClick={onClick} className={cn(cls, 'hover:border-navy dark:hover:border-link')}>
       {inner}
     </button>
   ) : (
@@ -694,13 +694,13 @@ function LatestNewsletter({ post, issue, onOpen }: { post: ClassPost; issue: num
   return (
     <section>
       <SectionLabel>Latest newsletter</SectionLabel>
-      <button type="button" onClick={onOpen} className="group relative block w-full overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-5 text-left text-white transition-colors hover:bg-navy-2">
-        <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/65">
+      <button type="button" onClick={onOpen} className="group relative block w-full overflow-hidden rounded-[2px] border border-l-4 border-line border-l-red bg-surface p-5 text-left transition-colors hover:bg-surface-2">
+        <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-red">
           Issue {issue} · {formatDate(post.created_at)}
         </div>
-        <h3 className="mt-2 text-lg font-bold leading-snug text-white">{post.title}</h3>
-        <p className="mt-2 line-clamp-3 text-sm text-white/75">{excerpt(post.body, 180)}</p>
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-white">
+        <h3 className="mt-2 text-lg font-bold leading-snug text-heading">{post.title}</h3>
+        <p className="mt-2 line-clamp-3 text-sm text-muted">{excerpt(post.body, 180)}</p>
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-red">
           Read · {readingMinutes(post.body)} min
           <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
         </span>
@@ -748,22 +748,22 @@ function NewsletterShelf({ items, canWrite, onOpen, onWrite }: { items: ClassPos
           </Button>
         </div>
       )}
-      <button type="button" onClick={() => onOpen(latest)} className="group relative block w-full overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-6 text-left text-white transition-colors hover:bg-navy-2 sm:p-9">
+      <button type="button" onClick={() => onOpen(latest)} className="group relative block w-full overflow-hidden rounded-[2px] border border-t-4 border-line border-t-red bg-surface p-6 text-left transition-colors hover:bg-surface-2 sm:p-9">
         <div className="relative max-w-2xl">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-red">
             <span className="h-[3px] w-5 bg-red" aria-hidden />
             Latest · Issue {items.length}
           </div>
-          <h2 className="mt-3 text-2xl font-extrabold leading-tight text-white sm:text-3xl">{latest.title}</h2>
-          <p className="mt-3 line-clamp-3 text-white/80">{excerpt(latest.body, 320)}</p>
-          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-white/75">
-            <Avatar src={latest.author?.avatar_url} name={latest.author?.display_name} size="xs" ring />
-            <span className="font-semibold text-white">{latest.author?.display_name ?? 'Former member'}</span>
+          <h2 className="mt-3 text-2xl font-extrabold leading-tight text-heading sm:text-3xl">{latest.title}</h2>
+          <p className="mt-3 line-clamp-3 text-ink/85">{excerpt(latest.body, 320)}</p>
+          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-muted">
+            <Avatar src={latest.author?.avatar_url} name={latest.author?.display_name} size="xs" />
+            <span className="font-semibold text-heading">{latest.author?.display_name ?? 'Former member'}</span>
             <span>{formatDate(latest.created_at)}</span>
             <span>{readingMinutes(latest.body)} min read</span>
           </div>
-          <span className="mt-6 inline-flex h-10 items-center gap-1.5 rounded-[2px] bg-white
- px-4 font-display text-sm font-semibold text-navy transition-transform group-hover:translate-x-0.5">
+          <span className="mt-6 inline-flex h-10 items-center gap-1.5 rounded-[2px] border border-navy bg-surface
+ px-4 font-display text-sm font-semibold text-navy transition-transform dark:border-link dark:text-link group-hover:translate-x-0.5">
             Read the issue <ChevronRight className="size-4" />
           </span>
         </div>

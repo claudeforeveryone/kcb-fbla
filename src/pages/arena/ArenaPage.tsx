@@ -323,11 +323,11 @@ export function ArenaPage() {
 
             },
           ].map((s) => (
-            <div key={s.k} className="rounded-[2px] border border-white/15 bg-navy-2 px-4 py-3">
-              <dt className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/65">
+            <div key={s.k} className="flex flex-col-reverse rounded-[2px] border border-line bg-surface px-4 py-3">
+              <dt className="mt-1 text-[11px] font-bold uppercase tracking-[0.12em] text-heading">
                 {s.k}
               </dt>
-              <dd className="tabular mt-0.5 font-display text-2xl font-extrabold text-white">{s.v}</dd>
+              <dd className="tabular font-display text-3xl font-extrabold leading-none text-red">{s.v}</dd>
             </div>
           ))}
         </dl>

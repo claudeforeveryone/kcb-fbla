@@ -30,12 +30,12 @@ export function StatTile({
     <div
       className={cn(
         'relative flex flex-col overflow-hidden rounded-[4px] border p-4',
-        navy ? 'border-navy bg-navy text-white dark:border-white/10 dark:bg-navy-2' : 'border-line bg-surface',
+        navy ? 'border-line border-t-4 border-t-red bg-surface' : 'border-line bg-surface',
         className,
       )}
     >
       <div className="flex items-center gap-2">
-        <span className={cn('text-xs font-semibold uppercase tracking-wider', navy ? 'text-white/70' : 'text-muted')}>
+        <span className={cn('text-xs font-semibold uppercase tracking-wider', 'text-muted')}>
           {label}
         </span>
       </div>
@@ -44,7 +44,7 @@ export function StatTile({
           <div
             className={cn(
               'tabular font-display text-[1.75rem] font-extrabold leading-none tracking-tight',
-              navy ? 'text-white' : 'text-heading',
+              navy ? 'text-red' : 'text-heading',
             )}
           >
             {value}
@@ -55,7 +55,7 @@ export function StatTile({
                 <span
                   className={cn(
                     'tabular inline-flex items-center gap-0.5 font-semibold',
-                    delta > 0 ? (navy ? 'text-[#7ee2b0]' : 'text-success') : navy ? 'text-[#ff9fb6]' : 'text-danger',
+                    delta > 0 ? 'text-success' : 'text-danger',
                   )}
                 >
                   {delta > 0 ? <ArrowUpRight className="size-3.5" /> : <ArrowDownRight className="size-3.5" />}
@@ -64,7 +64,7 @@ export function StatTile({
                   {deltaSuffix}
                 </span>
               )}
-              {sub && <span className={navy ? 'text-white/70' : 'text-muted'}>{sub}</span>}
+              {sub && <span className="text-muted">{sub}</span>}
             </div>
           )}
         </div>

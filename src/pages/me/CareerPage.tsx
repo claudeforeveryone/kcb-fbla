@@ -103,10 +103,10 @@ export default function CareerPage() {
 
 function HeaderStat({ label, value, chart, accent }: { label: string; value: string; chart?: ReactNode; accent?: boolean }) {
   return (
-    <div className={cn('flex items-center gap-3 rounded-xl px-4 py-2.5 ring-1 ring-inset', accent ? 'bg-red/90 ring-white/10' : 'bg-white/10 ring-white/15')}>
+    <div className={cn('flex items-center gap-3 rounded-xl px-4 py-2.5 ring-1 ring-inset', accent ? 'bg-white/10 ring-white/15 shadow-[inset_0_3px_0_var(--red)]' : 'bg-white/10 ring-white/15')}>
       <div>
         <div className="text-[10px] font-bold uppercase tracking-wider text-white/65">{label}</div>
-        <div className="tabular font-display text-xl font-extrabold text-white">{value}</div>
+        <div className={cn('tabular font-display text-xl font-extrabold', accent ? 'text-red dark:text-danger' : 'text-white')}>{value}</div>
       </div>
       {chart}
     </div>

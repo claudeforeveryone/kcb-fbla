@@ -6,8 +6,8 @@ import { fmt } from './data';
 
 const MEDAL: Record<number, { ring: string; chip: string; label: string }> = {
   1: { ring: 'ring-red', chip: 'bg-red text-white', label: '1st place' },
-  2: { ring: 'ring-navy dark:ring-blue', chip: 'bg-navy text-white dark:bg-blue', label: '2nd place' },
-  3: { ring: 'ring-navy dark:ring-blue', chip: 'bg-navy text-white dark:bg-blue', label: '3rd place' },
+  2: { ring: 'ring-navy dark:ring-blue', chip: 'border border-heading bg-surface text-heading', label: '2nd place' },
+  3: { ring: 'ring-navy dark:ring-blue', chip: 'border border-heading bg-surface text-heading', label: '3rd place' },
 };
 
 /** Position number; solid square chip for the top three. */
@@ -126,16 +126,21 @@ export function Podium({ entries }: { entries: PodiumEntry[] }) {
             </div>
             <div
               className={cn(
-                'relative mt-2 flex w-full flex-col items-center justify-start overflow-hidden rounded-t-xl pt-2.5 text-white',
+                'relative mt-2 flex w-full flex-col items-center justify-start overflow-hidden rounded-t-xl border border-b-0 border-line border-t-4 pt-2.5',
                 PLINTH[p],
-                p === 1 ? 'bg-navy dark:bg-blue' : 'bg-navy/90 dark:bg-navy-2',
-                p === 1 ? 'border-t-4 border-red' : e.me && 'border-t-4 border-red',
+                p === 1 || e.me ? 'border-t-red' : 'border-t-heading',
+                e.me ? 'bg-red/[0.06]' : 'bg-surface',
               )}
             >
-              <span className="relative inline-flex items-center gap-1 font-display text-lg font-extrabold tabular md:text-2xl">
+              <span
+                className={cn(
+                  'relative inline-flex items-center gap-1 font-display text-lg font-extrabold tabular md:text-2xl',
+                  p === 1 ? 'text-red' : 'text-heading',
+                )}
+              >
                 {fmt.format(Math.round(e.score))}
               </span>
-              <span className="relative text-[10px] font-semibold uppercase tracking-wider text-white/65 md:text-[11px]">
+              <span className="relative text-[10px] font-semibold uppercase tracking-wider text-muted md:text-[11px]">
                 {e.scoreLabel}
               </span>
             </div>
@@ -201,7 +206,7 @@ export function RowsSkeleton({ rows = 8 }: { rows?: number }) {
   );
 }
 
-/** Navy crest with the chapter's initials, echoing the logo's facets. */
+/** Outlined crest with the chapter's initials and a red slash, echoing the logo's facets. */
 export function ChapterCrest({ name, size = 'md', className }: { name: string; size?: 'sm' | 'md' | 'lg' | 'xl'; className?: string }) {
   const letters =
     name
@@ -216,7 +221,7 @@ export function ChapterCrest({ name, size = 'md', className }: { name: string; s
   const s = { sm: 'size-8 text-[11px] rounded-[2px]', md: 'size-10 text-sm rounded-[2px]', lg: 'size-14 text-lg rounded-[4px]', xl: 'size-20 text-2xl rounded-[4px]' }[size];
   return (
     <span
-      className={cn('relative grid shrink-0 place-items-center overflow-hidden bg-navy font-display font-extrabold text-white', s, className)}
+      className={cn('relative grid shrink-0 place-items-center overflow-hidden border border-line-strong bg-surface font-display font-extrabold text-heading', s, className)}
       aria-hidden
     >
       <span className="absolute -right-1 top-0 h-[140%] w-[3px] rotate-[22deg] bg-red/90" />

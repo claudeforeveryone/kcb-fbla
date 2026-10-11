@@ -192,7 +192,7 @@ function ChapterHome({ ctx, onLeft }: { ctx: MyChapter; onLeft: () => void }) {
           </>
         }
       >
-        <div className="flex flex-wrap gap-2.5">
+        <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
           <HeroChip label="Members" value={roster.data ? fmt(roster.data.length) : '…'} />
           <HeroChip label="Chapter Elo" value={myRank ? fmt(myRank.total_elo) : '…'} />
           <HeroChip label="Avg Elo" value={myRank ? fmt(myRank.avg_elo) : '…'} />
@@ -265,14 +265,14 @@ function HeroChip({ label, value, sub, accent }: { label: string; value: string;
   return (
     <div
       className={cn(
-        'min-w-[104px] rounded-[2px] border px-3.5 py-2.5',
-        accent ? 'border-red bg-red' : 'border-white/15 bg-navy-2',
+        'min-w-[104px] rounded-[2px] border border-t-[3px] border-line border-t-red px-3.5 py-2.5',
+        accent ? 'bg-red/[0.06]' : 'bg-surface',
       )}
     >
-      <div className="text-[0.6875rem] font-bold uppercase tracking-wider text-white/70">{label}</div>
-      <div className="tabular font-display text-xl font-extrabold leading-tight text-white">
+      <div className="text-[0.6875rem] font-bold uppercase tracking-wider text-muted">{label}</div>
+      <div className="tabular font-display text-xl font-extrabold leading-tight text-red">
         {value}
-        {sub && <span className="ml-1.5 text-xs font-semibold text-white/70">{sub}</span>}
+        {sub && <span className="ml-1.5 text-xs font-semibold text-muted">{sub}</span>}
       </div>
     </div>
   );
@@ -337,7 +337,7 @@ function Leaderboard({
                       <span
                         className={cn(
                           'absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-[2px] font-display text-xs font-extrabold text-white ring-2 ring-surface',
-                          r.rank === 1 ? 'bg-red' : 'bg-navy',
+                          r.rank === 1 ? 'bg-red' : 'bg-blue',
                         )}
                       >
                         {r.rank}
@@ -484,16 +484,16 @@ function ClassroomCard({ staff }: { staff: boolean }) {
   return (
     <Link
       to="/chapter/classroom"
-      className="group relative block overflow-hidden rounded-[2px] border-l-4 border-red bg-navy p-5 text-white transition-colors hover:bg-navy-2"
+      className="group relative block overflow-hidden rounded-[2px] border border-l-4 border-line border-l-red bg-surface p-5 transition-colors hover:bg-surface-2"
     >
       <div className="flex items-center gap-3">
         <div className="min-w-0 flex-1">
-          <div className="font-display text-lg font-bold">Classroom</div>
-          <div className="text-sm text-white/75">
+          <div className="font-display text-lg font-bold text-heading">Classroom</div>
+          <div className="text-sm text-muted">
             {staff ? 'Post updates, build tests and assign work.' : 'Announcements, assignments and chapter tests.'}
           </div>
         </div>
-        <ChevronRight className="size-5 text-white/70 transition-transform group-hover:translate-x-0.5" aria-hidden />
+        <ChevronRight className="size-5 text-red transition-transform group-hover:translate-x-0.5" aria-hidden />
       </div>
     </Link>
   );

@@ -188,16 +188,16 @@ export function LineChart({
       {hp && (
         <div className="pointer-events-none relative h-0">
           <div
-            className="absolute bottom-[calc(100%+var(--h))] z-10 -translate-x-1/2 whitespace-nowrap rounded-[2px] bg-[#0b1638] px-2.5 py-1.5 text-xs text-white"
+            className="absolute bottom-[calc(100%+var(--h))] z-10 -translate-x-1/2 whitespace-nowrap rounded-[2px] border border-line-strong bg-surface px-2.5 py-1.5 text-xs text-ink shadow-pop"
             style={{ left: Math.min(W - 60, Math.max(60, sx(hp.x))), ['--h' as string]: `${H - sy(hp.y) + 12}px` }}
           >
-            <div className="text-white/65">{fx(hp.x)}</div>
+            <div className="text-muted">{fx(hp.x)}</div>
             {prepared.map((s) => {
               const p = s.pts.reduce((b, q) => (Math.abs(q.x - hp.x) < Math.abs(b.x - hp.x) ? q : b), s.pts[0]);
               return (
                 <div key={s.name} className="tabular flex items-center gap-1.5 font-semibold">
                   <span className="size-2" style={{ background: s.color }} />
-                  {prepared.length > 1 && <span className="font-normal text-white/75">{s.name}</span>}
+                  {prepared.length > 1 && <span className="font-normal text-muted">{s.name}</span>}
                   {formatY(p.y)}
                 </div>
               );

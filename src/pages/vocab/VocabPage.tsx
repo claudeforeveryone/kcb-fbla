@@ -180,11 +180,11 @@ function HeaderStat({
     <div
       className={cn(
         'flex min-w-0 items-center gap-3 rounded-[2px] border px-3 py-2.5 sm:min-w-40 sm:px-4',
-        accent ? 'border-red bg-red' : 'border-white/20',
+        accent ? 'border-line border-t-[3px] border-t-red bg-surface' : 'border-line bg-surface',
       )}
     >
       <div className="min-w-0">
-        <div className="tabular font-display text-xl font-extrabold leading-none text-white sm:text-2xl">
+        <div className={cn('tabular font-display text-xl font-extrabold leading-none sm:text-2xl', accent ? 'text-red' : 'text-white')}>
           {value === null ? <span className="inline-block h-6 w-10 animate-pulse rounded bg-white/20" /> : value}
           {suffix && <span className="text-sm font-semibold text-white/60">{suffix}</span>}
         </div>
@@ -232,7 +232,7 @@ function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
         <div className="flex flex-wrap gap-2 lg:flex-col lg:items-stretch">
           <ButtonLink
             to={`/vocab/${deck.key}?mode=learn`}
-            className="bg-(--ev)! hover:bg-(--ev-2)!"
+            variant="accent"
             rightIcon={<ArrowRight className="size-4" />}
           >
             {stats.due > 0 ? `Review ${stats.due}` : started ? 'Keep learning' : 'Start learning'}

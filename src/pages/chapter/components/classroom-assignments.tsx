@@ -36,7 +36,7 @@ import {
 import { excerpt } from './classroom-markdown';
 import { ASSIGNMENT_META, EventTag, KindLabel, dueLabel, formatDate, pluralize, timeAgo } from './classroom-shared';
 
-const KIND_ACCENT = { test: 'bg-blue text-white', deck: 'bg-success text-white', official: 'bg-navy text-white dark:bg-blue' } as const;
+const KIND_ACCENT = { test: 'bg-blue text-white', deck: 'bg-success text-white', official: 'border border-navy bg-surface text-navy dark:border-link dark:text-link' } as const;
 
 function scoreTone(p: number) {
   return p >= 80 ? 'text-success' : p >= 60 ? 'text-warning' : 'text-red dark:text-danger';

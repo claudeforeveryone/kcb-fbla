@@ -16,7 +16,7 @@ export const POST_META: Record<PostKind, { label: string; plural: string; tone: 
     label: 'Newsletter',
     plural: 'Newsletters',
     tone: 'navy',
-    accent: 'bg-navy text-white dark:bg-blue',
+    accent: 'border border-navy bg-surface text-navy dark:border-link dark:text-link',
     blurb: 'A weekly letter from the executive team. Members get it by email too.',
   },
   link: {
