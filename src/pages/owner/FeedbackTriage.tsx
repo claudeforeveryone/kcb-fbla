@@ -2,11 +2,12 @@
 // Changing a status, priority or note goes through fbla_owner_feedback_update, which writes an audit row. The note
 // is shown to the student who sent the report, so it is written for them. A question report shows the question with
 // its answer key (fbla_owner_question) so the owner can check the report without leaving the console.
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Inbox } from 'lucide-react';
 import { Badge, Button, EmptyState, Pill, SegmentedControl, Select, Skeleton, Textarea, useToast } from '../../components/ui';
 import { cn } from '../../components/ui/cn';
+import { revealInRow } from '../../components/ui/scrollFade';
 import type { FeedbackFilter, FeedbackSaved, OwnerFeedbackRow } from '../../api/owner';
 import {
   KIND_LABELS,
@@ -46,6 +47,12 @@ const PRIORITY_OPTIONS: { value: FeedbackPriority; label: string }[] = [
 const PAGE = 50;
 const rowId = (r: OwnerFeedbackRow) => r.id;
 
+type Draft = { status: FeedbackStatus; priority: FeedbackPriority; note: string };
+// Unsaved triage edits, by report id. Kept at module level so a half-written note survives picking another report,
+// changing a filter or switching console sections; a page reload drops them.
+const drafts = new Map<string, Draft>();
+const NO_PROFILE = 'Account without a profile';
+
 export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   const src = useOwnerSource();
   const toast = useToast();
@@ -75,6 +82,15 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
     );
   };
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  // Re-renders the list when a report gains or loses unsaved edits, so its row can say so.
+  const [, draftsChanged] = useReducer((n: number) => n + 1, 0);
+  // On a phone the status pills scroll sideways: keep the chosen one in view, also when it came from a link.
+  const statusRow = useRef<HTMLDivElement>(null);
+  const statusPlaced = useRef(false);
+  useLayoutEffect(() => {
+    revealInRow(statusRow.current, statusRow.current?.querySelector<HTMLElement>('[aria-pressed="true"]'), !statusPlaced.current);
+    statusPlaced.current = true;
+  }, [status]);
   // The open report as last seen, so it stays open after a save moves it out of the current filter.
   const [snap, setSnap] = useState<OwnerFeedbackRow | null>(null);
   const state = usePaged(
@@ -125,7 +141,12 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:flex-wrap lg:px-0" role="group" aria-label="Status">
+        <div
+          ref={statusRow}
+          className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:flex-wrap lg:px-0"
+          role="group"
+          aria-label="Status"
+        >
           {FILTERS.map((f) => (
             <Pill
               key={f.value}
@@ -178,10 +199,11 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
                           {r.priority === 'high' && <Badge tone="red">High</Badge>}
                           {r.priority === 'low' && <Badge>Low</Badge>}
                           <StatusBadge status={r.status} />
+                          {drafts.has(r.id) && <span className="text-xs font-semibold text-warning">Unsaved changes</span>}
                         </div>
                         <p className="mt-1.5 line-clamp-2 text-sm text-ink">{r.message}</p>
                         <p className="mt-1 truncate text-xs text-muted">
-                          {r.username ? `@${r.username}` : 'Deleted account'} · {when(r.created_at)}
+                          {r.username ? `@${r.username}` : NO_PROFILE} · {when(r.created_at)}
                         </p>
                       </button>
                     </li>
@@ -194,6 +216,7 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
                   <FeedbackDetail
                     key={selected.id}
                     row={selected}
+                    onDraftChange={draftsChanged}
                     onBack={() => {
                       returnTo.current = selected.id;
                       setSelectedId(null);
@@ -238,10 +261,12 @@ export function FeedbackDetail({
   row,
   onBack,
   onSaved,
+  onDraftChange,
 }: {
   row: OwnerFeedbackRow;
   onBack: () => void;
   onSaved: (changed: Changed, saved: FeedbackSaved) => void;
+  onDraftChange?: () => void;
 }) {
   const src = useOwnerSource();
   const toast = useToast();
@@ -250,11 +275,20 @@ export function FeedbackDetail({
   useEffect(() => {
     if (!window.matchMedia('(min-width: 1024px)').matches) ref.current?.focus();
   }, []);
-  const [status, setStatus] = useState<FeedbackStatus>(row.status);
-  const [priority, setPriority] = useState<FeedbackPriority>(row.priority);
-  const [note, setNote] = useState(row.resolution_note ?? '');
+  // Picks up where an unsaved edit of this report left off.
+  const [draft] = useState(() => drafts.get(row.id));
+  const [status, setStatus] = useState<FeedbackStatus>(draft?.status ?? row.status);
+  const [priority, setPriority] = useState<FeedbackPriority>(draft?.priority ?? row.priority);
+  const [note, setNote] = useState(draft?.note ?? row.resolution_note ?? '');
   const [busy, setBusy] = useState(false);
   const dirty = status !== row.status || priority !== row.priority || note.trim() !== (row.resolution_note ?? '');
+  // Keep unsaved edits while another report is open; a save (or undoing the edit) clears them.
+  useEffect(() => {
+    const had = drafts.has(row.id);
+    if (dirty) drafts.set(row.id, { status, priority, note });
+    else drafts.delete(row.id);
+    if (had !== dirty) onDraftChange?.();
+  }, [row.id, dirty, status, priority, note, onDraftChange]);
   const tooLong = note.trim().length > 1000;
 
   const save = async () => {
@@ -295,7 +329,7 @@ export function FeedbackDetail({
                 {row.display_name} <span className="text-muted">@{row.username}</span>
               </>
             ) : (
-              'Deleted account'
+              NO_PROFILE
             )}
           </dd>
           <dt className="text-muted">Sent</dt>
@@ -343,7 +377,19 @@ export function FeedbackDetail({
           onChange={(e) => setNote(e.target.value)}
           maxLength={1200}
         />
-        <div className="flex justify-end">
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          {dirty && !busy && (
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setStatus(row.status);
+                setPriority(row.priority);
+                setNote(row.resolution_note ?? '');
+              }}
+            >
+              Discard changes
+            </Button>
+          )}
           <Button variant="accent" onClick={save} disabled={!dirty || tooLong} loading={busy}>
             Save changes
           </Button>
