@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import feedbackSql from '../../supabase/migrations/0103_fbla_feedback.sql?raw';
 import {
   canReportQuestion,
   cleanPagePath,
@@ -7,8 +8,29 @@ import {
   FEEDBACK_MAX,
   feedbackProblem,
   REPORT_REASONS,
+  STUDENT_FEEDBACK_COLUMNS,
   triageSaved,
 } from './feedback';
+
+describe('STUDENT_FEEDBACK_COLUMNS', () => {
+  // "Your reports" must ask only for columns inside the 0103 grant, or the database refuses the whole read.
+  const grant = /grant select \(([^)]*)\)\s+on table public\.fbla_feedback to authenticated/.exec(feedbackSql);
+  const granted = new Set((grant?.[1] ?? '').split(',').map((c) => c.trim()));
+  const asked = STUDENT_FEEDBACK_COLUMNS.split(',');
+
+  it('asks only for columns the migration lets a student read', () => {
+    expect(grant).not.toBeNull();
+    expect(asked.filter((c) => !granted.has(c))).toEqual([]);
+  });
+
+  it('keeps priority and the reviewer owner-only, as the triage toast promises', () => {
+    for (const col of ['priority', 'reviewed_by']) {
+      expect(granted.has(col)).toBe(false);
+      expect(asked).not.toContain(col);
+    }
+    expect(triageSaved({ priority: 'low' }).body).toBe('Only owners see priority.');
+  });
+});
 
 describe('feedbackProblem', () => {
   it('asks for a few words, counting the trimmed message', () => {

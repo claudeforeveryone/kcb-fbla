@@ -33,8 +33,9 @@ create index if not exists fbla_feedback_question_idx on public.fbla_feedback (q
 
 alter table public.fbla_feedback enable row level security;
 revoke all on table public.fbla_feedback from public, anon, authenticated;
--- Column grants: a member sees their report, its status and the team's note, not who on the team handled it.
-grant select (id, user_id, kind, message, page_path, question_id, status, priority, resolution_note,
+-- Column grants: a member sees their report, its status and the team's note, not who on the team handled it or the
+-- priority the team gave it (the triage screen tells the owner only owners see priority).
+grant select (id, user_id, kind, message, page_path, question_id, status, resolution_note,
               created_at, updated_at, resolved_at)
   on table public.fbla_feedback to authenticated;
 grant insert (user_id, kind, message, page_path, question_id) on table public.fbla_feedback to authenticated;
@@ -63,6 +64,12 @@ begin
   if tg_op = 'UPDATE' then
     new.updated_at := now();
     return new;
+  end if;
+
+  -- BEFORE triggers run ahead of the RLS check (user_id = auth.uid()). Refuse a report filed as someone else here,
+  -- before taking their lock or counting their rows, so the answer never depends on how much they sent.
+  if auth.uid() is not null and new.user_id is distinct from auth.uid() then
+    raise exception 'You can only send feedback as yourself.' using errcode = '42501';
   end if;
 
   new.message := btrim(new.message);

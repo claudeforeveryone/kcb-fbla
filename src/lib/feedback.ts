@@ -5,6 +5,12 @@ export type FeedbackKind = 'bug' | 'feature' | 'general' | 'question_issue' | 'r
 export type FeedbackStatus = 'new' | 'triaged' | 'in_progress' | 'resolved' | 'wontfix';
 export type FeedbackPriority = 'low' | 'normal' | 'high';
 
+/**
+ * What "Your reports" reads back: the report, its status and the team's note. Never priority or reviewed_by: 0103
+ * grants students select on the other columns only, so asking for either would make the database refuse the read.
+ */
+export const STUDENT_FEEDBACK_COLUMNS = 'id,kind,message,question_id,status,resolution_note,created_at,updated_at';
+
 export const FEEDBACK_MIN = 5;
 export const FEEDBACK_MAX = 2000;
 

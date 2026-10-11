@@ -10,7 +10,10 @@
 --   2. Tied numbers. Event counts (times, runs, answers) that belong to a hidden group are hidden too.
 --   3. Nested groups. When a response shows a group and a smaller group inside it (active this week and active
 --      today), the larger count is also hidden whenever the gap between them is 1 to 4, because subtracting would give
---      that small group away (fbla_count_over).
+--      that small group away (fbla_count_over). The pairs: Overview, active today / answering this week / returning /
+--      this month's finished sign-ups inside active this week and this month; Growth, practising and finished sign-up
+--      inside active, per bucket; Engagement, each practice mode inside students who finished, and students who played
+--      a duel run inside duel players.
 --   4. Rates are worked out only from counts the response shows, so a rate never brings back a hidden count.
 --   5. Account totals. Overview and Growth share one series of end-of-day account totals (fbla_account_totals).
 --      Walking back from today, a total is shown only when it is 0 or 5+ and differs from the last shown (later) total
@@ -22,13 +25,18 @@
 -- "Hidden" for all of them and never says which rule applied (saying it would narrow the value down).
 -- What this does not cover: numbers from different responses that are not additive, such as a Sunday's weekly
 -- active bucket in Growth against Overview's 7-day active count, Growth's per-bucket "finished sign-up" profiles
--- against Overview's onboarding cohorts, or today's figures against yesterday's. Comparing those can narrow a hidden
--- value down. Closing that needs noise or rounding, which the console does not use at this size. No email, no free
--- text, no per-user rows: question previews (site content, never keys or explanations) appear in content health.
+-- against Overview's onboarding cohorts, or today's figures against yesterday's. Groups in one response that overlap
+-- without one sitting inside the other are not covered either: students who started practice against students who
+-- finished (a resumed run finishes without a new start), or students per event against students who chose any event.
+-- Comparing those can narrow a hidden value down. Closing that needs noise or rounding, which the console does not use
+-- at this size. No email, no free text, no per-user rows: question previews (site content, never keys or
+-- explanations) appear in content health.
 --
 -- Scope: FBLA and DECA share auth.users. An account counts for FBLA when it has an FBLA profile, or its sign-up
--- metadata says app = 'kcb-fbla' / 'fbla', or it carries no app marker (every account before DECA's backend).
--- DECA sign-ups must set raw_user_meta_data.app = 'deca' to stay out of these numbers.
+-- metadata says app = 'kcb-fbla' / 'fbla', or it has no app marker, no DECA profile, and was made before FBLA started
+-- tagging its sign-ups (fbla_private.fbla_owner_settings 'unmarked_accounts_before', set when this migration is
+-- applied, together with the deploy whose sign-up form adds app = 'kcb-fbla'). After that moment an unmarked account
+-- with no FBLA profile is not counted: it could be a DECA sign-up. DECA sign-ups should still set app = 'deca'.
 --
 -- Activity = an analytics event the student caused, or a graded attempt. duel_completed is left out: the second
 -- player's submission records it for both players, so it is not something the first player did that day.
@@ -125,19 +133,53 @@ as $$
   select p_day::timestamp at time zone 'America/Toronto';
 $$;
 
--- FBLA-scoped accounts (see the scope note above).
+-- Settings the owner metrics read. 'unmarked_accounts_before': accounts with no app marker made before this moment
+-- count for FBLA (see the scope note above). It is the time this migration is applied; integration applies it with
+-- the deploy that tags FBLA sign-ups. If the two end up far apart, set it to the deploy time:
+--   update fbla_private.fbla_owner_settings set at = '<deploy time>' where key = 'unmarked_accounts_before';
+create table if not exists fbla_private.fbla_owner_settings (
+  key text primary key,
+  at timestamptz not null,
+  note text
+);
+alter table fbla_private.fbla_owner_settings enable row level security;
+revoke all on table fbla_private.fbla_owner_settings from public, anon, authenticated;
+insert into fbla_private.fbla_owner_settings (key, at, note)
+values ('unmarked_accounts_before', now(),
+        'Accounts with no app marker made before this count for FBLA; later ones only once they make an FBLA profile.')
+on conflict (key) do nothing;
+
+-- FBLA-scoped accounts (see the scope note above). DECA's profile table lives in the same project; the check is
+-- skipped where it does not exist, so these migrations still run on a database without DECA.
 create or replace function fbla_private.fbla_accounts()
 returns table (user_id uuid, created_at timestamptz)
-language sql
+language plpgsql
 stable
 security definer
 set search_path = ''
 as $$
-  select u.id, u.created_at
-    from auth.users u
-   where not coalesce(u.is_anonymous, false)
-     and (coalesce(u.raw_user_meta_data ->> 'app', 'kcb-fbla') in ('kcb-fbla', 'fbla')
-          or exists (select 1 from public.fbla_profiles p where p.id = u.id));
+declare
+  v_before timestamptz := (select s.at from fbla_private.fbla_owner_settings s where s.key = 'unmarked_accounts_before');
+begin
+  if to_regclass('public.deca_profiles') is null then
+    return query
+      select u.id, u.created_at
+        from auth.users u
+       where not coalesce(u.is_anonymous, false)
+         and (exists (select 1 from public.fbla_profiles p where p.id = u.id)
+              or u.raw_user_meta_data ->> 'app' in ('kcb-fbla', 'fbla')
+              or (u.raw_user_meta_data ->> 'app' is null and u.created_at < v_before));
+  else
+    return query
+      select u.id, u.created_at
+        from auth.users u
+       where not coalesce(u.is_anonymous, false)
+         and (exists (select 1 from public.fbla_profiles p where p.id = u.id)
+              or u.raw_user_meta_data ->> 'app' in ('kcb-fbla', 'fbla')
+              or (u.raw_user_meta_data ->> 'app' is null and u.created_at < v_before
+                  and not exists (select 1 from public.deca_profiles d where d.id = u.id)));
+  end if;
+end;
 $$;
 
 -- Activity rows (one per analytics event the student caused, or graded attempt) in [p_from, p_to).
@@ -292,12 +334,16 @@ begin
            group by x.user_id
           having count(distinct fbla_private.fbla_local_day(x.ts)) >= 2) r;
 
-  select count(distinct a.user_id), coalesce(sum(a.total), 0)
+  -- Questions answered: graded answer rows (official, chapter-written and duel questions), not attempt totals, which
+  -- for a finished flashcard deck count cards.
+  select count(distinct a.user_id), count(an.id)
     into v_answer_users, v_answered
     from public.fbla_attempts a
+    join public.fbla_answers an on an.attempt_id = a.id
    where a.created_at >= v_week;
 
-  -- Nested windows (rule 3): today, answering this week and returning sit inside this week or this month.
+  -- Nested windows (rule 3): today, answering this week and returning sit inside this week or this month, and so do
+  -- the accounts that finished sign-up this month (making a profile records an onboarding event).
   v_dau_c := fbla_private.fbla_count(v_dau);
   v_ans_c := fbla_private.fbla_count(v_answer_users);
   v_ret_c := fbla_private.fbla_count(v_returning);
@@ -305,7 +351,7 @@ begin
     array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c)]);
   v_mau_c := fbla_private.fbla_count_over(v_mau,
     array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c), fbla_private.fbla_shown(v_wau_c),
-          fbla_private.fbla_shown(v_ret_c)]);
+          fbla_private.fbla_shown(v_ret_c), case when v_month_ok then v_onb_month end]);
 
   select min(e.created_at) into v_since from public.fbla_analytics_events e;
 
@@ -338,8 +384,9 @@ $$;
 
 -- Growth: buckets of a day, week (Monday start) or month over the last p_days (7 to 400) Toronto days.
 -- Per bucket: new FBLA accounts and the running account total at the end of the bucket (both from the shared totals,
--- rule 5), profiles created (onboarded), distinct active users and distinct users who practised. `baseline` is the
--- running total the day before the first bucket.
+-- rule 5), profiles created (onboarded), distinct users who practised (a graded run; a finished flashcard deck is not
+-- one) and distinct active users. Practising and onboarded students sit inside the active ones, so the active count is
+-- hidden when it is 1 to 4 above either (rule 3). `baseline` is the running total the day before the first bucket.
 create or replace function public.fbla_owner_growth(p_days int default 90, p_bucket text default 'day')
 returns jsonb
 language plpgsql
@@ -371,30 +418,41 @@ begin
       from generate_series(date_trunc(v_bucket, v_first::timestamp), v_today::timestamp, v_step) as g
   ), act as (
     select * from fbla_private.fbla_activity(fbla_private.fbla_day_start(v_first), 'infinity')
+  ), n as (
+    select b.d_from, b.d_to,
+           (select count(*) from public.fbla_profiles p
+             where p.created_at >= fbla_private.fbla_day_start(b.d_from)
+               and p.created_at < fbla_private.fbla_day_start(b.d_to + 1)) as onboarded,
+           (select count(distinct act.user_id) from act
+             where act.ts >= fbla_private.fbla_day_start(b.d_from)
+               and act.ts < fbla_private.fbla_day_start(b.d_to + 1)) as active,
+           (select count(distinct a.user_id) from public.fbla_attempts a
+             where a.created_at >= fbla_private.fbla_day_start(b.d_from)
+               and a.created_at < fbla_private.fbla_day_start(b.d_to + 1)
+               and not exists (select 1 from public.fbla_assignments s where s.id = a.assignment_id and s.kind = 'deck'))
+             as practising
+      from b
+  ), c as (
+    select n.d_from, n.d_to, n.active,
+           fbla_private.fbla_count(n.onboarded) as onboarded_c,
+           fbla_private.fbla_count(n.practising) as practising_c
+      from n
   )
   select coalesce(jsonb_agg(jsonb_build_object(
-           'start', b.d_from,
-           'end', b.d_to,
+           'start', c.d_from,
+           'end', c.d_to,
            'signups', fbla_private.fbla_count_between(t_end.total, t_end.shown, t_prev.total, t_prev.shown),
            'total', fbla_private.fbla_count_if(t_end.total, t_end.shown),
-           'onboarded', fbla_private.fbla_count((
-             select count(*) from public.fbla_profiles p
-              where p.created_at >= fbla_private.fbla_day_start(b.d_from)
-                and p.created_at < fbla_private.fbla_day_start(b.d_to + 1))),
-           'active', fbla_private.fbla_count((
-             select count(distinct act.user_id) from act
-              where act.ts >= fbla_private.fbla_day_start(b.d_from)
-                and act.ts < fbla_private.fbla_day_start(b.d_to + 1))),
-           'practising', fbla_private.fbla_count((
-             select count(distinct a.user_id) from public.fbla_attempts a
-              where a.created_at >= fbla_private.fbla_day_start(b.d_from)
-                and a.created_at < fbla_private.fbla_day_start(b.d_to + 1)))
-         ) order by b.d_from), '[]'::jsonb),
+           'onboarded', c.onboarded_c,
+           'active', fbla_private.fbla_count_over(c.active,
+             array[fbla_private.fbla_shown(c.practising_c), fbla_private.fbla_shown(c.onboarded_c)]),
+           'practising', c.practising_c
+         ) order by c.d_from), '[]'::jsonb),
          (select fbla_private.fbla_count_if(t.total, t.shown) from tot t where t.day = v_first - 1)
     into v_series, v_baseline
-    from b
-    join tot t_end on t_end.day = b.d_to
-    join tot t_prev on t_prev.day = b.d_from - 1;
+    from c
+    join tot t_end on t_end.day = c.d_to
+    join tot t_prev on t_prev.day = c.d_from - 1;
 
   return jsonb_build_object('days', v_days, 'bucket', v_bucket, 'timezone', 'America/Toronto',
                             'baseline', v_baseline, 'series', v_series);
@@ -427,14 +485,17 @@ declare
   v_duel_users bigint;
   v_duels bigint;
   v_duels_done bigint;
+  v_players_c jsonb;
 begin
   if not public.is_platform_owner() then
     raise exception 'not authorized' using errcode = '42501';
   end if;
 
   -- Features, by the students who used each. Finished practice and mock exams are not here: Practice modes and the
-  -- practice funnel cover them, and listing them twice would let one number be rebuilt from the others. The install
-  -- and push events are left out until FBLA sends them. Hidden groups sort by name, not by their hidden size.
+  -- practice funnel cover them, and listing them twice would let one number be rebuilt from the others. Duels are left
+  -- out for the same reason (the duels block covers them: students who started or finished a duel sit inside its
+  -- players). The install and push events are left out until FBLA sends them. Hidden groups sort by name, not by
+  -- their hidden size.
   select coalesce(jsonb_agg(jsonb_build_object(
            'name', n.name,
            'users', fbla_private.fbla_count(coalesce(s.users, 0)),
@@ -442,8 +503,8 @@ begin
          order by case when coalesce(s.users, 0) between 1 and 4 then 0 else coalesce(s.users, 0) end desc, n.ord), '[]'::jsonb)
     into v_features
     from unnest(array[
-      'event_selected', 'practice_started', 'vocab_session_completed', 'duel_started', 'duel_completed',
-      'resource_opened', 'onboarding_completed', 'feedback_submitted'
+      'event_selected', 'practice_started', 'vocab_session_completed', 'resource_opened', 'onboarding_completed',
+      'feedback_submitted'
     ]) with ordinality as n(name, ord)
     left join (
       select e.event_name, count(distinct e.user_id) as users, count(*) as events
@@ -453,16 +514,19 @@ begin
     ) s on s.event_name = n.name;
 
   -- Practice modes from graded attempts (history before analytics existed is included): students per mode. Runs per
-  -- mode are left out, since they add up to the funnel's finished total and would expose a hidden mode.
+  -- mode are left out, since they add up to the funnel's finished total and would expose a hidden mode. A finished
+  -- flashcard deck is not a graded run.
   select coalesce(jsonb_agg(jsonb_build_object('mode', m.kind, 'users', fbla_private.fbla_count(m.users))
          order by case when m.users between 1 and 4 then 0 else m.users end desc, m.kind), '[]'::jsonb)
     into v_modes
     from (select a.kind, count(distinct a.user_id) as users
             from public.fbla_attempts a
            where a.created_at >= v_from
+             and not exists (select 1 from public.fbla_assignments s where s.id = a.assignment_id and s.kind = 'deck')
            group by a.kind) m;
 
-  -- The funnel: practice started in the app (client event) against graded runs (server events, every kind but duel).
+  -- The funnel: runs started in the app (client event, RunPage) against graded runs (server events: every kind but
+  -- duel; a finished flashcard deck records none, and the app never records a start for one).
   select count(distinct e.user_id) filter (where e.event_name = 'practice_started'),
          count(*) filter (where e.event_name = 'practice_started'),
          count(distinct e.user_id) filter (where e.event_name in ('practice_completed', 'exam_completed')),
@@ -482,6 +546,10 @@ begin
     from public.fbla_duels d
     cross join lateral (values (d.challenger_id), (d.opponent_id)) as p(uid)
    where d.created_at >= v_from;
+  -- Students who played a duel run (the duel mode) sit inside the players (rule 3). The duel counts belong to the
+  -- players, so they are hidden with them.
+  v_players_c := fbla_private.fbla_count_over(v_duel_users,
+    array(select fbla_private.fbla_shown(m -> 'users') from jsonb_array_elements(v_modes) m where m ->> 'mode' = 'duel'));
 
   -- Events students chose or started practising: real FBLA events only, students per event.
   select coalesce(jsonb_agg(t.obj order by t.sort_users desc, t.code), '[]'::jsonb)
@@ -510,15 +578,18 @@ begin
       'completion_rate', case when v_started_shown > 0 and v_done_shown is not null
                               then round(least(1, v_done_shown::numeric / v_started_shown), 3) end),
     'duels', jsonb_build_object(
-      'players', fbla_private.fbla_count(v_duel_users),
-      'created', case when v_duel_users between 1 and 4 then null else v_duels end,
-      'completed', case when v_duel_users between 1 and 4 then null else v_duels_done end),
+      'players', v_players_c,
+      'created', case when fbla_private.fbla_shown(v_players_c) is null then null else v_duels end,
+      'completed', case when fbla_private.fbla_shown(v_players_c) is null then null else v_duels_done end),
     'popular_events', v_popular);
 end;
 $$;
 
--- Preparation over the last p_days (1 to 400), one row per FBLA event: graded attempts, distinct students,
--- questions answered, aggregate accuracy, and abandonment (practice started but not completed).
+-- Preparation over the last p_days (1 to 400), one row per FBLA event. From the graded answers to that event's
+-- official questions (chapter-written questions and duels left out): runs, distinct students, questions answered and
+-- aggregate accuracy. A finished flashcard deck has no answer rows, so it never counts. Abandonment, the share of runs
+-- started in the app and not finished, counts practice runs and mock exams only (not chapter tests or assignments,
+-- whose starts and finishes the console reports under Engagement).
 create or replace function public.fbla_owner_preparation(p_days int default 30)
 returns jsonb
 language plpgsql
@@ -556,11 +627,13 @@ begin
                               end) as obj
         from (select distinct q.event from public.fbla_questions q) ev
         left join (
-          select t.event, count(*) as attempts, count(distinct t.user_id) as users,
-                 sum(t.total) as answered, sum(t.correct) as correct
-            from public.fbla_attempts t
-           where t.created_at >= v_from and t.kind not in ('duel', 'custom') and t.event is not null
-           group by t.event
+          select an.event, count(distinct an.attempt_id) as attempts, count(distinct an.user_id) as users,
+                 count(*) as answered, count(*) filter (where an.correct) as correct
+            from public.fbla_answers an
+            join public.fbla_attempts t on t.id = an.attempt_id
+           where t.created_at >= v_from and t.kind <> 'duel'
+             and an.question_id not like 'custom:%' and an.event is not null
+           group by an.event
         ) a on a.event = ev.event
         left join (
           select e.event_code,
@@ -570,6 +643,8 @@ begin
                  count(*) filter (where e.event_name in ('practice_completed', 'exam_completed')) as completed
             from public.fbla_analytics_events e
            where e.created_at >= v_from and e.event_code is not null
+             and e.event_name in ('practice_started', 'practice_completed', 'exam_completed')
+             and coalesce(e.meta ->> 'mode', '') not in ('custom', 'assignment', 'duel')
            group by e.event_code
         ) p on p.event_code = ev.event
     ) r;

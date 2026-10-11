@@ -11,7 +11,9 @@
 --   owner, no profile  a synthetic auth user with no FBLA profile (signed up, never onboarded), also made owner
 --   president          the president of a chapter that has another member (for the existing chapter RPCs)
 -- Synthetic data, made inside the transaction: 14 accounts with profiles 90 to 120 days ago (no real account is that
--- old), and the analytics rows below (the analytics table itself is new in this transaction).
+-- old), and the analytics rows below (the analytics table itself is new in this transaction). Later blocks give the
+-- synthetic students practice runs, a chapter with an assigned test and deck, duels, a day of past activity, and six
+-- more accounts that test which sign-ups count for FBLA rather than DECA.
 -- Output: one row per check (name, ok, detail). Every row must have ok = true.
 
 create temp table omega_results (name text primary key, ok boolean not null, detail text);
@@ -260,6 +262,17 @@ begin
   insert into public.fbla_vocab_progress (user_id, term_id, box, due_at, last_reviewed_at)
   values (v_syn, v_terms[1], 1, now(), now() - interval '45 minutes'), (v_syn, v_terms[2], 0, now(), null);
   update public.fbla_vocab_progress set last_reviewed_at = now(), box = 1 where user_id = v_syn and term_id = v_terms[2];
+  -- omega_syn_10 reviewed term 1 ten minutes ago in a batch of its own, which opened a session (the event below is
+  -- what that batch recorded). Its next batch re-reviews term 1 first, then a new term (sent in the server section).
+  select id into v_syn from public.fbla_profiles where username = 'omega_syn_10';
+  insert into public.fbla_vocab_progress (user_id, term_id, box, due_at, last_reviewed_at)
+  values (v_syn, v_terms[1], 1, now(), now() - interval '10 minutes');
+  insert into public.fbla_analytics_events (event_name, user_id, event_code, meta, created_at)
+  values ('vocab_session_completed', v_syn, 'marketing', '{"mode":"official"}', now() - interval '10 minutes');
+  perform set_config('omega.syn10', v_syn::text, true);
+  perform set_config('omega.vocab_batch', jsonb_build_array(
+    jsonb_build_object('term_id', v_terms[1], 'correct', false),
+    jsonb_build_object('term_id', v_terms[2], 'correct', true))::text, true);
 
   perform set_config('omega.qa', v_qa::text, true);
   perform set_config('omega.owner', v_owner::text, true);
@@ -351,8 +364,23 @@ select pg_temp.omega_try('qa: set status on insert', 'authenticated', current_se
   'insert into public.fbla_feedback (user_id, kind, message, status) values (''1cb2408f-5da3-4c05-964a-2a1ceed78fc8'', ''bug'', ''status smuggling'', ''resolved'')', '42501');
 select pg_temp.omega_try('qa: file feedback as someone else', 'authenticated', current_setting('omega.qa')::uuid,
   'insert into public.fbla_feedback (user_id, kind, message) values (current_setting(''omega.owner'')::uuid, ''bug'', ''written as another member'')', '42501');
+-- Filing as someone else must be refused before the rate limit counts their reports: otherwise the answer (53400 or
+-- 42501) tells the student whether that person sent 10+ reports this hour. Bring the fake owner to 10 first.
+do $$
+begin
+  for i in 1..9 loop
+    insert into public.fbla_feedback (user_id, kind, message)
+    values (current_setting('omega.owner')::uuid, 'general', 'Dry run: filler report ' || i);
+  end loop;
+end;
+$$;
+select pg_temp.omega_try('qa: filing as someone else is refused the same way whatever they sent', 'authenticated',
+  current_setting('omega.qa')::uuid,
+  'insert into public.fbla_feedback (user_id, kind, message) values (current_setting(''omega.owner'')::uuid, ''bug'', ''probing their volume'')', '42501');
 select pg_temp.omega_try('qa: read reviewed_by', 'authenticated', current_setting('omega.qa')::uuid,
   'select reviewed_by from public.fbla_feedback', '42501');
+select pg_temp.omega_try('qa: read priority (owners only)', 'authenticated', current_setting('omega.qa')::uuid,
+  'select priority from public.fbla_feedback', '42501');
 select pg_temp.omega_try('qa: question id on a non-question report', 'authenticated', current_setting('omega.qa')::uuid,
   'insert into public.fbla_feedback (kind, message, question_id) values (''bug'', ''a bug with a question id'', ''acc-001'')', '23514');
 select pg_temp.omega_try('qa: may file their own feedback (user_id defaults to them)', 'authenticated', current_setting('omega.qa')::uuid,
@@ -711,6 +739,241 @@ begin
 end;
 $$;
 
+-- ------------------------------------------------------------------------------------------------ chapter work
+-- Five synthetic students each finish an official accounting run through fbla_submit_attempt, after starting it in
+-- the app, and four more accounting runs are started and left. Then omega_syn_1 does chapter work in accounting: an
+-- assigned chapter-written test and an assigned flashcard deck, through the real RPCs. Preparation must not move: its
+-- answers and accuracy are official questions only, and its not-finished share is practice runs and mock exams only.
+do $$
+declare
+  v_owner uuid := current_setting('omega.owner')::uuid;
+  v_syn uuid[];
+  v_qs text[];
+  v_keys int[];
+  v_chapter uuid;
+  v_test uuid;
+  v_deck uuid;
+  v_a_test uuid;
+  v_a_deck uuid;
+  v_r0 jsonb;
+  v_r1 jsonb;
+  v_r2 jsonb;
+  v_assign_events int;
+  v_meta jsonb;
+begin
+  v_syn := array(select p.id from public.fbla_profiles p
+                  where p.username in ('omega_syn_1', 'omega_syn_2', 'omega_syn_3', 'omega_syn_4', 'omega_syn_5')
+                  order by p.username);
+  select array_agg(x.id order by x.id), array_agg(x.answer::int order by x.id) into v_qs, v_keys
+    from (select q.id, q.answer from public.fbla_questions q
+           where q.event = 'accounting' and q.answer is not null order by q.id offset 40 limit 10) x;
+
+  insert into public.fbla_analytics_events (event_name, user_id, event_code, meta)
+  select 'practice_started', u, 'accounting', '{"mode":"practice"}'::jsonb from unnest(v_syn) u
+  union all
+  select 'practice_started', u, 'accounting', '{"mode":"practice"}'::jsonb from unnest(v_syn[1:4]) u;
+  for i in 1..5 loop
+    perform set_config('request.jwt.claims', json_build_object('sub', v_syn[i]::text, 'role', 'authenticated')::text, true);
+    set local role authenticated;
+    perform public.fbla_submit_attempt(jsonb_build_object('kind', 'practice', 'event', 'accounting', 'answers',
+      (select jsonb_agg(jsonb_build_object('question_id', v_qs[j],
+                                           'chosen', case when j <= 2 then v_keys[j] else (v_keys[j] + 1) % 4 end,
+                                           'ms', 5000))
+         from generate_series(1, 4) j)));
+    reset role;
+  end loop;
+  select r into v_r0 from jsonb_array_elements(pg_temp.omega_as(v_owner, 'public.fbla_owner_preparation(30)') -> 'events') r
+   where r ->> 'event' = 'accounting';
+
+  -- omega_syn_1 registers a chapter; it holds a chapter-written accounting test and an accounting deck, both assigned.
+  perform set_config('request.jwt.claims', json_build_object('sub', v_syn[1]::text, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  v_chapter := public.fbla_create_chapter('Omega Dry Run Chapter', 'Dry Run School');
+  reset role;
+  insert into public.fbla_custom_tests (chapter_id, event, title, questions, published)
+  values (v_chapter, 'accounting', 'Dry run chapter test',
+          '[{"q":"Dry run question one","choices":["a","b","c","d"],"answer":0},
+            {"q":"Dry run question two","choices":["a","b","c","d"],"answer":1},
+            {"q":"Dry run question three","choices":["a","b","c","d"],"answer":2}]'::jsonb, true)
+  returning id into v_test;
+  insert into public.fbla_decks (chapter_id, event, title, cards)
+  values (v_chapter, 'accounting', 'Dry run deck',
+          '[{"term":"Asset","def":"Something owned"},{"term":"Liability","def":"Something owed"},
+            {"term":"Equity","def":"What is left"}]'::jsonb)
+  returning id into v_deck;
+  insert into public.fbla_assignments (chapter_id, kind, ref, title)
+  values (v_chapter, 'test', v_test::text, 'Dry run test assignment') returning id into v_a_test;
+  insert into public.fbla_assignments (chapter_id, kind, ref, title)
+  values (v_chapter, 'deck', v_deck::text, 'Dry run deck assignment') returning id into v_a_deck;
+  -- The app records practice_started when the assigned test opens (RunPage); decks are studied in the classroom.
+  insert into public.fbla_analytics_events (event_name, user_id, event_code, meta)
+  values ('practice_started', v_syn[1], 'accounting', '{"mode":"assignment"}');
+  perform set_config('request.jwt.claims', json_build_object('sub', v_syn[1]::text, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  perform public.fbla_submit_attempt(jsonb_build_object('kind', 'assignment', 'assignment_id', v_a_test, 'answers',
+    jsonb_build_array(
+      jsonb_build_object('question_id', 'custom:' || v_test || ':0', 'chosen', 0, 'ms', 4000),
+      jsonb_build_object('question_id', 'custom:' || v_test || ':1', 'chosen', 1, 'ms', 4000),
+      jsonb_build_object('question_id', 'custom:' || v_test || ':2', 'chosen', 2, 'ms', 4000))));
+  perform public.fbla_complete_deck_assignment(v_a_deck, 3, 3, 60000::bigint);
+  reset role;
+  perform set_config('request.jwt.claims', '', true);
+  select r into v_r1 from jsonb_array_elements(pg_temp.omega_as(v_owner, 'public.fbla_owner_preparation(30)') -> 'events') r
+   where r ->> 'event' = 'accounting';
+
+  perform pg_temp.omega_check('prep: chapter-written tests and deck assignments leave Preparation unchanged',
+    pg_temp.omega_shown(v_r0 -> 'users') >= 5 and (v_r0 -> 'answered') <> 'null'::jsonb
+      and (v_r0 -> 'accuracy') <> 'null'::jsonb and (v_r0 -> 'abandonment') <> 'null'::jsonb
+      and v_r1 -> 'users' = v_r0 -> 'users' and v_r1 -> 'attempts' = v_r0 -> 'attempts'
+      and v_r1 -> 'answered' = v_r0 -> 'answered' and v_r1 -> 'accuracy' = v_r0 -> 'accuracy'
+      and v_r1 -> 'abandonment' = v_r0 -> 'abandonment',
+    'before ' || coalesce(v_r0::text, 'missing') || ' after ' || coalesce(v_r1::text, 'missing'));
+
+  select count(*) into v_assign_events from public.fbla_analytics_events e
+   where e.user_id = v_syn[1] and e.event_name = 'practice_completed' and e.meta ->> 'mode' = 'assignment';
+  perform pg_temp.omega_check('server: an assigned test records practice_completed, a finished deck does not',
+    v_assign_events = 1, 'assignment completions recorded: ' || v_assign_events);
+
+  -- An official run still counts: omega_syn_2 answers 10 more accounting questions.
+  perform set_config('request.jwt.claims', json_build_object('sub', v_syn[2]::text, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  perform public.fbla_submit_attempt(jsonb_build_object('kind', 'practice', 'event', 'accounting', 'answers',
+    (select jsonb_agg(jsonb_build_object('question_id', v_qs[j], 'chosen', v_keys[j], 'ms', 5000)) from generate_series(1, 10) j)));
+  reset role;
+  perform set_config('request.jwt.claims', '', true);
+  select r into v_r2 from jsonb_array_elements(pg_temp.omega_as(v_owner, 'public.fbla_owner_preparation(30)') -> 'events') r
+   where r ->> 'event' = 'accounting';
+  perform pg_temp.omega_check('prep: an official run adds its answers and one run',
+    (v_r2 ->> 'answered')::int = (v_r1 ->> 'answered')::int + 10 and (v_r2 ->> 'attempts')::int = (v_r1 ->> 'attempts')::int + 1,
+    'before ' || coalesce(v_r1::text, 'missing') || ' after ' || coalesce(v_r2::text, 'missing'));
+
+  select e.meta into v_meta from public.fbla_analytics_events e
+   where e.user_id = v_syn[2] and e.event_name = 'practice_completed' order by e.id desc limit 1;
+  perform pg_temp.omega_check('server: practice_completed carries the mode and nothing else', v_meta = '{"mode":"practice"}'::jsonb,
+    coalesce(v_meta::text, 'missing'));
+end;
+$$;
+
+-- ------------------------------------------------------------------------------------------------ nested groups
+-- A group and a smaller group inside it, both shown, must not differ by 1 to 4 (rule 3 in 0105).
+--   Growth: on day today-110, 7 synthetic students are active and 5 of them practise.
+--   Engagement: 6 synthetic students play duels and 5 of them have played their run (with the 2 real players and the
+--   fixture's duel, the gap between players and students who played stays between 1 and 4).
+do $$
+declare
+  v_owner uuid := current_setting('omega.owner')::uuid;
+  v_today date := fbla_private.fbla_local_day(now());
+  v_at timestamptz := fbla_private.fbla_day_start(fbla_private.fbla_local_day(now()) - 110) + interval '12 hours';
+  v_syn uuid[];
+  v_q text[];
+  v_ov jsonb;
+  v_gd jsonb;
+  v_gw jsonb;
+  v_gm jsonb;
+  v_g30 jsonb;
+  v_en jsonb;
+  v_day jsonb;
+  v_duel_mode jsonb;
+begin
+  v_syn := array(select p.id from public.fbla_profiles p where p.username ~ '^omega_syn_[0-9]+$'
+                  order by substr(p.username, 11)::int);
+  insert into public.fbla_analytics_events (event_name, user_id, event_code, created_at)
+  select 'event_selected', u, 'accounting', v_at from unnest(v_syn[6:12]) u;
+  insert into public.fbla_attempts (user_id, kind, event, label, total, correct, created_at)
+  select u, 'practice', 'accounting', 'dry run past practice', 4, 2, v_at from unnest(v_syn[6:10]) u;
+
+  v_q := array(select q.id from public.fbla_questions q where q.event = 'economics' order by q.id limit 10);
+  insert into public.fbla_duels (challenger_id, opponent_id, event, question_ids, status, accepted_at)
+  values (v_syn[1], v_syn[2], 'economics', v_q, 'accepted', now()),
+         (v_syn[3], v_syn[4], 'economics', v_q, 'accepted', now()),
+         (v_syn[5], v_syn[6], 'economics', v_q, 'accepted', now());
+  insert into public.fbla_attempts (user_id, kind, event, label, total, correct)
+  select u, 'duel', 'economics', 'dry run duel run', 10, 5 from unnest(v_syn[1:5]) u;
+
+  v_ov := pg_temp.omega_as(v_owner, 'public.fbla_owner_overview()');
+  v_gd := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(130, ''day'')');
+  v_gw := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(130, ''week'')');
+  v_gm := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(130, ''month'')');
+  v_g30 := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(30, ''day'')');
+  v_en := pg_temp.omega_as(v_owner, 'public.fbla_owner_engagement(30)');
+
+  select b into v_day from jsonb_array_elements(v_gd -> 'series') b where (b ->> 'start')::date = v_today - 110;
+  perform pg_temp.omega_check('owner: 7 active students, 5 of whom practised, hide the active count',
+    pg_temp.omega_shown(v_day -> 'practising') = 5 and (v_day #>> '{active,suppressed}') = 'true',
+    coalesce(v_day::text, 'missing'));
+  perform pg_temp.omega_check('owner: no growth bucket shows active students 1 to 4 above the practising or onboarded ones',
+    not exists (select 1 from (select v_gd as g union all select v_gw union all select v_gm union all select v_g30) r,
+                              jsonb_array_elements(r.g -> 'series') b
+                 where not pg_temp.omega_gap_ok(b -> 'active', b -> 'practising')
+                    or not pg_temp.omega_gap_ok(b -> 'active', b -> 'onboarded')),
+    (select string_agg((b ->> 'start') || ' active ' || coalesce(b #>> '{active,value}', 'hidden') || ' practising '
+                       || coalesce(b #>> '{practising,value}', 'hidden') || ' onboarded '
+                       || coalesce(b #>> '{onboarded,value}', 'hidden'), '; ')
+       from (select v_gd as g union all select v_gw union all select v_gm union all select v_g30) r,
+            jsonb_array_elements(r.g -> 'series') b
+      where not pg_temp.omega_gap_ok(b -> 'active', b -> 'practising')
+         or not pg_temp.omega_gap_ok(b -> 'active', b -> 'onboarded')));
+  perform pg_temp.omega_check('owner: monthly active students and the month''s finished sign-ups never differ by 1 to 4',
+    pg_temp.omega_gap_ok(v_ov #> '{active,mau}', v_ov #> '{onboarding,month,onboarded}'),
+    'mau=' || coalesce(v_ov #>> '{active,mau}', 'null') || ' onboarded=' || coalesce(v_ov #>> '{onboarding,month,onboarded}', 'null'));
+
+  select m into v_duel_mode from jsonb_array_elements(v_en -> 'modes') m where m ->> 'mode' = 'duel';
+  perform pg_temp.omega_check('owner: duel players 1 to 4 above the students who played a duel run are hidden, with their duel counts',
+    pg_temp.omega_shown(v_duel_mode -> 'users') >= 5
+      and (v_en #>> '{duels,players,suppressed}') = 'true'
+      and pg_temp.omega_gap_ok(v_en #> '{duels,players}', v_duel_mode -> 'users')
+      and (v_en #> '{duels}' -> 'created') = 'null'::jsonb and (v_en #> '{duels}' -> 'completed') = 'null'::jsonb,
+    'duels=' || coalesce(v_en ->> 'duels', 'null') || ' duel mode=' || coalesce(v_duel_mode::text, 'missing'));
+  perform pg_temp.omega_check('owner: features leave out duels (the duels panel covers them)',
+    not exists (select 1 from jsonb_array_elements(v_en -> 'features') f where f ->> 'name' in ('duel_started', 'duel_completed')),
+    (select string_agg(f ->> 'name', ',') from jsonb_array_elements(v_en -> 'features') f));
+  perform pg_temp.omega_check('owner: still no visible count between 1 and 4 after the nested-group fixtures',
+    pg_temp.omega_no_small(v_ov) and pg_temp.omega_no_small(v_gd) and pg_temp.omega_no_small(v_gw)
+      and pg_temp.omega_no_small(v_gm) and pg_temp.omega_no_small(v_g30) and pg_temp.omega_no_small(v_en), 'checked');
+end;
+$$;
+
+-- ------------------------------------------------------------------------------------------------ account scope
+-- FBLA and DECA share auth.users. Six synthetic accounts (made two days ago unless noted):
+--   1 unmarked, DECA profile only            -> DECA
+--   2 marked app = deca, no profile          -> DECA
+--   3 marked app = deca, made an FBLA profile -> FBLA
+--   4 unmarked, no profile                   -> FBLA (from before FBLA tagged its sign-ups)
+--   5 unmarked, no profile, made just now    -> not counted (after the cutover every FBLA sign-up is tagged)
+--   6 unmarked, DECA and FBLA profiles       -> FBLA
+do $$
+declare
+  v_owner uuid := current_setting('omega.owner')::uuid;
+  v_ids uuid[] := array[gen_random_uuid(), gen_random_uuid(), gen_random_uuid(), gen_random_uuid(), gen_random_uuid(),
+                        gen_random_uuid()];
+  v_old timestamptz := now() - interval '2 days';
+  v_ov jsonb;
+begin
+  insert into auth.users (id, created_at, updated_at, raw_user_meta_data)
+  values (v_ids[1], v_old, v_old, '{}'), (v_ids[2], v_old, v_old, '{"app":"deca"}'), (v_ids[3], v_old, v_old, '{"app":"deca"}'),
+         (v_ids[4], v_old, v_old, '{}'), (v_ids[5], clock_timestamp(), clock_timestamp(), '{}'), (v_ids[6], v_old, v_old, '{}');
+  insert into public.deca_profiles (id, username, display_name)
+  values (v_ids[1], 'omega_dry_d1', 'Dry Run DECA One'), (v_ids[6], 'omega_dry_d6', 'Dry Run DECA Six');
+  insert into public.fbla_profiles (id, username, display_name, main_event)
+  values (v_ids[3], 'omega_dry_both3', 'Dry Run Both Three', 'accounting'),
+         (v_ids[6], 'omega_dry_both6', 'Dry Run Both Six', 'accounting');
+
+  perform pg_temp.omega_check('scope: account ' || x.n || ' ' || x.what,
+    exists (select 1 from fbla_private.fbla_accounts() a where a.user_id = v_ids[x.n]) = x.fbla, 'want fbla=' || x.fbla)
+    from (values (1, 'unmarked with only a DECA profile is not FBLA', false),
+                 (2, 'marked deca is not FBLA', false),
+                 (3, 'marked deca with an FBLA profile is FBLA', true),
+                 (4, 'unmarked from before the cutover is FBLA', true),
+                 (5, 'unmarked from after the cutover is not counted until it makes an FBLA profile', false),
+                 (6, 'unmarked with DECA and FBLA profiles is FBLA', true)) as x(n, what, fbla);
+
+  v_ov := pg_temp.omega_as(v_owner, 'public.fbla_owner_overview()');
+  perform pg_temp.omega_check('scope: Overview accounts still follow the FBLA scope',
+    (v_ov #>> '{accounts,value}')::bigint = (select count(*) from fbla_private.fbla_accounts()),
+    'accounts=' || coalesce(v_ov #>> '{accounts,value}', 'null'));
+end;
+$$;
+
 -- Owner writes.
 select pg_temp.omega_try('owner: feedback triage', 'authenticated', current_setting('omega.owner')::uuid,
   'select public.fbla_owner_feedback_update(current_setting(''omega.qa_bug'')::uuid, ''resolved'', ''high'', ''Fixed in the next release'')', 'ok');
@@ -718,8 +981,8 @@ select pg_temp.omega_try('owner: cannot read feedback rows directly (RPC only)',
   'do $t$ begin if (select count(*) from public.fbla_feedback where user_id = current_setting(''omega.qa'')::uuid) > 0 then raise exception ''visible'' using errcode = ''P0001''; end if; end $t$', 'ok');
 select pg_temp.omega_check('feedback: the reporter sees the triage result',
   pg_temp.omega_as(current_setting('omega.qa')::uuid,
-    '(select to_jsonb(f) from (select status, priority, resolution_note from public.fbla_feedback where id = current_setting(''omega.qa_bug'')::uuid) f)')
-  = '{"status": "resolved", "priority": "high", "resolution_note": "Fixed in the next release"}'::jsonb);
+    '(select to_jsonb(f) from (select status, resolution_note from public.fbla_feedback where id = current_setting(''omega.qa_bug'')::uuid) f)')
+  = '{"status": "resolved", "resolution_note": "Fixed in the next release"}'::jsonb);
 select pg_temp.omega_try('owner: unknown feedback status refused', 'authenticated', current_setting('omega.owner')::uuid,
   'select public.fbla_owner_feedback_update((select id from public.fbla_feedback limit 1), ''closed'', null, null)', '22023');
 select pg_temp.omega_try('owner: support email needs a reason', 'authenticated', current_setting('omega.owner')::uuid,
@@ -904,12 +1167,15 @@ select pg_temp.omega_check('server: a first profile records onboarding_completed
 select pg_temp.omega_check('server: feedback records feedback_submitted with its kind only',
   exists (select 1 from public.fbla_analytics_events e where e.user_id = current_setting('omega.qa')::uuid
             and e.event_name = 'feedback_submitted' and e.meta = '{"kind":"bug"}'::jsonb));
+select pg_temp.omega_try('server: omega_syn_10 sends batch [term 1, term 2] ten minutes after batch [term 1]',
+  'authenticated', current_setting('omega.syn10')::uuid,
+  'select public.fbla_vocab_review(current_setting(''omega.vocab_batch'')::jsonb)', 'ok');
 select pg_temp.omega_check('server: vocab sessions follow 30 quiet minutes ' || x.who,
   (select count(*) from public.fbla_analytics_events e
     where e.user_id = (select p.id from public.fbla_profiles p where p.username = x.who)
       and e.event_name = 'vocab_session_completed') = x.want,
   x.who || ' wants ' || x.want)
-  from (values ('omega_syn_12', 1), ('omega_syn_13', 0), ('omega_syn_14', 1)) as x(who, want);
+  from (values ('omega_syn_12', 1), ('omega_syn_13', 0), ('omega_syn_14', 1), ('omega_syn_10', 1)) as x(who, want);
 select pg_temp.omega_check('server: opening a duel run records duel_started',
   exists (select 1 from public.fbla_analytics_events e where e.user_id = current_setting('omega.profile')::uuid
             and e.event_name = 'duel_started' and e.event_code = 'economics'));
@@ -984,6 +1250,11 @@ select pg_temp.omega_check('grants: no new fbla_private function is executable b
                      'fbla_trg_audit_chapter_delete', 'fbla_trg_audit_platform_owner', 'fbla_count', 'fbla_count_over',
                      'fbla_count_if', 'fbla_count_between', 'fbla_shown', 'fbla_rate', 'fbla_local_day', 'fbla_day_start',
                      'fbla_accounts', 'fbla_activity', 'fbla_account_totals'] as names) x;
+select pg_temp.omega_check('grants: the owner settings table is closed to clients',
+  case when to_regclass('fbla_private.fbla_owner_settings') is null then false
+       else not has_table_privilege('anon', to_regclass('fbla_private.fbla_owner_settings'), 'SELECT, INSERT, UPDATE, DELETE')
+        and not has_table_privilege('authenticated', to_regclass('fbla_private.fbla_owner_settings'), 'SELECT, INSERT, UPDATE, DELETE') end,
+  'checked');
 select pg_temp.omega_check('grants: every owner RPC is closed to anon and open to authenticated',
   (select bool_and(not has_function_privilege('anon', p.oid, 'execute') and has_function_privilege('authenticated', p.oid, 'execute'))
      from pg_proc p join pg_namespace n on n.oid = p.pronamespace

@@ -8,8 +8,13 @@
 --
 -- Event definitions:
 --   onboarding_completed     first fbla_profiles row for a user (fbla_create_profile upserts, so re-saves do not count)
---   practice_completed       a graded attempt of any kind except mock and duel; meta.mode = attempt kind
+--   practice_completed       a graded attempt of any kind except mock and duel; meta.mode = attempt kind. Not for a
+--                            finished deck assignment (fbla_complete_deck_assignment): that is flashcard study, its
+--                            total and correct are cards gone through and cards the student said they knew, and the
+--                            app never records a practice_started for it.
 --   exam_completed           a graded mock exam attempt
+--                            Neither carries a question count: fbla_submit_attempt inserts the attempt with total 0 and
+--                            fills the total in afterwards, so an AFTER INSERT trigger cannot see it.
 --   duel_started             a player opens their run of an accepted duel (one fbla_duel_runs row per player)
 --   duel_completed           a duel reaches status complete; one event per player, meta.outcome win|loss|draw. The
 --                            second player's submission settles the duel, so the first player did nothing at that
@@ -18,8 +23,11 @@
 --                            minutes (no review by that student in the 30 minutes before it), and the event is
 --                            recorded at that first review, so a long unbroken sitting is one session however long
 --                            it runs. fbla_vocab_review flushes reviews in debounced batches and stamps every term in a
---                            batch with the same now(), so one batch never counts twice. The name comes from the
---                            shared taxonomy; read it as "vocab session".
+--                            batch with the same now(). Any session event in the last 30 minutes also means "same
+--                            session": a batch that re-reviews the last term before a new one (the client's retry puts
+--                            a failed batch back in front of the queue) stamps that term with now() first, which would
+--                            otherwise hide the review it just replaced. The name comes from the shared taxonomy; read
+--                            it as "vocab session".
 
 create or replace function fbla_private.fbla_trg_analytics_onboarding()
 returns trigger
@@ -54,10 +62,13 @@ begin
     return new;
   end if;
   begin
+    if new.assignment_id is not null
+       and exists (select 1 from public.fbla_assignments s where s.id = new.assignment_id and s.kind = 'deck') then
+      return new;
+    end if;
     perform fbla_private.fbla_record_event(
       case when new.kind = 'mock' then 'exam_completed' else 'practice_completed' end,
-      new.user_id, new.event,
-      jsonb_build_object('mode', new.kind, 'count', least(greatest(new.total, 0), 1000)));
+      new.user_id, new.event, jsonb_build_object('mode', new.kind));
   exception when others then
     null;
   end;
@@ -137,13 +148,14 @@ begin
     return new;
   end if;
   begin
-    -- Same session: this batch already recorded it (its events carry this transaction's now()), or the student
-    -- reviewed something, this term included, in the 30 minutes before this batch.
+    -- Same session: a session event in the last 30 minutes (this batch's included: it carries this transaction's
+    -- now()), or the student reviewed something, this term included, in the 30 minutes before this batch. The last
+    -- check keeps a sitting longer than 30 minutes to one session.
     if exists (
          select 1 from public.fbla_analytics_events e
           where e.user_id = new.user_id
             and e.event_name = 'vocab_session_completed'
-            and e.created_at >= now())
+            and e.created_at >= now() - interval '30 minutes')
        or (old.last_reviewed_at >= now() - interval '30 minutes' and old.last_reviewed_at < now())
        or exists (
          select 1 from public.fbla_vocab_progress p

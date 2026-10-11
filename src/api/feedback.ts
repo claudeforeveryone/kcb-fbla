@@ -1,12 +1,12 @@
 // Student feedback and question reports (fbla_feedback, supabase/migrations/0103). Students insert their own rows
-// and read their own rows back (status and the team's note); RLS and column grants enforce both. The database also
-// rate-limits submissions (10 an hour, 40 a day).
+// and read their own rows back (status and the team's note, never the priority owners set); RLS and column grants
+// enforce both. The database also rate-limits submissions (10 an hour, 40 a day).
 import { supabase } from '../lib/supabase';
 import {
   cleanPagePath,
   feedbackProblem,
+  STUDENT_FEEDBACK_COLUMNS,
   type FeedbackKind,
-  type FeedbackPriority,
   type FeedbackStatus,
 } from '../lib/feedback';
 import { ApiError, toApiError } from './core';
@@ -17,13 +17,11 @@ export type MyFeedback = {
   message: string;
   question_id: string | null;
   status: FeedbackStatus;
-  priority: FeedbackPriority;
   resolution_note: string | null;
   created_at: string;
   updated_at: string;
 };
 
-const MY_COLUMNS = 'id,kind,message,question_id,status,priority,resolution_note,created_at,updated_at';
 
 export async function sendFeedback(input: {
   kind: FeedbackKind;
@@ -47,7 +45,7 @@ export async function sendFeedback(input: {
 export async function listMyFeedback(limit = 20): Promise<MyFeedback[]> {
   const { data, error } = await supabase
     .from('fbla_feedback')
-    .select(MY_COLUMNS)
+    .select(STUDENT_FEEDBACK_COLUMNS)
     .order('created_at', { ascending: false })
     .limit(limit)
     .returns<MyFeedback[]>();
