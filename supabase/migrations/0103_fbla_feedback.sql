@@ -51,6 +51,9 @@ create policy fbla_feedback_select_own on public.fbla_feedback
   using (user_id = (select auth.uid()));
 
 -- Insert: normalise and rate-limit. Update (owner RPCs only): stamp updated_at.
+-- The page path loses any chapter invite token (a bearer secret: whoever has it can join) and any attempt, duel,
+-- member, test or profile id, replaced by the route name. The app does the same before sending (PATH_IDS in
+-- src/lib/feedback.ts, and feedback.test.ts checks the two lists match); this covers a direct insert.
 create or replace function fbla_private.fbla_feedback_guard()
 returns trigger
 language plpgsql
@@ -60,6 +63,7 @@ as $$
 declare
   v_hour int;
   v_day int;
+  v_path text;
 begin
   if tg_op = 'UPDATE' then
     new.updated_at := now();
@@ -73,6 +77,16 @@ begin
   end if;
 
   new.message := btrim(new.message);
+  if new.page_path is not null then
+    v_path := new.page_path;
+    v_path := regexp_replace(v_path, '^/chapter/join/[^/]+', '/chapter/join/:token');
+    v_path := regexp_replace(v_path, '^/play/review/[^/]+', '/play/review/:attempt');
+    v_path := regexp_replace(v_path, '^/arena/[^/]+', '/arena/:duel');
+    v_path := regexp_replace(v_path, '^/chapter/member/[^/]+', '/chapter/member/:member');
+    v_path := regexp_replace(v_path, '^/chapter/tests/[^/]+', '/chapter/tests/:test');
+    v_path := regexp_replace(v_path, '^/u/[^/]+', '/u/:username');
+    new.page_path := left(v_path, 200);
+  end if;
   new.status := 'new';
   new.priority := 'normal';
   new.resolution_note := null;

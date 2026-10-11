@@ -438,16 +438,26 @@ select pg_temp.omega_try('qa: read priority (owners only)', 'authenticated', cur
   'select priority from public.fbla_feedback', '42501');
 select pg_temp.omega_try('qa: question id on a non-question report', 'authenticated', current_setting('omega.qa')::uuid,
   'insert into public.fbla_feedback (kind, message, question_id) values (''bug'', ''a bug with a question id'', ''acc-001'')', '23514');
+-- Sent from a chapter invite page, as a direct insert (not through the app's cleanPagePath): the token must not stay.
 select pg_temp.omega_try('qa: may file their own feedback (user_id defaults to them)', 'authenticated', current_setting('omega.qa')::uuid,
-  'insert into public.fbla_feedback (kind, message, page_path) values (''bug'', ''Dry run: the QA student report'', ''/play'')', 'ok');
+  'insert into public.fbla_feedback (kind, message, page_path) values (''bug'', ''Dry run: the QA student report'', ''/chapter/join/OmegaDryRunToken42'')', 'ok');
 select pg_temp.omega_check('qa: filing feedback takes the per-student lock (parallel requests queue for the rate limit)',
   pg_temp.omega_lock_held('fbla_feedback:' || current_setting('omega.qa')));
 select pg_temp.omega_try('qa: may report a question', 'authenticated', current_setting('omega.qa')::uuid,
-  'insert into public.fbla_feedback (kind, message, page_path, question_id) values (''question_issue'', ''Wrong answer marked correct'', ''/play/review/abc'', current_setting(''omega.question''))', 'ok');
+  'insert into public.fbla_feedback (kind, message, page_path, question_id) values (''question_issue'', ''Wrong answer marked correct'', ''/play/review/3dd2c334-6d94-4fd1-a061-524ac601368b'', current_setting(''omega.question''))', 'ok');
 
 -- The owner reads feedback through the RPCs only (no table policy), so the test looks the id up as the server.
 select set_config('omega.qa_bug', (select f.id::text from public.fbla_feedback f
   where f.user_id = current_setting('omega.qa')::uuid and f.kind = 'bug' order by f.created_at limit 1), true);
+select pg_temp.omega_check('feedback: a chapter invite token in the page path is never stored',
+  not exists (select 1 from public.fbla_feedback f where f.page_path like '%OmegaDryRunToken42%')
+    and (select f.page_path from public.fbla_feedback f where f.id = current_setting('omega.qa_bug')::uuid) = '/chapter/join/:token',
+  (select f.page_path from public.fbla_feedback f where f.id = current_setting('omega.qa_bug')::uuid));
+select pg_temp.omega_check('feedback: an attempt id in the page path is replaced by the route name',
+  not exists (select 1 from public.fbla_feedback f where f.page_path like '%3dd2c334%')
+    and exists (select 1 from public.fbla_feedback f where f.user_id = current_setting('omega.qa')::uuid
+                   and f.kind = 'question_issue' and f.page_path = '/play/review/:attempt'),
+  'checked');
 
 select pg_temp.omega_try('qa: track an allowed event', 'authenticated', current_setting('omega.qa')::uuid,
   'select public.fbla_track(''event_selected'', ''accounting'', ''{"source":"play"}''::jsonb)', 'ok');
@@ -1100,6 +1110,19 @@ begin
     'accounts=' || coalesce(v_ov #>> '{accounts,value}', 'null'));
 end;
 $$;
+
+-- The audit log opens the report an entry is about by id, whatever page of the list it is on.
+select pg_temp.omega_check('owner: feedback list opens one report by id',
+  (x.v ->> 'total')::int = 1 and jsonb_array_length(x.v -> 'rows') = 1 and x.v -> 'rows' -> 0 ->> 'id' = current_setting('omega.qa_bug'),
+  left(x.v::text, 160))
+  from (select pg_temp.omega_as(current_setting('omega.owner')::uuid,
+          'public.fbla_owner_feedback_list(null, null, 50, 0, current_setting(''omega.qa_bug'')::uuid)') as v) x;
+select pg_temp.omega_check('owner: feedback list by an unknown id is empty',
+  (x.v ->> 'total')::int = 0 and x.v -> 'rows' = '[]'::jsonb, left(x.v::text, 160))
+  from (select pg_temp.omega_as(current_setting('omega.owner')::uuid,
+          'public.fbla_owner_feedback_list(null, null, 50, 0, gen_random_uuid())') as v) x;
+select pg_temp.omega_try('qa: owner feedback list by id', 'authenticated', current_setting('omega.qa')::uuid,
+  'select public.fbla_owner_feedback_list(null, null, 1, 0, current_setting(''omega.qa_bug'')::uuid)', '42501');
 
 -- Owner writes.
 select pg_temp.omega_try('owner: feedback triage', 'authenticated', current_setting('omega.owner')::uuid,

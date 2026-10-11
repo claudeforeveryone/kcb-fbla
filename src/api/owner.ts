@@ -164,6 +164,8 @@ export async function ownerFeedbackList(opts: {
   kind?: FeedbackKind | null;
   limit?: number;
   offset?: number;
+  /** One report by id (the audit log's link), whatever page of the list it is on. */
+  id?: string | null;
 }): Promise<OwnerFeedbackList> {
   const status = opts.status ?? 'open';
   return must(
@@ -172,6 +174,7 @@ export async function ownerFeedbackList(opts: {
       p_kind: opts.kind ?? null,
       p_limit: opts.limit ?? 50,
       p_offset: opts.offset ?? 0,
+      p_id: opts.id ?? null,
     }),
     'Could not load feedback.',
   );

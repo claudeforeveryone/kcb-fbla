@@ -11,9 +11,13 @@
 -- an executive must be demoted before a ban, matching what the chapter's own triggers enforce.
 
 -- Feedback inbox. p_status: one status, 'open' (new + triaged + in progress) or null for all. High priority first,
--- then newest. Returns the page, the filtered total, and per-status counts for the tabs.
+-- then newest. Returns the page, the filtered total, and per-status counts for the tabs. p_id narrows the page and
+-- the total to one report (the audit log links to the report an entry is about); the counts ignore it.
+-- An earlier draft of this file had no p_id; drop that signature if a branch database has it, so calls are not ambiguous.
+drop function if exists public.fbla_owner_feedback_list(text, text, int, int);
 create or replace function public.fbla_owner_feedback_list(
-  p_status text default 'open', p_kind text default null, p_limit int default 50, p_offset int default 0)
+  p_status text default 'open', p_kind text default null, p_limit int default 50, p_offset int default 0,
+  p_id uuid default null)
 returns jsonb
 language plpgsql
 stable
@@ -46,7 +50,7 @@ begin
 
   select count(*) into v_total
     from public.fbla_feedback f
-   where f.status = any (v_statuses) and (p_kind is null or f.kind = p_kind);
+   where f.status = any (v_statuses) and (p_kind is null or f.kind = p_kind) and (p_id is null or f.id = p_id);
 
   select coalesce(jsonb_agg(to_jsonb(x) - 'sort_priority' order by x.sort_priority, x.created_at desc), '[]'::jsonb)
     into v_rows
@@ -58,7 +62,7 @@ begin
             from public.fbla_feedback f
             left join public.fbla_profiles p on p.id = f.user_id
             left join public.fbla_questions q on q.id = f.question_id
-           where f.status = any (v_statuses) and (p_kind is null or f.kind = p_kind)
+           where f.status = any (v_statuses) and (p_kind is null or f.kind = p_kind) and (p_id is null or f.id = p_id)
            order by case f.priority when 'high' then 0 when 'normal' then 1 else 2 end, f.created_at desc
            limit v_limit offset v_offset) x;
 
@@ -420,7 +424,7 @@ begin
 end;
 $$;
 
-revoke all on function public.fbla_owner_feedback_list(text, text, int, int) from public, anon;
+revoke all on function public.fbla_owner_feedback_list(text, text, int, int, uuid) from public, anon;
 revoke all on function public.fbla_owner_feedback_update(uuid, text, text, text) from public, anon;
 revoke all on function public.fbla_owner_question(text) from public, anon;
 revoke all on function public.fbla_owner_audit_search(int, text, text, int, int) from public, anon;
@@ -428,7 +432,7 @@ revoke all on function public.fbla_owner_user_search(text, int) from public, ano
 revoke all on function public.fbla_owner_support_email(uuid, text) from public, anon;
 revoke all on function public.fbla_owner_set_chapter_ban(uuid, uuid, boolean, text) from public, anon;
 revoke all on function public.fbla_owner_set_chapter_role(uuid, uuid, text, text) from public, anon;
-grant execute on function public.fbla_owner_feedback_list(text, text, int, int) to authenticated;
+grant execute on function public.fbla_owner_feedback_list(text, text, int, int, uuid) to authenticated;
 grant execute on function public.fbla_owner_feedback_update(uuid, text, text, text) to authenticated;
 grant execute on function public.fbla_owner_question(text) to authenticated;
 grant execute on function public.fbla_owner_audit_search(int, text, text, int, int) to authenticated;

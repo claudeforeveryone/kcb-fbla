@@ -29,7 +29,14 @@ export type OwnerSource = {
   preparation(days: number): Promise<OwnerPreparation>;
   content(): Promise<OwnerContent>;
   question(id: string): Promise<OwnerQuestion>;
-  feedbackList(opts: { status?: FeedbackFilter; kind?: FeedbackKind | null; limit?: number; offset?: number }): Promise<OwnerFeedbackList>;
+  feedbackList(opts: {
+    status?: FeedbackFilter;
+    kind?: FeedbackKind | null;
+    limit?: number;
+    offset?: number;
+    /** One report by id, whatever page of the list it is on. */
+    id?: string | null;
+  }): Promise<OwnerFeedbackList>;
   feedbackUpdate(id: string, patch: FeedbackPatch): Promise<FeedbackSaved>;
   auditSearch(opts: { days?: number; action?: string | null; q?: string; limit?: number; offset?: number }): Promise<AuditPage>;
   userSearch(query: string): Promise<OwnerUserRow[]>;
