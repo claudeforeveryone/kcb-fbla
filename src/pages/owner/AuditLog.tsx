@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { ScrollText, Search } from 'lucide-react';
 import { Badge, EmptyState, Input, Select, Table, TBody, TD, TH, THead, TR } from '../../components/ui';
 import type { AuditRow } from '../../api/owner';
-import { auditActionLabel, auditChange, auditSource, NO_DATA } from '../../lib/owner';
-import { LoadState, MoreButton, useOwnerSource, usePaged, when } from './shared';
+import { auditActionLabel, auditChange, auditSource } from '../../lib/owner';
+import { EmptyValue, LoadState, MoreButton, useOwnerSource, usePaged, when } from './shared';
 
 const WINDOWS = [
   { value: '7', label: 'Last 7 days' },
@@ -164,12 +164,7 @@ export function AuditTable({ rows }: { rows: AuditRow[] }) {
               <TD className="min-w-56 text-sm">
                 {change && <div className="text-ink">{change}</div>}
                 {reason && <div className="text-muted">Reason: {reason}</div>}
-                {!change && !reason && (
-                  <span className="text-muted">
-                    <span aria-hidden="true">{NO_DATA}</span>
-                    <span className="sr-only">No details</span>
-                  </span>
-                )}
+                {!change && !reason && <EmptyValue label="No details" />}
               </TD>
             </TR>
           );

@@ -24,7 +24,7 @@ import {
 } from '../../lib/owner';
 import { STATUS_LABELS, triageLink, type FeedbackStatus } from '../../lib/feedback';
 import { ATTEMPT_KIND_LABELS, eventName, type AttemptKind } from '../../lib/types';
-import { CountText, dateOnly, HIDDEN_WHY, LoadState, num, Panel, PrivacyNote, useLoad, useOwnerSource } from './shared';
+import { CountText, dateOnly, EmptyValue, HIDDEN_WHY, LoadState, num, OrEmpty, Panel, PrivacyNote, useLoad, useOwnerSource } from './shared';
 
 const sub = (c: Count) => (c.suppressed ? 'hidden for privacy' : undefined);
 
@@ -120,7 +120,9 @@ export function OverviewView({ data: d }: { data: OwnerOverview }) {
             </div>
             <div>
               <dt className="text-xs text-muted">Of monthly active</dt>
-              <dd className="tabular mt-0.5 font-display text-xl font-extrabold text-heading">{fmtPercent(d.returning_rate)}</dd>
+              <dd className="tabular mt-0.5 font-display text-xl font-extrabold text-heading">
+                <OrEmpty text={fmtPercent(d.returning_rate)} />
+              </dd>
             </div>
           </dl>
         </Panel>
@@ -397,14 +399,7 @@ function Metric({ label, value, sub, accent }: { label: string; value: ReactNode
           empty ? 'text-muted' : accent ? 'text-red' : 'text-heading',
         )}
       >
-        {empty ? (
-          <>
-            <span aria-hidden="true">{NO_DATA}</span>
-            <span className="sr-only">No figure</span>
-          </>
-        ) : (
-          value
-        )}
+        {empty ? <EmptyValue /> : value}
       </div>
       {sub && <div className="mt-1 truncate text-xs text-muted">{sub}</div>}
     </div>
@@ -458,7 +453,9 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
               </div>
               <div>
                 <dt className="text-muted">Not finished</dt>
-                <dd className="tabular font-semibold text-ink">{fmtPercent(r.abandonment)}</dd>
+                <dd className="tabular font-semibold text-ink">
+                  <OrEmpty text={fmtPercent(r.abandonment)} />
+                </dd>
               </div>
             </dl>
           </li>
@@ -487,7 +484,9 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
               </TD>
               <TD align="right">{num(r.attempts)}</TD>
               <TD align="right">{num(r.answered)}</TD>
-              <TD align="right">{fmtPercent(r.abandonment)}</TD>
+              <TD align="right">
+                <OrEmpty text={fmtPercent(r.abandonment)} />
+              </TD>
             </TR>
           ))}
         </TBody>

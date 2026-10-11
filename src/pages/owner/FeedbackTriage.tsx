@@ -84,13 +84,6 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   // Re-renders the list when a report gains or loses unsaved edits, so its row can say so.
   const [, draftsChanged] = useReducer((n: number) => n + 1, 0);
-  // On a phone the status pills scroll sideways: keep the chosen one in view, also when it came from a link.
-  const statusRow = useRef<HTMLDivElement>(null);
-  const statusPlaced = useRef(false);
-  useLayoutEffect(() => {
-    revealInRow(statusRow.current, statusRow.current?.querySelector<HTMLElement>('[aria-pressed="true"]'), !statusPlaced.current);
-    statusPlaced.current = true;
-  }, [status]);
   // The open report as last seen, so it stays open after a save moves it out of the current filter.
   const [snap, setSnap] = useState<OwnerFeedbackRow | null>(null);
   const state = usePaged(
@@ -131,6 +124,15 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
   const fresh = snap && snap.id === selectedId && (!listed || snap.updated_at >= listed.updated_at) ? snap : null;
   const selected = fresh ?? listed ?? null;
   const counts = state.data?.counts;
+  // On a phone the status pills scroll sideways: keep the chosen one in view, also when it came from a link. The
+  // pills widen once their counts arrive, so that moment places the row again; until then the row jumps, after it glides.
+  const countsReady = counts != null;
+  const statusRow = useRef<HTMLDivElement>(null);
+  const statusPlaced = useRef(false);
+  useLayoutEffect(() => {
+    revealInRow(statusRow.current, statusRow.current?.querySelector<HTMLElement>('[aria-pressed="true"]'), !statusPlaced.current);
+    if (countsReady) statusPlaced.current = true;
+  }, [status, countsReady]);
   const countFor = (f: FeedbackFilter) => {
     if (!counts) return undefined;
     if (f === 'open') return counts.new + counts.triaged + counts.in_progress;

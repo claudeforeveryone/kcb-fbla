@@ -253,6 +253,24 @@ function SectionSkeleton({ kind }: { kind: 'cards' | 'chart' | 'table' }) {
 
 const intFmt = new Intl.NumberFormat('en-CA');
 
+/**
+ * A missing figure: a muted en dash (a screen reader hears `label`). One look everywhere in the console, so an empty
+ * value never reads as a number or, in an accent colour, as an alert.
+ */
+export function EmptyValue({ label = 'No figure' }: { label?: string }) {
+  return (
+    <span className="text-muted">
+      <span aria-hidden="true">{NO_DATA}</span>
+      <span className="sr-only">{label}</span>
+    </span>
+  );
+}
+
+/** A figure that may be missing (num(), fmtPercent() and friends return NO_DATA then). */
+export function OrEmpty({ text }: { text: string }) {
+  return text === NO_DATA ? <EmptyValue /> : <>{text}</>;
+}
+
 /** A plain number from the server that may be null because its group was suppressed. */
 export function num(n: number | null | undefined): string {
   return n == null ? NO_DATA : intFmt.format(n);
