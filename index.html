@@ -41,7 +41,9 @@
         var flag = false;
         try {
           flag =
-            /access_token=|[?&]code=|type=(recovery|signup|invite|magiclink)/.test(location.href) ||
+            /access_token=|refresh_token=|[?&#]code=|error_description=|type=(recovery|signup|invite|magiclink)/.test(
+              location.href,
+            ) ||
             localStorage.getItem('kcbfbla-auth-v2') !== null;
         } catch (e) {
           flag = true;

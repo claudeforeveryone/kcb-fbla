@@ -33,6 +33,10 @@ const AUTH_LINKS = [
   'https://kcb-fbla.vercel.app/reset/update#type=recovery',
   'https://kcb-fbla.vercel.app/#type=invite',
   'https://kcb-fbla.vercel.app/#type=magiclink',
+  // Also covered by fbla-observatory's copy (src/pages/landing/session.ts), so the landing can switch to this one.
+  'https://kcb-fbla.vercel.app/#refresh_token=def',
+  'https://kcb-fbla.vercel.app/onboarding#code=4f1e2d',
+  'https://kcb-fbla.vercel.app/#error=access_denied&error_code=otp_expired&error_description=Email+link+is+invalid+or+has+expired',
 ];
 
 afterEach(() => vi.unstubAllGlobals());
@@ -53,6 +57,8 @@ describe('mayHaveSession', () => {
       'https://kcb-fbla.vercel.app/login?next=%2Fplay',
       'https://kcb-fbla.vercel.app/?barcode=1',
       'https://kcb-fbla.vercel.app/terms?type=print',
+      'https://kcb-fbla.vercel.app/#platform',
+      'https://kcb-fbla.vercel.app/privacy#choices',
     ]) {
       stubWindow({ href });
       expect(mayHaveSession(), href).toBe(false);

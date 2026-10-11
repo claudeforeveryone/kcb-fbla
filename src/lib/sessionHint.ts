@@ -9,8 +9,12 @@
 /** localStorage key Supabase keeps the signed-in session under. */
 export const AUTH_STORAGE_KEY = 'kcbfbla-auth-v2';
 
-/** What Supabase auth links put in the URL: a hash token, a PKCE code, or an email link type. */
-export const AUTH_LINK_RE = /access_token=|[?&]code=|type=(recovery|signup|invite|magiclink)/;
+/**
+ * What Supabase auth links put in the URL: a hash token, a PKCE code, an email link type, or the error an expired
+ * link comes back with. A superset of fbla-observatory's copy (src/pages/landing/session.ts), so the landing can use
+ * this one instead without changing what anyone sees.
+ */
+export const AUTH_LINK_RE = /access_token=|refresh_token=|[?&#]code=|error_description=|type=(recovery|signup|invite|magiclink)/;
 
 /**
  * A visitor with no stored session and no auth link in the URL is known to be signed out: public pages paint at once
