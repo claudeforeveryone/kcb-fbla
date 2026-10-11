@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { AUTH_STORAGE_KEY } from './sessionHint';
 
 // The publishable key is safe to ship in the client; RLS protects the data.
 export const SUPABASE_URL =
@@ -11,16 +12,13 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true,
-    storageKey: 'kcbfbla-auth-v2',
+    storageKey: AUTH_STORAGE_KEY,
   },
   realtime: { params: { eventsPerSecond: 10 } },
 });
 
-/** Absolute URL to an in-app path, respecting the deploy base path (for auth email redirects). */
-export function appUrl(path = '') {
-  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-  return `${window.location.origin}${base}/${path.replace(/^\//, '')}`;
-}
+// appUrl lives in its own module so the first-load path can use it without this client (loadSupabase.ts).
+export { appUrl } from './appUrl';
 
 /** Public URL for a file in the avatars bucket. */
 export function avatarPublicUrl(path: string) {

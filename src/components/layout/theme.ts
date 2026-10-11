@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 
 export type ThemePref = 'light' | 'dark' | 'system';
 // New key so any older saved choice ("Auto"/dark) is dropped and everyone starts on white.
@@ -17,10 +17,22 @@ function read(): ThemePref {
 
 const systemDark = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
 
+const darkListeners = new Set<() => void>();
+const subscribeDark = (cb: () => void) => {
+  darkListeners.add(cb);
+  return () => {
+    darkListeners.delete(cb);
+  };
+};
+const readDark = () => document.documentElement.classList.contains('dark');
+// Prerendered pages are built light, so hydration starts light and switches straight after if dark is chosen.
+const readDarkOnServer = () => false;
+
 function apply(pref: ThemePref) {
   const dark = pref === 'dark' || (pref === 'system' && systemDark());
   document.documentElement.classList.toggle('dark', !!dark);
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#050d2b' : '#001E60');
+  darkListeners.forEach((l) => l());
 }
 
 const listeners = new Set<(p: ThemePref) => void>();
@@ -28,13 +40,10 @@ const listeners = new Set<(p: ThemePref) => void>();
 /** Theme preference (light / dark / follow system), persisted per browser. */
 export function useTheme() {
   const [pref, setPref] = useState<ThemePref>(read);
-  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
+  const isDark = useSyncExternalStore(subscribeDark, readDark, readDarkOnServer);
 
   useEffect(() => {
-    const on = (p: ThemePref) => {
-      setPref(p);
-      setIsDark(document.documentElement.classList.contains('dark'));
-    };
+    const on = (p: ThemePref) => setPref(p);
     listeners.add(on);
     const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
     const onSys = () => {

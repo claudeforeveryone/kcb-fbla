@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { AlertTriangle, CheckCircle2, Info, X, XCircle } from 'lucide-react';
 import { cn } from './cn';
@@ -33,9 +33,14 @@ const icons = {
 };
 const bars = { info: 'bg-blue', success: 'bg-success', error: 'bg-red', warning: 'bg-warning' };
 
+const noSubscribe = () => () => {};
+
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<ToastItem[]>([]);
   const seq = useRef(0);
+  // The toast layer is a portal into <body>, which only exists in the browser. False on the server and during
+  // hydration of prerendered pages (so the markup matches), true right after.
+  const inBrowser = useSyncExternalStore(noSubscribe, () => true, () => false);
 
   const dismiss = useCallback((id: number) => {
     setItems((xs) => xs.map((x) => (x.id === id ? { ...x, leaving: true } : x)));
@@ -68,7 +73,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <Ctx.Provider value={api}>
       {children}
-      {createPortal(
+      {inBrowser && createPortal(
         <div
           className="pointer-events-none fixed inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom))] z-[90] flex flex-col items-center gap-2 px-4 md:bottom-auto md:left-auto md:right-5 md:top-20 md:items-end md:px-0"
           aria-live="polite"

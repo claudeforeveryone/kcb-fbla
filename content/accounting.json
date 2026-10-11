@@ -24,7 +24,7 @@
         "Liabilities = Assets + Owner's Equity"
       ],
       "answer": 0,
-      "explain": "Assets equal liabilities plus owner equity; the other forms rearrange the terms incorrectly.",
+      "explain": "Assets equal liabilities plus owner's equity; the other forms rearrange the terms incorrectly.",
       "sub": "Foundations of Accounting",
       "diff": 1
     },
@@ -116,10 +116,10 @@
       "id": "acc-008",
       "q": "A trial balance has total debits of $85,400 and total credits of $85,400. Which conclusion is correct?",
       "choices": [
-        "Equal totals prove all transactions were recorded correctly",
-        "The balance sheet must be out of balance",
-        "Totals must equal zero to be valid",
-        "Equal totals do not prove every entry is correct, since some errors leave the totals balanced"
+        "All transactions were journalized and posted correctly",
+        "The balance sheet will not balance",
+        "No errors of omission occurred during the period",
+        "Debits equal credits, but some errors may still exist"
       ],
       "answer": 3,
       "explain": "A trial balance catches some errors, but omitted entries and wrong-account postings still balance.",
@@ -142,10 +142,10 @@
     },
     {
       "id": "acc-010",
-      "q": "Land is bought for $300,000, with a $25,000 title search and a $5,000 legal fee to acquire it. What is the recorded cost of the land under U.S. GAAP?",
+      "q": "Land is bought for $300,000. The buyer also pays $25,000 to tear down an old building on the site and a $5,000 legal fee. What is the recorded cost of the land under U.S. GAAP?",
       "choices": ["$300,000", "$325,000", "$305,000", "$330,000"],
       "answer": 3,
-      "explain": "All costs necessary to get the land ready for use are capitalized: $300,000 + $25,000 + $5,000 = $330,000.",
+      "explain": "All costs to acquire the land and get it ready for use are capitalized, including removing an old building: $300,000 + $25,000 + $5,000 = $330,000.",
       "sub": "Foundations of Accounting",
       "diff": 2
     },
@@ -198,7 +198,7 @@
         "Expense the full premium at payment",
         "Record a prepaid asset at payment and expense one-twelfth each month",
         "Record revenue when the premium is paid",
-        "Defer the premium until the policy expires"
+        "Expense the full premium when the policy expires"
       ],
       "answer": 1,
       "explain": "The prepaid asset is consumed monthly as coverage is used.",
@@ -311,13 +311,13 @@
       "id": "acc-023",
       "q": "What is the purpose of an external audit opinion?",
       "choices": [
-        "To guarantee the company will remain solvent",
-        "To determine the company's income tax liability",
-        "To give reasonable assurance that statements are free of material misstatement and fairly presented under GAAP",
-        "To set the next year's operating budget"
+        "To guarantee that the company will stay solvent",
+        "To calculate the company's income tax liability",
+        "To give reasonable assurance the statements are fairly presented",
+        "To detect every fraud committed during the year"
       ],
       "answer": 2,
-      "explain": "An audit gives reasonable, not absolute, assurance about the financial statements.",
+      "explain": "An audit gives reasonable, not absolute, assurance that the statements are free of material misstatement and fairly presented under GAAP. It does not guarantee solvency or catch every fraud.",
       "sub": "Standards and Compliance",
       "diff": 2
     },
@@ -341,15 +341,15 @@
     },
     {
       "id": "acc-026",
-      "q": "A CPA finds a material error in a client financial statement. What does professional ethics require?",
+      "q": "During an audit, a CPA finds a material error in the client's financial statements. What does professional ethics require?",
       "choices": [
-        "Delay disclosure until the next audit",
-        "Not knowingly associate with materially false statements and seek correction",
-        "Issue an unqualified opinion to avoid conflict",
-        "Wait for a regulator to find the error first"
+        "Correct the client's records personally without telling management",
+        "Ask management to correct it; if not corrected, modify the opinion",
+        "Report the error to the IRS before discussing it with the client",
+        "Ignore it if the client promises to fix it next year"
       ],
       "answer": 1,
-      "explain": "A CPA must not knowingly be associated with false financial information.",
+      "explain": "A CPA cannot knowingly be associated with materially misstated statements, so the auditor asks management to correct the error and, if it stays, issues a qualified or adverse opinion. Fixing the books personally would impair independence, and going to the IRS would breach confidentiality.",
       "sub": "Standards and Compliance",
       "diff": 2
     },
@@ -377,7 +377,7 @@
         "Debit Cash $20,000; credit Owner's Capital $20,000"
       ],
       "answer": 3,
-      "explain": "Cash increases (debit) and owner equity increases (credit).",
+      "explain": "Cash increases (debit) and owner's equity increases (credit) through Owner's Capital.",
       "sub": "The Accounting Cycle",
       "diff": 2
     },
@@ -443,7 +443,7 @@
     },
     {
       "id": "acc-034",
-      "q": "The same equipment (cost $60,000, 5-year life, straight-line, no salvage) has been depreciated for two full years. What is its net book value?",
+      "q": "Equipment costing $60,000 (5-year life, straight-line, no salvage value) has been depreciated for two full years. What is its net book value?",
       "choices": ["$12,000", "$36,000", "$24,000", "$48,000"],
       "answer": 1,
       "explain": "Accumulated depreciation is $24,000, so $60,000 less $24,000 leaves $36,000.",
@@ -472,7 +472,7 @@
       "id": "acc-037",
       "q": "A prepaid rent asset has been partly used up. Which adjusting entry is needed for the used portion?",
       "choices": [
-        "Debit Rent Expense; credit Prepaid Rent for the portion used",
+        "Debit Rent Expense; credit Prepaid Rent",
         "Debit Prepaid Rent; credit Rent Expense",
         "Debit Cash; credit Prepaid Rent",
         "Debit Rent Payable; credit Prepaid Rent"
@@ -660,10 +660,10 @@
     },
     {
       "id": "acc-052",
-      "q": "Merchandise costs $5,000 on terms 2/10, n/30. Under the net method, the bill is paid within the discount period. What cash is paid?",
-      "choices": ["$5,000", "$4,000", "$100", "$4,900"],
+      "q": "Merchandise is bought for $5,000 on terms 2/10, n/30 and recorded under the net method. The bill is paid on day 25. What amount is debited to Purchase Discounts Lost?",
+      "choices": ["$0", "$4,900", "$5,000", "$100"],
       "answer": 3,
-      "explain": "Under the net method the purchase is recorded net of the 2% discount: $5,000 less $100.",
+      "explain": "The net method records the payable at $4,900. Paying after the discount period costs the full $5,000, and the $100 difference is debited to Purchase Discounts Lost.",
       "sub": "Accounts Payable and Receivable",
       "diff": 3
     },
@@ -718,7 +718,7 @@
       "q": "The allowance has a $2,000 debit balance before adjustment, and an $11,000 credit balance is needed. What is bad debt expense?",
       "choices": ["$13,000", "$9,000", "$11,000", "$2,000"],
       "answer": 0,
-      "explain": "The adjustment must move the allowance by $13,000 from a debit to a $11,000 credit.",
+      "explain": "The allowance must go from a $2,000 debit balance to an $11,000 credit balance, so the adjustment is $2,000 + $11,000 = $13,000.",
       "sub": "Accounts Payable and Receivable",
       "diff": 3
     },
@@ -729,7 +729,7 @@
         "Net realizable value decreases by $800",
         "Net realizable value is unchanged",
         "Net realizable value increases by $800",
-        "Net realizable value decreases by $5,000"
+        "Net realizable value decreases by $1,600"
       ],
       "answer": 1,
       "explain": "The write-off reduces both gross receivables and the allowance by the same amount.",
@@ -816,21 +816,21 @@
     },
     {
       "id": "acc-066",
-      "q": "Which payroll tax does the employer pay that matches the employee Social Security and Medicare contribution?",
+      "q": "Which tax does an employer pay to match the Social Security and Medicare taxes withheld from employees?",
       "choices": [
-        "Federal income tax withholding",
-        "Employer FICA contribution",
-        "Sales tax",
-        "Excise tax"
+        "Federal unemployment (FUTA) tax",
+        "Employer share of FICA tax",
+        "State unemployment (SUTA) tax",
+        "Federal income tax withholding"
       ],
       "answer": 1,
-      "explain": "Employers match the employee share of FICA.",
+      "explain": "FICA (Social Security and Medicare) is shared: the employer matches the employee's 7.65%. FUTA and SUTA fund unemployment benefits, and income tax withholding is the employee's own tax.",
       "sub": "Tax Accounting",
       "diff": 1
     },
     {
       "id": "acc-067",
-      "q": "Which form reports each employee annual wages and tax withholdings?",
+      "q": "Which form reports each employee's annual wages and tax withholdings?",
       "choices": ["Form W-4", "Form 1099-NEC", "Form W-2", "Form 941"],
       "answer": 2,
       "explain": "The W-2 is issued to each employee and filed with the Social Security Administration.",
@@ -885,10 +885,10 @@
     },
     {
       "id": "acc-072",
-      "q": "Under current U.S. federal tax rules, business meal expenses are generally deductible at what percentage?",
+      "q": "Under current U.S. federal tax rules, what percentage of a business meal with a client is generally deductible?",
       "choices": ["100%", "25%", "0%", "50%"],
       "answer": 3,
-      "explain": "The general rule for business meals is 50 percent deductibility.",
+      "explain": "Client business meals that are not lavish and have a clear business purpose stay 50 percent deductible. Entertainment is 0 percent, and since 2026 meals provided for the employer's convenience are also nondeductible.",
       "sub": "Tax Accounting",
       "diff": 2
     },
@@ -995,7 +995,7 @@
     },
     {
       "id": "acc-082",
-      "q": "Net income is $75,000 and average stockholders equity is $500,000. What is return on equity?",
+      "q": "Net income is $75,000 and average stockholders' equity is $500,000. What is return on equity?",
       "choices": ["6.67%", "15.00%", "37.5%", "1.5%"],
       "answer": 1,
       "explain": "$75,000 divided by $500,000 is 15%.",
@@ -1027,15 +1027,15 @@
     },
     {
       "id": "acc-085",
-      "q": "Which items are typically reconciled in the statement of changes in stockholders equity?",
+      "q": "The statement of changes in stockholders' equity explains how equity changed during the period. Which items does it typically include?",
       "choices": [
-        "Net income and dividends",
-        "Cash from operations",
-        "Inventory turnover",
-        "Interest coverage"
+        "Net income, dividends, and stock issued or repurchased",
+        "Operating, investing, and financing cash flows",
+        "Sales, cost of goods sold, and operating expenses",
+        "Current assets, current liabilities, and working capital"
       ],
       "answer": 0,
-      "explain": "Equity changes come from net income, dividends, and stock transactions.",
+      "explain": "It reconciles beginning and ending equity: net income adds to retained earnings, dividends reduce it, and stock issues or buybacks change contributed capital. Cash flows, income statement lines, and working capital belong to other statements or ratios.",
       "sub": "Financial Reports",
       "diff": 2
     },
@@ -1161,33 +1161,33 @@
     },
     {
       "id": "acc-096",
-      "q": "Which control best reduces the risk of duplicate or unauthorized vendor payments?",
+      "q": "Which control best ensures a vendor is paid only for goods that were actually ordered and received?",
       "choices": [
-        "Approving invoices without comparing them to receiving records",
-        "Paying all invoices immediately",
-        "Deleting vendor records after payment",
-        "Three-way match of purchase order, receiving report, and vendor invoice"
+        "A monthly bank reconciliation prepared by the cashier",
+        "Two signatures required on every payroll check",
+        "Rotating accounts payable clerks every quarter",
+        "Matching the purchase order, receiving report, and invoice"
       ],
       "answer": 3,
-      "explain": "The three-way match confirms the bill is for goods ordered and received before payment.",
+      "explain": "The three-way match confirms the bill is for goods that were ordered and received before payment. A bank reconciliation finds problems after the fact, payroll signatures do not cover vendors, and job rotation does not check the documents.",
       "sub": "Technology and Accounting",
       "diff": 2
     },
     {
       "id": "acc-097",
-      "q": "Which credential is awarded to accountants who pass the Uniform CPA Examination and meet state licensing requirements?",
+      "q": "Which credential is the state license an accountant needs to sign audit opinions on financial statements?",
       "choices": ["CPA", "CMA", "CIA", "CFP"],
       "answer": 0,
-      "explain": "The Certified Public Accountant credential requires the CPA exam and state licensure.",
+      "explain": "Under state accountancy laws, audits and other restricted attest work can be issued only by licensed CPAs through CPA firms. The CMA, CIA, and CFP are private certifications. The CPA requires the Uniform CPA Examination plus state education and experience rules.",
       "sub": "Career Opportunities",
       "diff": 1
     },
     {
       "id": "acc-098",
-      "q": "Which certification focuses on management accounting and internal financial decision support?",
+      "q": "Which certification focuses on budgeting, cost management, and performance analysis inside a business?",
       "choices": ["CPA", "CMA", "CFP", "EA"],
       "answer": 1,
-      "explain": "The Certified Management Accountant credential focuses on management accounting.",
+      "explain": "The Certified Management Accountant credential covers planning, cost management, and decision analysis for internal managers. The CFP covers personal financial planning and the EA covers tax representation.",
       "sub": "Career Opportunities",
       "diff": 1
     },
@@ -1224,7 +1224,7 @@
     {
       "id": "acc-v001",
       "term": "Accounting equation",
-      "def": "Assets equal liabilities plus owner equity, and every transaction keeps the equation balanced.",
+      "def": "Assets equal liabilities plus owner's equity, and every transaction keeps the equation balanced.",
       "sub": "Foundations of Accounting"
     },
     {
@@ -1362,7 +1362,7 @@
     {
       "id": "acc-v024",
       "term": "Depreciation",
-      "def": "The systematic allocation of a tangible asset cost over its useful life.",
+      "def": "The systematic allocation of a tangible asset's cost over its useful life.",
       "sub": "The Accounting Cycle"
     },
     {
@@ -1434,7 +1434,7 @@
     {
       "id": "acc-v036",
       "term": "Form W-2",
-      "def": "The annual statement reporting each employee wages and tax withholdings.",
+      "def": "The annual statement reporting each employee's wages and tax withholdings.",
       "sub": "Tax Accounting"
     },
     {
@@ -1494,7 +1494,7 @@
     {
       "id": "acc-v046",
       "term": "Return on equity",
-      "def": "Net income divided by average stockholders equity, a measure of profitability for owners.",
+      "def": "Net income divided by average stockholders' equity, a measure of profitability for owners.",
       "sub": "Financial Reports"
     },
     {
@@ -1578,7 +1578,7 @@
     {
       "id": "acc-v060",
       "term": "Internal auditor",
-      "def": "A professional who evaluates an organization controls, governance, and risk management processes.",
+      "def": "A professional who evaluates an organization's controls, governance, and risk management processes.",
       "sub": "Career Opportunities"
     }
   ]

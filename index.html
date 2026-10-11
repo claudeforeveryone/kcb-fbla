@@ -4,15 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>FBLC</title>
-    <meta name="description" content="FBLC: official-style practice exams, vocab, 1v1 duels and chapter tools for FBLA members." />
+    <meta name="description" content="FBLA-style practice exams, vocab and 1v1 duels for FBL Canada members. An independent study site." />
+    <!-- Defaults for the signed-in app shell (dist/app.html). scripts/prerender.mjs gives each public page its own
+         title, description, robots rule, canonical link, social tags and structured data. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FBLC" />
+    <meta property="og:title" content="FBLC Practice" />
+    <meta property="og:description" content="FBLA-style practice exams, vocab and 1v1 duels for FBL Canada members." />
+    <meta property="og:image" content="https://kcb-fbla.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#001E60" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Work+Sans:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <!-- Brand fonts are self-hosted (@font-face in src/index.css). Preloading the Latin cuts starts them with the CSS
+         instead of after it, so the swap from the fallback comes sooner. -->
+    <link rel="preload" href="/src/assets/fonts/open-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/work-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <script>
       // Apply the colour mode before first paint so there is no flash.
       (function () {
@@ -22,6 +32,37 @@
         if (dark) document.documentElement.classList.add('dark');
       })();
     </script>
+    <script>
+      // Public pages arrive as signed-out HTML. Anyone who may be signed in (a stored session or an auth link, the
+      // same test as mayHaveSession in src/lib/sessionHint.ts) is flagged so that HTML never paints for them.
+      (function () {
+        var flag = false;
+        try {
+          flag =
+            /access_token=|refresh_token=|[?&#]code=|error_description=|type=(recovery|signup|invite|magiclink)/.test(
+              location.href,
+            ) ||
+            localStorage.getItem('kcbfbla-auth-v2') !== null;
+        } catch (e) {
+          flag = true;
+        }
+        if (flag) document.documentElement.setAttribute('data-session', '');
+      })();
+    </script>
+    <script>
+      // The prerendered sign-in and sign-up forms can be submitted before the app has taken them over (its script or
+      // the page chunk is still loading). A form with no action would then reload the page and drop what was typed.
+      // Every form in this app is handled in script, so the browser's own submit is held back for those. Capture
+      // phase: React stops a submit aimed at a form it has not hydrated yet before it bubbles back up to document.
+      document.addEventListener('submit', function (e) {
+        if (!e.target.hasAttribute('action')) e.preventDefault();
+      }, true);
+    </script>
+    <style>
+      /* Splash navy until main.tsx replaces the prerendered markup (it drops data-prerendered on its first commit). */
+      html[data-session] #root[data-prerendered] { position: fixed; inset: 0; z-index: 100; background: #001e60; }
+      html[data-session] #root[data-prerendered] > * { display: none !important; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

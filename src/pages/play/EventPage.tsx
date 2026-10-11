@@ -30,6 +30,7 @@ import {
 } from '../../api/play';
 import { AccuracyRing, AttemptList, EventTitle, PlaySection, accTone, pctText } from './parts';
 import { runHref } from './runLogic';
+import { track } from '../../api/track';
 
 export default function EventPage() {
   const { event = '' } = useParams();
@@ -48,6 +49,9 @@ export default function EventPage() {
   useEffect(() => {
     if (info) load();
   }, [info, load]);
+  useEffect(() => {
+    if (info) void track('event_selected', info.slug, { source: 'play' });
+  }, [info]);
 
   const stats = useMemo(() => {
     if (!data || !info) return null;

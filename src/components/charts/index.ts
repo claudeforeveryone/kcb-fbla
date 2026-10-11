@@ -7,4 +7,6 @@ export type { DonutSegment } from './Donut';
 export { Sparkline } from './Sparkline';
 export { RadarChart } from './RadarChart';
 export type { RadarSeries } from './RadarChart';
+export { ChartFigure } from './ChartFigure';
+export type { ChartTable } from './ChartFigure';
 export { CHART_COLORS, chartColor, niceTicks, useWidth } from './shared';

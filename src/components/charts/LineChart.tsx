@@ -1,7 +1,27 @@
 import { useMemo, useState, type PointerEvent, type ReactNode } from 'react';
 import { chartColor, fmtNum, niceTicks, toX, useWidth } from './shared';
 
-export type LinePoint = { x: number | string | Date; y: number };
+/**
+ * `gap`: the stretch from the previous point crosses values that are not shown (hidden for privacy). It is drawn
+ * dashed with no area under it, so it never reads as a known climb.
+ */
+export type LinePoint = { x: number | string | Date; y: number; gap?: boolean };
+type Pt = { x: number; y: number; gap: boolean };
+
+/** Splits a series into runs of known values; a point marked `gap` starts a new run. */
+function runsOf(pts: Pt[]): Pt[][] {
+  const out: Pt[][] = [];
+  let cur: Pt[] = [];
+  pts.forEach((p, i) => {
+    if (i && p.gap) {
+      out.push(cur);
+      cur = [];
+    }
+    cur.push(p);
+  });
+  if (cur.length) out.push(cur);
+  return out;
+}
 export type LineSeries = { name: string; data: LinePoint[]; color?: string };
 
 const shortDate = (n: number) => new Date(n).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
@@ -45,9 +65,9 @@ export function LineChart({
         ...s,
         color: s.color ?? chartColor(i),
         pts: s.data
-          .map((d, j) => {
+          .map((d, j): Pt => {
             const x = toX(d.x);
-            return { x: isNaN(x) ? j : x, y: d.y };
+            return { x: isNaN(x) ? j : x, y: d.y, gap: !!d.gap };
           })
           .sort((a, b) => a.x - b.x),
       })),
@@ -158,27 +178,40 @@ export function LineChart({
           </text>
           ),
         )}
-        {area && primary.pts.length > 1 && (
-          <path
-            d={`M${sx(primary.pts[0].x)},${sy(y0)} ${primary.pts.map((p) => `L${sx(p.x)},${sy(p.y)}`).join(' ')} L${sx(last.x)},${sy(y0)}Z`}
-            fill={primary.color}
-            fillOpacity={0.08}
-          />
-        )}
-        {prepared.map((s) => (
-          <g key={s.name}>
-            <path
-              d={s.pts.map((p, i) => `${i ? 'L' : 'M'}${sx(p.x)},${sy(p.y)}`).join(' ')}
-              fill="none"
-              stroke={s.color}
-              strokeWidth={2.25}
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
-            {(dots || s.pts.length === 1) &&
-              s.pts.map((p, i) => <circle key={i} cx={sx(p.x)} cy={sy(p.y)} r={3} fill="var(--surface)" stroke={s.color} strokeWidth={2} />)}
-          </g>
-        ))}
+        {area &&
+          runsOf(primary.pts)
+            .filter((run) => run.length > 1)
+            .map((run, i) => (
+              <path
+                key={i}
+                d={`M${sx(run[0].x)},${sy(y0)} ${run.map((p) => `L${sx(p.x)},${sy(p.y)}`).join(' ')} L${sx(run[run.length - 1].x)},${sy(y0)}Z`}
+                fill={primary.color}
+                fillOpacity={0.08}
+              />
+            ))}
+        {prepared.map((s) => {
+          const runs = runsOf(s.pts);
+          const gaps = s.pts.flatMap((p, i) => (i && p.gap ? [`M${sx(s.pts[i - 1].x)},${sy(s.pts[i - 1].y)} L${sx(p.x)},${sy(p.y)}`] : []));
+          return (
+            <g key={s.name}>
+              <path
+                d={runs.map((run) => run.map((p, i) => `${i ? 'L' : 'M'}${sx(p.x)},${sy(p.y)}`).join(' ')).join(' ')}
+                fill="none"
+                stroke={s.color}
+                strokeWidth={2.25}
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
+              {gaps.length > 0 && <path d={gaps.join(' ')} fill="none" stroke={s.color} strokeWidth={1.75} strokeDasharray="4 4" />}
+              {/* Dots on every point of a short series, and always on a known value that stands alone between gaps. */}
+              {runs.flatMap((run) =>
+                dots || run.length === 1
+                  ? run.map((p) => <circle key={p.x} cx={sx(p.x)} cy={sy(p.y)} r={3} fill="var(--surface)" stroke={s.color} strokeWidth={2} />)
+                  : [],
+              )}
+            </g>
+          );
+        })}
         {hp && (
           <g pointerEvents="none">
             <line x1={sx(hp.x)} x2={sx(hp.x)} y1={pad.t} y2={pad.t + ih} stroke="var(--line-strong)" />

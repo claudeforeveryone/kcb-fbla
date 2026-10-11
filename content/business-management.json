@@ -23,7 +23,7 @@
       "answer": 2,
       "explain": "Comparing results to a standard and taking corrective action is the controlling function. Planning sets the standard; organizing and staffing come before performance is measured.",
       "sub": "Strategic Management",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-002",
@@ -51,7 +51,7 @@
       "answer": 3,
       "explain": "Equity equals assets minus liabilities: $240,000 minus $90,000 is $150,000. The trap is reporting total assets or liabilities as equity.",
       "sub": "Business Finance",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-004",
@@ -79,7 +79,7 @@
       "answer": 2,
       "explain": "Job analysis gathers the duties, skills, and conditions for a position and comes before recruiting. Appraisal and orientation happen later in the employee lifecycle.",
       "sub": "Strategic Management",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-006",
@@ -107,7 +107,7 @@
       "answer": 3,
       "explain": "Purchases of long-term assets such as equipment are investing activities. This transaction involves cash, so it is not a non-cash activity.",
       "sub": "Business Finance",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-008",
@@ -121,7 +121,7 @@
       "answer": 1,
       "explain": "Output per unit of input, such as labour hours, is productivity. Liquidity and solvency are financial measures, and profitability measures earnings.",
       "sub": "Operations",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-009",
@@ -163,7 +163,7 @@
       "answer": 3,
       "explain": "UCC Article 2 governs sales of goods in the U.S. The other laws cover wages, antitrust, and workplace safety.",
       "sub": "Business Environment",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-012",
@@ -191,7 +191,7 @@
       "answer": 2,
       "explain": "Feedforward (preliminary) control anticipates problems before work starts. Feedback control evaluates results after the fact, and concurrent control monitors work as it happens.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-014",
@@ -205,7 +205,7 @@
       "answer": 0,
       "explain": "Change management plans for and supports people through a change in processes or systems. The other choices cover different areas.",
       "sub": "Management Types",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-015",
@@ -227,17 +227,17 @@
       "choices": [
         "Higher inventory carrying costs",
         "Faster response to demand and fewer stockouts",
-        "Lower product quality by definition",
+        "Lower product quality from using more suppliers",
         "Higher long-term debt"
       ],
       "answer": 1,
-      "explain": "Shorter lead times improve responsiveness and reduce stockouts. Lower quality and higher debt do not follow from the change described.",
+      "explain": "Shorter lead times let the firm react to demand faster, so it can hold less safety stock and still avoid stockouts. Carrying costs usually fall, not rise, and nothing in the change implies lower quality or more debt.",
       "sub": "Operations",
       "diff": 3
     },
     {
       "id": "bm-017",
-      "q": "A call centre wants to know whether customers get their issue resolved on the first contact. Which metric best matches that goal?",
+      "q": "A call centre's goal is to cut the number of customers who have to call back about the same problem. Which metric best tracks progress toward that goal?",
       "choices": [
         "Average handle time",
         "Employee tenure",
@@ -245,9 +245,9 @@
         "Calls received per month"
       ],
       "answer": 2,
-      "explain": "First-contact resolution rate measures the goal directly. Average handle time measures speed, and pushing it down can work against resolution.",
+      "explain": "First-contact resolution rate measures the share of issues solved on the first call, which is what drives repeat calls down. Average handle time measures speed, and pushing it down can work against resolution.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-018",
@@ -261,7 +261,7 @@
       "answer": 0,
       "explain": "Differing labelling rules across countries are part of the global legal and regulatory environment. Demographics and technology are not the direct driver here.",
       "sub": "Business Environment",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-019",
@@ -275,7 +275,7 @@
       "answer": 3,
       "explain": "Capturing, storing, and sharing organizational know-how is knowledge management.",
       "sub": "Management Types",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-020",
@@ -289,7 +289,7 @@
       "answer": 1,
       "explain": "Setting objectives and choosing the means to reach them is planning. Controlling comes later when results are compared to the plan.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-021",
@@ -303,19 +303,19 @@
       "answer": 2,
       "explain": "Under accrual accounting, net income and cash flow can differ in timing. Depreciation is a non-cash expense, and dividends are not operating expenses.",
       "sub": "Business Finance",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-022",
       "q": "Which statement about a business process is most accurate?",
       "choices": [
         "It transforms inputs into outputs through a sequence of linked activities",
-        "It is a one-time event with no outputs",
-        "It is a financial statement of the firm",
-        "It applies only to human resources"
+        "It is a one-time project with a fixed budget and end date",
+        "It is a financial statement that summarizes operations",
+        "It is a single department that handles one business function"
       ],
       "answer": 0,
-      "explain": "A business process is a set of linked activities that turns inputs into outputs. The other choices misdescribe the concept.",
+      "explain": "A business process is a set of linked activities that turns inputs into outputs. A one-time effort with a fixed end date is a project, and a department is an organizational unit, not a process.",
       "sub": "Operations",
       "diff": 1
     },
@@ -323,15 +323,15 @@
       "id": "bm-023",
       "q": "A CEO wants employees to behave ethically, so the firm adopts a written code of conduct, trains staff on it, and rewards compliance. Which element of managerial ethics is being built?",
       "choices": [
-        "Corporate tax planning",
-        "A strategic alliance",
-        "Lean manufacturing",
-        "An ethical climate supported by a formal ethics program"
+        "Corporate philanthropy",
+        "A social audit",
+        "Ethical relativism",
+        "A formal ethics program"
       ],
       "answer": 3,
-      "explain": "A code of conduct, training, and reward systems form a formal ethics program that shapes the ethical climate. The other choices are unrelated to ethics.",
+      "explain": "A written code, training, and rewards for compliance form a formal ethics program, which shapes the ethical climate. Philanthropy is giving to outside causes, a social audit measures social responsibility performance, and ethical relativism is a philosophy, not a program.",
       "sub": "Strategic Management",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-024",
@@ -345,7 +345,7 @@
       "answer": 1,
       "explain": "Standardizing processes and measuring defect rates against targets is quality management.",
       "sub": "Management Types",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-025",
@@ -373,21 +373,21 @@
       "answer": 0,
       "explain": "Gross profit is revenue minus cost of goods sold: $800,000 minus $500,000 is $300,000. Subtracting operating expenses gives operating income, not gross profit.",
       "sub": "Business Finance",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-027",
       "q": "A company relies on a single supplier for a critical component. A flood shuts that supplier down and halts production for weeks. Which supply chain impact best describes this event?",
       "choices": [
-        "Improved economies of scale",
-        "Reduced inventory risk",
-        "Higher quality control",
-        "Supply chain disruption from lack of supplier diversification"
+        "The bullwhip effect from distorted demand signals",
+        "Inventory shrinkage from theft or damage",
+        "A capacity bottleneck inside its own plant",
+        "Supply disruption caused by single sourcing"
       ],
       "answer": 3,
-      "explain": "Depending on one source creates vulnerability to disruption. The other choices describe benefits or effects that do not match the event.",
+      "explain": "Relying on one supplier (single sourcing) leaves no backup when that supplier fails, so a local event halts production. The bullwhip effect is demand distortion along the chain, shrinkage is lost stock, and the constraint here is outside the plant, not inside it.",
       "sub": "Management Types",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-028",
@@ -401,7 +401,7 @@
       "answer": 1,
       "explain": "The control process is: set standards, measure performance, compare results to standards, and take corrective action where needed.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-029",
@@ -415,7 +415,7 @@
       "answer": 2,
       "explain": "Identifying, assessing, and responding to threats to objectives is risk management.",
       "sub": "Management Types",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-030",
@@ -428,8 +428,8 @@
       ],
       "answer": 0,
       "explain": "A vision statement describes the desired future state. A code of conduct governs behaviour, and a budget and organization chart serve other purposes.",
-      "sub": "Business Environment",
-      "diff": 2
+      "sub": "Strategic Management",
+      "diff": 1
     },
     {
       "id": "bm-031",
@@ -449,29 +449,29 @@
       "id": "bm-032",
       "q": "Why do companies study their business processes?",
       "choices": [
-        "To eliminate all managers",
+        "To meet a legal requirement for incorporation",
         "To find waste, reduce cycle time, and improve quality and cost",
-        "To avoid all business risk",
-        "To set the company's stock price"
+        "To shift all operating risk to suppliers",
+        "To replace the need for a strategic plan"
       ],
       "answer": 1,
-      "explain": "Process study targets waste, cycle time, quality, and cost. The other choices are not purposes of process analysis.",
+      "explain": "Studying processes exposes waste, delays, and defects so the firm can cut cycle time and cost and raise quality. It is not a legal requirement and does not remove risk or replace strategy.",
       "sub": "Operations",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-033",
-      "q": "Employees have proposed a new approach that changes their daily work. The manager wants to reduce conflict and build support before implementing it. Which approach is most suitable?",
+      "q": "A manager plans to change how a team schedules its daily work and expects pushback. Which approach best reduces conflict and builds support before the change?",
       "choices": [
-        "Implement immediately and skip communication",
-        "Remove the employees who object",
+        "Announce the change by email on the day it starts",
+        "Make the change mandatory and tie it to discipline",
         "Involve employees in planning and explain the reasons for the change",
-        "Ignore the proposal until next year"
+        "Delay the change until resistance fades on its own"
       ],
       "answer": 2,
-      "explain": "Involving employees and explaining the reasons builds support and reduces resistance. The other options ignore people's needs or act against them.",
+      "explain": "Involving people and explaining why builds understanding and ownership, which lowers resistance. Surprise announcements and threats raise resistance, and waiting does not address its causes.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-034",
@@ -485,7 +485,7 @@
       "answer": 0,
       "explain": "Using customer data to manage and personalize relationships is customer relationship management.",
       "sub": "Management Types",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-035",
@@ -513,7 +513,7 @@
       "answer": 1,
       "explain": "The four functions are planning, organizing, leading, and controlling. The other sets mix in activities that fall within these functions.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-037",
@@ -527,7 +527,7 @@
       "answer": 2,
       "explain": "Working capital is current assets minus current liabilities: $60,000 minus $40,000 is $20,000.",
       "sub": "Business Finance",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-038",
@@ -541,7 +541,7 @@
       "answer": 0,
       "explain": "The elapsed time from order to delivery is lead time (or cycle time). The other measures are financial ratios.",
       "sub": "Operations",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-039",
@@ -555,7 +555,7 @@
       "answer": 3,
       "explain": "Grouping tasks and setting reporting lines is organizing.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-040",
@@ -569,7 +569,7 @@
       "answer": 1,
       "explain": "A sole proprietorship has one owner who is personally liable for business debts. The other choices describe corporations, partnerships, and non-profits.",
       "sub": "Business Environment",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-041",
@@ -583,7 +583,7 @@
       "answer": 2,
       "explain": "Total quality management focuses on continuous improvement and measured quality outcomes across the organization.",
       "sub": "Management Types",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-042",
@@ -597,7 +597,7 @@
       "answer": 0,
       "explain": "Tightening credit and collecting overdue invoices speeds cash inflows. The other choices reduce cash or slow collections.",
       "sub": "Business Finance",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-043",
@@ -625,7 +625,7 @@
       "answer": 1,
       "explain": "Management by objectives sets jointly agreed goals and ties rewards to achieving them.",
       "sub": "Strategic Management",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-045",
@@ -653,21 +653,21 @@
       "answer": 0,
       "explain": "Having a backup source lowers the likelihood and impact of a supply failure, which is risk reduction.",
       "sub": "Management Types",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-047",
-      "q": "A company wants to know how intensively its machinery is used relative to what it could produce. Which measure best reflects this?",
+      "q": "Orders pass through three steps in sequence. Step 1 can handle 60 orders per hour, step 2 can handle 40, and step 3 can handle 50. What is the most the whole process can complete per hour?",
       "choices": [
-        "Current ratio",
-        "Debt ratio",
-        "Gross margin",
-        "Capacity utilization rate"
+        "60 orders, set by the fastest step",
+        "50 orders, the average of the three steps",
+        "150 orders, the sum of the three steps",
+        "40 orders, set by the bottleneck step"
       ],
       "answer": 3,
-      "explain": "Capacity utilization compares actual output with maximum capacity. The other measures are financial ratios.",
+      "explain": "In a sequential process, output is capped by the slowest step (the bottleneck), here 40 per hour. Faster steps only build a queue in front of step 2.",
       "sub": "Operations",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-048",
@@ -687,15 +687,15 @@
       "id": "bm-049",
       "q": "Leaders want an organizational culture that supports open communication. Which step most directly supports this in the leading function?",
       "choices": [
-        "Restrict information to senior staff",
-        "Eliminate team meetings",
+        "Route all concerns to senior staff through formal written reports",
+        "Hold fewer team meetings so staff can focus on their tasks",
         "Communicate openly, model the behaviour, and recognize staff who raise concerns",
-        "Standardize all job titles"
+        "Post a list of company values and leave behaviour to each team"
       ],
       "answer": 2,
-      "explain": "Leaders build open culture by communicating, modelling the behaviour, and rewarding it. The other options restrict or remove communication.",
+      "explain": "Open culture grows when leaders share information, model the behaviour themselves, and reward people who speak up. Formal-only channels, fewer meetings, and posters without action all discourage open communication.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-050",
@@ -722,8 +722,8 @@
       ],
       "answer": 3,
       "explain": "Grouping by business function is a functional structure. Product structures group by product line.",
-      "sub": "Strategic Management",
-      "diff": 2
+      "sub": "Business Environment",
+      "diff": 1
     },
     {
       "id": "bm-052",
@@ -737,19 +737,19 @@
       "answer": 1,
       "explain": "Fewer suppliers can bring discounts but increase the impact of any single disruption.",
       "sub": "Management Types",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-053",
       "q": "Results will be reviewed every week against the plan, with exceptions reported immediately. Which part of the control process is being emphasized?",
       "choices": [
-        "Hiring new staff",
-        "Designing the company logo",
-        "Measuring performance against standards and reporting variances",
-        "Negotiating a merger"
+        "Setting performance standards",
+        "Taking corrective action",
+        "Measuring performance and comparing it to standards",
+        "Revising the long-term strategy"
       ],
       "answer": 2,
-      "explain": "Weekly review against the plan, with exceptions reported, is measuring performance against standards and reporting variances.",
+      "explain": "Weekly review against the plan, with exceptions flagged, is the measure-and-compare step. The standards already exist (the plan), and corrective action comes after a gap is found.",
       "sub": "Strategic Management",
       "diff": 2
     },
@@ -765,19 +765,19 @@
       "answer": 0,
       "explain": "Interest on debt is a fixed financing cost that creates leverage. It is not an operating expense, a dividend, or depreciation.",
       "sub": "Business Finance",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-055",
       "q": "A company uses continuous improvement in its operations. Which is the best example?",
       "choices": [
-        "Buying a single large machine once",
-        "Ending a product line permanently",
-        "Changing the company name",
+        "Replacing an entire production line in one major overhaul",
+        "Inspecting every finished unit before it ships",
+        "Benchmarking against a rival once and filing the report",
         "Regularly reviewing a process and making small changes that reduce waste over time"
       ],
       "answer": 3,
-      "explain": "Continuous improvement is ongoing, incremental refinement of processes.",
+      "explain": "Continuous improvement (kaizen) is ongoing, incremental refinement of a process. A one-time overhaul is radical change, end-of-line inspection catches defects without improving the process, and a one-off benchmark is not continuous.",
       "sub": "Management Types",
       "diff": 2
     },
@@ -793,7 +793,7 @@
       "answer": 1,
       "explain": "Low barriers to entry describe the threat of new entrants in Porter's five forces.",
       "sub": "Business Environment",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-057",
@@ -807,21 +807,21 @@
       "answer": 2,
       "explain": "A mission statement describes the organization's purpose and what it does for whom.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-058",
-      "q": "A company uses a formal process to identify, evaluate, and monitor threats to its information systems, including data breaches. Which management type is most directly involved?",
+      "q": "A risk team rates each threat to its information systems, such as a data breach or a server outage, by likelihood and potential impact, then plots the results on a grid to decide which to address first. Which tool is the team using?",
       "choices": [
-        "Risk management",
-        "Customer relationship management",
-        "Human resource management",
-        "Supply chain management"
+        "Risk matrix (heat map)",
+        "Gantt chart",
+        "Statistical process control chart",
+        "Fishbone (cause-and-effect) diagram"
       ],
       "answer": 0,
-      "explain": "Identifying and monitoring threats to information systems and their consequences is risk management.",
+      "explain": "A risk matrix ranks risks by likelihood and impact so the highest-priority ones get attention first. A Gantt chart schedules tasks, a control chart tracks process variation, and a fishbone diagram traces the causes of a problem.",
       "sub": "Management Types",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-059",
@@ -863,7 +863,7 @@
       "answer": 2,
       "explain": "The balanced scorecard uses financial, customer, internal process, and learning and growth perspectives.",
       "sub": "Strategic Management",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-062",
@@ -877,7 +877,7 @@
       "answer": 0,
       "explain": "A product that could be replaced by a different product or technology is a threat of substitutes.",
       "sub": "Business Environment",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-063",
@@ -891,7 +891,7 @@
       "answer": 3,
       "explain": "Protecting and controlling access to information is information management.",
       "sub": "Management Types",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-064",
@@ -905,7 +905,7 @@
       "answer": 1,
       "explain": "Producing to forecast can build excess inventory when demand falls short of the forecast.",
       "sub": "Operations",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-065",
@@ -919,7 +919,7 @@
       "answer": 2,
       "explain": "Reducing layers of management is flattening the structure. The other options are strategic moves, not structural changes.",
       "sub": "Business Environment",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-066",
@@ -947,7 +947,7 @@
       "answer": 3,
       "explain": "Delegation distributes authority and responsibility, a part of organizing.",
       "sub": "Strategic Management",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-068",
@@ -956,10 +956,10 @@
         "January",
         "December",
         "Split equally between the two months",
-        "Only when cash is collected"
+        "At the end of the fiscal year"
       ],
       "answer": 1,
-      "explain": "Accrual accounting recognizes revenue when earned, which is when the service is delivered in December.",
+      "explain": "Accrual accounting recognizes revenue when it is earned, which is when the service is delivered in December. January, when cash arrives, would be the cash-basis answer.",
       "sub": "Business Finance",
       "diff": 2
     },
@@ -975,7 +975,7 @@
       "answer": 2,
       "explain": "Inventory turnover is COGS divided by average inventory: $900,000 divided by $150,000 is 6.",
       "sub": "Operations",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-070",
@@ -989,7 +989,7 @@
       "answer": 0,
       "explain": "Theory X assumes workers avoid work and need direction and control, in contrast with Theory Y.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-071",
@@ -1017,7 +1017,7 @@
       "answer": 1,
       "explain": "A corporation gives limited liability and perpetual existence. Sole proprietorships and general partnerships expose owners to personal liability.",
       "sub": "Business Environment",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-073",
@@ -1031,7 +1031,7 @@
       "answer": 2,
       "explain": "A debt-to-equity ratio of 2.0 means debt is twice equity.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-074",
@@ -1045,7 +1045,7 @@
       "answer": 0,
       "explain": "Each bar shows a task's start, end, and duration on a timeline.",
       "sub": "Management Types",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-075",
@@ -1059,7 +1059,7 @@
       "answer": 3,
       "explain": "Strengths and weaknesses are internal. Opportunities and threats are external.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-076",
@@ -1073,11 +1073,11 @@
       "answer": 1,
       "explain": "Succession planning identifies future leaders and is part of human resource planning.",
       "sub": "Management Types",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-077",
-      "q": "A company sells goods on credit for $5,000. Which account is credited to record the sale?",
+      "q": "A company sells goods on credit for $5,000. In the entry that records the $5,000 selling price, which account is credited?",
       "choices": [
         "Cash",
         "Accounts payable",
@@ -1085,7 +1085,7 @@
         "Inventory"
       ],
       "answer": 2,
-      "explain": "The sale is debited to accounts receivable and credited to sales revenue.",
+      "explain": "The selling price is debited to accounts receivable and credited to sales revenue. Under a perpetual system a separate entry at cost debits cost of goods sold and credits inventory, but that is not the $5,000 sale entry.",
       "sub": "Business Finance",
       "diff": 3
     },
@@ -1101,13 +1101,13 @@
       "answer": 0,
       "explain": "Control charts track process variation over time to detect when a process goes out of control.",
       "sub": "Management Types",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-079",
       "q": "A manager uses management by exception. What does this mean?",
       "choices": [
-        "Managers ignore all results",
+        "Managers grant exceptions to policy for top performers",
         "Managers review every transaction equally",
         "Managers delegate all decisions",
         "Managers focus on significant deviations from plan rather than routine results"
@@ -1115,21 +1115,21 @@
       "answer": 3,
       "explain": "Management by exception directs attention to significant deviations from plan.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-080",
-      "q": "Which human resources function most directly ensures the firm follows federal overtime and minimum-wage rules?",
+      "q": "Which area of management is most directly responsible for making sure the firm follows federal overtime and minimum-wage rules?",
       "choices": [
         "Supply chain management",
-        "Labour compliance within human resources management",
+        "Human resources management",
         "Knowledge management",
         "Quality management"
       ],
       "answer": 1,
-      "explain": "Labour compliance in HR covers wage and hour rules such as the federal Fair Labor Standards Act.",
+      "explain": "Human resources management handles pay practices and compliance with U.S. wage and hour law, mainly the Fair Labor Standards Act (FLSA).",
       "sub": "Management Types",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-081",
@@ -1143,7 +1143,7 @@
       "answer": 2,
       "explain": "ROE is net income divided by equity: $300,000 divided by 0.15 is $2,000,000.",
       "sub": "Strategic Management",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-082",
@@ -1185,7 +1185,7 @@
       "answer": 1,
       "explain": "Integrating data across functions for decisions is information management.",
       "sub": "Management Types",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-085",
@@ -1199,7 +1199,7 @@
       "answer": 2,
       "explain": "Tariffs are trade policy and fall within the global political and legal environment.",
       "sub": "Business Environment",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-086",
@@ -1213,7 +1213,7 @@
       "answer": 0,
       "explain": "The quick ratio excludes inventory, so a big gap means inventory makes up much of current assets.",
       "sub": "Business Finance",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "bm-087",
@@ -1221,13 +1221,13 @@
       "choices": [
         "125%",
         "20%",
-        "1.25",
+        "8%",
         "80%"
       ],
       "answer": 3,
       "explain": "Utilization is actual output divided by capacity: 800 divided by 1,000 is 80%.",
       "sub": "Operations",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "bm-088",
@@ -1255,7 +1255,7 @@
       "answer": 2,
       "explain": "GAAP is the body of accounting standards used in the United States.",
       "sub": "Business Finance",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-090",
@@ -1269,7 +1269,7 @@
       "answer": 0,
       "explain": "A value-added activity is one the customer would pay for. Other activities are waste to reduce.",
       "sub": "Operations",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-091",
@@ -1283,7 +1283,7 @@
       "answer": 3,
       "explain": "Laissez-faire leaders delegate most decisions to the group. Autocratic and paternalistic styles keep decisions with the leader.",
       "sub": "Strategic Management",
-      "diff": 2
+      "diff": 1
     },
     {
       "id": "bm-092",
@@ -1301,7 +1301,7 @@
     },
     {
       "id": "bm-093",
-      "q": "A procurement team combines purchases across five plants to negotiate better terms with one shared supplier. Which management type is most directly applied?",
+      "q": "A manufacturer coordinates its parts suppliers, a contract assembler, and a third-party logistics firm so that materials, production, and deliveries stay in step. Which management type is most directly applied?",
       "choices": [
         "Customer relationship management",
         "Quality management",
@@ -1309,23 +1309,23 @@
         "Knowledge management"
       ],
       "answer": 2,
-      "explain": "Coordinating purchasing across the supply network is supply chain management.",
+      "explain": "Coordinating the flow of materials and products across suppliers, producers, and logistics partners is supply chain management.",
       "sub": "Management Types",
       "diff": 2
     },
     {
       "id": "bm-094",
-      "q": "A company hires a consultant to lead the firm through a new enterprise system rollout that changes how staff work. Which management type applies?",
+      "q": "Before rolling out a new enterprise system, a manager shows staff how the old process causes errors and delays so they see why it has to change. In Lewin's three-step change model, which stage is this?",
       "choices": [
-        "Change management",
-        "Quality management",
-        "Risk management",
-        "Supply chain management"
+        "Unfreezing",
+        "Changing (moving)",
+        "Refreezing",
+        "Benchmarking"
       ],
       "answer": 0,
-      "explain": "Leading people through a significant change in systems and work is change management.",
+      "explain": "Unfreezing prepares people by showing why the current way cannot continue. Changing is the move to the new system, and refreezing locks the new way in. Benchmarking is not a Lewin stage.",
       "sub": "Management Types",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-095",
@@ -1334,12 +1334,12 @@
         "Risk avoidance by exiting the market",
         "Risk acceptance by doing nothing",
         "Risk retention through reserves",
-        "Risk transfer through a financial hedge"
+        "Risk transfer to a contract counterparty"
       ],
       "answer": 3,
-      "explain": "A hedge shifts currency risk to a counterparty, which is risk transfer.",
+      "explain": "A currency hedge shifts part of the potential loss to the counterparty on the contract. Risk frameworks such as COSO ERM class hedging, like insurance, as transfer (sharing).",
       "sub": "Management Types",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "bm-096",
@@ -1367,7 +1367,7 @@
       "answer": 2,
       "explain": "The marketing plan describes target customers, pricing, promotion, and distribution.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "bm-098",
@@ -1385,7 +1385,7 @@
     },
     {
       "id": "bm-099",
-      "q": "A company's operating plan sets specific monthly sales quotas for each territory. Which type of plan is this?",
+      "q": "A regional sales manager sets specific monthly sales quotas for each territory for the coming quarter. Which type of plan is this?",
       "choices": [
         "Strategic plan",
         "Vision plan",
@@ -1393,21 +1393,21 @@
         "Operational plan"
       ],
       "answer": 3,
-      "explain": "Short-term, specific targets are operational plans.",
+      "explain": "Short-term, specific targets for units or people are operational plans. Strategic plans set long-range direction, and contingency plans cover what to do if something goes wrong.",
       "sub": "Strategic Management",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "bm-100",
       "q": "A company uses a Gantt chart and the critical path method to plan a project. What does the critical path identify?",
       "choices": [
-        "The cheapest supplier for each task",
+        "The tasks that can be delayed without delaying the project",
         "The longest sequence of dependent tasks that sets the minimum project duration",
-        "The employees with the most overtime",
-        "The best-selling product"
+        "The tasks with the highest cost",
+        "The shortest route through the task network"
       ],
       "answer": 1,
-      "explain": "The critical path is the longest chain of dependent tasks, and it determines the shortest possible completion time.",
+      "explain": "The critical path is the longest chain of dependent tasks, so it sets the shortest possible completion time; any delay on it delays the project. Tasks that can slip have slack and sit off the critical path.",
       "sub": "Management Types",
       "diff": 3
     }

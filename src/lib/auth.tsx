@@ -1,7 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import type { Session, User } from '@supabase/supabase-js';
-import { appUrl, supabase } from './supabase';
+import { appUrl } from './appUrl';
+import { loadSupabase } from './loadSupabase';
+import { browserPaintEnv, whenPainted } from './paint';
+import { mayHaveSession } from './sessionHint';
 import { SplashScreen } from '../components/layout/SplashScreen';
 
 /** Row of public.fbla_profiles (see docs/SPEC.md). */
@@ -55,11 +58,12 @@ type AuthContextValue = {
   /** Optimistically merge fields into the cached profile (after a successful update elsewhere). */
   patchProfile: (patch: Partial<AuthProfile>) => void;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<SignUpResult>;
+  /** `next`: the in-app page to land on after onboarding, carried through the confirmation email. */
+  signUp: (email: string, password: string, next?: string) => Promise<SignUpResult>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updatePassword: (password: string) => Promise<void>;
-  resendConfirmation: (email: string) => Promise<void>;
+  resendConfirmation: (email: string, next?: string) => Promise<void>;
   createProfile: (p: NewProfile) => Promise<AuthProfile | null>;
 };
 
@@ -68,6 +72,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 async function fetchProfile(uid: string): Promise<AuthProfile | null> {
   // own row through fbla_my_profile: it includes email_opt_in, which other members cannot read
   void uid;
+  const supabase = await loadSupabase();
   const { data, error } = await supabase.rpc('fbla_my_profile');
   if (error) {
     console.warn('[auth] profile load failed', error.message);
@@ -152,7 +157,7 @@ export function authErrorKind(e: unknown): AuthErrorKind {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<AuthProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(mayHaveSession);
   const [recovering, setRecovering] = useState(false);
   // The user id whose profile lookup has finished (so guards never act on a half-loaded state).
   const [checkedUid, setCheckedUid] = useState<string | null>(null);
@@ -174,28 +179,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let alive = true;
-    supabase.auth.getSession().then(async ({ data }) => {
-      if (!alive) return;
-      setSession(data.session);
-      await loadFor(data.session?.user.id ?? null);
-      if (alive) setLoading(false);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((event, s) => {
-      setSession(s);
-      if (event === 'PASSWORD_RECOVERY') setRecovering(true);
-      if (event === 'SIGNED_OUT') {
-        uidRef.current = null;
-        setProfile(null);
-        setRecovering(false);
-        return;
-      }
-      const uid = s?.user.id ?? null;
-      // Defer Supabase calls out of the auth callback (avoids a client lock deadlock).
-      if (uid !== uidRef.current) window.setTimeout(() => void loadFor(uid), 0);
-    });
+    let unsubscribe: (() => void) | null = null;
+    // Someone who may be signed in waits on the splash for this check, so the client loads at once. Anyone else is
+    // known to be signed out and their page paints without it (loadSupabase.ts); it loads once that page is on screen,
+    // then listens as before (a sign-in in another tab).
+    const when = mayHaveSession() ? Promise.resolve() : whenPainted(browserPaintEnv());
+    when
+      .then(loadSupabase)
+      .then(
+        (supabase) => {
+          if (!alive) return;
+          supabase.auth.getSession().then(async ({ data }) => {
+            if (!alive) return;
+            setSession(data.session);
+            await loadFor(data.session?.user.id ?? null);
+            if (alive) setLoading(false);
+          });
+          const { data: sub } = supabase.auth.onAuthStateChange((event, s) => {
+            setSession(s);
+            if (event === 'PASSWORD_RECOVERY') setRecovering(true);
+            if (event === 'SIGNED_OUT') {
+              uidRef.current = null;
+              setProfile(null);
+              setRecovering(false);
+              return;
+            }
+            const uid = s?.user.id ?? null;
+            // Defer Supabase calls out of the auth callback (avoids a client lock deadlock).
+            if (uid !== uidRef.current) window.setTimeout(() => void loadFor(uid), 0);
+          });
+          unsubscribe = () => sub.subscription.unsubscribe();
+        },
+        (e: unknown) => {
+          // the client's chunk could not be fetched: show the signed-out view rather than a splash that never ends
+          console.warn('[auth] could not load the sign-in client', e);
+          if (alive) setLoading(false);
+        },
+      );
     return () => {
       alive = false;
-      sub.subscription.unsubscribe();
+      unsubscribe?.();
     };
   }, [loadFor]);
 
@@ -207,6 +230,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = useCallback(
     async (email: string, password: string) => {
+      const supabase = await loadSupabase();
       const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
       if (error) throw toAuthError(error, 'signin');
       setSession(data.session);
@@ -215,11 +239,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [loadFor],
   );
 
-  const signUp = useCallback(async (email: string, password: string): Promise<SignUpResult> => {
+  const signUp = useCallback(async (email: string, password: string, next?: string): Promise<SignUpResult> => {
+    const supabase = await loadSupabase();
     const { data, error } = await supabase.auth.signUp({
       email: email.trim(),
       password,
-      options: { emailRedirectTo: appUrl('onboarding') },
+      // app marks which site created the account (the FBLA and DECA sites share one auth project); the owner
+      // metrics count only FBLA accounts. Not a permission: nothing authorizes on user metadata.
+      options: { emailRedirectTo: appUrl(confirmRedirectPath(next)), data: { app: 'kcb-fbla' } },
     });
     if (error) throw toAuthError(error, 'signup');
     // Supabase returns a user with no identities when the email is already registered (and confirmations are on).
@@ -236,6 +263,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signOut = useCallback(async () => {
+    const supabase = await loadSupabase();
     await supabase.auth.signOut();
     uidRef.current = null;
     setSession(null);
@@ -243,21 +271,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const resetPassword = useCallback(async (email: string) => {
+    const supabase = await loadSupabase();
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: appUrl('reset/update') });
     if (error) throw toAuthError(error, 'reset');
   }, []);
 
   const updatePassword = useCallback(async (password: string) => {
+    const supabase = await loadSupabase();
     const { error } = await supabase.auth.updateUser({ password });
     if (error) throw toAuthError(error, 'update');
     setRecovering(false);
   }, []);
 
-  const resendConfirmation = useCallback(async (email: string) => {
+  const resendConfirmation = useCallback(async (email: string, next?: string) => {
+    const supabase = await loadSupabase();
     const { error } = await supabase.auth.resend({
       type: 'signup',
       email: email.trim(),
-      options: { emailRedirectTo: appUrl('onboarding') },
+      options: { emailRedirectTo: appUrl(confirmRedirectPath(next)) },
     });
     if (error) throw toAuthError(error, 'resend');
   }, []);
@@ -265,6 +296,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const createProfile = useCallback(
     async (p: NewProfile) => {
       // fbla_create_profile (0007_core_rpcs.sql) creates the row, or updates cosmetic fields if it exists.
+      const supabase = await loadSupabase();
       const { error } = await supabase.rpc('fbla_create_profile', {
         p_username: p.username.trim().toLowerCase(),
         p_display_name: p.display_name.trim(),
@@ -361,6 +393,17 @@ export function RedirectIfAuthed({ children }: { children: ReactNode }) {
     return <Navigate to={profile ? next : `/onboarding?next=${encodeURIComponent(next)}`} replace />;
   }
   return <>{children}</>;
+}
+
+/**
+ * Where a confirmation email's link lands (relative to the app): onboarding, carrying `next` so a visitor who signed
+ * up from a page (the landing's "Practise <event>", a chapter invite) gets there once their profile exists. Onboarding
+ * reads `next` through safeNext. Supabase accepts any path on the Site URL's host; if a deploy's allow list refused
+ * the query, it would fall back to the Site URL, which still sends a new account to onboarding.
+ */
+export function confirmRedirectPath(next?: string | null): string {
+  const to = safeNext(next);
+  return to === '/' ? 'onboarding' : `onboarding?next=${encodeURIComponent(to)}`;
 }
 
 /** Only allow in-app relative redirects. */

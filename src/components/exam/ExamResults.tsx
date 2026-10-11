@@ -1,9 +1,10 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import { ArrowDownRight, ArrowUpRight, Check, ChevronDown, Flag, Minus, X } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, Check, ChevronDown, Flag, MessageSquareWarning, Minus, X } from 'lucide-react';
 import { Badge, Card, CardHeader, ProgressBar, SegmentedControl, cn } from '../ui';
 import { FacetArt } from '../ui/PageHeader';
 import { Sparkline } from '../charts';
 import { ATTEMPT_KIND_LABELS, DIFFICULTY_LABELS, NO_ELO_KINDS, eventName } from '../../lib/types';
+import { canReportQuestion } from '../../lib/feedback';
 import { ExamStyles } from './ExamStyles';
 import { areaBreakdown, fmtDuration, verdict, type ExamResultData, type ResultAnswer } from './result';
 import { LETTERS, type ExamQuestion } from './types';
@@ -21,11 +22,13 @@ export type ExamResultsProps = {
   previousBest?: number | null;
   /** Small line above the title, e.g. "Viewing Sam's attempt". */
   note?: ReactNode;
+  /** Shows "Report this question" on official questions in the review list (see useQuestionReport). */
+  onReport?: (questionId: string) => void;
 };
 
 type Filter = 'all' | 'missed' | 'correct' | 'flagged';
 
-export function ExamResults({ data, questions, actions, animate = true, previousBest, note }: ExamResultsProps) {
+export function ExamResults({ data, questions, actions, animate = true, previousBest, note, onReport }: ExamResultsProps) {
   const pct = data.total ? data.correct / data.total : 0;
   const v = verdict(pct, data.total);
   const endless = data.kind === 'endless';
@@ -149,7 +152,14 @@ export function ExamResults({ data, questions, actions, animate = true, previous
           ) : (
             <ol className="space-y-3">
               {shown.map(({ a, i }) => (
-                <ReviewItem key={`${a.question_id}-${i}`} n={i + 1} a={a} q={byQ.get(a.question_id)} showElo={!NO_ELO_KINDS.includes(data.kind)} />
+                <ReviewItem
+                  key={`${a.question_id}-${i}`}
+                  n={i + 1}
+                  a={a}
+                  q={byQ.get(a.question_id)}
+                  showElo={!NO_ELO_KINDS.includes(data.kind)}
+                  onReport={onReport && canReportQuestion(a.question_id) ? () => onReport(a.question_id) : undefined}
+                />
               ))}
             </ol>
           )}
@@ -287,7 +297,19 @@ function EloPanel({ data, animate }: { data: ExamResultData; animate: boolean })
   );
 }
 
-function ReviewItem({ n, a, q, showElo }: { n: number; a: ResultAnswer; q: ExamQuestion | undefined; showElo: boolean }) {
+function ReviewItem({
+  n,
+  a,
+  q,
+  showElo,
+  onReport,
+}: {
+  n: number;
+  a: ResultAnswer;
+  q: ExamQuestion | undefined;
+  showElo: boolean;
+  onReport?: () => void;
+}) {
   const [open, setOpen] = useState(!a.correct);
   const correctIdx = a.correct_choice ?? q?.answer ?? null;
   return (
@@ -372,6 +394,18 @@ function ReviewItem({ n, a, q, showElo }: { n: number; a: ResultAnswer; q: ExamQ
             <p className="mt-3 rounded-[2px] border-l-[3px] border-blue bg-surface-2 px-3 py-2.5 text-sm leading-relaxed text-ink">
               <span>{a.explain ?? q.explain}</span>
             </p>
+          )}
+          {onReport && (
+            <div className="mt-2 flex justify-end">
+              <button
+                type="button"
+                onClick={onReport}
+                className="relative inline-flex h-10 items-center gap-1.5 rounded-[2px] px-3 text-xs font-semibold text-muted transition-colors after:absolute after:inset-x-0 after:-inset-y-1 hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
+              >
+                <MessageSquareWarning className="size-3.5" aria-hidden />
+                Report this question
+              </button>
+            </div>
           )}
         </div>
       )}

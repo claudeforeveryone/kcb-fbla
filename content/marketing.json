@@ -2,7 +2,7 @@
   "slug": "marketing",
   "name": "Marketing",
   "group": "case",
-  "notes": "Competency areas: FBLA 2025-26 Marketing guideline knowledge areas (Marketing Fundamentals, Market Planning, Marketing-Information Management, Product/Service Management, Channel Management, Pricing, Promotion, Selling), taken from the 2025-26 Marketing guideline summary (https://www.pafbla.org/wp-content/uploads/2026/08/Marketing.pdf) and the FBLA high school events page (https://www.fbla.org/high-school/competitive-events/). Unusual: the official FBLA Marketing event is a High School Role Play (objective test plus interactive role play), not a case study. The brief group is set to case as requested. The detailed objectives sit in the guideline study guide, which I could not open, so sub weights are approximate. The FBLA site now also lists 2026-27 guidelines, so areas may have shifted. Questions are original practice items.",
+  "notes": "Knowledge areas and test-item weights from the official FBLA 2025-26 Marketing guideline study guide (https://www.pafbla.org/wp-content/uploads/2026/08/Marketing.pdf, updated November 2025; mirrors the fbla.org high school guideline): Marketing Fundamentals 10, Market Planning 10, Marketing-Information Management 15, Product/Service Management 25, Channel Management 10, Pricing 10, Promotion 10, Selling 10 test items. The objectives use MBA Research codes and include ethics in most areas, consumer protection agencies, product bundling, corporate branding and advertising media types. The event is a High School Role Play (100-question, 50-minute objective test plus interactive role play), not a case study; group is set to case as the brief requested. This bank weights the areas more evenly than the official test (fewer Product/Service Management and Marketing-Information Management items). Questions are original practice items.",
   "subs": [
     "Marketing Fundamentals",
     "Market Planning",
@@ -97,10 +97,10 @@
       "id": "mkt-007",
       "q": "Brand equity refers to:",
       "choices": [
-        "The cost of registering a trademark",
-        "The total revenue from licensing a logo",
-        "The added value a brand name gives a product beyond its functional features",
-        "The number of retail stores that carry a brand"
+        "The cost of registering and renewing a trademark",
+        "The total revenue earned from licensing a logo",
+        "The added value a brand name gives a product beyond its features",
+        "The number of retail stores that carry the brand"
       ],
       "answer": 2,
       "explain": "Brand equity is the value a name adds, such as trust and recognition, beyond what the product does.",
@@ -167,13 +167,13 @@
       "id": "mkt-012",
       "q": "Why should a firm evaluate customer lifetime value rather than the profit from one sale?",
       "choices": [
-        "Single sales are always less profitable than repeat sales in every industry",
-        "Lifetime value measures inventory turnover",
-        "Lifetime value matters only for nonprofit organizations",
-        "Lifetime value captures expected profit across the whole relationship, guiding how much to spend on acquisition and retention"
+        "It shows how quickly a store sells and replaces the inventory it holds",
+        "It removes the need to track what it costs to win each new customer",
+        "It measures how many people a single advertisement reaches in a month",
+        "It estimates total profit over the relationship to guide acquisition and retention"
       ],
       "answer": 3,
-      "explain": "CLV estimates total future profit from a customer and informs acquisition and retention budgets.",
+      "explain": "CLV estimates the total future profit from a customer, which tells the firm how much it can sensibly spend to win and keep that customer. Inventory speed and ad reach are different metrics, and CLV is used alongside acquisition cost, not instead of it.",
       "sub": "Marketing Fundamentals",
       "diff": 3
     },
@@ -341,7 +341,7 @@
     },
     {
       "id": "mkt-026",
-      "q": "In which product life cycle stage do sales growth slow and competition intensify, pushing firms to differentiate?",
+      "q": "In which product life cycle stage does sales growth slow and competition intensify, pushing firms to differentiate?",
       "choices": ["Introduction", "Maturity", "Growth", "Decline"],
       "answer": 1,
       "explain": "Maturity is when growth flattens and competition is strongest.",
@@ -468,13 +468,13 @@
       "id": "mkt-036",
       "q": "A firm must choose between a $500 secondary-data review and a $25,000 primary survey. Which factor best supports starting with secondary research?",
       "choices": [
-        "Secondary data is always more accurate",
-        "Secondary data cannot inform decisions",
-        "Primary data is never needed",
+        "Secondary data is always more current than primary data",
+        "Secondary data is collected to answer the firm's exact question",
+        "Secondary data gives the firm insight competitors cannot access",
         "Secondary data is cheaper and faster for a first look at the problem"
       ],
       "answer": 3,
-      "explain": "Secondary research is a low-cost first step. It does not replace primary research when the question needs firsthand data.",
+      "explain": "Secondary research is a low-cost, quick first step. It is often dated, was gathered for someone else's purpose and is open to competitors too, which is why primary research may still be needed afterwards.",
       "sub": "Marketing-Information Management",
       "diff": 3
     },
@@ -496,13 +496,13 @@
       "id": "mkt-038",
       "q": "A marketing team wants to know whether a new ad caused awareness to rise. Which design best isolates the ad's effect?",
       "choices": [
-        "Annual report review",
-        "Pre- and post-campaign awareness survey with a comparison group not exposed to the ad",
-        "Balance sheet analysis",
-        "Break-even chart"
+        "A survey after the campaign of only the people who saw the ad",
+        "Before-and-after awareness surveys of exposed and unexposed groups",
+        "A count of total website visits during the weeks the ad ran",
+        "A focus group asking viewers whether they liked the ad's message"
       ],
       "answer": 1,
-      "explain": "Comparing before and after, against a group that did not see the ad, isolates the campaign's effect.",
+      "explain": "Measuring awareness before and after in both an exposed group and an unexposed comparison group separates the ad's effect from other causes. A post-only survey has no baseline, and web visits or liking the ad do not show that the ad caused the change.",
       "sub": "Marketing-Information Management",
       "diff": 3
     },
@@ -524,13 +524,13 @@
       "id": "mkt-040",
       "q": "A product's core benefit is best described as:",
       "choices": [
-        "Its packaging design",
-        "Its warranty terms",
-        "Its brand name",
+        "The look and material of its packaging",
+        "The warranty and service that come with it",
+        "The brand name and features buyers see",
         "The fundamental need the product satisfies"
       ],
       "answer": 3,
-      "explain": "The core benefit is the problem the product solves for the buyer.",
+      "explain": "The core benefit is the problem the product solves for the buyer. Brand name and features are the actual product, and warranty and service are the augmented product.",
       "sub": "Product/Service Management",
       "diff": 1
     },
@@ -718,13 +718,13 @@
       "id": "mkt-056",
       "q": "Which statement correctly distinguishes an agent from a broker?",
       "choices": [
-        "An agent takes title to goods; a broker does not",
-        "Both take title to goods",
-        "Brokers work only for manufacturers",
-        "An agent represents a buyer or seller on an ongoing basis without taking title; a broker brings parties together for a transaction"
+        "An agent takes title to the goods; a broker does not",
+        "Both take title to the goods they help sell",
+        "A broker works only for sellers; an agent works only for buyers",
+        "An agent has a lasting client relationship; a broker arranges one-off deals"
       ],
       "answer": 3,
-      "explain": "Agents usually hold ongoing representation without taking title; brokers match parties for a transaction.",
+      "explain": "Neither agents nor brokers take title. Agents represent buyers or sellers on a more lasting basis, while brokers bring parties together for a single transaction and assist in negotiation. Either can work for buyers or sellers.",
       "sub": "Channel Management",
       "diff": 3
     },
@@ -733,9 +733,9 @@
       "q": "Which channel function means a retailer holds goods so they are available when customers want them?",
       "choices": [
         "Storage and inventory holding",
-        "Sorting",
-        "Financing",
-        "Risk taking"
+        "Sorting and assorting goods",
+        "Financing channel members",
+        "Risk taking and insurance"
       ],
       "answer": 0,
       "explain": "Storage and inventory holding keeps goods on hand for customers.",
@@ -789,12 +789,12 @@
       "q": "Which is a benefit of using a wholesaler?",
       "choices": [
         "It reduces the number of contacts a manufacturer must make with retailers",
-        "It eliminates all transportation costs",
-        "It guarantees the manufacturer full control over retail prices",
-        "It removes the need for promotion"
+        "It gives the manufacturer more control over how retailers display the product",
+        "It lets the manufacturer keep the wholesaler's margin as extra profit",
+        "It shortens the channel between the manufacturer and the consumer"
       ],
       "answer": 0,
-      "explain": "Wholesalers consolidate contacts and distribution work for the manufacturer.",
+      "explain": "A wholesaler lets a manufacturer reach many retailers through one contact, cutting the number of transactions. Adding a wholesaler lengthens the channel and usually reduces the maker's control and share of the margin.",
       "sub": "Channel Management",
       "diff": 2
     },
@@ -927,13 +927,13 @@
       "id": "mkt-072",
       "q": "What is the main risk of relying on cost-based pricing alone?",
       "choices": [
-        "It always produces a loss",
-        "It cannot be used by manufacturers",
-        "It requires no cost data",
+        "It requires detailed data on competitors' costs",
+        "It cannot be used by retailers or wholesalers",
+        "It forces prices to change every time demand shifts",
         "It ignores customer demand and the value customers perceive"
       ],
       "answer": 3,
-      "explain": "Cost-based pricing can misprice when demand and perceived value differ from cost.",
+      "explain": "Cost-based pricing looks only at the firm's own costs, so it can set prices above what customers will pay or below the value they see. It needs only internal cost data, retailers use it widely through markups, and it does not react to demand at all.",
       "sub": "Pricing",
       "diff": 2
     },
@@ -1040,7 +1040,7 @@
       "choices": [
         "Media selection decision",
         "Pricing decision",
-        "Channel decision",
+        "Distribution decision",
         "Product decision"
       ],
       "answer": 0,
@@ -1096,15 +1096,15 @@
     },
     {
       "id": "mkt-086",
-      "q": "Which method best measures whether a campaign raised brand awareness?",
+      "q": "A store advertises a TV at a very low price but stocks almost none, then steers shoppers who ask for it toward a pricier model. This deceptive practice is called:",
       "choices": [
-        "Annual report review",
-        "Pre- and post-campaign awareness survey",
-        "Balance sheet analysis",
-        "Break-even chart"
+        "Loss-leader pricing",
+        "Bait and switch",
+        "Price lining",
+        "Odd-even pricing"
       ],
       "answer": 1,
-      "explain": "Comparing awareness before and after the campaign measures the change.",
+      "explain": "Bait and switch advertises an item the seller does not really intend to sell in order to push a costlier one, which the FTC treats as deceptive advertising. A loss leader is a real low-priced item the store actually sells to draw traffic.",
       "sub": "Promotion",
       "diff": 2
     },
@@ -1112,10 +1112,10 @@
       "id": "mkt-087",
       "q": "Public relations primarily helps a firm by:",
       "choices": [
-        "Guaranteeing sales volume",
-        "Setting product prices",
+        "Guaranteeing a set level of sales volume",
+        "Setting prices for the firm's products",
         "Managing its image and relationships with stakeholders",
-        "Reducing shipping time"
+        "Reducing shipping times to customers"
       ],
       "answer": 2,
       "explain": "Public relations manages image and stakeholder relationships.",
@@ -1149,13 +1149,13 @@
       "id": "mkt-090",
       "q": "A customer says, 'Your price is higher than a competitor's.' What is the best response?",
       "choices": [
-        "Argue that the competitor's product is worse",
+        "Offer to match the competitor's price before asking any questions",
         "Acknowledge the concern and explain value and total cost of ownership",
-        "Lower the price immediately without discussion",
-        "Ignore the comment and continue the presentation"
+        "Point out every weakness of the competitor's product in detail",
+        "Repeat the price and move straight to asking for the order"
       ],
       "answer": 1,
-      "explain": "Acknowledge the concern, then reframe around value.",
+      "explain": "Acknowledging the objection and then showing value (quality, service, total cost) answers the real concern. Matching the price at once gives away margin, attacking the competitor hurts credibility, and skipping past the objection leaves it unresolved.",
       "sub": "Selling",
       "diff": 2
     },
@@ -1243,9 +1243,9 @@
       "q": "What is the best use of a trial close?",
       "choices": [
         "To check the customer's readiness to buy before the final close",
-        "To end the sales call immediately",
-        "To lower the price",
-        "To avoid objections"
+        "To end the sales call once the customer raises an objection",
+        "To offer a lower price before the customer asks for one",
+        "To skip the presentation and go straight to the order form"
       ],
       "answer": 0,
       "explain": "A trial close tests readiness before asking for the order.",
@@ -1256,10 +1256,10 @@
       "id": "mkt-098",
       "q": "How should customer objections be viewed?",
       "choices": [
-        "Signals of rejection that end the sale",
+        "Signals of rejection that mean the sale is over",
         "Requests for information and reassurance that can advance the sale",
-        "Reasons to reassign the customer",
-        "Proof the product is defective"
+        "Reasons to hand the customer to a different salesperson",
+        "Arguments the salesperson must win before closing"
       ],
       "answer": 1,
       "explain": "Objections are openings to clarify value and move the sale forward.",
@@ -1268,21 +1268,21 @@
     },
     {
       "id": "mkt-099",
-      "q": "A buyer's purchase requires a committee. What is the rep's best next step?",
+      "q": "A rep learns that the buyer's purchase must be approved by a buying committee. What is the rep's best next step?",
       "choices": [
-        "Sign the contract without meeting others",
-        "Discount the price by 40%",
+        "Push the current contact to sign before the committee meets",
+        "Offer a deep discount so the committee approves quickly",
         "Ask who else influences the decision and map the buying group",
-        "Stop communicating"
+        "Send the same proposal to the committee and wait for a reply"
       ],
       "answer": 2,
-      "explain": "Mapping the buying group is the key next step in a multi-stakeholder sale.",
+      "explain": "In a committee purchase the rep needs to know every influencer and decision maker and what each one cares about. Pressuring one contact, discounting early, or sending a generic proposal ignores the people who actually decide.",
       "sub": "Selling",
       "diff": 3
     },
     {
       "id": "mkt-100",
-      "q": "Which metric measures a sales team's conversion efficiency?",
+      "q": "A sales manager divides each rep's closed deals by the number of qualified leads the rep worked. Which metric is the manager calculating?",
       "choices": [
         "Gross margin",
         "Days sales outstanding",
@@ -1290,7 +1290,7 @@
         "Conversion rate"
       ],
       "answer": 3,
-      "explain": "Conversion rate is the share of leads that become customers.",
+      "explain": "Conversion (close) rate is closed deals divided by leads or opportunities worked. Gross margin measures profitability, days sales outstanding measures collection speed, and inventory turnover measures how fast stock sells.",
       "sub": "Selling",
       "diff": 1
     }
@@ -1383,7 +1383,7 @@
     {
       "id": "mkt-v015",
       "term": "PESTEL analysis",
-      "def": "A scan of political-legal, economic, social, technological, environmental, and legal forces in the external environment.",
+      "def": "A scan of the political, economic, social, technological, environmental, and legal forces in the external environment.",
       "sub": "Market Planning"
     },
     {
@@ -1467,7 +1467,7 @@
     {
       "id": "mkt-v029",
       "term": "Trademark",
-      "def": "Legal protection, granted in the United States, for a word, name, symbol, or logo that identifies a seller's goods.",
+      "def": "A word, name, symbol, or design that identifies a seller's goods and is legally protected against use by others; in the U.S. it can be registered with the USPTO.",
       "sub": "Product/Service Management"
     },
     {

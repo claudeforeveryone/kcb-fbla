@@ -6,6 +6,7 @@ import { FacetArt } from '../../components/ui/PageHeader';
 import { ExamSession, type ExamResultData, type RunnerSnapshot } from '../../components/exam';
 import { useProfile } from '../../lib/auth';
 import { buildRun, RunBlocked, type BuiltRun } from './buildRun';
+import { track } from '../../api/track';
 import { parseRunSpec, runHref } from './runLogic';
 
 type Saved = { run: BuiltRun; snap: RunnerSnapshot | null; savedAt: number };
@@ -76,6 +77,7 @@ function Run() {
 
   const start = useCallback((run: BuiltRun, snap: RunnerSnapshot | null) => {
     setState({ s: 'running', run, snap });
+    if (!snap) void track('practice_started', run.submit.event, { mode: run.submit.kind });
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -229,7 +231,7 @@ function Intro({
           to={run.back.to}
           variant="ghost"
           size="sm"
-          className="mb-4 text-white/80 hover:bg-white/10 hover:text-white"
+          className="mb-4 text-muted hover:bg-surface-2 hover:text-heading"
           leftIcon={<ArrowLeft className="size-4" />}
         >
           {run.back.label}
@@ -246,7 +248,7 @@ function Intro({
               {run.facts.map((f) => (
                 <div key={f.label} className="rounded-[4px] bg-surface-2 px-3 py-3">
                   <dt className="text-[11px] font-bold uppercase tracking-wider text-muted">{f.label}</dt>
-                  <dd className="mt-1 line-clamp-2 font-display text-[0.95rem] font-bold leading-tight text-heading">{f.value}</dd>
+                  <dd className="mt-1 font-display text-[0.95rem] font-bold leading-tight text-heading [overflow-wrap:anywhere]">{f.value}</dd>
                 </div>
               ))}
             </dl>

@@ -70,17 +70,17 @@
     },
     {
       "id": "pf-005",
-      "q": "What is the main difference between a debit card and a credit card?",
+      "q": "Under U.S. federal law, which payment method caps a consumer's liability for unauthorized charges at $50, even if the loss is reported weeks later?",
       "choices": [
-        "Credit cards draw from a checking account, while debit cards are loans.",
-        "Debit cards always charge interest on purchases.",
-        "Debit cards require a credit check before approval.",
-        "Debit cards withdraw funds from the cardholder's own bank account, while credit cards borrow from the issuer."
+        "Debit card",
+        "Store gift card",
+        "Cash",
+        "Credit card"
       ],
       "answer": 3,
-      "explain": "Debit spends the cardholder's own money. Credit creates a debt owed to the card issuer.",
+      "explain": "Federal law (the Truth in Lending Act) caps liability for unauthorized credit card use at $50. Debit card liability under the Electronic Fund Transfer Act rises to $500 or more when reporting is late, and cash and store gift cards have no such cap.",
       "sub": "Principles of Money",
-      "diff": 1
+      "diff": 2
     },
     {
       "id": "pf-006",
@@ -113,11 +113,16 @@
     {
       "id": "pf-008",
       "q": "An employee earns $1,200 gross pay for a pay period. Federal and state income tax withholding plus FICA total $270. What is net pay for the period?",
-      "choices": ["$270", "$1,470", "$930", "$1,000"],
+      "choices": [
+        "$270",
+        "$1,470",
+        "$930",
+        "$1,000"
+      ],
       "answer": 2,
       "explain": "Net pay equals gross pay minus withholdings: $1,200 minus $270 is $930. The trap is $1,000, which subtracts only part of the withholdings.",
       "sub": "Principles of Money",
-      "diff": 3
+      "diff": 2
     },
     {
       "id": "pf-009",
@@ -192,16 +197,26 @@
     {
       "id": "pf-014",
       "q": "A consumer's debit card is lost and the loss is reported within two business days. What is the maximum liability under the Electronic Fund Transfer Act?",
-      "choices": ["$50", "$500", "$0 in all cases", "Unlimited"],
+      "choices": [
+        "$50",
+        "$500",
+        "$0 in all cases",
+        "Unlimited"
+      ],
       "answer": 0,
-      "explain": "Under the EFTA, reporting within two business days caps liability at $50. Reporting later raises the cap to $500.",
+      "explain": "Under the EFTA, reporting within two business days caps liability at $50. Reporting later (but within 60 days of the statement) raises the cap to $500, and after that liability can be unlimited.",
       "sub": "Principles of Money",
-      "diff": 1
+      "diff": 3
     },
     {
       "id": "pf-015",
       "q": "A $1,000 deposit earns 5% interest compounded annually. What is its value after one year?",
-      "choices": ["$1,005", "$950", "$1,500", "$1,050"],
+      "choices": [
+        "$1,005",
+        "$950",
+        "$1,500",
+        "$1,050"
+      ],
       "answer": 3,
       "explain": "$1,000 times 1.05 equals $1,050. The trap is adding 5% of the deposit incorrectly or using the wrong base.",
       "sub": "Principles of Money",
@@ -210,7 +225,12 @@
     {
       "id": "pf-016",
       "q": "Under the Fair Credit Billing Act, how many days does a consumer generally have to send a written notice of a billing error after the first statement showing it?",
-      "choices": ["30 days", "45 days", "60 days", "90 days"],
+      "choices": [
+        "30 days",
+        "45 days",
+        "60 days",
+        "90 days"
+      ],
       "answer": 2,
       "explain": "The FCBA gives 60 days to dispute a billing error in writing after the first statement with the error is sent.",
       "sub": "Principles of Money",
@@ -274,7 +294,7 @@
     },
     {
       "id": "pf-021",
-      "q": "Which step should come first in the financial planning process?",
+      "q": "Of these actions, which should come first in the financial planning process?",
       "choices": [
         "Investing in the stock market",
         "Paying bills on time",
@@ -282,7 +302,7 @@
         "Buying insurance"
       ],
       "answer": 2,
-      "explain": "Goals guide every later decision, so they come first in the planning process.",
+      "explain": "Of the choices, setting goals comes first, because goals guide later investing, insurance and spending decisions. (Many models start by reviewing your current financial situation, then setting goals.)",
       "sub": "Financial Needs and Goals",
       "diff": 1
     },
@@ -373,7 +393,12 @@
     {
       "id": "pf-028",
       "q": "Which expense is a fixed expense?",
-      "choices": ["Groceries", "Entertainment", "Rent", "Clothing"],
+      "choices": [
+        "Groceries",
+        "Entertainment",
+        "Rent",
+        "Clothing"
+      ],
       "answer": 2,
       "explain": "Fixed expenses stay the same each period. Rent is usually set by a lease.",
       "sub": "Financial Needs and Goals",
@@ -468,7 +493,7 @@
       "q": "An employer's 401(k) match is best classified as:",
       "choices": [
         "A tax refund",
-        "A loan forgiveness",
+        "Forgiveness of a loan",
         "A cash bonus",
         "A fringe benefit that supports retirement saving"
       ],
@@ -489,7 +514,7 @@
       "answer": 2,
       "explain": "Commercial banks take deposits and lend. Brokers and insurance agents do not hold deposits.",
       "sub": "Financial-Services Providers",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "pf-037",
@@ -507,15 +532,15 @@
     },
     {
       "id": "pf-038",
-      "q": "Which provider is a broker-dealer that executes trades in securities for clients?",
+      "q": "Which type of financial-services provider buys and sells stocks and bonds on behalf of its clients?",
       "choices": [
         "Brokerage firm",
         "Credit union",
-        "Pawn shop",
-        "Payday lender"
+        "Insurance company",
+        "Savings and loan association"
       ],
       "answer": 0,
-      "explain": "Brokerage firms buy and sell securities on behalf of clients.",
+      "explain": "Brokerage firms buy and sell securities for clients. Credit unions and savings and loans take deposits and lend, and insurance companies sell coverage.",
       "sub": "Financial-Services Providers",
       "diff": 1
     },
@@ -564,7 +589,12 @@
     {
       "id": "pf-042",
       "q": "A bond pays $50 per year in interest on a $1,000 face value. What is its coupon rate?",
-      "choices": ["0.5%", "2.5%", "5%", "10%"],
+      "choices": [
+        "0.5%",
+        "2.5%",
+        "5%",
+        "10%"
+      ],
       "answer": 2,
       "explain": "Coupon rate equals annual interest divided by face value: $50 divided by $1,000 is 5%.",
       "sub": "Investment Strategies",
@@ -642,10 +672,15 @@
     },
     {
       "id": "pf-048",
-      "q": "Gross pay is $2,000 and total withholdings are $460. What is net pay?",
-      "choices": ["$1,540", "$1,460", "$2,460", "$1,640"],
+      "q": "An employee's gross pay for a pay period is $2,000. Federal income tax withheld is $180, and FICA is withheld at 7.65% (6.2% Social Security plus 1.45% Medicare). There are no other deductions. What is net pay?",
+      "choices": [
+        "$1,667",
+        "$1,820",
+        "$1,847",
+        "$1,514"
+      ],
       "answer": 0,
-      "explain": "Net pay is $2,000 minus $460, which equals $1,540.",
+      "explain": "FICA is $2,000 times 7.65%, or $153. Net pay is $2,000 minus $180 minus $153, which is $1,667. $1,514 wrongly withholds the employer's matching FICA share as well.",
       "sub": "Financial Literacy",
       "diff": 3
     },
@@ -665,15 +700,15 @@
     },
     {
       "id": "pf-050",
-      "q": "What must match when you write a check?",
+      "q": "When writing a check, which two entries should agree with each other?",
       "choices": [
-        "The date and memo",
-        "The routing number",
-        "The amount in numerals and in words",
-        "The account signature"
+        "The date and the memo line",
+        "The routing number and the account number",
+        "The amount in numerals and the amount in words",
+        "The payee name and the signature"
       ],
       "answer": 2,
-      "explain": "The numerical and written amounts should agree to avoid disputes or altered checks.",
+      "explain": "The numeric amount and the written amount must agree. If they differ, the written words generally control, which invites disputes or altered checks.",
       "sub": "Financial Literacy",
       "diff": 2
     },
@@ -689,12 +724,17 @@
       "answer": 3,
       "explain": "Under the Uniform Commercial Code, the written words generally control over numerals when they conflict.",
       "sub": "Financial Literacy",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "pf-052",
       "q": "Your checkbook balance is $1,200. The bank statement shows $1,350, with an outstanding check of $200 and an unrecorded $50 service fee. What is the adjusted balance?",
-      "choices": ["$1,100", "$1,150", "$1,200", "$1,350"],
+      "choices": [
+        "$1,100",
+        "$1,150",
+        "$1,200",
+        "$1,350"
+      ],
       "answer": 1,
       "explain": "Bank side: $1,350 minus $200 is $1,150. Book side: $1,200 minus the $50 fee is $1,150. Both match.",
       "sub": "Financial Literacy",
@@ -740,7 +780,7 @@
       "answer": 1,
       "explain": "The IRS requires a contemporaneous written acknowledgment from the charity for single cash gifts of $250 or more.",
       "sub": "Financial Literacy",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "pf-056",
@@ -772,8 +812,13 @@
     },
     {
       "id": "pf-058",
-      "q": "A $1,000 credit card balance carries 18% APR charged monthly (1.5% per month) with no new purchases. What is the first month's interest?",
-      "choices": ["$15", "$18", "$1.50", "$180"],
+      "q": "A credit card carries a $1,000 balance at 18% APR, and interest is charged monthly at the periodic rate (APR divided by 12). With no new purchases or payments, how much interest is charged for the first month?",
+      "choices": [
+        "$15",
+        "$18",
+        "$1.50",
+        "$180"
+      ],
       "answer": 0,
       "explain": "The monthly rate is 18% divided by 12, or 1.5%. Applied to $1,000, the interest is $15. The trap is using $18, the annual rate in dollars.",
       "sub": "Financial Literacy",
@@ -781,21 +826,21 @@
     },
     {
       "id": "pf-059",
-      "q": "Why do cardholders pay interest on credit cards?",
+      "q": "In which situation does a cardholder usually pay interest on credit card purchases?",
       "choices": [
-        "The issuer waives interest after 30 days",
-        "The cardholder pays the full statement balance each month",
-        "The cardholder carries a balance past the grace period",
-        "The card carries an annual fee"
+        "The card has a 0% introductory rate on purchases",
+        "The cardholder pays the full statement balance by each due date",
+        "The cardholder carries an unpaid balance past the grace period",
+        "The card charges an annual fee"
       ],
       "answer": 2,
-      "explain": "Interest starts when a balance is carried past the grace period. Paying the full statement balance usually avoids interest on purchases.",
+      "explain": "Interest on purchases starts when a balance is carried past the grace period. Paying the full statement balance each month avoids it, and an annual fee is a fee, not interest.",
       "sub": "Financial Literacy",
       "diff": 2
     },
     {
       "id": "pf-060",
-      "q": "A $3,000 balance at 24% APR requires a $60 minimum payment. Why does the balance fall so slowly?",
+      "q": "A credit card has a $3,000 balance at 24% APR and a $90 minimum payment. If the cardholder pays only the minimum, why does the balance fall so slowly?",
       "choices": [
         "The minimum is applied entirely to principal",
         "The issuer refunds interest each month",
@@ -803,7 +848,7 @@
         "Most of the minimum covers accrued interest, leaving little for principal"
       ],
       "answer": 3,
-      "explain": "Monthly interest is $3,000 times 2%, or $60, so nearly all of the minimum covers interest and little reduces principal.",
+      "explain": "Monthly interest is about $3,000 times 2%, or $60, so $60 of the $90 payment covers interest and only about $30 reduces principal.",
       "sub": "Financial Literacy",
       "diff": 3
     },
@@ -952,12 +997,12 @@
       "q": "Which retirement plan allows employees to contribute pre-tax income through payroll deduction?",
       "choices": [
         "Traditional 401(k) plan",
-        "Roth IRA with after-tax contributions",
+        "Roth IRA",
         "Savings bond",
         "Payday loan account"
       ],
       "answer": 0,
-      "explain": "Traditional 401(k) contributions reduce current taxable wages, and withdrawals in retirement are taxed as income.",
+      "explain": "Traditional 401(k) contributions come out of pay before income tax, reducing current taxable wages, and withdrawals in retirement are taxed as income. Roth IRA contributions use after-tax dollars.",
       "sub": "Financial Literacy",
       "diff": 2
     },
@@ -978,7 +1023,12 @@
     {
       "id": "pf-073",
       "q": "Which form does a student complete to apply for federal financial aid?",
-      "choices": ["Form W-4", "FAFSA", "Form 1099-INT", "Form 1098-E"],
+      "choices": [
+        "Form W-4",
+        "FAFSA",
+        "Form 1099-INT",
+        "Form 1098-E"
+      ],
       "answer": 1,
       "explain": "The Free Application for Federal Student Aid (FAFSA) is required for federal grants and loans.",
       "sub": "Financial Literacy",
@@ -1029,7 +1079,12 @@
     {
       "id": "pf-077",
       "q": "Which form does an employer send to an employee to report annual wages and withholding?",
-      "choices": ["Form 1099-DIV", "Form 1098", "Form 1040-ES", "Form W-2"],
+      "choices": [
+        "Form 1099-DIV",
+        "Form 1098",
+        "Form 1040-ES",
+        "Form W-2"
+      ],
       "answer": 3,
       "explain": "Form W-2 reports wages and taxes withheld. Form 1099 is used for non-employee income.",
       "sub": "Financial Literacy",
@@ -1052,7 +1107,12 @@
     {
       "id": "pf-079",
       "q": "Which tax item reduces tax owed dollar for dollar?",
-      "choices": ["Deduction", "Exemption", "Credit", "Standard deduction"],
+      "choices": [
+        "Deduction",
+        "Exemption",
+        "Credit",
+        "Standard deduction"
+      ],
       "answer": 2,
       "explain": "A credit reduces tax directly. A deduction only reduces taxable income.",
       "sub": "Financial Literacy",
@@ -1061,7 +1121,12 @@
     {
       "id": "pf-080",
       "q": "A taxpayer in the 22% bracket has $1,000 of additional taxable income, all in that bracket. How much additional federal income tax is owed?",
-      "choices": ["$100", "$220", "$180", "$2,200"],
+      "choices": [
+        "$100",
+        "$220",
+        "$180",
+        "$2,200"
+      ],
       "answer": 1,
       "explain": "Tax is 22% of $1,000, which is $220. The trap is treating the rate as 2.2 times the amount.",
       "sub": "Financial Literacy",
@@ -1070,7 +1135,12 @@
     {
       "id": "pf-081",
       "q": "Which tax is paid on the value of goods and services at the point of purchase?",
-      "choices": ["Sales tax", "Estate tax", "Payroll tax", "Property tax"],
+      "choices": [
+        "Sales tax",
+        "Estate tax",
+        "Payroll tax",
+        "Property tax"
+      ],
       "answer": 0,
       "explain": "Sales tax is collected at the register on the taxable price of goods and services.",
       "sub": "Financial Literacy",
@@ -1165,12 +1235,12 @@
       "q": "A borrower defaults on a car loan. Under the Uniform Commercial Code, what is the lender's typical remedy?",
       "choices": [
         "File criminal charges",
-        "Repossess the collateral after giving required notice",
+        "Repossess the car without breaching the peace",
         "Collect from the borrower's employer without notice",
         "Cancel the principal"
       ],
       "answer": 1,
-      "explain": "A secured lender may repossess collateral after default, subject to notice rules under the UCC.",
+      "explain": "Under UCC Article 9 (section 9-609), a secured lender may repossess collateral after default without going to court, as long as it does not breach the peace. The UCC requires notice before the lender sells the collateral (section 9-611), not before repossession, though some states add a right-to-cure notice.",
       "sub": "Financial Literacy",
       "diff": 3
     },
@@ -1260,26 +1330,31 @@
     },
     {
       "id": "pf-095",
-      "q": "Which record-keeping practice best supports a tax audit?",
+      "q": "A taxpayer left out income that was more than 25% of the gross income shown on the return. How long does the IRS generally say to keep records for that return?",
       "choices": [
-        "Keeping receipts and statements for the required period, generally three years",
-        "Shredding all statements after one month",
-        "Storing records only on a phone",
-        "Relying on memory"
+        "6 years",
+        "3 years",
+        "7 years",
+        "10 years"
       ],
       "answer": 0,
-      "explain": "Documentation is the basis for supporting deductions and income. Keeping it for the required period protects the taxpayer.",
+      "explain": "The IRS says to keep records for 6 years when unreported income is more than 25% of the gross income shown on the return. Three years is the general rule, and 7 years applies to worthless-securities or bad-debt claims.",
       "sub": "Financial Literacy",
-      "diff": 2
+      "diff": 3
     },
     {
       "id": "pf-096",
       "q": "Which term describes the amount a policyholder pays out of pocket before insurance begins to pay?",
-      "choices": ["Premium", "Deductible", "Policy limit", "Coinsurance"],
+      "choices": [
+        "Premium",
+        "Deductible",
+        "Policy limit",
+        "Coinsurance"
+      ],
       "answer": 1,
       "explain": "The deductible is the out-of-pocket amount before the insurer pays. The premium is the regular cost of coverage.",
       "sub": "Risk Management",
-      "diff": 3
+      "diff": 1
     },
     {
       "id": "pf-097",
@@ -1297,15 +1372,15 @@
     },
     {
       "id": "pf-098",
-      "q": "Which insurance protects against liability for injuries you cause to others?",
+      "q": "A driver runs a red light, injuring another driver and damaging that driver's car. Which part of the at-fault driver's auto policy pays for the other driver's injuries and repairs?",
       "choices": [
-        "Collision coverage on your own car",
-        "Homeowner's contents coverage",
+        "Collision coverage",
+        "Comprehensive coverage",
         "Liability coverage",
-        "Term life insurance"
+        "Uninsured motorist coverage"
       ],
       "answer": 2,
-      "explain": "Liability coverage pays for legal defence and damages you owe to third parties.",
+      "explain": "Liability coverage pays for injuries and property damage you cause to others, plus legal defence. Collision and comprehensive cover your own car, and uninsured motorist coverage protects you when the other driver has no insurance.",
       "sub": "Risk Management",
       "diff": 2
     },
