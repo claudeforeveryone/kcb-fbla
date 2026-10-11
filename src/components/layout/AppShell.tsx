@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { BarChart3, ChevronDown, LogOut, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
@@ -8,13 +8,24 @@ import { Dropdown } from '../ui/Dropdown';
 import { EloBadge } from '../ui/EloBadge';
 import { cn } from '../ui/cn';
 import { useToast } from '../ui/Toast';
-import { NotificationBell } from '../notifications/NotificationBell';
 import { useHydrated } from '../../lib/hydration';
 import { returnPathAfterAuth } from '../../lib/seo';
 import { Brand } from './Brand';
 import { NAV } from './nav';
 import { useTheme, type ThemePref } from './theme';
 import { Footer } from './Footer';
+
+// Members only (the bar shows it once signed in with a profile), and it brings the notifications API and with it the
+// Supabase client: a lazy chunk, so the first-load chunk every visitor downloads stays without them (loadSupabase.ts).
+// No error boundary sits above the top bar, so a chunk that cannot be fetched (offline before it was cached, a deploy
+// that replaced it) means no bell for this visit, never a broken page.
+const NotificationBell = lazy(
+  (): Promise<{ default: ComponentType }> =>
+    import('../notifications/NotificationBell').then(
+      (m) => ({ default: m.NotificationBell }),
+      () => ({ default: () => null }),
+    ),
+);
 
 /** App chrome: navy top bar, page outlet, footer, and the phone bottom tab bar. */
 export function AppShell({ children }: { children?: ReactNode }) {
@@ -105,7 +116,10 @@ function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string })
         <div className="ml-auto flex items-center gap-1.5">
           {signedIn ? (
             <>
-              <NotificationBell />
+              {/* the same 40 px as the bell's button, so nothing moves when it arrives */}
+              <Suspense fallback={<span className="size-10" aria-hidden="true" />}>
+                <NotificationBell />
+              </Suspense>
               <UserMenu />
             </>
           ) : (

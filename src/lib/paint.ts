@@ -1,5 +1,6 @@
-// "Has the page painted yet?" Decoration (the still of the room, the live room) waits for the browser to have put the
-// page's own content on screen, as well as for load and an idle slot (ObservatoryStage). Load alone is not enough: a
+// "Has the page painted yet?" Work the first frame does not need waits for the browser to have put the page's own
+// content on screen: the landing's code (loadLanding.ts), the Supabase client for a signed-out visitor (auth.tsx), and
+// the landing's decoration, which also waits for load and an idle slot (ObservatoryStage). Load alone is not enough: a
 // browser can finish loading well before its first frame reaches the screen (a GPU process still starting, measured
 // at 470 ms in headless Chrome against a 64 ms load), and work started in that gap delays the frame that shows the
 // headline. Pure so it can be unit tested; browserPaintEnv() is the browser's side.

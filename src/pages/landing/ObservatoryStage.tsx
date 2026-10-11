@@ -27,7 +27,7 @@ import {
 import { cn } from "../../components/ui/cn";
 import { ObservatoryPoster, type PosterVariant } from "./ObservatoryPoster";
 import { ObservatoryStill } from "./ObservatoryStill";
-import { browserPaintEnv, whenPainted } from "./paint";
+import { browserPaintEnv, whenPainted } from "../../lib/paint";
 import { mayHoldRoom, RoomSlotContext } from "./roomSlot";
 import {
   readLandingEnv,
@@ -126,7 +126,7 @@ export function ObservatoryStage({
     };
   }, [env]);
 
-  // The page's own load (fonts, logo) and its first paint on screen (paint.ts) come first, then two frames, then an
+  // The page's own load (fonts, logo) and its first paint on screen (src/lib/paint.ts) come first, then two frames, then an
   // idle slot, and only then is the still or the 3D chunk requested. On a slow connection the room must not compete
   // with the fonts for bandwidth, and its work must not land between load and the frame that shows the headline.
   useEffect(() => {
