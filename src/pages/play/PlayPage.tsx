@@ -14,7 +14,7 @@ import {
   cn,
 } from '../../components/ui';
 import { Page } from '../../components/layout/Page';
-import { EventCrest, eventStyle } from '../../lib/eventStyle';
+import { EventBlock, EventCrest, eventStyle } from '../../lib/eventStyle';
 import { useProfile } from '../../lib/auth';
 import { loadIndex, type Topic } from '../../lib/content';
 import { EVENTS, EVENT_GROUPS, eventInfo, eventName, type EventInfo } from '../../lib/types';
@@ -447,7 +447,7 @@ function ModeTile({
   );
 }
 
-/** Event card: solid event-colour strip with its crest and code, white body with progress in the event colour. */
+/** Event card: decorated event-colour banner with its crest and code (same as Vocab deck tiles), white body with progress in the event colour. */
 function EventCard({
   e,
   s,
@@ -470,19 +470,22 @@ function EventCard({
           mine ? 'border-red/50' : 'border-line',
         )}
       >
-        <div className="flex h-14 items-center justify-between gap-3 px-4 sm:h-[72px] sm:px-5" style={{ backgroundColor: color }}>
-          <EventCrest slug={e.slug} size={44} className="max-sm:!size-9" />
-          <div className="flex items-center gap-2">
-            {mine && (
-              <span className="rounded-[2px] border border-white/70 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
-                Your event
-              </span>
-            )}
-            <span className="rounded-[2px] bg-white px-2 py-0.5 font-display text-xs font-bold tracking-wider" style={{ color }}>
-              {e.short}
-            </span>
+        <EventBlock slug={e.slug} className="h-[112px] shrink-0 sm:h-[128px]">
+          <div className="grid h-full place-items-center">
+            <EventCrest slug={e.slug} size={64} className="transition-transform duration-200 group-hover:scale-[1.05] max-sm:!size-14" />
           </div>
-        </div>
+          {mine && (
+            <span
+              className="absolute left-3 top-3 inline-flex h-5 items-center rounded-[2px] bg-white px-1.5 text-[10px] font-bold uppercase tracking-[0.08em]"
+              style={{ color }}
+            >
+              Your event
+            </span>
+          )}
+          <span className="absolute right-3 top-3 inline-flex h-5 items-center rounded-[2px] border border-white/80 px-1.5 font-display text-[10px] font-bold tracking-[0.1em] text-white">
+            {e.short}
+          </span>
+        </EventBlock>
         <div className="flex flex-1 flex-col px-4 pb-4 pt-4 sm:p-5">
           <h3 className="text-[1.0625rem] font-bold leading-snug">
             <EventTitle e={e} />
