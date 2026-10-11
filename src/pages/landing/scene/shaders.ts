@@ -36,14 +36,17 @@ void main() {
   ${tail}
 }`;
 
-/** A wide, low dawn glow behind the stage's far rim; it fades out well before the plane's edges. */
+/**
+ * A wide, low dawn glow behind the stage's far rim; it fades out well before the plane's edges, the bottom one
+ * included (beside the stage the camera sees below the rim, where a hard cut showed).
+ */
 export const horizonFragment = /* glsl */ `
 uniform vec3 uColor;
 uniform float uIntensity;
 varying vec2 vUv;
 varying vec3 vWorld;
 void main() {
-  float band = exp(-pow(vUv.y * 3.4, 2.0));
+  float band = exp(-pow(vUv.y * 3.4, 2.0)) * smoothstep(0.0, 0.12, vUv.y);
   float spread = exp(-pow(vWorld.x * 0.093, 2.0));
   float edge = 1.0 - smoothstep(0.3, 0.48, abs(vUv.x - 0.5));
   vec3 col = uColor * band * spread * edge * 0.55 * uIntensity;

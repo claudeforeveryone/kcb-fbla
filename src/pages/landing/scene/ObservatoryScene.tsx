@@ -106,6 +106,10 @@ export type ObservatorySceneProps = {
   onSettled: () => void;
   /** the frame rate stayed too low: step down a tier */
   onDecline: () => void;
+  /** the arches to stand up; by default the tier's own (the stills render a phone's five with full-tier glass) */
+  colonnade?: ColonnadeSpec;
+  /** a fixed pixel ratio instead of the tier's range (the stills render at 2x) */
+  dpr?: number;
 };
 
 /** Everything below the stage's top surface is cut away, so glass rising out of the floor never shows under the disc. */
@@ -341,17 +345,29 @@ const PANELS: Panel[] = [
 ];
 
 /**
+ * The closing scene's camera stands low at the front right, where the studio has only the blue fill: the brass rings
+ * reflected it as dark olive and the crystal's camera-side facets as flat tan. A warm card on that side (a
+ * photographer's fill) gives them gold to reflect, as the hero's camera gets from the panels behind and above it.
+ */
+const CLOSE_FILL: Panel = {
+  color: GOLD_SOFT,
+  intensity: 3,
+  position: [4.5, 1.6, 6.5],
+  scale: [5, 5, 1],
+};
+
+/**
  * Bakes the studio panels into the scene's environment map once, before anything compiles. The same picture drei's
  * Environment and Lightformer made, built with three's own PMREMGenerator: drei's Environment brought HDR, EXR and
  * gain-map loaders (about 15 KB gzip) that a room lit by four flat panels never uses.
  */
-function StudioEnvironment() {
+function StudioEnvironment({ variant }: { variant: SceneVariant }) {
   const gl = useThree((s) => s.gl);
   const scene = useThree((s) => s.scene);
   useLayoutEffect(() => {
     const studio = new Scene();
     const parts: Array<{ dispose: () => void }> = [];
-    for (const p of PANELS) {
+    for (const p of variant === "close" ? [...PANELS, CLOSE_FILL] : PANELS) {
       const geo = p.ring
         ? new RingGeometry(0.25, 0.5, 64)
         : new PlaneGeometry(1, 1);
@@ -376,7 +392,7 @@ function StudioEnvironment() {
       if (scene.environment === env.texture) scene.environment = null;
       env.dispose();
     };
-  }, [gl, scene]);
+  }, [gl, scene, variant]);
   return null;
 }
 
@@ -447,6 +463,7 @@ function beamGeometry(
 type RoomProps = {
   tier: SceneTier;
   variant: SceneVariant;
+  colonnade?: ColonnadeSpec;
   animate: boolean;
   onReady: () => void;
   onSettled: () => void;
@@ -461,6 +478,7 @@ type RoomProps = {
 function Room({
   tier,
   variant,
+  colonnade,
   animate,
   onReady,
   onSettled,
@@ -470,7 +488,8 @@ function Room({
   frontRef,
   lightRef,
 }: RoomProps) {
-  const spec: ColonnadeSpec = tier === "full" ? COLONNADE_FULL : COLONNADE_LITE;
+  const spec: ColonnadeSpec =
+    colonnade ?? (tier === "full" ? COLONNADE_FULL : COLONNADE_LITE);
   const samples = tier === "full" ? 6 : 3;
   const arches = useMemo(() => archLayout(spec), [spec]);
   const size = useThree((s) => s.size);
@@ -493,6 +512,19 @@ function Room({
     [arches],
   );
   const crystalGeo = useMemo(() => crystalGeometry(), []);
+  const coreRef = useRef<Mesh | null>(null);
+  const coreGeo = useMemo(
+    () => new CylinderGeometry(0.07, 0.07, ROOM.crystal.height * 1.1, 16),
+    [],
+  );
+  const coreMat = useMemo(
+    () =>
+      new MeshBasicMaterial({
+        color: new Color(GOLD_HOT).multiplyScalar(2.2),
+        toneMapped: false,
+      }),
+    [],
+  );
   const stageGeo = useMemo(
     () =>
       new CylinderGeometry(
@@ -603,6 +635,7 @@ function Room({
     () => () => {
       [
         crystalGeo,
+        coreGeo,
         stageGeo,
         inlayGeo,
         floorGeo,
@@ -610,8 +643,19 @@ function Room({
         horizonGeo,
         ...ringGeos,
       ].forEach((g) => g.dispose());
+      coreMat.dispose();
     },
-    [crystalGeo, stageGeo, inlayGeo, floorGeo, slitGeo, horizonGeo, ringGeos],
+    [
+      crystalGeo,
+      coreGeo,
+      coreMat,
+      stageGeo,
+      inlayGeo,
+      floorGeo,
+      slitGeo,
+      horizonGeo,
+      ringGeos,
+    ],
   );
 
   // pointer parallax: desktop, full tier, hero, moving only
@@ -696,6 +740,11 @@ function Room({
       c.rotation.y = t * 0.16 + (1 - up) * 1.4;
       const s = 0.55 + 0.45 * up;
       c.scale.setScalar(s);
+      const core = coreRef.current;
+      if (core) {
+        core.position.copy(c.position);
+        core.scale.setScalar(s);
+      }
     }
 
     // armillary rings swing from flat to their tilts, then drift
@@ -749,7 +798,7 @@ function Room({
           on the glass and brass comes from the environment; the gold on the stage comes from the caustics. */}
       <directionalLight position={[-4, 5, 8]} intensity={0.35} color={ICE} />
 
-      <StudioEnvironment />
+      <StudioEnvironment variant={variant} />
 
       {/* light source behind the colonnade */}
       <mesh
@@ -844,14 +893,17 @@ function Room({
           geometry={crystalGeo}
           position={[0, 0.25, ROOM.crystal.position[2]]}
         >
-          <Glass
-            samples={samples}
-            reeded={false}
-            warm
-            glow={variant === "close" ? 0.35 : 0.06}
-          />
+          <Glass samples={samples} reeded={false} warm />
         </mesh>
       </group>
+
+      {/* The crystal's light. In the hero the slit stands behind the crystal and its faces bend that gold toward the
+          camera; the closing scene's low camera sees navy behind it instead, and the quartz read as a flat tan
+          block. A thin hot core inside it, in the refraction buffer (outside the glass group), gives every facet
+          gold to carry. In the main pass the crystal's own faces cover it. */}
+      {variant === "close" && (
+        <mesh ref={coreRef} geometry={coreGeo} material={coreMat} />
+      )}
     </>
   );
 }
@@ -933,6 +985,8 @@ export default function ObservatoryScene({
   onReady,
   onSettled,
   onDecline,
+  colonnade,
+  dpr: fixedDpr,
 }: ObservatorySceneProps) {
   const age = useRef(0);
   const [compiled, setCompiled] = useState(false);
@@ -941,7 +995,8 @@ export default function ObservatoryScene({
   const [effectsOn, setEffectsOn] = useState(tier !== "full");
   const onCompiled = useCallback(() => setCompiled(true), []);
   const onEffects = useCallback(() => setEffectsOn(true), []);
-  const dpr: [number, number] = tier === "full" ? [1, 1.75] : [1, 1.5];
+  const dpr: number | [number, number] =
+    fixedDpr ?? (tier === "full" ? [1, 1.75] : [1, 1.5]);
   const frameloop =
     !compiled || !effectsOn
       ? "never"
@@ -974,6 +1029,7 @@ export default function ObservatoryScene({
       <BufferRoot
         tier={tier}
         variant={variant}
+        colonnade={colonnade}
         animate={animate}
         onReady={onReady}
         onSettled={onSettled}
