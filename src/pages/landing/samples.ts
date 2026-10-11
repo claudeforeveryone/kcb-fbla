@@ -1,5 +1,8 @@
-// Three real questions for the landing's sample run, copied with their keys from the public banks in content/
-// (samples.test.ts fails if any of them drifts from its bank). Nothing a visitor does with them is sent anywhere.
+// Three questions for the landing's sample run, written for this page only and kept out of the question banks
+// (samples.test.ts checks every bank). A visitor sees their keys before joining, so if they were bank items, the
+// member's first rated try at them would be free Elo, outside the rule that a question whose key you have seen does not
+// move your rating. They follow the banks' events, competency areas and difficulty levels. Nothing a visitor does with
+// them is sent anywhere.
 
 import type { Diff } from "../../lib/elo";
 
@@ -17,44 +20,44 @@ export type SampleQuestion = {
 
 export const SAMPLE_QUESTIONS: SampleQuestion[] = [
   {
-    id: "acc-010",
+    id: "landing-accounting",
     event: "accounting",
     eventName: "Accounting",
     sub: "Foundations of Accounting",
     diff: 2,
-    q: "Land is bought for $300,000, with a $25,000 title search and a $5,000 legal fee to acquire it. What is the recorded cost of the land under U.S. GAAP?",
-    choices: ["$300,000", "$325,000", "$305,000", "$330,000"],
-    answer: 3,
+    q: "A business has assets of $85,000 and liabilities of $30,000. It then borrows $10,000 from a bank and keeps the cash. What is owner's equity after the loan?",
+    choices: ["$45,000", "$65,000", "$55,000", "$95,000"],
+    answer: 2,
     explain:
-      "All costs necessary to get the land ready for use are capitalized: $300,000 + $25,000 + $5,000 = $330,000.",
+      "Borrowing adds $10,000 to cash and $10,000 to liabilities, so equity does not change: $85,000 minus $30,000 is $55,000. A loan is not income.",
   },
   {
-    id: "ent-006",
+    id: "landing-entrepreneurship",
     event: "entrepreneurship",
     eventName: "Entrepreneurship",
-    sub: "Business Plan and Opportunity Assessment",
+    sub: "Financial Management and Initial Capital",
     diff: 3,
-    q: "A product sells for $25 per unit, has a variable cost of $15 per unit and fixed costs of $12,000 per year. How many units must be sold to break even?",
-    choices: ["480 units", "1,200 units", "600 units", "1,800 units"],
-    answer: 1,
+    q: "A retailer pays $40 for a product and wants a 20 percent profit margin on the selling price. What price should it charge?",
+    choices: ["$48", "$60", "$52", "$50"],
+    answer: 3,
     explain:
-      "Contribution per unit is $25 minus $15, or $10, so $12,000 divided by $10 is 1,200 units. Dividing by the $25 price gives the wrong answer of 480.",
+      "A margin is a share of the selling price, so the $40 cost must be 80 percent of the price: $40 divided by 0.80 is $50. Adding 20 percent to the cost gives $48, a 20 percent markup but only about a 16.7 percent margin.",
   },
   {
-    id: "law-011",
+    id: "landing-business-law",
     event: "business-law",
     eventName: "Business Law",
-    sub: "Legal systems",
+    sub: "Property laws",
     diff: 2,
-    q: "A court's obligation to follow precedent from earlier decisions on similar facts is known as:",
+    q: "A shop owner who rents her store bolts custom display shelving to the walls for her business. When the lease ends, the shelving is generally:",
     choices: [
-      "Judicial review",
-      "Stare decisis",
-      "Original jurisdiction",
-      "Due process",
+      "Part of the building, owned by the landlord",
+      "A trade fixture she may remove",
+      "An easement held by the landlord",
+      "A lien on the building",
     ],
     answer: 1,
     explain:
-      "Stare decisis means to stand by things decided. Judicial review is the power to strike down laws that violate the Constitution.",
+      "Fixtures a commercial tenant installs for the business are trade fixtures. They stay the tenant's property and may be removed by the end of the lease, as long as she repairs any damage the removal causes.",
   },
 ];

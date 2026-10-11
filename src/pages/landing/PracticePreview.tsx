@@ -1,8 +1,12 @@
 // A three-question sample run inside the room, built from the app's own pieces (Badge, EloBadge,
-// Button, the runner's answer styling) on the app's own white surface. The questions are real bank items; the
-// rating is a sample that starts at 0 like a new member's and moves by the app's Elo rule (src/lib/elo.ts).
-// Nothing is sent or saved.
-import { useState } from "react";
+// Button, the runner's answer styling) on the app's own white surface. The questions are written for this page in the
+// banks' format (samples.ts); the rating is a sample that starts at 0 like a new member's and moves by the app's Elo
+// rule (src/lib/elo.ts). Nothing is sent or saved.
+//
+// Keyboard and screen readers: an answered choice stays focusable (aria-disabled, not disabled), the feedback is
+// announced from a live region that was mounted empty, and moving on puts focus on the next question's heading (or
+// the result), because the old question, and the button that was pressed, are gone.
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -32,6 +36,9 @@ const fresh = (): Run => ({
 
 export function PracticePreview() {
   const [run, setRun] = useState<Run>(fresh);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  // set by Next and Try again: the visitor moved on, so focus follows (never on the first render)
+  const moved = useRef(false);
   const n = SAMPLE_QUESTIONS.length;
   const done = run.index >= n;
   const q = SAMPLE_QUESTIONS[Math.min(run.index, n - 1)];
@@ -64,7 +71,21 @@ export function PracticePreview() {
     });
   };
 
-  const next = () => setRun((r) => ({ ...r, index: r.index + 1 }));
+  const next = () => {
+    moved.current = true;
+    setRun((r) => ({ ...r, index: r.index + 1 }));
+  };
+
+  const again = () => {
+    moved.current = true;
+    setRun(fresh());
+  };
+
+  useEffect(() => {
+    if (!moved.current) return;
+    moved.current = false;
+    headingRef.current?.focus();
+  }, [run.index, done]);
 
   return (
     <div className="obs-app overflow-hidden">
@@ -76,7 +97,7 @@ export function PracticePreview() {
               Sample paper
             </div>
             <div className="truncate text-xs text-muted">
-              Three real questions. Nothing is saved.
+              Three sample questions. Nothing is saved.
             </div>
           </div>
           <span className="tabular hidden text-sm font-semibold text-muted sm:inline">
@@ -105,9 +126,13 @@ export function PracticePreview() {
         {/* each question, and the result, is keyed: it remounts and slides in (obs-swap, obs-swap-x) */}
         {done ? (
           <div key="done" className="obs-swap py-6">
-            <p className="font-display text-xl font-bold text-heading">
+            <h3
+              ref={headingRef}
+              tabIndex={-1}
+              className="font-display text-xl font-bold text-heading outline-none"
+            >
               You got {right} of {n}.
-            </p>
+            </h3>
             <p className="mt-2 max-w-prose text-[0.975rem] text-ink">
               A new member who answered like that would sit at{" "}
               <span className="tabular font-semibold">{shown}</span> Elo now. In
@@ -121,7 +146,7 @@ export function PracticePreview() {
               <Button
                 variant="outline"
                 leftIcon={<RotateCcw className="size-4" aria-hidden />}
-                onClick={() => setRun(fresh())}
+                onClick={again}
               >
                 Try again
               </Button>
@@ -147,7 +172,11 @@ export function PracticePreview() {
               </Badge>
             </div>
 
-            <h3 className="mb-5 text-[1.1rem] font-bold leading-snug text-heading md:text-[1.25rem]">
+            <h3
+              ref={headingRef}
+              tabIndex={-1}
+              className="mb-5 text-[1.1rem] font-bold leading-snug text-heading outline-none md:text-[1.25rem]"
+            >
               {q.q}
             </h3>
 
@@ -167,11 +196,12 @@ export function PracticePreview() {
                     key={c}
                     type="button"
                     aria-pressed={isChosen}
-                    disabled={revealed}
+                    // not `disabled`: that would drop keyboard focus to the page the moment the answer is picked
+                    aria-disabled={revealed || undefined}
                     onClick={() => pick(i)}
                     className={cn(
                       "group flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left transition-[border-color,background-color,opacity] duration-150 ease-out md:px-4",
-                      "disabled:cursor-default",
+                      "aria-disabled:cursor-default",
                       state === "idle" &&
                         "border-line bg-surface hover:border-blue/60 hover:bg-surface-2",
                       state === "right" &&
@@ -215,50 +245,52 @@ export function PracticePreview() {
               })}
             </div>
 
-            {revealed && (
-              <div
-                className={cn(
-                  "obs-swap mt-4 rounded-[4px] border p-4",
-                  chosen === q.answer
-                    ? "border-success/30 bg-success/[0.06]"
-                    : "border-red/25 bg-red/[0.04]",
-                )}
-                role="status"
-              >
-                <div className="flex flex-wrap items-center gap-2 font-display font-bold">
-                  {chosen === q.answer ? (
-                    <>
-                      <CheckCircle2
-                        className="size-5 text-success"
-                        aria-hidden
-                      />
-                      <span className="text-success">Correct</span>
-                    </>
-                  ) : (
-                    <>
-                      <XCircle
-                        className="size-5 text-red dark:text-danger"
-                        aria-hidden
-                      />
-                      <span className="text-red dark:text-danger">
-                        Not quite. The answer is {LETTERS[q.answer]}.
-                      </span>
-                    </>
+            {/* mounted empty with each question, so filling it is announced */}
+            <div role="status">
+              {revealed && (
+                <div
+                  className={cn(
+                    "obs-swap mt-4 rounded-[4px] border p-4",
+                    chosen === q.answer
+                      ? "border-success/30 bg-success/[0.06]"
+                      : "border-red/25 bg-red/[0.04]",
                   )}
-                  <span className="tabular ml-auto text-sm font-semibold text-muted">
-                    {delta > 0 ? `+${delta}` : delta} Elo
-                  </span>
+                >
+                  <div className="flex flex-wrap items-center gap-2 font-display font-bold">
+                    {chosen === q.answer ? (
+                      <>
+                        <CheckCircle2
+                          className="size-5 text-success"
+                          aria-hidden
+                        />
+                        <span className="text-success">Correct</span>
+                      </>
+                    ) : (
+                      <>
+                        <XCircle
+                          className="size-5 text-red dark:text-danger"
+                          aria-hidden
+                        />
+                        <span className="text-red dark:text-danger">
+                          Not quite. The answer is {LETTERS[q.answer]}.
+                        </span>
+                      </>
+                    )}
+                    <span className="tabular ml-auto text-sm font-semibold text-muted">
+                      {delta > 0 ? `+${delta}` : delta} Elo
+                    </span>
+                  </div>
+                  <p className="mt-2 text-[0.95rem] leading-relaxed text-ink">
+                    {q.explain}
+                  </p>
+                  <p className="mt-2 text-xs text-muted">
+                    {delta === 0 && chosen !== q.answer
+                      ? "Ratings never go below 0, so a miss costs nothing yet."
+                      : `First try at a ${DIFFICULTY_LABELS[q.diff].toLowerCase()} question. A repeat would not move Elo.`}
+                  </p>
                 </div>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-ink">
-                  {q.explain}
-                </p>
-                <p className="mt-2 text-xs text-muted">
-                  {delta === 0 && chosen !== q.answer
-                    ? "Ratings never go below 0, so a miss costs nothing yet."
-                    : `First try at a ${DIFFICULTY_LABELS[q.diff].toLowerCase()} question. A repeat would not move Elo.`}
-                </p>
-              </div>
-            )}
+              )}
+            </div>
 
             <div className="mt-5 flex justify-end">
               <Button

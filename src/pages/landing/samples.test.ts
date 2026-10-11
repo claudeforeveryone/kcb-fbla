@@ -22,21 +22,43 @@ const banks: Record<string, Bank> = Object.fromEntries(
   Object.values(files).map((b) => [b.slug, b]),
 );
 
+const allBankQuestions = Object.values(files).flatMap((b) => b.questions);
+
 describe("sample questions", () => {
-  it("are word for word the items in their banks, keys included", () => {
+  it("are written for the landing: no id or question from any bank", () => {
+    // a visitor sees these keys before joining; if they were bank items, their first rated try would be free points
+    for (const s of SAMPLE_QUESTIONS) {
+      expect(
+        allBankQuestions.find((q) => q.id === s.id),
+        s.id,
+      ).toBeUndefined();
+      const text = s.q.trim().toLowerCase();
+      expect(
+        allBankQuestions.find((q) => q.q.trim().toLowerCase() === text),
+        s.id,
+      ).toBeUndefined();
+    }
+  });
+
+  it("name a real event and one of its real competency areas", () => {
     for (const s of SAMPLE_QUESTIONS) {
       const bank = banks[s.event];
       expect(bank, s.event).toBeDefined();
       expect(s.eventName).toBe(bank.name);
       expect(eventBySlug(s.event)?.name).toBe(bank.name);
-      const q = bank.questions.find((x) => x.id === s.id);
-      expect(q, s.id).toBeDefined();
-      expect(s.q).toBe(q!.q);
-      expect(s.choices).toEqual(q!.choices);
-      expect(s.answer).toBe(q!.answer);
-      expect(s.explain).toBe(q!.explain);
-      expect(s.sub).toBe(q!.sub);
-      expect(s.diff).toBe(q!.diff);
+      expect(new Set(bank.questions.map((q) => q.sub)).has(s.sub), s.sub).toBe(
+        true,
+      );
+    }
+  });
+
+  it("each have four different choices, one keyed answer and an explanation", () => {
+    for (const s of SAMPLE_QUESTIONS) {
+      expect(s.choices).toHaveLength(4);
+      expect(new Set(s.choices).size).toBe(4);
+      expect(s.answer).toBeGreaterThanOrEqual(0);
+      expect(s.answer).toBeLessThan(4);
+      expect(s.explain.length).toBeGreaterThan(40);
     }
   });
 

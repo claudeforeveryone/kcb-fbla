@@ -281,7 +281,7 @@ function Landing() {
         </div>
       </section>
 
-      {/* a real question */}
+      {/* a sample paper */}
       <section
         id="preview"
         aria-labelledby="preview-title"
@@ -290,16 +290,18 @@ function Landing() {
         <div className="obs-wrap grid items-start gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-20">
           <div className="lg:pt-6">
             <h2 id="preview-title" className="obs-h2">
-              Try a real question.
+              Try a sample question.
             </h2>
             <p className="obs-body mt-6">
-              Three items from the Accounting, Entrepreneurship and Business Law
-              banks, with the feedback the app gives after every answer.
+              Three questions written in the style of the Accounting,
+              Entrepreneurship and Business Law banks, with the feedback the app
+              gives after every answer.
             </p>
             <p className="obs-small mt-4 max-w-[48ch]">
-              The rating here is a sample. It starts at 0, like a new member’s,
-              and moves by the same rule the app uses. Nothing you click is
-              saved.
+              They are not in the banks, so you won’t meet them again in the
+              app. The rating here is a sample: it starts at 0, like a new
+              member’s, and moves by the same rule the app uses. Nothing you
+              click is saved.
             </p>
           </div>
           <PracticePreview />
