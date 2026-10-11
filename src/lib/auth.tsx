@@ -56,11 +56,12 @@ type AuthContextValue = {
   /** Optimistically merge fields into the cached profile (after a successful update elsewhere). */
   patchProfile: (patch: Partial<AuthProfile>) => void;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<SignUpResult>;
+  /** `next`: the in-app page to land on after onboarding, carried through the confirmation email. */
+  signUp: (email: string, password: string, next?: string) => Promise<SignUpResult>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updatePassword: (password: string) => Promise<void>;
-  resendConfirmation: (email: string) => Promise<void>;
+  resendConfirmation: (email: string, next?: string) => Promise<void>;
   createProfile: (p: NewProfile) => Promise<AuthProfile | null>;
 };
 
@@ -216,11 +217,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [loadFor],
   );
 
-  const signUp = useCallback(async (email: string, password: string): Promise<SignUpResult> => {
+  const signUp = useCallback(async (email: string, password: string, next?: string): Promise<SignUpResult> => {
     const { data, error } = await supabase.auth.signUp({
       email: email.trim(),
       password,
-      options: { emailRedirectTo: appUrl('onboarding') },
+      options: { emailRedirectTo: appUrl(confirmRedirectPath(next)) },
     });
     if (error) throw toAuthError(error, 'signup');
     // Supabase returns a user with no identities when the email is already registered (and confirmations are on).
@@ -254,11 +255,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setRecovering(false);
   }, []);
 
-  const resendConfirmation = useCallback(async (email: string) => {
+  const resendConfirmation = useCallback(async (email: string, next?: string) => {
     const { error } = await supabase.auth.resend({
       type: 'signup',
       email: email.trim(),
-      options: { emailRedirectTo: appUrl('onboarding') },
+      options: { emailRedirectTo: appUrl(confirmRedirectPath(next)) },
     });
     if (error) throw toAuthError(error, 'resend');
   }, []);
@@ -362,6 +363,17 @@ export function RedirectIfAuthed({ children }: { children: ReactNode }) {
     return <Navigate to={profile ? next : `/onboarding?next=${encodeURIComponent(next)}`} replace />;
   }
   return <>{children}</>;
+}
+
+/**
+ * Where a confirmation email's link lands (relative to the app): onboarding, carrying `next` so a visitor who signed
+ * up from a page (the landing's "Practise <event>", a chapter invite) gets there once their profile exists. Onboarding
+ * reads `next` through safeNext. Supabase accepts any path on the Site URL's host; if a deploy's allow list refused
+ * the query, it would fall back to the Site URL, which still sends a new account to onboarding.
+ */
+export function confirmRedirectPath(next?: string | null): string {
+  const to = safeNext(next);
+  return to === '/' ? 'onboarding' : `onboarding?next=${encodeURIComponent(to)}`;
 }
 
 /** Only allow in-app relative redirects. */

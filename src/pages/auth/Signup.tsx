@@ -48,7 +48,7 @@ export default function Signup() {
     setError(null);
     setErrorKind('other');
     try {
-      const { needsConfirmation } = await signUp(email, password);
+      const { needsConfirmation } = await signUp(email, password, next);
       if (needsConfirmation) setSentTo(email.trim());
       else navigate(`/onboarding?next=${encodeURIComponent(next)}`, { replace: true });
     } catch (err) {
@@ -59,7 +59,7 @@ export default function Signup() {
     }
   };
 
-  if (sentTo) return <CheckInbox email={sentTo} onBack={() => setSentTo(null)} />;
+  if (sentTo) return <CheckInbox email={sentTo} next={next} onBack={() => setSentTo(null)} />;
 
   return (
     <AuthLayout
@@ -154,7 +154,7 @@ export default function Signup() {
   );
 }
 
-function CheckInbox({ email, onBack }: { email: string; onBack: () => void }) {
+function CheckInbox({ email, next, onBack }: { email: string; next: string; onBack: () => void }) {
   const { resendConfirmation } = useAuth();
   const toast = useToast();
   const [cooldown, setCooldown] = useState(45);
@@ -169,7 +169,7 @@ function CheckInbox({ email, onBack }: { email: string; onBack: () => void }) {
   const resend = async () => {
     setBusy(true);
     try {
-      await resendConfirmation(email);
+      await resendConfirmation(email, next);
       toast.success('Email sent again', `Check ${email} (and your spam folder).`);
       setCooldown(60);
     } catch (e) {
