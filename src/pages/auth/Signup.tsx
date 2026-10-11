@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Mail, MailCheck, RefreshCw } from 'lucide-react';
-import { safeNext, useAuth } from '../../lib/auth';
+import { authErrorKind, safeNext, useAuth, type AuthErrorKind } from '../../lib/auth';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Field';
 import { useToast } from '../../components/ui/Toast';
@@ -19,6 +19,7 @@ export default function Signup() {
   const [confirm, setConfirm] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errorKind, setErrorKind] = useState<AuthErrorKind>('other');
   const [touched, setTouched] = useState(false);
   const [sentTo, setSentTo] = useState<string | null>(null);
 
@@ -35,12 +36,14 @@ export default function Signup() {
     if (!valid) return;
     setBusy(true);
     setError(null);
+    setErrorKind('other');
     try {
       const { needsConfirmation } = await signUp(email, password);
       if (needsConfirmation) setSentTo(email.trim());
       else navigate(`/onboarding?next=${encodeURIComponent(next)}`, { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not create your account.');
+      setErrorKind(authErrorKind(err));
     } finally {
       setBusy(false);
     }
@@ -65,10 +68,19 @@ export default function Signup() {
         {error && (
           <div role="alert" className="animate-rise rounded-[4px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
             {error}{' '}
-            {error.includes('already exists') && (
+            {errorKind === 'exists' && (
               <Link to="/login" className="link">
                 Sign in
               </Link>
+            )}
+            {(errorKind === 'email_limit' || errorKind === 'email_cooldown') && (
+              <span className="mt-1.5 block font-normal text-ink">
+                Already got a confirmation email from us earlier?{' '}
+                <Link to="/login" className="link">
+                  Sign in
+                </Link>{' '}
+                instead.
+              </span>
             )}
           </div>
         )}

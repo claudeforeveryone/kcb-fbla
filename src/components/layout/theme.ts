@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export type ThemePref = 'light' | 'dark' | 'system';
-const KEY = 'kcbfbla:theme';
+// New key so any older saved choice ("Auto"/dark) is dropped and everyone starts on white.
+const KEY = 'fblc:theme';
 
 function read(): ThemePref {
   try {
     const v = localStorage.getItem(KEY);
-    if (v === 'light' || v === 'dark' || v === 'system') return v;
+    if (v === 'light' || v === 'dark') return v;
   } catch {
     /* storage blocked */
   }

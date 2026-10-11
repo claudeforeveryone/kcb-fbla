@@ -74,18 +74,77 @@ async function fetchProfile(uid: string): Promise<AuthProfile | null> {
   return (data as AuthProfile | null) ?? null;
 }
 
-/** Friendlier copy for common Supabase auth errors. */
-export function authErrorMessage(e: unknown): string {
-  const msg = e && typeof e === 'object' && 'message' in e ? String((e as { message: unknown }).message) : String(e ?? '');
+/** Which auth action failed; the same Supabase error needs different advice per flow. */
+export type AuthAction = 'signin' | 'signup' | 'resend' | 'reset' | 'update';
+
+/**
+ * Stable kinds the auth pages branch on:
+ * - email_limit: the project's hourly confirmation/reset email quota is used up (Supabase `over_email_send_rate_limit`).
+ * - email_cooldown: the per-address "wait N seconds before another email" guard.
+ * - request_limit: too many requests from this network (`over_request_rate_limit`).
+ * - not_confirmed: the account exists but the email was never confirmed.
+ */
+export type AuthErrorKind = 'email_limit' | 'email_cooldown' | 'request_limit' | 'not_confirmed' | 'exists' | 'other';
+
+export class AuthFlowError extends Error {
+  readonly kind: AuthErrorKind;
+  constructor(message: string, kind: AuthErrorKind) {
+    super(message);
+    this.name = 'AuthFlowError';
+    this.kind = kind;
+  }
+}
+
+function classify(e: unknown): { kind: AuthErrorKind; msg: string; wait: number | null } {
+  const o = e && typeof e === 'object' ? (e as { message?: unknown; code?: unknown; status?: unknown }) : null;
+  const msg = o && 'message' in o ? String(o.message ?? '') : String(e ?? '');
+  const code = o && typeof o.code === 'string' ? o.code : '';
   const m = msg.toLowerCase();
+  const waitMatch = /after (\d+) seconds?/.exec(m);
+  const wait = waitMatch ? Number(waitMatch[1]) : null;
+  if (code === 'over_email_send_rate_limit' || m.includes('email rate limit'))
+    return { kind: wait != null ? 'email_cooldown' : 'email_limit', msg, wait };
+  if (wait != null && m.includes('for security purposes')) return { kind: 'email_cooldown', msg, wait };
+  if (code === 'over_request_rate_limit' || m.includes('rate limit') || m.includes('too many'))
+    return { kind: 'request_limit', msg, wait };
+  if (code === 'email_not_confirmed' || m.includes('email not confirmed')) return { kind: 'not_confirmed', msg, wait };
+  if (code === 'user_already_exists' || code === 'email_exists' || m.includes('already registered') || m.includes('already been registered'))
+    return { kind: 'exists', msg, wait };
+  return { kind: 'other', msg, wait };
+}
+
+/** Friendlier copy for common Supabase auth errors. */
+export function authErrorMessage(e: unknown, action: AuthAction = 'signin'): string {
+  const { kind, msg, wait } = classify(e);
+  const m = msg.toLowerCase();
+  switch (kind) {
+    case 'email_limit':
+      if (action === 'signup')
+        return 'Sign-ups are busy right now: we hit our hourly limit for sending confirmation emails, so your account was not created yet. Please try again in about an hour.';
+      if (action === 'reset') return 'We hit our hourly limit for sending emails. Please request a reset link again in about an hour.';
+      return 'We hit our hourly limit for sending emails. Please try again in about an hour.';
+    case 'email_cooldown':
+      return `We just sent an email to this address. Wait ${wait ?? 60} seconds before asking for another one.`;
+    case 'request_limit':
+      return 'Too many attempts from this network. Wait a few minutes and try again.';
+    case 'not_confirmed':
+      return 'Please confirm your email first. Check your inbox (and spam) for the link, or send a new one below.';
+    case 'exists':
+      return 'An account with this email already exists. Try signing in instead.';
+  }
   if (m.includes('invalid login credentials')) return 'That email and password do not match. Try again or reset your password.';
-  if (m.includes('email not confirmed')) return 'Please confirm your email first. Check your inbox for the link.';
-  if (m.includes('already registered') || m.includes('already been registered'))
-    return 'An account with this email already exists. Try signing in instead.';
   if (m.includes('password should be') || m.includes('weak password')) return 'Choose a stronger password: at least 8 characters.';
-  if (m.includes('rate limit') || m.includes('too many')) return 'Too many attempts. Wait a minute and try again.';
   if (m.includes('failed to fetch') || m.includes('network')) return 'Could not reach the server. Check your connection.';
   return msg || 'Something went wrong. Please try again.';
+}
+
+function toAuthError(e: unknown, action: AuthAction): AuthFlowError {
+  return new AuthFlowError(authErrorMessage(e, action), classify(e).kind);
+}
+
+/** The AuthErrorKind of an error thrown by useAuth() actions ('other' for anything else). */
+export function authErrorKind(e: unknown): AuthErrorKind {
+  return e instanceof AuthFlowError ? e.kind : 'other';
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -147,7 +206,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signIn = useCallback(
     async (email: string, password: string) => {
       const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
-      if (error) throw new Error(authErrorMessage(error));
+      if (error) throw toAuthError(error, 'signin');
       setSession(data.session);
       await loadFor(data.user?.id ?? null);
     },
@@ -160,10 +219,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password,
       options: { emailRedirectTo: appUrl('onboarding') },
     });
-    if (error) throw new Error(authErrorMessage(error));
+    if (error) throw toAuthError(error, 'signup');
     // Supabase returns a user with no identities when the email is already registered (and confirmations are on).
     if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0)
-      throw new Error('An account with this email already exists. Try signing in instead.');
+      throw new AuthFlowError('An account with this email already exists. Try signing in instead.', 'exists');
     if (data.session) {
       setSession(data.session);
       uidRef.current = data.session.user.id;
@@ -183,12 +242,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const resetPassword = useCallback(async (email: string) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: appUrl('reset/update') });
-    if (error) throw new Error(authErrorMessage(error));
+    if (error) throw toAuthError(error, 'reset');
   }, []);
 
   const updatePassword = useCallback(async (password: string) => {
     const { error } = await supabase.auth.updateUser({ password });
-    if (error) throw new Error(authErrorMessage(error));
+    if (error) throw toAuthError(error, 'update');
     setRecovering(false);
   }, []);
 
@@ -198,7 +257,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       email: email.trim(),
       options: { emailRedirectTo: appUrl('onboarding') },
     });
-    if (error) throw new Error(authErrorMessage(error));
+    if (error) throw toAuthError(error, 'resend');
   }, []);
 
   const createProfile = useCallback(

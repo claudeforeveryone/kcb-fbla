@@ -433,10 +433,9 @@ function AppearanceSection() {
   const options: { value: ThemePref; label: string; preview: string }[] = [
     { value: 'light', label: 'Light', preview: 'bg-[#F5F7FB]' },
     { value: 'dark', label: 'Dark', preview: 'bg-[#0A1230]' },
-    { value: 'system', label: 'Auto', preview: 'bg-[#F5F7FB]' },
   ];
   return (
-    <SettingsCard id="appearance" title="Appearance" description="Saved on this device. Auto follows your system setting.">
+    <SettingsCard id="appearance" title="Appearance" description="Saved on this device. Light is the default.">
       <div role="radiogroup" aria-label="Theme" className="grid grid-cols-3 gap-3">
         {options.map((o) => {
           const active = theme === o.value;
@@ -453,7 +452,6 @@ function AppearanceSection() {
               )}
             >
               <span className={cn('relative block h-16 overflow-hidden rounded-lg ring-1 ring-inset ring-line sm:h-20', o.preview)}>
-                {o.value === 'system' && <span className="absolute inset-y-0 right-0 w-1/2 bg-[#0A1230]" />}
                 <span className="absolute inset-x-0 top-0 h-3 bg-[#001E60]" />
                 <span className="absolute left-2 top-5 h-2 w-1/2 bg-[#3F6FB3]/70" />
                 <span className="absolute left-2 top-9 h-2 w-1/3 bg-[#BF0D3E]/70" />

@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { BarChart3, ChevronDown, LogOut, Monitor, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
+import { BarChart3, ChevronDown, LogOut, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
 import { Avatar } from '../ui/Avatar';
 import { buttonClasses } from '../ui/Button';
@@ -117,7 +117,6 @@ function SignedOutActions({ pathname }: { pathname: string }) {
 const themeOptions: { value: ThemePref; label: string; icon: typeof Sun }[] = [
   { value: 'light', label: 'Light', icon: Sun },
   { value: 'dark', label: 'Dark', icon: Moon },
-  { value: 'system', label: 'Auto', icon: Monitor },
 ];
 
 function UserMenu() {
