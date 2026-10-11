@@ -113,7 +113,7 @@ export function AuthLayout({
   );
 }
 
-/** Credits and legal links under the auth forms (these pages have no app footer). */
+/** Credits and legal links under the auth forms (these pages have no app footer). New tab, so a typed form survives. */
 function AuthFooter() {
   const link = 'inline-flex min-h-10 items-center px-2 font-semibold text-muted underline-offset-4 hover:text-ink hover:underline';
   return (
@@ -124,11 +124,11 @@ function AuthFooter() {
         by Joseph &amp; Kaden
       </span>
       <nav aria-label="Legal" className="flex">
-        <Link to="/terms" className={link}>
-          Terms
+        <Link to="/terms" target="_blank" rel="noopener" className={link}>
+          Terms<span className="sr-only"> of use (opens in a new tab)</span>
         </Link>
-        <Link to="/privacy" className={link}>
-          Privacy
+        <Link to="/privacy" target="_blank" rel="noopener" className={link}>
+          Privacy<span className="sr-only"> policy (opens in a new tab)</span>
         </Link>
       </nav>
     </footer>

@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Mail, MailCheck, RefreshCw } from 'lucide-react';
 import { authErrorKind, safeNext, useAuth, type AuthErrorKind } from '../../lib/auth';
+import { useHydrated } from '../../lib/hydration';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Field';
 import { useToast } from '../../components/ui/Toast';
@@ -14,6 +15,8 @@ export default function Signup() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const next = safeNext(params.get('next'));
+  // This page is prerendered without a query string: add ?next= only once hydrated, or the link keeps the bare href.
+  const nextQuery = useHydrated() && params.get('next') ? `?next=${encodeURIComponent(next)}` : '';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -58,7 +61,7 @@ export default function Signup() {
       footer={
         <>
           Already have an account?{' '}
-          <Link to={`/login${params.get('next') ? `?next=${encodeURIComponent(next)}` : ''}`} className="link">
+          <Link to={`/login${nextQuery}`} className="link">
             Sign in
           </Link>
         </>
@@ -122,13 +125,14 @@ export default function Signup() {
           Create account
         </Button>
         <p className="text-center text-sm leading-relaxed text-muted">
+          {/* New tab: reading the terms must not wipe the half-filled form. */}
           By creating an account you agree to the{' '}
-          <Link to="/terms" className="link underline">
-            Terms of use
+          <Link to="/terms" target="_blank" rel="noopener" className="link underline">
+            Terms of use<span className="sr-only"> (opens in a new tab)</span>
           </Link>{' '}
           and{' '}
-          <Link to="/privacy" className="link underline">
-            Privacy policy
+          <Link to="/privacy" target="_blank" rel="noopener" className="link underline">
+            Privacy policy<span className="sr-only"> (opens in a new tab)</span>
           </Link>
           . Under 13? Ask a parent or guardian first.
         </p>

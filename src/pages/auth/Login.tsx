@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Mail, RefreshCw } from 'lucide-react';
 import { authErrorKind, safeNext, useAuth, type AuthErrorKind } from '../../lib/auth';
+import { useHydrated } from '../../lib/hydration';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Field';
 import { useToast } from '../../components/ui/Toast';
@@ -12,6 +13,8 @@ export default function Login() {
   const toast = useToast();
   const [params] = useSearchParams();
   const next = safeNext(params.get('next'));
+  // This page is prerendered without a query string: add ?next= only once hydrated, or the link keeps the bare href.
+  const nextQuery = useHydrated() && params.get('next') ? `?next=${encodeURIComponent(next)}` : '';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
@@ -62,7 +65,7 @@ export default function Login() {
       footer={
         <>
           New to FBLC?{' '}
-          <Link to={`/signup${params.get('next') ? `?next=${encodeURIComponent(next)}` : ''}`} className="link">
+          <Link to={`/signup${nextQuery}`} className="link">
             Create an account
           </Link>
         </>
