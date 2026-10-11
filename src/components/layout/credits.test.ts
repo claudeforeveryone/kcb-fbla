@@ -30,7 +30,7 @@ const spokenText = (markup: string) =>
 describe('credit line', () => {
   const cases: Array<[string, ReactElement]> = [
     ['app footer', createElement(Footer)],
-    ['sign-in and sign-up pages', createElement(AuthLayout, { title: 'Welcome back' }, 'form')],
+    ['sign-in and sign-up pages', createElement(AuthLayout, { title: 'Welcome back', children: 'form' })],
   ];
 
   it.each(cases)('%s keeps a space on both sides of the heart', (_, el) => {
