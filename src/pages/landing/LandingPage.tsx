@@ -256,7 +256,9 @@ function Landing() {
             </p>
             <p className="obs-small mt-6 max-w-[52ch]">
               Questions are written for study from FBLA’s published competency
-              areas. They are not official FBLA or FBLC test items.
+              areas, or a standard course outline where FBLA’s guideline
+              couldn’t be checked. They are not official FBLA or FBLC test
+              items.
             </p>
           </div>
           <div className="obs-ledger">

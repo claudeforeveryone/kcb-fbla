@@ -18,6 +18,11 @@ export type LandingEvent = {
   areas: string[];
   /** set when the event has an eligibility limit */
   note?: string;
+  /**
+   * "outline": FBLA's guideline for the event could not be read, so the bank's areas are a standard course outline
+   * (the bank's notes say so). Otherwise they are FBLA's own areas, from its guideline or a state chapter's copy.
+   */
+  areasFrom?: "outline";
 };
 
 export const QUESTIONS_PER_EVENT = 100;
@@ -159,6 +164,7 @@ export const EVENTS: LandingEvent[] = [
     name: "Organizational Leadership",
     format: "objective",
     discipline: "law",
+    areasFrom: "outline",
     areas: [
       "Leadership Concepts and Traits",
       "Motivation and Leadership Theories",
@@ -208,6 +214,7 @@ export const EVENTS: LandingEvent[] = [
     name: "Entrepreneurship",
     format: "case",
     discipline: "markets",
+    areasFrom: "outline",
     areas: [
       "Business Plan and Opportunity Assessment",
       "Marketing Management",
@@ -222,6 +229,7 @@ export const EVENTS: LandingEvent[] = [
     name: "International Business",
     format: "case",
     discipline: "markets",
+    areasFrom: "outline",
     areas: [
       "Global Business Environment",
       "International Trade Theory and Agreements",
@@ -270,6 +278,7 @@ export const EVENTS: LandingEvent[] = [
     name: "Hospitality & Event Management",
     format: "case",
     discipline: "hospitality",
+    areasFrom: "outline",
     areas: [
       "Event Planning and Logistics",
       "Venue Selection and Layout",

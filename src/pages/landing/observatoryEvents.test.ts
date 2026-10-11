@@ -14,6 +14,7 @@ type Bank = {
   name: string;
   group: string;
   subs: string[];
+  notes: string;
   questions: unknown[];
   vocab: unknown[];
 };
@@ -58,6 +59,26 @@ describe("landing event data", () => {
     expect(placed.sort()).toEqual(EVENTS.map((e) => e.slug).sort());
     for (const d of DISCIPLINES)
       expect(eventsIn(d.id).length, d.id).toBeGreaterThan(0);
+  });
+
+  it("flags exactly the events whose areas are a standard outline, not FBLA's (the bank's notes say so)", () => {
+    // the notes of these banks say FBLA's guideline could not be read and the areas are a standard curriculum outline
+    const outline = /areas are (?:therefore )?(?:the )?standard|use the standard/i;
+    const fromNotes = Object.values(banks)
+      .filter((b) => outline.test(b.notes))
+      .map((b) => b.slug)
+      .sort();
+    expect(fromNotes).toEqual([
+      "entrepreneurship",
+      "hospitality-event-management",
+      "international-business",
+      "organizational-leadership",
+    ]);
+    expect(
+      EVENTS.filter((e) => e.areasFrom === "outline")
+        .map((e) => e.slug)
+        .sort(),
+    ).toEqual(fromNotes);
   });
 
   it("builds sign-up links that come back to the event page", () => {

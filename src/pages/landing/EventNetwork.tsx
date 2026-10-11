@@ -290,7 +290,7 @@ function EventFacts({
       </dl>
       <p className="obs-small mt-5">
         {event.format === "objective"
-          ? `A full mock runs ${MOCK_QUESTIONS} questions in ${MOCK_MINUTES} minutes, with these areas weighted like the real test.`
+          ? `A full mock runs ${MOCK_QUESTIONS} questions in ${MOCK_MINUTES} minutes across these areas.`
           : `Case events are judged live, so practice here drills the knowledge behind the case: ${QUESTIONS_PER_EVENT} questions across these areas.`}
       </p>
       <ul className="obs-areas mt-3 grid gap-x-6 gap-y-1.5 text-[14px] leading-snug text-white/85 sm:grid-cols-2">
@@ -298,6 +298,12 @@ function EventFacts({
           <li key={a}>{a}</li>
         ))}
       </ul>
+      {event.areasFrom === "outline" && (
+        <p className="obs-small mt-3">
+          FBLA’s guideline for this event couldn’t be checked, so these areas
+          follow a standard course outline.
+        </p>
+      )}
       <Link
         to={signupFor(event.slug)}
         className={buttonClasses("accent", "md", "mt-7")}
