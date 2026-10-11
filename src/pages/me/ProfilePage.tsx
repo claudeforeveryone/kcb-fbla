@@ -1,6 +1,6 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Check, History, Settings, X } from 'lucide-react';
+import { Check, History, Pencil, X } from 'lucide-react';
 import {
   Avatar,
   Badge,
@@ -18,6 +18,7 @@ import {
   errorMessage,
   useToast,
 } from '../../components/ui';
+import { AvatarUpload } from '../../components/ui/AvatarUpload';
 import { BarChart, Donut, LineChart, RadarChart } from '../../components/charts';
 import { Page } from '../../components/layout/Page';
 import { useAuth } from '../../lib/auth';
@@ -71,6 +72,7 @@ export default function ProfilePage() {
 
 function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   const p = stats.profile;
+  const { profile: me } = useAuth();
   const main = eventInfo(p.main_event);
   const chapRank = useAsync(
     () => (stats.chapter ? chapterRank(stats.chapter.id, p.id) : Promise.resolve(null)),
@@ -86,7 +88,11 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
         size="lg"
         eyebrow={isMe ? 'Your player card' : 'Player card'}
         leading={
-          <Avatar src={p.avatar_url} name={p.display_name} size="2xl" ring className="max-sm:size-20 max-sm:text-2xl" />
+          isMe ? (
+            <AvatarUpload src={me?.avatar_url ?? null} name={p.display_name} size="2xl" ring className="max-sm:size-20 max-sm:text-2xl" />
+          ) : (
+            <Avatar src={p.avatar_url} name={p.display_name} size="2xl" ring className="max-sm:size-20 max-sm:text-2xl" />
+          )
         }
         title={<span className="break-words">{p.display_name}</span>}
         subtitle={
@@ -99,16 +105,16 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
         actions={
           isMe ? (
             <>
-              <ButtonLink to="/me/career" variant="inverse" leftIcon={<History className="size-4" />}>
-                Career
+              <ButtonLink to="/me/settings#profile" variant="inverse" leftIcon={<Pencil className="size-4" />}>
+                Edit profile
               </ButtonLink>
               <ButtonLink
-                to="/me/settings"
+                to="/me/career"
                 variant="ghost"
                 className="text-white hover:bg-white/10"
-                leftIcon={<Settings className="size-4" />}
+                leftIcon={<History className="size-4" />}
               >
-                Edit profile
+                Career
               </ButtonLink>
             </>
           ) : (

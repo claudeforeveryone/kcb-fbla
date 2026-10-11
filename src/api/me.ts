@@ -266,6 +266,103 @@ export const KIND_FILTERS: { value: AttemptKind | 'all'; label: string }[] = [
   { value: 'duel', label: 'Arena duel' },
 ];
 
+// ------------------------------------------------------------------------------------------------ avatar
+
+/** File types the picker accepts. GIFs are left out: the canvas downscale would flatten them anyway. */
+export const AVATAR_ACCEPT = ['image/jpeg', 'image/png', 'image/webp'];
+/** Largest original we accept; it is downscaled to AVATAR_SIZE before upload, so the stored file is tiny. */
+export const AVATAR_INPUT_MAX_BYTES = 5 * 1024 * 1024;
+export const AVATAR_SIZE = 512;
+
+/** Throws a friendly ApiError when the picked file is not a usable photo. */
+export function checkAvatarFile(file: File): void {
+  if (!AVATAR_ACCEPT.includes(file.type)) throw new ApiError('Use a JPG, PNG or WebP image.');
+  if (file.size > AVATAR_INPUT_MAX_BYTES) throw new ApiError('That image is over 5 MB. Pick a smaller one.');
+}
+
+function loadImage(file: Blob): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new ApiError('That file could not be read as an image.'));
+    };
+    img.src = url;
+  });
+}
+
+function canvasBlob(canvas: HTMLCanvasElement, type: string, quality: number): Promise<Blob | null> {
+  return new Promise((resolve) => canvas.toBlob(resolve, type, quality));
+}
+
+/** Center-crops to a square and scales down to at most AVATAR_SIZE px, re-encoded as WebP (JPEG fallback). */
+export async function prepareAvatar(file: File): Promise<Blob> {
+  checkAvatarFile(file);
+  const img = await loadImage(file);
+  const side = Math.min(img.naturalWidth, img.naturalHeight);
+  if (!side) throw new ApiError('That image is empty.');
+  const out = Math.min(AVATAR_SIZE, side);
+  const canvas = document.createElement('canvas');
+  canvas.width = out;
+  canvas.height = out;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new ApiError('Your browser could not resize the image.');
+  ctx.imageSmoothingQuality = 'high';
+  // white under transparent PNGs so the JPEG fallback does not turn them black
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, out, out);
+  const sx = (img.naturalWidth - side) / 2;
+  const sy = (img.naturalHeight - side) / 2;
+  ctx.drawImage(img, sx, sy, side, side, 0, 0, out, out);
+  let blob = await canvasBlob(canvas, 'image/webp', 0.88);
+  if (!blob || blob.type !== 'image/webp') blob = await canvasBlob(canvas, 'image/jpeg', 0.9);
+  if (!blob) throw new ApiError('Your browser could not resize the image.');
+  return blob;
+}
+
+async function clearOldAvatars(uid: string, keep: string | null): Promise<void> {
+  try {
+    const listed = await supabase.storage.from('avatars').list(uid, { limit: 100 });
+    const stale = (listed.data ?? []).map((f) => `${uid}/${f.name}`).filter((p) => p !== keep);
+    if (stale.length) await supabase.storage.from('avatars').remove(stale);
+  } catch {
+    // tidying is best effort
+  }
+}
+
+/**
+ * Uploads a prepared avatar (see prepareAvatar) to avatars/<uid>/, points the profile at it and returns the
+ * new public URL. The URL carries ?v=<timestamp> so browsers and the CDN never show the previous photo.
+ */
+export async function uploadMyAvatar(image: Blob): Promise<string> {
+  const uid = await myUid();
+  const ts = Date.now();
+  const ext = image.type === 'image/webp' ? 'webp' : image.type === 'image/png' ? 'png' : 'jpg';
+  const path = `${uid}/avatar-${ts}.${ext}`;
+  const up = await supabase.storage
+    .from('avatars')
+    .upload(path, image, { contentType: image.type || 'image/jpeg', cacheControl: '31536000', upsert: true });
+  if (up.error) throw new ApiError(up.error.message || 'Upload failed. Try again.');
+  const url = `${supabase.storage.from('avatars').getPublicUrl(path).data.publicUrl}?v=${ts}`;
+  const res = await supabase.from('fbla_profiles').update({ avatar_url: url }).eq('id', uid);
+  if (res.error) throw toApiError(res.error, 'Could not save your photo.');
+  await clearOldAvatars(uid, path);
+  return url;
+}
+
+/** Clears the profile photo and deletes the stored files. */
+export async function removeMyAvatar(): Promise<void> {
+  const uid = await myUid();
+  const res = await supabase.from('fbla_profiles').update({ avatar_url: null }).eq('id', uid);
+  if (res.error) throw toApiError(res.error, 'Could not remove your photo.');
+  await clearOldAvatars(uid, null);
+}
+
 // ------------------------------------------------------------------------------------------------ account
 
 /** Re-checks the current password, then sets the new one. */

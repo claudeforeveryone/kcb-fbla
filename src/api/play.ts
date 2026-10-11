@@ -245,10 +245,11 @@ export function dailyStreak(h: PlayHistory): number {
 
 // ------------------------------------------------------------------------------------------------ chapter content
 
+/** A chapter test to run. Members get it without answer keys (fbla_custom_tests_view); the server grades it. */
 export async function getCustomTest(id: string): Promise<CustomTest | null> {
-  const res = await supabase.from('fbla_custom_tests').select('*').eq('id', id).maybeSingle<CustomTest>();
+  const res = await supabase.rpc('fbla_custom_tests_view', { p_chapter: null, p_ids: [id] });
   if (res.error) throw toApiError(res.error);
-  return res.data;
+  return ((res.data ?? []) as CustomTest[])[0] ?? null;
 }
 
 export async function getAssignment(id: string): Promise<Assignment | null> {
@@ -282,8 +283,10 @@ export async function listMyAssignments(chapterId: string, history?: PlayHistory
   const testIds = rows.filter((r) => r.kind === 'test').map((r) => r.ref);
   const counts = new Map<string, number>();
   if (testIds.length) {
-    const t = await supabase.from('fbla_custom_tests').select('id,questions').in('id', testIds);
-    if (!t.error) for (const r of (t.data ?? []) as { id: string; questions: unknown[] }[]) counts.set(r.id, r.questions?.length ?? 0);
+    const t = await supabase.rpc('fbla_custom_tests_view', { p_chapter: null, p_ids: testIds });
+    if (!t.error)
+      for (const r of (t.data ?? []) as { id: string; question_count?: number; questions: unknown[] }[])
+        counts.set(r.id, r.question_count ?? r.questions?.length ?? 0);
   }
   const now = Date.now();
   const out = rows.map((r) => {

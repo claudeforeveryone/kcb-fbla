@@ -26,7 +26,7 @@ import { EVENT_GROUPS, type Assignment, type Deck } from '../../lib/types';
 import { canManageDeck, isDeckStaff, type StudyDeck, type VocabTerm } from '../../api/vocab';
 import { deckStats, isDue, relativeDue, statusOf, type DeckStats, type ProgressLike } from './leitner';
 import { assignmentFor, reloadVocab, useVocab, type VocabState } from './store';
-import { DeckCrest, EventBar, Highlight, StatusChip, deckColor, deckVars } from './parts';
+import { DeckBlock, DeckCrest, EventBar, Highlight, StatusChip, deckColor, deckVars } from './parts';
 import { DeckEditor } from './DeckEditor';
 
 export default function VocabPage() {
@@ -199,13 +199,15 @@ function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
   const color = deckColor(deck);
   return (
     <section
-      className="mt-6 flex flex-col overflow-hidden rounded-[4px] border border-line bg-surface sm:flex-row"
+      className="mt-6 flex flex-col overflow-hidden rounded-[12px] border border-line bg-surface sm:flex-row"
       style={deckVars(color)}
       aria-label={`Your event: ${deck.title}`}
     >
-      <div className="grid h-28 shrink-0 place-items-center sm:h-auto sm:w-48" style={{ background: color }}>
-        <DeckCrest deck={deck} size={72} />
-      </div>
+      <DeckBlock deck={deck} className="h-32 shrink-0 sm:h-auto sm:w-56">
+        <div className="grid h-full place-items-center">
+          <DeckCrest deck={deck} size={76} />
+        </div>
+      </DeckBlock>
       <div className="flex min-w-0 flex-1 flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-center">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
@@ -282,10 +284,12 @@ function DeckTile({
     <div className="group relative h-full" style={deckVars(color)}>
       <Link
         to={`/vocab/${deck.key}`}
-        className="flex h-full flex-col overflow-hidden rounded-[4px] border border-line bg-surface outline-none transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong focus-visible:ring-2 focus-visible:ring-blue"
+        className="flex h-full flex-col overflow-hidden rounded-[12px] border border-line bg-surface outline-none transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong focus-visible:ring-2 focus-visible:ring-blue"
       >
-        <div className="relative grid h-[120px] shrink-0 place-items-center" style={{ background: color }}>
-          <DeckCrest deck={deck} size={64} className="transition-transform duration-200 group-hover:scale-[1.04]" />
+        <DeckBlock deck={deck} className="h-[128px] shrink-0">
+          <div className="grid h-full place-items-center">
+            <DeckCrest deck={deck} size={68} className="transition-transform duration-200 group-hover:scale-[1.05]" />
+          </div>
           {(main || deck.isNew) && (
             <div className="absolute left-3 top-3 flex gap-1.5">
               {main && (
@@ -300,7 +304,7 @@ function DeckTile({
               )}
             </div>
           )}
-        </div>
+        </DeckBlock>
         <div className="flex flex-1 flex-col p-5">
           <div className="flex items-start justify-between gap-3">
             <h3 className="font-bold leading-snug text-heading">{deck.title}</h3>

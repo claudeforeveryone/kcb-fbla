@@ -4,10 +4,11 @@ import { Avatar, Button, ButtonLink, EmptyState, ErrorState, Input, Spinner, cn 
 import type { ChapterLeaderboardRow } from '../../lib/types';
 import { ChapterDrawer } from './ChapterDrawer';
 import { fmt, normalize, ordinal, useChapterBoard, useDebounced } from './data';
-import { ChapterCrest, YouTag, EloCell, Podium, PodiumSkeleton, RankMark, RowsSkeleton, type PodiumEntry } from './parts';
+import { ChapterCrest, YouTag, EloCell, RankMark, RowsSkeleton } from './parts';
 
+// Phone: rank | chapter | total Elo. md adds members, avg Elo, top player; lg adds school.
 const GRID =
-  'grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[3rem_minmax(0,1fr)_5.5rem_5.5rem_minmax(0,12rem)_7rem] md:gap-4';
+  'grid grid-cols-[2.25rem_minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[3rem_minmax(0,1.5fr)_5.5rem_6rem_5.5rem_minmax(0,1fr)_1rem] md:gap-4 lg:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,1fr)_5.5rem_6rem_5.5rem_minmax(0,1fr)_1rem]';
 
 export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
   const board = useChapterBoard();
@@ -28,27 +29,12 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
         : board.rows,
     [board.rows, q, searching],
   );
-  const showPodium = !searching && board.rows.length > 0;
-  const list = showPodium ? board.rows.slice(3) : filtered;
+  const list = filtered;
   const mine = board.rows.find((r) => r.is_mine);
-
-  const podium: PodiumEntry[] = showPodium
-    ? board.rows.slice(0, 3).map((r) => ({
-        id: r.chapter_id,
-        rank: r.rank,
-        name: r.name,
-        sub: `${r.member_count} ${r.member_count === 1 ? 'member' : 'members'}`,
-        score: r.total_elo,
-        scoreLabel: 'Total Elo',
-        me: r.is_mine,
-        onClick: () => setOpen(r),
-        icon: <ChapterCrest name={r.name} size={r.rank === 1 ? 'xl' : 'lg'} className="ring-4 ring-surface" />,
-      }))
-    : [];
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-3 rounded-[4px] border border-line bg-surface p-3 shadow-card sm:flex-row sm:items-end sm:p-4">
+      <div className="flex flex-col gap-3 rounded-[12px] border border-line bg-surface p-3 sm:flex-row sm:items-end sm:p-4">
         <Input
           className="sm:flex-1"
           label="Search chapters"
@@ -83,7 +69,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
       </div>
 
       {!board.loading && !board.error && board.rows.length > 0 && (
-        <p className="text-sm text-muted" aria-live="polite">
+        <p className="text-sm text-ink" aria-live="polite">
           {searching ? (
             <>
               <span className="tabular font-semibold text-ink">{filtered.length}</span> {filtered.length === 1 ? 'match' : 'matches'}
@@ -100,14 +86,9 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
       {board.error ? (
         <ErrorState title="Could not load chapters" error={board.error} onRetry={board.reload} />
       ) : board.loading ? (
-        <>
-          <div className="rounded-[4px] border border-line bg-surface px-3 pt-10 shadow-card sm:px-8">
-            <PodiumSkeleton />
-          </div>
-          <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
-            <RowsSkeleton rows={6} />
-          </div>
-        </>
+        <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
+          <RowsSkeleton rows={8} />
+        </div>
       ) : board.rows.length === 0 ? (
         <EmptyState
           title="No chapters yet"
@@ -120,17 +101,6 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
         />
       ) : (
         <>
-          {showPodium && (
-            <section
-              aria-label="Podium"
-              className="relative overflow-hidden rounded-[4px] border border-line bg-surface px-2 pt-10 shadow-card sm:px-8"
-            >
-              <div className="relative mx-auto max-w-2xl">
-                <Podium entries={podium} />
-              </div>
-            </section>
-          )}
-
           {searching && filtered.length === 0 && !board.loadingMore ? (
             <EmptyState
               title={`No chapters match "${query.trim()}"`}
@@ -141,20 +111,22 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
               }
             />
           ) : list.length > 0 ? (
-            <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
+            <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
               <div
                 className={cn(
                   GRID,
-                  'hidden border-b border-line bg-surface-2/70 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-muted md:grid',
+                  'hidden border-b border-line bg-surface px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-heading md:grid',
                 )}
                 aria-hidden
               >
                 <span className="text-center">#</span>
                 <span>Chapter</span>
+                <span className="hidden lg:block">School</span>
                 <span className="text-right">Members</span>
+                <span className="text-right">Total Elo</span>
                 <span className="text-right">Avg Elo</span>
                 <span>Top player</span>
-                <span className="text-right">Total Elo</span>
+                <span />
               </div>
               <ol className="divide-y divide-line" aria-label="Chapter rankings">
                 {list.map((r) => (
@@ -172,7 +144,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
             </div>
           )}
           {searching && board.loadingMore && (
-            <p className="flex items-center justify-center gap-2 text-sm text-muted">
+            <p className="flex items-center justify-center gap-2 text-sm text-ink">
               <Spinner className="size-4" /> Searching every chapter
             </p>
           )}
@@ -192,7 +164,7 @@ function ChapterRow({ row: r, onOpen }: { row: ChapterLeaderboardRow; onOpen: ()
         onClick={onOpen}
         className={cn(
           GRID,
-          'group w-full px-4 py-3 text-left outline-none transition-colors duration-150 hover:bg-surface-2/60 focus-visible:bg-surface-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
+          'group min-h-[68px] w-full px-4 py-3.5 text-left outline-none transition-colors duration-150 hover:bg-surface-2/60 focus-visible:bg-surface-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
           r.is_mine && 'bg-red/[0.06] shadow-[inset_3px_0_0_var(--red)] hover:bg-red/[0.09]',
         )}
         aria-label={`${ordinal(r.rank)}: ${r.name}${r.is_mine ? ' (your chapter)' : ''}, ${r.total_elo} total Elo. Show members`}
@@ -205,40 +177,43 @@ function ChapterRow({ row: r, onOpen }: { row: ChapterLeaderboardRow; onOpen: ()
               <span className={cn('truncate font-display font-semibold text-heading', r.is_mine && 'text-red dark:text-danger')}>
                 {r.name}
               </span>
-              {r.is_mine && (
-                <YouTag>Yours</YouTag>
-              )}
+              {r.is_mine && <YouTag>Yours</YouTag>}
             </span>
-            <span className="block truncate text-xs text-muted">
-              {[r.school, r.region].filter(Boolean).join(' · ') || 'Independent chapter'}
+            <span className="block truncate text-xs text-ink lg:hidden">
+              {r.school || r.region || 'Independent chapter'}
               <span className="md:hidden">
                 {' '}
-                · {r.member_count} {r.member_count === 1 ? 'member' : 'members'} · avg {fmt.format(r.avg_elo)}
+                · {fmt.format(r.member_count)} {r.member_count === 1 ? 'member' : 'members'}
               </span>
             </span>
+            {r.region && r.school && <span className="hidden truncate text-xs text-ink lg:block">{r.region}</span>}
           </span>
         </span>
+        <span className="hidden min-w-0 truncate text-sm text-ink lg:block">{r.school || '-'}</span>
         <span className="tabular hidden text-right text-sm text-ink md:block">{fmt.format(r.member_count)}</span>
-        <span className="tabular hidden text-right text-sm text-ink md:block">{fmt.format(r.avg_elo)}</span>
+        <span className="flex flex-col items-end">
+          <EloCell elo={r.total_elo} label="Total Elo" />
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-heading md:hidden">Total Elo</span>
+        </span>
+        <span className="tabular hidden text-right text-sm text-ink md:block">{fmt.format(Math.round(r.avg_elo))}</span>
         <span className="hidden min-w-0 items-center gap-2 md:flex">
           {r.top_user_id ? (
             <>
               <Avatar src={r.top_avatar_url} name={r.top_display_name} size="sm" />
               <span className="min-w-0">
                 <span className="block truncate text-sm text-ink">{r.top_display_name}</span>
-                <span className="tabular block text-xs text-muted">{fmt.format(r.top_elo ?? 0)} Elo</span>
+                <span className="tabular block text-xs text-ink">{fmt.format(Math.round(r.top_elo ?? 0))} Elo</span>
               </span>
             </>
           ) : (
-            <span className="text-sm text-muted">No members</span>
+            <span className="text-sm text-ink">No members</span>
           )}
         </span>
-        <span className="flex items-center justify-end gap-1">
-          <EloCell elo={r.total_elo} label="Total Elo" />
-          <ChevronRight className="size-4 text-muted transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden />
-        </span>
+        <ChevronRight
+          className="hidden size-4 text-heading transition-transform duration-150 group-hover:translate-x-0.5 md:block"
+          aria-hidden
+        />
       </button>
     </li>
   );
 }
-

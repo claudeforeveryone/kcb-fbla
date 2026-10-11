@@ -189,20 +189,19 @@ export async function deletePost(id: string): Promise<void> {
 
 export const MAX_TEST_QUESTIONS = 200;
 
+/**
+ * Tests in a chapter, newest edit first. Read through fbla_custom_tests_view (0017): members get published tests
+ * with the answer keys stripped; the people who manage a test (can_manage) get it whole, drafts included.
+ */
 export async function listCustomTests(chapterId: string): Promise<ClassTest[]> {
-  const res = await supabase
-    .from('fbla_custom_tests')
-    .select('*')
-    .eq('chapter_id', chapterId)
-    .order('updated_at', { ascending: false })
-    .limit(200);
-  return (must(res) ?? []) as ClassTest[];
+  const res = await supabase.rpc('fbla_custom_tests_view', { p_chapter: chapterId, p_ids: null });
+  return (must(res as { data: ClassTest[] | null; error: PostgrestError | null }) ?? []) as ClassTest[];
 }
 
-/** One custom test with its questions (answers included). RLS: members of its chapter; drafts staff only. */
+/** One custom test. Keys (answer / explain) are only included when you can manage it. */
 export async function getCustomTest(id: string): Promise<ClassTest | null> {
-  const res = await supabase.from('fbla_custom_tests').select('*').eq('id', id).maybeSingle();
-  return must(res) as ClassTest | null;
+  const res = await supabase.rpc('fbla_custom_tests_view', { p_chapter: null, p_ids: [id] });
+  return ((must(res as { data: ClassTest[] | null; error: PostgrestError | null }) ?? []) as ClassTest[])[0] ?? null;
 }
 
 /** A custom test's questions in runner shape, with the ids the server grades by (`custom:<testId>:<n>`). */

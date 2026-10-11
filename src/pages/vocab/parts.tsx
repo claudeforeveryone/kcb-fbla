@@ -1,7 +1,7 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
-import { Layers, RotateCcw } from 'lucide-react';
+import { Layers, RotateCcw, type LucideIcon } from 'lucide-react';
 import { cn } from '../../components/ui';
-import { EventCrest, eventStyle } from '../../lib/eventStyle';
+import { ColorBlock, Crest, eventStyle } from '../../lib/eventStyle';
 import type { StudyDeck } from '../../api/vocab';
 import { STATUS_LABEL, type DeckStats, type TermStatus } from './leitner';
 
@@ -22,25 +22,35 @@ export function deckVars(color: string): CSSProperties {
   } as CSSProperties;
 }
 
-/** White outline icon in a thin white ring, for use on the deck's colour. Stays real white inside the page band. */
+/** The icon a deck wears: its event's icon, or a generic one for the review deck and chapter decks. */
+export function deckIcon(deck: DeckId): LucideIcon {
+  if (deck.key === 'review') return RotateCcw;
+  return deck.event ? eventStyle(deck.event).icon : Layers;
+}
+
+/** The deck's icon in its colour on a white disc, for use on the deck's colour block. */
 export function DeckCrest({ deck, size = 64, className }: { deck: DeckId; size?: number; className?: string }) {
-  const white = { '--color-white': '#fff' } as CSSProperties;
-  if (deck.event && deck.key !== 'review') {
-    return (
-      <span className={cn('inline-grid', className)} style={white}>
-        <EventCrest slug={deck.event} size={size} />
-      </span>
-    );
-  }
-  const Icon = deck.key === 'review' ? RotateCcw : Layers;
+  return <Crest icon={deckIcon(deck)} color={deckColor(deck)} size={size} className={className} />;
+}
+
+/** The deck's colour as a decorated block (angled facets + faint oversized icon). */
+export function DeckBlock({
+  deck,
+  className,
+  style,
+  children,
+  watermark,
+}: {
+  deck: DeckId;
+  className?: string;
+  style?: CSSProperties;
+  children?: ReactNode;
+  watermark?: boolean;
+}) {
   return (
-    <span
-      className={cn('grid shrink-0 place-items-center rounded-full border-2 border-white/90 text-white', className)}
-      style={{ ...white, width: size, height: size }}
-      aria-hidden
-    >
-      <Icon style={{ width: size * 0.46, height: size * 0.46 }} strokeWidth={1.75} />
-    </span>
+    <ColorBlock color={deckColor(deck)} icon={deckIcon(deck)} className={className} style={style} watermark={watermark}>
+      {children}
+    </ColorBlock>
   );
 }
 

@@ -15,7 +15,7 @@ import {
 } from '../../components/ui';
 import { EVENTS, EVENT_GROUPS, eventName, type PlayerLeaderboardRow } from '../../lib/types';
 import { SCAN_CAP, fmt, normalize, ordinal, pct, useDebounced, useMyStanding, usePlayerBoard, type MyStanding } from './data';
-import { AccuracyMeter, EloCell, Podium, PodiumSkeleton, RankMark, RowsSkeleton, YouTag, type PodiumEntry } from './parts';
+import { AccuracyMeter, EloCell, RankMark, RowsSkeleton, YouTag } from './parts';
 
 export type Scope = 'all' | 'chapter';
 
@@ -29,7 +29,9 @@ type Props = {
   onQuery: (q: string) => void;
 };
 
-const GRID = 'grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[3rem_minmax(0,1fr)_minmax(0,12rem)_7rem_5.5rem_6.5rem] md:gap-4';
+// Phone: rank | player | Elo. md adds chapter, accuracy, questions; lg adds school.
+const GRID =
+  'grid grid-cols-[2.25rem_minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[3rem_minmax(0,1.5fr)_minmax(0,1fr)_5rem_7rem_5.5rem] md:gap-4 lg:grid-cols-[3rem_minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_5rem_7rem_5.5rem]';
 
 export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuery }: Props) {
   const chapterId = scope === 'chapter' ? (me?.chapter_id ?? null) : null;
@@ -51,9 +53,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
     );
   }, [board.rows, q, searching]);
 
-  const showPodium = !searching && board.rows.length > 0;
-  const podium = showPodium ? board.rows.slice(0, 3) : [];
-  const list = showPodium ? board.rows.slice(3) : filtered;
+  const list = filtered;
   const eloLabel = event ? 'Event Elo' : 'Elo';
 
   // ---------------------------------------------------------------- infinite scroll
@@ -126,18 +126,6 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
     setPendingScroll(false);
   }, [pendingScroll, meInList, board.rows.length]);
 
-  const podiumEntries: PodiumEntry[] = podium.map((r) => ({
-    id: r.user_id,
-    rank: r.rank,
-    name: r.display_name,
-    sub: r.chapter_name ?? r.school ?? `@${r.username}`,
-    avatar: r.avatar_url,
-    score: r.elo,
-    scoreLabel: eloLabel,
-    me: r.is_me,
-    to: `/u/${r.username}`,
-  }));
-
   const eventOptions = EVENT_GROUPS.map((g) => ({
     label: g.label,
     events: EVENTS.filter((e) => e.group === g.id),
@@ -146,7 +134,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
   return (
     <div className="space-y-5">
       {/* Filters */}
-      <div ref={attachFilters} className="flex flex-col gap-3 rounded-[4px] border border-line bg-surface p-3 shadow-card sm:p-4 lg:flex-row lg:items-end">
+      <div ref={attachFilters} className="flex flex-col gap-3 rounded-[12px] border border-line bg-surface p-3 sm:p-4 lg:flex-row lg:items-end">
         <Input
           className="lg:flex-1"
           label="Search players"
@@ -215,7 +203,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
 
       {/* Context line */}
       {!board.loading && !board.error && (
-        <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-muted">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-ink">
           <p aria-live="polite">
             {searching ? (
               <>
@@ -247,33 +235,13 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
       {board.error ? (
         <ErrorState title="Could not load the leaderboard" error={board.error} onRetry={board.reload} />
       ) : board.loading ? (
-        <>
-          {!searching && (
-            <div className="rounded-[4px] border border-line bg-surface px-3 pb-0 pt-10 shadow-card sm:px-8">
-              <PodiumSkeleton />
-            </div>
-          )}
-          <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
-            <RowsSkeleton />
-          </div>
-        </>
+        <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
+          <RowsSkeleton rows={10} />
+        </div>
       ) : board.rows.length === 0 ? (
         <BoardEmpty event={event} scope={scope} />
       ) : (
         <>
-          {showPodium && (
-            <section
-              aria-label="Podium"
-              ref={podium.some((r) => r.is_me) ? attachMe : undefined}
-              tabIndex={podium.some((r) => r.is_me) ? -1 : undefined}
-              className="relative overflow-hidden outline-none rounded-[4px] border border-line bg-surface px-2 pt-10 shadow-card sm:px-8"
-            >
-              <div className="relative mx-auto max-w-2xl">
-                <Podium entries={podiumEntries} />
-              </div>
-            </section>
-          )}
-
           {searching && filtered.length === 0 && !board.loadingMore ? (
             <EmptyState
               title={`No players match "${query.trim()}"`}
@@ -285,20 +253,21 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
               }
             />
           ) : list.length > 0 || board.loadingMore ? (
-            <div className="overflow-hidden rounded-[4px] border border-line bg-surface shadow-card">
+            <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
               <div
                 className={cn(
                   GRID,
-                  'hidden border-b border-line bg-surface-2/70 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-muted md:grid',
+                  'hidden border-b border-line bg-surface px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-heading md:grid',
                 )}
                 aria-hidden
               >
                 <span className="text-center">#</span>
                 <span>Player</span>
                 <span>Chapter</span>
-                <span>Accuracy</span>
-                <span className="text-right">Questions</span>
+                <span className="hidden lg:block">School</span>
                 <span className="text-right">{eloLabel}</span>
+                <span className="text-right">Accuracy</span>
+                <span className="text-right">Questions</span>
               </div>
               <ol className="divide-y divide-line" aria-label="Rankings">
                 {list.map((r) => (
@@ -306,7 +275,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
                 ))}
               </ol>
               {searching && board.loadingMore && (
-                <div className="flex items-center justify-center gap-2 border-t border-line py-4 text-sm text-muted">
+                <div className="flex items-center justify-center gap-2 border-t border-line py-4 text-sm text-ink">
                   <Spinner className="size-4" /> Searching every player
                 </div>
               )}
@@ -316,14 +285,14 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
           {!searching && (
             <div ref={sentinel} className="flex justify-center py-2">
               {moreError ? (
-                <div className="flex flex-col items-center gap-2 text-sm text-muted">
+                <div className="flex flex-col items-center gap-2 text-sm text-ink">
                   Could not load more players.
                   <Button size="sm" variant="outline" onClick={more}>
                     Try again
                   </Button>
                 </div>
               ) : board.loadingMore ? (
-                <span className="flex items-center gap-2 text-sm text-muted">
+                <span className="flex items-center gap-2 text-sm text-ink">
                   <Spinner className="size-4" /> Loading more
                 </span>
               ) : !board.done ? (
@@ -331,7 +300,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
                   Load more players
                 </Button>
               ) : board.rows.length > 10 ? (
-                <span className="text-xs text-muted">That is everyone. Keep practising to climb.</span>
+                <span className="text-xs text-ink">That is everyone. Keep practising to climb.</span>
               ) : null}
             </div>
           )}
@@ -374,7 +343,7 @@ function PlayerRow({
         to={`/u/${r.username}`}
         className={cn(
           GRID,
-          'relative px-4 py-3 outline-none transition-colors duration-150 hover:bg-surface-2/60 focus-visible:bg-surface-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
+          'relative min-h-[68px] px-4 py-3.5 outline-none transition-colors duration-150 hover:bg-surface-2/60 focus-visible:bg-surface-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
           r.is_me && 'bg-red/[0.06] shadow-[inset_3px_0_0_var(--red)] hover:bg-red/[0.09]',
         )}
         aria-label={`${ordinal(r.rank)}: ${r.display_name}${r.is_me ? ' (you)' : ''}, ${r.elo} ${eloLabel}`}
@@ -387,39 +356,24 @@ function PlayerRow({
               <span className={cn('truncate font-display font-semibold text-heading', r.is_me && 'text-red dark:text-danger')}>
                 {r.display_name}
               </span>
-              {r.is_me && (
-                <YouTag />
-              )}
-              {r.current_streak >= 3 && (
-                <span
-                  className="tabular inline-flex h-5 shrink-0 items-center rounded-[2px] border border-line px-1.5 text-[10px] font-bold uppercase tracking-wider text-muted"
-                  title={`${r.current_streak}-day streak`}
-                >
-                  {r.current_streak}d streak
-                </span>
-              )}
+              {r.is_me && <YouTag />}
             </span>
-            <span className="block truncate text-xs text-muted">
+            <span className="block truncate text-xs text-ink">
               @{r.username}
-              <span className="md:hidden">
-                {r.chapter_name ? ` · ${r.chapter_name}` : r.school ? ` · ${r.school}` : ''}
-              </span>
-              <span className="md:hidden"> · {pct(r.accuracy)} · {fmt.format(r.questions_answered)} Q</span>
+              <span className="md:hidden">{r.chapter_name ? ` · ${r.chapter_name}` : ''}</span>
             </span>
           </span>
         </span>
-        <span className="hidden min-w-0 md:block">
-          <span className="block truncate text-sm text-ink">{r.chapter_name ?? <span className="text-muted">No chapter</span>}</span>
-          {r.school && <span className="block truncate text-xs text-muted">{r.school}</span>}
+        <span className="hidden min-w-0 truncate text-sm text-ink md:block">{r.chapter_name ?? 'No chapter'}</span>
+        <span className="hidden min-w-0 truncate text-sm text-ink lg:block">{r.school ?? '-'}</span>
+        <span className="flex flex-col items-end">
+          <EloCell elo={r.elo} />
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-heading md:hidden">{eloLabel}</span>
         </span>
-        <span className="hidden md:block">
+        <span className="hidden justify-end md:flex">
           <AccuracyMeter value={r.accuracy} answered={r.questions_answered} />
         </span>
         <span className="tabular hidden text-right text-sm text-ink md:block">{fmt.format(r.questions_answered)}</span>
-        <span className="flex flex-col items-end">
-          <EloCell elo={r.elo} />
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted md:hidden">{eloLabel}</span>
-        </span>
       </Link>
     </li>
   );
@@ -446,14 +400,14 @@ function PinnedMe({
 }) {
   if (hidden || standing.status === 'loading' || standing.status === 'unknown') return null;
   const shell =
-    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-[4px] border border-red/30 border-l-[3px] border-l-red bg-surface shadow-card md:bottom-4';
+    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-[12px] border border-red/30 border-l-[3px] border-l-red bg-surface shadow-card md:bottom-4';
 
   if (standing.status === 'unranked') {
     return (
       <div className={cn(shell, 'flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:p-4')} role="status">
         <div className="min-w-0 flex-1">
           <p className="font-display font-semibold text-heading">You are not on this board yet</p>
-          <p className="text-sm text-muted">
+          <p className="text-sm text-ink">
             {event ? `Answer a ${eventName(event)} question to get ranked here.` : 'Answer a question to get ranked.'}
           </p>
         </div>
@@ -468,16 +422,16 @@ function PinnedMe({
   const gap = above ? above.elo - r.elo : null;
   return (
     <div className={cn(shell, 'flex items-center gap-3 px-3 py-2.5 sm:px-4')} aria-label="Your position">
-      <span className="tabular grid h-10 min-w-10 shrink-0 place-items-center rounded-[2px] bg-red px-2 font-display text-sm font-extrabold text-white">
+      <span className="tabular grid h-10 min-w-10 shrink-0 place-items-center rounded-[6px] bg-red px-2 font-display text-sm font-extrabold text-white">
         {r.rank}
       </span>
       <Avatar src={r.avatar_url} name={r.display_name} size="md" className="max-sm:hidden" />
       <div className="min-w-0 flex-1">
         <p className="truncate font-display font-semibold text-heading">
           You are {ordinal(r.rank)}
-          <span className="font-normal text-muted"> of {fmt.format(r.total_count)}</span>
+          <span className="font-normal text-ink"> of {fmt.format(r.total_count)}</span>
         </p>
-        <p className="truncate text-xs text-muted">
+        <p className="truncate text-xs text-ink">
           {gap != null && gap > 0
             ? `${fmt.format(gap)} ${eloLabel} behind ${above!.display_name}`
             : r.rank === 1

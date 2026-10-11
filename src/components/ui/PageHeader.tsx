@@ -26,13 +26,13 @@ export function FacetArt({ className, intensity = 1 }: { className?: string; int
       <polygon className="facet-drift" style={drift(12, -1, 12, -10, 5)} points="150,190 182,166 190,214" fill="var(--facet-ink, #fff)" fillOpacity={o(0.16)} />
       <polygon className="facet-drift" style={drift(15, -8, -10, 8, -4)} points="250,40 270,20 284,62" fill="#3F6FB3" fillOpacity={o(0.5)} />
       <polygon className="facet-drift" style={drift(20, -3, 8, -8, 1.5)} points="190,320 330,150 390,320" fill="#3F6FB3" fillOpacity={o(0.26)} />
-      <polygon className="facet-drift" style={drift(16, -6, -6, 10, -3)} points="60,140 96,120 92,170" fill="#BF0D3E" fillOpacity={o(0.45)} />
+      <polygon className="facet-drift" style={drift(16, -6, -6, 10, -3)} points="60,140 96,120 92,170" fill="var(--facet-ink, #fff)" fillOpacity={o(0.1)} />
       <polygon className="facet-drift" style={drift(19, -13, 9, -7, 2)} points="330,0 420,0 372,64" fill="var(--facet-ink, #fff)" fillOpacity={o(0.1)} />
       {/* middle band */}
       <polygon className="facet-drift" style={drift(17, -6, -12, 6, -1.2)} points="420,0 620,0 520,120" fill="var(--facet-ink, #fff)" fillOpacity={o(0.09)} />
       <polygon className="facet-drift" style={drift(13, -4, 14, -10, 6)} points="560,240 596,212 602,264" fill="var(--facet-ink, #fff)" fillOpacity={o(0.16)} />
       <polygon className="facet-drift" style={drift(19, -9, 10, -6, 1)} points="610,320 760,140 830,320" fill="#3F6FB3" fillOpacity={o(0.22)} />
-      <polygon className="facet-drift" style={drift(14, -2, -14, 10, -5)} points="760,60 786,42 792,84" fill="#BF0D3E" fillOpacity={o(0.6)} />
+      <polygon className="facet-drift" style={drift(14, -2, -14, 10, -5)} points="760,60 786,42 792,84" fill="var(--facet-ink, #fff)" fillOpacity={o(0.12)} />
       <polygon className="facet-drift" style={drift(16, -12, 8, 8, 2)} points="860,0 990,0 940,80" fill="#3F6FB3" fillOpacity={o(0.34)} />
       <polygon className="facet-drift" style={drift(21, -7, -10, -6, -1.5)} points="470,320 540,230 600,320" fill="var(--facet-ink, #fff)" fillOpacity={o(0.1)} />
       <polygon className="facet-drift" style={drift(11, -5, 12, 10, 4)} points="700,180 724,166 728,196" fill="#3F6FB3" fillOpacity={o(0.5)} />

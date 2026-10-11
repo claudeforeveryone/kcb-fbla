@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AtSign, Camera, Check, Eye, EyeOff, Loader2, LogOut, Mail, School, Trash2, X } from 'lucide-react';
+import { AtSign, Camera, Check, Eye, EyeOff, Loader2, LogOut, Mail, School, Trash2, Undo2, X } from 'lucide-react';
 import {
   Avatar,
   Button,
-  ConfirmDialog,
   EloBadge,
   Input,
   PageHeader,
@@ -20,8 +19,8 @@ import { Page } from '../../components/layout/Page';
 import { useTheme, type ThemePref } from '../../components/layout/theme';
 import { useAuth, useProfile } from '../../lib/auth';
 import { EVENTS, EVENT_GROUPS, USERNAME_RE, eventName } from '../../lib/types';
-import { AVATAR_MAX_BYTES, isUsernameAvailable, updateMyProfile, uploadAvatar } from '../../api/core';
-import { changePassword, myEmail } from '../../api/me';
+import { isUsernameAvailable, updateMyProfile } from '../../api/core';
+import { AVATAR_ACCEPT, changePassword, myEmail, prepareAvatar, removeMyAvatar, uploadMyAvatar } from '../../api/me';
 
 const SECTIONS = [
   { id: 'profile', label: 'Profile' },
@@ -83,7 +82,7 @@ function SettingsCard({
   footer?: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 overflow-hidden rounded-[4px] border border-line bg-surface">
+    <section id={id} className="scroll-mt-24 overflow-hidden rounded-[12px] border border-line bg-surface">
       <div className="px-5 pt-5 sm:px-6">
         <h2 className="text-lg font-bold">{title}</h2>
         {description && <p className="mt-0.5 text-sm text-muted">{description}</p>}
@@ -120,14 +119,23 @@ function ProfileSection() {
   const [form, setForm] = useState(initial);
   const [saving, setSaving] = useState(false);
   const [avail, setAvail] = useState<Availability>('idle');
-  const [avatarBusy, setAvatarBusy] = useState(false);
-  const [confirmRemove, setConfirmRemove] = useState(false);
+  /** Photo change waiting for Save: a resized image with its preview URL, or 'remove'. */
+  const [photo, setPhoto] = useState<{ blob: Blob; preview: string } | 'remove' | null>(null);
+  const [preparing, setPreparing] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => setForm(initial), [initial]);
+  // free the preview object URL when it is replaced or the page closes
+  useEffect(() => {
+    const url = photo && photo !== 'remove' ? photo.preview : null;
+    return () => {
+      if (url) URL.revokeObjectURL(url);
+    };
+  }, [photo]);
 
   const set = <K extends keyof typeof form>(k: K, v: (typeof form)[K]) => setForm((f) => ({ ...f, [k]: v }));
-  const dirty = (Object.keys(form) as (keyof typeof form)[]).some((k) => form[k] !== initial[k]);
+  const fieldsDirty = (Object.keys(form) as (keyof typeof form)[]).some((k) => form[k] !== initial[k]);
+  const dirty = fieldsDirty || photo != null;
 
   // live username check
   useEffect(() => {
@@ -160,22 +168,34 @@ function ProfileSection() {
   const eventErr =
     form.main_event === 'intro-business-concepts' && ibcBlocked(grade) ? 'Intro to Business Concepts is for grades 9 and 10.' : null;
 
+  const shownAvatar = photo === 'remove' ? null : photo ? photo.preview : profile.avatar_url;
+
   const save = async (e: FormEvent) => {
     e.preventDefault();
-    if (nameErr || userErr || eventErr || avail === 'checking') return;
+    if (nameErr || userErr || eventErr || avail === 'checking' || preparing) return;
     setSaving(true);
     try {
-      const saved = await updateMyProfile({
-        display_name: form.display_name,
-        username: form.username,
-        school: form.school.trim() || null,
-        grade,
-        main_event: form.main_event || null,
-        bio: form.bio.trim() || null,
-      });
-      patchProfile(saved);
+      if (photo === 'remove') {
+        await removeMyAvatar();
+        patchProfile({ avatar_url: null });
+      } else if (photo) {
+        const url = await uploadMyAvatar(photo.blob);
+        patchProfile({ avatar_url: url });
+      }
+      setPhoto(null);
+      if (fieldsDirty) {
+        const saved = await updateMyProfile({
+          display_name: form.display_name,
+          username: form.username,
+          school: form.school.trim() || null,
+          grade,
+          main_event: form.main_event || null,
+          bio: form.bio.trim() || null,
+        });
+        patchProfile(saved);
+      }
       await refreshProfile();
-      toast.success('Profile saved');
+      toast.success('Profile saved', 'Your changes are live on your player card and the leaderboard.');
     } catch (err) {
       toast.error('Could not save', errorMessage(err));
     } finally {
@@ -184,29 +204,22 @@ function ProfileSection() {
   };
 
   const pick = async (file: File | undefined) => {
+    if (fileRef.current) fileRef.current.value = '';
     if (!file) return;
-    if (file.size > AVATAR_MAX_BYTES) return toast.error('That image is over 2 MB', 'Pick a smaller one.');
-    setAvatarBusy(true);
+    setPreparing(true);
     try {
-      const url = await uploadAvatar(file);
-      patchProfile({ avatar_url: url });
-      toast.success('New photo saved');
+      const blob = await prepareAvatar(file);
+      setPhoto({ blob, preview: URL.createObjectURL(blob) });
     } catch (err) {
-      toast.error('Upload failed', errorMessage(err));
+      toast.error('Could not use that image', errorMessage(err));
     } finally {
-      setAvatarBusy(false);
-      if (fileRef.current) fileRef.current.value = '';
+      setPreparing(false);
     }
   };
 
-  const removeAvatar = async () => {
-    try {
-      await updateMyProfile({ avatar_url: null });
-      patchProfile({ avatar_url: null });
-      toast.success('Photo removed');
-    } catch (err) {
-      toast.error(errorMessage(err));
-    }
+  const discard = () => {
+    setForm(initial);
+    setPhoto(null);
   };
 
   return (
@@ -218,52 +231,66 @@ function ProfileSection() {
         footer={
           <>
             {dirty && (
-              <Button variant="ghost" onClick={() => setForm(initial)} disabled={saving}>
+              <Button variant="ghost" onClick={discard} disabled={saving}>
                 Discard changes
               </Button>
             )}
-            <Button type="submit" loading={saving} disabled={!dirty || !!nameErr || !!userErr || !!eventErr || avail === 'checking'}>
+            <Button type="submit" loading={saving} disabled={!dirty || preparing || !!nameErr || !!userErr || !!eventErr || avail === 'checking'}>
               Save profile
             </Button>
           </>
         }
       >
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-          <div className="relative w-fit">
-            <Avatar src={profile.avatar_url} name={form.display_name || profile.display_name} size="2xl" />
+          <div className="group relative w-fit">
+            <Avatar key={shownAvatar ?? 'none'} src={shownAvatar} name={form.display_name || profile.display_name} size="2xl" />
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              disabled={avatarBusy}
-              className="absolute inset-0 grid place-items-center rounded-full bg-navy/0 text-white opacity-0 transition-[opacity,background-color] duration-200 hover:bg-navy/55 hover:opacity-100 focus-visible:bg-navy/55 focus-visible:opacity-100 disabled:opacity-100"
+              disabled={preparing || saving}
+              className="absolute inset-0 flex flex-col items-center justify-center gap-1 rounded-full bg-navy/0 text-xs font-bold text-white opacity-0 transition-[opacity,background-color] duration-200 hover:bg-navy/65 hover:opacity-100 focus-visible:bg-navy/65 focus-visible:opacity-100 disabled:bg-navy/65 disabled:opacity-100"
               aria-label="Change photo"
             >
-              {avatarBusy ? <Loader2 className="size-7 animate-spin" /> : <Camera className="size-7" />}
+              {preparing ? <Loader2 className="size-7 animate-spin" /> : <Camera className="size-7" />}
+              Change photo
             </button>
           </div>
           <div className="min-w-0">
             <div className="font-display text-lg font-bold text-heading">{form.display_name || profile.display_name}</div>
-            <div className="flex flex-wrap items-center gap-2 text-sm text-muted">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-navy dark:text-muted">
               @{form.username || profile.username}
               <EloBadge elo={profile.elo} size="sm" />
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
-              <Button size="sm" variant="secondary" leftIcon={<Camera className="size-4" />} onClick={() => fileRef.current?.click()} loading={avatarBusy}>
-                {profile.avatar_url ? 'Change photo' : 'Upload photo'}
+              <Button size="sm" variant="secondary" leftIcon={<Camera className="size-4" />} onClick={() => fileRef.current?.click()} loading={preparing} disabled={saving}>
+                {shownAvatar ? 'Change photo' : 'Upload photo'}
               </Button>
-              {profile.avatar_url && (
-                <Button size="sm" variant="ghost" leftIcon={<Trash2 className="size-4" />} onClick={() => setConfirmRemove(true)} disabled={avatarBusy}>
+              {shownAvatar && (
+                <Button size="sm" variant="ghost" leftIcon={<Trash2 className="size-4" />} onClick={() => setPhoto(profile.avatar_url ? 'remove' : null)} disabled={saving || preparing}>
                   Remove
                 </Button>
               )}
+              {photo && (
+                <Button size="sm" variant="ghost" leftIcon={<Undo2 className="size-4" />} onClick={() => setPhoto(null)} disabled={saving}>
+                  Keep current photo
+                </Button>
+              )}
             </div>
-            <p className="mt-2 text-xs text-muted">PNG, JPEG, WebP or GIF, up to 2 MB.</p>
+            <p className={cn('mt-2 text-xs', photo ? 'font-semibold text-red dark:text-danger' : 'text-navy dark:text-muted')} aria-live="polite">
+              {photo === 'remove'
+                ? 'Your photo will be removed when you save.'
+                : photo
+                  ? 'Preview. Press Save profile to use this photo.'
+                  : 'JPG, PNG or WebP, up to 5 MB. We crop it to a square.'}
+            </p>
             <input
               ref={fileRef}
               type="file"
-              accept="image/png,image/jpeg,image/webp,image/gif"
+              accept={AVATAR_ACCEPT.join(',')}
               className="sr-only"
               tabIndex={-1}
+              aria-hidden
+              data-testid="settings-avatar-file"
               onChange={(e) => pick(e.target.files?.[0])}
             />
           </div>
@@ -341,15 +368,6 @@ function ProfileSection() {
           />
         </div>
       </SettingsCard>
-      <ConfirmDialog
-        open={confirmRemove}
-        onClose={() => setConfirmRemove(false)}
-        onConfirm={removeAvatar}
-        title="Remove your photo?"
-        description="Your initials will show instead. You can upload a new photo any time."
-        confirmLabel="Remove photo"
-        variant="danger"
-      />
     </form>
   );
 }

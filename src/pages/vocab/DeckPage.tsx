@@ -8,7 +8,7 @@ import { EVENT_GROUPS } from '../../lib/types';
 import { canManageDeck, eventName, type StudyDeck } from '../../api/vocab';
 import { deckStats, isDue, relativeDue } from './leitner';
 import { assignmentFor, findDeck, reloadVocab, useVocab } from './store';
-import { DeckCrest, EventBar, VocabStyles, deckColor, deckVars } from './parts';
+import { DeckBlock, DeckCrest, EventBar, VocabStyles, deckColor, deckVars } from './parts';
 import { Learn } from './Learn';
 import { Flashcards } from './Flashcards';
 import { Match } from './Match';
@@ -155,17 +155,16 @@ export default function DeckPage() {
         title={deck.title}
         back={{ to: '/vocab', label: 'All decks' }}
         leading={
-          <span
-            className="grid size-16 shrink-0 place-items-center rounded-[4px] sm:size-[84px]"
-            style={{ background: color }}
-          >
-            <span className="hidden sm:contents">
-              <DeckCrest deck={deck} size={56} />
+          <DeckBlock deck={deck} watermark={false} className="size-16 shrink-0 rounded-[12px] sm:size-[88px]">
+            <span className="grid h-full place-items-center">
+              <span className="hidden sm:contents">
+                <DeckCrest deck={deck} size={54} />
+              </span>
+              <span className="contents sm:hidden">
+                <DeckCrest deck={deck} size={40} />
+              </span>
             </span>
-            <span className="contents sm:hidden">
-              <DeckCrest deck={deck} size={42} />
-            </span>
-          </span>
+          </DeckBlock>
         }
         subtitle={
           assignment ? (
