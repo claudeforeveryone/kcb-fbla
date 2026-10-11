@@ -96,11 +96,20 @@ export default function LandingPage() {
   // the hero and the closing section share one WebGL room (see roomSlot.ts)
   const [roomOwner, setRoomOwner] = useState<RoomOwner>(null);
   const [declines, setDeclines] = useState(0);
+  const [unusable, setUnusable] = useState(false);
   const claimRoom = useCallback((who: PosterVariant) => setRoomOwner(who), []);
   const decline = useCallback(() => setDeclines((d) => d + 1), []);
+  const markUnusable = useCallback(() => setUnusable(true), []);
   const roomSlot = useMemo(
-    () => ({ owner: roomOwner, claim: claimRoom, declines, decline }),
-    [roomOwner, claimRoom, declines, decline],
+    () => ({
+      owner: roomOwner,
+      claim: claimRoom,
+      declines,
+      decline,
+      unusable,
+      markUnusable,
+    }),
+    [roomOwner, claimRoom, declines, decline, unusable, markUnusable],
   );
   return (
     <RoomSlotContext.Provider value={roomSlot}>

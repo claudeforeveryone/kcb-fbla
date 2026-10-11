@@ -70,6 +70,7 @@ import {
   type Arch,
   type ColonnadeSpec,
 } from "../roomLayout";
+import { isSoftwareRenderer, rendererOf } from "../tier";
 import { archGeometry, crystalGeometry } from "./geometry";
 import {
   beamFragment,
@@ -109,6 +110,8 @@ export type ObservatorySceneProps = {
   onSettled: () => void;
   /** the frame rate stayed too low: step down a tier */
   onDecline: () => void;
+  /** the context turned out to run on a software rasteriser: fall back to the still */
+  onSoftware?: () => void;
   /** the arches to stand up; by default the tier's own (the stills render a phone's five with full-tier glass) */
   colonnade?: ColonnadeSpec;
   /** a fixed pixel ratio instead of the tier's range (the stills render at 2x) */
@@ -407,7 +410,11 @@ async function bakeStudio(
   // compiles the same program now (kept alive until the bake has used it)
   const box = new Mesh(
     new BoxGeometry(),
-    new MeshBasicMaterial({ side: BackSide, depthWrite: false, depthTest: false }),
+    new MeshBasicMaterial({
+      side: BackSide,
+      depthWrite: false,
+      depthTest: false,
+    }),
   );
   parts.push(box.geometry, box.material);
   const release = () => {
@@ -1061,6 +1068,7 @@ export default function ObservatoryScene({
   onDecline,
   colonnade,
   dpr: fixedDpr,
+  onSoftware,
 }: ObservatorySceneProps) {
   const age = useRef(0);
   const [compiled, setCompiled] = useState(false);
@@ -1090,10 +1098,14 @@ export default function ObservatoryScene({
         alpha: false,
         stencil: false,
         powerPreference: "high-performance",
+        // no context at all rather than one the browser knows is slow (a software fallback): the stage shows the still
+        failIfMajorPerformanceCaveat: true,
       }}
       onCreated={({ gl }) => {
         // the glass rises out of the floor: FLOOR_CLIP cuts away what is still below it
         gl.localClippingEnabled = true;
+        // a software rasteriser the browser did not flag (some VMs, remote desktops): transmission glass is unusable
+        if (isSoftwareRenderer(rendererOf(gl.getContext()))) onSoftware?.();
       }}
       camera={{ position: [0, 1.6, 14], fov: 30, near: 0.1, far: 80 }}
       style={{ position: "absolute", inset: 0 }}

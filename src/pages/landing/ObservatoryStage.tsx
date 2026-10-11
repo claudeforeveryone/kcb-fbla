@@ -77,7 +77,7 @@ export function ObservatoryStage({
   const [env, setEnv] = useState<LandingEnv | null>(null);
   const [reduced, setReduced] = useState(false);
   const [ownDeclines, setOwnDeclines] = useState(0);
-  const [failed, setFailed] = useState(false);
+  const [ownUnusable, setOwnUnusable] = useState(false);
   // the tier whose room has drawn its first frames; cleared when the room goes, so a new mount (a tier change, the
   // slot coming back) always starts behind the static frame instead of showing an unpainted canvas
   const [readyTier, setReadyTier] = useState<Tier | null>(null);
@@ -92,11 +92,12 @@ export function ObservatoryStage({
     "none",
   );
 
-  // Browser facts (WebGL probe, device hints, motion preference) are read after mount.
+  // Browser facts (device hints, motion preference, Save-Data) are read after mount.
   useEffect(() => {
     setEnv(readLandingEnv(0));
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } })
-      .connection;
+    const conn = (
+      navigator as Navigator & { connection?: { saveData?: boolean } }
+    ).connection;
     setSaveData(!!conn?.saveData);
     const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
     setReduced(prefersReducedMotion());
@@ -193,7 +194,9 @@ export function ObservatoryStage({
   }, []);
 
   const declines = slot ? slot.declines : ownDeclines;
-  const tier: Tier = env && !failed ? tierFor({ ...env, declines }) : "poster";
+  const unusable = slot ? slot.unusable : ownUnusable;
+  const tier: Tier =
+    env && !unusable ? tierFor({ ...env, declines }) : "poster";
   const wantsRoom = tier !== "poster" && idle;
 
   // coming near the viewport takes the room slot from the other section
@@ -239,7 +242,12 @@ export function ObservatoryStage({
     () => (slotDecline ? slotDecline() : setOwnDeclines((d) => d + 1)),
     [slotDecline],
   );
-  const onFail = useCallback(() => setFailed(true), []);
+  // no context, a software rasteriser or a scene that threw: the still, for both sections, for the rest of the visit
+  const slotUnusable = slot?.markUnusable;
+  const onUnusable = useCallback(
+    () => (slotUnusable ? slotUnusable() : setOwnUnusable(true)),
+    [slotUnusable],
+  );
 
   // The static frame draws the room's outlines only when nothing better is coming (the static-frame tier without its
   // still) and once the live room has assembled (so a rebuilt room cross-fades from the same picture); otherwise it
@@ -272,7 +280,7 @@ export function ObservatoryStage({
         />
       )}
       {live && (
-        <SceneBoundary onFail={onFail}>
+        <SceneBoundary onFail={onUnusable}>
           <Suspense fallback={null}>
             <div
               className={cn("obs-fade absolute inset-0", !ready && "is-out")}
@@ -287,6 +295,7 @@ export function ObservatoryStage({
                 onReady={onReady}
                 onSettled={onSettled}
                 onDecline={onDecline}
+                onSoftware={onUnusable}
               />
             </div>
           </Suspense>

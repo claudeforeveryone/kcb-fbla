@@ -16,6 +16,12 @@ export type RoomSlot = {
    */
   declines: number;
   decline: () => void;
+  /**
+   * The device cannot run the room this visit: no context (none at all, or only a slow software fallback the browser
+   * refused), a software rasteriser, or a scene that threw. Shared, so the other section does not try again.
+   */
+  unusable: boolean;
+  markUnusable: () => void;
 };
 
 /** May this section hold a canvas? Without a provider (a stage used on its own) it always may. */

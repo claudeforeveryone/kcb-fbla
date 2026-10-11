@@ -15,9 +15,9 @@ export type LandingEnv = {
   cores: number | null;
   /** navigator.deviceMemory in GB (Chromium only), null when unknown */
   memoryGb: number | null;
-  /** a WebGL2 context can be created */
+  /** the browser has WebGL2 (whether a context can really be made is learnt when the room makes its own) */
   webgl2: boolean;
-  /** the GPU is a software rasteriser (no hardware acceleration) */
+  /** the GPU is a software rasteriser (no hardware acceleration); reported by the room's own context */
   software: boolean;
   /** no fine pointer anywhere (phones, tablets): `(any-pointer: fine)` does not match */
   touchOnly: boolean;
@@ -56,25 +56,16 @@ export function isSoftwareRenderer(
   return !!renderer && SOFTWARE.test(renderer);
 }
 
-type Probe = { webgl2: boolean; renderer: string | null };
-
-/** Creates a throwaway WebGL2 context to see what the GPU is, then releases it. Browser only. */
-export function probeWebGL(): Probe {
-  try {
-    const canvas = document.createElement("canvas");
-    const gl = canvas.getContext("webgl2", {
-      failIfMajorPerformanceCaveat: false,
-    });
-    if (!gl) return { webgl2: false, renderer: null };
-    const info = gl.getExtension("WEBGL_debug_renderer_info");
-    const renderer = info
-      ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL))
-      : String(gl.getParameter(gl.RENDERER));
-    gl.getExtension("WEBGL_lose_context")?.loseContext();
-    return { webgl2: true, renderer };
-  } catch {
-    return { webgl2: false, renderer: null };
-  }
+/** The renderer string of a live WebGL context (unmasked where the browser allows). */
+export function rendererOf(
+  gl: WebGLRenderingContext | WebGL2RenderingContext,
+): string {
+  const info = gl.getExtension("WEBGL_debug_renderer_info");
+  return String(
+    info
+      ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL)
+      : gl.getParameter(gl.RENDERER),
+  );
 }
 
 /** True when the device has no fine pointer at all (a phone or tablet without a trackpad or mouse). */
@@ -87,16 +78,20 @@ function isTouchOnly(): boolean {
   );
 }
 
-/** Reads the browser facts tierFor needs. Only call from an effect (touches the DOM). */
+/**
+ * Reads the browser facts tierFor needs. Only call from an effect (touches the DOM).
+ *
+ * No WebGL context is made here. A throwaway probe context used to be created at mount to read the GPU's name: a
+ * synchronous trip into the GPU process inside the page's first task, and then the room made a second context
+ * anyway. Dropping it took that first task from 68-80 ms to 60-61 ms (Playwright, desktop GPU) and Lighthouse
+ * desktop's median blocking time from 489 to 236 ms. The room's own context now reports a software rasteriser
+ * (ObservatoryScene's onCreated) and is created with failIfMajorPerformanceCaveat, so a device without a usable GPU
+ * falls back to the still from there.
+ */
 export function readLandingEnv(declines: number): LandingEnv {
   const nav = navigator as Navigator & { deviceMemory?: number };
   const width = window.innerWidth;
   const touchOnly = isTouchOnly();
-  // a phone or tablet gets the poster whatever its GPU is, so it is spared the throwaway WebGL context
-  const probe =
-    width < PHONE_WIDTH || touchOnly
-      ? { webgl2: false, renderer: null }
-      : probeWebGL();
   return {
     width,
     cores:
@@ -104,8 +99,8 @@ export function readLandingEnv(declines: number): LandingEnv {
         ? nav.hardwareConcurrency
         : null,
     memoryGb: typeof nav.deviceMemory === "number" ? nav.deviceMemory : null,
-    webgl2: probe.webgl2,
-    software: isSoftwareRenderer(probe.renderer),
+    webgl2: typeof window.WebGL2RenderingContext !== "undefined",
+    software: false,
     touchOnly,
     declines,
   };
