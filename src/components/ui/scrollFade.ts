@@ -31,3 +31,46 @@ export function useScrollFade<T extends HTMLElement>() {
     };
   }, []);
 }
+
+/** Width of the faded edge in `.scroll-fade` (index.css): an item under it counts as out of view. */
+const FADE_PX = 40;
+
+/**
+ * Where a sideways-scrolling row should scroll so an item in it is in full view: null when it already is (or the row
+ * does not scroll), else the scrollLeft that centres the item, kept within the row. `start` and `width` are the
+ * item's left edge and width in the row's scroll coordinates.
+ */
+export function revealScrollLeft(m: {
+  scrollLeft: number;
+  clientWidth: number;
+  scrollWidth: number;
+  start: number;
+  width: number;
+}): number | null {
+  const max = m.scrollWidth - m.clientWidth;
+  if (max <= 0) return null;
+  const left = m.scrollLeft + (m.scrollLeft > 2 ? FADE_PX : 0);
+  const right = m.scrollLeft + m.clientWidth - (max - m.scrollLeft > 2 ? FADE_PX : 0);
+  if (m.start >= left && m.start + m.width <= right) return null;
+  return Math.round(Math.min(max, Math.max(0, m.start - (m.clientWidth - m.width) / 2)));
+}
+
+/**
+ * Scrolls `row` sideways so `item` is in full view (see revealScrollLeft). Only the row moves, never the page, so
+ * it is safe on first render and after a deep link. Smooth unless `instant` or the visitor prefers reduced motion.
+ */
+export function revealInRow(row: HTMLElement | null | undefined, item: HTMLElement | null | undefined, instant = false) {
+  if (!row || !item) return;
+  const r = row.getBoundingClientRect();
+  const e = item.getBoundingClientRect();
+  const target = revealScrollLeft({
+    scrollLeft: row.scrollLeft,
+    clientWidth: row.clientWidth,
+    scrollWidth: row.scrollWidth,
+    start: e.left - r.left + row.scrollLeft,
+    width: e.width,
+  });
+  if (target == null) return;
+  const reduce = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  row.scrollTo({ left: target, behavior: instant || reduce ? 'auto' : 'smooth' });
+}

@@ -1,6 +1,6 @@
-import { useRef, type KeyboardEvent, type ReactNode } from 'react';
+import { useCallback, useLayoutEffect, useRef, type KeyboardEvent, type ReactNode } from 'react';
 import { cn } from './cn';
-import { useScrollFade } from './scrollFade';
+import { revealInRow, useScrollFade } from './scrollFade';
 
 export type TabItem<T extends string = string> = {
   value: T;
@@ -33,6 +33,22 @@ export function Tabs<T extends string>({
 }) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const fadeRef = useScrollFade<HTMLDivElement>();
+  const listRef = useRef<HTMLDivElement | null>(null);
+  const setList = useCallback(
+    (el: HTMLDivElement | null) => {
+      listRef.current = el;
+      fadeRef(el);
+    },
+    [fadeRef],
+  );
+  // On a narrow screen the strip scrolls sideways: keep the selected tab in view, whether it was picked here, came
+  // from the URL (a refresh, a shared link) or was set by another control. The first pass jumps, later ones glide.
+  const activeIndex = items.findIndex((t) => t.value === value);
+  const placed = useRef(false);
+  useLayoutEffect(() => {
+    revealInRow(listRef.current, refs.current[activeIndex], !placed.current);
+    placed.current = true;
+  }, [activeIndex]);
 
   const onKey = (e: KeyboardEvent, i: number) => {
     const enabled = items.map((t, j) => (t.disabled ? -1 : j)).filter((j) => j >= 0);
@@ -51,7 +67,7 @@ export function Tabs<T extends string>({
 
   return (
     <div
-      ref={fadeRef}
+      ref={setList}
       role="tablist"
       aria-label={ariaLabel}
       className={cn(
