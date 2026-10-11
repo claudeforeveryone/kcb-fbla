@@ -1,8 +1,8 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Mail, RefreshCw } from 'lucide-react';
 import { authErrorKind, safeNext, useAuth, type AuthErrorKind } from '../../lib/auth';
-import { useHydrated } from '../../lib/hydration';
+import { useHydrated, useKeepTypedValue } from '../../lib/hydration';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Field';
 import { useToast } from '../../components/ui/Toast';
@@ -17,6 +17,11 @@ export default function Login() {
   const nextQuery = useHydrated() && params.get('next') ? `?next=${encodeURIComponent(next)}` : '';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // The form is prerendered: keep anything typed before the app took over.
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  useKeepTypedValue(emailRef, setEmail);
+  useKeepTypedValue(passwordRef, setPassword);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorKind, setErrorKind] = useState<AuthErrorKind>('other');
@@ -96,6 +101,7 @@ export default function Login() {
           </div>
         )}
         <Input
+          ref={emailRef}
           label="Email"
           type="email"
           autoComplete="email"
@@ -109,6 +115,7 @@ export default function Login() {
           autoFocus
         />
         <PasswordInput
+          ref={passwordRef}
           label="Password"
           autoComplete="current-password"
           placeholder="Your password"

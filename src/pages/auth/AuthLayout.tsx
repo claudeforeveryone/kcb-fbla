@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, type ReactNode, type Ref } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff, Heart, Lock, Moon, Sun } from 'lucide-react';
 import { Brand } from '../../components/layout/Brand';
@@ -136,7 +136,7 @@ function AuthFooter() {
 }
 
 /** Password input with a show/hide toggle. */
-export function PasswordInput(props: Omit<InputProps, 'type' | 'right'>) {
+export function PasswordInput(props: Omit<InputProps, 'type' | 'right'> & { ref?: Ref<HTMLInputElement> }) {
   const [show, setShow] = useState(false);
   return (
     <Input

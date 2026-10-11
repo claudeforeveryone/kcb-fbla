@@ -1,8 +1,8 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Mail, MailCheck, RefreshCw } from 'lucide-react';
 import { authErrorKind, safeNext, useAuth, type AuthErrorKind } from '../../lib/auth';
-import { useHydrated } from '../../lib/hydration';
+import { useHydrated, useKeepTypedValue } from '../../lib/hydration';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Field';
 import { useToast } from '../../components/ui/Toast';
@@ -20,6 +20,13 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  // The form is prerendered: keep anything typed before the app took over.
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmRef = useRef<HTMLInputElement>(null);
+  useKeepTypedValue(emailRef, setEmail);
+  useKeepTypedValue(passwordRef, setPassword);
+  useKeepTypedValue(confirmRef, setConfirm);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorKind, setErrorKind] = useState<AuthErrorKind>('other');
@@ -88,6 +95,7 @@ export default function Signup() {
           </div>
         )}
         <Input
+          ref={emailRef}
           label="Email"
           type="email"
           autoComplete="email"
@@ -102,6 +110,7 @@ export default function Signup() {
         />
         <div>
           <PasswordInput
+            ref={passwordRef}
             label="Password"
             autoComplete="new-password"
             placeholder="At least 8 characters"
@@ -113,6 +122,7 @@ export default function Signup() {
           <StrengthMeter password={password} />
         </div>
         <PasswordInput
+          ref={confirmRef}
           label="Confirm password"
           autoComplete="new-password"
           placeholder="Type it again"

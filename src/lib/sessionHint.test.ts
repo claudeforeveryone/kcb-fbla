@@ -85,14 +85,19 @@ function headScripts(): string[] {
   return [...head.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
 }
 
-/** Runs the head scripts against a fake page and reports which attributes they set on <html>. */
+type Listener = { type: string; fn: (e: unknown) => void; capture: boolean };
+
+/** Runs the head scripts against a fake page: which attributes they set on <html>, and which listeners they add. */
 function runHeadScripts(v: Visitor) {
   const attrs = new Map<string, string>();
   const classes = new Set<string>();
+  const listeners: Listener[] = [];
   const documentElement = {
     setAttribute: (k: string, val: string) => attrs.set(k, val),
     classList: { add: (c: string) => classes.add(c) },
   };
+  const addEventListener = (type: string, fn: (e: unknown) => void, opts?: boolean | { capture?: boolean }) =>
+    listeners.push({ type, fn, capture: typeof opts === 'boolean' ? opts : !!opts?.capture });
   const storage = {
     getItem(key: string) {
       if (v.storage === 'getItem-throws') throw new Error('SecurityError');
@@ -102,9 +107,21 @@ function runHeadScripts(v: Visitor) {
   };
   for (const body of headScripts()) {
     // The scripts read the page globals by name; hand them in as parameters.
-    new Function('document', 'localStorage', 'location', body)({ documentElement }, storage, { href: v.href });
+    new Function('document', 'localStorage', 'location', body)({ documentElement, addEventListener }, storage, { href: v.href });
   }
-  return { session: attrs.has('data-session'), dark: classes.has('dark') };
+  return { session: attrs.has('data-session'), dark: classes.has('dark'), listeners };
+}
+
+/** A submit event as the head script sees it: the form (with or without an action attribute) and the default. */
+function fakeSubmit(form: { action?: string }) {
+  const event = {
+    target: { hasAttribute: (name: string) => name === 'action' && form.action !== undefined },
+    defaultPrevented: false,
+    preventDefault() {
+      event.defaultPrevented = true;
+    },
+  };
+  return event;
 }
 
 describe('index.html head script', () => {
@@ -124,6 +141,24 @@ describe('index.html head script', () => {
 
   it('still applies the saved dark theme', () => {
     expect(runHeadScripts(SIGNED_OUT).dark).toBe(true);
+  });
+
+  it("holds back the browser's own submit of an app form, so typing on a page that is still loading survives", () => {
+    // The prerendered sign-in form paints before the app's script runs, and its page chunk can still be loading after
+    // hydration starts. Submitted then, a form with no action would reload the page and drop what was typed.
+    const submits = runHeadScripts(SIGNED_OUT).listeners.filter((l) => l.type === 'submit');
+    expect(submits).toHaveLength(1);
+    // Capture phase on document: React stops a submit aimed at a not-yet-hydrated form at #root, so a bubbling
+    // listener on document would never run.
+    expect(submits[0].capture).toBe(true);
+
+    const appForm = fakeSubmit({});
+    submits[0].fn(appForm);
+    expect(appForm.defaultPrevented).toBe(true);
+
+    const realForm = fakeSubmit({ action: 'https://example.com/subscribe' });
+    submits[0].fn(realForm);
+    expect(realForm.defaultPrevented).toBe(false);
   });
 
   it('hides prerendered markup from flagged visitors until the app replaces it', () => {

@@ -49,6 +49,15 @@
         if (flag) document.documentElement.setAttribute('data-session', '');
       })();
     </script>
+    <script>
+      // The prerendered sign-in and sign-up forms can be submitted before the app has taken them over (its script or
+      // the page chunk is still loading). A form with no action would then reload the page and drop what was typed.
+      // Every form in this app is handled in script, so the browser's own submit is held back for those. Capture
+      // phase: React stops a submit aimed at a form it has not hydrated yet before it bubbles back up to document.
+      document.addEventListener('submit', function (e) {
+        if (!e.target.hasAttribute('action')) e.preventDefault();
+      }, true);
+    </script>
     <style>
       /* Splash navy until main.tsx replaces the prerendered markup (it drops data-prerendered on its first commit). */
       html[data-session] #root[data-prerendered] { position: fixed; inset: 0; z-index: 100; background: #001e60; }
