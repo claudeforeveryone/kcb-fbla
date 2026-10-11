@@ -100,7 +100,7 @@ function Dashboard({ ctx, reloadCtx, setCtx }: { ctx: MyChapter; reloadCtx: () =
         }
       />
       <div className="sticky top-16 z-20 border-b border-line bg-bg">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mx-auto max-w-[1440px] lg:px-10 px-4 sm:px-6">
           <Tabs id="admin" items={items} value={tab} onChange={setTab} aria-label="Admin sections" className="border-b-0" />
         </div>
       </div>

@@ -7,7 +7,7 @@ export function Footer({ className }: { className?: string }) {
   const year = new Date().getFullYear();
   return (
     <footer className={cn('mt-16 border-t border-line bg-surface', className)}>
-      <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid w-full max-w-[1440px] lg:px-10 gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
             <span className="grid size-11 place-items-center rounded-[2px] bg-navy">
@@ -60,7 +60,7 @@ export function Footer({ className }: { className?: string }) {
         </nav>
       </div>
       <div className="border-t border-line">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-4 py-4 text-xs text-muted sm:flex-row sm:justify-between sm:px-6">
+        <div className="mx-auto flex w-full max-w-[1440px] lg:px-10 flex-col gap-1 px-4 py-4 text-xs text-muted sm:flex-row sm:justify-between sm:px-6">
           <span>&copy; {year} FBLC. Student-run practice platform.</span>
           <span>Practice questions are unofficial and written for study.</span>
         </div>

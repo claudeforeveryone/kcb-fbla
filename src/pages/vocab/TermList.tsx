@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { RotateCcw, Search } from 'lucide-react';
-import { Button, ConfirmDialog, EmptyState, Input, Pill, useToast, errorMessage } from '../../components/ui';
+import { Button, ConfirmDialog, EmptyState, Input, Pill, ScrollRow, useToast, errorMessage } from '../../components/ui';
 import type { StudyDeck } from '../../api/vocab';
 import { STATUS_LABEL, isDue, relativeDue, statusOf, type ProgressLike, type TermStatus } from './leitner';
 import { resetTerms } from './store';
@@ -62,13 +62,13 @@ export function TermList({
           </Button>
         )}
       </div>
-      <div className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
+      <ScrollRow className="-mx-4 gap-2 px-4 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
         {filters.map((f) => (
           <Pill key={f} active={filter === f} onClick={() => setFilter(f)} count={counts[f]}>
             {f === 'all' ? 'All' : f === 'due' ? 'Due today' : STATUS_LABEL[f]}
           </Pill>
         ))}
-      </div>
+      </ScrollRow>
 
       {rows.length === 0 ? (
         <EmptyState

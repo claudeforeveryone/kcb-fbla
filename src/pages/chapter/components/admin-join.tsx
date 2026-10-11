@@ -55,7 +55,7 @@ export function BannedNotice() {
   );
 }
 
-/** Six-box code entry with a live preview and a Join button. */
+/** Six-box code entry with a live preview and a Join button. Styled to sit on the solid blue join box. */
 export function JoinByCode({ autoFocus }: { autoFocus?: boolean }) {
   const [code, setCode] = useState('');
   const [preview, setPreview] = useState<ChapterPreview | null | undefined>(undefined);
@@ -99,7 +99,7 @@ export function JoinByCode({ autoFocus }: { autoFocus?: boolean }) {
 
   return (
     <form onSubmit={join} className="space-y-4">
-      <label htmlFor="join-code" className="text-sm font-semibold text-ink">
+      <label htmlFor="join-code" className="text-sm font-semibold text-white">
         Chapter join code
       </label>
       <div className="relative">
@@ -115,16 +115,16 @@ export function JoinByCode({ autoFocus }: { autoFocus?: boolean }) {
           placeholder="ABC123"
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
           className="tabular h-14 w-full rounded-[2px] border
- border-line-strong bg-surface px-4 text-center font-display text-2xl font-extrabold uppercase tracking-[0.5em] text-heading outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/15 placeholder:text-muted/40"
+ border-white bg-white px-4 text-center font-display text-2xl font-extrabold uppercase tracking-[0.5em] text-navy outline-none transition focus:ring-4 focus:ring-white/40 placeholder:text-navy/30"
           aria-describedby="join-code-hint"
         />
-        {looking && <Spinner className="absolute right-4 top-1/2 size-5 -translate-y-1/2 text-muted" />}
+        {looking && <Spinner className="absolute right-4 top-1/2 size-5 -translate-y-1/2 text-navy" />}
       </div>
-      <p id="join-code-hint" className="text-[0.8125rem] text-muted">
+      <p id="join-code-hint" className="text-[0.8125rem] text-white/85">
         Six letters and numbers. Ask your chapter's president or an executive for it.
       </p>
       {preview === null && code.length === 6 && !looking && (
-        <p className="text-sm font-medium text-danger" role="alert">
+        <p className="rounded-[4px] bg-white px-3 py-2 text-sm font-semibold text-red" role="alert">
           No chapter uses that code. Check it, or ask for a fresh one.
         </p>
       )}
@@ -140,7 +140,7 @@ export function JoinByCode({ autoFocus }: { autoFocus?: boolean }) {
                 You're already a member. Open chapter
               </Button>
             ) : (
-              <Button type="submit" variant="accent" block size="lg" loading={joining} rightIcon={<ArrowRight className="size-5" />}>
+              <Button type="submit" variant="primary" block size="lg" loading={joining} rightIcon={<ArrowRight className="size-5" />}>
                 Join {preview.name}
               </Button>
             )

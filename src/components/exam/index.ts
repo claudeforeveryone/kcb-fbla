@@ -5,7 +5,6 @@ export { ExamResults } from './ExamResults';
 export type { ExamResultsProps } from './ExamResults';
 export { ExamSession } from './ExamSession';
 export type { ExamSessionProps } from './ExamSession';
-export { AchievementIcon } from './AchievementIcon';
 export { ExamStyles } from './ExamStyles';
 export { useCountUp } from './useCountUp';
 export {

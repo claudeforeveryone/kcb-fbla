@@ -90,6 +90,18 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
     };
   }, []);
 
+  // The pinned bar sits at the bottom of the viewport; keep it hidden while the filter form is in that bottom
+  // band (e.g. on a phone when the page first opens) so it never covers the filters.
+  const [filtersUnderBar, setFiltersUnderBar] = useState(false);
+  const attachFilters = useCallback((el: HTMLElement | null) => {
+    if (!el) return;
+    const io = new IntersectionObserver((es) => setFiltersUnderBar(es.some((x) => x.isIntersecting)), {
+      rootMargin: '-78% 0px 0px 0px',
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const [jumping, setJumping] = useState(false);
   const [pendingScroll, setPendingScroll] = useState(false);
   const jump = async () => {
@@ -134,7 +146,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
   return (
     <div className="space-y-5">
       {/* Filters */}
-      <div className="flex flex-col gap-3 rounded-[4px] border border-line bg-surface p-3 shadow-card sm:p-4 lg:flex-row lg:items-end">
+      <div ref={attachFilters} className="flex flex-col gap-3 rounded-[4px] border border-line bg-surface p-3 shadow-card sm:p-4 lg:flex-row lg:items-end">
         <Input
           className="lg:flex-1"
           label="Search players"
@@ -330,7 +342,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
         <PinnedMe
           standing={standing}
           event={event}
-          hidden={(meInList && meVisible) || (searching && filtered.some((r) => r.is_me))}
+          hidden={filtersUnderBar || (meInList && meVisible) || (searching && filtered.some((r) => r.is_me))}
           onJump={jump}
           jumping={jumping}
           canJump={standing.status === 'ranked' && (meInList || standing.row.rank <= SCAN_CAP)}
@@ -434,7 +446,7 @@ function PinnedMe({
 }) {
   if (hidden || standing.status === 'loading' || standing.status === 'unknown') return null;
   const shell =
-    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-[4px] border border-red/30 border-l-[3px] border-l-red bg-surface shadow-pop md:bottom-4';
+    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-[4px] border border-red/30 border-l-[3px] border-l-red bg-surface shadow-card md:bottom-4';
 
   if (standing.status === 'unranked') {
     return (

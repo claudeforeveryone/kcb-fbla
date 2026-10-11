@@ -105,17 +105,10 @@ export type DuelItem = {
 };
 
 export async function getOpenDuels(uid: string): Promise<DuelItem[]> {
-  const res = await supabase
-    .from('fbla_duels')
-    .select('*')
-    .or(`challenger_id.eq.${uid},opponent_id.eq.${uid}`)
-    .in('status', ['pending', 'accepted'])
-    .gt('expires_at', new Date().toISOString())
-    .order('created_at', { ascending: false })
-    .limit(20)
-    .returns<Duel[]>();
+  // masked rows (0015): your own score is visible, theirs only once the duel is complete
+  const res = await supabase.rpc('fbla_my_duels', { p_id: null, p_limit: 20, p_open: true });
   if (res.error) throw toApiError(res.error);
-  const duels = res.data ?? [];
+  const duels = (res.data ?? []) as Duel[];
   const otherIds = [...new Set(duels.map((d) => (d.challenger_id === uid ? d.opponent_id : d.challenger_id)))];
   const people = await getCards(otherIds);
   const order = { incoming: 0, yourTurn: 1, waiting: 2 } as const;

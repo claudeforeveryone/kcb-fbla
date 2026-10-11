@@ -6,6 +6,7 @@ import { Page } from '../../components/layout/Page';
 import { ExamResults, fromContent, fromCustom, resultFromStored, type ExamQuestion, type ExamResultData } from '../../components/exam';
 import { getAttempt, getProfile } from '../../api/core';
 import { getCustomTest } from '../../api/play';
+import { applyKeys, getQuestionKeys, type QuestionKey } from '../../api/keys';
 import { useProfile } from '../../lib/auth';
 import { eventInfo, eventName, parseCustomQuestionId } from '../../lib/types';
 import { questionsByIds } from './buildRun';
@@ -29,15 +30,20 @@ export default function ReviewPage() {
       const ids = answers.map((a) => a.question_id);
       const officialIds = ids.filter((id) => !id.startsWith('custom:'));
       const customIdx = ids.map(parseCustomQuestionId).filter((x): x is NonNullable<typeof x> => !!x);
-      const [official, test, owner] = await Promise.all([
+      const [official, test, owner, keys] = await Promise.all([
         questionsByIds(officialIds),
         customIdx.length ? getCustomTest(attempt.custom_test_id ?? customIdx[0].testId).catch(() => null) : Promise.resolve(null),
         attempt.user_id === me.id ? Promise.resolve(null) : getProfile(attempt.user_id).catch(() => null),
+        // keys are not shipped with the questions; the server hands them out for an attempt you may view
+        getQuestionKeys(ids, attempt.id).catch(() => new Map<string, QuestionKey>()),
       ]);
-      const questions: ExamQuestion[] = [
-        ...official.map(fromContent),
-        ...(test ? customIdx.filter((c) => test.questions[c.index]).map((c) => fromCustom(test.id, c.index, test.questions[c.index], test.event)) : []),
-      ];
+      const questions: ExamQuestion[] = applyKeys(
+        [
+          ...official.map(fromContent),
+          ...(test ? customIdx.filter((c) => test.questions[c.index]).map((c) => fromCustom(test.id, c.index, test.questions[c.index], test.event)) : []),
+        ],
+        keys,
+      );
       setState({
         s: 'ok',
         v: {

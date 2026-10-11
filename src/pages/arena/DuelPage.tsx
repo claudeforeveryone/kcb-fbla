@@ -494,7 +494,9 @@ function DuelPlay({
   const prepare = useCallback(async () => {
     setError(null);
     try {
-      const [qs, start] = await Promise.all([getDuelQuestions(duel.question_ids), startDuel(duel.id)]);
+      // the questions are only handed out once the clock has started (fbla_start_duel)
+      const start = await startDuel(duel.id);
+      const qs = start.questions ?? [];
       if (start.finished) {
         await onDone({
           duel_id: duel.id,
@@ -534,7 +536,7 @@ function DuelPlay({
     } catch (e) {
       setError(e);
     }
-  }, [duel.id, duel.question_ids, key, uid, onDone]);
+  }, [duel.id, key, uid, onDone]);
 
   const prepared = useRef<string | null>(null);
   useEffect(() => {

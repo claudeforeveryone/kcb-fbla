@@ -26,6 +26,7 @@ import {
 } from '../../components/ui';
 import { Page } from '../../components/layout/Page';
 import { loadQuestions, type Question } from '../../lib/content';
+import { applyKeys, getBankKeys } from '../../api/keys';
 import { DIFFICULTY_LABELS, eventName, type CustomQuestion } from '../../lib/types';
 import {
   MAX_TEST_QUESTIONS,
@@ -53,7 +54,7 @@ function fromStored(q: CustomQuestion & { src?: string | null }): EQ {
 }
 function fromOfficial(q: Question): EQ {
   const c = [...q.choices, '', '', '', ''].slice(0, 4) as EQ['choices'];
-  return { key: ++keySeq, q: q.q, choices: c, answer: q.answer, explain: q.explain ?? '', sub: q.sub ?? '', src: q.id };
+  return { key: ++keySeq, q: q.q, choices: c, answer: q.answer ?? null, explain: q.explain ?? '', sub: q.sub ?? '', src: q.id };
 }
 function toStored(e: EQ): CustomQuestion & { src?: string } {
   return {
@@ -823,8 +824,9 @@ function ImportModal({
     setQ('');
     setSub('');
     setDiff(0);
-    loadQuestions(event)
-      .then((b) => live && setBank(b))
+    // the public bank has no keys; staff get them from the server (fbla_question_bank)
+    Promise.all([loadQuestions(event), getBankKeys(event)])
+      .then(([b, keys]) => live && setBank(applyKeys(b, keys)))
       .catch((e) => live && setErr(errorMessage(e)));
     return () => {
       live = false;
@@ -852,7 +854,7 @@ function ImportModal({
       onClose={onClose}
       size="xl"
       title={`Import from the ${eventName(event)} bank`}
-      description="Imported questions are copies. Edit them however you like; the official bank is not changed."
+      description="Imported questions are copies; the official bank is not changed. Because this shows the answer key, these questions no longer count toward your own Elo."
       footer={
         <>
           <span className={cn('mr-auto self-center text-sm', over ? 'font-semibold text-danger' : 'text-muted')}>

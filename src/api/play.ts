@@ -42,7 +42,7 @@ export type PlayHistory = {
   attempts: HistoryAttempt[];
   /** Official answers in the shape src/lib/score.ts and src/lib/pick.ts expect (oldest first). */
   log: Answer[];
-  /** Official question ids answered before (K = 24 vs 8). */
+  /** Official question ids answered before (repeats earn no Elo). */
   seen: Set<string>;
 };
 

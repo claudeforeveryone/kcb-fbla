@@ -43,6 +43,7 @@ import {
 } from '../../api/chapter';
 import { JoinByCode } from './components/admin-join';
 import { InviteCard, RoleBadge, ROLE_ORDER, fmt, pct, useLoad } from './components/admin-shared';
+import { pluralize } from './components/classroom-shared';
 
 export default function ChapterPage() {
   const mine = useLoad(() => getMyChapter(), []);
@@ -82,15 +83,13 @@ function NoChapter() {
       />
       <Page>
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card as="section" className="p-5 sm:p-6">
-            <CardHeader
-              title="Join with a code"
-              subtitle="Got a link instead? Just open it and you'll land on the invite page."
-            />
-            <div>
-              <JoinByCode autoFocus />
+          <section className="rounded-[12px] bg-blue p-5 text-white sm:p-6">
+            <div className="mb-4">
+              <h3 className="text-base font-bold leading-tight text-white">Join with a code</h3>
+              <p className="mt-0.5 text-sm text-white/85">Got a link instead? Just open it and you'll land on the invite page.</p>
             </div>
-          </Card>
+            <JoinByCode autoFocus />
+          </section>
           <Card as="section" className="flex flex-col p-5 sm:p-6">
             <CardHeader
               title="Starting a chapter?"
@@ -298,6 +297,8 @@ function Leaderboard({
   const navigate = useNavigate();
   const roleOf = useMemo(() => new Map((roles ?? []).map((r) => [r.user_id, r.role])), [roles]);
   const allZero = rows != null && rows.every((r) => r.elo === 0);
+  // "Fresh" means nobody has played yet; members can have answered questions and still sit at the 0 Elo floor.
+  const fresh = allZero && rows.every((r) => r.questions_answered === 0);
   const podium = rows && !allZero ? rows.slice(0, 3) : [];
 
   return (
@@ -356,7 +357,9 @@ function Leaderboard({
           )}
           {allZero && (
             <div className="mx-4 mb-3 rounded-[2px] border-l-4 border-blue bg-surface-2 px-3 py-2.5 text-sm text-ink sm:mx-5">
-              Fresh board: everyone is at 0. The first member to finish a practice set takes the top spot.
+              {fresh
+                ? 'Fresh board: everyone is at 0. The first member to finish a practice set takes the top spot.'
+                : 'Everyone is tied at 0 Elo so far. Rated practice with more right answers moves you up the board.'}
             </div>
           )}
           <Table>
@@ -590,7 +593,7 @@ function MyAttendance({
       <CardHeader
         title="Your attendance"
 
-        subtitle={counted ? `${attended} of ${counted} meetings` : `${rows.length} meetings so far`}
+        subtitle={counted ? `${attended} of ${pluralize(counted, 'meeting')}` : `${pluralize(rows.length, 'meeting')} so far`}
         action={<span className="tabular font-display text-2xl font-extrabold text-heading">{pct(rate)}</span>}
       />
       <ul className="space-y-2">

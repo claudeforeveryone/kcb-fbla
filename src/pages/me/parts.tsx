@@ -1,9 +1,9 @@
-// Building blocks shared by the Me pages: data hook, activity heatmap, achievements, mini leaderboard, friends.
+// Building blocks shared by the Me pages: data hook, activity heatmap, mini leaderboard, friends.
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { UserCheck, UserMinus, UserPlus, UserX, X } from 'lucide-react';
-import { Avatar, Button, Dropdown, EloBadge, ProgressBar, Tooltip, cn, errorMessage, useToast } from '../../components/ui';
-import { ACHIEVEMENTS, EVENTS, type AchievementCode, type ProfileStats } from '../../lib/types';
+import { Avatar, Button, Dropdown, EloBadge, Tooltip, cn, errorMessage, useToast } from '../../components/ui';
+import { type ProfileStats } from '../../lib/types';
 import {
   acceptFriend,
   addFriend,
@@ -175,173 +175,6 @@ function Row({
   );
 }
 
-// ------------------------------------------------------------------------------------------------ achievements
-
-/** How hard each achievement is; the hardest earned ones are showcased. */
-const PRESTIGE: Record<AchievementCode, number> = {
-  first_steps: 1,
-  chapter_joined: 2,
-  streak_3: 3,
-  questions_100: 3,
-  duel_win_1: 4,
-  answer_streak_10: 5,
-  elo_300: 5,
-  questions_500: 6,
-  streak_7: 6,
-  perfect_paper: 6,
-  speed_run: 6,
-  all_events: 7,
-  elo_500: 7,
-  vocab_100: 7,
-  mock_90: 8,
-  answer_streak_25: 8,
-  questions_1000: 9,
-  duel_win_10: 9,
-  elo_700: 10,
-  streak_30: 10,
-};
-
-function progressFor(code: AchievementCode, s: ProfileStats): { value: number; max: number } | null {
-  const p = s.profile;
-  switch (code) {
-    case 'questions_100':
-      return { value: s.questions_answered, max: 100 };
-    case 'questions_500':
-      return { value: s.questions_answered, max: 500 };
-    case 'questions_1000':
-      return { value: s.questions_answered, max: 1000 };
-    case 'streak_3':
-      return { value: s.best_streak, max: 3 };
-    case 'streak_7':
-      return { value: s.best_streak, max: 7 };
-    case 'streak_30':
-      return { value: s.best_streak, max: 30 };
-    case 'answer_streak_10':
-      return { value: s.best_answer_streak, max: 10 };
-    case 'answer_streak_25':
-      return { value: s.best_answer_streak, max: 25 };
-    case 'elo_300':
-      return { value: p.peak_elo, max: 300 };
-    case 'elo_500':
-      return { value: p.peak_elo, max: 500 };
-    case 'elo_700':
-      return { value: p.peak_elo, max: 700 };
-    case 'duel_win_1':
-      return { value: p.duel_wins, max: 1 };
-    case 'duel_win_10':
-      return { value: p.duel_wins, max: 10 };
-    case 'all_events':
-      return { value: s.by_event.length, max: EVENTS.length };
-    default:
-      return null;
-  }
-}
-
-export function AchievementsSection({ stats }: { stats: ProfileStats }) {
-  const [filter, setFilter] = useState<'all' | 'earned' | 'locked'>('all');
-  const earnedAt = useMemo(() => new Map(stats.achievements.map((a) => [a.code, a.earned_at])), [stats.achievements]);
-  const showcase = useMemo(
-    () =>
-      ACHIEVEMENTS.filter((a) => earnedAt.has(a.code))
-        .sort((a, b) => PRESTIGE[b.code] - PRESTIGE[a.code] || (earnedAt.get(b.code) ?? '').localeCompare(earnedAt.get(a.code) ?? ''))
-        .slice(0, 3),
-    [earnedAt],
-  );
-  const list = ACHIEVEMENTS.filter((a) =>
-    filter === 'all' ? true : filter === 'earned' ? earnedAt.has(a.code) : !earnedAt.has(a.code),
-  ).sort((a, b) => {
-    const ea = earnedAt.has(a.code) ? 0 : 1;
-    const eb = earnedAt.has(b.code) ? 0 : 1;
-    return ea - eb;
-  });
-
-  return (
-    <div>
-      {showcase.length > 0 && (
-        <div className="grid gap-3 sm:grid-cols-3">
-          {showcase.map((def, i) => (
-            <div
-              key={def.code}
-              className="relative overflow-hidden rounded-[4px] border border-line border-l-[3px] border-l-red bg-surface p-4"
-              style={{ animationDelay: `${i * 60}ms` }}
-            >
-              <div>
-                <div className="min-w-0">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
-                    {i === 0 ? 'Top achievement' : 'Highlight'}
-                  </div>
-                  <div className="truncate font-display text-base font-bold text-heading">{def.title}</div>
-                  <div className="text-xs text-muted">Earned {formatDate(earnedAt.get(def.code)!, true)}</div>
-                </div>
-              </div>
-              <p className="mt-3 text-sm text-ink">{def.description}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted">
-          <span className="tabular font-semibold text-heading">{earnedAt.size}</span> of {ACHIEVEMENTS.length} unlocked
-        </p>
-        <div className="flex gap-1.5" role="group" aria-label="Filter achievements">
-          {(['all', 'earned', 'locked'] as const).map((f) => (
-            <button
-              key={f}
-              type="button"
-              aria-pressed={filter === f}
-              onClick={() => setFilter(f)}
-              className={cn(
-                'h-8 rounded-[2px] px-3 text-xs font-semibold capitalize transition-colors',
-                filter === f
-                  ? 'bg-surface text-heading shadow-[inset_0_-2px_0_var(--red)] ring-1 ring-inset ring-line-strong'
-                  : 'bg-surface-2 text-muted hover:text-ink',
-              )}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <ul className="mt-3 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-        {list.map((def) => {
-          const at = earnedAt.get(def.code);
-          const prog = at ? null : progressFor(def.code, stats);
-          return (
-            <li
-              key={def.code}
-              className={cn(
-                'flex items-start gap-3 rounded-[4px] border border-l-[3px] p-3 transition-colors',
-                at ? 'border-line border-l-red bg-surface' : 'border-line border-l-line-strong bg-surface/50',
-              )}
-            >
-              <div className="min-w-0 flex-1">
-                <div className={cn('truncate text-sm font-bold', at ? 'text-heading' : 'text-ink/80')}>{def.title}</div>
-                <div className="text-xs text-muted">{def.description}</div>
-                {at ? (
-                  <div className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-success">
-                    Earned {formatDate(at, true)}
-                  </div>
-                ) : prog ? (
-                  <ProgressBar
-                    className="mt-1.5"
-                    size="xs"
-                    value={Math.min(prog.value, prog.max)}
-                    max={prog.max}
-                    label={<span className="text-[11px] text-muted">Progress</span>}
-                    showValue={(v, m) => <span className="text-[11px]">{`${v} / ${m}`}</span>}
-                  />
-                ) : null}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-
 // ------------------------------------------------------------------------------------------------ mini leaderboard
 
 export function MiniLeaderboard({ board, userId }: { board: MiniBoard; userId: string }) {
@@ -485,6 +318,17 @@ export function FriendButton({ userId, name, onDark }: { userId: string; name: s
       ]}
     />
   );
+}
+
+/**
+ * Per-event and per-section breakdowns count the official question bank only; chapter custom tests are in the
+ * headline totals but not broken down. Says so (with the gap) so the two sets of numbers don't look contradictory.
+ */
+export function officialOnlyNote(stats: Pick<ProfileStats, "questions_answered" | "by_event">): string {
+  const broken = stats.by_event.reduce((n, e) => n + e.answered, 0);
+  const other = Math.max(0, stats.questions_answered - broken);
+  if (!other) return "Official question bank";
+  return `Official question bank only. ${other.toLocaleString()} ${other === 1 ? "answer" : "answers"} from chapter tests ${other === 1 ? "counts" : "count"} in the totals but not here.`;
 }
 
 /** A small titled panel used down the profile sidebar. */

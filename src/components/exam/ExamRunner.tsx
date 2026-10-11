@@ -22,6 +22,7 @@ import {
   type ExamQuestion,
   type FinishMeta,
   type RunnerAnswer,
+  type RunnerKey,
   type RunnerSnapshot,
 } from './types';
 
@@ -48,6 +49,11 @@ export type ExamRunnerProps = {
   submitting?: boolean;
   /** Hide the question navigator even in exam mode (e.g. Arena). */
   hideNavigator?: boolean;
+  /**
+   * Instant modes: grades one answer when the question carries no key (keys are not shipped with the questions).
+   * The server records the first answer per question, so the returned `chosen` wins over the local one.
+   */
+  onCheck?: (questionId: string, choice: number | null) => Promise<RunnerKey & { chosen?: number | null }>;
   className?: string;
 };
 
@@ -77,7 +83,7 @@ const isTyping = (t: EventTarget | null) =>
  * Keyboard: 1-4 or A-D pick, Enter confirms / next, arrows move (exam), F flags (exam).
  */
 export function ExamRunner({
-  questions,
+  questions: rawQuestions,
   mode,
   timeLimitSec,
   onFinish,
@@ -90,8 +96,22 @@ export function ExamRunner({
   onSnapshot,
   submitting,
   hideNavigator,
+  onCheck,
   className,
 }: ExamRunnerProps) {
+  // keys fetched for instant feedback (fbla_check_answer), merged onto the questions that arrived without one
+  const [keys, setKeys] = useState<Record<string, RunnerKey>>(() => ({ ...(initialState?.keys ?? {}) }));
+  const questions = useMemo(
+    () =>
+      rawQuestions.map((q) => {
+        const k = q.answer === undefined ? keys[q.id] : undefined;
+        return k ? { ...q, answer: k.answer, explain: k.explain ?? q.explain ?? null } : q;
+      }),
+    [rawQuestions, keys],
+  );
+  const [checking, setChecking] = useState(false);
+  const [checkError, setCheckError] = useState<string | null>(null);
+  const checkingRef = useRef(false);
   const n = questions.length;
   const [s, setS] = useState<RunnerSnapshot>(() =>
     validSnapshot(initialState, n) ? initialState : freshState(n, timeLimitSec),
@@ -131,8 +151,8 @@ export function ExamRunner({
   const outOfLives = mode === 'endless' && livesLeft === 0;
 
   useEffect(() => {
-    onSnapshot?.(s);
-  }, [s, onSnapshot]);
+    onSnapshot?.(Object.keys(keys).length ? { ...s, keys } : s);
+  }, [s, keys, onSnapshot]);
 
   const sRef = useRef(s);
   sRef.current = s;
@@ -180,11 +200,39 @@ export function ExamRunner({
 
   const pick = useCallback(
     (choice: number | null) => {
-      if (finished.current || submitting) return;
+      if (finished.current || submitting || checkingRef.current) return;
       const prev = sRef.current;
       const i = prev.index;
       if (instant && prev.revealed[i]) return;
       if (!instant && choice == null) return;
+      if (instant && questions[i].answer === undefined && onCheck) {
+        // no key on the client: the server grades it (and remembers this first answer)
+        const qid = questions[i].id;
+        const st0 = bank(prev);
+        setS(st0);
+        checkingRef.current = true;
+        setChecking(true);
+        setCheckError(null);
+        onCheck(qid, choice)
+          .then((res) => {
+            setKeys((k) => ({ ...k, [qid]: { answer: res.answer, explain: res.explain ?? null } }));
+            const picked = res.chosen !== undefined ? res.chosen : choice;
+            if (picked !== res.answer) setShakeKey((k) => k + 1);
+            setS((cur) => {
+              const c = [...cur.chosen];
+              c[i] = picked;
+              const r = [...cur.revealed];
+              r[i] = true;
+              return { ...cur, chosen: c, revealed: r };
+            });
+          })
+          .catch((e: unknown) => setCheckError(e instanceof Error ? e.message : 'Could not check that answer.'))
+          .finally(() => {
+            checkingRef.current = false;
+            setChecking(false);
+          });
+        return;
+      }
       const st = instant ? bank(prev) : prev;
       const c = [...st.chosen];
       c[i] = !instant && c[i] === choice ? null : choice; // exam: clicking the same choice clears it
@@ -196,7 +244,7 @@ export function ExamRunner({
       }
       setS({ ...st, chosen: c, revealed: r });
     },
-    [bank, instant, questions, submitting],
+    [bank, instant, questions, submitting, onCheck],
   );
 
   const toggleFlag = useCallback(() => {
@@ -285,7 +333,7 @@ export function ExamRunner({
       <ExamStyles />
       {/* toolbar */}
       <div className="sticky top-16 z-30 border-b border-line bg-surface">
-        <div className="mx-auto flex h-14 w-full max-w-6xl items-center gap-3 px-4 sm:px-6">
+        <div className="mx-auto flex h-14 w-full max-w-[1440px] lg:px-10 items-center gap-3 px-4 sm:px-6">
           <div className="min-w-0 flex-1">
             <div className="truncate font-display text-sm font-bold text-heading">{title}</div>
             {subtitle && <div className="truncate text-xs text-muted">{subtitle}</div>}
@@ -355,7 +403,7 @@ export function ExamRunner({
         )}
       </div>
 
-      <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 pb-6 pt-5 sm:px-6 md:pt-8 lg:grid-cols-[minmax(0,1fr)_280px]">
+      <div className="mx-auto grid w-full max-w-[1440px] lg:px-10 gap-6 px-4 pb-6 pt-5 sm:px-6 md:pt-8 lg:grid-cols-[minmax(0,1fr)_280px]">
         <div className={cn('min-w-0', !showNav && 'lg:col-span-2 lg:mx-auto lg:w-full lg:max-w-3xl')}>
           <div ref={topRef} key={s.index} className="exam-slide">
             {/* question meta */}
@@ -401,7 +449,7 @@ export function ExamRunner({
                     role={instant ? undefined : 'radio'}
                     aria-checked={instant ? undefined : isChosen}
                     aria-pressed={instant ? isChosen : undefined}
-                    disabled={(instant && revealed) || submitting}
+                    disabled={(instant && revealed) || submitting || checking}
                     onClick={() => pick(i)}
                     className={cn(
                       'group flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left transition-[border-color,background-color,opacity] duration-150 ease-out md:px-4 md:py-3.5',
@@ -435,6 +483,12 @@ export function ExamRunner({
                 );
               })}
             </div>
+
+            {instant && !revealed && (checking || checkError) && (
+              <p className={cn('mt-3 text-sm', checkError ? 'font-semibold text-danger' : 'text-muted')} role="status">
+                {checkError ? `${checkError} Pick again to retry.` : 'Checking your answer...'}
+              </p>
+            )}
 
             {/* instant feedback */}
             {instant && revealed && (

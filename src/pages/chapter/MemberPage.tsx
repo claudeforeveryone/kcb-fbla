@@ -28,6 +28,7 @@ import { ATTEMPT_KIND_LABELS, ROLE_LABELS, eventInfo, eventName, isAdminRole, ty
 import { listAttempts, profileStats, weakSpots } from '../../api/core';
 import { ATTENDANCE_LABELS, attendanceRate, getMyChapter, memberAttendance, relativeDay } from '../../api/chapter';
 import { RoleBadge, accuracyTone, fmt, pct, useLoad } from './components/admin-shared';
+import { officialOnlyNote } from '../me/parts';
 
 const STATUS_DOT: Record<AttendanceStatus, string> = { present: 'bg-success', late: 'bg-warning', absent: 'bg-red', excused: 'bg-blue' };
 
@@ -52,9 +53,12 @@ export default function MemberPage() {
     () => (canPrivate ? listAttempts({ userId, limit: 15 }) : Promise.resolve({ rows: [], count: 0 })),
     [userId, canPrivate],
   );
+  // Attendance rows are readable only by the member and the chapter president/executives (RLS), so trainers
+  // would otherwise get an empty list and read it as "no marks". Hide attendance from them instead.
+  const canSeeAttendance = viewerIsAdmin || isSelf;
   const attendance = useLoad(
-    () => (memberChapterId && (viewerIsAdmin || isSelf) ? memberAttendance(memberChapterId, userId) : Promise.resolve([])),
-    [userId, memberChapterId, viewerIsAdmin, isSelf],
+    () => (memberChapterId && canSeeAttendance ? memberAttendance(memberChapterId, userId) : Promise.resolve([])),
+    [userId, memberChapterId, canSeeAttendance],
   );
 
   const weekly = useMemo(() => {
@@ -112,7 +116,7 @@ export default function MemberPage() {
         <Page>
           <EmptyState
             title="Chapter staff only"
-            description={`Detailed stats, weak spots and attendance are visible to ${p.display_name}'s chapter president, executives and trainers.`}
+            description={`Detailed stats and weak spots are visible to ${p.display_name}'s chapter president, executives and trainers.`}
             action={<ButtonLink to={`/u/${p.username}`}>View public profile</ButtonLink>}
           />
         </Page>
@@ -155,13 +159,13 @@ export default function MemberPage() {
       </PageHeader>
 
       <Page>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+        <div className={`grid grid-cols-2 gap-3 md:grid-cols-3 ${canSeeAttendance ? "xl:grid-cols-6" : "xl:grid-cols-5"}`}>
           <StatTile label="Accuracy" value={s.questions_answered ? pct(s.accuracy) : '–'} sub={`${fmt(s.questions_correct)}/${fmt(s.questions_answered)}`} />
           <StatTile label="Last 30 days" value={fmt(last30)} sub="questions" chart={<Sparkline values={weekly} title="Questions per week, last 26 weeks" />} />
           <StatTile label="Streak" value={`${s.current_streak}d`} sub={`best ${s.best_streak}d`} />
           <StatTile label="Time studied" value={fmtDuration(s.time_spent_ms)} sub={`${fmt(s.attempts_count)} ${s.attempts_count === 1 ? "set" : "sets"}`} />
-          <StatTile label="Attendance" value={pct(attRate.rate)} sub={attRate.counted ? `${attRate.attended}/${attRate.counted} meetings` : 'No marks yet'} />
-          <StatTile label="Achievements" value={fmt(s.achievements.length)} sub={s.best_paper ? `best ${pct(s.best_paper.accuracy)}` : 'no full set yet'} />
+          {canSeeAttendance && <StatTile label="Attendance" value={pct(attRate.rate)} sub={attRate.counted ? `${attRate.attended}/${attRate.counted} meetings` : 'No marks yet'} />}
+          <StatTile label="Best set" value={s.best_paper ? pct(s.best_paper.accuracy) : '–'} sub={s.best_paper ? `${s.best_paper.correct}/${s.best_paper.total} correct` : 'no full set yet'} />
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
@@ -174,7 +178,7 @@ export default function MemberPage() {
             <Card as="section">
               <CardHeader
                 title="Weak spots"
-                subtitle="Accuracy by area, worst first. These are the areas to drill before competition."
+                subtitle="Accuracy by area on official questions, worst first. These are the areas to drill before competition."
               />
               {weak.loading && !weak.data ? (
                 <div className="space-y-3">
@@ -213,7 +217,7 @@ export default function MemberPage() {
             </Card>
 
             <Card as="section">
-              <CardHeader title="Accuracy by event" />
+              <CardHeader title="Accuracy by event" subtitle={officialOnlyNote(s)} />
               <BarChart
                 title="Accuracy by event"
                 data={s.by_event.map((e) => ({
@@ -311,7 +315,7 @@ export default function MemberPage() {
               </dl>
             </Card>
 
-            {(viewerIsAdmin || isSelf) && (
+            {canSeeAttendance && (
               <Card as="section">
                 <CardHeader
                   title="Attendance"

@@ -83,7 +83,11 @@ export function LineChart({
     x1 += span;
   }
   const ys = all.map((p) => p.y);
-  const ticks = niceTicks(yMin ?? Math.min(...ys), yMax ?? Math.max(...ys), 4);
+  const lo = yMin ?? Math.min(...ys);
+  let hi = yMax ?? Math.max(...ys);
+  // A flat series (e.g. Elo sitting at the 0 floor) pads upward only, so the axis never suggests values below it.
+  if (hi <= lo) hi = lo + Math.max(10, Math.abs(lo) * 0.2);
+  const ticks = niceTicks(lo, hi, 4);
   const y0 = ticks[0];
   const y1 = ticks[ticks.length - 1];
   const sx = (x: number) => pad.l + ((x - x0) / (x1 - x0)) * iw;

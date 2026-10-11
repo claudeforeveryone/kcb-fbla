@@ -17,8 +17,9 @@ export type Question = {
   id: string;
   q: string;
   choices: string[];
-  answer: number;
-  explain: string;
+  /** Not shipped in public/content (keys stay on the server); filled in from src/api/keys.ts where allowed. */
+  answer?: number;
+  explain?: string | null;
   sub: string;
   diff: Diff;
   topic: string;

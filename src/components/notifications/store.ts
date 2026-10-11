@@ -58,6 +58,17 @@ function set(patch: Partial<FeedState>) {
 const byNewest = (a: Notification, b: Notification) =>
   a.created_at < b.created_at ? 1 : a.created_at > b.created_at ? -1 : a.id < b.id ? 1 : -1;
 
+/** Achievements are no longer shown anywhere in the app; the server still records them, so hide them here. */
+export const isHidden = (n: Pick<Notification, 'kind'>) => n.kind.toLowerCase().startsWith('achievement');
+const visible = (rows: Notification[]) => rows.filter((n) => !isHidden(n));
+
+/** Quietly marks hidden unread rows read so they never count towards the unread badge. */
+function retireHidden(rows: Notification[]) {
+  const ids = rows.filter((n) => isHidden(n) && !n.read_at).map((n) => n.id);
+  if (ids.length) void apiMarkRead(ids).catch(() => {});
+  return ids.length;
+}
+
 function merge(existing: Notification[], incoming: Notification[]): Notification[] {
   const map = new Map(existing.map((n) => [n.id, n]));
   for (const n of incoming) map.set(n.id, n);
@@ -73,9 +84,10 @@ async function loadFirst(userId: string, quiet = false) {
     // keep older pages the user already loaded; replace the newest window
     const oldest = rows.length ? rows[rows.length - 1].created_at : null;
     const keep = oldest ? state.items.filter((n) => n.created_at < oldest) : [];
+    const hiddenUnread = retireHidden(rows);
     set({
-      items: merge(keep, rows),
-      unread: count,
+      items: merge(keep, visible(rows)),
+      unread: Math.max(0, count - hiddenUnread),
       status: 'ready',
       error: null,
       hasMore: state.items.length > rows.length ? state.hasMore : rows.length === PAGE,
@@ -106,6 +118,10 @@ function connect(userId: string) {
     (c) => {
       if (state.userId !== userId) return;
       if (c.type === 'insert') {
+        if (isHidden(c.row)) {
+          retireHidden([c.row]);
+          return;
+        }
         if (state.items.some((n) => n.id === c.row.id)) return;
         const fresh = new Set(state.fresh);
         fresh.add(c.row.id);
@@ -244,7 +260,8 @@ export const feed = {
     try {
       const rows = await listNotifications(uid, { limit: PAGE, before: last?.created_at ?? null });
       if (state.userId !== uid) return;
-      set({ items: merge(state.items, rows), hasMore: rows.length === PAGE, loadingMore: false });
+      retireHidden(rows);
+      set({ items: merge(state.items, visible(rows)), hasMore: rows.length === PAGE, loadingMore: false });
     } catch (e) {
       set({ loadingMore: false });
       throw e;

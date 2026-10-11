@@ -14,6 +14,7 @@ import {
   Pill,
   Select,
   Skeleton,
+  ScrollRow,
   SkeletonCards,
   Tabs,
   cn,
@@ -362,8 +363,8 @@ export default function ClassroomPage() {
                   </button>
                 )}
 
-                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:px-0" role="group" aria-label="Filter by type">
+                <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                  <ScrollRow className="-mx-4 gap-2 px-4 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0" role="group" aria-label="Filter by type">
                     <Pill active={!kindFilter} onClick={() => setParam({ kind: null })} count={data.posts.filter((p) => !eventFilter || p.event === eventFilter).length}>
                       All
                     </Pill>
@@ -376,8 +377,8 @@ export default function ClassroomPage() {
                         </Pill>
                       );
                     })}
-                  </div>
-                  <div className="flex items-center gap-2 sm:w-60">
+                  </ScrollRow>
+                  <div className="flex shrink-0 items-center gap-2 sm:w-60">
                     <Select
                       aria-label="Filter by event"
                       className="flex-1"
@@ -547,7 +548,8 @@ function HeaderChip({ label, alert, onClick }: { label: string; alert?: string; 
       {inner}
     </button>
   ) : (
-    <span className={cls}>{inner}</span>
+    // Plain text, not a bordered chip: it isn't clickable, so it shouldn't look like the buttons beside it.
+    <span className="inline-flex h-9 max-w-full items-center gap-2 px-1 text-sm font-semibold text-muted">{inner}</span>
   );
 }
 

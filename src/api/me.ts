@@ -3,6 +3,7 @@
 import type { PostgrestError } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import { loadQuestions, type Question } from '../lib/content';
+import { applyKeys, getQuestionKeys, type QuestionKey } from './keys';
 import {
   ApiError,
   getProfileByUsername,
@@ -64,7 +65,10 @@ export async function miniLeaderboard(userId: string, rankHint: number): Promise
 export async function chapterRank(chapterId: string, userId: string): Promise<{ rank: number; of: number } | null> {
   const rows = await playerLeaderboard({ chapterId, limit: 200 });
   const me = rows.find((r) => r.user_id === userId);
-  return me ? { rank: me.rank, of: me.total_count } : null;
+  if (!me) return null;
+  // Same tie rule as the global rank in fbla_profile_stats: players with strictly higher Elo, plus one. (The
+  // leaderboard's own rank also breaks ties on questions answered, which made tied players differ here.)
+  return { rank: rows.filter((r) => r.elo > me.elo).length + 1, of: me.total_count };
 }
 
 // ------------------------------------------------------------------------------------------------ friends
@@ -217,9 +221,13 @@ export async function listWrongQuestions(): Promise<WrongQuestion[]> {
   }
   const wrong = [...latest.values()].filter((x) => !x.row.correct && x.row.event);
   const events = [...new Set(wrong.map((w) => w.row.event as string))];
-  const banks = await Promise.all(events.map((e) => loadQuestions(e).catch(() => [] as Question[])));
+  const [banks, keys] = await Promise.all([
+    Promise.all(events.map((e) => loadQuestions(e).catch(() => [] as Question[]))),
+    // keys are not in the public bank; you may see them for questions you have answered
+    getQuestionKeys(wrong.map((w) => w.row.question_id)).catch(() => new Map<string, QuestionKey>()),
+  ]);
   const byId = new Map<string, Question>();
-  banks.flat().forEach((q) => byId.set(q.id, q));
+  applyKeys(banks.flat(), keys).forEach((q) => byId.set(q.id, q));
   return wrong
     .map(({ row, misses, tries }) => {
       const question = byId.get(row.question_id) ?? null;

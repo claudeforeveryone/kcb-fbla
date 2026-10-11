@@ -12,6 +12,7 @@ import {
   Switch,
   Textarea,
   cn,
+  useScrollFade,
   errorMessage,
   useToast,
 } from '../../components/ui';
@@ -31,13 +32,14 @@ const SECTIONS = [
 ];
 
 export default function SettingsPage() {
+  const navRef = useScrollFade<HTMLUListElement>();
   return (
     <>
       <PageHeader eyebrow="Me" title="Settings" subtitle="Your player card, email, theme and account." back={{ to: '/me', label: 'Profile' }} size="sm" />
       <Page>
         <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[200px_minmax(0,1fr)]">
           <nav aria-label="Settings sections" className="min-w-0 lg:sticky lg:top-24 lg:self-start">
-            <ul className="scrollbar-none -mx-4 flex gap-1 overflow-x-auto px-4 lg:mx-0 lg:flex-col lg:px-0">
+            <ul ref={navRef} className="scroll-fade scrollbar-none -mx-4 flex gap-1 overflow-x-auto px-4 lg:mx-0 lg:flex-col lg:px-0">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
@@ -46,7 +48,7 @@ export default function SettingsPage() {
                       e.preventDefault();
                       document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }}
-                    className="flex h-9 items-center gap-2 whitespace-nowrap rounded-lg px-3 text-sm font-semibold text-muted transition-colors hover:bg-surface-2 hover:text-ink [&>svg]:size-4"
+                    className="flex h-9 items-center gap-2 whitespace-nowrap rounded-[2px] px-3 text-sm font-semibold text-muted transition-colors hover:bg-surface-2 hover:text-ink [&>svg]:size-4"
                   >
                     {s.label}
                   </a>

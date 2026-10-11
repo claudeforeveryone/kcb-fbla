@@ -35,7 +35,7 @@ export function QuickActions({
 
       {/* Daily challenge */}
       {dailyLoading && !daily ? (
-        <div className="rounded-[4px] border border-line bg-surface p-5 shadow-card">
+        <div className="rounded-[12px] border-t-4 border-red bg-navy p-5 shadow-card">
           <Skeleton className="h-3 w-24" />
           <Skeleton className="mt-4 h-5 w-2/3" />
           <Skeleton className="mt-2 h-4 w-full" />
@@ -91,7 +91,7 @@ function EloShift({ before, after }: { before: number; after: number }) {
   const d = after - before;
   if (d === 0) return null;
   return (
-    <span className={cn('ml-2 align-middle text-sm font-bold', d > 0 ? 'text-success' : 'text-muted')}>
+    <span className={cn('ml-2 align-middle text-sm font-bold', d > 0 ? 'text-[#7FD6A8]' : 'text-white/75')}>
       {d > 0 ? '+' : ''}
       {d} Elo
     </span>
@@ -107,11 +107,11 @@ function useResetCountdown() {
   return formatUntil(nextTorontoMidnight(now), now);
 }
 
-// White cards (like the stat boxes on fblc.ca); the tone only colours the top bar, the eyebrow and the link.
+// Solid navy cards with white text; the tone only colours the 4px top bar.
 const TONES = {
-  navy: '#001E60',
+  navy: '#3F6FB3',
   red: '#BF0D3E',
-  blue: '#3F6FB3',
+  blue: 'rgba(255,255,255,0.4)',
   done: '#1E8E5A',
 } as const;
 
@@ -137,19 +137,16 @@ function ActionTile({
   return (
     <Link
       to={to}
-      className="group relative flex flex-col overflow-hidden rounded-[4px] border border-line border-t-4 bg-surface p-5 transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong focus-visible:-translate-y-0.5 sm:p-6"
+      className="group relative flex flex-col overflow-hidden rounded-[12px] border-t-4 bg-navy p-5 text-white shadow-card transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 sm:p-6"
       style={{ borderTopColor: c }}
     >
-      <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em]" style={{ color: c }}>
-        {eyebrow}
-      </span>
-      <h2 className="mt-2 truncate font-display text-xl font-extrabold tracking-tight text-heading sm:mt-3 md:text-2xl">{title}</h2>
-      <p className="mt-1 flex-1 text-sm text-muted">{body}</p>
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold sm:mt-5" style={{ color: c }}>
+      <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/75">{eyebrow}</span>
+      <h2 className="mt-2 truncate font-display text-xl font-extrabold tracking-tight text-white sm:mt-3 md:text-2xl">{title}</h2>
+      <p className="mt-1 flex-1 text-sm text-white/80">{body}</p>
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-white sm:mt-5">
         {cta}
         <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
       </span>
     </Link>
   );
 }
-

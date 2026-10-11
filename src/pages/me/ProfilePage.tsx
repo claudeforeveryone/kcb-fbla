@@ -35,7 +35,7 @@ import {
   removeFriend,
   type FriendEntry,
 } from '../../api/me';
-import { AchievementsSection, ActivityHeatmap, FriendButton, MiniLeaderboard, Panel, useAsync } from './parts';
+import { ActivityHeatmap, FriendButton, MiniLeaderboard, Panel, officialOnlyNote, useAsync } from './parts';
 
 export default function ProfilePage() {
   const { username } = useParams();
@@ -191,18 +191,6 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
             {isMe && <FriendsCard />}
           </aside>
         </div>
-
-        <section className="mt-8">
-          <div className="mb-4 flex items-end justify-between gap-4">
-            <div>
-              <h2 className="text-xl font-bold">Achievements</h2>
-              <p className="mt-0.5 text-sm text-muted">
-                {isMe ? 'Unlock them by practising, keeping streaks and winning duels.' : `What ${p.display_name} has unlocked.`}
-              </p>
-            </div>
-          </div>
-          <AchievementsSection stats={stats} />
-        </section>
       </Page>
     </>
   );
@@ -301,6 +289,7 @@ function EloCard({ stats }: { stats: ProfileStats }) {
         title="Elo rating over time"
         series={[{ name: 'Elo', data: series, color: 'var(--blue)' }]}
         height={220}
+        yMin={0}
         dots={series.length < 20}
         emptyLabel="Finish a practice set to start your rating line"
       />
@@ -387,6 +376,7 @@ function AccuracyCard({ stats }: { stats: ProfileStats }) {
           </div>
         </div>
       )}
+      <p className="mt-3 text-xs text-muted">{officialOnlyNote(stats)}</p>
     </Panel>
   );
 }
@@ -678,7 +668,7 @@ function ProfileSkeleton() {
   return (
     <>
       <header className="band relative overflow-hidden">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 pb-14 pt-12 sm:px-6">
+        <div className="mx-auto flex max-w-[1440px] lg:px-10 items-center gap-4 px-4 pb-14 pt-12 sm:px-6">
           <Skeleton className="size-24 opacity-30" rounded="rounded-full" />
           <div className="flex-1 space-y-3">
             <Skeleton className="h-8 w-56 opacity-30" />

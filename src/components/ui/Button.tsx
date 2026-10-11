@@ -22,7 +22,8 @@ const variants: Record<ButtonVariant, string> = {
     'border border-line-strong bg-surface text-ink hover:border-blue/50 hover:bg-surface-2',
   ghost: 'text-ink hover:bg-surface-2',
   danger: 'bg-danger/10 text-danger hover:bg-danger hover:text-white',
-  inverse: 'bg-white text-navy hover:bg-white/90',
+  inverse:
+    'bg-white text-navy hover:bg-surface-2 dark:border dark:border-line-strong dark:bg-transparent dark:text-white dark:hover:bg-white/5',
 };
 
 const sizes: Record<ButtonSize, string> = {

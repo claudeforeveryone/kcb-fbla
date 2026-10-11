@@ -2,6 +2,7 @@
 // Every function throws ApiError (a plain Error with a friendly message and the Postgres code) on failure.
 import type { PostgrestError } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
+import { profileSearchFilter } from '../lib/search';
 import {
   CHAPTER_COLUMNS,
   type AchievementRow,
@@ -87,13 +88,13 @@ export async function getProfiles(ids: string[]): Promise<Profile[]> {
 
 /** Prefix search on username or display name, for pickers (challenge a friend, add a member). */
 export async function searchProfiles(query: string, limit = 10): Promise<Profile[]> {
-  const q = query.trim().replace(/[%_,()]/g, '');
-  if (q.length < 2) return [];
+  const filter = profileSearchFilter(query);
+  if (!filter) return [];
   return must(
     await supabase
       .from('fbla_profiles')
       .select('*')
-      .or(`username.ilike.${q.toLowerCase()}%,display_name.ilike.%${q}%`)
+      .or(filter)
       .order('elo', { ascending: false })
       .limit(limit)
       .returns<Profile[]>(),
@@ -244,7 +245,7 @@ async function allAnswers(uid: string, columns: string, event?: string | null): 
   return out;
 }
 
-/** Official question ids the member has answered before (decides K = 24 vs 8 in Elo previews). */
+/** Official question ids the member has answered before (a repeat earns no Elo, see src/lib/elo.ts). */
 export async function getSeenQuestionIds(userId?: string): Promise<Set<string>> {
   const uid = userId ?? (await requireUid());
   return new Set((await allAnswers(uid, 'question_id')).map((a) => a.question_id));

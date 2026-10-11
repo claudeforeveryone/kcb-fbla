@@ -90,7 +90,7 @@ export function NotificationBell() {
       toast.toast({
         title: n.title,
         description: n.body ?? undefined,
-        tone: n.kind === 'achievement' || (n.kind === 'duel_result' && n.data?.outcome === 'win') ? 'success' : 'info',
+        tone: (n.kind === 'duel_result' && n.data?.outcome === 'win') ? 'success' : 'info',
         duration: 6000,
         action: n.link ? { label: 'View', onClick: () => openItem(n) } : undefined,
       });
@@ -289,7 +289,7 @@ function BellEmpty({ unreadOnly }: { unreadOnly: boolean }) {
       <p className="mt-1 max-w-[260px] text-xs leading-relaxed text-muted">
         {unreadOnly
           ? 'Nothing new since you last checked.'
-          : 'Duel challenges, chapter news, assignments and achievements will show up here.'}
+          : 'Duel challenges, chapter news and assignments will show up here.'}
       </p>
     </div>
   );

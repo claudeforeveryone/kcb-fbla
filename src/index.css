@@ -23,12 +23,13 @@
   --surface-3: #e4eaf4;
   --ink: #211e1e;
   --heading: #001e60;
-  --muted: #5b6478;
+  --muted: #2a3d6b;
   --line: #dde3ee;
   --line-strong: #c3ccdc;
   --link: #3f6fb3;
   --success: #1e8e5a;
   --warning: #c98a00;
+  --warning-ink: #8a5d00; /* amber for text on white: #c98a00 is only 2.9:1 */
   --danger: #bf0d3e;
   --bar: #001e60;
   --ring: #3f6fb3;
@@ -38,6 +39,7 @@
 
 .dark {
   color-scheme: dark;
+  /* Brand red (#bf0d3e) is 2.6:1 on the dark surface: red text uses the lighter danger tone (see .text-red below). */
   --bg: #0a1230;
   --surface: #111c40;
   --surface-2: #17234d;
@@ -50,6 +52,7 @@
   --link: #7fa3dd;
   --success: #3cc68a;
   --warning: #f0b73a;
+  --warning-ink: #f0b73a;
   --danger: #ff5a7f;
   --bar: #050d2b;
   --ring: #7fa3dd;
@@ -220,10 +223,11 @@
     --color-white: #fff;
   }
   /* Translucent panels on the band become solid light panels so the shapes don't show through. */
-  .band :is([class*="bg-white/"]) {
+  /* Only an unprefixed bg-white/N token: a hover:/dark: variant (e.g. hover:bg-white/90) must not match. */
+  .band :is([class^="bg-white/"], [class*=" bg-white/"]) {
     background-color: #f2f5fa;
   }
-  .dark .band :is([class*="bg-white/"]) {
+  .dark .band :is([class^="bg-white/"], [class*=" bg-white/"]) {
     background-color: var(--surface-2);
   }
   html:not(.dark) .band .bg-white {
@@ -256,4 +260,25 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Dark mode: brand red stays as a fill (bg-red) but red text switches to the lighter danger tone for contrast. */
+.dark .text-red {
+  color: var(--danger);
+}
+
+/* Scroll cue for horizontally scrolling rows (see useScrollFade): fade the edge that has more content past it. */
+.scroll-fade[data-fade="end"] {
+  mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+}
+.scroll-fade[data-fade="start"] {
+  mask-image: linear-gradient(to left, #000 calc(100% - 2.5rem), transparent);
+}
+.scroll-fade[data-fade="both"] {
+  mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+}
+
+/* Warning text uses a darker amber than warning fills so it passes contrast on white. */
+.text-warning {
+  color: var(--warning-ink);
 }

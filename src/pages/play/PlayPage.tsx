@@ -4,7 +4,6 @@ import { ArrowRight } from 'lucide-react';
 import {
   Badge,
   ButtonLink,
-  Card,
   EloBadge,
   EmptyState,
   ErrorState,
@@ -244,36 +243,36 @@ function DailyCard({ history }: { history: PlayHistory }) {
   const streak = dailyStreak(history);
   const until = useUntilReset();
   return (
-    <div className="relative overflow-hidden rounded-[4px] border border-line bg-surface">
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-red" aria-hidden />
+    <div className="relative overflow-hidden rounded-[12px] bg-navy text-white">
+      <div className="absolute inset-x-0 top-0 h-1 bg-red" aria-hidden />
       <div className="flex flex-col gap-6 px-6 pb-7 pt-8 md:flex-row md:items-center md:gap-10 md:px-10 md:pb-9 md:pt-10">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-display text-xs font-bold uppercase tracking-[0.14em] text-red dark:text-danger">
+            <span className="font-display text-xs font-bold uppercase tracking-[0.14em] text-white/75">
               Daily challenge
             </span>
-            {streak > 1 && <Badge tone="warning">{streak}-day daily streak</Badge>}
-            {done && <Badge tone="success">Done today</Badge>}
+            {streak > 1 && <Badge tone="warning" solid>{streak}-day daily streak</Badge>}
+            {done && <Badge tone="success" solid>Done today</Badge>}
           </div>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">
+          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-white md:text-3xl">
             {done ? "Today's set is done" : `Today's ${DAILY_SIZE} questions`}
           </h2>
-          <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-muted">
+          <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-white/80">
             {done ? (
               <>
-                You scored <b className="tabular text-heading">{done.correct}/{done.total}</b>
+                You scored <b className="tabular text-white">{done.correct}/{done.total}</b>
                 {done.elo_after !== done.elo_before && (
-                  <span className={cn('tabular font-semibold', done.elo_after > done.elo_before ? 'text-success' : 'text-red dark:text-danger')}>
+                  <span className={cn('tabular font-semibold', done.elo_after > done.elo_before ? 'text-[#7FD6A8]' : 'text-white/75')}>
                     {' '}({done.elo_after > done.elo_before ? '+' : ''}
                     {done.elo_after - done.elo_before} Elo)
                   </span>
                 )}
-                . A new set unlocks in <span className="tabular font-semibold text-heading">{until}</span>.
+                . A new set unlocks in <span className="tabular font-semibold text-white">{until}</span>.
               </>
             ) : (
               <>
                 {DAILY_SIZE} questions across the events, the same for every member today. One try, resets in{' '}
-                <span className="tabular font-semibold text-heading">{until}</span>.
+                <span className="tabular font-semibold text-white">{until}</span>.
               </>
             )}
           </p>
@@ -281,7 +280,7 @@ function DailyCard({ history }: { history: PlayHistory }) {
         {done ? (
           <ButtonLink
             to={`/play/review/${done.id}`}
-            variant="outline"
+            variant="inverse"
             size="lg"
             className="shrink-0 self-start md:self-center"
             rightIcon={<ArrowRight className="size-4" />}
@@ -442,7 +441,7 @@ function ModeCard({
     </>
   );
   const cls =
-    'group relative flex w-full flex-1 flex-col overflow-hidden rounded-[4px] border border-line bg-surface p-6 pt-8 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2 md:p-7 md:pt-9';
+    'group relative flex w-full flex-1 flex-col overflow-hidden rounded-[12px] border border-line bg-surface p-6 pt-8 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2 md:p-7 md:pt-9';
   return (
     <div className="flex flex-col">
       {to ? (
@@ -493,7 +492,7 @@ function ModeRowCard({
     </>
   );
   const cls =
-    'group flex h-full w-full flex-col rounded-[4px] border border-line bg-surface-2/60 px-5 py-4 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2';
+    'group flex h-full w-full flex-col rounded-[12px] border border-line bg-surface-2/60 px-5 py-4 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2';
   return to ? (
     <Link to={to} className={cls}>
       {inner}
@@ -521,8 +520,13 @@ function EventCard({
 }) {
   const { color } = eventStyle(e.slug);
   return (
-    <Link to={`/play/${e.slug}`} className="group block rounded-[4px] focus-visible:outline-offset-4">
-      <Card interactive padded={false} className={cn('flex h-full flex-col overflow-hidden', mine && 'border-red/50')}>
+    <Link to={`/play/${e.slug}`} className="group block rounded-[12px] focus-visible:outline-offset-4">
+      <div
+        className={cn(
+          'flex h-full flex-col overflow-hidden rounded-[12px] border bg-surface transition-[transform,border-color] duration-200 ease-out hover:-translate-y-px hover:border-line-strong',
+          mine ? 'border-red/50' : 'border-line',
+        )}
+      >
         <div className="flex h-14 items-center justify-between gap-3 px-4 sm:h-[72px] sm:px-5" style={{ backgroundColor: color }}>
           <EventCrest slug={e.slug} size={44} className="max-sm:!size-9" />
           <div className="flex items-center gap-2">
@@ -561,7 +565,7 @@ function EventCard({
             </div>
           </div>
         </div>
-      </Card>
+      </div>
     </Link>
   );
 }
@@ -659,7 +663,7 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
 function LoadingPlay() {
   return (
     <div role="status" aria-label="Loading" className="space-y-14 md:space-y-20">
-      <Skeleton className="h-40 w-full" rounded="rounded-[4px]" />
+      <Skeleton className="h-40 w-full" rounded="rounded-[12px]" />
       <div>
         <Skeleton className="mb-7 h-8 w-48" />
         <SkeletonCards count={3} />

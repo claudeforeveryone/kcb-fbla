@@ -26,6 +26,7 @@ import {
   SegmentedControl,
   Skeleton,
   Switch,
+  ScrollRow,
   cn,
   errorMessage,
   useToast,
@@ -50,7 +51,7 @@ import {
 } from '../../components/notifications/parts';
 
 type CategoryFilter = 'all' | NotificationCategory;
-const CATEGORY_ORDER: NotificationCategory[] = ['arena', 'classroom', 'chapter', 'achievements', 'social', 'other'];
+const CATEGORY_ORDER: NotificationCategory[] = ['arena', 'classroom', 'chapter', 'social', 'other'];
 
 export default function NotificationsPage() {
   const { user, profile, patchProfile } = useAuth();
@@ -128,7 +129,7 @@ export default function NotificationsPage() {
 
   const subtitle =
     s.status !== 'ready'
-      ? 'Duels, chapter news, assignments and achievements, all in one place.'
+      ? 'Duels, chapter news and assignments, all in one place.'
       : s.unread
         ? `You have ${s.unread} unread ${s.unread === 1 ? 'notification' : 'notifications'}.`
         : 'You are all caught up.';
@@ -192,7 +193,7 @@ export default function NotificationsPage() {
               </div>
             </div>
 
-            <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0 [scrollbar-width:none]">
+            <ScrollRow className="-mx-4 mt-3 gap-2 px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
               <Pill active={cat === 'all'} onClick={() => setCat('all')} count={s.items.length || undefined}>
                 Everything
               </Pill>
@@ -204,7 +205,7 @@ export default function NotificationsPage() {
                   )}
                 </Pill>
               ))}
-            </div>
+            </ScrollRow>
 
             <div className="mt-5">
               {s.status === 'loading' || s.status === 'idle' ? (
@@ -219,7 +220,7 @@ export default function NotificationsPage() {
                 <EmptyState
                   icon={<Bell />}
                   title="No notifications yet"
-                  description="When someone challenges you, your chapter posts news or an assignment, or you unlock an achievement, it lands here."
+                  description="When someone challenges you or your chapter posts news or an assignment, it lands here."
                   action={
                     <>
                       <ButtonLink to="/arena" leftIcon={<Swords className="size-4" />}>
@@ -315,7 +316,6 @@ export default function NotificationsPage() {
                 <li><strong className="font-semibold text-ink">Arena</strong> challenges, accepts and results</li>
                 <li><strong className="font-semibold text-ink">Classroom</strong> announcements, newsletters and assignments</li>
                 <li><strong className="font-semibold text-ink">Chapter</strong> role changes, trainer picks and new members</li>
-                <li><strong className="font-semibold text-ink">Achievements</strong> the moment you unlock one</li>
               </ul>
             </Card>
           </aside>

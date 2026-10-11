@@ -50,7 +50,12 @@ export type RunnerSnapshot = {
   deadline: number | null;
   /** Endless: how many questions have been drawn so far. */
   reached: number;
+  /** Keys fetched for instant feedback, by question id (questions ship without them). */
+  keys?: Record<string, RunnerKey>;
 };
+
+/** A question's key as the server hands it out. */
+export type RunnerKey = { answer: number; explain: string | null };
 
 export const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 

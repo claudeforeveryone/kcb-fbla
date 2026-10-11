@@ -3,7 +3,7 @@ import { ArrowDownRight, ArrowUpRight, Check, ChevronDown, Flag, Minus, X } from
 import { Badge, Card, CardHeader, ProgressBar, SegmentedControl, cn } from '../ui';
 import { FacetArt } from '../ui/PageHeader';
 import { Sparkline } from '../charts';
-import { ATTEMPT_KIND_LABELS, DIFFICULTY_LABELS, NO_ELO_KINDS, achievementDef, eventName } from '../../lib/types';
+import { ATTEMPT_KIND_LABELS, DIFFICULTY_LABELS, NO_ELO_KINDS, eventName } from '../../lib/types';
 import { ExamStyles } from './ExamStyles';
 import { areaBreakdown, fmtDuration, verdict, type ExamResultData, type ResultAnswer } from './result';
 import { LETTERS, type ExamQuestion } from './types';
@@ -48,8 +48,8 @@ export function ExamResults({ data, questions, actions, animate = true, previous
       <ExamStyles />
       {/* hero */}
       <section className="band relative isolate overflow-hidden text-white">
-        <FacetArt className="opacity-80 max-md:opacity-40" />
-        <div className="relative mx-auto grid w-full max-w-6xl items-center gap-6 px-4 pb-10 pt-8 sm:px-6 md:grid-cols-[auto_minmax(0,1fr)] md:pb-12 md:pt-10 lg:grid-cols-[auto_minmax(0,1fr)_320px]">
+        <FacetArt className="opacity-80 max-md:left-auto max-md:w-2/5 max-md:opacity-40" />
+        <div className="relative mx-auto grid w-full max-w-[1440px] lg:px-10 items-center gap-6 px-4 pb-10 pt-8 sm:px-6 md:grid-cols-[auto_minmax(0,1fr)] md:pb-12 md:pt-10 lg:grid-cols-[auto_minmax(0,1fr)_320px]">
           <ScoreRing pct={pct} correct={data.correct} total={data.total} animate={animate} endless={endless} />
           <div className="min-w-0 exam-rise" style={{ animationDelay: '120ms' }}>
             {note && <div className="mb-2 text-sm text-white/75">{note}</div>}
@@ -95,34 +95,8 @@ export function ExamResults({ data, questions, actions, animate = true, previous
         </div>
       </section>
 
-      <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 md:py-8">
+      <div className="mx-auto w-full max-w-[1440px] lg:px-10 px-4 py-6 sm:px-6 md:py-8">
         {actions && <div className="mb-6 flex flex-wrap gap-2">{actions}</div>}
-
-        {data.achievements.length > 0 && (
-          <section className="mb-6" aria-label="Achievements unlocked">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {data.achievements.map((code, i) => {
-                const def = achievementDef(code);
-                return (
-                  <div
-                    key={code}
-                    className="exam-rise relative overflow-hidden rounded-[2px] border border-line bg-surface p-4 pl-5"
-                    style={{ animationDelay: `${500 + i * 140}ms` }}
-                  >
-                    <span className="absolute inset-y-0 left-0 w-[3px] bg-red" aria-hidden />
-                    <div className="min-w-0">
-                      <div className="text-xs font-bold uppercase tracking-wider text-red dark:text-danger">
-                        Achievement unlocked
-                      </div>
-                      <div className="font-display font-bold text-heading">{def?.title ?? code}</div>
-                      {def && <div className="text-sm text-muted">{def.description}</div>}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        )}
 
         {areas.length > 0 && data.total >= 3 && (
           <Card className="mb-6">

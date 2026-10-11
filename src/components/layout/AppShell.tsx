@@ -47,8 +47,8 @@ export function AppShell({ children }: { children?: ReactNode }) {
 function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string }) {
   return (
     <header className="sticky top-0 z-50 border-b border-black/20 bg-bar text-white">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center gap-3 px-4 sm:px-6">
-        <Brand size="md" className="shrink-0" wordmarkClassName="md:hidden lg:flex" />
+      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center gap-3 px-4 sm:px-6 md:h-[76px] lg:px-10">
+        <Brand size="md" className="shrink-0 md:[&_img]:h-11" wordmarkClassName="md:hidden lg:flex" />
         {signedIn && (
           <nav aria-label="Main" className="ml-2 hidden h-full flex-1 items-stretch md:flex lg:ml-6">
             {NAV.map((n) => {
@@ -60,11 +60,11 @@ function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string })
                   to={n.to}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group relative flex items-center gap-2 px-2.5 font-display text-[0.9375rem] font-semibold transition-colors duration-150 lg:px-3',
+                    'group relative flex items-center gap-2 px-2.5 font-display text-[0.9375rem] font-semibold transition-colors duration-150 lg:px-4 lg:text-[1.0625rem] xl:px-5',
                     active ? 'text-white' : 'text-white/70 hover:text-white',
                   )}
                 >
-                  <Icon className={cn('hidden size-[18px] lg:block', active ? 'opacity-100' : 'opacity-70 group-hover:opacity-100')} />
+                  <Icon className={cn('hidden size-5 lg:block', active ? 'opacity-100' : 'opacity-70 group-hover:opacity-100')} />
                   {n.label}
                   <span
                     className={cn(

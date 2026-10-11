@@ -5,6 +5,7 @@ import { ChevronDown, Search } from 'lucide-react';
 import {
   Avatar,
   Badge,
+  ScrollRow,
   Button,
   Card,
   CardHeader,
@@ -171,13 +172,13 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
                 className="h-10 w-full rounded-[4px] border border-line-strong bg-surface pl-9 pr-3 text-[0.9375rem] outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/15"
               />
             </div>
-            <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1 md:pb-0">
+            <ScrollRow className="-mx-1 gap-1.5 px-1 pb-1 md:pb-0">
               {(['all', ...ROLE_ORDER] as const).map((r) => (
                 <Pill key={r} active={roleFilter === r} onClick={() => setRoleFilter(r)} count={counts[r] ?? 0}>
                   {r === 'all' ? 'Everyone' : `${ROLE_LABELS[r]}s`}
                 </Pill>
               ))}
-            </div>
+            </ScrollRow>
           </div>
         </div>
 
@@ -203,8 +204,8 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
             <THead>
               <tr>
                 <TH sort={sortOf('name')} onSort={() => toggleSort('name')}>Member</TH>
-                <TH sort={sortOf('role')} onSort={() => toggleSort('role')}>Role</TH>
-                <TH align="right" sort={sortOf('elo')} onSort={() => toggleSort('elo')}>Elo</TH>
+                <TH className="max-sm:hidden" sort={sortOf('role')} onSort={() => toggleSort('role')}>Role</TH>
+                <TH align="right" className="max-sm:hidden" sort={sortOf('elo')} onSort={() => toggleSort('elo')}>Elo</TH>
                 <TH className="max-md:hidden" sort={sortOf('active')} onSort={() => toggleSort('active')}>Last practised</TH>
                 <TH className="max-lg:hidden" sort={sortOf('joined')} onSort={() => toggleSort('joined')}>Joined</TH>
                 <TH align="right" className="relative"><span className="sr-only">Actions</span></TH>
@@ -222,17 +223,23 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
                           {m.user_id === myId && <span className="ml-1.5 text-xs font-normal text-muted">(you)</span>}
                         </span>
                         <span className="block truncate text-xs text-muted">@{m.profile.username}</span>
+                        {/* Phones: role and Elo move under the name so the row fits without sideways scrolling.
+                            Role changes are in the Manage menu. */}
+                        <span className="mt-1 flex items-center gap-2 sm:hidden">
+                          <RoleBadge role={m.role} />
+                          <span className="tabular text-xs font-semibold text-muted">{fmt(m.profile.elo)} Elo</span>
+                        </span>
                       </span>
                     </Link>
                   </TD>
-                  <TD>
+                  <TD className="max-sm:hidden">
                     {canManage(m) ? (
                       <RolePicker m={m} myRole={myRole} onPick={(r) => void changeRole(m, r)} />
                     ) : (
                       <RoleBadge role={m.role} />
                     )}
                   </TD>
-                  <TD align="right">
+                  <TD align="right" className="max-sm:hidden">
                     <EloBadge elo={m.profile.elo} size="sm" />
                   </TD>
                   <TD className="max-md:hidden text-sm text-muted">{relativeDay(m.profile.last_active_date)}</TD>

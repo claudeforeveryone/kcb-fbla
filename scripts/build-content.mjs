@@ -1,6 +1,6 @@
 // Splits content/<slug>.json into what the site loads: public/content/index.json (event list, competency
 // areas with question counts), public/content/vocab.json (every term) and public/content/q/<slug>.json
-// (one event's questions, loaded when a paper starts). Runs before dev and build.
+// (one event's questions without answer keys, loaded when a paper starts). Runs before dev and build.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -77,7 +77,10 @@ for (const slug of slugs) {
   });
   for (const v of d.vocab)
     vocab.push({ id: v.id, term: v.term, def: v.def, topic: slug, sub: v.sub });
-  const qs = d.questions.map((q) => ({ ...q, topic: slug }));
+  // Answer keys and explanations stay server-side (fbla_questions, graded by fbla_submit_attempt): shipping them
+  // here would let anyone read every key before a rated run or a duel. See supabase/migrations/0014.
+  // eslint-disable-next-line no-unused-vars
+  const qs = d.questions.map(({ answer, explain, ...q }) => ({ ...q, topic: slug }));
   writeFileSync(join(out, "q", `${slug}.json`), JSON.stringify(qs));
 }
 writeFileSync(join(out, "index.json"), JSON.stringify({ topics }));

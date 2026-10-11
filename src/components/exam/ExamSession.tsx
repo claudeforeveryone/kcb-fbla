@@ -3,6 +3,7 @@ import { RefreshCw } from 'lucide-react';
 import { Button, Spinner, useToast } from '../ui';
 import { submitAttempt } from '../../api/core';
 import { invalidatePlayHistory } from '../../api/play';
+import { checkAnswer } from '../../api/keys';
 import { useAuth } from '../../lib/auth';
 import type { SubmitAttemptInput, SubmitAttemptResult } from '../../lib/types';
 import { ExamRunner, type ExamRunnerProps } from './ExamRunner';
@@ -20,6 +21,12 @@ export type ExamSessionProps = Omit<ExamRunnerProps, 'onFinish' | 'submitting'> 
   /** Endless: the record before this run. */
   previousBest?: number | null;
 };
+
+/** Instant feedback graded by the server (questions ship without their keys). */
+async function serverCheck(questionId: string, choice: number | null) {
+  const r = await checkAnswer(questionId, choice);
+  return { answer: r.correct_choice, explain: r.explain, chosen: r.chosen };
+}
 
 /**
  * Runner + submission + animated results in one: run the questions, grade them with fbla_submit_attempt,
@@ -88,7 +95,7 @@ export function ExamSession({ submit, resultActions, onSubmitted, previousBest, 
 
   return (
     <>
-      <ExamRunner {...runner} onFinish={onFinish} submitting={phase === 'submitting'} />
+      <ExamRunner {...runner} onCheck={runner.onCheck ?? serverCheck} onFinish={onFinish} submitting={phase === 'submitting'} />
       {phase !== 'running' && (
         <div className="fixed inset-0 z-[60] grid place-items-center bg-navy-deep/60 p-4" role="dialog" aria-modal="true" aria-live="polite">
           <div className="animate-pop w-full max-w-sm rounded-[2px] border border-line border-t-[3px] border-t-red bg-surface p-6 text-center">

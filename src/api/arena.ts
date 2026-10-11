@@ -2,6 +2,7 @@
 // Every write goes through a security-definer RPC; reads use RLS (participants only, the opponent's per-question
 // run only once a duel is complete).
 import { supabase } from '../lib/supabase';
+import { profileSearchFilter } from '../lib/search';
 import {
   PROFILE_CARD_COLUMNS,
   type Duel,
@@ -10,6 +11,7 @@ import {
   type ProfileCard,
 } from '../lib/types';
 import { toApiError } from './core';
+import { applyKeys, getQuestionKeys, type QuestionKey } from './keys';
 
 // ------------------------------------------------------------------------------------------------ types
 
@@ -21,6 +23,9 @@ export type DuelRow = Duel & {
   message: string | null;
   /** Set when the duel ended because this player did not play in time. */
   forfeit_by: string | null;
+  /** Whether each side has played (their score itself stays hidden until the duel is complete). */
+  challenger_done?: boolean;
+  opponent_done?: boolean;
 };
 
 export type DuelRunAnswer = {
@@ -55,7 +60,15 @@ export type DuelQuestion = {
   explain?: string | null;
 };
 
-export type StartDuelResult = { started_at: string; deadline: string; server_now: string; finished: boolean };
+export type StartDuelResult = {
+  started_at: string;
+  deadline: string;
+  server_now: string;
+  finished: boolean;
+  /** The duel's questions in order (text and choices only). Only handed out once your clock has started. */
+  question_ids: string[];
+  questions: DuelQuestion[];
+};
 
 export type SubmitDuelResult = {
   duel_id: string;
@@ -88,24 +101,22 @@ export async function sweepDuels(): Promise<void> {
   if (error) console.warn('[arena] sweep failed', error.message);
 }
 
-export async function listMyDuels(uid: string, limit = 150): Promise<DuelRow[]> {
-  const { data, error } = await supabase
-    .from('fbla_duels')
-    .select('*')
-    .or(`challenger_id.eq.${uid},opponent_id.eq.${uid}`)
-    .order('created_at', { ascending: false })
-    .limit(limit);
+// Duels are read through fbla_my_duels (0015): question_ids stay empty until you start your run, and the other
+// side's score and time stay null until the duel is complete. `challenger_done` / `opponent_done` say who played.
+// `uid` is kept for callers; the server always answers for the signed-in user.
+export async function listMyDuels(_uid: string, limit = 150, openOnly = false): Promise<DuelRow[]> {
+  const { data, error } = await supabase.rpc('fbla_my_duels', { p_id: null, p_limit: limit, p_open: openOnly });
   if (error) throw toApiError(error, 'Could not load your duels.');
   return (data ?? []) as DuelRow[];
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export async function getDuel(id: string): Promise<DuelRow | null> {
-  const { data, error } = await supabase.from('fbla_duels').select('*').eq('id', id).maybeSingle();
-  if (error) {
-    if (error.code === '22P02') return null; // not a uuid
-    throw toApiError(error, 'Could not load this duel.');
-  }
-  return (data as DuelRow | null) ?? null;
+  if (!UUID_RE.test(id)) return null;
+  const { data, error } = await supabase.rpc('fbla_my_duels', { p_id: id, p_limit: 1, p_open: false });
+  if (error) throw toApiError(error, 'Could not load this duel.');
+  return ((data ?? []) as DuelRow[])[0] ?? null;
 }
 
 /** Your own run always; the opponent's too once the duel is complete. */
@@ -115,14 +126,22 @@ export async function getDuelRuns(duelId: string): Promise<DuelRun[]> {
   return (data ?? []) as DuelRun[];
 }
 
-/** Question text in duel order. `withKey` adds the answer and explanation (results only). */
+/**
+ * Question text in duel order. `withKey` adds the answer and explanation, which the server only hands out for
+ * questions you have already answered (results only). While playing, use the questions startDuel() returns.
+ */
 export async function getDuelQuestions(ids: string[], withKey = false): Promise<DuelQuestion[]> {
   if (ids.length === 0) return [];
-  const cols = withKey ? 'id,event,sub,diff,q,choices,answer,explain' : 'id,event,sub,diff,q,choices';
-  const { data, error } = await supabase.from('fbla_questions').select(cols).in('id', ids);
-  if (error) throw toApiError(error, 'Could not load the questions.');
-  const byId = new Map(((data ?? []) as unknown as DuelQuestion[]).map((q) => [q.id, q]));
-  return ids.map((id) => byId.get(id)).filter((q): q is DuelQuestion => !!q);
+  const [res, keys] = await Promise.all([
+    supabase.from('fbla_questions').select('id,event,sub,diff,q,choices').in('id', ids),
+    withKey ? getQuestionKeys(ids) : Promise.resolve(new Map<string, QuestionKey>()),
+  ]);
+  if (res.error) throw toApiError(res.error, 'Could not load the questions.');
+  const byId = new Map(((res.data ?? []) as unknown as DuelQuestion[]).map((q) => [q.id, q]));
+  return applyKeys(
+    ids.map((id) => byId.get(id)).filter((q): q is DuelQuestion => !!q),
+    keys,
+  );
 }
 
 export async function challengePlayer(input: {
@@ -229,12 +248,12 @@ export async function getPlayerCardByUsername(username: string): Promise<Profile
 
 /** Username prefix or display-name search for the challenge picker. Excludes `exceptId`. */
 export async function searchPlayers(query: string, exceptId?: string, limit = 8): Promise<ProfileCard[]> {
-  const q = query.trim().replace(/^@/, '').replace(/[%_,()*\\]/g, '');
-  if (q.length < 2) return [];
+  const filter = profileSearchFilter(query);
+  if (!filter) return [];
   let req = supabase
     .from('fbla_profiles')
     .select(PROFILE_CARD_COLUMNS)
-    .or(`username.ilike.${q.toLowerCase()}%,display_name.ilike.%${q}%`)
+    .or(filter)
     .order('elo', { ascending: false })
     .limit(limit);
   if (exceptId) req = req.neq('id', exceptId);
@@ -254,9 +273,15 @@ export function subscribeArena(
   handlers: { onDuel?: (row: DuelRow, kind: 'INSERT' | 'UPDATE' | 'DELETE') => void; onFriends?: () => void },
 ): () => void {
   const tag = Math.random().toString(36).slice(2, 8);
+  // Realtime payloads only carry the columns clients may read (no questions or hidden scores), so re-read the row.
   const duel = (p: { eventType: string; new: unknown; old: unknown }) => {
-    const row = (p.eventType === 'DELETE' ? p.old : p.new) as DuelRow;
-    if (row?.id) handlers.onDuel?.(row, p.eventType as 'INSERT' | 'UPDATE' | 'DELETE');
+    const kind = p.eventType as 'INSERT' | 'UPDATE' | 'DELETE';
+    const raw = (kind === 'DELETE' ? p.old : p.new) as DuelRow;
+    if (!raw?.id) return;
+    if (kind === 'DELETE') return handlers.onDuel?.(raw, kind);
+    void getDuel(raw.id)
+      .then((row) => row && handlers.onDuel?.(row, kind))
+      .catch(() => {});
   };
   const friends = () => handlers.onFriends?.();
   const ch = supabase
@@ -275,9 +300,12 @@ export function subscribeArena(
 export function subscribeDuel(id: string, onChange: (row: DuelRow) => void): () => void {
   const ch = supabase
     .channel(`duel-${id}-${Math.random().toString(36).slice(2, 8)}`)
-    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'fbla_duels', filter: `id=eq.${id}` }, (p) =>
-      onChange(p.new as DuelRow),
-    )
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'fbla_duels', filter: `id=eq.${id}` }, () => {
+      // the payload lacks the masked columns; read the row the server is willing to show
+      void getDuel(id)
+        .then((row) => row && onChange(row))
+        .catch(() => {});
+    })
     .subscribe();
   return () => {
     void supabase.removeChannel(ch);

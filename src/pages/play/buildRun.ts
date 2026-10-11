@@ -396,7 +396,7 @@ async function buildRedo(spec: RunSpec, history: PlayHistory): Promise<BuiltRun>
       blurb: 'Questions you got wrong last time, with instant feedback. Get one right to clear it from the list.',
       facts: [
         { label: 'Questions', value: String(qs.length) },
-        { label: 'Elo', value: 'Smaller swings (repeats)' },
+        { label: 'Elo', value: 'Unchanged (repeats)' },
         { label: 'Feedback', value: 'After each answer' },
       ],
       back: { to: '/me/career?tab=wrong', label: 'Wrong questions' },
@@ -422,7 +422,7 @@ async function buildRedo(spec: RunSpec, history: PlayHistory): Promise<BuiltRun>
       blurb: 'Every question whose latest answer was wrong, newest first. Get it right to clear it from the list.',
       facts: [
         { label: 'Questions', value: String(qs.length) },
-        { label: 'Elo', value: 'Smaller swings (repeats)' },
+        { label: 'Elo', value: 'Unchanged (repeats)' },
         { label: 'Feedback', value: 'After each answer' },
       ],
       back: eventBack(info?.slug ?? null),
@@ -473,7 +473,7 @@ async function buildRedo(spec: RunSpec, history: PlayHistory): Promise<BuiltRun>
       : 'The same questions as that attempt, shuffled, with instant feedback.',
     facts: [
       { label: 'Questions', value: String(questions.length) },
-      { label: 'Elo', value: isCustom ? 'Not affected' : 'Smaller swings (repeats)' },
+      { label: 'Elo', value: isCustom ? 'Not affected' : 'Unchanged (repeats)' },
       { label: 'Feedback', value: 'After each answer' },
     ],
     back: { to: `/play/review/${attempt.id}`, label: 'Original attempt' },

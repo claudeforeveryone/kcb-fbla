@@ -171,7 +171,7 @@ function HowRankingWorks({ open, onClose }: { open: boolean; onClose: () => void
               Harder questions are worth more: getting a hard one right gains more than an easy one, and missing an easy
               one costs more than missing a hard one.
             </li>
-            <li>The first time you see a question counts fully. Repeats count about a third as much, so grinding the same paper only goes so far.</li>
+            <li>Only your first answer to each question counts. Repeats, and questions whose answer you saw first, leave your Elo unchanged, so grinding the same paper does nothing.</li>
             <li>Chapter custom tests and Arena duels do not change your Elo.</li>
           </ul>
         </section>

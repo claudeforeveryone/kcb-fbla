@@ -13,8 +13,6 @@ import {
 } from '../../components/ui';
 import {
   ROLE_LABELS,
-  achievementDef,
-  type AchievementCode,
   type PlayerLeaderboardRow,
   type ProfileStats,
 } from '../../lib/types';
@@ -94,83 +92,6 @@ function Mini({ label, value }: { label: string; value: string }) {
       <dd className="tabular font-display text-lg font-extrabold text-heading">{value}</dd>
       <dt className="text-[0.7rem] font-semibold uppercase tracking-wider text-muted">{label}</dt>
     </div>
-  );
-}
-
-// ------------------------------------------------------------------------------------------------ next goals
-
-/** The two locked milestone achievements you're closest to. */
-export function NextGoals({
-  stats,
-  profile,
-}: {
-  stats: ProfileStats | undefined;
-  profile: { questions_answered: number; elo: number; peak_elo: number; current_streak: number };
-}) {
-  if (!stats) return null;
-  const have = new Set(stats.achievements.map((a) => a.code));
-  const streak = stats.current_streak;
-  const ladders: { code: AchievementCode; value: number; target: number; unit: string }[] = [
-    { code: 'questions_100', value: profile.questions_answered, target: 100, unit: 'questions' },
-    { code: 'questions_500', value: profile.questions_answered, target: 500, unit: 'questions' },
-    { code: 'questions_1000', value: profile.questions_answered, target: 1000, unit: 'questions' },
-    { code: 'streak_3', value: streak, target: 3, unit: 'days' },
-    { code: 'streak_7', value: streak, target: 7, unit: 'days' },
-    { code: 'streak_30', value: streak, target: 30, unit: 'days' },
-    { code: 'elo_300', value: Math.max(profile.elo, profile.peak_elo), target: 300, unit: 'Elo' },
-    { code: 'elo_500', value: Math.max(profile.elo, profile.peak_elo), target: 500, unit: 'Elo' },
-    { code: 'elo_700', value: Math.max(profile.elo, profile.peak_elo), target: 700, unit: 'Elo' },
-  ];
-  // First locked rung of each ladder, ranked by how close it is.
-  const seen = new Set<string>();
-  const goals = ladders
-    .filter((l) => !have.has(l.code))
-    .filter((l) => {
-      const ladder = l.code.split('_')[0];
-      if (seen.has(ladder)) return false;
-      seen.add(ladder);
-      return true;
-    })
-    .map((l) => ({ ...l, pct: Math.min(0.99, l.value / l.target) }))
-    .sort((a, b) => b.pct - a.pct)
-    .slice(0, 2);
-  if (goals.length === 0) return null;
-
-  return (
-    <Card>
-      <CardHeader
-        title="Next achievements"
-        subtitle={`${have.size} of 20 unlocked`}
-        action={
-          <Link to="/me" className="link text-sm">
-            Trophy case
-          </Link>
-        }
-      />
-      <ul className="space-y-4">
-        {goals.map((g) => {
-          const def = achievementDef(g.code);
-          return (
-            <li key={g.code} className="flex items-center gap-3">
-              <div className="min-w-0 flex-1">
-                <div className="flex items-baseline justify-between gap-2">
-                  <span className="truncate text-sm font-semibold text-heading">{def?.title ?? g.code}</span>
-                  <span className="tabular shrink-0 text-xs text-muted">
-                    {Math.min(g.value, g.target)}/{g.target} {g.unit}
-                  </span>
-                </div>
-                <div className="mt-1.5 h-1.5 overflow-hidden bg-surface-3">
-                  <div
-                    className="h-full bg-navy dark:bg-blue"
-                    style={{ width: `${Math.max(3, g.pct * 100)}%` }}
-                  />
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </Card>
   );
 }
 
@@ -341,7 +262,7 @@ export function ChapterCard({
         </div>
         <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-surface-2 p-3 text-center">
           <Mini label="Members" value={String(memberCount)} />
-          <Mini label="Rank" value={rank ? `#${rank}` : '–'} />
+          <Mini label={chapters && rank ? `Rank of ${chapters}` : 'Rank'} value={rank ? `#${rank}` : '–'} />
           <Mini label="Avg Elo" value={avgElo != null ? String(avgElo) : '–'} />
         </div>
         <div className="mt-4 flex items-center justify-between">
@@ -351,7 +272,7 @@ export function ChapterCard({
             ))}
           </div>
           <span className="inline-flex items-center gap-1 text-sm font-semibold text-link">
-            {chapters && rank ? `of ${chapters} chapters` : 'Open'}
+            Open chapter
             <ChevronRight className="size-4" />
           </span>
         </div>

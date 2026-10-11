@@ -6,7 +6,7 @@ import { Hero } from './Hero';
 import { QuickActions } from './QuickActions';
 import { Inbox } from './Inbox';
 import { RecentAttempts, WeakSpots } from './Practice';
-import { ChapterCard, MiniLeaderboard, NextGoals, VocabCard, WeekCard } from './Sidebar';
+import { ChapterCard, MiniLeaderboard, VocabCard, WeekCard } from './Sidebar';
 import { getAssignments, getChapterSummary, getDailyStatus, getOpenDuels, getVocabDue } from './homeData';
 import { useAsync } from './useAsync';
 
@@ -93,7 +93,7 @@ export default function HomePage() {
   return (
     <>
       <Hero profile={profile} stats={stats.data} statsLoading={stats.loading} />
-      <div className="animate-rise mx-auto w-full max-w-6xl px-4 pb-10 sm:px-6">
+      <div className="animate-rise mx-auto w-full max-w-[1440px] lg:px-10 px-4 pb-10 sm:px-6">
         <QuickActions
           continueEvent={continueEvent}
           continueReason={continueReason}
@@ -132,7 +132,6 @@ export default function HomePage() {
               onRetry={chapter.reload}
             />
             <VocabCard data={vocab.data} mainEvent={profile.main_event} />
-            <NextGoals stats={stats.data} profile={profile} />
           </aside>
         </div>
       </div>

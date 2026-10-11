@@ -145,7 +145,7 @@ function HowItWorks() {
       </div>
       <p className="mt-3">
         Each right answer on a due term pushes it further out. A miss sends it back to the start. Terms that reach the
-        8-day step count as mastered.
+        {BOX_DAYS[MASTERED_BOX]}-day step count as mastered.
       </p>
     </div>
   );

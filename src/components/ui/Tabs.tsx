@@ -1,5 +1,6 @@
 import { useRef, type KeyboardEvent, type ReactNode } from 'react';
 import { cn } from './cn';
+import { useScrollFade } from './scrollFade';
 
 export type TabItem<T extends string = string> = {
   value: T;
@@ -31,6 +32,7 @@ export function Tabs<T extends string>({
   'aria-label'?: string;
 }) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const fadeRef = useScrollFade<HTMLDivElement>();
 
   const onKey = (e: KeyboardEvent, i: number) => {
     const enabled = items.map((t, j) => (t.disabled ? -1 : j)).filter((j) => j >= 0);
@@ -49,10 +51,11 @@ export function Tabs<T extends string>({
 
   return (
     <div
+      ref={fadeRef}
       role="tablist"
       aria-label={ariaLabel}
       className={cn(
-        'scrollbar-none flex max-w-full overflow-x-auto',
+        'scroll-fade scrollbar-none flex max-w-full overflow-x-auto',
         variant === 'underline' ? 'gap-1 border-b border-line' : 'gap-0 rounded-[2px] border border-line bg-surface-2',
         className,
       )}

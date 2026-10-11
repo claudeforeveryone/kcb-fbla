@@ -14,7 +14,7 @@ export function Page({
   /** Remove top padding, e.g. when content overlaps the header band. */
   flush?: boolean;
 }) {
-  const w = { narrow: 'max-w-3xl', default: 'max-w-6xl', wide: 'max-w-7xl' }[width];
+  const w = { narrow: 'max-w-3xl', default: 'max-w-[1440px] lg:px-10', wide: 'max-w-7xl' }[width];
   return (
     <div className={cn('animate-rise mx-auto w-full px-4 sm:px-6', w, flush ? 'pb-8' : 'py-6 md:py-8', className)}>
       {children}
