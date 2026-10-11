@@ -3,6 +3,7 @@ import {
   auditActionLabel,
   auditChange,
   auditSource,
+  auditTarget,
   bucketLabel,
   bucketsFor,
   clampRange,
@@ -10,6 +11,7 @@ import {
   dayLabel,
   featureLabel,
   fmtPercent,
+  growthSpan,
   loadPages,
   mergePage,
   ownerGate,
@@ -106,14 +108,72 @@ describe('seriesBars', () => {
   it('maps each bucket to a bar and keeps suppressed buckets visible as zero-height, flagged bars', () => {
     const bars = seriesBars([row('2026-10-01', n(7)), row('2026-10-02', hidden), row('2026-10-03', n(0))], 'signups', 'day');
     expect(bars).toEqual([
-      { label: 'Oct 1', title: 'Oct 1, 2026', value: 7, suppressed: false },
-      { label: 'Oct 2', title: 'Oct 2, 2026', value: 0, suppressed: true },
-      { label: 'Oct 3', title: 'Oct 3, 2026', value: 0, suppressed: false },
+      { label: 'Oct 1', title: 'Oct 1, 2026', value: 7, suppressed: false, partial: false },
+      { label: 'Oct 2', title: 'Oct 2, 2026', value: 0, suppressed: true, partial: false },
+      // The growth RPC ends every range today, so the last bucket is never over yet.
+      { label: 'Oct 3', title: 'Oct 3, 2026 (so far)', value: 0, suppressed: false, partial: true },
     ]);
   });
 
   it('returns nothing for an empty series', () => {
     expect(seriesBars([], 'signups', 'day')).toEqual([]);
+  });
+
+  // 12 months by month, as the RPC returns it on Oct 11, 2026: the range starts Oct 12, 2025, so the first and the
+  // last bucket are both October and both cover only part of a month.
+  const span = (start: string, end: string, signups: Count) => ({ start, end, signups });
+  const year = [
+    span('2025-10-12', '2025-10-31', n(63)),
+    span('2025-11-01', '2025-11-30', n(135)),
+    span('2026-09-01', '2026-09-30', n(115)),
+    span('2026-10-01', '2026-10-11', n(72)),
+  ];
+
+  it('flags a first bucket the range cuts short and the current bucket, and says so in their titles', () => {
+    const bars = seriesBars(year, 'signups', 'month');
+    expect(bars.map((b) => b.partial)).toEqual([true, false, false, true]);
+    expect(bars[0].title).toBe('Oct 12 to Oct 31, 2025 (part of the month)');
+    expect(bars[1].title).toBe('November 2025');
+    expect(bars[3].title).toBe('Oct 1 to Oct 11, 2026 (so far)');
+  });
+
+  it('puts the year on month labels when the range spans two years, so the two Octobers differ', () => {
+    expect(seriesBars(year, 'signups', 'month').map((b) => b.label)).toEqual(['Oct ’25', 'Nov ’25', 'Sep ’26', 'Oct ’26']);
+    const sameYear = [span('2026-08-01', '2026-08-31', n(5)), span('2026-09-01', '2026-09-12', n(5))];
+    expect(seriesBars(sameYear, 'signups', 'month').map((b) => b.label)).toEqual(['Aug', 'Sep']);
+  });
+
+  it('treats a Monday-to-Sunday week as whole and a week the range starts partway through as part of one', () => {
+    const weeks = [span('2026-09-10', '2026-09-13', n(5)), span('2026-09-14', '2026-09-20', n(5)), span('2026-09-21', '2026-09-23', n(5))];
+    const bars = seriesBars(weeks, 'signups', 'week');
+    expect(bars.map((b) => b.partial)).toEqual([true, false, true]);
+    expect(bars[0].title).toBe('Sep 10 to Sep 13, 2026 (part of the week)');
+  });
+});
+
+describe('growthSpan (the line above the Growth charts)', () => {
+  const span = (start: string, end: string) => ({ start, end });
+
+  it('names the whole range and why the edge bars are lighter', () => {
+    const months = [span('2025-10-12', '2025-10-31'), span('2025-11-01', '2025-11-30'), span('2026-10-01', '2026-10-11')];
+    expect(growthSpan(months, 'month')).toEqual({
+      range: 'Oct 12, 2025 to Oct 11, 2026',
+      partial: 'Lighter bars are part periods: the first month starts on Oct 12 and the last is this month so far.',
+    });
+  });
+
+  it('only mentions the current bucket when the first one is whole', () => {
+    expect(growthSpan([span('2026-09-14', '2026-09-20'), span('2026-09-21', '2026-09-23')], 'week')).toEqual({
+      range: 'Sep 14 to Sep 23, 2026',
+      partial: 'The lighter last bar is this week so far.',
+    });
+    expect(growthSpan([span('2026-10-10', '2026-10-10'), span('2026-10-11', '2026-10-11')], 'day')?.partial).toBe(
+      'The lighter last bar is today so far.',
+    );
+  });
+
+  it('has nothing to say about an empty series', () => {
+    expect(growthSpan([], 'day')).toBeNull();
   });
 });
 
@@ -136,7 +196,22 @@ describe('totalPoints (the running-total line)', () => {
   it('starts the line from the total the day before the range and skips hidden totals', () => {
     expect(totalPoints([row('2026-10-01', '2026-10-01', hidden), row('2026-10-02', '2026-10-02', n(25))], n(14))).toEqual([
       { x: '2026-09-30', y: 14 },
-      { x: '2026-10-02', y: 25 },
+      { x: '2026-10-02', y: 25, gap: true },
+    ]);
+  });
+
+  it('marks each point reached across hidden totals, so the chart can draw that stretch as unknown', () => {
+    const series = [
+      row('2026-09-16', '2026-09-16', n(12)),
+      row('2026-09-17', '2026-09-17', hidden),
+      row('2026-09-18', '2026-09-18', hidden),
+      row('2026-09-19', '2026-09-19', n(18)),
+      row('2026-09-20', '2026-09-20', n(18)),
+    ];
+    expect(totalPoints(series, hidden)).toEqual([
+      { x: '2026-09-16', y: 12 },
+      { x: '2026-09-19', y: 18, gap: true },
+      { x: '2026-09-20', y: 18 },
     ]);
   });
 
@@ -221,6 +296,23 @@ describe('audit wording', () => {
     expect(auditChange('chapter_deleted', { name: 'KCB FBLA', members: 12 })).toBe('12 members');
     expect(auditChange('chapter_deleted', { name: 'Solo', members: 1 })).toBe('1 member');
     expect(auditChange('member_banned', {})).toBe('');
+  });
+
+  it('names what an entry is about, capitalised for the Affected column and lower case after "on"', () => {
+    const row = (target_type: string, target_id: string | null, target_username: string | null = null, detail = {}) => ({
+      target_type,
+      target_id,
+      target_username,
+      detail,
+    });
+    const fb = row('feedback', '3dd2c334-6d94-4fd1-a061-524ac601368b');
+    expect(auditTarget(fb)).toBe('Feedback report');
+    expect(auditTarget(fb, 'inline')).toBe('a feedback report');
+    expect(auditTarget(row('chapter_member', 'u-1', 'maya.chen'), 'inline')).toBe('@maya.chen');
+    expect(auditTarget(row('chapter', 'c9', null, { name: 'Test Chapter' }), 'inline')).toBe('Test Chapter');
+    expect(auditTarget(row('chapter_member', '9b1e2c44-0000-4000-8000-000000000001'))).toBe('Chapter member 9b1e2c44');
+    expect(auditTarget(row('chapter_member', '9b1e2c44-0000-4000-8000-000000000001'), 'inline')).toBe('chapter member 9b1e2c44');
+    expect(auditTarget(row('user', null))).toBe('');
   });
 
   it('says where a change came from', () => {

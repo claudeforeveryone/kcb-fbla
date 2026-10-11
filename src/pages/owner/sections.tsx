@@ -13,6 +13,7 @@ import {
   countLabel,
   featureLabel,
   fmtPercent,
+  growthSpan,
   NO_DATA,
   seriesBars,
   seriesState,
@@ -101,7 +102,7 @@ export function OverviewView({ data: d }: { data: OwnerOverview }) {
                   className={cn('tabular mt-0.5 font-display text-xl font-extrabold', f.hidden ? 'text-muted' : 'text-heading')}
                   title={f.hidden ? HIDDEN_WHY : undefined}
                 >
-                  {f.value}
+                  <OrEmpty text={f.value} />
                 </dd>
                 <dd className="tabular text-xs text-muted">{f.sub}</dd>
               </div>
@@ -132,7 +133,9 @@ export function OverviewView({ data: d }: { data: OwnerOverview }) {
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h3 className="text-sm font-bold text-heading">Questions answered this week</h3>
           <p className="text-sm text-muted">
-            <span className="tabular font-display text-xl font-extrabold text-heading">{num(d.answered_week.questions)}</span>
+            <span className="tabular font-display text-xl font-extrabold text-heading">
+              <OrEmpty text={num(d.answered_week.questions)} />
+            </span>
             <span className="ml-2">
               by <Students c={d.answered_week.users} />
             </span>
@@ -155,11 +158,15 @@ export function OverviewView({ data: d }: { data: OwnerOverview }) {
 // ------------------------------------------------------------------------------------------------ growth
 
 const pad2 = (n: number) => String(n).padStart(2, '0');
-/** LineChart hands date axes back as local-midnight epochs; label them like the bar charts ("Oct 5"). */
-const axisDay = (n: number) => {
+/**
+ * LineChart hands date axes back as local-midnight epochs; label them like the bar charts ("Oct 5"), with the year
+ * when the line spans two ("Oct 11 ’25" and "Oct 11 ’26" on a 12-month range).
+ */
+const axisDay = (withYear: boolean) => (n: number) => {
   const d = new Date(n);
   const day = `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
-  return bucketLabel(day, day, 'day', true);
+  const label = bucketLabel(day, day, 'day', true);
+  return withYear ? `${label} ’${String(d.getFullYear()).slice(-2)}` : label;
 };
 
 const BUCKETS: { value: Bucket; label: string }[] = [
@@ -183,7 +190,7 @@ export function GrowthSection({ days, refreshKey }: { days: number; refreshKey: 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted">One bar per {bucket}, Toronto time. A dashed stub is a number hidden for privacy.</p>
+        <p className="text-sm text-muted">One bar per {bucket}, Toronto time.</p>
         <SegmentedControl
           size="sm"
           aria-label="Group by"
@@ -199,10 +206,23 @@ export function GrowthSection({ days, refreshKey }: { days: number; refreshKey: 
   );
 }
 
-function growthTable(rows: GrowthRow[], bucket: Bucket, key: keyof Omit<GrowthRow, 'start' | 'end'>) {
+type SeriesKey = keyof Omit<GrowthRow, 'start' | 'end'>;
+
+/** What each Growth series counts: sign-ups and totals are accounts (many without a profile), not students. */
+const SERIES_UNIT: Record<SeriesKey, string> = {
+  signups: 'Accounts',
+  total: 'Accounts',
+  active: 'Students',
+  practising: 'Students',
+  onboarded: 'Profiles',
+};
+
+/** The table under a Growth chart; its periods are named like the bars' tooltips, "(so far)" included. */
+function growthTable(rows: GrowthRow[], bucket: Bucket, key: SeriesKey) {
+  const bars = seriesBars(rows, key, bucket);
   return {
-    columns: [bucket === 'day' ? 'Day' : bucket === 'week' ? 'Week' : 'Month', 'Students'],
-    rows: rows.map((r) => [bucketLabel(r.start, r.end, bucket), countLabel(r[key])]),
+    columns: [bucket === 'day' ? 'Day' : bucket === 'week' ? 'Week' : 'Month', SERIES_UNIT[key]],
+    rows: rows.map((r, i) => [bars[i].title, countLabel(r[key])]),
   };
 }
 
@@ -227,8 +247,18 @@ export function GrowthView({ data, coarser }: { data: OwnerGrowth; coarser?: str
   const points = totalPoints(rows, data.baseline);
   const totals = growthTable(rows, b, 'total');
   const totalNote = quietNote([data.baseline, ...rows.map((r) => r.total)], b, coarser);
+  const span = growthSpan(rows, b);
+  // Only explain the lighter bars when one is drawn: a part period that is 0 or hidden shows no bar at all.
+  const lighterDrawn = charts.some((c) => seriesBars(rows, c.key, b).some((bar) => bar.partial && !bar.suppressed && bar.value > 0));
+  const twoYears = points.length > 1 && points[0].x.slice(0, 4) !== points[points.length - 1].x.slice(0, 4);
   return (
     <div className="space-y-4">
+      {span && (
+        <p className="text-sm text-muted">
+          <span className="font-semibold text-ink">{span.range}.</span> {lighterDrawn && `${span.partial} `}A dashed stub is a
+          number hidden for privacy.
+        </p>
+      )}
       <div className="grid gap-4 xl:grid-cols-2">
         {charts.map((c) => {
           const note = quietNote(rows.map((r) => r[c.key]), b, coarser);
@@ -261,9 +291,12 @@ export function GrowthView({ data, coarser }: { data: OwnerGrowth; coarser?: str
             yMin={0}
             dots={points.length < 12}
             series={[{ name: 'Accounts', data: points }]}
-            formatX={axisDay}
+            formatX={axisDay(twoYears)}
             emptyLabel="Every total in this range is hidden"
           />
+          {points.some((p) => p.gap) && (
+            <p className="mt-2 text-sm text-muted">A dashed stretch joins two shown totals across totals hidden for privacy.</p>
+          )}
           {points.length > 0 && totalNote && <p className="mt-2 text-sm text-muted">{totalNote}</p>}
         </ChartFigure>
       </Panel>
@@ -445,11 +478,15 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
             <dl className="grid grid-cols-3 gap-2 text-xs">
               <div>
                 <dt className="text-muted">Runs</dt>
-                <dd className="tabular font-semibold text-ink">{num(r.attempts)}</dd>
+                <dd className="tabular font-semibold text-ink">
+                  <OrEmpty text={num(r.attempts)} />
+                </dd>
               </div>
               <div>
                 <dt className="text-muted">Answered</dt>
-                <dd className="tabular font-semibold text-ink">{num(r.answered)}</dd>
+                <dd className="tabular font-semibold text-ink">
+                  <OrEmpty text={num(r.answered)} />
+                </dd>
               </div>
               <div>
                 <dt className="text-muted">Not finished</dt>
@@ -482,8 +519,12 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
               <TD align="right">
                 <CountText c={r.users} />
               </TD>
-              <TD align="right">{num(r.attempts)}</TD>
-              <TD align="right">{num(r.answered)}</TD>
+              <TD align="right">
+                <OrEmpty text={num(r.attempts)} />
+              </TD>
+              <TD align="right">
+                <OrEmpty text={num(r.answered)} />
+              </TD>
               <TD align="right">
                 <OrEmpty text={fmtPercent(r.abandonment)} />
               </TD>

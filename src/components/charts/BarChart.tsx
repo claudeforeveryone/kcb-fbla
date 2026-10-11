@@ -11,6 +11,10 @@ export type BarDatum = {
   highlight?: boolean;
   /** The value is withheld for privacy: drawn as an empty dashed bar labelled "Hidden". */
   suppressed?: boolean;
+  /** Full name for the tooltip when the axis label is short ("Oct 1 to Oct 11, 2026 (so far)" under "Oct"). */
+  title?: string;
+  /** Vertical only: the bar covers part of a period (a month so far): drawn lighter, outlined in its colour. */
+  partial?: boolean;
 };
 
 const HIDDEN = 'Hidden';
@@ -165,7 +169,9 @@ function Vertical({
           const y = sy(d.suppressed ? 0 : Math.max(0, d.value));
           const c = d.highlight ? 'var(--red)' : (d.color ?? color ?? chartColor(0));
           const shown = d.suppressed ? HIDDEN : formatValue(d.value);
+          const name = d.title ?? d.label;
           const stub = Math.min(8, ih);
+          const h = Math.max(0, pad.t + ih - y);
           return (
             <g
               key={`${d.label}-${i}`}
@@ -185,11 +191,25 @@ function Vertical({
                   stroke="var(--muted)"
                   strokeDasharray="2 2"
                 >
-                  <title>{`${d.label}: hidden for privacy`}</title>
+                  <title>{`${name}: hidden for privacy`}</title>
+                </rect>
+              ) : d.partial ? (
+                // A lighter fill says "not a whole period"; the outline keeps the bar's edge as visible as a full one.
+                <rect
+                  x={cx - bw / 2 + 0.75}
+                  y={Math.min(y + 0.75, pad.t + ih)}
+                  width={Math.max(0, bw - 1.5)}
+                  height={Math.max(0, h - 0.75)}
+                  fill={c}
+                  fillOpacity={0.3}
+                  stroke={c}
+                  strokeWidth={1.5}
+                >
+                  <title>{`${name}: ${shown}`}</title>
                 </rect>
               ) : (
-                <rect x={cx - bw / 2} y={y} width={bw} height={Math.max(0, pad.t + ih - y)} fill={c}>
-                  <title>{`${d.label}: ${shown}`}</title>
+                <rect x={cx - bw / 2} y={y} width={bw} height={h} fill={c}>
+                  <title>{`${name}: ${shown}`}</title>
                 </rect>
               )}
               {hover === i && (

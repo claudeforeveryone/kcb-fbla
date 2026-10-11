@@ -58,14 +58,28 @@ const short = (day: string) => {
   return `${MONTHS_SHORT[p.m]} ${p.d}`;
 };
 
+/** Monday = 0 ... Sunday = 6 for a 'YYYY-MM-DD' day (Postgres date_trunc('week') starts weeks on Monday). */
+function weekday(day: string): number {
+  const p = parts(day);
+  return (new Date(Date.UTC(p.y, p.m, p.d)).getUTCDay() + 6) % 7;
+}
+
+/** Whether a bucket spans its whole day, Monday-to-Sunday week or calendar month. */
+function wholeBucket(start: string, end: string, bucket: Bucket): boolean {
+  if (bucket === 'day') return true;
+  if (bucket === 'week') return weekday(start) === 0 && weekday(end) === 6;
+  const a = parts(start);
+  const b = parts(end);
+  return a.d === 1 && b.d === new Date(Date.UTC(b.y, b.m + 1, 0)).getUTCDate();
+}
+
 /** A growth bucket's name: full for tables and tooltips, short for chart axes. */
 export function bucketLabel(start: string, end: string, bucket: Bucket, compact = false): string {
   const a = parts(start);
   const b = parts(end);
   if (bucket === 'month') {
-    const whole = a.d === 1 && b.d === new Date(Date.UTC(b.y, b.m + 1, 0)).getUTCDate();
     if (compact) return MONTHS_SHORT[a.m];
-    if (whole) return `${MONTHS_LONG[a.m]} ${a.y}`;
+    if (wholeBucket(start, end, bucket)) return `${MONTHS_LONG[a.m]} ${a.y}`;
   }
   if (compact) return short(start);
   if (bucket === 'day' || start === end) return `${short(start)}, ${a.y}`;
@@ -81,20 +95,57 @@ export type GrowthRow = {
   practising: Count;
   total: Count;
 };
-export type SeriesBar = { label: string; title: string; value: number; suppressed: boolean };
+export type SeriesBar = { label: string; title: string; value: number; suppressed: boolean; partial: boolean };
 
-/** One bar per bucket. A suppressed bucket stays on the axis at zero height, flagged so the chart can mark it. */
+const spansYears = (rows: { start: string; end: string }[]) =>
+  rows.length > 0 && parts(rows[0].start).y !== parts(rows[rows.length - 1].end).y;
+
+/**
+ * One bar per bucket. A suppressed bucket stays on the axis at zero height, flagged so the chart can mark it.
+ * `partial` marks the two buckets that do not cover a whole period: the first, when the range starts partway through
+ * a week or month, and the last, which always holds today (fbla_owner_growth ends every range today), so it is the
+ * period so far. Month labels carry the year when the range spans two, so the two Octobers of a 12-month range differ.
+ */
 export function seriesBars<K extends string>(
   rows: ({ start: string; end: string } & Record<K, Count>)[],
   key: K,
   bucket: Bucket,
 ): SeriesBar[] {
-  return rows.map((r) => ({
-    label: bucketLabel(r.start, r.end, bucket, true),
-    title: bucketLabel(r.start, r.end, bucket),
-    value: r[key].suppressed ? 0 : (r[key].value ?? 0),
-    suppressed: r[key].suppressed,
-  }));
+  const withYear = bucket === 'month' && spansYears(rows);
+  return rows.map((r, i) => {
+    const current = i === rows.length - 1;
+    const cut = i === 0 && !wholeBucket(r.start, r.end, bucket);
+    const name = bucketLabel(r.start, r.end, bucket);
+    const p = parts(r.start);
+    return {
+      label: withYear ? `${MONTHS_SHORT[p.m]} ’${String(p.y).slice(-2)}` : bucketLabel(r.start, r.end, bucket, true),
+      title: current ? `${name} (so far)` : cut ? `${name} (part of the ${bucket})` : name,
+      value: r[key].suppressed ? 0 : (r[key].value ?? 0),
+      suppressed: r[key].suppressed,
+      partial: current || cut,
+    };
+  });
+}
+
+/**
+ * The line above the Growth charts: the whole range in words, and why the edge bars are drawn lighter (see
+ * seriesBars). Null for an empty series.
+ */
+export function growthSpan(rows: { start: string; end: string }[], bucket: Bucket): { range: string; partial: string } | null {
+  if (!rows.length) return null;
+  const first = rows[0];
+  const last = rows[rows.length - 1];
+  const a = parts(first.start);
+  const b = parts(last.end);
+  const range = a.y === b.y ? `${short(first.start)} to ${short(last.end)}, ${b.y}` : `${short(first.start)}, ${a.y} to ${short(last.end)}, ${b.y}`;
+  const now = bucket === 'day' ? 'today so far' : `this ${bucket} so far`;
+  const cut = rows.length > 1 && !wholeBucket(first.start, first.end, bucket);
+  return {
+    range,
+    partial: cut
+      ? `Lighter bars are part periods: the first ${bucket} starts on ${short(first.start)} and the last is ${now}.`
+      : `The lighter last bar is ${now}.`,
+  };
 }
 
 /**
@@ -116,17 +167,26 @@ function dayBefore(day: string): string {
 
 /**
  * Points for the running-total line: the total the day before the range (the growth RPC's `baseline`), then the
- * total at the end of each bucket. Hidden totals are left out, so the line joins the totals it can show.
+ * total at the end of each bucket. Hidden totals are left out. A point reached across one or more hidden totals
+ * carries `gap: true`, so the chart draws that stretch as unknown (dashed, no area) instead of as a known climb.
  */
 export function totalPoints(
   series: { start: string; end: string; total: Count }[],
   baseline: Count | null | undefined,
-): { x: string; y: number }[] {
+): { x: string; y: number; gap?: boolean }[] {
   if (!series.length) return [];
   const shown = (c: Count | null | undefined) => !!c && !c.suppressed && c.value != null;
-  const out: { x: string; y: number }[] = [];
+  const out: { x: string; y: number; gap?: boolean }[] = [];
   if (shown(baseline)) out.push({ x: dayBefore(series[0].start), y: baseline!.value! });
-  for (const r of series) if (shown(r.total)) out.push({ x: r.end, y: r.total.value! });
+  let skipped = false;
+  for (const r of series) {
+    if (!shown(r.total)) {
+      skipped = true;
+      continue;
+    }
+    out.push(skipped && out.length ? { x: r.end, y: r.total.value!, gap: true } : { x: r.end, y: r.total.value! });
+    skipped = false;
+  }
   return out;
 }
 
@@ -213,6 +273,22 @@ export function auditChange(action: string, detail: Detail | null | undefined): 
     default:
       return '';
   }
+}
+
+/**
+ * What an audit entry is about: a username, a chapter's name, "Feedback report", or the target type and a short id.
+ * 'start' is for the Affected column; 'inline' follows "on" in a sentence ("on a feedback report").
+ */
+export function auditTarget(
+  r: { target_type: string | null; target_id: string | null; target_username: string | null; detail: Detail | null },
+  at: 'start' | 'inline' = 'start',
+): string {
+  if (r.target_username) return `@${r.target_username}`;
+  if (r.target_type === 'chapter' && typeof r.detail?.name === 'string') return r.detail.name;
+  if (r.target_type === 'feedback') return at === 'start' ? 'Feedback report' : 'a feedback report';
+  if (!r.target_id) return '';
+  const t = `${words(r.target_type ?? 'item')} ${r.target_id.slice(0, 8)}`;
+  return at === 'start' ? t : t.charAt(0).toLowerCase() + t.slice(1);
 }
 
 const OWNER_ONLY = new Set(['feedback_updated', 'support_email_viewed']);
