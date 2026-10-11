@@ -30,8 +30,11 @@ export function FeedbackDialog({ open, onClose }: { open: boolean; onClose: () =
   const [tried, setTried] = useState(false);
   const [busy, setBusy] = useState(false);
   const [mineKey, setMineKey] = useState(0);
+  // How many reports "Your reports" found (null while loading or after an error), for the footer's wording.
+  const [mineCount, setMineCount] = useState<number | null>(null);
   const problem = feedbackProblem(message);
   const page = cleanPagePath(pathname);
+  const fieldId = useId();
 
   useEffect(() => {
     if (!open) return;
@@ -75,7 +78,7 @@ export function FeedbackDialog({ open, onClose }: { open: boolean; onClose: () =
           </>
         ) : (
           <Button variant="primary" onClick={() => setView('write')}>
-            Write another
+            {mineCount === 0 ? 'Write one' : mineCount ? 'Write another' : 'Write feedback'}
           </Button>
         )
       }
@@ -100,37 +103,59 @@ export function FeedbackDialog({ open, onClose }: { open: boolean; onClose: () =
             onChange={setKind}
             options={FEEDBACK_KINDS.map((k) => ({ value: k.value, label: k.label, hint: k.hint }))}
           />
-          <Textarea
-            label="What happened?"
-            rows={4}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            maxLength={FEEDBACK_MAX + 200}
-            error={tried ? problem : undefined}
-            corner={<span className={cn('tabular', message.trim().length > FEEDBACK_MAX && 'text-danger')}>{message.trim().length}/2,000</span>}
-            hint={`Sent with the page you're on (${page}). Don't include passwords or personal details.`}
-          />
+          <div>
+            <Textarea
+              id={fieldId}
+              label="What happened?"
+              rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              maxLength={FEEDBACK_MAX + 200}
+              error={tried ? problem : undefined}
+              aria-describedby={[tried && problem ? `${fieldId}-err` : null, `${fieldId}-privacy`].filter(Boolean).join(' ')}
+              corner={<span className={cn('tabular', message.trim().length > FEEDBACK_MAX && 'text-danger')}>{message.trim().length}/2,000</span>}
+            />
+            {/* Its own line, so a validation error never hides it. */}
+            <p id={`${fieldId}-privacy`} className="mt-1.5 text-[0.8125rem] text-muted">
+              Sent with the page you're on ({page}). Don't include passwords or personal details.
+            </p>
+          </div>
         </div>
       ) : (
-        <MyReports refreshKey={mineKey} />
+        <MyReports refreshKey={mineKey} onCount={setMineCount} />
       )}
     </Modal>
   );
 }
 
-function MyReports({ refreshKey }: { refreshKey: number }) {
+function MyReports({ refreshKey, onCount }: { refreshKey: number; onCount: (n: number | null) => void }) {
   const [state, setState] = useState<{ rows: MyFeedback[] | null; error: boolean }>({ rows: null, error: false });
+  const [retry, setRetry] = useState(0);
   useEffect(() => {
     let live = true;
+    setState({ rows: null, error: false });
+    onCount(null);
     listMyFeedback()
-      .then((rows) => live && setState({ rows, error: false }))
+      .then((rows) => {
+        if (!live) return;
+        setState({ rows, error: false });
+        onCount(rows.length);
+      })
       .catch(() => live && setState({ rows: null, error: true }));
     return () => {
       live = false;
     };
-  }, [refreshKey]);
+  }, [refreshKey, retry, onCount]);
 
-  if (state.error) return <p className="py-6 text-center text-sm text-muted">Your reports could not be loaded right now. Try again later.</p>;
+  if (state.error)
+    return (
+      <div className="flex flex-col items-center gap-3 py-6 text-center">
+        <p className="text-sm text-muted">Your reports could not be loaded right now.</p>
+        <Button variant="outline" size="sm" onClick={() => setRetry((n) => n + 1)}>
+          Try again
+        </Button>
+      </div>
+    );
   if (!state.rows) return <p className="py-6 text-center text-sm text-muted" role="status">Loading your reports...</p>;
   if (!state.rows.length) return <p className="py-6 text-center text-sm text-muted">You haven't sent any feedback yet.</p>;
   return (
@@ -146,10 +171,10 @@ function MyReports({ refreshKey }: { refreshKey: number }) {
           </div>
           <p className="mt-1.5 line-clamp-3 text-sm text-ink">{r.message}</p>
           {r.resolution_note && (
-            <p className="mt-2 border-l-[3px] border-blue bg-surface-2 px-3 py-2 text-sm text-ink">
-              <span className="font-semibold">From the team: </span>
-              {r.resolution_note}
-            </p>
+            <div className="mt-2 rounded-[2px] border border-line bg-surface-2 px-3 py-2 text-sm">
+              <div className="text-xs font-semibold text-heading">From the team</div>
+              <p className="mt-0.5 text-ink">{r.resolution_note}</p>
+            </div>
           )}
         </li>
       ))}

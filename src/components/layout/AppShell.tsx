@@ -5,7 +5,7 @@ import { useAuth } from '../../lib/auth';
 import { useIsOwner } from '../../lib/useIsOwner';
 import { Avatar } from '../ui/Avatar';
 import { buttonClasses } from '../ui/Button';
-import { Dropdown } from '../ui/Dropdown';
+import { Dropdown, type DropdownItem } from '../ui/Dropdown';
 import { EloBadge } from '../ui/EloBadge';
 import { cn } from '../ui/cn';
 import { useToast } from '../ui/Toast';
@@ -108,9 +108,12 @@ function SignedOutActions({ pathname }: { pathname: string }) {
   const next = encodeURIComponent(pathname);
   if (session)
     return (
-      <Link to="/onboarding" className={buttonClasses('accent', 'sm')}>
-        Finish setup
-      </Link>
+      <>
+        <Link to="/onboarding" className={buttonClasses('accent', 'sm')}>
+          Finish setup
+        </Link>
+        <SessionMenu />
+      </>
     );
   return (
     <>
@@ -121,6 +124,50 @@ function SignedOutActions({ pathname }: { pathname: string }) {
         Join free
       </Link>
     </>
+  );
+}
+
+/**
+ * Signed in without a student profile (sign-up not finished, or an owner account that never made one): no profile
+ * to show, but the owner console and signing out still need a way in.
+ */
+function SessionMenu() {
+  const { signOut } = useAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
+  const owner = useIsOwner() === 'owner';
+  const items: DropdownItem[] = [
+    ...(owner ? ([{ label: 'Owner console', icon: <Gauge />, to: '/owner' }, { type: 'separator' }] satisfies DropdownItem[]) : []),
+    {
+      label: 'Sign out',
+      icon: <LogOut />,
+      danger: true,
+      onSelect: async () => {
+        await signOut();
+        toast.info('Signed out', 'See you next practice.');
+        navigate('/login', { replace: true });
+      },
+    },
+  ];
+  return (
+    <Dropdown
+      width="w-56"
+      items={items}
+      trigger={({ open, ...props }) => (
+        <button
+          type="button"
+          {...props}
+          aria-label="Account menu"
+          className={cn(
+            'flex h-9 items-center gap-1 rounded-[2px] px-1.5 text-white/85 transition-colors hover:bg-white/10 hover:text-white',
+            open && 'bg-white/10 text-white',
+          )}
+        >
+          <UserRound className="size-5" />
+          <ChevronDown className={cn('size-4 text-white/70 transition-transform duration-200', open && 'rotate-180')} />
+        </button>
+      )}
+    />
   );
 }
 
