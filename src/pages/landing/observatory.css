@@ -237,6 +237,23 @@
   }
 }
 
+/* Tablets and narrow desktop windows (4:3 to 3:2): the room's framing keeps the colonnade on the right, but the copy
+   column reaches further across, so the scrim holds solid longer and the leftmost arches sit under it, not behind
+   the body copy. */
+@media (min-width: 768px) and (min-aspect-ratio: 11/10) and (max-aspect-ratio: 3/2) {
+  .obs-scrim {
+    background:
+      linear-gradient(
+        to right,
+        var(--obs-stage) 0%,
+        rgb(0 20 63 / 0.94) 38%,
+        rgb(0 20 63 / 0.55) 54%,
+        rgb(0 20 63 / 0) 68%
+      ),
+      linear-gradient(to top, var(--obs-stage) 0%, rgb(0 20 63 / 0) 22%);
+  }
+}
+
 .obs-rule {
   display: block;
   height: 1px;
@@ -371,6 +388,17 @@
   .obs-poster--tall {
     display: none;
   }
+}
+
+/* the still of the room (phones, tablets, no GPU) fades in over the frame's stage and light; opacity only, so it
+   stays under reduced motion */
+.obs-still {
+  opacity: 0;
+  transition: opacity 900ms var(--obs-ease);
+}
+
+.obs-still.is-on {
+  opacity: 1;
 }
 
 .obs-poster-room {

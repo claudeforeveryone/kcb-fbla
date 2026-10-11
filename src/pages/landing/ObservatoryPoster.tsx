@@ -8,8 +8,8 @@
 import { useMemo } from "react";
 import { cn } from "../../components/ui/cn";
 import {
-  COLONNADE_FULL,
   COLONNADE_LITE,
+  FRAME_PRESETS,
   ROOM,
   archLayout,
   archOutline,
@@ -19,6 +19,7 @@ import {
   project,
   rotateXYZ,
   type ColonnadeSpec,
+  type FramePreset,
   type Framing,
   type Vec3,
 } from "./roomLayout";
@@ -26,17 +27,8 @@ import {
 export type PosterState = "waiting" | "room";
 export type PosterVariant = "hero" | "close";
 
-type Preset = {
-  key: "wide" | "tall";
-  width: number;
-  height: number;
-  spec: ColonnadeSpec;
-};
-
-const PRESETS: Preset[] = [
-  { key: "wide", width: 1440, height: 824, spec: COLONNADE_FULL },
-  { key: "tall", width: 390, height: 768, spec: COLONNADE_LITE },
-];
+type Preset = FramePreset;
+const PRESETS = FRAME_PRESETS;
 
 const path = (pts: Array<[number, number]>, close = false) =>
   pts

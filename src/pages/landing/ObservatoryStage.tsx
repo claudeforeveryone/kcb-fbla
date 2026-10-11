@@ -1,5 +1,7 @@
 // Decides when the WebGL room is worth paying for, and shows the static frame until it is.
-// - Phones and touch-only devices never load it (tier.ts): they get the static frame, drawn from the same layout.
+// - Phones and touch-only devices never load it (tier.ts). They, and devices without a usable GPU, get a still of the
+//   real room (ObservatoryStill) once the page is idle, over the static frame's stage and light; the outline drawing
+//   of the room is their fallback only if the still cannot load (offline, Save-Data).
 // - The 3D chunk is a separate dynamic import, requested only after the page has loaded (fonts included), an idle
 //   slot, and the section being near the viewport, on a tier that allows WebGL. The first paint never waits on it.
 // - One room at a time (roomSlot.ts): the hero and the closing section share a slot, so only one canvas exists.
@@ -23,6 +25,7 @@ import {
 } from "react";
 import { cn } from "../../components/ui/cn";
 import { ObservatoryPoster, type PosterVariant } from "./ObservatoryPoster";
+import { ObservatoryStill } from "./ObservatoryStill";
 import { mayHoldRoom, RoomSlotContext } from "./roomSlot";
 import {
   readLandingEnv,
@@ -84,10 +87,17 @@ export function ObservatoryStage({
   const [onScreen, setOnScreen] = useState(false);
   const [tabVisible, setTabVisible] = useState(true);
   const [keep, setKeep] = useState(false);
+  const [saveData, setSaveData] = useState(false);
+  const [still, setStill] = useState<"none" | "loading" | "shown" | "failed">(
+    "none",
+  );
 
   // Browser facts (WebGL probe, device hints, motion preference) are read after mount.
   useEffect(() => {
     setEnv(readLandingEnv(0));
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } })
+      .connection;
+    setSaveData(!!conn?.saveData);
     const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
     setReduced(prefersReducedMotion());
     const onChange = () => setReduced(prefersReducedMotion());
@@ -212,6 +222,16 @@ export function ObservatoryStage({
     if (live && tier === "full") void import("./scene/Effects");
   }, [live, tier]);
 
+  // the still of the room, for the static-frame tier: after the page is idle, once the section is near
+  const stillOk = !saveData && still !== "failed";
+  const wantsStill = env !== null && tier === "poster" && stillOk;
+  useEffect(() => {
+    if (wantsStill && idle && near)
+      setStill((s) => (s === "none" ? "loading" : s));
+  }, [wantsStill, idle, near]);
+  const onStillShown = useCallback(() => setStill("shown"), []);
+  const onStillFailed = useCallback(() => setStill("failed"), []);
+
   const onReady = useCallback(() => setReadyTier(tier), [tier]);
   const onSettled = useCallback(() => setSettled(true), []);
   const slotDecline = slot?.decline;
@@ -221,10 +241,12 @@ export function ObservatoryStage({
   );
   const onFail = useCallback(() => setFailed(true), []);
 
-  // The static frame shows the whole room when that is what the visitor gets, and once the live room has assembled
-  // (so a rebuilt room cross-fades from the same picture); before that it shows only the stage and the light.
+  // The static frame draws the room's outlines only when nothing better is coming (the static-frame tier without its
+  // still) and once the live room has assembled (so a rebuilt room cross-fades from the same picture); otherwise it
+  // shows the stage and the light, under the still or the canvas that is on its way.
   const posterState =
-    env && (tier === "poster" || failed || settled) ? "room" : "waiting";
+    env && (tier === "poster" ? !stillOk : settled) ? "room" : "waiting";
+  const covered = ready || (tier === "poster" && still === "shown");
 
   return (
     <div
@@ -236,8 +258,16 @@ export function ObservatoryStage({
         variant={variant}
         state={posterState}
         lite={tier === "lite"}
-        className={cn("obs-under", ready && "is-out")}
+        className={cn("obs-under", covered && "is-out")}
       />
+      {wantsStill && (
+        <ObservatoryStill
+          variant={variant}
+          load={still !== "none"}
+          onShown={onStillShown}
+          onFailed={onStillFailed}
+        />
+      )}
       {live && (
         <SceneBoundary onFail={onFail}>
           <Suspense fallback={null}>

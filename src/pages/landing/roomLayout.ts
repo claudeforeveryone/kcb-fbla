@@ -44,6 +44,18 @@ export const COLONNADE_LITE: ColonnadeSpec = {
   spanDeg: 50,
 };
 
+/**
+ * The fixed framings the static frame is drawn at (ObservatoryPoster) and the pre-rendered stills of the real room were
+ * rendered at (stills/), so a still lands exactly on the outline drawing under it. Wide: desktops and landscape
+ * tablets; tall: phones and portrait tablets.
+ */
+export const FRAME_PRESETS = [
+  { key: "wide", width: 1440, height: 824, spec: COLONNADE_FULL },
+  { key: "tall", width: 390, height: 768, spec: COLONNADE_LITE },
+] as const;
+
+export type FramePreset = (typeof FRAME_PRESETS)[number];
+
 /** Arches on an arc around the origin, each facing the centre, tallest in the middle. */
 export function archLayout(spec: ColonnadeSpec): Arch[] {
   const { count, radius, spanDeg } = spec;
