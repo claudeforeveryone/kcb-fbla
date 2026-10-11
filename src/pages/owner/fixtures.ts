@@ -1,7 +1,9 @@
 // DEV ONLY. Made-up data for the owner console in the component gallery (/dev/ui?only=owner for a busy site,
 // /dev/ui?only=owner-small for a small one). Imported only by src/components/ui/Gallery.tsx, which App.tsx loads only
 // when import.meta.env.DEV, so none of this reaches a production build: `npm run build` ends with
-// scripts/check-dist.mjs, which fails when dist/ contains FIXTURE_MARKER. Never use it anywhere else. Hidden counts
+// scripts/check-dist.mjs, which fails when dist/ contains FIXTURE_MARKER. The marker is a field of every value this
+// file exports (fixtures.test.ts checks), so any bundle that pulls in fixture data carries it too, whatever imports
+// it. Never use it anywhere else. Hidden counts
 // follow the same rules as 0105: 1-4 is hidden, a running total is hidden when it would reveal a group of 1-4 next to
 // the total after it, a group inside an account total is hidden when it is 1-4 below it, and a group is hidden when it
 // is 1-4 above a smaller group inside it that is shown.
@@ -21,6 +23,9 @@ import type { Bucket, Count, GrowthRow } from '../../lib/owner';
 import type { OwnerSource } from './shared';
 
 export const FIXTURE_MARKER = 'omega-owner-fixture-data';
+
+/** A fixture data source: the console's OwnerSource, tagged so check-dist can find it in a bundle. */
+export type FixtureSource = OwnerSource & { readonly fixture: typeof FIXTURE_MARKER };
 
 type Site = 'busy' | 'small';
 
@@ -52,6 +57,7 @@ const overviews: Record<Site, OwnerOverview> = {
   },
   // 23 accounts. This month's sign-up split is 10 and 2, so both halves are hidden (the 2x2 rule in 0105). 17 active
   // this month is 1 below the 18 who finished sign-up, so the month's count is hidden too, and with it the rate.
+  // 3 students answered questions this week: hidden, and the question count with it (0105 returns null for both).
   small: {
     generated_at: NOW,
     timezone: 'America/Toronto',
@@ -65,7 +71,7 @@ const overviews: Record<Site, OwnerOverview> = {
       month: { created: c(12), onboarded: hidden, rate: null },
       all_time: { created: c(23), onboarded: c(18), rate: 0.783 },
     },
-    answered_week: { users: c(6), questions: 212 },
+    answered_week: { users: hidden, questions: null },
   },
 };
 
@@ -177,10 +183,6 @@ function growth(site: Site, days: number, bucket: Bucket): OwnerGrowth {
   });
   return { days, bucket, timezone: 'America/Toronto', baseline: total(0), series };
 }
-
-/** For the fixture tests: the Growth and Overview fixtures as the gallery serves them. */
-export const fixtureGrowth = growth;
-export const fixtureOverview = (site: Site): OwnerOverview => overviews[site];
 
 const engagement = (site: Site, days: number): OwnerEngagement => {
   if (site === 'small')
@@ -346,18 +348,22 @@ const content: OwnerContent = {
   feedback_status: {},
 };
 
+/** Report n's id: a uuid like the real ones, so links into triage (?report=) work in the gallery. */
+const fid = (n: number) => `0f0f0f0f-0000-4000-8000-${String(n).padStart(12, '0')}`;
+
+// Page paths as the app stores them: ids and tokens replaced by their route name (cleanPagePath).
 let feedback: OwnerFeedbackRow[] = [
-  fb('f1', 'question_issue', 'Wrong answer marked correct: B is right, the textbook says wages payable is credited.', 'new', 'high', 'maya.chen', 'Maya Chen', '2026-10-10T19:12:00Z', '/play/review/abc', 'acc-118', 'accounting'),
+  fb('f1', 'question_issue', 'Wrong answer marked correct: B is right, the textbook says wages payable is credited.', 'new', 'high', 'maya.chen', 'Maya Chen', '2026-10-10T19:12:00Z', '/play/review/:attempt', 'acc-118', 'accounting'),
   fb('f2', 'bug', 'The timer kept running after I submitted my mock exam and showed 00:00 on the results page.', 'new', 'normal', 'jordan_p', 'Jordan Patel', '2026-10-10T16:01:00Z', '/play/run'),
   fb('f3', 'accessibility', 'The chart colours on my profile are hard to tell apart. I am colour blind (red-green).', 'triaged', 'normal', 'sam.r', 'Sam Rivera', '2026-10-09T22:30:00Z', '/me'),
   fb('f4', 'feature', 'Could vocab decks have a mode that only shows terms I got wrong last time?', 'in_progress', 'low', 'lee_ann', 'Lee-Ann Brooks', '2026-10-07T13:44:00Z', '/vocab/marketing'),
-  fb('f5', 'question_issue', 'The question is unclear: it does not say if the contract was signed before or after the birthday.', 'new', 'normal', 'noah.k', 'Noah Kim', '2026-10-08T15:40:00Z', '/play/review/def', 'law-042', 'business-law'),
+  fb('f5', 'question_issue', 'The question is unclear: it does not say if the contract was signed before or after the birthday.', 'new', 'normal', 'noah.k', 'Noah Kim', '2026-10-08T15:40:00Z', '/play/review/:attempt', 'law-042', 'business-law'),
   fb('f6', 'resource_issue', 'The study guide link in our classroom goes to a 404 page.', 'triaged', 'normal', 'priya.s', 'Priya Singh', '2026-10-06T18:20:00Z', '/chapter/classroom'),
   fb('f7', 'bug', 'Duel invite notification opened the wrong duel.', 'resolved', 'high', 'ethan.w', 'Ethan Wong', '2026-09-30T20:10:00Z', '/arena', null, null, 'Fixed on Oct 2. Thanks for the clear steps!'),
 ];
 
 function fb(
-  id: string,
+  key: string,
   kind: OwnerFeedbackRow['kind'],
   message: string,
   status: FeedbackStatus,
@@ -370,8 +376,9 @@ function fb(
   question_event: string | null = null,
   resolution_note: string | null = null,
 ): OwnerFeedbackRow {
+  const n = Number(key.slice(1));
   return {
-    id,
+    id: fid(n),
     kind,
     message,
     page_path,
@@ -383,14 +390,14 @@ function fb(
     created_at,
     updated_at: created_at,
     resolved_at: status === 'resolved' || status === 'wontfix' ? '2026-10-02T14:00:00Z' : null,
-    user_id: `00000000-0000-4000-8000-0000000000${id.slice(1).padStart(2, '0')}`,
+    user_id: `00000000-0000-4000-8000-0000000000${String(n).padStart(2, '0')}`,
     username,
     display_name,
   };
 }
 
 const audit: AuditRow[] = [
-  a(12, '2026-10-11T13:02:00Z', 'feedback_updated', 'feedback', 'f7', { from: 'in_progress', to: 'resolved', priority: 'high', note_changed: true }, 'joseph', null),
+  a(12, '2026-10-11T13:02:00Z', 'feedback_updated', 'feedback', fid(7), { from: 'in_progress', to: 'resolved', priority: 'high', note_changed: true }, 'joseph', null),
   a(13, '2026-10-11T09:30:00Z', 'member_added', 'chapter_member', 'u-new', { chapter_id: 'c1', role: 'member' }, 'maya.chen', 'new.student'),
   a(11, '2026-10-10T21:15:00Z', 'support_email_viewed', 'user', 'u-noah', { reason: 'Student asked for help resetting their sign-in email' }, 'joseph', 'noah.k'),
   a(10, '2026-10-10T17:48:00Z', 'member_banned', 'chapter_member', 'u-x', { chapter_id: 'c1', op: 'insert', has_reason: true, via: 'owner_console', reason: 'Posted spam links in the chapter feed' }, 'joseph', 'spam.account'),
@@ -453,9 +460,10 @@ function statusCounts(rows: OwnerFeedbackRow[]): Record<FeedbackStatus, number> 
   return counts;
 }
 
-function makeSource(site: Site): OwnerSource {
-  const fbRows = () => (site === 'small' ? feedback.filter((f) => f.id === 'f1' || f.id === 'f2') : feedback);
+function makeSource(site: Site): FixtureSource {
+  const fbRows = () => (site === 'small' ? feedback.filter((f) => f.id === fid(1) || f.id === fid(2)) : feedback);
   return {
+    fixture: FIXTURE_MARKER,
     overview: async () => overviews[site],
     growth: async (days, bucket) => growth(site, days, bucket),
     engagement: async (days) => engagement(site, days),
@@ -471,10 +479,11 @@ function makeSource(site: Site): OwnerSource {
       if (!q) throw Object.assign(new Error('Question not found'), { code: 'P0002' });
       return q;
     },
-    feedbackList: async ({ status = 'open', kind, limit = 50, offset = 0 }) => {
+    feedbackList: async ({ status = 'open', kind, limit = 50, offset = 0, id }) => {
       const byKind = fbRows().filter((f) => !kind || f.kind === kind);
       const rows = byKind
         .filter((f) => (status === 'all' ? true : status === 'open' ? OPEN.includes(f.status) : f.status === status))
+        .filter((f) => !id || f.id === id)
         .sort(
           (x, y) =>
             ['high', 'normal', 'low'].indexOf(x.priority) - ['high', 'normal', 'low'].indexOf(y.priority) ||
@@ -519,5 +528,5 @@ function makeSource(site: Site): OwnerSource {
   };
 }
 
-export const fixtureSource: OwnerSource = makeSource('busy');
-export const smallFixtureSource: OwnerSource = makeSource('small');
+export const fixtureSource: FixtureSource = makeSource('busy');
+export const smallFixtureSource: FixtureSource = makeSource('small');

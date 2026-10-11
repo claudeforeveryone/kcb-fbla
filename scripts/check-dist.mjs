@@ -1,5 +1,7 @@
 // Runs after `npm run build` (postbuild). Fails the build when dist/ contains the owner console's dev-only fixture
-// data (src/pages/owner/fixtures.ts, FIXTURE_MARKER), which must only ever load in the dev component gallery.
+// data (src/pages/owner/fixtures.ts, FIXTURE_MARKER), which must only ever load in the dev component gallery. The
+// marker is a field of every value fixtures.ts exports (fixtures.test.ts checks that), so a bundle that pulls in any
+// fixture data, from any file, carries the marker with it.
 //   node scripts/check-dist.mjs [dir]   (default dist)
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
