@@ -62,11 +62,19 @@ function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string })
                   to={n.to}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group relative flex items-center gap-2 px-2.5 font-display text-[0.9375rem] font-semibold transition-colors duration-150 lg:px-4 lg:text-[1.0625rem] xl:px-5',
-                    active ? 'text-white' : 'text-white/70 hover:text-white',
+                    'group relative flex items-center gap-2 px-2 font-display text-[0.9375rem] font-semibold transition-colors duration-150 lg:gap-2.5 lg:px-3 lg:text-[1.0625rem] xl:px-4',
+                    active ? 'text-white' : 'text-white/75 hover:text-white',
                   )}
                 >
-                  <Icon className={cn('hidden size-5 lg:block', active ? 'opacity-100' : 'opacity-70 group-hover:opacity-100')} />
+                  <span
+                    className={cn(
+                      'hidden size-8 shrink-0 place-items-center rounded-[8px] transition-colors duration-150 lg:grid',
+                      active ? 'bg-red text-white' : 'bg-white/10 text-white group-hover:bg-white/20',
+                    )}
+                    aria-hidden
+                  >
+                    <Icon className="size-[18px]" strokeWidth={active ? 2.4 : 2} />
+                  </span>
                   {n.label}
                   <span
                     className={cn(

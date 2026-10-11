@@ -156,7 +156,7 @@ export default function DeckPage() {
         title={deck.title}
         back={{ to: '/vocab', label: 'All decks' }}
         leading={
-          <DeckBlock deck={deck} watermark={false} className="size-16 shrink-0 rounded-[12px] sm:size-[88px]">
+          <DeckBlock deck={deck} className="size-16 shrink-0 rounded-[12px] sm:size-[88px]">
             <span className="grid h-full place-items-center">
               <span className="hidden sm:contents">
                 <DeckCrest deck={deck} size={54} />
