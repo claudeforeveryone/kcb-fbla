@@ -283,7 +283,9 @@ function Landing() {
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div>
               <h2 id="events-title" className="obs-h2 max-w-[18ch]">
-                Fifteen events. Five disciplines. One map.
+                Fifteen events. Five disciplines.
+                {/* the map is drawn from xl up (EventNetwork); below that the events are a list, so no map is promised */}
+                <span className="hidden xl:inline"> One map.</span>
               </h2>
               <p className="obs-body mt-6">
                 Every event has its own {QUESTIONS_PER_EVENT}-question bank and{" "}
