@@ -85,15 +85,15 @@ function CrashNotice({ message, offlineAtCrash }: { message: string; offlineAtCr
         <Icon className="mx-auto mb-4 size-6 text-red dark:text-danger" aria-hidden />
         <h1 className="text-xl font-bold">{title}</h1>
         <p className="mt-2 text-sm text-muted">{body}</p>
-        {kind !== 'offline' && (
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="mt-6 inline-flex h-10 items-center gap-2 rounded-[2px] border border-navy bg-surface px-4 font-display text-sm font-semibold text-navy transition-colors hover:bg-surface-2 dark:border-link dark:text-link"
-          >
-            <RefreshCw className="size-4" /> Reload
-          </button>
-        )}
+        {/* Offline it also reloads by itself on the 'online' event, but that event can be late or never come (a
+            captive portal, a VPN adapter, a wrong navigator.onLine), so a manual retry is always there. */}
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          className="mt-6 inline-flex h-10 items-center gap-2 rounded-[2px] border border-navy bg-surface px-4 font-display text-sm font-semibold text-navy transition-colors hover:bg-surface-2 dark:border-link dark:text-link"
+        >
+          <RefreshCw className="size-4" aria-hidden /> {kind === 'offline' ? 'Try again' : 'Reload'}
+        </button>
       </div>
     </div>
   );
