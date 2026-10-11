@@ -7,7 +7,7 @@ import { RouteFallback, SplashScreen } from './components/layout/SplashScreen';
 // Signed-out front door. Imported eagerly so it paints on the first client render (the 3D room inside it is lazy).
 import LandingPage from './pages/landing/LandingPage';
 import { indexView } from './pages/landing/indexView';
-import { mayHaveSessionNow } from './pages/landing/session';
+import { mayHaveSession } from './lib/sessionHint';
 
 /** Lazy page that accepts either a default export or a named export matching `name`. */
 function page(loader: () => Promise<Record<string, unknown>>, name: string) {
@@ -61,8 +61,9 @@ const Gallery = import.meta.env.DEV ? page(() => import('./components/ui/Gallery
 function IndexRoute() {
   const { loading, session, profile } = useAuth();
   const loc = useLocation();
-  // A first visit (no stored session, no sign-in link in the URL) gets the landing at once, not a splash first.
-  const [signedOutAtLoad] = useState(() => !mayHaveSessionNow());
+  // A first visit (no stored session, no sign-in link in the URL) gets the landing at once, not a splash first. The
+  // same rule main.tsx uses to decide whether to hydrate the prerendered page, so the two never disagree.
+  const [signedOutAtLoad] = useState(() => !mayHaveSession());
   switch (indexView({ loading, signedOutAtLoad, session, profile })) {
     case 'landing':
       return <LandingPage />;

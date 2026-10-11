@@ -7,7 +7,7 @@ export type IndexView = "landing" | "splash" | "onboarding" | "home";
 export type IndexState = {
   /** auth is still restoring the session */
   loading: boolean;
-  /** read once at the first render: no stored session and no sign-in link in the URL (session.ts) */
+  /** read once at the first render: no stored session and no sign-in link in the URL (mayHaveSession in src/lib/sessionHint.ts) */
   signedOutAtLoad: boolean;
   session: unknown | null;
   profile: unknown | null;
