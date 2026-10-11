@@ -1,5 +1,7 @@
 // Owner console: pure helpers for the numbers the owner RPCs return (supabase/migrations/0105, 0106).
-// Every distinct-user count comes back as a Count: exact for 0 and 5+, { value: null, suppressed: true } for 1-4.
+// Every distinct-user count comes back as a Count: exact, or { value: null, suppressed: true } when it is hidden. A
+// count is hidden when it is 1-4, and also when showing it would let someone work out a group of 1-4 by subtracting
+// two numbers on the page (0105, privacy rules 1-5), so "hidden" does not always mean "under 5".
 
 export type Count = { value: number | null; suppressed: boolean };
 
@@ -8,10 +10,10 @@ export const NO_DATA = '–';
 
 const intFmt = new Intl.NumberFormat('en-CA');
 
-/** "12,345", "Under 5" for a suppressed small group, or a dash when there is no data. */
+/** "12,345", "Hidden" for a withheld count, or a dash when there is no data. */
 export function countLabel(c: Count | null | undefined): string {
   if (!c) return NO_DATA;
-  if (c.suppressed) return 'Under 5';
+  if (c.suppressed) return 'Hidden';
   return c.value == null ? NO_DATA : intFmt.format(c.value);
 }
 
@@ -95,8 +97,78 @@ export function seriesBars<K extends string>(
   }));
 }
 
+/**
+ * What a growth series has to draw. 'zero' and 'hidden' both mean an empty-looking chart: the page says why instead
+ * of showing a blank grid ('hidden' usually clears up with a longer bucket, where groups are bigger).
+ */
+export function seriesState(counts: Count[]): 'empty' | 'zero' | 'hidden' | 'ok' {
+  if (!counts.length) return 'empty';
+  if (counts.some((c) => !c.suppressed && (c.value ?? 0) > 0)) return 'ok';
+  return counts.some((c) => c.suppressed) ? 'hidden' : 'zero';
+}
+
+/** The calendar day before a 'YYYY-MM-DD' day, without going through the viewer's time zone. */
+function dayBefore(day: string): string {
+  const p = parts(day);
+  const d = new Date(Date.UTC(p.y, p.m, p.d - 1));
+  return d.toISOString().slice(0, 10);
+}
+
+/**
+ * Points for the running-total line: the total the day before the range (the growth RPC's `baseline`), then the
+ * total at the end of each bucket. Hidden totals are left out, so the line joins the totals it can show.
+ */
+export function totalPoints(
+  series: { start: string; end: string; total: Count }[],
+  baseline: Count | null | undefined,
+): { x: string; y: number }[] {
+  if (!series.length) return [];
+  const shown = (c: Count | null | undefined) => !!c && !c.suppressed && c.value != null;
+  const out: { x: string; y: number }[] = [];
+  if (shown(baseline)) out.push({ x: dayBefore(series[0].start), y: baseline!.value! });
+  for (const r of series) if (shown(r.total)) out.push({ x: r.end, y: r.total.value! });
+  return out;
+}
+
+// ------------------------------------------------------------------------------------------------ paging
+
+/** Adds a page of rows to the ones already shown, skipping any it already has (rows shift when new ones arrive). */
+export function mergePage<T>(rows: T[], page: T[], idOf: (row: T) => string | number): { rows: T[]; added: number } {
+  const seen = new Set(rows.map(idOf));
+  const fresh = page.filter((r) => {
+    const id = idOf(r);
+    if (seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
+  return { rows: fresh.length ? [...rows, ...fresh] : rows, added: fresh.length };
+}
+
+/**
+ * Loads the first page, then follows offsets until it has at least `want` rows (what was on screen before a reload),
+ * the end of the list, or a page that adds nothing. The owner RPCs cap a page at 200 rows; offsets go past that.
+ */
+export async function loadPages<T, P extends { total: number; rows: T[] }>(
+  fetchPage: (offset: number) => Promise<P>,
+  want: number,
+  idOf: (row: T) => string | number,
+): Promise<{ head: P; rows: T[]; total: number; done: boolean }> {
+  const head = await fetchPage(0);
+  let m = mergePage<T>([], head.rows, idOf);
+  let total = head.total;
+  let done = m.added === 0 || m.rows.length >= total;
+  while (!done && m.rows.length < want) {
+    const page = await fetchPage(m.rows.length);
+    total = page.total;
+    m = mergePage(m.rows, page.rows, idOf);
+    done = m.added === 0 || m.rows.length >= total;
+  }
+  return { head, rows: m.rows, total, done };
+}
+
 /** Labels for the actions fbla_audit_log holds (0104 triggers and 0106 owner RPCs). */
 export const AUDIT_ACTION_LABELS: Record<string, string> = {
+  member_added: 'Added to chapter',
   chapter_role_changed: 'Role changed',
   member_banned: 'Banned from chapter',
   member_unbanned: 'Unbanned',
@@ -194,7 +266,7 @@ export const FEATURE_LABELS: Record<string, string> = {
   practice_started: 'Started practice',
   practice_completed: 'Finished practice',
   exam_completed: 'Finished a mock exam',
-  vocab_session_completed: 'Finished a vocab session',
+  vocab_session_completed: 'Studied vocab',
   resource_opened: 'Opened a resource',
   duel_started: 'Started a duel',
   duel_completed: 'Finished a duel',

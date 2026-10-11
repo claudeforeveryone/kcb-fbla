@@ -43,6 +43,15 @@ export function niceTicks(min: number, max: number, count = 4): number[] {
   return out;
 }
 
+/**
+ * Axis ticks for counts of people: whole numbers only, and up to at least 5, so a small site's chart of 0s and 1s
+ * does not show "0.5 students".
+ */
+export function countTicks(max: number, count = 4): number[] {
+  const top = Math.max(5, Math.ceil(Number.isFinite(max) ? max : 0));
+  return niceTicks(0, top, count);
+}
+
 export const fmtNum = (n: number) =>
   Math.abs(n) >= 10000 ? `${Math.round(n / 1000)}k` : Math.abs(n) >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(Math.round(n * 10) / 10);
 

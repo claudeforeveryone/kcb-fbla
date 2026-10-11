@@ -1,5 +1,24 @@
 import { describe, expect, it } from 'vitest';
-import { auditActionLabel, auditChange, auditSource, bucketLabel, bucketsFor, clampRange, countLabel, dayLabel, reasonProblem, featureLabel, fmtPercent, ownerGate, seriesBars, type Count } from './owner';
+import {
+  auditActionLabel,
+  auditChange,
+  auditSource,
+  bucketLabel,
+  bucketsFor,
+  clampRange,
+  countLabel,
+  dayLabel,
+  featureLabel,
+  fmtPercent,
+  loadPages,
+  mergePage,
+  ownerGate,
+  reasonProblem,
+  seriesBars,
+  seriesState,
+  totalPoints,
+  type Count,
+} from './owner';
 
 const n = (value: number): Count => ({ value, suppressed: false });
 const hidden: Count = { value: null, suppressed: true };
@@ -11,8 +30,8 @@ describe('countLabel', () => {
     expect(countLabel(n(12345))).toBe('12,345');
   });
 
-  it('says "Under 5" for a suppressed group and a dash when there is no data', () => {
-    expect(countLabel(hidden)).toBe('Under 5');
+  it('says "Hidden" for a withheld count (not "Under 5": a large group can be hidden too) and a dash for no data', () => {
+    expect(countLabel(hidden)).toBe('Hidden');
     expect(countLabel(null)).toBe('–');
     expect(countLabel(undefined)).toBe('–');
   });
@@ -97,12 +116,94 @@ describe('seriesBars', () => {
   });
 });
 
+describe('seriesState (small-site charts)', () => {
+  it('says when a series has nothing to draw: no buckets, all zero, or only zero and hidden buckets', () => {
+    expect(seriesState([])).toBe('empty');
+    expect(seriesState([n(0), n(0)])).toBe('zero');
+    expect(seriesState([n(0), hidden, hidden])).toBe('hidden');
+    expect(seriesState([hidden])).toBe('hidden');
+  });
+
+  it('is fine once any bucket shows a real number', () => {
+    expect(seriesState([hidden, n(0), n(6)])).toBe('ok');
+  });
+});
+
+describe('totalPoints (the running-total line)', () => {
+  const row = (start: string, end: string, total: Count) => ({ start, end, total });
+
+  it('starts the line from the total the day before the range and skips hidden totals', () => {
+    expect(totalPoints([row('2026-10-01', '2026-10-01', hidden), row('2026-10-02', '2026-10-02', n(25))], n(14))).toEqual([
+      { x: '2026-09-30', y: 14 },
+      { x: '2026-10-02', y: 25 },
+    ]);
+  });
+
+  it('crosses month and year edges on the calendar, and leaves out a hidden baseline', () => {
+    expect(totalPoints([row('2026-01-01', '2026-01-04', n(9))], n(7))[0]).toEqual({ x: '2025-12-31', y: 7 });
+    expect(totalPoints([row('2026-03-01', '2026-03-31', n(30))], hidden)).toEqual([{ x: '2026-03-31', y: 30 }]);
+    expect(totalPoints([], n(5))).toEqual([]);
+  });
+});
+
+describe('mergePage and loadPages (paging past the server limit)', () => {
+  type R = { id: number };
+  const ids = (rows: R[]) => rows.map((r) => r.id);
+  const idOf = (r: R) => r.id;
+
+  it('appends only rows it does not have yet and says how many were new', () => {
+    const m = mergePage([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], idOf);
+    expect(ids(m.rows)).toEqual([1, 2, 3]);
+    expect(m.added).toBe(1);
+  });
+
+  // A server like fbla_owner_feedback_list: limit capped at 200, offset unbounded.
+  const server = (count: number) => {
+    const all = Array.from({ length: count }, (_, i) => ({ id: i + 1 }));
+    const calls: number[] = [];
+    const page = async (offset: number) => {
+      calls.push(offset);
+      return { total: count, rows: all.slice(offset, offset + Math.min(50, 200)), extra: 'meta' };
+    };
+    return { page, calls };
+  };
+
+  it('loads the first page, then as many pages as it takes to reach the rows already shown', async () => {
+    const s = server(430);
+    const first = await loadPages(s.page, 0, idOf);
+    expect(first.rows).toHaveLength(50);
+    expect(first.done).toBe(false);
+    expect(first.head.extra).toBe('meta');
+
+    const again = await loadPages(s.page, 260, idOf);
+    expect(again.rows).toHaveLength(300);
+    expect(ids(again.rows).slice(-1)).toEqual([300]);
+    expect(again.done).toBe(false);
+  });
+
+  it('reaches every row past 200 and stops at the end', async () => {
+    const s = server(230);
+    const all = await loadPages(s.page, 230, idOf);
+    expect(all.rows).toHaveLength(230);
+    expect(all.done).toBe(true);
+    expect(s.calls).toEqual([0, 50, 100, 150, 200]);
+  });
+
+  it('stops instead of looping when a page brings nothing new', async () => {
+    const stuck = async () => ({ total: 999, rows: [{ id: 1 }, { id: 2 }] });
+    const r = await loadPages(stuck, 500, idOf);
+    expect(ids(r.rows)).toEqual([1, 2]);
+    expect(r.done).toBe(true);
+  });
+});
+
 describe('audit wording', () => {
   it('names every action the database writes in plain words', () => {
     expect(auditActionLabel('member_banned')).toBe('Banned from chapter');
     expect(auditActionLabel('support_email_viewed')).toBe('Email looked up');
     expect(auditActionLabel('chapter_role_changed')).toBe('Role changed');
     expect(auditActionLabel('owner_granted')).toBe('Owner access granted');
+    expect(auditActionLabel('member_added')).toBe('Added to chapter');
   });
 
   it('turns an action it does not know into readable words', () => {
@@ -144,7 +245,7 @@ describe('dayLabel', () => {
 describe('featureLabel', () => {
   it('names each tracked event in plain words', () => {
     expect(featureLabel('practice_started')).toBe('Started practice');
-    expect(featureLabel('vocab_session_completed')).toBe('Finished a vocab session');
+    expect(featureLabel('vocab_session_completed')).toBe('Studied vocab');
     expect(featureLabel('something_new')).toBe('Something new');
   });
 });

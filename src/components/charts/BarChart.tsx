@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { chartColor, fmtNum, niceTicks, useWidth } from './shared';
+import { chartColor, countTicks, fmtNum, niceTicks, useWidth } from './shared';
 
 export type BarDatum = {
   label: string;
@@ -9,11 +9,11 @@ export type BarDatum = {
   sub?: ReactNode;
   /** Mark this bar (e.g. "you"): drawn in red. */
   highlight?: boolean;
-  /** The value is hidden (a group of 1-4 people): drawn as an empty dashed bar labelled "Under 5". */
+  /** The value is withheld for privacy: drawn as an empty dashed bar labelled "Hidden". */
   suppressed?: boolean;
 };
 
-const HIDDEN = 'Under 5';
+const HIDDEN = 'Hidden';
 
 /**
  * Bar chart. Horizontal (default) renders labelled rows that wrap well on phones; vertical renders SVG columns.
@@ -27,6 +27,7 @@ export function BarChart({
   height = 220,
   color,
   emptyLabel = 'No data yet',
+  integer = false,
   className,
 }: {
   data: BarDatum[];
@@ -38,6 +39,8 @@ export function BarChart({
   height?: number;
   color?: string;
   emptyLabel?: ReactNode;
+  /** Vertical only: the values are counts of people, so the axis uses whole numbers up to at least 5. */
+  integer?: boolean;
   className?: string;
 }) {
   if (!data.length)
@@ -49,7 +52,16 @@ export function BarChart({
   return orientation === 'horizontal' ? (
     <Horizontal data={data} title={title} max={max} formatValue={formatValue} color={color} className={className} />
   ) : (
-    <Vertical data={data} title={title} max={max} formatValue={formatValue} height={height} color={color} className={className} />
+    <Vertical
+      data={data}
+      title={title}
+      max={max}
+      formatValue={formatValue}
+      height={height}
+      color={color}
+      integer={integer}
+      className={className}
+    />
   );
 }
 
@@ -89,7 +101,7 @@ function Horizontal({
                   )}
                 </span>
               </div>
-              <div className={d.suppressed ? 'h-2 border border-dashed border-line-strong' : 'h-2 overflow-hidden bg-surface-3'}>
+              <div className={d.suppressed ? 'h-2 border border-dashed border-muted' : 'h-2 overflow-hidden bg-surface-3'}>
                 <div
                   className="h-full transition-[width] duration-700 ease-out"
                   style={{ width: `${p}%`, background: c }}
@@ -110,6 +122,7 @@ function Vertical({
   formatValue,
   height,
   color,
+  integer,
   className,
 }: {
   data: BarDatum[];
@@ -118,6 +131,7 @@ function Vertical({
   formatValue: (v: number) => string;
   height: number;
   color?: string;
+  integer: boolean;
   className?: string;
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
@@ -126,7 +140,8 @@ function Vertical({
   const W = Math.max(120, width);
   const iw = W - pad.l - pad.r;
   const ih = height - pad.t - pad.b;
-  const ticks = niceTicks(0, max ?? Math.max(...data.map((d) => (d.suppressed ? 0 : d.value)), 1), 4);
+  const peak = max ?? Math.max(...data.map((d) => (d.suppressed ? 0 : d.value)), integer ? 0 : 1);
+  const ticks = integer ? countTicks(peak) : niceTicks(0, peak, 4);
   const top = ticks[ticks.length - 1] || 1;
   const band = iw / data.length;
   const bw = Math.max(4, Math.min(44, band * 0.62));
@@ -167,10 +182,10 @@ function Vertical({
                   width={Math.max(0, bw - 1)}
                   height={stub}
                   fill="none"
-                  stroke="var(--line-strong)"
+                  stroke="var(--muted)"
                   strokeDasharray="2 2"
                 >
-                  <title>{`${d.label}: ${HIDDEN} (hidden for privacy)`}</title>
+                  <title>{`${d.label}: hidden for privacy`}</title>
                 </rect>
               ) : (
                 <rect x={cx - bw / 2} y={y} width={bw} height={Math.max(0, pad.t + ih - y)} fill={c}>

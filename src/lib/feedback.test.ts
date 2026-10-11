@@ -7,6 +7,7 @@ import {
   FEEDBACK_MAX,
   feedbackProblem,
   REPORT_REASONS,
+  triageSaved,
 } from './feedback';
 
 describe('feedbackProblem', () => {
@@ -59,5 +60,24 @@ describe('FEEDBACK_KINDS', () => {
     const db = ['bug', 'feature', 'general', 'question_issue', 'resource_issue', 'accessibility'];
     for (const k of FEEDBACK_KINDS) expect(db).toContain(k.value);
     expect(FEEDBACK_KINDS.map((k) => k.value)).not.toContain('question_issue');
+  });
+});
+
+describe('triageSaved (what the owner is told after saving)', () => {
+  it('names the new status and says the student sees it', () => {
+    expect(triageSaved({ status: 'resolved' })).toEqual({ title: 'Marked Resolved', body: 'The student sees the new status.' });
+    expect(triageSaved({ status: 'in_progress', note: 'Looking into it' })).toEqual({
+      title: 'Marked In progress',
+      body: 'The student sees the new status and your note.',
+    });
+  });
+
+  it('does not claim the student sees a priority change, which only owners see', () => {
+    expect(triageSaved({ priority: 'high' })).toEqual({ title: 'Priority set to High', body: 'Only owners see priority.' });
+  });
+
+  it('tells a note change apart from removing the note', () => {
+    expect(triageSaved({ note: 'Fixed now' })).toEqual({ title: 'Note saved', body: 'The student sees it with the status.' });
+    expect(triageSaved({ note: '' })).toEqual({ title: 'Note removed', body: 'The student no longer sees a note.' });
   });
 });

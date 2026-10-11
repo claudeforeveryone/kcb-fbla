@@ -34,6 +34,31 @@ export const STATUS_LABELS: Record<FeedbackStatus, string> = {
   wontfix: "Won't fix",
 };
 
+/**
+ * The toast after an owner saves a report in triage: says what changed and who sees it. Status and the note are
+ * shown to the student; priority is owners only. `note` is the new note text when it changed ('' when removed).
+ */
+export function triageSaved(changed: { status?: FeedbackStatus; priority?: FeedbackPriority; note?: string }): {
+  title: string;
+  body: string;
+} {
+  const note = changed.note;
+  if (changed.status)
+    return {
+      title: `Marked ${STATUS_LABELS[changed.status]}`,
+      body: note ? 'The student sees the new status and your note.' : 'The student sees the new status.',
+    };
+  if (note !== undefined)
+    return note
+      ? { title: 'Note saved', body: 'The student sees it with the status.' }
+      : { title: 'Note removed', body: 'The student no longer sees a note.' };
+  if (changed.priority) {
+    const p = changed.priority;
+    return { title: `Priority set to ${p.charAt(0).toUpperCase()}${p.slice(1)}`, body: 'Only owners see priority.' };
+  }
+  return { title: 'Saved', body: 'Nothing changed.' };
+}
+
 /** Null when the message can be sent, otherwise what to fix. */
 export function feedbackProblem(message: string): string | null {
   const n = message.trim().length;
