@@ -83,8 +83,8 @@ export default function VocabPage() {
       >
         <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-3">
           <HeaderStat label="Due today" value={firstLoad ? null : totals.due} accent={totals.due > 0} />
-          <HeaderStat label="Mastered" value={firstLoad ? null : totals.mastered} />
-          <HeaderStat label="Studied" value={firstLoad ? null : `${totals.studied}`} suffix={firstLoad ? '' : ` / ${totals.terms}`} />
+          <HeaderStat label="Mastered" value={firstLoad ? null : totals.mastered} blue />
+          <HeaderStat label="Studied" value={firstLoad ? null : `${totals.studied}`} suffix={firstLoad ? '' : ` / ${totals.terms}`} blue />
         </div>
       </PageHeader>
 
@@ -94,7 +94,7 @@ export default function VocabPage() {
         ) : (
           <>
             {s.saveError && (
-              <div role="status" className="mb-4 rounded-[2px] border-l-[3px] border-warning bg-warning/12 px-3 py-2 text-sm font-semibold text-[#8a5f00] dark:text-warning">
+              <div role="status" className="mb-4 rounded-[8px] border-l-[3px] border-warning bg-warning/12 px-3 py-2 text-sm font-semibold text-[#8a5f00] dark:text-warning">
                 Some reviews haven't saved yet ({s.saveError}). We'll keep retrying.
               </div>
             )}
@@ -103,6 +103,7 @@ export default function VocabPage() {
               aria-label="Search all vocab"
               placeholder={firstLoad ? 'Search terms' : `Search ${totals.terms.toLocaleString()} terms and definitions`}
               leftIcon={<Search />}
+              inputClassName="rounded-[12px]"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               right={
@@ -118,7 +119,7 @@ export default function VocabPage() {
               <SearchResults query={query} decks={allDecks} progress={s.progress} onClear={() => setQuery('')} />
             ) : firstLoad ? (
               <div className="mt-8 grid gap-4">
-                <Skeleton className="h-36 w-full" rounded="rounded-[4px]" />
+                <Skeleton className="h-36 w-full" rounded="rounded-[12px]" />
                 <SkeletonCards count={6} />
               </div>
             ) : (
@@ -170,25 +171,31 @@ function HeaderStat({
   value,
   suffix,
   accent,
+  blue,
 }: {
   label: string;
   value: number | string | null;
   suffix?: string;
   accent?: boolean;
+  blue?: boolean;
 }) {
   return (
     <div
       className={cn(
-        'flex min-w-0 items-center gap-3 rounded-[2px] border px-3 py-2.5 sm:min-w-40 sm:px-4',
-        accent ? 'border-line border-t-[3px] border-t-red bg-surface' : 'border-line bg-surface',
+        'flex min-w-0 items-center gap-3 overflow-hidden rounded-[12px] border px-3 py-2.5 sm:min-w-40 sm:px-4',
+        blue
+          ? 'border-blue bg-blue text-white'
+          : accent
+            ? 'border-line border-t-[3px] border-t-red bg-surface'
+            : 'border-line bg-surface',
       )}
     >
       <div className="min-w-0">
         <div className={cn('tabular font-display text-xl font-extrabold leading-none sm:text-2xl', accent ? 'text-red' : 'text-white')}>
           {value === null ? <span className="inline-block h-6 w-10 animate-pulse rounded bg-white/20" /> : value}
-          {suffix && <span className="text-sm font-semibold text-white/60">{suffix}</span>}
+          {suffix && <span className={cn('text-sm font-semibold', blue ? 'text-white/85' : 'text-white/60')}>{suffix}</span>}
         </div>
-        <div className="mt-1 truncate text-[11px] font-semibold uppercase tracking-[0.1em] text-white/70">{label}</div>
+        <div className={cn('mt-1 truncate text-[11px] font-semibold uppercase tracking-[0.1em]', blue ? 'text-white/90' : 'text-white/70')}>{label}</div>
       </div>
     </div>
   );
@@ -235,11 +242,12 @@ function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
           <ButtonLink
             to={`/vocab/${deck.key}?mode=learn`}
             variant="accent"
+            className="rounded-[8px]"
             rightIcon={<ArrowRight className="size-4" />}
           >
             {stats.due > 0 ? `Review ${stats.due}` : started ? 'Keep learning' : 'Start learning'}
           </ButtonLink>
-          <ButtonLink to={`/vocab/${deck.key}?mode=cards`} variant="outline">
+          <ButtonLink to={`/vocab/${deck.key}?mode=cards`} variant="outline" className="rounded-[8px]">
             Flashcards
           </ButtonLink>
         </div>
@@ -390,12 +398,12 @@ function ChapterDecks({
 }) {
   if (!s.chapterId) {
     return (
-      <Card className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+      <Card className="mt-6 flex flex-col items-start gap-3 rounded-[12px] border-blue bg-blue text-white sm:flex-row sm:items-center">
         <div className="min-w-0 flex-1">
-          <h3 className="font-bold">Chapter decks</h3>
-          <p className="text-sm text-muted">Join your chapter to study the decks your trainers and executives make for you.</p>
+          <h3 className="font-bold text-white">Chapter decks</h3>
+          <p className="text-sm text-white/85">Join your chapter to study the decks your trainers and executives make for you.</p>
         </div>
-        <ButtonLink to="/chapter" variant="secondary">
+        <ButtonLink to="/chapter" variant="inverse" className="rounded-[8px]">
           Find my chapter
         </ButtonLink>
       </Card>
@@ -425,6 +433,7 @@ function ChapterDecks({
       ) : sorted.length === 0 ? (
         <EmptyState
           compact
+          className="rounded-[12px] border-solid border-blue bg-blue text-white [&_h3]:text-white [&_p]:text-white/85"
           title="No chapter decks yet"
           description={
             staff
@@ -433,11 +442,11 @@ function ChapterDecks({
           }
           action={
             staff ? (
-              <Button leftIcon={<Plus className="size-4" />} onClick={onNew}>
+              <Button variant="inverse" className="rounded-[8px]" leftIcon={<Plus className="size-4" />} onClick={onNew}>
                 Create a deck
               </Button>
             ) : (
-              <ButtonLink to="/chapter" variant="outline">
+              <ButtonLink to="/chapter" variant="inverse" className="rounded-[8px]">
                 Go to my chapter
               </ButtonLink>
             )
@@ -504,7 +513,7 @@ function SearchResults({
       <p className="mb-3 text-sm text-muted" aria-live="polite">
         <span className="tabular font-semibold text-ink">{hits.length}</span> {hits.length === 1 ? 'match' : 'matches'}
       </p>
-      <ul className="divide-y divide-line overflow-hidden rounded-[4px] border border-line bg-surface">
+      <ul className="divide-y divide-line overflow-hidden rounded-[12px] border border-line bg-surface">
         {hits.slice(0, limit).map((t) => {
           const d = deckBy.get(t.deckKey);
           const p = progress.get(t.id);

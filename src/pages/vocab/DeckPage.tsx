@@ -118,6 +118,7 @@ export default function DeckPage() {
   if (n === 0) {
     body = (
       <EmptyState
+        className="rounded-[12px]"
         title={key === REVIEW_KEY ? 'Nothing is due' : 'This deck has no cards yet'}
         description={key === REVIEW_KEY ? 'You are all caught up. Pick a deck to learn something new.' : 'Cards added by your chapter staff will show up here.'}
         action={<ButtonLink to="/vocab">Browse decks</ButtonLink>}
@@ -257,7 +258,7 @@ function LoadingDeck() {
       <PageHeader title={<span className="inline-block h-9 w-56 animate-pulse rounded-[2px] bg-white/15" />} back={{ to: '/vocab', label: 'All decks' }} />
       <Page>
         <Skeleton className="mb-6 h-11 w-full max-w-lg" />
-        <Skeleton className="mx-auto h-80 w-full max-w-2xl" rounded="rounded-[4px]" />
+        <Skeleton className="mx-auto h-80 w-full max-w-2xl" rounded="rounded-[12px]" />
       </Page>
     </>
   );

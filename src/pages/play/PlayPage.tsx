@@ -321,90 +321,76 @@ function ModeGrid({
   const misses = openMisses(history, ev).length;
   const open = assignments?.filter((a) => !a.done && a.kind !== 'deck').length ?? 0;
   return (
-    <div>
-      <div className="grid gap-5 md:grid-cols-3 lg:gap-6">
-        <ModeCard
-          accent="blue"
-          title="Quick 10"
-          text="Ten questions, new ones first. The fastest way to keep your streak alive."
-          meta="10 questions · about 5 min"
-          to={runHref({ mode: 'quick', event: ev })}
-          cta="Play"
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-4">
+      <ModeTile
+        title="Quick 10"
+        text="Ten questions, new ones first."
+        meta="10 Qs · ~5 min"
+        to={runHref({ mode: 'quick', event: ev })}
+        cta="Play"
+      />
+      <ModeTile
+        title="Weak spots"
+        text="Your misses plus your weakest areas."
+        meta={misses ? `${misses} open ${misses === 1 ? 'miss' : 'misses'}` : history.log.length ? 'No open misses' : 'Needs history'}
+        to={runHref({ mode: 'weak', event: ev })}
+        cta="Target them"
+        extra={
+          misses > 0 ? (
+            <Link
+              to={runHref({ redo: 'wrong', event: ev })}
+              className="inline-flex items-center gap-1 text-xs font-semibold text-white/90 underline underline-offset-2 hover:text-white"
+            >
+              Redo just the misses <ArrowRight className="size-3" />
+            </Link>
+          ) : null
+        }
+      />
+      <ModeTile
+        title="Mock exam"
+        text="100 questions, 50 minutes, official format."
+        meta={ev ? `100 Qs · ${eventInfo(ev)?.short ?? ''}` : '100 Qs · 50 min'}
+        onClick={onMock}
+        cta="Set it up"
+      />
+      <ModeTile
+        title="Endless"
+        text="Keep answering until your third miss."
+        meta={best ? `Best run ${best.correct}` : 'No run yet'}
+        to={runHref({ mode: 'endless', event: ev })}
+        cta="Start a run"
+      />
+      <ModeTile
+        title="Area drill"
+        text="Ten questions from one competency area."
+        meta={ev ? eventInfo(ev)?.short ?? '' : 'Choose an event'}
+        onClick={onArea}
+        cta="Pick an area"
+      />
+      {assignments ? (
+        <ModeTile
+          title="Assigned"
+          text="Tests and sets from your chapter leaders."
+          meta={open ? `${open} to do` : assignments.length ? 'All caught up' : 'Nothing yet'}
+          to="/play#assigned"
+          cta={open ? 'See assignments' : 'View'}
+          highlight={open > 0}
         />
-        <ModeCard
-          accent="red"
-          title="Weak spots"
-          text="Your misses plus your lowest-scoring competency areas, in one set."
-          meta={misses ? `${misses} open ${misses === 1 ? 'miss' : 'misses'}` : history.log.length ? 'No open misses' : 'Needs some history'}
-          to={runHref({ mode: 'weak', event: ev })}
-          cta="Target them"
-          extra={
-            misses > 0 ? (
-              <Link to={runHref({ redo: 'wrong', event: ev })} className="link inline-flex items-center gap-1 text-sm">
-                Redo just the misses <ArrowRight className="size-3.5" />
-              </Link>
-            ) : null
-          }
+      ) : (
+        <ModeTile
+          title="Assigned"
+          text="Join your chapter to get tests from leaders."
+          meta="Not in a chapter"
+          to="/chapter"
+          cta="Find your chapter"
         />
-        <ModeCard
-          accent="navy"
-          title="Mock exam"
-          text="100 questions in 50 minutes, weighted like the real test. Results at the end."
-          meta={ev ? `100 questions · ${eventName(ev)}` : '100 questions · 50 min'}
-          onClick={onMock}
-          cta="Set it up"
-          badge={<Badge tone="navy">Official format</Badge>}
-        />
-      </div>
-
-      <div className="mt-10 text-xs font-bold uppercase tracking-[0.14em] text-muted">More ways to play</div>
-      <div className="mt-4 grid gap-4 md:grid-cols-3 lg:gap-6">
-        <ModeRowCard
-          title="Endless"
-          text="Keep answering until your third miss."
-          meta={best ? `Best run ${best.correct}` : 'No run yet'}
-          to={runHref({ mode: 'endless', event: ev })}
-          cta="Start a run"
-        />
-        <ModeRowCard
-          title="Area drill"
-          text="Ten questions from one competency area."
-          meta={ev ? eventInfo(ev)?.short ?? '' : 'Choose an event'}
-          onClick={onArea}
-          cta="Pick an area"
-        />
-        {assignments ? (
-          <ModeRowCard
-            title="Assigned"
-            text="Tests and question sets from your chapter leaders."
-            meta={open ? `${open} to do` : assignments.length ? 'All caught up' : 'Nothing yet'}
-            to="/play#assigned"
-            cta={open ? 'See assignments' : 'View'}
-            highlight={open > 0}
-          />
-        ) : (
-          <ModeRowCard
-            title="Assigned"
-            text="Join your school's chapter to get tests from your leaders."
-            meta="Not in a chapter"
-            to="/chapter"
-            cta="Find your chapter"
-          />
-        )}
-      </div>
+      )}
     </div>
   );
 }
 
-const ACCENTS = {
-  navy: 'bg-navy dark:bg-link',
-  red: 'bg-red',
-  blue: 'bg-blue',
-};
-
-/** Primary mode: big, roomy, one clear purpose. */
-function ModeCard({
-  accent,
+/** Compact mode tile: solid FBLC blue, white text. The whole tile is clickable (stretched link); `extra` sits above it. */
+function ModeTile({
   title,
   text,
   meta,
@@ -412,60 +398,6 @@ function ModeCard({
   onClick,
   cta,
   extra,
-  badge,
-}: {
-  accent: keyof typeof ACCENTS;
-  title: string;
-  text: string;
-  meta: string;
-  to?: string;
-  onClick?: () => void;
-  cta: string;
-  extra?: ReactNode;
-  badge?: ReactNode;
-}) {
-  const inner = (
-    <>
-      <span className={cn('absolute inset-x-0 top-0 h-1', ACCENTS[accent])} aria-hidden />
-      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-        <h3 className="font-display text-xl font-extrabold leading-tight md:text-[1.375rem]">{title}</h3>
-        {badge}
-      </div>
-      <p className="mb-8 mt-3 text-[0.9375rem] leading-relaxed text-muted">{text}</p>
-      <div className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-5">
-        <span className="tabular truncate text-xs font-bold uppercase tracking-wide text-heading">{meta}</span>
-        <span className="inline-flex shrink-0 items-center gap-1 font-display text-sm font-bold text-blue transition-transform group-hover:translate-x-0.5 dark:text-link">
-          {cta} <ArrowRight className="size-4" />
-        </span>
-      </div>
-    </>
-  );
-  const cls =
-    'group relative flex w-full flex-1 flex-col overflow-hidden rounded-[12px] border border-line bg-surface p-6 pt-8 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2 md:p-7 md:pt-9';
-  return (
-    <div className="flex flex-col">
-      {to ? (
-        <Link to={to} className={cls}>
-          {inner}
-        </Link>
-      ) : (
-        <button type="button" onClick={onClick} className={cls}>
-          {inner}
-        </button>
-      )}
-      {extra ? <div className="px-1 pt-3">{extra}</div> : <div className="hidden h-8 md:block" aria-hidden />}
-    </div>
-  );
-}
-
-/** Secondary mode: lighter, smaller, no accent bar. */
-function ModeRowCard({
-  title,
-  text,
-  meta,
-  to,
-  onClick,
-  cta,
   highlight,
 }: {
   title: string;
@@ -474,33 +406,44 @@ function ModeRowCard({
   to?: string;
   onClick?: () => void;
   cta: string;
+  extra?: ReactNode;
   highlight?: boolean;
 }) {
-  const inner = (
+  const stretch =
+    "text-left text-white outline-none after:absolute after:inset-0 after:rounded-[12px] after:content-[''] focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-blue";
+  const label = (
     <>
-      <div className="flex items-center justify-between gap-3">
-        <h3 className="flex items-center gap-2 font-display text-base font-bold leading-tight">
-          {title}
-          {highlight && <span className="size-2 rounded-full bg-red" aria-label="Has work to do" />}
-        </h3>
-        <span className="tabular truncate text-xs font-semibold text-muted">{meta}</span>
-      </div>
-      <p className="mt-1.5 text-sm text-muted">{text}</p>
-      <span className="mt-auto inline-flex items-center gap-1 pt-3 font-display text-sm font-bold text-blue transition-transform group-hover:translate-x-0.5 dark:text-link">
-        {cta} <ArrowRight className="size-3.5" />
-      </span>
+      {title}
+      {highlight && <span className="size-2 rounded-full bg-red ring-2 ring-white" aria-label="Has work to do" />}
     </>
   );
-  const cls =
-    'group flex h-full w-full flex-col rounded-[12px] border border-line bg-surface-2/60 px-5 py-4 text-left transition-colors duration-150 hover:border-line-strong hover:bg-surface-2';
-  return to ? (
-    <Link to={to} className={cls}>
-      {inner}
-    </Link>
-  ) : (
-    <button type="button" onClick={onClick} className={cls}>
-      {inner}
-    </button>
+  return (
+    <div className="group relative flex h-full flex-col rounded-[12px] bg-blue px-4 py-3.5 text-white transition-colors duration-150 hover:bg-[#365f9b] md:px-5 md:py-4">
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="font-display text-base font-extrabold leading-tight text-white md:text-lg">
+          {to ? (
+            <Link to={to} className={cn('flex items-center gap-2', stretch)}>
+              {label}
+            </Link>
+          ) : (
+            <button type="button" onClick={onClick} className={cn('flex items-center gap-2', stretch)}>
+              {label}
+            </button>
+          )}
+        </h3>
+        <span className="tabular hidden shrink-0 truncate rounded-[6px] bg-white/15 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white sm:inline">
+          {meta}
+        </span>
+      </div>
+      <p className="mt-1 text-[0.8125rem] leading-snug text-white/85 md:text-sm">{text}</p>
+      <span className="tabular mt-1.5 text-[11px] font-bold uppercase tracking-wide text-white sm:hidden">{meta}</span>
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1 pt-2.5">
+        <span className="inline-flex items-center gap-1 font-display text-sm font-bold text-white" aria-hidden>
+          {cta} <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+        </span>
+        {extra && <span className="relative z-10">{extra}</span>}
+      </div>
+    </div>
   );
 }
 

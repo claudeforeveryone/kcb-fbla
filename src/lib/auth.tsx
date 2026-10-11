@@ -66,7 +66,9 @@ type AuthContextValue = {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 async function fetchProfile(uid: string): Promise<AuthProfile | null> {
-  const { data, error } = await supabase.from('fbla_profiles').select('*').eq('id', uid).maybeSingle();
+  // own row through fbla_my_profile: it includes email_opt_in, which other members cannot read
+  void uid;
+  const { data, error } = await supabase.rpc('fbla_my_profile');
   if (error) {
     console.warn('[auth] profile load failed', error.message);
     return null;

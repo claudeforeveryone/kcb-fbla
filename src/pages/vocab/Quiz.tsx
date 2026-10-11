@@ -164,7 +164,7 @@ function Run({
         {missed.length > 0 && (
           <div className="mx-auto w-full max-w-2xl">
             <h3 className="mb-2 text-sm font-bold uppercase tracking-[0.12em] text-muted">Review what you missed</h3>
-            <ul className="divide-y divide-line overflow-hidden rounded-[4px] border border-line bg-surface">
+            <ul className="divide-y divide-line overflow-hidden rounded-[12px] border border-line bg-surface">
               {missed.map((m) => (
                 <li key={m.q.term.id} className="p-4">
                   <div className="font-display font-bold text-heading">{m.q.term.term}</div>
@@ -210,7 +210,7 @@ function Run({
         </Button>
       </div>
 
-      <div key={i} className="animate-slide-in rounded-[4px] border border-line bg-surface p-5 sm:p-7">
+      <div key={i} className="animate-slide-in rounded-[12px] border border-line bg-surface p-5 sm:p-7">
         <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
           {dir === 'term' ? 'Which definition matches?' : 'Which term is this?'}
         </span>
@@ -230,7 +230,7 @@ function Run({
                 disabled={picked !== null}
                 onClick={() => choose(idx)}
                 className={cn(
-                  'flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left leading-snug transition-[border-color,background-color,opacity] duration-150',
+                  'flex w-full items-start gap-3 rounded-[8px] border px-3.5 py-3 text-left leading-snug transition-[border-color,background-color,opacity] duration-150',
                   dir === 'def' ? 'font-display font-semibold text-heading' : 'text-[0.9375rem]',
                   state === 'idle' && 'border-line-strong bg-surface hover:border-blue/60 hover:bg-surface-2',
                   state === 'right' && 'border-success bg-success/10',

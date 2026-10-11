@@ -221,7 +221,7 @@ function Board({
           const isGone = gone.has(t.pair);
           const isSel = sel === t.key;
           const isWrong = !!wrong && wrong.includes(t.key);
-          if (isGone) return <div key={t.key} className="min-h-24 rounded-[4px] border border-dashed border-line/70" aria-hidden />;
+          if (isGone) return <div key={t.key} className="min-h-24 rounded-[12px] border border-dashed border-line/70" aria-hidden />;
           return (
             <button
               key={t.key}
@@ -230,7 +230,7 @@ function Board({
               aria-pressed={isSel}
               disabled={isMatched}
               className={cn(
-                'flex min-h-24 items-center justify-center rounded-[4px] border-2 p-3 text-center transition-[border-color,background-color] duration-150',
+                'flex min-h-24 items-center justify-center rounded-[12px] border-2 p-3 text-center transition-[border-color,background-color] duration-150',
                 t.kind === 'term'
                   ? 'font-display text-[0.9375rem] font-bold text-heading'
                   : 'text-[0.8125rem] leading-snug text-ink',

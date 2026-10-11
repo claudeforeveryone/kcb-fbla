@@ -9,11 +9,12 @@ import {
   listChapterDecks,
   listDeckAssignments,
   loadEventDecks,
+  recordVocabReviews,
   resetVocabProgress,
-  saveVocabProgress,
   type DeckStaffScope,
   type ProgressWrite,
   type StudyDeck,
+  type VocabReview,
 } from '../../api/vocab';
 import { review, type ProgressLike, type ReviewResult } from './leitner';
 
@@ -93,7 +94,10 @@ export function reloadVocab() {
 
 // ------------------------------------------------------------------------------------------------ writes
 
+// Optimistic rows (what the UI shows until the server answers) and the reviews still to send. The server applies
+// the same Leitner rules (fbla_vocab_review) and its rows replace the optimistic ones.
 const pending = new Map<string, ProgressWrite>();
+let queue: VocabReview[] = [];
 let timer: ReturnType<typeof setTimeout> | null = null;
 let flushing: Promise<void> | null = null;
 
@@ -103,16 +107,25 @@ async function flush() {
     timer = null;
   }
   if (flushing) await flushing;
-  if (!pending.size) return;
-  const batch = [...pending.values()];
-  pending.clear();
-  flushing = saveVocabProgress(batch)
-    .then(() => {
-      if (state.saveError) set({ saveError: null });
+  if (!queue.length) return;
+  const batch = queue;
+  queue = [];
+  flushing = recordVocabReviews(batch)
+    .then((rows) => {
+      const progress = new Map(state.progress);
+      const waiting = new Set(queue.map((r) => r.term_id));
+      for (const row of rows) {
+        if (waiting.has(row.term_id)) continue; // newer reviews are still on their way
+        progress.set(row.term_id, row);
+        pending.delete(row.term_id);
+      }
+      set({ progress, ...(state.saveError ? { saveError: null } : {}) });
     })
-    .catch((e: Error) => {
-      for (const r of batch) if (!pending.has(r.term_id)) pending.set(r.term_id, r);
+    .catch((e: Error & { code?: string }) => {
       set({ saveError: e.message });
+      // a card the server does not know (deleted deck) will never save: drop the batch instead of retrying forever
+      if (e.code === '22023') return;
+      queue = [...batch, ...queue];
       schedule(8000);
     })
     .finally(() => {
@@ -139,6 +152,7 @@ export function recordReview(termId: string, correct: boolean): ReviewResult {
   const progress = new Map(state.progress);
   progress.set(termId, row);
   pending.set(termId, row);
+  queue.push({ term_id: termId, correct });
   set({ progress });
   schedule();
   return r;

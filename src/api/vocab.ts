@@ -282,15 +282,21 @@ export type ProgressWrite = Pick<
   'term_id' | 'box' | 'due_at' | 'correct_count' | 'wrong_count' | 'last_reviewed_at'
 >;
 
-/** Upserts reviewed terms (one row per term). */
-export async function saveVocabProgress(rows: ProgressWrite[]): Promise<void> {
-  if (!rows.length) return;
-  const me = await uid();
-  const { error } = await supabase.from('fbla_vocab_progress').upsert(
-    rows.map((r) => ({ ...r, user_id: me })),
-    { onConflict: 'user_id,term_id' },
-  );
-  if (error) throw toApiError(error, 'Could not save your progress.');
+export type VocabReview = { term_id: string; correct: boolean };
+
+/**
+ * Records reviews, oldest first (fbla_vocab_review, 0018). The server applies the Leitner rules itself (the same
+ * ones as src/pages/vocab/leitner.ts) and returns the resulting rows; clients cannot write progress rows directly.
+ */
+export async function recordVocabReviews(reviews: VocabReview[]): Promise<VocabProgress[]> {
+  if (!reviews.length) return [];
+  const out: VocabProgress[] = [];
+  for (let i = 0; i < reviews.length; i += 500) {
+    const { data, error } = await supabase.rpc('fbla_vocab_review', { p_reviews: reviews.slice(i, i + 500) });
+    if (error) throw toApiError(error, 'Could not save your progress.');
+    out.push(...((data ?? []) as VocabProgress[]));
+  }
+  return out;
 }
 
 /** Forgets the caller's progress on these terms (they become new again). */

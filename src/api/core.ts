@@ -15,6 +15,7 @@ import {
   type ChapterMember,
   type ChapterPreview,
   type PlayerLeaderboardRow,
+  PROFILE_COLUMNS,
   type Profile,
   type ProfilePatch,
   type ProfileStats,
@@ -68,7 +69,7 @@ async function requireUid(): Promise<string> {
 // ------------------------------------------------------------------------------------------------ profiles
 
 export async function getProfile(id: string): Promise<Profile | null> {
-  return must(await supabase.from('fbla_profiles').select('*').eq('id', id).maybeSingle<Profile>());
+  return must(await supabase.from('fbla_profiles').select(PROFILE_COLUMNS).eq('id', id).maybeSingle<Profile>());
 }
 
 export async function getMyProfile(): Promise<Profile | null> {
@@ -77,13 +78,13 @@ export async function getMyProfile(): Promise<Profile | null> {
 
 export async function getProfileByUsername(username: string): Promise<Profile | null> {
   return must(
-    await supabase.from('fbla_profiles').select('*').eq('username', username.trim().toLowerCase()).maybeSingle<Profile>(),
+    await supabase.from('fbla_profiles').select(PROFILE_COLUMNS).eq('username', username.trim().toLowerCase()).maybeSingle<Profile>(),
   );
 }
 
 export async function getProfiles(ids: string[]): Promise<Profile[]> {
   if (ids.length === 0) return [];
-  return must(await supabase.from('fbla_profiles').select('*').in('id', [...new Set(ids)]).returns<Profile[]>());
+  return must(await supabase.from('fbla_profiles').select(PROFILE_COLUMNS).in('id', [...new Set(ids)]).returns<Profile[]>());
 }
 
 /** Prefix search on username or display name, for pickers (challenge a friend, add a member). */
@@ -93,7 +94,7 @@ export async function searchProfiles(query: string, limit = 10): Promise<Profile
   return must(
     await supabase
       .from('fbla_profiles')
-      .select('*')
+      .select(PROFILE_COLUMNS)
       .or(filter)
       .order('elo', { ascending: false })
       .limit(limit)
@@ -107,9 +108,11 @@ export async function updateMyProfile(patch: ProfilePatch): Promise<Profile> {
   const clean: ProfilePatch = { ...patch };
   if (clean.username != null) clean.username = clean.username.trim().toLowerCase();
   if (clean.display_name != null) clean.display_name = clean.display_name.trim();
-  const res = await supabase.from('fbla_profiles').update(clean).eq('id', uid).select('*').single<Profile>();
+  const res = await supabase.from('fbla_profiles').update(clean).eq('id', uid).select(PROFILE_COLUMNS).single<Profile>();
   if (res.error?.code === '23505') throw new ApiError('That username is taken.', '23505');
-  return must(res, 'Could not save your profile.');
+  const row = must(res, 'Could not save your profile.');
+  // email_opt_in is not selectable (owner-only via fbla_my_profile); echo back what was just saved
+  return clean.email_opt_in === undefined ? row : { ...row, email_opt_in: clean.email_opt_in };
 }
 
 export type NewProfileInput = {

@@ -140,7 +140,7 @@ export function DeckEditor({
           </div>
 
           {paste !== null && (
-            <div className="animate-rise grid gap-2 rounded-[2px] border border-line bg-surface-2/60 p-3">
+            <div className="animate-rise grid gap-2 rounded-[12px] border border-line bg-surface-2/60 p-3">
               <Textarea
                 label="One card per line"
                 hint='Separate the term and definition with a tab, " - " or ": ". Spreadsheet columns paste as tabs.'
@@ -159,7 +159,7 @@ export function DeckEditor({
 
           <ol className="grid gap-2">
             {rows.map((r, i) => (
-              <li key={r.k} className="flex items-start gap-2 rounded-[2px] border border-line bg-surface p-2.5">
+              <li key={r.k} className="flex items-start gap-2 rounded-[8px] border border-line bg-surface p-2.5">
                 <span className="tabular mt-2.5 w-6 shrink-0 text-center text-xs font-bold text-muted">{i + 1}</span>
                 <div className="grid min-w-0 flex-1 gap-2 sm:grid-cols-[minmax(0,14rem)_1fr]">
                   <Input
@@ -204,7 +204,7 @@ export function DeckEditor({
             Add card
           </Button>
           {err && (
-            <p role="alert" className="rounded-[2px] bg-danger/10 px-3 py-2 text-sm font-semibold text-danger">
+            <p role="alert" className="rounded-[8px] bg-danger/10 px-3 py-2 text-sm font-semibold text-danger">
               {err}
             </p>
           )}

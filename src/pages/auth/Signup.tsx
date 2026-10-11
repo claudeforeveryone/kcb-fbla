@@ -54,7 +54,7 @@ export default function Signup() {
   return (
     <AuthLayout
       title="Create your account"
-      subtitle="Free for every FBLA member. Takes about a minute."
+      subtitle="Free for every FBLC member. Takes about a minute."
       footer={
         <>
           Already have an account?{' '}

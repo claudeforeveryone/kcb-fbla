@@ -154,10 +154,17 @@ export type Profile = {
   duel_wins: number;
   duel_losses: number;
   duel_draws: number;
-  email_opt_in: boolean;
+  /** Only present on your own profile (fbla_my_profile); other members' opt-in is private. */
+  email_opt_in?: boolean;
   last_seen_at: string | null;
   created_at: string;
 };
+
+/** Every fbla_profiles column a client may select (email_opt_in is owner-only: read it with fbla_my_profile). */
+export const PROFILE_COLUMNS =
+  'id,username,display_name,avatar_url,school,grade,main_event,bio,chapter_id,elo,peak_elo,questions_answered,' +
+  'questions_correct,time_spent_ms,current_streak,best_streak,answer_streak,best_answer_streak,last_active_date,' +
+  'duel_wins,duel_losses,duel_draws,last_seen_at,created_at';
 
 /** The only columns a member may update directly (column grants enforce the same list). */
 export const PROFILE_EDITABLE = [

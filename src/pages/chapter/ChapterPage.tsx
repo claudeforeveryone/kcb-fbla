@@ -78,7 +78,7 @@ function NoChapter() {
       <PageHeader
         eyebrow="Chapter"
         title="Find your team"
-        subtitle="Join your school's FBLA chapter to compete on its leaderboard, get assignments from your trainers and see how you stack up."
+        subtitle="Join your school's FBLC chapter to compete on its leaderboard, get assignments from your trainers and see how you stack up."
         size="lg"
       />
       <Page>

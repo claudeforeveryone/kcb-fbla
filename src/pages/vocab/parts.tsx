@@ -255,7 +255,7 @@ export function SessionPanel({
     red: 'bg-red',
   }[tone];
   return (
-    <div className="animate-pop relative mx-auto flex max-w-xl flex-col items-center overflow-hidden rounded-[4px] border border-line bg-surface px-5 py-9 text-center sm:px-10">
+    <div className="animate-pop relative mx-auto flex max-w-xl flex-col items-center overflow-hidden rounded-[12px] border border-line bg-surface px-5 py-9 text-center sm:px-10">
       <span className={cn('absolute inset-x-0 top-0 h-[3px]', bar)} aria-hidden />
       {eyebrow && <div className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">{eyebrow}</div>}
       <h2 className="text-2xl font-extrabold md:text-3xl">{title}</h2>
@@ -267,7 +267,7 @@ export function SessionPanel({
 
 export function MiniStat({ label, value, tone }: { label: ReactNode; value: ReactNode; tone?: 'success' | 'red' | 'blue' }) {
   return (
-    <div className="rounded-[2px] bg-surface-2 px-3 py-2.5 text-center">
+    <div className="rounded-[8px] bg-surface-2 px-3 py-2.5 text-center">
       <div
         className={cn(
           'tabular font-display text-2xl font-extrabold leading-none',
