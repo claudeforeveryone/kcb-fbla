@@ -48,10 +48,33 @@
       <button type="button" onclick="location.reload()">Try again</button>
     </main>
     <script>
-      // Back online: load the page that was asked for (this page is shown at its URL).
-      addEventListener('online', function () {
-        location.reload();
-      });
+      // Load the page that was asked for (this page is shown at its URL) as soon as the site answers. A quick HEAD
+      // request checks first, so a reload never lands back here: the first request after reconnecting often still
+      // fails, and no second 'online' event would come. Checked when the connection returns and, while the browser
+      // counts as online (a dropped request), every few seconds with a growing wait. Any HTTP answer will do: the page
+      // may be a 404 shell on GitHub Pages, and an error page from the server is still more useful than this one.
+      (function () {
+        var wait = 2000;
+        var timer = null;
+        function later() {
+          if (timer !== null || !navigator.onLine) return;
+          timer = setTimeout(check, wait);
+          wait = Math.min(wait * 2, 30000);
+        }
+        function check() {
+          timer = null;
+          fetch(location.href, { method: 'HEAD', cache: 'no-store' }).then(function () {
+            location.reload();
+          }, later);
+        }
+        addEventListener('online', function () {
+          clearTimeout(timer);
+          timer = null;
+          wait = 2000;
+          check();
+        });
+        later();
+      })();
     </script>
   </body>
 </html>
