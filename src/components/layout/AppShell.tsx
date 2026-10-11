@@ -1,7 +1,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { BarChart3, ChevronDown, LogOut, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
+import { BarChart3, ChevronDown, Gauge, LogOut, MessageSquare, Moon, Settings, Sun, UserRound, WifiOff } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
+import { useIsOwner } from '../../lib/useIsOwner';
 import { Avatar } from '../ui/Avatar';
 import { buttonClasses } from '../ui/Button';
 import { Dropdown } from '../ui/Dropdown';
@@ -13,6 +14,7 @@ import { Brand } from './Brand';
 import { NAV } from './nav';
 import { useTheme, type ThemePref } from './theme';
 import { Footer } from './Footer';
+import { FeedbackDialog } from '../feedback/FeedbackDialog';
 
 /** App chrome: navy top bar, page outlet, footer, and the phone bottom tab bar. */
 export function AppShell({ children }: { children?: ReactNode }) {
@@ -124,9 +126,13 @@ function UserMenu() {
   const { theme, setTheme } = useTheme();
   const toast = useToast();
   const navigate = useNavigate();
+  const owner = useIsOwner() === 'owner';
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
   if (!profile) return null;
 
   return (
+    <>
+    <FeedbackDialog open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
     <Dropdown
       width="w-72"
       header={
@@ -147,6 +153,8 @@ function UserMenu() {
         { label: 'Profile', icon: <UserRound />, to: '/me' },
         { label: 'Career', icon: <BarChart3 />, to: '/me/career' },
         { label: 'Settings', icon: <Settings />, to: '/me/settings' },
+        { label: 'Send feedback', icon: <MessageSquare />, onSelect: () => setFeedbackOpen(true) },
+        ...(owner ? [{ label: 'Owner console', icon: <Gauge />, to: '/owner' }] : []),
         { type: 'separator' },
         {
           type: 'custom',
@@ -205,6 +213,7 @@ function UserMenu() {
         </button>
       )}
     />
+    </>
   );
 }
 

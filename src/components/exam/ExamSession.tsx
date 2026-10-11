@@ -8,6 +8,7 @@ import { useAuth } from '../../lib/auth';
 import type { SubmitAttemptInput, SubmitAttemptResult } from '../../lib/types';
 import { ExamRunner, type ExamRunnerProps } from './ExamRunner';
 import { ExamResults } from './ExamResults';
+import { useQuestionReport } from '../feedback/FeedbackDialog';
 import { resultFromSubmit, type ExamResultData } from './result';
 import type { FinishMeta, RunnerAnswer } from './types';
 
@@ -40,6 +41,7 @@ export function ExamSession({ submit, resultActions, onSubmitted, previousBest, 
   const [result, setResult] = useState<ExamResultData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const pending = useRef<{ answers: RunnerAnswer[]; meta: FinishMeta } | null>(null);
+  const report = useQuestionReport();
 
   const send = useCallback(async () => {
     const p = pending.current;
@@ -84,13 +86,17 @@ export function ExamSession({ submit, resultActions, onSubmitted, previousBest, 
 
   if (phase === 'done' && result)
     return (
-      <ExamResults
-        data={result}
-        questions={runner.questions}
-        actions={resultActions?.(result)}
-        previousBest={previousBest}
-        animate
-      />
+      <>
+        <ExamResults
+          data={result}
+          questions={runner.questions}
+          actions={resultActions?.(result)}
+          previousBest={previousBest}
+          animate
+          onReport={report.onReport}
+        />
+        {report.dialog}
+      </>
     );
 
   return (

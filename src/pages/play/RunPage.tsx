@@ -6,6 +6,7 @@ import { FacetArt } from '../../components/ui/PageHeader';
 import { ExamSession, type ExamResultData, type RunnerSnapshot } from '../../components/exam';
 import { useProfile } from '../../lib/auth';
 import { buildRun, RunBlocked, type BuiltRun } from './buildRun';
+import { track } from '../../api/track';
 import { parseRunSpec, runHref } from './runLogic';
 
 type Saved = { run: BuiltRun; snap: RunnerSnapshot | null; savedAt: number };
@@ -76,6 +77,7 @@ function Run() {
 
   const start = useCallback((run: BuiltRun, snap: RunnerSnapshot | null) => {
     setState({ s: 'running', run, snap });
+    if (!snap) void track('practice_started', run.submit.event, { mode: run.submit.kind });
     window.scrollTo({ top: 0 });
   }, []);
 

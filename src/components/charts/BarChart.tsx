@@ -9,7 +9,11 @@ export type BarDatum = {
   sub?: ReactNode;
   /** Mark this bar (e.g. "you"): drawn in red. */
   highlight?: boolean;
+  /** The value is hidden (a group of 1-4 people): drawn as an empty dashed bar labelled "Under 5". */
+  suppressed?: boolean;
 };
+
+const HIDDEN = 'Under 5';
 
 /**
  * Bar chart. Horizontal (default) renders labelled rows that wrap well on phones; vertical renders SVG columns.
@@ -64,13 +68,13 @@ function Horizontal({
   color?: string;
   className?: string;
 }) {
-  const m = max ?? Math.max(...data.map((d) => d.value), 1);
+  const m = max ?? Math.max(...data.map((d) => (d.suppressed ? 0 : d.value)), 1);
   return (
     <figure className={className} aria-label={title}>
       <figcaption className="sr-only">{title}</figcaption>
       <ul className="space-y-3">
         {data.map((d, i) => {
-          const p = Math.max(0, Math.min(100, (d.value / (m || 1)) * 100));
+          const p = d.suppressed ? 0 : Math.max(0, Math.min(100, (d.value / (m || 1)) * 100));
           const c = d.highlight ? 'var(--red)' : (d.color ?? color ?? chartColor(0));
           return (
             <li key={`${d.label}-${i}`}>
@@ -78,10 +82,14 @@ function Horizontal({
                 <span className="min-w-0 truncate font-medium text-ink">{d.label}</span>
                 <span className="tabular shrink-0 text-muted">
                   {d.sub && <span className="mr-2 text-xs">{d.sub}</span>}
-                  <span className="font-semibold text-heading">{formatValue(d.value)}</span>
+                  {d.suppressed ? (
+                    <span className="font-semibold text-muted">{HIDDEN}</span>
+                  ) : (
+                    <span className="font-semibold text-heading">{formatValue(d.value)}</span>
+                  )}
                 </span>
               </div>
-              <div className="h-2 overflow-hidden bg-surface-3">
+              <div className={d.suppressed ? 'h-2 border border-dashed border-line-strong' : 'h-2 overflow-hidden bg-surface-3'}>
                 <div
                   className="h-full transition-[width] duration-700 ease-out"
                   style={{ width: `${p}%`, background: c }}
@@ -118,7 +126,7 @@ function Vertical({
   const W = Math.max(120, width);
   const iw = W - pad.l - pad.r;
   const ih = height - pad.t - pad.b;
-  const ticks = niceTicks(0, max ?? Math.max(...data.map((d) => d.value), 1), 4);
+  const ticks = niceTicks(0, max ?? Math.max(...data.map((d) => (d.suppressed ? 0 : d.value)), 1), 4);
   const top = ticks[ticks.length - 1] || 1;
   const band = iw / data.length;
   const bw = Math.max(4, Math.min(44, band * 0.62));
@@ -139,8 +147,10 @@ function Vertical({
         ))}
         {data.map((d, i) => {
           const cx = pad.l + band * i + band / 2;
-          const y = sy(Math.max(0, d.value));
+          const y = sy(d.suppressed ? 0 : Math.max(0, d.value));
           const c = d.highlight ? 'var(--red)' : (d.color ?? color ?? chartColor(0));
+          const shown = d.suppressed ? HIDDEN : formatValue(d.value);
+          const stub = Math.min(8, ih);
           return (
             <g
               key={`${d.label}-${i}`}
@@ -150,12 +160,31 @@ function Vertical({
               style={{ transition: 'opacity 150ms' }}
             >
               <rect x={pad.l + band * i} y={pad.t} width={band} height={ih} fill="transparent" />
-              <rect x={cx - bw / 2} y={y} width={bw} height={Math.max(0, pad.t + ih - y)} fill={c}>
-                <title>{`${d.label}: ${formatValue(d.value)}`}</title>
-              </rect>
+              {d.suppressed ? (
+                <rect
+                  x={cx - bw / 2 + 0.5}
+                  y={pad.t + ih - stub}
+                  width={Math.max(0, bw - 1)}
+                  height={stub}
+                  fill="none"
+                  stroke="var(--line-strong)"
+                  strokeDasharray="2 2"
+                >
+                  <title>{`${d.label}: ${HIDDEN} (hidden for privacy)`}</title>
+                </rect>
+              ) : (
+                <rect x={cx - bw / 2} y={y} width={bw} height={Math.max(0, pad.t + ih - y)} fill={c}>
+                  <title>{`${d.label}: ${shown}`}</title>
+                </rect>
+              )}
               {hover === i && (
-                <text x={cx} y={y - 6} textAnchor="middle" className="tabular fill-[var(--heading)] text-[11px] font-bold">
-                  {formatValue(d.value)}
+                <text
+                  x={cx}
+                  y={(d.suppressed ? pad.t + ih - stub : y) - 6}
+                  textAnchor="middle"
+                  className="tabular fill-[var(--heading)] text-[11px] font-bold"
+                >
+                  {shown}
                 </text>
               )}
               {i % every === 0 && (
