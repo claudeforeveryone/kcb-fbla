@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { PageHeader } from '../../components/ui/PageHeader';
+import { useScrollToHash } from '../../lib/hydration';
 import { CONTACT_EMAIL } from '../../lib/seo';
 
 export type LegalSectionMeta = { id: string; title: string };
@@ -20,6 +21,8 @@ export function LegalPage({
   sections: LegalSectionMeta[];
   children: ReactNode;
 }) {
+  // A shared link to one section (/privacy#choices) opens at that section, also for signed-in members.
+  useScrollToHash();
   return (
     <>
       <PageHeader size="sm" title={title} subtitle={intro} />

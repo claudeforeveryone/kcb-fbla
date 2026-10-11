@@ -1,4 +1,4 @@
-import { useLayoutEffect, useSyncExternalStore, type RefObject } from 'react';
+import { useEffect, useLayoutEffect, useRef, useSyncExternalStore, type RefObject } from 'react';
 
 /**
  * Values that differ between the build-time prerender and the browser. Hydration has to reproduce the prerendered
@@ -43,4 +43,32 @@ export function useKeepTypedValue(ref: RefObject<HTMLInputElement | null>, setVa
     if (typed) setValue(typed);
     // Mount only: from then on the input is controlled and onChange keeps state in step.
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+}
+
+/** The element id a URL hash points at ("#email" is "email"), or null when there is none. */
+export function hashTargetId(hash: string): string | null {
+  const raw = hash.replace(/^#/, '');
+  if (!raw) return null;
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
+/**
+ * Brings a section link such as /privacy#email to its section when the page mounts in the browser. The browser's own
+ * jump to the anchor only works when the section is in the HTML it loaded: a prerendered page hydrated for a signed-out
+ * reader. Everywhere else (a signed-in member, whose prerendered markup is hidden and replaced, or in-app navigation
+ * to a lazy page) the section appears later and nothing scrolls to it. Skipped on a hydration mount, so a reader who
+ * was already placed by the browser, or has scrolled on since, is not moved.
+ */
+export function useScrollToHash(): void {
+  const hydrating = !useHydrated();
+  const skip = useRef(hydrating);
+  useEffect(() => {
+    if (skip.current) return;
+    const id = hashTargetId(window.location.hash);
+    if (id) document.getElementById(id)?.scrollIntoView();
+  }, []);
 }
