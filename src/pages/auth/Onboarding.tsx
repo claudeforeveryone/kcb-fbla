@@ -220,7 +220,7 @@ export default function Onboarding() {
             {step === 1 ? 'Every champion starts at zero.' : 'Pick your main event.'}
           </h2>
           <p className="mt-2 hidden text-white/75 lg:block">
-            Answer questions to earn Elo and climb from Bronze to Champion.
+            Answer questions to earn Elo and climb the leaderboard.
           </p>
           <div className="mt-8 hidden lg:block">{card}</div>
         </div>

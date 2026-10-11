@@ -94,7 +94,7 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
             <MiniStat label="New" value={newN} tone="blue" />
             <MiniStat label="Mastered" value={stats.mastered} tone="success" />
           </div>
-          <Button size="lg" block variant="accent" className="mt-6" rightIcon={<ArrowRight className="size-5" />} onClick={() => setMode('srs')}>
+          <Button size="lg" block variant="accent" className="mt-6 rounded-[8px]" rightIcon={<ArrowRight className="size-5" />} onClick={() => setMode('srs')}>
             Start learning
           </Button>
         </div>
