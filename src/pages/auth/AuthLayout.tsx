@@ -7,7 +7,7 @@ import { FacetArt } from '../../components/ui/PageHeader';
 import { Input, type InputProps } from '../../components/ui/Field';
 
 const features = [
-  { title: 'Official-style exams', body: 'Fifteen FBLC events, timed papers and Elo that moves with every answer.' },
+  { title: 'FBLA-style exams', body: 'Fifteen FBLC events, timed papers and Elo that moves with every answer.' },
   { title: 'Arena duels', body: 'Challenge a friend to ten questions. Fastest correct answers win.' },
   { title: 'Your chapter, organised', body: 'Assignments, newsletters, attendance and a coach view of every member.' },
 ];
@@ -67,7 +67,7 @@ export function AuthLayout({
                 Train like it is nationals.
               </h2>
               <p className="mt-3 hidden max-w-md text-base text-white/75 lg:block">
-                Practice the way FBLC tests you, see exactly where you are weak, and climb the chapter leaderboard.
+                Practise the way FBLA events are tested, see exactly where you are weak, and climb the chapter leaderboard.
               </p>
               <ul className="mt-9 hidden space-y-5 lg:block">
                 {features.map((f) => (
