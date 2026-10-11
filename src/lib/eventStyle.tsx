@@ -31,7 +31,7 @@ export const EVENT_STYLE: Record<string, EventStyle> = {
   'organizational-leadership': { color: '#BE185D', icon: Users },
   'personal-finance': { color: '#4D7C0F', icon: PiggyBank },
   'securities-investments': { color: '#0B4F8A', icon: CandlestickChart },
-  'business-management': { color: '#475569', icon: Briefcase },
+  'business-management': { color: '#A21CAF', icon: Briefcase },
   entrepreneurship: { color: '#9A6700', icon: Rocket },
   'hospitality-event-management': { color: '#C2410C', icon: ConciergeBell },
   'international-business': { color: '#0369A1', icon: Globe },

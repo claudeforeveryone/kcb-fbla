@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Skeleton, cn, formatUntil } from '../../components/ui';
 import { eventInfo } from '../../lib/types';
-import { eventStyle } from '../../lib/eventStyle';
 import { nextTorontoMidnight, runLink, type DailyStatus } from './homeData';
 
 /** The three big "do something now" tiles under the hero. */
@@ -28,7 +27,6 @@ export function QuickActions({
       <ActionTile
         to={ev ? runLink({ kind: 'practice', event: ev.slug }) : '/play'}
         tone="navy"
-        color={ev ? eventStyle(ev.slug).color : undefined}
         eyebrow={ev ? (continueReason === 'last' ? 'Continue' : 'Your main event') : 'Get started'}
         title={ev ? ev.name : 'Pick your first event'}
         body={ev ? 'A fresh practice set, weighted to questions you haven’t mastered.' : '15 events, 1,500 official-style questions.'}

@@ -6,11 +6,12 @@ const KEY = 'kcbfbla:theme';
 function read(): ThemePref {
   try {
     const v = localStorage.getItem(KEY);
-    if (v === 'light' || v === 'dark') return v;
+    if (v === 'light' || v === 'dark' || v === 'system') return v;
   } catch {
     /* storage blocked */
   }
-  return 'system';
+  // White by default; dark only when the member picks it in Settings.
+  return 'light';
 }
 
 const systemDark = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
