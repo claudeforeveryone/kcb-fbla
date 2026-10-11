@@ -87,8 +87,8 @@ export function LoadState<T>({
   children: (data: T) => ReactNode;
   skeleton?: 'cards' | 'chart' | 'table';
 }) {
-  if (state.data) return <div className={cn(state.loading && 'opacity-60 transition-opacity')}>{children(state.data)}</div>;
   if (state.error) return <ErrorState title="Could not load this section" error={state.error} onRetry={state.reload} />;
+  if (state.data) return <div className={cn(state.loading && 'opacity-60 transition-opacity')}>{children(state.data)}</div>;
   return <SectionSkeleton kind={skeleton} />;
 }
 

@@ -237,7 +237,10 @@ function ActionDialog({ action, onClose, onDone }: { action: Action; onClose: ()
               variant="ghost"
               aria-label="Copy email"
               onClick={() => {
-                void navigator.clipboard?.writeText(email).then(() => toast.success('Copied'));
+                void navigator.clipboard
+                  ?.writeText(email)
+                  .then(() => toast.success('Copied'))
+                  .catch(() => toast.error('Could not copy', 'Select the address and copy it by hand.'));
               }}
             >
               <Copy className="size-4" />

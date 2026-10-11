@@ -1,7 +1,7 @@
 // Feedback triage: every report students send (Send feedback, Report this question), newest high-priority first.
 // Changing a status, priority or note goes through fbla_owner_feedback_update, which writes an audit row. The note
 // is shown to the student who sent the report, so it is written for them.
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Inbox } from 'lucide-react';
 import { Badge, Button, EmptyState, Pill, SegmentedControl, Select, Textarea, useToast } from '../../components/ui';
 import { cn } from '../../components/ui/cn';
@@ -54,7 +54,6 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
     `fb:${status}:${kind}:${limit}:${refreshKey}:${bump}`,
   );
 
-  useEffect(() => setLimit(PAGE), [status, kind]);
 
   const rows = state.data?.rows ?? [];
   const selected = rows.find((r) => r.id === selectedId) ?? null;
@@ -71,7 +70,15 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:flex-wrap lg:px-0" role="group" aria-label="Status">
           {FILTERS.map((f) => (
-            <Pill key={f.value} active={status === f.value} onClick={() => setStatus(f.value)} count={countFor(f.value)}>
+            <Pill
+              key={f.value}
+              active={status === f.value}
+              onClick={() => {
+                setStatus(f.value);
+                setLimit(PAGE);
+              }}
+              count={countFor(f.value)}
+            >
               {f.label}
             </Pill>
           ))}
@@ -80,7 +87,10 @@ export function FeedbackTriage({ refreshKey }: { refreshKey: number }) {
           aria-label="Kind"
           className="w-full lg:w-48"
           value={kind}
-          onChange={(e) => setKind(e.target.value as FeedbackKind | '')}
+          onChange={(e) => {
+            setKind(e.target.value as FeedbackKind | '');
+            setLimit(PAGE);
+          }}
           options={KIND_OPTIONS}
         />
       </div>
