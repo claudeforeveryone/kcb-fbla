@@ -26,9 +26,11 @@ export function Footer({ className }: { className?: string }) {
             FBLA-style practice exams, vocab and 1v1 duels for FBL Canada members, plus the tools our chapter
             executives use to run the club.
           </p>
+          {/* The {' '} keep real spaces in the text (copy, search snippets, screen readers); the gap does the visual
+              spacing. The heart is brand red lightened for navy: the dark-mode red tone (--danger), 5.2:1 here. */}
           <p className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-white">
-            Built with
-            <Heart aria-label="love" role="img" className="size-4 shrink-0 fill-current text-[#ff7d98]" />
+            Built with{' '}
+            <Heart aria-label="love" role="img" className="size-4 shrink-0 fill-current text-[#ff5a7f]" />{' '}
             by Joseph &amp; Kaden
           </p>
         </div>

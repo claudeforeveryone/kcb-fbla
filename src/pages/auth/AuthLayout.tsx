@@ -119,8 +119,8 @@ function AuthFooter() {
   return (
     <footer className="flex flex-wrap items-center justify-center gap-x-3 px-5 pb-5 text-xs text-muted">
       <span className="inline-flex min-h-10 items-center gap-1 px-2">
-        Built with
-        <Heart aria-label="love" role="img" className="size-3.5 shrink-0 fill-current text-red" />
+        Built with{' '}
+        <Heart aria-label="love" role="img" className="size-3.5 shrink-0 fill-current text-red" />{' '}
         by Joseph &amp; Kaden
       </span>
       <nav aria-label="Legal" className="flex">
