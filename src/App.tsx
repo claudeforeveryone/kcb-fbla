@@ -1,9 +1,12 @@
-import { lazy, Suspense, type ComponentType, type ReactNode } from 'react';
-import { Outlet, Route, Routes, useLocation } from 'react-router-dom';
-import { RedirectIfAuthed, RequireAuth, RequireProfile } from './lib/auth';
+import { lazy, Suspense, useState, type ComponentType, type ReactNode } from 'react';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { RedirectIfAuthed, RequireAuth, RequireProfile, useAuth } from './lib/auth';
 import { AppShell } from './components/layout/AppShell';
 import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { RouteFallback, SplashScreen } from './components/layout/SplashScreen';
+// Signed-out front door. Imported eagerly so it paints on the first client render (the 3D room inside it is lazy).
+import LandingPage from './pages/landing/LandingPage';
+import { mayHaveSessionNow } from './pages/landing/session';
 
 /** Lazy page that accepts either a default export or a named export matching `name`. */
 function page(loader: () => Promise<Record<string, unknown>>, name: string) {
@@ -47,6 +50,21 @@ const NotificationsPage = page(() => import('./pages/notifications/Notifications
 // Dev-only component gallery (tree-shaken from production builds).
 const Gallery = import.meta.env.DEV ? page(() => import('./components/ui/Gallery'), 'Gallery') : null;
 
+/**
+ * "/": signed-out visitors get the landing; signed-in members with a profile get Home; a session without a profile
+ * goes to onboarding (the rule RequireProfile applies everywhere else).
+ */
+function IndexRoute() {
+  const { loading, session, profile } = useAuth();
+  const loc = useLocation();
+  // A first visit (no stored session, no sign-in link in the URL) gets the landing at once, not a splash first.
+  const [signedOutAtLoad] = useState(() => !mayHaveSessionNow());
+  if (loading) return signedOutAtLoad ? <LandingPage /> : <SplashScreen />;
+  if (!session) return <LandingPage />;
+  if (!profile) return <Navigate to={`/onboarding?next=${encodeURIComponent(loc.pathname + loc.search)}`} replace />;
+  return <HomePage />;
+}
+
 /** Full-screen pages (auth): splash while the chunk loads. */
 function Bare({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
@@ -83,12 +101,12 @@ export default function App() {
 
       <Route element={<ShellLayout />}>
         {/* public inside the shell */}
+        <Route index element={<IndexRoute />} />
         <Route path="/chapter/join/:token" element={<JoinPage />} />
         {Gallery && <Route path="/dev/ui" element={<Gallery />} />}
 
         {/* signed in + profile */}
         <Route element={<RequireProfile />}>
-          <Route index element={<HomePage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/play" element={<PlayPage />} />
           <Route path="/play/run" element={<RunPage />} />
