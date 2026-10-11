@@ -2,8 +2,9 @@
 // - Phones and touch-only devices never load it (tier.ts). They, and devices without a usable GPU, get a still of the
 //   real room (ObservatoryStill) once the page is idle, over the static frame's stage and light; the outline drawing
 //   of the room is their fallback only if the still cannot load (offline, Save-Data).
-// - The 3D chunk is a separate dynamic import, requested only after the page has loaded (fonts included), an idle
-//   slot, and the section being near the viewport, on a tier that allows WebGL. The first paint never waits on it.
+// - The 3D chunk is a separate dynamic import, requested only after the page has loaded (fonts included) and painted,
+//   an idle slot, and the section being near the viewport, on a tier that allows WebGL. The first paint never waits
+//   on it, and neither does the still.
 // - One room at a time (roomSlot.ts): the hero and the closing section share a slot, so only one canvas exists.
 // - Rendering pauses while the canvas is off-screen or the tab is hidden; a room that owns the slot stays mounted
 //   (paused) so scrolling back does not rebuild it.
@@ -26,6 +27,7 @@ import {
 import { cn } from "../../components/ui/cn";
 import { ObservatoryPoster, type PosterVariant } from "./ObservatoryPoster";
 import { ObservatoryStill } from "./ObservatoryStill";
+import { browserPaintEnv, whenPainted } from "./paint";
 import { mayHoldRoom, RoomSlotContext } from "./roomSlot";
 import {
   readLandingEnv,
@@ -124,9 +126,9 @@ export function ObservatoryStage({
     };
   }, [env]);
 
-  // The page's own load (fonts, logo, the headline settled as the largest paint) comes first, then two frames, then
-  // an idle slot, and only then is the 3D chunk requested. On a slow connection the room must not compete with the
-  // fonts for bandwidth.
+  // The page's own load (fonts, logo) and its first paint on screen (paint.ts) come first, then two frames, then an
+  // idle slot, and only then is the still or the 3D chunk requested. On a slow connection the room must not compete
+  // with the fonts for bandwidth, and its work must not land between load and the frame that shows the headline.
   useEffect(() => {
     let cancelled = false;
     let idleId: number | undefined;
@@ -144,7 +146,7 @@ export function ObservatoryStage({
       else window.addEventListener("load", () => resolve(), { once: true });
     });
     const fonts = document.fonts?.ready ?? Promise.resolve();
-    Promise.all([loaded, fonts]).then(() => {
+    Promise.all([loaded, fonts, whenPainted(browserPaintEnv())]).then(() => {
       if (cancelled) return;
       raf = requestAnimationFrame(() =>
         requestAnimationFrame(() => {
@@ -220,9 +222,11 @@ export function ObservatoryStage({
   }, [live]);
   const ready = live && readyTier === tier;
 
-  // the full tier's effects chunk (bloom, FXAA) downloads beside the scene's, not after it
+  // The full tier's effects chunk (bloom, FXAA) downloads beside the scene's, not after it. Only a prefetch: if it
+  // fails (offline, a deploy replaced its hash), the scene's own import of it fails into SceneBoundary, which keeps
+  // the static frame, so this one is silenced instead of surfacing as an unhandled rejection.
   useEffect(() => {
-    if (live && tier === "full") void import("./scene/Effects");
+    if (live && tier === "full") import("./scene/Effects").catch(() => {});
   }, [live, tier]);
 
   // the still of the room, for the static-frame tier: after the page is idle, once the section is near
