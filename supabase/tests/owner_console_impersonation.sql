@@ -12,8 +12,9 @@
 --   president          the president of a chapter that has another member (for the existing chapter RPCs)
 -- Synthetic data, made inside the transaction: 14 accounts with profiles 90 to 120 days ago (no real account is that
 -- old), and the analytics rows below (the analytics table itself is new in this transaction). Later blocks give the
--- synthetic students practice runs, a chapter with an assigned test and deck, duels, a day of past activity, and six
--- more accounts that test which sign-ups count for FBLA rather than DECA.
+-- synthetic students practice runs, a chapter with an assigned test and deck, duels, a day of past activity, a duel
+-- run today for every student but one (so only 1 to 4 FBLA accounts were not active this month), and six more
+-- accounts that test which sign-ups count for FBLA rather than DECA.
 -- Output: one row per check (name, ok, detail). Every row must have ok = true.
 
 create temp table omega_results (name text primary key, ok boolean not null, detail text);
@@ -95,11 +96,65 @@ returns bigint language sql as $$
 $$;
 
 -- False when a group and a smaller group inside it are both shown and differ by 1 to 4 (subtracting would give a
--- group that small away).
+-- group that small away). Both arguments must be Counts: a missing key (a typo in a path) stops the run instead of
+-- passing quietly.
 create function pg_temp.omega_gap_ok(p_big jsonb, p_small jsonb)
-returns boolean language sql as $$
-  select pg_temp.omega_shown(p_big) is null or pg_temp.omega_shown(p_small) is null
+returns boolean language plpgsql as $$
+begin
+  if p_big is null or jsonb_typeof(p_big) <> 'object' or not (p_big ? 'suppressed')
+     or p_small is null or jsonb_typeof(p_small) <> 'object' or not (p_small ? 'suppressed') then
+    raise exception 'test bug: omega_gap_ok needs two Counts, got % and %',
+      coalesce(p_big::text, 'nothing'), coalesce(p_small::text, 'nothing');
+  end if;
+  return pg_temp.omega_shown(p_big) is null or pg_temp.omega_shown(p_small) is null
       or not (pg_temp.omega_shown(p_big) - pg_temp.omega_shown(p_small) between 1 and 4);
+end;
+$$;
+
+-- Every pair of nested groups Overview shows, as (outer, inner): the accounts hold the finished sign-ups, which hold
+-- every active student (activity needs an FBLA profile); the month's active students hold the week's, which hold
+-- today's; and so on. Lists each pair that is shown on both sides and differs by 1 to 4, else null.
+create function pg_temp.omega_overview_nest_problem(v jsonb)
+returns text language sql as $$
+  select string_agg(array_to_string(p.big, '.') || ' ' || coalesce(pg_temp.omega_shown(v #> p.big)::text, 'hidden')
+                    || ' over ' || array_to_string(p.small, '.') || ' '
+                    || coalesce(pg_temp.omega_shown(v #> p.small)::text, 'hidden'), '; ')
+    from (values
+      ('{accounts}'::text[], '{onboarding,all_time,onboarded}'::text[]),
+      ('{accounts}', '{onboarding,month,created}'), ('{accounts}', '{onboarding,month,onboarded}'),
+      ('{accounts}', '{new_accounts,day}'), ('{accounts}', '{new_accounts,week}'), ('{accounts}', '{new_accounts,month}'),
+      ('{accounts}', '{active,dau}'), ('{accounts}', '{active,wau}'), ('{accounts}', '{active,mau}'),
+      ('{accounts}', '{returning}'), ('{accounts}', '{answered_week,users}'),
+      ('{onboarding,all_time,onboarded}', '{onboarding,month,onboarded}'),
+      ('{onboarding,all_time,onboarded}', '{active,dau}'), ('{onboarding,all_time,onboarded}', '{active,wau}'),
+      ('{onboarding,all_time,onboarded}', '{active,mau}'), ('{onboarding,all_time,onboarded}', '{returning}'),
+      ('{onboarding,all_time,onboarded}', '{answered_week,users}'),
+      ('{onboarding,month,created}', '{onboarding,month,onboarded}'),
+      ('{new_accounts,month}', '{new_accounts,week}'), ('{new_accounts,week}', '{new_accounts,day}'),
+      ('{active,mau}', '{active,wau}'), ('{active,mau}', '{active,dau}'), ('{active,mau}', '{returning}'),
+      ('{active,mau}', '{answered_week,users}'), ('{active,mau}', '{onboarding,month,onboarded}'),
+      ('{active,wau}', '{active,dau}'), ('{active,wau}', '{answered_week,users}')
+    ) as p(big, small)
+   where not pg_temp.omega_gap_ok(v #> p.big, v #> p.small);
+$$;
+
+-- Nested groups in a Growth response: practising and finished sign-up sit inside active, and all three sit inside
+-- every running total from the bucket's end on (an account exists before its owner does anything). Lists each pair
+-- that is shown on both sides and differs by 1 to 4, else null.
+create function pg_temp.omega_growth_nest_problem(g jsonb)
+returns text language sql as $$
+  select string_agg(x.what, '; ')
+    from (select (b.b ->> 'start') || ' ' || k.key || ' ' || coalesce(pg_temp.omega_shown(b.b -> k.key)::text, 'hidden')
+                 || ' under ' || o.label || ' ' || coalesce(pg_temp.omega_shown(o.c)::text, 'hidden') as what
+            from jsonb_array_elements(g -> 'series') with ordinality as b(b, i)
+           cross join unnest(array['active', 'practising', 'onboarded']) as k(key)
+           cross join lateral (
+             select 'active' as label, b.b -> 'active' as c where k.key <> 'active'
+             union all
+             select 'total to ' || (t.t ->> 'end'), t.t -> 'total'
+               from jsonb_array_elements(g -> 'series') with ordinality as t(t, j)
+              where t.j >= b.i) o
+           where not pg_temp.omega_gap_ok(o.c, b.b -> k.key)) x;
 $$;
 
 -- In a growth response every shown sign-up count must be the difference of two shown running totals (the bucket's and
@@ -508,9 +563,11 @@ declare
   v_rem bigint;
   v_pool bigint[];
 begin
+  -- Active today: students with an FBLA profile who caused an event (not a duel settling) or had a run graded.
   select count(distinct x.user_id) into v_expect_dau from (
     select e.user_id from public.fbla_analytics_events e where e.created_at >= v_day and e.event_name <> 'duel_completed'
-    union all select a.user_id from public.fbla_attempts a where a.created_at >= v_day) x;
+    union all select a.user_id from public.fbla_attempts a where a.created_at >= v_day) x
+   where exists (select 1 from public.fbla_profiles p where p.id = x.user_id);
 
   v_ov := pg_temp.omega_as(v_owner, 'public.fbla_owner_overview()');
   v_gd := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(30, ''day'')');
@@ -626,7 +683,7 @@ begin
   perform pg_temp.omega_check('owner: onboarding counts never give away the accounts that did not finish sign-up',
     pg_temp.omega_gap_ok(v_ov #> '{onboarding,all_time,created}', v_ov #> '{onboarding,all_time,onboarded}')
       and pg_temp.omega_gap_ok(v_ov #> '{onboarding,month,created}', v_ov #> '{onboarding,month,onboarded}')
-      and pg_temp.omega_gap_ok(v_ov -> 'accounts', v_ov -> 'profiles')
+      and pg_temp.omega_gap_ok(v_ov -> 'accounts', v_ov #> '{onboarding,all_time,onboarded}')
       and ((v_ov #> '{onboarding,all_time}' -> 'rate') = 'null'::jsonb
            or pg_temp.omega_shown(v_ov #> '{onboarding,all_time,onboarded}') is not null)
       and ((v_ov #> '{onboarding,month}' -> 'rate') = 'null'::jsonb
@@ -642,18 +699,21 @@ begin
       and (v_ov #> '{onboarding,all_time}' -> 'rate') = 'null'::jsonb,
     'accounts without a profile: ' || v_rem || ', all_time=' || coalesce(v_ov #>> '{onboarding,all_time}', 'null'));
 
-  -- Active-user windows: today inside this week inside this month, returning and answering inside them.
-  perform pg_temp.omega_check('owner: active-user windows never give away a group of 1 to 4 by subtraction',
-    pg_temp.omega_gap_ok(v_ov #> '{active,wau}', v_ov #> '{active,dau}')
-      and pg_temp.omega_gap_ok(v_ov #> '{active,mau}', v_ov #> '{active,wau}')
-      and pg_temp.omega_gap_ok(v_ov #> '{active,mau}', v_ov #> '{active,dau}')
-      and pg_temp.omega_gap_ok(v_ov #> '{active,mau}', v_ov -> 'returning')
-      and pg_temp.omega_gap_ok(v_ov #> '{active,wau}', v_ov #> '{answered_week,users}')
-      and pg_temp.omega_gap_ok(v_ov #> '{active,mau}', v_ov #> '{answered_week,users}')
-      and ((v_ov -> 'returning_rate') = 'null'::jsonb
-           or (pg_temp.omega_shown(v_ov -> 'returning') is not null and pg_temp.omega_shown(v_ov #> '{active,mau}') is not null)),
-    'active=' || coalesce(v_ov ->> 'active', 'null') || ' returning=' || coalesce(v_ov ->> 'returning', 'null')
-      || ' answered=' || coalesce(v_ov ->> 'answered_week', 'null'));
+  -- Nested groups in Overview: the accounts and the finished sign-ups hold every active window; today sits inside this
+  -- week inside this month, returning and answering inside them.
+  perform pg_temp.omega_check('owner: Overview never shows a group 1 to 4 below a group that holds it',
+    pg_temp.omega_overview_nest_problem(v_ov) is null, coalesce(pg_temp.omega_overview_nest_problem(v_ov), 'none'));
+  perform pg_temp.omega_check('owner: the returning rate is shown only with both of its counts',
+    (v_ov -> 'returning_rate') = 'null'::jsonb
+      or (pg_temp.omega_shown(v_ov -> 'returning') is not null and pg_temp.omega_shown(v_ov #> '{active,mau}') is not null),
+    'active=' || coalesce(v_ov ->> 'active', 'null') || ' returning=' || coalesce(v_ov ->> 'returning', 'null'));
+  perform pg_temp.omega_check('owner: Growth never shows a group 1 to 4 below a group that holds it (every range and bucket)',
+    pg_temp.omega_growth_nest_problem(v_gd) is null and pg_temp.omega_growth_nest_problem(v_gw) is null
+      and pg_temp.omega_growth_nest_problem(v_gm) is null and pg_temp.omega_growth_nest_problem(v_gd130) is null
+      and pg_temp.omega_growth_nest_problem(v_gw130) is null and pg_temp.omega_growth_nest_problem(v_gm130) is null,
+    coalesce(nullif(concat_ws(' | ', pg_temp.omega_growth_nest_problem(v_gd), pg_temp.omega_growth_nest_problem(v_gw),
+                       pg_temp.omega_growth_nest_problem(v_gm), pg_temp.omega_growth_nest_problem(v_gd130),
+                       pg_temp.omega_growth_nest_problem(v_gw130), pg_temp.omega_growth_nest_problem(v_gm130)), ''), 'none'));
 
   -- Engagement: 7 started (6 in accounting), 3 finished (2 accounting starters and the economics profile).
   perform pg_temp.omega_check('owner: 1 to 4 students finishing hides the finished count and the finish rate',
@@ -856,14 +916,15 @@ $$;
 
 -- ------------------------------------------------------------------------------------------------ nested groups
 -- A group and a smaller group inside it, both shown, must not differ by 1 to 4 (rule 3 in 0105).
---   Growth: on day today-110, 7 synthetic students are active and 5 of them practise.
+--   Growth: on day today-85 (after every synthetic account was made, as in real life: an account exists before its
+--   owner does anything), 7 synthetic students are active and 5 of them practise.
 --   Engagement: 6 synthetic students play duels and 5 of them have played their run (with the 2 real players and the
 --   fixture's duel, the gap between players and students who played stays between 1 and 4).
 do $$
 declare
   v_owner uuid := current_setting('omega.owner')::uuid;
   v_today date := fbla_private.fbla_local_day(now());
-  v_at timestamptz := fbla_private.fbla_day_start(fbla_private.fbla_local_day(now()) - 110) + interval '12 hours';
+  v_at timestamptz := fbla_private.fbla_day_start(fbla_private.fbla_local_day(now()) - 85) + interval '12 hours';
   v_syn uuid[];
   v_q text[];
   v_ov jsonb;
@@ -897,25 +958,17 @@ begin
   v_g30 := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(30, ''day'')');
   v_en := pg_temp.omega_as(v_owner, 'public.fbla_owner_engagement(30)');
 
-  select b into v_day from jsonb_array_elements(v_gd -> 'series') b where (b ->> 'start')::date = v_today - 110;
+  select b into v_day from jsonb_array_elements(v_gd -> 'series') b where (b ->> 'start')::date = v_today - 85;
   perform pg_temp.omega_check('owner: 7 active students, 5 of whom practised, hide the active count',
     pg_temp.omega_shown(v_day -> 'practising') = 5 and (v_day #>> '{active,suppressed}') = 'true',
     coalesce(v_day::text, 'missing'));
-  perform pg_temp.omega_check('owner: no growth bucket shows active students 1 to 4 above the practising or onboarded ones',
-    not exists (select 1 from (select v_gd as g union all select v_gw union all select v_gm union all select v_g30) r,
-                              jsonb_array_elements(r.g -> 'series') b
-                 where not pg_temp.omega_gap_ok(b -> 'active', b -> 'practising')
-                    or not pg_temp.omega_gap_ok(b -> 'active', b -> 'onboarded')),
-    (select string_agg((b ->> 'start') || ' active ' || coalesce(b #>> '{active,value}', 'hidden') || ' practising '
-                       || coalesce(b #>> '{practising,value}', 'hidden') || ' onboarded '
-                       || coalesce(b #>> '{onboarded,value}', 'hidden'), '; ')
-       from (select v_gd as g union all select v_gw union all select v_gm union all select v_g30) r,
-            jsonb_array_elements(r.g -> 'series') b
-      where not pg_temp.omega_gap_ok(b -> 'active', b -> 'practising')
-         or not pg_temp.omega_gap_ok(b -> 'active', b -> 'onboarded')));
-  perform pg_temp.omega_check('owner: monthly active students and the month''s finished sign-ups never differ by 1 to 4',
-    pg_temp.omega_gap_ok(v_ov #> '{active,mau}', v_ov #> '{onboarding,month,onboarded}'),
-    'mau=' || coalesce(v_ov #>> '{active,mau}', 'null') || ' onboarded=' || coalesce(v_ov #>> '{onboarding,month,onboarded}', 'null'));
+  perform pg_temp.omega_check('owner: no growth bucket shows a group 1 to 4 below one that holds it, after the nested-group fixtures',
+    pg_temp.omega_growth_nest_problem(v_gd) is null and pg_temp.omega_growth_nest_problem(v_gw) is null
+      and pg_temp.omega_growth_nest_problem(v_gm) is null and pg_temp.omega_growth_nest_problem(v_g30) is null,
+    coalesce(nullif(concat_ws(' | ', pg_temp.omega_growth_nest_problem(v_gd), pg_temp.omega_growth_nest_problem(v_gw),
+                              pg_temp.omega_growth_nest_problem(v_gm), pg_temp.omega_growth_nest_problem(v_g30)), ''), 'none'));
+  perform pg_temp.omega_check('owner: Overview nested groups hold after the nested-group fixtures',
+    pg_temp.omega_overview_nest_problem(v_ov) is null, coalesce(pg_temp.omega_overview_nest_problem(v_ov), 'none'));
 
   select m into v_duel_mode from jsonb_array_elements(v_en -> 'modes') m where m ->> 'mode' = 'duel';
   perform pg_temp.omega_check('owner: duel players 1 to 4 above the students who played a duel run are hidden, with their duel counts',
@@ -930,6 +983,80 @@ begin
   perform pg_temp.omega_check('owner: still no visible count between 1 and 4 after the nested-group fixtures',
     pg_temp.omega_no_small(v_ov) and pg_temp.omega_no_small(v_gd) and pg_temp.omega_no_small(v_gw)
       and pg_temp.omega_no_small(v_gm) and pg_temp.omega_no_small(v_g30) and pg_temp.omega_no_small(v_en), 'checked');
+end;
+$$;
+
+-- ------------------------------------------------------------------------------------------------ accounts vs activity
+-- Activity needs an FBLA profile: the owner who never finished sign-up can call fbla_track, but is not an active
+-- student. Then every student with a profile except omega_syn_11 (last active 85 days ago) plays a duel run today
+-- (duel runs record no analytics event, so nothing else moves). The FBLA accounts not active this month are then
+-- omega_syn_11 and the accounts without a profile: 1 to 4 of them, since the suite already needs 1 to 4 accounts without
+-- a profile. Those accounts are a group of 1 to 4 that subtracting the active students from the account total, or from
+-- the finished sign-ups, would give away (rule 3), so Overview and Growth must hide the active counts here.
+do $$
+declare
+  v_owner uuid := current_setting('omega.owner')::uuid;
+  v_np uuid := current_setting('omega.np_owner')::uuid;
+  v_today date := fbla_private.fbla_local_day(now());
+  v_month timestamptz := fbla_private.fbla_day_start(fbla_private.fbla_local_day(now()) - 29);
+  v_left uuid;
+  v_inactive bigint;
+  v_ov jsonb;
+  v_gd jsonb;
+  v_gw jsonb;
+  v_gm jsonb;
+  v_gm90 jsonb;
+  v_last jsonb;
+begin
+  perform set_config('request.jwt.claims', json_build_object('sub', v_np::text, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  perform public.fbla_track('event_selected', 'accounting', '{}'::jsonb);
+  reset role;
+  perform set_config('request.jwt.claims', '', true);
+  perform pg_temp.omega_check('activity: an account without an FBLA profile that sends events is not an active student',
+    exists (select 1 from public.fbla_analytics_events e where e.user_id = v_np and e.event_name = 'event_selected')
+      and not exists (select 1 from fbla_private.fbla_activity(fbla_private.fbla_day_start(v_today), 'infinity') x
+                       where x.user_id = v_np), 'checked');
+
+  select p.id into v_left from public.fbla_profiles p where p.username = 'omega_syn_11';
+  insert into public.fbla_attempts (user_id, kind, event, label, total, correct)
+  select p.id, 'duel', 'economics', 'dry run duel run', 10, 5 from public.fbla_profiles p where p.id <> v_left;
+
+  -- FBLA accounts with no FBLA profile, or with no event and no graded run this month.
+  select count(*) into v_inactive from fbla_private.fbla_accounts() a
+   where not exists (select 1 from public.fbla_profiles p where p.id = a.user_id)
+      or not (exists (select 1 from public.fbla_attempts t where t.user_id = a.user_id and t.created_at >= v_month)
+              or exists (select 1 from public.fbla_analytics_events e
+                          where e.user_id = a.user_id and e.created_at >= v_month and e.event_name <> 'duel_completed'));
+  perform pg_temp.omega_check('setup: 1 to 4 FBLA accounts were not active this month', v_inactive between 1 and 4,
+    'inactive accounts: ' || v_inactive);
+
+  v_ov := pg_temp.omega_as(v_owner, 'public.fbla_owner_overview()');
+  v_gd := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(30, ''day'')');
+  v_gw := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(30, ''week'')');
+  v_gm := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(30, ''month'')');
+  v_gm90 := pg_temp.omega_as(v_owner, 'public.fbla_owner_growth(90, ''month'')');
+  v_last := v_gd -> 'series' -> -1;
+
+  perform pg_temp.omega_check('owner: with 1 to 4 FBLA accounts not active, the active-student counts are hidden',
+    pg_temp.omega_shown(v_ov -> 'accounts') is not null
+      and (v_ov #>> '{active,dau,suppressed}') = 'true' and (v_ov #>> '{active,wau,suppressed}') = 'true'
+      and (v_ov #>> '{active,mau,suppressed}') = 'true',
+    'accounts=' || coalesce(v_ov ->> 'accounts', 'null') || ' active=' || coalesce(v_ov ->> 'active', 'null'));
+  perform pg_temp.omega_check('owner: Overview never shows a group 1 to 4 below a group that holds it, with everyone but 1 to 4 active',
+    pg_temp.omega_overview_nest_problem(v_ov) is null, coalesce(pg_temp.omega_overview_nest_problem(v_ov), 'none'));
+  perform pg_temp.omega_check('owner: today''s Growth bucket hides active and practising students 1 to 4 below the total',
+    pg_temp.omega_shown(v_last -> 'total') is not null
+      and (v_last #>> '{active,suppressed}') = 'true' and (v_last #>> '{practising,suppressed}') = 'true',
+    coalesce(v_last::text, 'missing'));
+  perform pg_temp.omega_check('owner: Growth never shows a group 1 to 4 below a group that holds it, with everyone but 1 to 4 active',
+    pg_temp.omega_growth_nest_problem(v_gd) is null and pg_temp.omega_growth_nest_problem(v_gw) is null
+      and pg_temp.omega_growth_nest_problem(v_gm) is null and pg_temp.omega_growth_nest_problem(v_gm90) is null,
+    coalesce(nullif(concat_ws(' | ', pg_temp.omega_growth_nest_problem(v_gd), pg_temp.omega_growth_nest_problem(v_gw),
+                              pg_temp.omega_growth_nest_problem(v_gm), pg_temp.omega_growth_nest_problem(v_gm90)), ''), 'none'));
+  perform pg_temp.omega_check('owner: no visible count between 1 and 4 with everyone but 1 to 4 active',
+    pg_temp.omega_no_small(v_ov) and pg_temp.omega_no_small(v_gd) and pg_temp.omega_no_small(v_gw)
+      and pg_temp.omega_no_small(v_gm) and pg_temp.omega_no_small(v_gm90), 'checked');
 end;
 $$;
 
@@ -1247,7 +1374,7 @@ select pg_temp.omega_check('grants: no new fbla_private function is executable b
                      'fbla_trg_analytics_vocab', 'fbla_feedback_guard', 'fbla_trg_analytics_feedback',
                      'fbla_audit_immutable', 'fbla_audit', 'fbla_trg_audit_member_role', 'fbla_trg_audit_member_removed',
                      'fbla_trg_audit_member_added', 'fbla_trg_audit_ban', 'fbla_trg_audit_unban', 'fbla_trg_audit_trainer',
-                     'fbla_trg_audit_chapter_delete', 'fbla_trg_audit_platform_owner', 'fbla_count', 'fbla_count_over',
+                     'fbla_trg_audit_chapter_delete', 'fbla_trg_audit_platform_owner', 'fbla_count', 'fbla_count_over', 'fbla_count_under',
                      'fbla_count_if', 'fbla_count_between', 'fbla_shown', 'fbla_rate', 'fbla_local_day', 'fbla_day_start',
                      'fbla_accounts', 'fbla_activity', 'fbla_account_totals'] as names) x;
 select pg_temp.omega_check('grants: the owner settings table is closed to clients',

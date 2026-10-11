@@ -9,11 +9,21 @@
 --   1. Small groups. A count of 1 to 4 people is hidden; 0 and 5+ are shown (fbla_count).
 --   2. Tied numbers. Event counts (times, runs, answers) that belong to a hidden group are hidden too.
 --   3. Nested groups. When a response shows a group and a smaller group inside it (active this week and active
---      today), the larger count is also hidden whenever the gap between them is 1 to 4, because subtracting would give
---      that small group away (fbla_count_over). The pairs: Overview, active today and answering this week inside
---      active this week, and those two plus active this week, returning and this month's finished sign-ups inside
---      active this month; Growth, practising and finished sign-up inside active, per bucket; Engagement, each practice
---      mode inside students who finished, and students who played a duel run inside duel players.
+--      today), one of the two is hidden whenever the gap between them is 1 to 4, because subtracting would give that
+--      small group away. Where the outer count is fixed by rule 5 (an account total), the inner one is hidden
+--      (fbla_count_under); otherwise the outer one is (fbla_count_over). A count with both runs fbla_count_under first.
+--      The pairs:
+--      - Overview: every active window (today, this week, this month, returning, answering this week) inside the
+--        accounts and inside the accounts that finished sign-up (activity needs an FBLA profile, see below), hidden
+--        inner; then active today and answering this week inside active this week, and those two plus active this week,
+--        returning and this month's finished sign-ups inside active this month, hidden outer.
+--      - Growth, per bucket: active, practising and finished sign-up inside every account total from the end of the
+--        bucket on (an account exists before its owner does anything, and totals only grow), hidden inner; the
+--        smallest such total that is shown is the one that decides. Then practising and finished sign-up inside
+--        active, hidden outer.
+--      - Engagement: each practice mode inside students who finished, and students who played a duel run inside duel
+--        players, hidden outer.
+--      - Account totals, new accounts and finished sign-ups against each other: rule 5 and the onboarding cells.
 --   4. Rates are worked out only from counts the response shows, so a rate never brings back a hidden count.
 --   5. Account totals. Overview and Growth share one series of end-of-day account totals (fbla_account_totals).
 --      Walking back from today, a total is shown only when it is 0 or 5+ and differs from the last shown (later) total
@@ -38,8 +48,11 @@
 -- applied, together with the deploy whose sign-up form adds app = 'kcb-fbla'). After that moment an unmarked account
 -- with no FBLA profile is not counted: it could be a DECA sign-up. DECA sign-ups should still set app = 'deca'.
 --
--- Activity = an analytics event the student caused, or a graded attempt. duel_completed is left out: the second
--- player's submission records it for both players, so it is not something the first player did that day.
+-- Activity = an analytics event the student caused, or a graded attempt, by an account with an FBLA profile. An
+-- account without one (a DECA sign-up, or someone who never finished sign-up) can still send fbla_track events or file
+-- feedback, but is not an active FBLA student; leaving it out also keeps every active group inside the accounts that
+-- finished sign-up, which rule 3 relies on. Attempts always belong to a profile (foreign key). duel_completed is left
+-- out: the second player's submission records it for both players, so it is not something the first player did that day.
 -- Days are America/Toronto calendar days.
 
 create or replace function fbla_private.fbla_count(p_n bigint)
@@ -76,6 +89,23 @@ as $$
     when coalesce(p_n, 0) between 1 and 4
       or exists (select 1 from unnest(coalesce(p_subs, '{}'::bigint[])) as s(v)
                   where s.v is not null and coalesce(p_n, 0) - s.v between 1 and 4)
+      then jsonb_build_object('value', null, 'suppressed', true)
+    else jsonb_build_object('value', coalesce(p_n, 0), 'suppressed', false) end;
+$$;
+
+-- A count of a group that sits inside other groups the same response shows (p_supers: their shown values; nulls, for
+-- hidden ones, are ignored). Hidden when it is 1-4, or when it is 1-4 less than any of them. For groups inside an
+-- account total, which rule 5 has already fixed, so the inner count gives way.
+create or replace function fbla_private.fbla_count_under(p_n bigint, p_supers bigint[])
+returns jsonb
+language sql
+immutable
+set search_path = ''
+as $$
+  select case
+    when coalesce(p_n, 0) between 1 and 4
+      or exists (select 1 from unnest(coalesce(p_supers, '{}'::bigint[])) as s(v)
+                  where s.v is not null and s.v - coalesce(p_n, 0) between 1 and 4)
       then jsonb_build_object('value', null, 'suppressed', true)
     else jsonb_build_object('value', coalesce(p_n, 0), 'suppressed', false) end;
 $$;
@@ -182,7 +212,8 @@ begin
 end;
 $$;
 
--- Activity rows (one per analytics event the student caused, or graded attempt) in [p_from, p_to).
+-- Activity rows (one per analytics event the student caused, or graded attempt) in [p_from, p_to), from accounts with
+-- an FBLA profile only (see the activity note above).
 create or replace function fbla_private.fbla_activity(p_from timestamptz, p_to timestamptz)
 returns table (user_id uuid, ts timestamptz)
 language sql
@@ -192,6 +223,7 @@ set search_path = ''
 as $$
   select e.user_id, e.created_at from public.fbla_analytics_events e
    where e.created_at >= p_from and e.created_at < p_to and e.event_name <> 'duel_completed'
+     and exists (select 1 from public.fbla_profiles p where p.id = e.user_id)
   union all
   select a.user_id, a.created_at from public.fbla_attempts a
    where a.created_at >= p_from and a.created_at < p_to;
@@ -241,6 +273,7 @@ $$;
 revoke all on function fbla_private.fbla_count(bigint) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_shown(jsonb) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_count_over(bigint, bigint[]) from public, anon, authenticated;
+revoke all on function fbla_private.fbla_count_under(bigint, bigint[]) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_count_if(bigint, boolean) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_count_between(bigint, boolean, bigint, boolean) from public, anon, authenticated;
 revoke all on function fbla_private.fbla_rate(bigint, bigint) from public, anon, authenticated;
@@ -287,6 +320,7 @@ declare
   v_ret_c jsonb;
   v_wau_c jsonb;
   v_mau_c jsonb;
+  v_outer bigint[];
   v_since timestamptz;
 begin
   if not public.is_platform_owner() then
@@ -342,16 +376,26 @@ begin
     join public.fbla_answers an on an.attempt_id = a.id
    where a.created_at >= v_week;
 
-  -- Nested windows (rule 3): today, answering this week and returning sit inside this week or this month, and so do
-  -- the accounts that finished sign-up this month (making a profile records an onboarding event).
-  v_dau_c := fbla_private.fbla_count(v_dau);
-  v_ans_c := fbla_private.fbla_count(v_answer_users);
-  v_ret_c := fbla_private.fbla_count(v_returning);
-  v_wau_c := fbla_private.fbla_count_over(v_wau,
-    array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c)]);
-  v_mau_c := fbla_private.fbla_count_over(v_mau,
-    array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c), fbla_private.fbla_shown(v_wau_c),
-          fbla_private.fbla_shown(v_ret_c), case when v_month_ok then v_onb_month end]);
+  -- Nested groups (rule 3). Every active window sits inside the accounts and inside the accounts that finished sign-up
+  -- (activity needs a profile). Those two are fixed already (rule 5 and the onboarding cells above), so a window 1 to 4
+  -- below either is hidden. Then today, answering this week and returning sit inside this week or this month, and so
+  -- do the accounts that finished sign-up this month (making a profile records an onboarding event): the outer window
+  -- is hidden when it is 1 to 4 above one of them.
+  v_outer := array[case when v_s0 then v_t0 end, case when v_all_ok then v_onb_all end];
+  v_dau_c := fbla_private.fbla_count_under(v_dau, v_outer);
+  v_ans_c := fbla_private.fbla_count_under(v_answer_users, v_outer);
+  v_ret_c := fbla_private.fbla_count_under(v_returning, v_outer);
+  v_wau_c := fbla_private.fbla_count_under(v_wau, v_outer);
+  if fbla_private.fbla_shown(v_wau_c) is not null then
+    v_wau_c := fbla_private.fbla_count_over(v_wau,
+      array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c)]);
+  end if;
+  v_mau_c := fbla_private.fbla_count_under(v_mau, v_outer);
+  if fbla_private.fbla_shown(v_mau_c) is not null then
+    v_mau_c := fbla_private.fbla_count_over(v_mau,
+      array[fbla_private.fbla_shown(v_dau_c), fbla_private.fbla_shown(v_ans_c), fbla_private.fbla_shown(v_wau_c),
+            fbla_private.fbla_shown(v_ret_c), case when v_month_ok then v_onb_month end]);
+  end if;
 
   select min(e.created_at) into v_since from public.fbla_analytics_events e;
 
@@ -385,8 +429,10 @@ $$;
 -- Growth: buckets of a day, week (Monday start) or month over the last p_days (7 to 400) Toronto days.
 -- Per bucket: new FBLA accounts and the running account total at the end of the bucket (both from the shared totals,
 -- rule 5), profiles created (onboarded), distinct users who practised (a graded run; a finished flashcard deck is not
--- one) and distinct active users. Practising and onboarded students sit inside the active ones, so the active count is
--- hidden when it is 1 to 4 above either (rule 3). `baseline` is the running total the day before the first bucket.
+-- one) and distinct active users. Rule 3, per bucket: all three sit inside every account total from the bucket's end
+-- on, so each is hidden when it is 1 to 4 below the first of those totals that is shown (any later shown total is the
+-- same or 5+ more, rule 5); then practising and onboarded students sit inside the active ones, so the active count is
+-- hidden when it is 1 to 4 above either. `baseline` is the running total the day before the first bucket.
 create or replace function public.fbla_owner_growth(p_days int default 90, p_bucket text default 'day')
 returns jsonb
 language plpgsql
@@ -430,12 +476,14 @@ begin
              where a.created_at >= fbla_private.fbla_day_start(b.d_from)
                and a.created_at < fbla_private.fbla_day_start(b.d_to + 1)
                and not exists (select 1 from public.fbla_assignments s where s.id = a.assignment_id and s.kind = 'deck'))
-             as practising
+             as practising,
+           (select t.total from tot t where t.day >= b.d_to and t.shown order by t.day limit 1) as outer_total
       from b
   ), c as (
     select n.d_from, n.d_to, n.active,
-           fbla_private.fbla_count(n.onboarded) as onboarded_c,
-           fbla_private.fbla_count(n.practising) as practising_c
+           fbla_private.fbla_count_under(n.onboarded, array[n.outer_total]) as onboarded_c,
+           fbla_private.fbla_count_under(n.practising, array[n.outer_total]) as practising_c,
+           fbla_private.fbla_count_under(n.active, array[n.outer_total]) as active_under
       from n
   )
   select coalesce(jsonb_agg(jsonb_build_object(
@@ -444,8 +492,9 @@ begin
            'signups', fbla_private.fbla_count_between(t_end.total, t_end.shown, t_prev.total, t_prev.shown),
            'total', fbla_private.fbla_count_if(t_end.total, t_end.shown),
            'onboarded', c.onboarded_c,
-           'active', fbla_private.fbla_count_over(c.active,
-             array[fbla_private.fbla_shown(c.practising_c), fbla_private.fbla_shown(c.onboarded_c)]),
+           'active', case when fbla_private.fbla_shown(c.active_under) is null then c.active_under
+                          else fbla_private.fbla_count_over(c.active,
+                            array[fbla_private.fbla_shown(c.practising_c), fbla_private.fbla_shown(c.onboarded_c)]) end,
            'practising', c.practising_c
          ) order by c.d_from), '[]'::jsonb),
          (select fbla_private.fbla_count_if(t.total, t.shown) from tot t where t.day = v_first - 1)
