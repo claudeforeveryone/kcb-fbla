@@ -247,7 +247,8 @@ function BottomTabs({ pathname }: { pathname: string }) {
 }
 
 function OfflineBanner() {
-  const [online, setOnline] = useState(() => (typeof navigator === 'undefined' ? true : navigator.onLine));
+  // Node has a navigator without onLine (build-time prerender): only an explicit false means offline.
+  const [online, setOnline] = useState(() => typeof navigator === 'undefined' || navigator.onLine !== false);
   useEffect(() => {
     const up = () => setOnline(true);
     const down = () => setOnline(false);

@@ -6,12 +6,15 @@ export const SUPABASE_URL =
 export const SUPABASE_KEY =
   (import.meta.env.VITE_SUPABASE_KEY as string | undefined) || 'sb_publishable_F127HhwYm4XDMDLpmOtKIg_erImORLk';
 
+/** localStorage key Supabase keeps the signed-in session under. */
+export const AUTH_STORAGE_KEY = 'kcbfbla-auth-v2';
+
 export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true,
-    storageKey: 'kcbfbla-auth-v2',
+    storageKey: AUTH_STORAGE_KEY,
   },
   realtime: { params: { eventsPerSecond: 10 } },
 });

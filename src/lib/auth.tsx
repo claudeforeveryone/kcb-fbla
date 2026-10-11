@@ -1,8 +1,24 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import type { Session, User } from '@supabase/supabase-js';
-import { appUrl, supabase } from './supabase';
+import { AUTH_STORAGE_KEY, appUrl, supabase } from './supabase';
 import { SplashScreen } from '../components/layout/SplashScreen';
+
+/**
+ * Whether the session check can be skipped on first render. A visitor with no stored session and no auth link in
+ * the URL is known to be signed out, so public pages paint at once (no splash over prerendered HTML) and main.tsx
+ * can hydrate that HTML. Anything that might carry a session keeps the splash until it is checked. Always false on
+ * the server (build-time prerender), which renders every page signed out.
+ */
+export function mayHaveSession(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    if (/access_token=|[?&]code=|type=(recovery|signup|invite|magiclink)/.test(window.location.href)) return true;
+    return window.localStorage.getItem(AUTH_STORAGE_KEY) !== null;
+  } catch {
+    return true;
+  }
+}
 
 /** Row of public.fbla_profiles (see docs/SPEC.md). */
 export type AuthProfile = {
@@ -152,7 +168,7 @@ export function authErrorKind(e: unknown): AuthErrorKind {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<AuthProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(mayHaveSession);
   const [recovering, setRecovering] = useState(false);
   // The user id whose profile lookup has finished (so guards never act on a half-loaded state).
   const [checkedUid, setCheckedUid] = useState<string | null>(null);

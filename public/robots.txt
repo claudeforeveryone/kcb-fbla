@@ -1,0 +1,17 @@
+# FBLC Practice. Public pages: home, sign-up, Terms and Privacy. Everything else needs a sign-in and is not indexed.
+User-agent: *
+Allow: /
+Disallow: /app.html
+Disallow: /me
+Disallow: /u/
+Disallow: /play
+Disallow: /vocab
+Disallow: /arena
+Disallow: /chapter
+Disallow: /leaderboard
+Disallow: /notifications
+Disallow: /onboarding
+Disallow: /reset
+Disallow: /dev/
+
+Sitemap: https://kcb-fbla.vercel.app/sitemap.xml
