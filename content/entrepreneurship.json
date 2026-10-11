@@ -2,7 +2,7 @@
   "slug": "entrepreneurship",
   "name": "Entrepreneurship",
   "group": "case",
-  "notes": "Competency areas are not verifiable: fbla.org event pages and the 2025-26 guideline PDFs returned 403 or were unreadable to the research tool (connect.fbla.org, fbla.org/competitive-events/entrepreneurship). Areas are the standard high-school entrepreneurship curriculum (business plan, marketing, finance and initial capital, legal and structure, operations and personnel, ethics/taxes/regulation), chosen to match the competencies in the older Alabama FBLA rating sheet (2019). The 2025-26 Competitive Events Overview slides (https://www.fbla.org/media/2025/10/2025-2026-Competitive-Events-Overview-Slides.pdf) list Entrepreneurship under the role-play category area; the event format (case study vs role play) should be confirmed against the official guideline. All questions are original practice items, U.S. conventions.",
+  "notes": "Official knowledge areas verified 2026-10-11 from the 2026-2027 FBLA Entrepreneurship guideline (state copy of the national guideline, https://www.pafbla.org/wp-content/uploads/2026/09/26-27-Entrepreneurship-PA.pdf): high school role play event (team of 1-3) with a 50-minute, 100-item objective test plus an interactive role play. Test areas and item counts: Fundamentals of Entrepreneurship (10), Discovery Strategies (15), Business Venture Concepts (20), Business Venture Resources (20), New Business Venture Activities (25), Business Law and Regulations (10), aligned to MBA Research EN/BL standards. The subs below are the earlier curriculum-based areas (business plan, marketing, finance and initial capital, legal and structure, operations and personnel, ethics/taxes/regulation) and have not yet been remapped to the official six. All questions are original practice items, U.S. conventions.",
   "subs": [
     "Business Plan and Opportunity Assessment",
     "Marketing Management",
@@ -22,7 +22,7 @@
         "Sign a distribution contract with a national grocery chain"
       ],
       "answer": 0,
-      "explain": "Validating demand cheaply before major spending reduces the risk of the business plan. Friends-and-family praise is not a demand test.",
+      "explain": "Validating demand cheaply before major spending reduces the risk of the business plan. Buying equipment, hiring or signing big contracts first commits money before demand is known.",
       "sub": "Business Plan and Opportunity Assessment",
       "diff": 1
     },
@@ -60,7 +60,7 @@
       "choices": [
         "All consumers who might ever buy any product",
         "Competitors' existing customers only",
-        "Customers who have already bought from a competitor in the past year",
+        "Only the people who live closest to the business",
         "A specific group of customers with shared needs that the business chooses to serve"
       ],
       "answer": 3,
@@ -210,15 +210,15 @@
     },
     {
       "id": "ent-015",
-      "q": "A startup holds a patent but has few customers and needs capital. Which element of the business plan most directly shows investors how the patent turns into revenue?",
+      "q": "A startup holds a patent but has few customers and needs capital. Which part of the business plan most directly shows investors how the patent will make money?",
       "choices": [
-        "Organizational chart",
-        "Lease terms for office space",
+        "Management team and organizational chart",
+        "Facilities and lease terms",
         "Revenue model and go-to-market strategy",
-        "An employee handbook with the vacation policy"
+        "Employee policies and benefits"
       ],
       "answer": 2,
-      "explain": "Investors need to see how the technology becomes income. The org chart and lease matter but do not answer the revenue question.",
+      "explain": "Investors need to see how the technology becomes income, which is what the revenue model and go-to-market plan show. Management, facilities and HR policies matter but do not answer that question.",
       "sub": "Business Plan and Opportunity Assessment",
       "diff": 3
     },
@@ -462,29 +462,29 @@
     },
     {
       "id": "ent-033",
-      "q": "A retailer buys a jacket for $40 and sells it for $60. What is the gross margin percentage?",
+      "q": "A retailer buys a jacket for $40 and sells it for $60. What is the markup as a percentage of cost?",
       "choices": [
-        "33.3%",
         "50.0%",
+        "33.3%",
         "40.0%",
         "66.7%"
       ],
       "answer": 0,
-      "explain": "Gross margin is $20 divided by the $60 selling price, about 33.3 percent. The 50 percent figure is markup on cost, a common trap.",
+      "explain": "Markup on cost is the $20 markup divided by the $40 cost, which is 50 percent. Dividing by the $60 selling price gives 33.3 percent, which is the markup on retail (gross margin), a common trap.",
       "sub": "Marketing Management",
       "diff": 3
     },
     {
       "id": "ent-034",
-      "q": "Which promotional tool is most effective at quickly increasing short-term sales?",
+      "q": "A manufacturer gives retailers display allowances and extra margin so they will stock and recommend its new product. Which promotional strategy is this?",
       "choices": [
-        "Corporate image advertising",
-        "Sales promotion, such as a limited-time discount",
-        "A public relations press release",
-        "Community sponsorship"
+        "Pull strategy",
+        "Push strategy",
+        "Publicity campaign",
+        "Price skimming"
       ],
       "answer": 1,
-      "explain": "Sales promotions create immediate purchase incentives. The others build awareness or reputation over time.",
+      "explain": "A push strategy aims promotion at channel members so they push the product toward consumers. A pull strategy aims promotion at consumers so they ask retailers for it.",
       "sub": "Marketing Management",
       "diff": 1
     },
@@ -676,11 +676,11 @@
       "choices": [
         "LIFO",
         "Specific identification",
-        "Specific identification always gives the lowest income",
+        "Weighted average",
         "FIFO"
       ],
       "answer": 3,
-      "explain": "FIFO assigns the older, cheaper costs to cost of goods sold when prices rise, so income is higher. LIFO does the opposite and is the trap.",
+      "explain": "FIFO assigns the older, cheaper costs to cost of goods sold when prices rise, so income is higher. LIFO does the opposite and is the trap; weighted average falls in between.",
       "sub": "Financial Management and Initial Capital",
       "diff": 3
     },
@@ -770,21 +770,21 @@
     },
     {
       "id": "ent-055",
-      "q": "Which intellectual property protects a company's logo and slogan used to identify its goods?",
+      "q": "A startup's website has original product photos and written product descriptions. Which intellectual property protects these automatically once they are created in a fixed form?",
       "choices": [
         "Patent",
-        "Copyright",
         "Trademark",
+        "Copyright",
         "Trade secret"
       ],
       "answer": 2,
-      "explain": "Trademarks protect brand identifiers used in commerce. Patents cover inventions and copyrights cover creative works.",
+      "explain": "Copyright protects original creative works such as photos and text as soon as they are fixed in a tangible form; registration is optional. Patents cover inventions and trademarks cover brand identifiers.",
       "sub": "Legal Issues and Business Structure",
       "diff": 1
     },
     {
       "id": "ent-056",
-      "q": "Under U.S. law, how long does a standard utility patent generally last from the filing date?",
+      "q": "Under U.S. law, how long does a standard utility patent generally last?",
       "choices": [
         "10 years from the date granted",
         "50 years after the author's death",
@@ -840,7 +840,7 @@
     },
     {
       "id": "ent-060",
-      "q": "A business owner signs a contract through an agent without revealing the principal. Which legal concept describes this?",
+      "q": "An agent signs a supply contract for a business owner, but the supplier has no idea the agent is acting for anyone else. Which agency-law concept describes this arrangement?",
       "choices": [
         "Apparent authority",
         "Warranty of title",
@@ -848,7 +848,7 @@
         "Undisclosed principal"
       ],
       "answer": 3,
-      "explain": "An undisclosed principal is bound and can enforce the agent's contract. Apparent authority is a different agency concept.",
+      "explain": "When the third party does not know a principal exists, the principal is undisclosed; the principal is still bound and can enforce the contract, and the agent can be held liable too. Apparent authority is a different agency concept about what a third party reasonably believes.",
       "sub": "Legal Issues and Business Structure",
       "diff": 3
     },
@@ -910,15 +910,15 @@
     },
     {
       "id": "ent-065",
-      "q": "A tenant signs a commercial lease with a personal guarantee. What is the main personal risk?",
+      "q": "A startup signs a commercial lease that requires it to pay base rent plus the property's taxes, insurance and maintenance. Which type of lease is this?",
       "choices": [
-        "The owner may lose personal assets if the business defaults on rent",
-        "The landlord takes ownership of the company",
-        "The lease ends automatically after one year",
-        "The business loses its trademark rights"
+        "Triple net (NNN) lease",
+        "Gross lease",
+        "Percentage lease",
+        "Sublease"
       ],
       "answer": 0,
-      "explain": "A personal guarantee makes the owner liable for the lease obligations, which reaches personal assets.",
+      "explain": "In a triple net lease the tenant pays base rent plus the three 'nets': property taxes, insurance and maintenance. In a gross lease the landlord covers those costs out of a single rent payment; a percentage lease adds a share of sales.",
       "sub": "Legal Issues and Business Structure",
       "diff": 2
     },
@@ -1078,7 +1078,7 @@
     },
     {
       "id": "ent-077",
-      "q": "A business with 12 employees loses 3 in a year. What is the annual turnover rate?",
+      "q": "A business averages 12 employees during the year, and 3 employees leave. What is the annual turnover rate?",
       "choices": [
         "25%",
         "12%",
@@ -1263,12 +1263,12 @@
       "q": "Which expense is generally fully deductible in the year it is paid by a small business?",
       "choices": [
         "Purchase of land",
-        "Ordinary and necessary business rent",
+        "Monthly rent on the business's shop space",
         "An owner's personal vacation",
-        "A 15-year building improvement"
+        "The purchase price of a new commercial building"
       ],
       "answer": 1,
-      "explain": "Ordinary and necessary business expenses are deductible when paid. Land is not depreciable, and capital improvements are depreciated over time.",
+      "explain": "Rent is an ordinary and necessary business expense, deductible when paid. Land is never depreciated, a commercial building is depreciated over 39 years, and a personal vacation is not a business expense.",
       "sub": "Ethics, Taxes and Government Regulation",
       "diff": 3
     },
@@ -1330,15 +1330,15 @@
     },
     {
       "id": "ent-095",
-      "q": "Which business form generally passes its profits and losses through to the owners' personal tax returns?",
+      "q": "A partnership files Form 1065 but pays no federal income tax itself. Which form does it give each partner to report their share of income on their personal return?",
       "choices": [
-        "C corporation",
-        "Publicly traded corporation",
-        "Partnership",
-        "Cooperative taxed at the entity level"
+        "Form W-2",
+        "Form 1099-NEC",
+        "Schedule K-1",
+        "Schedule C"
       ],
       "answer": 2,
-      "explain": "Partnerships are pass-through entities that report income on partners' returns. C corporations and cooperatives can be taxed at the entity level.",
+      "explain": "A partnership is a pass-through entity: it files an information return (Form 1065) and gives each partner a Schedule K-1 showing their share. W-2s are for employees, 1099-NEC is for contractors, and Schedule C is for sole proprietors.",
       "sub": "Ethics, Taxes and Government Regulation",
       "diff": 2
     },
@@ -1352,7 +1352,7 @@
         "Obtain consent and provide an easy opt-out"
       ],
       "answer": 3,
-      "explain": "Consent and an easy opt-out respect customer privacy and anti-spam rules. Sharing or buying lists without consent breaks both.",
+      "explain": "Consent and an easy opt-out are best practice, and the U.S. CAN-SPAM Act requires a working opt-out on commercial email. Sharing, buying or exposing lists breaks customer trust and privacy rules.",
       "sub": "Ethics, Taxes and Government Regulation",
       "diff": 1
     },
@@ -1759,7 +1759,7 @@
     {
       "id": "ent-v058",
       "term": "Sherman Antitrust Act",
-      "def": "A 1890 federal law that prohibits contracts and conspiracies that unreasonably restrain trade.",
+      "def": "An 1890 federal law that prohibits contracts, combinations and conspiracies that unreasonably restrain trade, and monopolization.",
       "sub": "Ethics, Taxes and Government Regulation"
     },
     {
