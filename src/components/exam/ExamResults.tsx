@@ -400,7 +400,7 @@ function ReviewItem({
               <button
                 type="button"
                 onClick={onReport}
-                className="inline-flex h-8 items-center gap-1.5 rounded-[2px] px-2 text-xs font-semibold text-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40"
+                className="relative inline-flex h-10 items-center gap-1.5 rounded-[2px] px-3 text-xs font-semibold text-muted transition-colors after:absolute after:inset-x-0 after:-inset-y-1 hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
               >
                 <MessageSquareWarning className="size-3.5" aria-hidden />
                 Report this question

@@ -78,7 +78,8 @@ export function Tabs<T extends string>({
             onClick={() => onChange(t.value)}
             onKeyDown={(e) => onKey(e, i)}
             className={cn(
-              'relative inline-flex shrink-0 items-center gap-2 font-display text-sm font-semibold transition-colors duration-150 disabled:opacity-40 [&>svg]:size-4',
+              // The tablist scrolls sideways, which clips an outline drawn outside the button: draw focus inside it.
+              'relative inline-flex shrink-0 items-center gap-2 font-display text-sm font-semibold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ring)] disabled:opacity-40 [&>svg]:size-4',
               variant === 'underline'
                 ? cn(
                     'h-11 px-3 after:absolute after:inset-x-2 after:-bottom-px after:h-[3px] after:transition-colors',
