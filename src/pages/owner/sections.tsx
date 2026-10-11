@@ -365,8 +365,8 @@ export function PreparationView({ data }: { data: OwnerPreparation }) {
   return (
     <div className="space-y-3">
       <p className="text-sm text-muted">
-        How students do in each event: practice runs and mock exams (not duels or chapter tests). Accuracy and the share of
-        runs not finished show only when 5 or more students took part.
+        Practice runs and mock exams only, not duels or chapter tests. Accuracy and the share of runs not finished show
+        only when 5 or more students took part.
       </p>
       <Table>
         <THead>
