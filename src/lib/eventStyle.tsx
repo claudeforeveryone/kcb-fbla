@@ -83,26 +83,26 @@ export function EventCrest({ slug, size = 72, className }: { slug: string; size?
 // alternating ease-in-out loops of different lengths per layer. Only transform is animated. The watermark's
 // resting offset/tilt come from Tailwind v4's `translate`/`rotate` properties, which compose with `transform`.
 const COLOR_BLOCK_CSS = `
-@keyframes cb-facet-a { from { transform: translate3d(-2.5%, -1%, 0) } to { transform: translate3d(2.5%, 1.5%, 0) } }
-@keyframes cb-facet-b { from { transform: translate3d(2%, 1%, 0) } to { transform: translate3d(-3%, -1.5%, 0) } }
-@keyframes cb-mark { from { transform: translate3d(0, 2.5%, 0) rotate(-2deg) } to { transform: translate3d(-1.5%, -2.5%, 0) rotate(2.5deg) } }
+@keyframes cb-facet-a { from { transform: translate3d(-4.5%, -2%, 0) } to { transform: translate3d(4.5%, 2.5%, 0) } }
+@keyframes cb-facet-b { from { transform: translate3d(4%, 2%, 0) } to { transform: translate3d(-5%, -2.5%, 0) } }
+@keyframes cb-mark { from { transform: translate3d(1.5%, 5%, 0) rotate(-5deg) } to { transform: translate3d(-3%, -5%, 0) rotate(5deg) } }
 .cb-facet-a, .cb-facet-b, .cb-mark {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-delay: var(--cb-delay, 0s);
 }
-.cb-facet-a { animation-name: cb-facet-a; animation-duration: 11s }
-.cb-facet-b { animation-name: cb-facet-b; animation-duration: 15s }
-.cb-mark { animation-name: cb-mark; animation-duration: 9s }
+.cb-facet-a { animation-name: cb-facet-a; animation-duration: 8s }
+.cb-facet-b { animation-name: cb-facet-b; animation-duration: 11s }
+.cb-mark { animation-name: cb-mark; animation-duration: 7s }
 @media (prefers-reduced-motion: reduce) { .cb-facet-a, .cb-facet-b, .cb-mark { animation: none } }
 `;
 
-/** A stable negative delay (0 to -16s) from a string, so neighbouring blocks don't drift in lockstep. */
+/** A stable negative delay (0 to -11s) from a string, so neighbouring blocks don't drift in lockstep. */
 function driftDelay(seed: string): string {
   let h = 0;
   for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) | 0;
-  return `-${(Math.abs(h) % 16000) / 1000}s`;
+  return `-${(Math.abs(h) % 11000) / 1000}s`;
 }
 
 /**
