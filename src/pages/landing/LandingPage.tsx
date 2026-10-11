@@ -34,8 +34,9 @@ import {
 
 // Read once, when this chunk first runs: is this page's static HTML on screen? Hydration keeps the prerendered markup
 // in place until this chunk has loaded, so for a hydrated visit it is still there. A fresh render (someone who may be
-// signed in, whose prerendered copy stayed hidden behind the navy splash) has replaced it by then; whether the reveal
-// plays is then intro.ts's first-paint rule (the splash painted first, so usually not).
+// signed in, whose prerendered copy stayed hidden behind the navy splash) has replaced it by then; whether the lead and
+// actions fade up is then intro.ts's first-paint rule (the splash painted first, so usually not). The headline's own
+// reveal is CSS and plays either way (observatory.css).
 const PRERENDERED =
   typeof document !== "undefined" &&
   !!document.querySelector("#root .observatory");
@@ -128,7 +129,7 @@ function Landing() {
   const [intro, setIntro] = useState(false);
   const [js, setJs] = useState(false);
 
-  // Decide on the headline reveal before the first browser paint, so the text never jumps.
+  // Decide on the lead and actions fade (obs-intro) before the first browser paint, so the text never jumps.
   useBeforePaint(() => {
     const reducedMotion = !!window.matchMedia?.(
       "(prefers-reduced-motion: reduce)",

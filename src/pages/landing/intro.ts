@@ -1,8 +1,10 @@
-// Whether the hero's headline reveal should play. Pure so it can be unit tested.
+// Whether the hero's lead, body and actions fade up (obs-intro). Pure so it can be unit tested. The headline's own
+// reveal (lines rising, the rule drawing) is transform-only CSS that plays from the first paint for everyone who
+// allows motion, prerendered page included (observatory.css, reveal.test.ts).
 //
-// The reveal only makes sense when the landing is the first thing the visitor sees being painted. When static HTML of
-// the landing was already on screen (a prerendered page that React then takes over), replaying the reveal would make
-// text the visitor is already reading drop and rise again, so the text stays still and only the 3D room assembles.
+// The fade only makes sense when the landing is the first thing the visitor sees being painted. When static HTML of
+// the landing was already on screen (a prerendered page that React then takes over), fading text the visitor is
+// already reading out and in again would be wrong, and the body paragraph is the page's largest paint, so it stays.
 
 export type IntroEnv = {
   reducedMotion: boolean;

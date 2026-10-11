@@ -313,16 +313,23 @@
   display: block;
 }
 
-/* The intro plays only when the landing is the first paint (see intro.ts); otherwise everything is simply there. */
-.obs-intro .obs-line > span {
-  animation: obs-rise 900ms var(--obs-ease) both;
-  animation-delay: var(--d, 0ms);
+/* The headline reveal: the two lines rise inside their masks and the gold rule draws. Transform only, so the text is
+   painted, and readable, from the first frame and the largest-paint timing is untouched. It is in the prerendered
+   page's CSS, so a first visit sees it from the very first paint; hydration keeps the same elements, so it never
+   replays. Nothing moves under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .obs-hero .obs-line > span {
+    animation: obs-rise 900ms var(--obs-ease) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .obs-hero .obs-rule {
+    animation: obs-draw 700ms var(--obs-ease) 500ms both;
+  }
 }
 
-.obs-intro .obs-rule {
-  animation: obs-draw 700ms var(--obs-ease) 500ms both;
-}
-
+/* The lead, body and actions fade up only when the landing is rendered fresh as the first paint (obs-intro, see
+   intro.ts). On the prerendered page they are simply there: the body paragraph is the largest paint. */
 .obs-intro .obs-up {
   animation: obs-up 600ms var(--obs-ease) both;
   animation-delay: var(--d, 0ms);
