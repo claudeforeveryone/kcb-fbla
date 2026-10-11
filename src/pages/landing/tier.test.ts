@@ -7,6 +7,7 @@ const desktop: LandingEnv = {
   memoryGb: 8,
   webgl2: true,
   software: false,
+  touchOnly: false,
   declines: 0,
 };
 
@@ -20,10 +21,16 @@ describe("tierFor", () => {
     expect(tierFor({ ...desktop, software: true })).toBe("poster");
   });
 
-  it("uses the lite room on phone widths", () => {
-    expect(tierFor({ ...desktop, width: 390 })).toBe("lite");
-    expect(tierFor({ ...desktop, width: 767 })).toBe("lite");
+  it("gives phones the static frame, never the WebGL room", () => {
+    // phone-first: the room's mount and shader compile were 1.2-1.5 s of blocking time on a 4x-throttled phone
+    expect(tierFor({ ...desktop, width: 390 })).toBe("poster");
+    expect(tierFor({ ...desktop, width: 767 })).toBe("poster");
     expect(tierFor({ ...desktop, width: 768 })).toBe("full");
+  });
+
+  it("gives touch-only devices the static frame at any width (tablets, phones held sideways)", () => {
+    expect(tierFor({ ...desktop, width: 844, touchOnly: true })).toBe("poster");
+    expect(tierFor({ ...desktop, width: 1366, touchOnly: true })).toBe("poster");
   });
 
   it("uses the lite room on low-core and low-memory devices", () => {
@@ -34,7 +41,7 @@ describe("tierFor", () => {
 
   it("uses the static frame on very low memory", () => {
     expect(tierFor({ ...desktop, memoryGb: 2 })).toBe("poster");
-    expect(tierFor({ ...desktop, width: 390, memoryGb: 1 })).toBe("poster");
+    expect(tierFor({ ...desktop, width: 1280, cores: 2, memoryGb: 1 })).toBe("poster");
   });
 
   it("steps down after one performance decline and to the static frame after two", () => {
