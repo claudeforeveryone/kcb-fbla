@@ -2,7 +2,7 @@
   "slug": "healthcare-administration",
   "name": "Healthcare Administration",
   "group": "objective",
-  "notes": "Competency areas and item counts taken from the Florida FBLA Healthcare Administration event page (https://www.flfbla.org/fbla-event-health-care-administration): 100 multiple-choice questions, 50 minutes, 8 knowledge areas (15/10/10/15/10/10/15/15). The official fbla.org event page and 2025-26 guideline PDF returned HTTP 403 / 404 to the fetch tool, so they could not be read directly. FBLA's 2025-26 high school event list (https://www.fbla.org/media/2025/05/25-26-HS-CE-List.pdf) confirms Healthcare Administration is an individual objective test for grades 9-12. Sub counts are approximate to the Florida weights: actual counts are Organizations 15, Finances 13, Staffing 9, Strategy 13, Technology 10, Billing 14, Policy 15, Communication 11 (billing and finance run high because revenue-cycle questions were kept). The Florida page's knowledge-area list omits Healthcare Organizations and Structure, but its item counts include it, so it is kept here. Questions are original and use U.S. law (HIPAA, Stark, Anti-Kickback, EMTALA, CMS, OSHA).",
+  "notes": "Competency areas and item counts taken from the Florida FBLA Healthcare Administration event page (https://www.flfbla.org/fbla-event-health-care-administration): 100 multiple-choice questions, 50 minutes, 8 knowledge areas (15/10/10/15/10/10/15/15). The official fbla.org event page and 2025-26 guideline PDF returned HTTP 403 / 404 to the fetch tool, so they could not be read directly. FBLA's 2025-26 high school event list (https://www.fbla.org/media/2025/05/25-26-HS-CE-List.pdf) confirms Healthcare Administration is an individual objective test for grades 9-12. Sub counts are approximate to the Florida weights: actual counts are Organizations 15, Finances 14, Staffing 10, Strategy 11, Technology 10, Billing 14, Policy 16, Communication 10 (billing and finance run high because revenue-cycle questions were kept). The Florida page's knowledge-area list omits Healthcare Organizations and Structure, but its item counts include it, so it is kept here. Questions are original and use U.S. law (HIPAA, Stark, Anti-Kickback, EMTALA, CMS, OSHA). Answer keys re-verified 2026-10-11 (all 100 re-solved); giveaway wording, weak distractors, and a few sub tags fixed.",
   "subs": [
     "Healthcare Organizations and Structure",
     "Healthcare Finances and Budgeting",
@@ -31,7 +31,12 @@
     {
       "id": "hca-002",
       "q": "A hospital receives a fixed amount per member per month to cover all necessary care for a defined population, regardless of how many services each member uses. What is this payment method called?",
-      "choices": ["Fee-for-service", "Per diem", "Case rate", "Capitation"],
+      "choices": [
+        "Fee-for-service",
+        "Per diem",
+        "Case rate",
+        "Capitation"
+      ],
       "answer": 3,
       "explain": "Capitation shifts financial risk to the provider. The trap is case rate, which pays a fixed amount per episode rather than per member.",
       "sub": "Healthcare Finances and Budgeting",
@@ -39,9 +44,9 @@
     },
     {
       "id": "hca-003",
-      "q": "Which type of hospital ownership is operated by a state or local government?",
+      "q": "A hospital owned and run by a county or state is classified as which type?",
       "choices": [
-        "Public (government) hospital",
+        "Public hospital",
         "Investor-owned hospital",
         "Voluntary nonprofit hospital",
         "Faith-based hospital"
@@ -55,13 +60,13 @@
       "id": "hca-004",
       "q": "An accountable care organization (ACO) differs from traditional fee-for-service primarily because ACO participants:",
       "choices": [
-        "Are paid only for each procedure they perform",
-        "Must accept no Medicare beneficiaries",
-        "Share savings or losses based on total cost and quality of care for an attributed population",
-        "Are exempt from quality reporting"
+        "Are paid separately for each visit and procedure, with no shared risk",
+        "Receive a fixed monthly payment per member with no quality targets",
+        "Share in savings or losses tied to cost and quality for an assigned population",
+        "Must directly employ every physician who participates in the ACO"
       ],
       "answer": 2,
-      "explain": "ACOs are accountable for total cost and quality for a population, so they can share savings or losses. Quality reporting is required, not waived.",
+      "explain": "ACOs are accountable for total cost and quality for an assigned population and can share savings (and in some tracks, losses). Per-procedure payment is fee-for-service, a flat per-member payment is capitation, and ACOs can be networks of independent practices.",
       "sub": "Healthcare Organizations and Structure",
       "diff": 2
     },
@@ -70,8 +75,8 @@
       "q": "A hospital's case mix index (CMI) is used primarily to:",
       "choices": [
         "Measure patient satisfaction with the discharge process",
-        "Calculate the percentage of beds occupied",
-        "Compare the average resource intensity of the patient mix against a standard, to inform payment and staffing",
+        "Calculate the percentage of staffed beds occupied",
+        "Gauge the average resource intensity of the patient mix",
         "Track the number of emergency visits per year"
       ],
       "answer": 2,
@@ -109,7 +114,7 @@
     },
     {
       "id": "hca-008",
-      "q": "Which level of long-term care provides 24-hour skilled nursing and rehabilitation for patients who no longer need hospital care?",
+      "q": "Which long-term care setting provides round-the-clock care by licensed nurses and daily rehabilitation therapy for patients who no longer need hospital care?",
       "choices": [
         "Assisted living facility",
         "Skilled nursing facility",
@@ -123,7 +128,7 @@
     },
     {
       "id": "hca-009",
-      "q": "Which payment method pays providers for each unit of service delivered, so revenue rises with the volume of services?",
+      "q": "Which payment method pays providers separately for every visit, test, and procedure, so revenue rises with volume?",
       "choices": [
         "Fee-for-service",
         "Capitation",
@@ -138,7 +143,12 @@
     {
       "id": "hca-010",
       "q": "A hospital has an average daily census of 180 patients and 240 staffed beds. What is its occupancy rate?",
-      "choices": ["60%", "67%", "75%", "133%"],
+      "choices": [
+        "60%",
+        "67%",
+        "75%",
+        "133%"
+      ],
       "answer": 2,
       "explain": "Occupancy = 180 / 240 = 75%. Dividing the other way gives 133%, a common error.",
       "sub": "Healthcare Organizations and Structure",
@@ -168,7 +178,7 @@
         "Strengths"
       ],
       "answer": 3,
-      "explain": "Strengths and weaknesses are internal; opportunities and threats are external. Competitor pricing is an external threat.",
+      "explain": "Strengths and weaknesses are internal; opportunities and threats are external. Competitor pricing is an external factor.",
       "sub": "Strategic Management",
       "diff": 2
     },
@@ -177,19 +187,24 @@
       "q": "Under OSHA's Bloodborne Pathogens Standard, what must an employer provide to employees with occupational exposure to blood?",
       "choices": [
         "Protective equipment purchased by each employee",
-        "Training only after an exposure incident occurs",
-        "A notice posted in the emergency room only",
+        "One training session at hire, with no annual refresher",
+        "The hepatitis B vaccine only after an exposure incident",
         "Annual training and the hepatitis B vaccine at no cost to the employee"
       ],
       "answer": 3,
-      "explain": "The standard requires annual training, free hepatitis B vaccination, and protective equipment for exposed employees. The other choices contradict it.",
+      "explain": "The standard (29 CFR 1910.1030) requires training at assignment and at least annually, hepatitis B vaccination offered at no cost within 10 working days of assignment, and employer-provided protective equipment. Each other choice breaks one of those rules.",
       "sub": "Healthcare Policy and Regulation",
       "diff": 2
     },
     {
       "id": "hca-014",
       "q": "In SBAR communication, what does the letter B stand for?",
-      "choices": ["Balance", "Background", "Billing", "Baseline"],
+      "choices": [
+        "Balance",
+        "Background",
+        "Billing",
+        "Baseline"
+      ],
       "answer": 1,
       "explain": "SBAR stands for Situation, Background, Assessment, Recommendation.",
       "sub": "Communication and Leadership",
@@ -201,7 +216,7 @@
       "choices": [
         "Autocratic",
         "Laissez-faire",
-        "Participative (consultative)",
+        "Participative",
         "Bureaucratic"
       ],
       "answer": 2,
@@ -211,15 +226,15 @@
     },
     {
       "id": "hca-016",
-      "q": "Which interoperability standard uses RESTful APIs and modular resources to exchange health data and is the modern successor to HL7 version 2 messaging?",
+      "q": "Which HL7 interoperability standard exchanges health data through RESTful APIs and modular resources, and is the newer alternative to HL7 version 2 messaging?",
       "choices": [
-        "FHIR (Fast Healthcare Interoperability Resources)",
+        "FHIR",
         "DICOM",
         "NCPDP SCRIPT",
         "X12 837"
       ],
       "answer": 0,
-      "explain": "FHIR is the HL7 standard built on web APIs. DICOM handles imaging, NCPDP SCRIPT handles prescriptions, and X12 837 handles claims.",
+      "explain": "FHIR (Fast Healthcare Interoperability Resources) is the HL7 standard built on web APIs. DICOM handles imaging, NCPDP SCRIPT handles e-prescriptions, and X12 837 handles claims.",
       "sub": "Healthcare Technology",
       "diff": 3
     },
@@ -241,13 +256,13 @@
       "id": "hca-018",
       "q": "What is the main purpose of an electronic health record (EHR)?",
       "choices": [
-        "A centralized digital record of a patient's health information across care",
-        "A patient's personal diary of symptoms only",
-        "Billing-only software for insurance claims",
-        "A scheduling tool for surgeons"
+        "A digital patient record that can be shared across providers and settings",
+        "A health record the patient creates and manages, such as a phone app",
+        "Practice management software that handles claims and billing",
+        "A digital chart used only inside one practice and not shared"
       ],
       "answer": 0,
-      "explain": "An EHR holds the clinical record and can be shared across care settings. Billing and scheduling are functions it may support, not its main purpose.",
+      "explain": "An EHR is a digital clinical record built to be shared across providers and settings. A chart kept inside one practice is an EMR, a patient-managed record is a PHR, and claims software is practice management, not the EHR's main purpose.",
       "sub": "Healthcare Technology",
       "diff": 1
     },
@@ -267,7 +282,7 @@
     },
     {
       "id": "hca-020",
-      "q": "A claim is denied because the diagnosis code does not support medical necessity for the procedure billed. Which denial category best describes this?",
+      "q": "A payer denies a claim because the diagnosis code reported does not justify the procedure that was billed. Which denial category is this?",
       "choices": [
         "Eligibility",
         "Timely filing",
@@ -297,13 +312,13 @@
       "id": "hca-022",
       "q": "Coinsurance is best defined as:",
       "choices": [
-        "A flat fee per visit",
-        "A deductible paid in installments",
-        "The insured's percentage share of covered costs after the deductible",
-        "A premium paid by the employer"
+        "A fixed dollar amount the insured pays at each visit",
+        "The amount the insured pays before the plan begins to pay",
+        "The insured's percentage share of costs after the deductible",
+        "The monthly premium the insured pays to keep coverage"
       ],
       "answer": 2,
-      "explain": "Coinsurance is a percentage the insured pays of allowed charges after the deductible. Copayment is a fixed amount.",
+      "explain": "Coinsurance is a percentage of allowed charges the insured pays after the deductible. A fixed per-visit amount is a copayment, and the amount paid before coverage starts is the deductible.",
       "sub": "Healthcare Billing and Insurance",
       "diff": 2
     },
@@ -324,7 +339,12 @@
     {
       "id": "hca-024",
       "q": "Which federal law requires hospitals with emergency departments to screen and stabilize patients regardless of ability to pay?",
-      "choices": ["EMTALA", "HITECH", "CLIA", "ERISA"],
+      "choices": [
+        "EMTALA",
+        "HITECH",
+        "CLIA",
+        "ERISA"
+      ],
       "answer": 0,
       "explain": "EMTALA is the Emergency Medical Treatment and Labor Act. HITECH covers health IT and breach rules, CLIA covers lab testing, and ERISA covers employee benefit plans.",
       "sub": "Healthcare Organizations and Structure",
@@ -335,12 +355,12 @@
       "q": "Modifier 25 appended to an E/M code indicates:",
       "choices": [
         "A significant, separately identifiable E/M service on the same day as a procedure",
-        "The patient was seen by an anesthesiologist",
-        "The service was performed in an emergency room",
-        "The visit was a telehealth service"
+        "An unrelated E/M visit during a procedure's postoperative period",
+        "A distinct procedure performed at a separate site or session",
+        "A service delivered by real-time audio and video telehealth"
       ],
       "answer": 0,
-      "explain": "Modifier 25 lets a physician bill a separate E/M visit on the same day as a procedure when the visit is significant and separately identifiable.",
+      "explain": "Modifier 25 reports a significant, separately identifiable E/M service on the same day as a procedure. The other choices describe modifier 24 (unrelated E/M in a postoperative period), 59 (distinct procedural service), and 95 (synchronous telehealth).",
       "sub": "Healthcare Billing and Insurance",
       "diff": 3
     },
@@ -362,13 +382,13 @@
       "id": "hca-027",
       "q": "Employee turnover rate is calculated as:",
       "choices": [
-        "Total hires divided by total employees",
+        "Hires during the period divided by average number of employees, times 100",
         "Separations during the period divided by average number of employees, times 100",
-        "Number of employees hired per year",
-        "Terminations divided by hires"
+        "Separations during the period divided by hires during the period, times 100",
+        "Employees at year-end divided by employees at year-start, times 100"
       ],
       "answer": 1,
-      "explain": "Turnover rate = separations divided by average headcount, multiplied by 100. Hires are not part of the formula.",
+      "explain": "Turnover rate = separations divided by average headcount, multiplied by 100. Hires divided by headcount is a hire rate, and comparing separations with hires or year-end with year-start headcount is not turnover.",
       "sub": "Staffing and Training",
       "diff": 2
     },
@@ -376,13 +396,13 @@
       "id": "hca-028",
       "q": "Which training method is most effective for teaching staff a new electronic health record system?",
       "choices": [
-        "Self-study of the vendor manual only",
-        "Hands-on training in a practice environment with super-users",
-        "A single annual lecture",
-        "No training; staff learn on the job"
+        "Emailing staff the vendor's user manual to read before go-live",
+        "Hands-on practice in a test environment with super-user support",
+        "A single classroom lecture months before go-live",
+        "A short webinar on go-live day with no practice time"
       ],
       "answer": 1,
-      "explain": "Hands-on practice with peer support builds skills. Reading alone or a single lecture does not transfer well.",
+      "explain": "Hands-on practice in a training environment, backed by super-users, builds real skill. Reading a manual, a lecture held long before go-live, or a short webinar gives staff little practice.",
       "sub": "Staffing and Training",
       "diff": 2
     },
@@ -390,13 +410,13 @@
       "id": "hca-029",
       "q": "Performance appraisal feedback is most effective when it is:",
       "choices": [
-        "Delivered once a year only",
-        "Based on vague impressions",
-        "Shared only with the employee's supervisor",
+        "Saved for the annual review so it is delivered all at once",
+        "Based on the manager's overall impression of the employee",
+        "Focused on ranking the employee against coworkers",
         "Specific, timely, and tied to documented goals"
       ],
       "answer": 3,
-      "explain": "Effective feedback is specific, timely, and linked to measurable goals rather than impressions.",
+      "explain": "Effective feedback is specific, timely, and linked to documented goals. Saving it for one annual meeting, relying on general impressions, or ranking against peers makes it less useful.",
       "sub": "Staffing and Training",
       "diff": 2
     },
@@ -432,13 +452,13 @@
       "id": "hca-032",
       "q": "Orientation for new clinical staff typically includes which element that accreditation standards expect?",
       "choices": [
-        "Only a dress code review",
+        "A probationary pay rate for the first 90 days",
         "Competency verification for the assigned role",
-        "A mandatory vacation request",
-        "Social media training only"
+        "Enrolment in the organization's retirement plan",
+        "A signed non-compete agreement"
       ],
       "answer": 1,
-      "explain": "Accreditors expect staff competency to be verified for their role during orientation.",
+      "explain": "Accreditors such as The Joint Commission expect orientation to include verifying that staff are competent for their role. Pay, benefits, and contracts are HR paperwork, not accreditation requirements.",
       "sub": "Staffing and Training",
       "diff": 2
     },
@@ -515,7 +535,12 @@
     {
       "id": "hca-038",
       "q": "Which term describes a clear statement of what an organization hopes to become in the future?",
-      "choices": ["Mission", "Vision", "Objective", "Policy"],
+      "choices": [
+        "Mission",
+        "Vision",
+        "Objective",
+        "Policy"
+      ],
       "answer": 1,
       "explain": "Vision is the future aspiration. Mission is current purpose and objectives are measurable targets.",
       "sub": "Strategic Management",
@@ -525,13 +550,13 @@
       "id": "hca-039",
       "q": "Porter's five forces analysis is used to assess:",
       "choices": [
-        "Internal staffing levels",
-        "Employee satisfaction",
-        "Patient transportation",
-        "Industry competitive intensity and profitability"
+        "An organization's internal strengths and weaknesses",
+        "Employee engagement across departments",
+        "The quality of patient care processes",
+        "Competitive intensity and profitability of an industry"
       ],
       "answer": 3,
-      "explain": "The five forces assess rivalry, new entrants, substitutes, supplier power, and buyer power within an industry.",
+      "explain": "The five forces assess rivalry, new entrants, substitutes, supplier power, and buyer power within an industry. Internal strengths and weaknesses belong to a SWOT analysis.",
       "sub": "Strategic Management",
       "diff": 2
     },
@@ -565,7 +590,7 @@
     },
     {
       "id": "hca-042",
-      "q": "Which type of hospital is a rural facility with fewer than 25 inpatient beds that is paid on a cost-based reimbursement basis?",
+      "q": "Which type of hospital is a rural facility with no more than 25 inpatient beds that Medicare pays on a reasonable-cost basis?",
       "choices": [
         "Long-term acute care hospital",
         "Critical access hospital",
@@ -573,7 +598,7 @@
         "Children's hospital"
       ],
       "answer": 1,
-      "explain": "Critical access hospitals are designated rural facilities with limited beds and cost-based Medicare payment.",
+      "explain": "Critical access hospitals are designated rural facilities limited to 25 inpatient beds (42 CFR 485.620) that Medicare pays at 101% of reasonable cost.",
       "sub": "Healthcare Organizations and Structure",
       "diff": 2
     },
@@ -607,10 +632,15 @@
     },
     {
       "id": "hca-045",
-      "q": "A patient who may self-refer to specialists and use out-of-network providers, at a higher cost-sharing rate, most likely has which plan type?",
-      "choices": ["HMO", "EPO", "POS", "PPO"],
+      "q": "A patient does not have to choose a primary care provider, can see specialists without a referral, and can use out-of-network providers at a higher cost-sharing rate. Which plan type does the patient most likely have?",
+      "choices": [
+        "HMO",
+        "EPO",
+        "POS",
+        "PPO"
+      ],
       "answer": 3,
-      "explain": "PPOs allow self-referral and out-of-network care at higher cost. EPOs and HMOs generally do not cover out-of-network care.",
+      "explain": "PPOs need no gatekeeper or referrals and cover out-of-network care at higher cost. POS plans usually require a primary care provider and referrals, and EPOs and HMOs generally do not cover out-of-network care.",
       "sub": "Healthcare Organizations and Structure",
       "diff": 3
     },
@@ -644,7 +674,7 @@
     },
     {
       "id": "hca-048",
-      "q": "What does the abbreviation HIE stand for?",
+      "q": "In health information technology, what does the abbreviation HIE stand for?",
       "choices": [
         "Health Insurance Exchange",
         "Hospital Information Exchange",
@@ -660,10 +690,10 @@
       "id": "hca-049",
       "q": "Computerized provider order entry (CPOE) primarily reduces which risk?",
       "choices": [
-        "Insurance denials",
-        "Patient no-shows",
-        "Medication errors from illegible handwriting",
-        "Staff turnover"
+        "Insurance claim denials",
+        "Patient appointment no-shows",
+        "Medication errors from illegible orders",
+        "Nurse staffing shortages"
       ],
       "answer": 2,
       "explain": "CPOE replaces handwritten orders, reducing transcription and medication errors.",
@@ -687,7 +717,12 @@
     {
       "id": "hca-051",
       "q": "Which federal law is the primary privacy rule protecting individually identifiable health information?",
-      "choices": ["ERISA", "HIPAA", "COBRA", "FDCPA"],
+      "choices": [
+        "ERISA",
+        "HIPAA",
+        "COBRA",
+        "FDCPA"
+      ],
       "answer": 1,
       "explain": "HIPAA sets the Privacy, Security, and Breach Notification rules for protected health information.",
       "sub": "Healthcare Policy and Regulation",
@@ -700,7 +735,7 @@
         "Patients must receive a minimum of 30 days notice",
         "Providers must keep records for a minimum of 3 years",
         "Staff must complete a minimum of 8 hours of training",
-        "Only the minimum amount of PHI needed for a permitted purpose should be used or disclosed"
+        "Only the least PHI needed for a purpose may be used or disclosed"
       ],
       "answer": 3,
       "explain": "Minimum necessary limits PHI use and disclosure to what is needed for the purpose, with exceptions such as treatment.",
@@ -709,7 +744,7 @@
     },
     {
       "id": "hca-053",
-      "q": "Which HIPAA rule requires covered entities to notify affected individuals, HHS, and sometimes the media after a breach of unsecured PHI?",
+      "q": "Which HIPAA rule requires covered entities to tell affected individuals, HHS, and sometimes the media when unsecured PHI has been improperly acquired or disclosed?",
       "choices": [
         "Privacy Rule",
         "Security Rule",
@@ -725,13 +760,13 @@
       "id": "hca-054",
       "q": "What is a Notice of Privacy Practices?",
       "choices": [
-        "A billing statement itemizing charges",
-        "A consent form for surgery",
-        "A document describing how a covered entity uses and discloses PHI and patient rights",
-        "A payer's list of covered drugs"
+        "A form the patient signs to let records be released to a third party",
+        "A notice sent to patients after their PHI has been breached",
+        "A document explaining how a covered entity uses and discloses PHI and patients' rights",
+        "A list of every disclosure made of the patient's PHI"
       ],
       "answer": 2,
-      "explain": "HIPAA requires covered entities to give patients a notice describing privacy practices and rights.",
+      "explain": "HIPAA requires covered entities to give patients a notice describing how PHI is used and disclosed and what rights patients have. The other choices describe an authorization, a breach notice, and an accounting of disclosures.",
       "sub": "Healthcare Policy and Regulation",
       "diff": 1
     },
@@ -779,7 +814,7 @@
     },
     {
       "id": "hca-058",
-      "q": "Which federal act, signed in 2010, expanded health insurance coverage through Medicaid expansion and state marketplaces?",
+      "q": "Which federal act, signed in 2010, expanded health insurance coverage through Medicaid expansion and health insurance marketplaces?",
       "choices": [
         "Medicare Modernization Act",
         "Social Security Act",
@@ -794,7 +829,12 @@
     {
       "id": "hca-059",
       "q": "Which federal law requires employer group health plans to offer continued coverage after a qualifying job loss?",
-      "choices": ["ERISA", "HIPAA", "FMLA", "COBRA"],
+      "choices": [
+        "ERISA",
+        "HIPAA",
+        "FMLA",
+        "COBRA"
+      ],
       "answer": 3,
       "explain": "COBRA allows continuation of group coverage for a period after qualifying events such as job loss.",
       "sub": "Healthcare Policy and Regulation",
@@ -802,7 +842,7 @@
     },
     {
       "id": "hca-060",
-      "q": "The Clinical Laboratory Improvement Amendments (CLIA) regulate which activity?",
+      "q": "Which activity do the federal CLIA regulations govern?",
       "choices": [
         "Prescription drug manufacturing",
         "Laboratory testing of human specimens",
@@ -817,7 +857,12 @@
     {
       "id": "hca-061",
       "q": "Which CMS-adopted code set is used to report diagnoses for U.S. healthcare encounters?",
-      "choices": ["CPT", "ICD-10-CM", "HCPCS Level II", "NDC"],
+      "choices": [
+        "CPT",
+        "ICD-10-CM",
+        "HCPCS Level II",
+        "NDC"
+      ],
       "answer": 1,
       "explain": "ICD-10-CM is the U.S. diagnosis code set. CPT codes procedures, HCPCS Level II covers supplies and some services, and NDC identifies drugs.",
       "sub": "Healthcare Billing and Insurance",
@@ -827,20 +872,25 @@
       "id": "hca-062",
       "q": "Which code set describes medical procedures and services and is maintained by the American Medical Association?",
       "choices": [
-        "CPT (Current Procedural Terminology)",
+        "CPT",
         "ICD-10-PCS",
         "HCPCS Level II",
         "NDC"
       ],
       "answer": 0,
-      "explain": "CPT is maintained by the AMA. ICD-10-PCS is used for inpatient procedures, and HCPCS Level II is maintained by CMS.",
+      "explain": "CPT (Current Procedural Terminology) is maintained by the AMA. ICD-10-PCS is used for inpatient procedures, and HCPCS Level II is maintained by CMS.",
       "sub": "Healthcare Billing and Insurance",
       "diff": 2
     },
     {
       "id": "hca-063",
       "q": "Which claim form is used primarily by physicians and other professional providers?",
-      "choices": ["UB-04", "EOB", "Remittance advice", "CMS-1500"],
+      "choices": [
+        "UB-04",
+        "EOB",
+        "Remittance advice",
+        "CMS-1500"
+      ],
       "answer": 3,
       "explain": "The CMS-1500 is the professional claim form. The UB-04 is used by institutional providers such as hospitals.",
       "sub": "Healthcare Billing and Insurance",
@@ -850,13 +900,13 @@
       "id": "hca-064",
       "q": "An explanation of benefits (EOB) is:",
       "choices": [
-        "A bill sent to the patient for a copayment",
-        "A request for prior authorization",
-        "A statement from the payer explaining what was covered and paid",
-        "A list of a provider's fees"
+        "A bill the provider sends the patient for a copayment",
+        "A provider's request for prior authorization from the payer",
+        "A payer's statement to the insured showing what was covered and paid",
+        "A provider's list of standard charges for each service"
       ],
       "answer": 2,
-      "explain": "An EOB is a payer statement. It is not a bill, and the provider does not send it.",
+      "explain": "An EOB is a payer statement sent to the insured. It is not a bill, and the provider does not send it. The provider receives a remittance advice instead.",
       "sub": "Healthcare Billing and Insurance",
       "diff": 2
     },
@@ -926,14 +976,19 @@
         "Accounts payable divided by operating expenses"
       ],
       "answer": 0,
-      "explain": "Days in AR shows how long it takes to collect. Inverting the ratio gives a meaningless number.",
+      "explain": "Days in AR = accounts receivable divided by average daily net revenue (net revenue / 365), which shows how long collection takes. Choice B is the receivables turnover ratio, not days.",
       "sub": "Healthcare Finances and Budgeting",
       "diff": 2
     },
     {
       "id": "hca-070",
       "q": "A clinic has fixed costs of $120,000 per year, a price of $80 per visit, and a variable cost of $40 per visit. How many visits are needed to break even?",
-      "choices": ["1,500", "2,000", "2,400", "3,000"],
+      "choices": [
+        "1,500",
+        "2,000",
+        "2,400",
+        "3,000"
+      ],
       "answer": 3,
       "explain": "Break-even = fixed costs divided by contribution margin: 120,000 / (80 - 40) = 3,000 visits.",
       "sub": "Healthcare Finances and Budgeting",
@@ -970,7 +1025,12 @@
     {
       "id": "hca-073",
       "q": "A hospital reports gross patient charges of $5,000,000 and contractual allowances of $2,000,000. What is net patient service revenue before bad debt?",
-      "choices": ["$2,300,000", "$2,700,000", "$5,000,000", "$3,000,000"],
+      "choices": [
+        "$2,300,000",
+        "$2,700,000",
+        "$5,000,000",
+        "$3,000,000"
+      ],
       "answer": 3,
       "explain": "Net patient revenue = gross charges minus contractual allowances, or $3,000,000. Bad debt is handled separately.",
       "sub": "Healthcare Finances and Budgeting",
@@ -981,32 +1041,37 @@
       "q": "Which financial statement shows an organization's assets, liabilities, and net assets at a point in time?",
       "choices": [
         "Statement of activities",
-        "Statement of financial position (balance sheet)",
+        "Balance sheet",
         "Statement of cash flows",
         "Income statement"
       ],
       "answer": 1,
-      "explain": "The balance sheet is a snapshot. The income statement and statement of activities cover a period.",
+      "explain": "The balance sheet (called the statement of financial position by nonprofits) is a snapshot. The income statement and statement of activities cover a period.",
       "sub": "Healthcare Finances and Budgeting",
       "diff": 2
     },
     {
       "id": "hca-075",
       "q": "Which term describes a payment model where a provider receives one predetermined payment for all services in an episode of care, including related follow-up?",
-      "choices": ["Bundled payment", "Fee schedule", "Per diem", "Cost-plus"],
+      "choices": [
+        "Bundled payment",
+        "Fee-schedule payment",
+        "Per diem payment",
+        "Cost-plus reimbursement"
+      ],
       "answer": 0,
-      "explain": "Bundled payments cover an episode as a package. A fee schedule prices each service separately.",
-      "sub": "Strategic Management",
+      "explain": "Bundled payments cover an episode as one package. A fee schedule prices each service separately, and per diem pays a set amount per day.",
+      "sub": "Healthcare Finances and Budgeting",
       "diff": 3
     },
     {
       "id": "hca-076",
       "q": "What does a budget variance measure?",
       "choices": [
-        "Total patient volume",
-        "Staff turnover",
+        "The change in patient volume from one year to the next",
+        "The rate at which staff leave the organization",
         "The difference between budgeted and actual amounts",
-        "Insurance claim denial rate"
+        "The share of claims denied by insurers"
       ],
       "answer": 2,
       "explain": "A variance is actual minus budget, showing where spending or revenue differed from plan.",
@@ -1031,13 +1096,13 @@
       "id": "hca-078",
       "q": "What is the best first step when a patient becomes upset about a bill?",
       "choices": [
-        "Ignore the concern until the patient calms down",
-        "Refer the patient to a lawyer",
+        "Transfer the patient to the billing supervisor right away",
+        "Explain the insurer's contract terms in detail",
         "Listen actively and acknowledge the concern",
-        "Tell the patient the policy is non-negotiable"
+        "Offer to write off the balance to end the conversation"
       ],
       "answer": 2,
-      "explain": "Acknowledging and listening de-escalates the situation before problem-solving.",
+      "explain": "Listening and acknowledging the concern de-escalates first. Transferring right away or launching into contract details skips that step, and an unapproved write-off can raise compliance issues.",
       "sub": "Communication and Leadership",
       "diff": 1
     },
@@ -1045,20 +1110,25 @@
       "id": "hca-079",
       "q": "Which communication barrier occurs when medical jargon is used with a patient who does not understand the terms?",
       "choices": [
-        "Technical (jargon) barrier",
+        "Semantic barrier",
         "Physical barrier",
         "Emotional barrier",
         "Organizational barrier"
       ],
       "answer": 0,
-      "explain": "Jargon is a technical barrier. Plain language and teach-back reduce it.",
+      "explain": "Jargon the listener does not understand is a semantic (language) barrier. Plain language and teach-back reduce it.",
       "sub": "Communication and Leadership",
       "diff": 2
     },
     {
       "id": "hca-080",
       "q": "A manager wants to resolve a conflict between two staff members with a solution that meets both parties' core interests. Which conflict-handling approach does this describe?",
-      "choices": ["Avoidance", "Accommodation", "Competition", "Collaboration"],
+      "choices": [
+        "Avoidance",
+        "Accommodation",
+        "Competition",
+        "Collaboration"
+      ],
       "answer": 3,
       "explain": "Collaboration seeks a win-win solution. Competition wins at the other party's expense, and accommodation gives in.",
       "sub": "Communication and Leadership",
@@ -1066,7 +1136,7 @@
     },
     {
       "id": "hca-081",
-      "q": "Which document names a person to make healthcare decisions if the patient becomes unable to communicate?",
+      "q": "Which document names a person to make medical decisions if the patient becomes unable to communicate?",
       "choices": [
         "Notice of privacy practices",
         "Consent to release information",
@@ -1075,13 +1145,18 @@
       ],
       "answer": 2,
       "explain": "A healthcare power of attorney appoints a healthcare agent. A notice of privacy practices describes HIPAA rights.",
-      "sub": "Communication and Leadership",
+      "sub": "Healthcare Policy and Regulation",
       "diff": 1
     },
     {
       "id": "hca-082",
       "q": "Which standard defines the structure of electronic medical claims submitted to payers in the United States?",
-      "choices": ["DICOM", "X12 837", "NCPDP", "HL7 ADT"],
+      "choices": [
+        "DICOM",
+        "X12 837",
+        "NCPDP",
+        "HL7 ADT"
+      ],
       "answer": 1,
       "explain": "The X12 837 transaction is the HIPAA standard for electronic healthcare claims.",
       "sub": "Healthcare Technology",
@@ -1120,12 +1195,12 @@
       "q": "Under the Patient Self-Determination Act, healthcare providers must:",
       "choices": [
         "Ask adult patients whether they have an advance directive and document the answer",
-        "Refuse treatment to patients without insurance",
-        "Share patient records with the media",
-        "Provide free care to all patients"
+        "Require adult patients to sign an advance directive as a condition of admission",
+        "Have staff draft a living will for every patient who lacks one",
+        "Ask only patients over 65 about advance directives"
       ],
       "answer": 0,
-      "explain": "PSDA requires providers to inform adults of advance directive rights and document whether one exists.",
+      "explain": "PSDA requires participating providers to inform adults of their advance directive rights and document whether one exists. Care cannot be conditioned on having a directive, and staff are not required to draft one.",
       "sub": "Healthcare Policy and Regulation",
       "diff": 3
     },
@@ -1148,12 +1223,12 @@
       "q": "Under the Joint Commission's National Patient Safety Goals, which action is used to verify patient identity?",
       "choices": [
         "Checking the insurance card only",
-        "Asking family members",
+        "Asking the patient, 'Are you Maria Lopez?'",
         "Asking the patient to state full name and date of birth",
         "Using the room number"
       ],
       "answer": 2,
-      "explain": "Patients are identified with two identifiers, such as full name and date of birth, stated by the patient.",
+      "explain": "NPSG.01.01.01 requires at least two patient identifiers, such as full name and date of birth, stated by the patient. A room number is never an identifier, and a yes-or-no question invites a wrong yes.",
       "sub": "Communication and Leadership",
       "diff": 2
     },
@@ -1173,7 +1248,7 @@
     },
     {
       "id": "hca-089",
-      "q": "Which goal-setting method involves managers and employees jointly setting objectives and reviewing results?",
+      "q": "Which goal-setting method has managers and employees agree on specific goals together and later review results against them?",
       "choices": [
         "Management by exception",
         "Gantt charting",
@@ -1217,13 +1292,13 @@
       "id": "hca-092",
       "q": "What is the main purpose of an orientation checklist for new hires?",
       "choices": [
-        "Reduce payroll taxes",
+        "Rate the employee's job performance for the year",
         "Ensure required tasks, policies, and training are completed",
-        "Set vacation schedules",
-        "Eliminate the need for supervision"
+        "Record the employee's benefit choices and pay rate",
+        "Replace the written job description for the role"
       ],
       "answer": 1,
-      "explain": "Checklists confirm that required onboarding steps and training are documented.",
+      "explain": "An orientation checklist confirms that required onboarding tasks, policy reviews, and training are completed and documented. It is not an appraisal, a payroll record, or a job description.",
       "sub": "Staffing and Training",
       "diff": 1
     },
@@ -1245,14 +1320,14 @@
       "id": "hca-094",
       "q": "Cross-training staff primarily helps a healthcare organization by:",
       "choices": [
-        "Eliminating the need for policies",
-        "Reducing all wages",
-        "Replacing supervisors",
+        "Raising every employee's pay grade automatically",
+        "Reducing the licences staff are required to hold",
+        "Limiting each employee to one specialized task",
         "Increasing staffing flexibility when coverage gaps occur"
       ],
       "answer": 3,
-      "explain": "Cross-training lets staff cover roles during absences or surges, so it does not replace supervisors or policies.",
-      "sub": "Strategic Management",
+      "explain": "Cross-training lets staff cover other roles during absences or surges. It does not change pay grades or licensure rules, and it widens rather than narrows what each person can do.",
+      "sub": "Staffing and Training",
       "diff": 1
     },
     {
@@ -1273,10 +1348,10 @@
       "id": "hca-096",
       "q": "What is a remittance advice?",
       "choices": [
-        "A patient's request to change providers",
-        "A list of approved drugs",
-        "A payer's document explaining payment details for claims",
-        "A provider's appointment reminder"
+        "A patient's request to transfer records to a new provider",
+        "A payer's list of drugs covered under the plan",
+        "A payer's statement to the provider detailing claim payments",
+        "A notice reminding the patient of an upcoming appointment"
       ],
       "answer": 2,
       "explain": "The remittance advice (ERA or paper) shows what was paid and why adjustments were made.",
@@ -1313,15 +1388,15 @@
     },
     {
       "id": "hca-099",
-      "q": "Under HIPAA, how soon must a covered entity notify HHS of a breach affecting 500 or more individuals?",
+      "q": "Under HIPAA, what is the latest a covered entity may notify HHS of a breach affecting 500 or more individuals?",
       "choices": [
-        "Within 30 days",
-        "Within 90 days",
-        "Within 1 year",
-        "Within 60 calendar days after discovery"
+        "Within 30 calendar days of discovery",
+        "Within 90 calendar days of discovery",
+        "Within 1 year of discovery",
+        "Within 60 calendar days of discovery"
       ],
       "answer": 3,
-      "explain": "Breaches affecting 500 or more individuals must be reported to HHS without unreasonable delay and no later than 60 days after discovery.",
+      "explain": "Breaches affecting 500 or more individuals must be reported to HHS without unreasonable delay and no later than 60 calendar days after discovery (45 CFR 164.408).",
       "sub": "Healthcare Policy and Regulation",
       "diff": 3
     },
@@ -1329,13 +1404,13 @@
       "id": "hca-100",
       "q": "Which action best demonstrates empathy when communicating with a grieving family?",
       "choices": [
-        "Interrupting to offer quick solutions",
+        "Telling them you know exactly how they feel",
         "Acknowledging their loss and allowing them to speak without rushing",
-        "Changing the subject to paperwork",
-        "Explaining the billing policy first"
+        "Reassuring them that everything happens for a reason",
+        "Handing them a grief brochure and quickly leaving"
       ],
       "answer": 1,
-      "explain": "Empathy involves acknowledging emotion and listening. The other options prioritize the organization's needs over the family's.",
+      "explain": "Empathy means acknowledging the loss and giving the family time to speak. Claiming to know how they feel, offering cliches, or hurrying away all shut the conversation down.",
       "sub": "Communication and Leadership",
       "diff": 1
     }
@@ -1411,7 +1486,7 @@
       "id": "hca-v012",
       "term": "Bundled payment",
       "def": "A payment model that pays one predetermined amount for all services in a defined episode of care.",
-      "sub": "Strategic Management"
+      "sub": "Healthcare Finances and Budgeting"
     },
     {
       "id": "hca-v013",
@@ -1687,7 +1762,7 @@
       "id": "hca-v058",
       "term": "Advance directive",
       "def": "A written document stating a person's wishes for medical treatment if they become unable to decide for themselves.",
-      "sub": "Communication and Leadership"
+      "sub": "Healthcare Policy and Regulation"
     },
     {
       "id": "hca-v059",
