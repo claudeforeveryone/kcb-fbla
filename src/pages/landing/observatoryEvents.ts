@@ -19,8 +19,8 @@ export type LandingEvent = {
   /** set when the event has an eligibility limit */
   note?: string;
   /**
-   * "outline": FBLA's guideline for the event could not be read, so the bank's areas are a standard course outline
-   * (the bank's notes say so). Otherwise they are FBLA's own areas, from its guideline or a state chapter's copy.
+   * "outline": the bank's areas are a standard course outline, not (yet) FBLA's own list for the event (the bank's
+   * notes say so). Otherwise they are FBLA's own areas, from its guideline or a state chapter's copy.
    */
   areasFrom?: "outline";
 };
@@ -278,7 +278,6 @@ export const EVENTS: LandingEvent[] = [
     name: "Hospitality & Event Management",
     format: "case",
     discipline: "hospitality",
-    areasFrom: "outline",
     areas: [
       "Event Planning and Logistics",
       "Venue Selection and Layout",

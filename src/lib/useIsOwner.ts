@@ -3,7 +3,7 @@
 // tampered client gets 42501, not data. Fails closed: errors, a missing function or no session all mean "no".
 import { useEffect, useState } from 'react';
 import { useAuth } from './auth';
-import { supabase } from './supabase';
+import { loadSupabase } from './loadSupabase';
 import { ownerGate } from './owner';
 
 export type OwnerState = 'loading' | 'owner' | 'denied';
@@ -12,6 +12,8 @@ const confirmed = new Set<string>();
 
 export async function checkIsOwner(): Promise<boolean> {
   try {
+    // loadSupabase: the top bar asks this on every page, and the first-load chunk stays without the client
+    const supabase = await loadSupabase();
     return ownerGate(await supabase.rpc('is_platform_owner')) === 'owner';
   } catch {
     return false;

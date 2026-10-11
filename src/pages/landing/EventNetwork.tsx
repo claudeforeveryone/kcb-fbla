@@ -306,8 +306,8 @@ function EventFacts({
       </ul>
       {event.areasFrom === "outline" && (
         <p className="obs-small mt-3">
-          FBLA’s guideline for this event couldn’t be checked, so these areas
-          follow a standard course outline.
+          These areas follow a standard course outline, not yet FBLA’s own
+          list for this event.
         </p>
       )}
       <Link

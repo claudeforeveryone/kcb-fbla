@@ -15,7 +15,6 @@ import { Brand } from './Brand';
 import { NAV } from './nav';
 import { useTheme, type ThemePref } from './theme';
 import { Footer } from './Footer';
-import { FeedbackDialog } from '../feedback/FeedbackDialog';
 
 // Members only (the bar shows it once signed in with a profile), and it brings the notifications API and with it the
 // Supabase client: a lazy chunk, so the first-load chunk every visitor downloads stays without them (loadSupabase.ts).
@@ -25,6 +24,17 @@ const NotificationBell = lazy(
   (): Promise<{ default: ComponentType }> =>
     import('../notifications/NotificationBell').then(
       (m) => ({ default: m.NotificationBell }),
+      () => ({ default: () => null }),
+    ),
+);
+
+// Send feedback is opened from the user menu only, and its API brings the Supabase client: a lazy chunk fetched on the
+// first open, so the first-load chunk stays without the client (loadSupabase.ts, firstLoad.test.ts). A chunk that
+// cannot be fetched means no dialog this time, never a broken page.
+const FeedbackDialog = lazy(
+  (): Promise<{ default: ComponentType<{ open: boolean; onClose: () => void }> }> =>
+    import('../feedback/FeedbackDialog').then(
+      (m) => ({ default: m.FeedbackDialog }),
       () => ({ default: () => null }),
     ),
 );
@@ -217,11 +227,17 @@ function UserMenu() {
   const navigate = useNavigate();
   const owner = useIsOwner() === 'owner';
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  // mounted from the first open on, so its chunk loads only for someone who uses it, and closing still animates
+  const [feedbackUsed, setFeedbackUsed] = useState(false);
   if (!profile) return null;
 
   return (
     <>
-    <FeedbackDialog open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+    {feedbackUsed && (
+      <Suspense fallback={null}>
+        <FeedbackDialog open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+      </Suspense>
+    )}
     <Dropdown
       width="w-72"
       header={
@@ -242,7 +258,10 @@ function UserMenu() {
         { label: 'Profile', icon: <UserRound />, to: '/me' },
         { label: 'Career', icon: <BarChart3 />, to: '/me/career' },
         { label: 'Settings', icon: <Settings />, to: '/me/settings' },
-        { label: 'Send feedback', icon: <MessageSquare />, onSelect: () => setFeedbackOpen(true) },
+        { label: 'Send feedback', icon: <MessageSquare />, onSelect: () => {
+            setFeedbackUsed(true);
+            setFeedbackOpen(true);
+          } },
         ...(owner ? [{ label: 'Owner console', icon: <Gauge />, to: '/owner' }] : []),
         { type: 'separator' },
         {

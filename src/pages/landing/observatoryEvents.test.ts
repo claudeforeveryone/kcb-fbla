@@ -62,15 +62,15 @@ describe("landing event data", () => {
   });
 
   it("flags exactly the events whose areas are a standard outline, not FBLA's (the bank's notes say so)", () => {
-    // the notes of these banks say FBLA's guideline could not be read and the areas are a standard curriculum outline
-    const outline = /areas are (?:therefore )?(?:the )?standard|use the standard/i;
+    // the notes of these banks say their areas are a standard curriculum outline, not (yet) FBLA's own list
+    const outline =
+      /areas are (?:therefore )?(?:the )?standard|use (?:the )?standard|not yet been remapped/i;
     const fromNotes = Object.values(banks)
       .filter((b) => outline.test(b.notes))
       .map((b) => b.slug)
       .sort();
     expect(fromNotes).toEqual([
       "entrepreneurship",
-      "hospitality-event-management",
       "international-business",
       "organizational-leadership",
     ]);
