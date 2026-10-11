@@ -127,8 +127,11 @@ float ridges(vec2 p, float t) {
 void main() {
   vec2 p = vWorld.xz;
   float light = 0.0;
+  // Every iteration runs, with unused slots weighted 0, instead of breaking at uCount: lines() takes a derivative
+  // (fwidth), which needs uniform control flow, and the early break made ANGLE/D3D11 warn that the derivatives in
+  // the loop may be undefined (X3595).
   for (int i = 0; i < MAX_ARCHES; i++) {
-    if (i >= uCount) break;
+    float used = step(float(i) + 0.5, float(uCount));
     vec4 a = uArches[i];
     vec2 dir = vec2(-sin(a.z), cos(a.z));
     vec2 perp = vec2(dir.y, -dir.x);
@@ -142,7 +145,7 @@ void main() {
     float wobble = 0.06 * sin(along * 2.2 + uTime * 0.8 + float(i) * 2.3) + 0.025 * sin(along * 6.1 - uTime * 1.3);
     float phase = (across + wobble) / (uArchWidth * spread) * uLines + 0.5;
     float shimmer = 0.75 + 0.25 * sin(uTime * 1.1 + along * 3.0 + float(i));
-    light += inside * reach * (0.012 + lines(phase, 0.11) * shimmer * 0.4) * a.w;
+    light += used * inside * reach * (0.012 + lines(phase, 0.11) * shimmer * 0.4) * a.w;
   }
   float r = length(p - vec2(0.0, 0.35));
   float pool = (1.0 - smoothstep(0.0, 1.45, r));
