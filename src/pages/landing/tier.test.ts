@@ -30,7 +30,9 @@ describe("tierFor", () => {
 
   it("gives touch-only devices the static frame at any width (tablets, phones held sideways)", () => {
     expect(tierFor({ ...desktop, width: 844, touchOnly: true })).toBe("poster");
-    expect(tierFor({ ...desktop, width: 1366, touchOnly: true })).toBe("poster");
+    expect(tierFor({ ...desktop, width: 1366, touchOnly: true })).toBe(
+      "poster",
+    );
   });
 
   it("uses the lite room on low-core and low-memory devices", () => {
@@ -41,7 +43,9 @@ describe("tierFor", () => {
 
   it("uses the static frame on very low memory", () => {
     expect(tierFor({ ...desktop, memoryGb: 2 })).toBe("poster");
-    expect(tierFor({ ...desktop, width: 1280, cores: 2, memoryGb: 1 })).toBe("poster");
+    expect(tierFor({ ...desktop, width: 1280, cores: 2, memoryGb: 1 })).toBe(
+      "poster",
+    );
   });
 
   it("steps down after one performance decline and to the static frame after two", () => {

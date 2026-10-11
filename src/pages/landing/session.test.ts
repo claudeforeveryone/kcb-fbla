@@ -5,7 +5,8 @@ import { AUTH_IN_URL, AUTH_STORAGE_KEY, mayHaveSession } from "./session";
 // fbla-trust's rule (src/lib/sessionHint.ts AUTH_LINK_RE, repeated in its index.html head script). Its main.tsx
 // hydrates the prerendered landing when that rule says "signed out", so IndexRoute must agree on every URL, or React
 // throws the server HTML away (hydration mismatch) and the page flashes the splash.
-const TRUST_AUTH_LINK_RE = /access_token=|[?&]code=|type=(recovery|signup|invite|magiclink)/;
+const TRUST_AUTH_LINK_RE =
+  /access_token=|[?&]code=|type=(recovery|signup|invite|magiclink)/;
 
 const store = (items: Record<string, string>) => ({
   getItem: (k: string) => (k in items ? items[k] : null),

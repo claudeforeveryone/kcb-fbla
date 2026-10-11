@@ -71,10 +71,12 @@ export function probeWebGL(): Probe {
 
 /** True when the device has no fine pointer at all (a phone or tablet without a trackpad or mouse). */
 function isTouchOnly(): boolean {
-  const mq = window.matchMedia;
-  if (!mq) return false;
+  if (typeof window.matchMedia !== "function") return false;
   // browsers without any-pointer support match neither query: treat them as pointer devices
-  return mq("(any-pointer: coarse)").matches && !mq("(any-pointer: fine)").matches;
+  return (
+    window.matchMedia("(any-pointer: coarse)").matches &&
+    !window.matchMedia("(any-pointer: fine)").matches
+  );
 }
 
 /** Reads the browser facts tierFor needs. Only call from an effect (touches the DOM). */
