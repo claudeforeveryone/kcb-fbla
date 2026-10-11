@@ -1,6 +1,7 @@
 // "Send feedback" (account menu) and "Report this question" (exam review). Both write a row to fbla_feedback
-// (0103) that only the sender and the site owners can read. The page path goes with it (no query string), never
-// answers or anything else about the student. "Your reports" shows each report's status and the team's note.
+// (0103) that only the sender and the site owners can read. The page path goes with it (no query string, and ids or
+// invite tokens replaced by their route name), never answers or anything else about the student. "Your reports" shows
+// each report's status, in plain words, and the team's note.
 import { useEffect, useId, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Badge, Button, Modal, SegmentedControl, Textarea, useToast } from '../ui';
@@ -13,8 +14,9 @@ import {
   FEEDBACK_MAX,
   feedbackProblem,
   KIND_LABELS,
+  pageLabel,
   REPORT_REASONS,
-  STATUS_LABELS,
+  STUDENT_STATUS_LABELS,
   type FeedbackKind,
   type ReportReason,
 } from '../../lib/feedback';
@@ -34,6 +36,7 @@ export function FeedbackDialog({ open, onClose }: { open: boolean; onClose: () =
   const [mineCount, setMineCount] = useState<number | null>(null);
   const problem = feedbackProblem(message);
   const page = cleanPagePath(pathname);
+  const where = pageLabel(page);
   const fieldId = useId();
 
   useEffect(() => {
@@ -117,7 +120,8 @@ export function FeedbackDialog({ open, onClose }: { open: boolean; onClose: () =
             />
             {/* Its own line, so a validation error never hides it. */}
             <p id={`${fieldId}-privacy`} className="mt-1.5 text-[0.8125rem] text-muted">
-              Sent with the page you're on ({page}). Don't include passwords or personal details.
+              {where ? `Sent with the page you're on (${where}).` : "Sent with the page you're on."} Don't include passwords
+              or personal details.
             </p>
           </div>
         </div>
@@ -165,7 +169,7 @@ function MyReports({ refreshKey, onCount }: { refreshKey: number; onCount: (n: n
           <div className="flex flex-wrap items-center gap-1.5 text-xs">
             <Badge>{KIND_LABELS[r.kind]}</Badge>
             <Badge tone={r.status === 'resolved' ? 'success' : r.status === 'new' ? 'blue' : 'neutral'} dot>
-              {STATUS_LABELS[r.status]}
+              {STUDENT_STATUS_LABELS[r.status]}
             </Badge>
             <span className="text-muted">{new Date(r.created_at).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}</span>
           </div>

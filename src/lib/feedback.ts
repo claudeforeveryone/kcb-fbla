@@ -34,12 +34,22 @@ export const KIND_LABELS: Record<FeedbackKind, string> = {
   accessibility: 'Accessibility',
 };
 
+/** The team's words for a status, in the owner console. */
 export const STATUS_LABELS: Record<FeedbackStatus, string> = {
   new: 'New',
   triaged: 'Triaged',
   in_progress: 'In progress',
   resolved: 'Resolved',
   wontfix: "Won't fix",
+};
+
+/** The same statuses as a student sees them under Your reports: plain words, no triage jargon. */
+export const STUDENT_STATUS_LABELS: Record<FeedbackStatus, string> = {
+  new: 'Sent',
+  triaged: 'Seen by the team',
+  in_progress: 'Being worked on',
+  resolved: 'Done',
+  wontfix: 'Not changing',
 };
 
 /**
@@ -54,7 +64,7 @@ export function triageSaved(changed: { status?: FeedbackStatus; priority?: Feedb
   if (changed.status)
     return {
       title: `Marked ${STATUS_LABELS[changed.status]}`,
-      body: note ? 'The student sees the new status and your note.' : 'The student sees the new status.',
+      body: `The student now sees "${STUDENT_STATUS_LABELS[changed.status]}"${note ? ' and your note' : ''}.`,
     };
   if (note !== undefined)
     return note
@@ -69,37 +79,43 @@ export function triageSaved(changed: { status?: FeedbackStatus; priority?: Feedb
 
 const FILTERS: readonly string[] = ['open', 'all', 'new', 'triaged', 'in_progress', 'resolved', 'wontfix'];
 const QUESTION_ID = /^[A-Za-z0-9_:.-]{1,80}$/;
+const REPORT_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /**
- * The triage filters in the owner console URL (?status=&kind=&question=), so Content's reported questions and the
- * status counts can open Feedback already filtered. Anything unknown falls back to open reports of any kind.
+ * The triage filters in the owner console URL (?status=&kind=&question=&report=), so Content's reported questions,
+ * the status counts and the audit log can open Feedback already filtered, or on one report. Anything unknown falls
+ * back to open reports of any kind.
  */
 export function triageFilters(params: URLSearchParams): {
   status: FeedbackFilter;
   kind: FeedbackKind | '';
   question: string | null;
+  report: string | null;
 } {
   const status = params.get('status') ?? '';
   const kind = params.get('kind') ?? '';
   const question = params.get('question') ?? '';
+  const report = params.get('report') ?? '';
   return {
     status: FILTERS.includes(status) ? (status as FeedbackFilter) : 'open',
     kind: Object.hasOwn(KIND_LABELS, kind) ? (kind as FeedbackKind) : '',
     question: QUESTION_ID.test(question) ? question : null,
+    report: REPORT_ID.test(report) ? report : null,
   };
 }
 
 /** A link into Feedback triage: keeps the rest of the console URL (range), replaces any earlier filters. */
 export function triageLink(
   current: URLSearchParams | string,
-  f: { status?: FeedbackFilter; kind?: FeedbackKind; question?: string },
+  f: { status?: FeedbackFilter; kind?: FeedbackKind; question?: string; report?: string },
 ): string {
   const p = new URLSearchParams(current);
   p.set('tab', 'feedback');
-  for (const key of ['status', 'kind', 'question']) p.delete(key);
+  for (const key of ['status', 'kind', 'question', 'report']) p.delete(key);
   if (f.status) p.set('status', f.status);
   if (f.kind) p.set('kind', f.kind);
   if (f.question) p.set('question', f.question);
+  if (f.report) p.set('report', f.report);
   return `?${p.toString()}`;
 }
 
@@ -111,10 +127,61 @@ export function feedbackProblem(message: string): string | null {
   return null;
 }
 
-/** The page a report came from: path only (no query or hash, which can carry ids), at most 200 characters. */
+/**
+ * Path segments that hold a secret or point at one person, attempt or duel, replaced by their route name before a
+ * report is stored. A chapter invite token is a bearer secret (whoever has it can join), and the rest say nothing the
+ * team can use: an owner cannot open another student's review or duel. 0103's fbla_feedback_guard rewrites the same
+ * patterns on the server, so a direct insert cannot store them either (feedback.test.ts checks the two lists match).
+ */
+export const PATH_IDS: readonly (readonly [RegExp, string])[] = [
+  [/^\/chapter\/join\/[^/]+/, '/chapter/join/:token'],
+  [/^\/play\/review\/[^/]+/, '/play/review/:attempt'],
+  [/^\/arena\/[^/]+/, '/arena/:duel'],
+  [/^\/chapter\/member\/[^/]+/, '/chapter/member/:member'],
+  [/^\/chapter\/tests\/[^/]+/, '/chapter/tests/:test'],
+  [/^\/u\/[^/]+/, '/u/:username'],
+];
+
+/**
+ * The page a report came from: path only (no query or hash, which can carry ids), with ids and invite tokens replaced
+ * by their route name (PATH_IDS), at most 200 characters.
+ */
 export function cleanPagePath(path: string): string {
   const bare = path.split(/[?#]/)[0].replace(/\s+/g, '');
-  return (bare.startsWith('/') ? bare : `/${bare}`).slice(0, 200);
+  let p = bare.startsWith('/') ? bare : `/${bare}`;
+  for (const [pattern, name] of PATH_IDS) p = p.replace(pattern, name);
+  return p.slice(0, 200);
+}
+
+const PAGE_NAMES: readonly (readonly [RegExp, string])[] = [
+  [/^\/$/, 'Home'],
+  [/^\/play\/review\//, 'Exam review'],
+  [/^\/play\/run\/?$/, 'Practice run'],
+  [/^\/play\/?$/, 'Play'],
+  [/^\/play\//, 'Event page'],
+  [/^\/vocab\/?$/, 'Vocab'],
+  [/^\/vocab\//, 'Vocab deck'],
+  [/^\/arena\/?$/, 'Arena'],
+  [/^\/arena\//, 'Duel'],
+  [/^\/leaderboard/, 'Leaderboard'],
+  [/^\/chapter\/join\//, 'Chapter invite'],
+  [/^\/chapter\/classroom/, 'Classroom'],
+  [/^\/chapter\/admin/, 'Chapter admin'],
+  [/^\/chapter\/member\//, 'Member page'],
+  [/^\/chapter\/tests\//, 'Test editor'],
+  [/^\/chapter\/new/, 'New chapter'],
+  [/^\/chapter\/?$/, 'Chapter'],
+  [/^\/me\/settings/, 'Settings'],
+  [/^\/me\/career/, 'Career'],
+  [/^\/me\/?$/, 'Your profile'],
+  [/^\/u\//, 'A profile'],
+  [/^\/notifications/, 'Notifications'],
+  [/^\/owner/, 'Owner console'],
+];
+
+/** The page a report is sent with, in words a student reads ("Exam review"). Null for a page it does not know. */
+export function pageLabel(path: string): string | null {
+  return PAGE_NAMES.find(([pattern]) => pattern.test(path))?.[1] ?? null;
 }
 
 export const REPORT_REASONS = [

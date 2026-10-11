@@ -7,6 +7,8 @@ import {
   FEEDBACK_KINDS,
   FEEDBACK_MAX,
   feedbackProblem,
+  pageLabel,
+  PATH_IDS,
   REPORT_REASONS,
   STUDENT_FEEDBACK_COLUMNS,
   triageFilters,
@@ -34,13 +36,24 @@ describe('triage links (Content and the status badges open Feedback filtered)', 
       status: 'resolved',
       kind: 'question_issue',
       question: 'acc-014',
+      report: null,
     });
     expect(triageFilters(new URLSearchParams('status=closed&kind=nonsense&question=a%20b'))).toEqual({
       status: 'open',
       kind: '',
       question: null,
+      report: null,
     });
-    expect(triageFilters(new URLSearchParams(''))).toEqual({ status: 'open', kind: '', question: null });
+    expect(triageFilters(new URLSearchParams(''))).toEqual({ status: 'open', kind: '', question: null, report: null });
+  });
+
+  it('opens one report from the audit log by its id, and ignores anything that is not a report id', () => {
+    const id = '3dd2c334-6d94-4fd1-a061-524ac601368b';
+    const link = triageLink('?tab=audit&range=30', { status: 'all', report: id });
+    const p = new URLSearchParams(link);
+    expect([p.get('tab'), p.get('range'), p.get('status'), p.get('report')]).toEqual(['feedback', '30', 'all', id]);
+    expect(triageFilters(p).report).toBe(id);
+    expect(triageFilters(new URLSearchParams('report=f1%27%20or%201=1')).report).toBeNull();
   });
 });
 
@@ -79,7 +92,30 @@ describe('feedbackProblem', () => {
 
 describe('cleanPagePath', () => {
   it('keeps only the path: no query string, no hash', () => {
-    expect(cleanPagePath('/play/review/abc?tab=2#q3')).toBe('/play/review/abc');
+    expect(cleanPagePath('/play/accounting?tab=2#q3')).toBe('/play/accounting');
+  });
+
+  it('never sends a chapter invite token, and replaces other ids in the path with their route name', () => {
+    expect(cleanPagePath('/chapter/join/Xk3vQ9pLmZ2w')).toBe('/chapter/join/:token');
+    expect(cleanPagePath('/chapter/join/Xk3vQ9pLmZ2w/?ref=1')).toBe('/chapter/join/:token/');
+    expect(cleanPagePath('/play/review/3dd2c334-6d94-4fd1-a061-524ac601368b')).toBe('/play/review/:attempt');
+    expect(cleanPagePath('/arena/9b1e2c44-0000-4000-8000-000000000001')).toBe('/arena/:duel');
+    expect(cleanPagePath('/chapter/member/9b1e2c44-0000-4000-8000-000000000001')).toBe('/chapter/member/:member');
+    expect(cleanPagePath('/chapter/tests/42/edit')).toBe('/chapter/tests/:test/edit');
+    expect(cleanPagePath('/u/maya.chen')).toBe('/u/:username');
+  });
+
+  it('matches the database: fbla_feedback_guard (0103) rewrites every pattern the same way', () => {
+    for (const [pattern, name] of PATH_IDS) {
+      const sqlPattern = pattern.source.replace(/\\\//g, '/');
+      expect(feedbackSql).toContain(`v_path := regexp_replace(v_path, '${sqlPattern}', '${name}');`);
+    }
+  });
+
+  it('keeps pages whose path names no person or secret', () => {
+    for (const path of ['/', '/play', '/play/run', '/play/accounting', '/vocab/marketing', '/arena', '/chapter/join', '/me/settings']) {
+      expect(cleanPagePath(path)).toBe(path);
+    }
   });
 
   it('always starts with a slash, drops whitespace and stays within 200 characters', () => {
@@ -87,6 +123,21 @@ describe('cleanPagePath', () => {
     expect(cleanPagePath('/me/ settings')).toBe('/me/settings');
     expect(cleanPagePath(`/${'a'.repeat(300)}`)).toHaveLength(200);
     expect(cleanPagePath('')).toBe('/');
+  });
+});
+
+describe('pageLabel (what Send feedback tells the student it sends)', () => {
+  it('names the page in plain words instead of showing the path', () => {
+    expect(pageLabel(cleanPagePath('/play/review/3dd2c334-6d94-4fd1-a061-524ac601368b'))).toBe('Exam review');
+    expect(pageLabel('/')).toBe('Home');
+    expect(pageLabel('/play/accounting')).toBe('Event page');
+    expect(pageLabel('/vocab/marketing')).toBe('Vocab deck');
+    expect(pageLabel('/chapter/join/:token')).toBe('Chapter invite');
+    expect(pageLabel('/me/settings')).toBe('Settings');
+  });
+
+  it('says nothing for a page it does not know', () => {
+    expect(pageLabel('/somewhere/new')).toBeNull();
   });
 });
 
@@ -118,12 +169,15 @@ describe('FEEDBACK_KINDS', () => {
 });
 
 describe('triageSaved (what the owner is told after saving)', () => {
-  it('names the new status and says the student sees it', () => {
-    expect(triageSaved({ status: 'resolved' })).toEqual({ title: 'Marked Resolved', body: 'The student sees the new status.' });
+  it('names the new status and the plain words the student sees for it', () => {
+    expect(triageSaved({ status: 'resolved' })).toEqual({ title: 'Marked Resolved', body: 'The student now sees "Done".' });
     expect(triageSaved({ status: 'in_progress', note: 'Looking into it' })).toEqual({
       title: 'Marked In progress',
-      body: 'The student sees the new status and your note.',
+      body: 'The student now sees "Being worked on" and your note.',
     });
+    // Students never see the team's own words for a status.
+    expect(triageSaved({ status: 'triaged' }).body).toBe('The student now sees "Seen by the team".');
+    expect(triageSaved({ status: 'wontfix' }).body).toBe('The student now sees "Not changing".');
   });
 
   it('does not claim the student sees a priority change, which only owners see', () => {
