@@ -5,10 +5,12 @@
 /** Must match `storageKey` in src/lib/supabase.ts (a test checks it). */
 export const AUTH_STORAGE_KEY = "kcbfbla-auth-v2";
 
-// What Supabase puts in the URL when a sign-in, sign-up, invite or recovery link opens the app. Kept in step with
-// fbla-trust's src/lib/sessionHint.ts (same storage key, same cases), which can replace this file once both merge.
-const AUTH_IN_URL =
-  /access_token=|refresh_token=|[?&#]code=|error_description=|type=(recovery|signup|invite|magiclink)/;
+// What Supabase puts in the URL when a sign-in, sign-up, invite or recovery link opens the app. Exactly fbla-trust's
+// AUTH_LINK_RE (src/lib/sessionHint.ts and its index.html head script; session.test.ts pins it): trust hydrates the
+// prerendered landing when its rule says "signed out", so this rule must give the same answer for every URL. Once
+// both are on main, IndexRoute can call trust's mayHaveSession() and this file and its test can go.
+export const AUTH_IN_URL =
+  /access_token=|[?&]code=|type=(recovery|signup|invite|magiclink)/;
 
 export function mayHaveSession(
   storage: Pick<Storage, "getItem"> | null,
