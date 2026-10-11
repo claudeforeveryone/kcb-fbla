@@ -3,7 +3,8 @@
 // when import.meta.env.DEV, so none of this reaches a production build: `npm run build` ends with
 // scripts/check-dist.mjs, which fails when dist/ contains FIXTURE_MARKER. Never use it anywhere else. Hidden counts
 // follow the same rules as 0105: 1-4 is hidden, a running total is hidden when it would reveal a group of 1-4 next to
-// the total after it, and a group is hidden when it is 1-4 above a smaller group inside it that is shown.
+// the total after it, a group inside an account total is hidden when it is 1-4 below it, and a group is hidden when it
+// is 1-4 above a smaller group inside it that is shown.
 import type {
   AuditRow,
   OwnerContent,
@@ -28,6 +29,9 @@ const hidden: Count = { value: null, suppressed: true };
 /** fbla_count_over: also hidden when 1-4 above any shown group inside it. */
 const cOver = (value: number, inside: Count[]): Count =>
   inside.some((s) => !s.suppressed && s.value != null && value - s.value >= 1 && value - s.value <= 4) ? hidden : c(value);
+/** fbla_count_under: also hidden when 1-4 below any shown group that holds it (null: that group is hidden). */
+const cUnder = (value: number, outer: (number | null)[]): Count =>
+  outer.some((o) => o != null && o - value >= 1 && o - value <= 4) ? hidden : c(value);
 const NOW = '2026-10-11T14:20:00Z';
 
 const overviews: Record<Site, OwnerOverview> = {
@@ -46,16 +50,17 @@ const overviews: Record<Site, OwnerOverview> = {
     },
     answered_week: { users: c(143), questions: 9874 },
   },
-  // 23 accounts. This month's sign-up split is 10 and 2, so both halves are hidden (the 2x2 rule in 0105).
+  // 23 accounts. This month's sign-up split is 10 and 2, so both halves are hidden (the 2x2 rule in 0105). 17 active
+  // this month is 1 below the 18 who finished sign-up, so the month's count is hidden too, and with it the rate.
   small: {
     generated_at: NOW,
     timezone: 'America/Toronto',
     tracking_since: '2026-09-20T13:05:00Z',
     accounts: c(23),
     new_accounts: { day: c(0), week: hidden, month: c(12) },
-    active: { dau: hidden, wau: c(11), mau: c(17) },
-    returning: c(9),
-    returning_rate: 0.529,
+    active: { dau: hidden, wau: cUnder(11, [23, 18]), mau: cUnder(17, [23, 18]) },
+    returning: cUnder(9, [23, 18]),
+    returning_rate: null,
     onboarding: {
       month: { created: c(12), onboarded: hidden, rate: null },
       all_time: { created: c(23), onboarded: c(18), rate: 0.783 },
@@ -106,11 +111,13 @@ function rawBucket(site: Site, bucket: Bucket, i: number) {
   }
   const scale = bucket === 'day' ? 1 : bucket === 'week' ? 6 : 24;
   const signups = i % 7 === 3 && bucket === 'day' ? 2 : wave(i, 4 * scale, 2 * scale);
+  // About 57 a day, 188 a week and 301 a month, like the busy Overview.
+  const reach = bucket === 'day' ? 1 : bucket === 'week' ? 1.6 : 1.18;
   return {
     signups,
     onboarded: Math.round(signups * 0.86),
-    active: wave(i + 2, 52 * Math.sqrt(scale) * (bucket === 'day' ? 1 : 1.6), 12),
-    practising: wave(i + 4, 38 * Math.sqrt(scale) * (bucket === 'day' ? 1 : 1.5), 10),
+    active: wave(i + 2, 52 * Math.sqrt(scale) * reach, 12),
+    practising: wave(i + 4, 38 * Math.sqrt(scale) * reach, 10),
   };
 }
 
@@ -136,22 +143,44 @@ function growth(site: Site, days: number, bucket: Bucket): OwnerGrowth {
   const buckets = bucketsOf(days, bucket);
   const raw = buckets.map((_, i) => rawBucket(site, bucket, i));
   const now = site === 'small' ? 23 : 412;
-  const baseline = now - raw.reduce((t, r) => t + r.signups, 0);
-  const totals = [baseline];
-  for (const r of raw) totals.push(totals[totals.length - 1] + r.signups);
+  // Over a long range the made-up sign-ups would add up to more accounts than the site has. Count back from today
+  // instead: the site launched in the bucket where they reach today's total, and had no accounts before it.
+  const signups = raw.map(() => 0);
+  let left = now;
+  for (let i = raw.length - 1; i >= 0 && left > 0; i--) {
+    signups[i] = Math.min(raw[i].signups, left);
+    left -= signups[i];
+  }
+  const totals = [left];
+  for (const n of signups) totals.push(totals[totals.length - 1] + n);
   const shown = hideTotals(totals);
   const total = (i: number): Count => (shown[i] ? { value: totals[i], suppressed: false } : hidden);
-  const series: GrowthRow[] = buckets.map((b, i) => ({
-    start: iso(b.s),
-    end: iso(b.e),
-    signups: shown[i] && shown[i + 1] ? { value: totals[i + 1] - totals[i], suppressed: false } : hidden,
-    onboarded: c(raw[i].onboarded),
-    active: cOver(raw[i].active, [c(raw[i].practising), c(raw[i].onboarded)]),
-    practising: c(raw[i].practising),
-    total: total(i + 1),
-  }));
+  // The first shown total at or after a bucket's end: everyone counted in the bucket is inside it (fbla_count_under).
+  const outer = (i: number) => totals.find((_, j) => j > i && shown[j]) ?? null;
+  const series: GrowthRow[] = buckets.map((b, i) => {
+    // Profiles come from that bucket's sign-ups, and no more students are active than there are accounts.
+    const onboarded = Math.min(raw[i].onboarded, signups[i]);
+    const active = Math.min(raw[i].active, Math.floor(totals[i + 1] * 0.75));
+    const practising = Math.min(raw[i].practising, active);
+    const onboardedC = cUnder(onboarded, [outer(i)]);
+    const practisingC = cUnder(practising, [outer(i)]);
+    const activeUnder = cUnder(active, [outer(i)]);
+    return {
+      start: iso(b.s),
+      end: iso(b.e),
+      signups: shown[i] && shown[i + 1] ? { value: totals[i + 1] - totals[i], suppressed: false } : hidden,
+      onboarded: onboardedC,
+      active: activeUnder.suppressed ? activeUnder : cOver(active, [practisingC, onboardedC]),
+      practising: practisingC,
+      total: total(i + 1),
+    };
+  });
   return { days, bucket, timezone: 'America/Toronto', baseline: total(0), series };
 }
+
+/** For the fixture tests: the Growth and Overview fixtures as the gallery serves them. */
+export const fixtureGrowth = growth;
+export const fixtureOverview = (site: Site): OwnerOverview => overviews[site];
 
 const engagement = (site: Site, days: number): OwnerEngagement => {
   if (site === 'small')

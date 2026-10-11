@@ -13,6 +13,7 @@ import {
   countLabel,
   featureLabel,
   fmtPercent,
+  NO_DATA,
   seriesBars,
   seriesState,
   signupFigure,
@@ -216,7 +217,7 @@ export function GrowthView({ data, coarser }: { data: OwnerGrowth; coarser?: str
   const b = data.bucket;
   if (!rows.length) return <EmptyState compact title="No data in this range" description="Pick a longer range." />;
   const charts: { key: 'signups' | 'active' | 'practising' | 'onboarded'; title: string; description: string }[] = [
-    { key: 'signups', title: 'New accounts', description: 'Accounts created on the FBLA site' },
+    { key: 'signups', title: 'New accounts', description: 'Accounts created on this site' },
     { key: 'active', title: 'Active students', description: 'Practised, reviewed vocab, duelled or used a feature' },
     { key: 'practising', title: 'Students who practised', description: 'Finished at least one practice run or exam' },
     { key: 'onboarded', title: 'Finished sign-up', description: 'Profiles created' },
@@ -384,11 +385,27 @@ export function EngagementView({ data: d }: { data: OwnerEngagement }) {
   );
 }
 
+// A missing value (the en dash) is always muted, so it never reads as a figure or as an alert in red.
 function Metric({ label, value, sub, accent }: { label: string; value: ReactNode; sub?: ReactNode; accent?: boolean }) {
+  const empty = value === NO_DATA;
   return (
     <div className="min-w-0">
       <div className="text-xs text-muted">{label}</div>
-      <div className={cn('tabular mt-0.5 font-display text-2xl font-extrabold leading-none', accent ? 'text-red' : 'text-heading')}>{value}</div>
+      <div
+        className={cn(
+          'tabular mt-0.5 font-display text-2xl font-extrabold leading-none',
+          empty ? 'text-muted' : accent ? 'text-red' : 'text-heading',
+        )}
+      >
+        {empty ? (
+          <>
+            <span aria-hidden="true">{NO_DATA}</span>
+            <span className="sr-only">No figure</span>
+          </>
+        ) : (
+          value
+        )}
+      </div>
       {sub && <div className="mt-1 truncate text-xs text-muted">{sub}</div>}
     </div>
   );
