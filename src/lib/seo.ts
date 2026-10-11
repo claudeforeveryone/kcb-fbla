@@ -75,6 +75,8 @@ const PRIVATE_TITLES: Array<[RegExp, string]> = [
   [/^\/vocab(\/|$)/, 'Vocab'],
   [/^\/arena(\/|$)/, 'Arena'],
   [/^\/chapter(\/|$)/, 'Chapter'],
+  [/^\/me\/settings(\/|$)/, 'Settings'],
+  [/^\/me\/career(\/|$)/, 'Career'],
   [/^\/(me(\/|$)|u\/)/, 'Profile'],
   [/^\/notifications(\/|$)/, 'Notifications'],
   [/^\/onboarding(\/|$)/, 'Set up your player card'],
@@ -149,10 +151,14 @@ export function scriptJson(value: unknown): string {
   return JSON.stringify(value).replaceAll('<', `${String.fromCharCode(92)}u003c`);
 }
 
-/** Head tags for one public route, written into the prerendered HTML. */
-export function headTags(route: PublicRoute): string {
+/**
+ * Head tags for one public route, written into the prerendered HTML. `rendered: false` is a route the prerender could
+ * not fill (head tags over an empty root, e.g. "/" while it still redirects signed-out visitors): crawlers would see
+ * an empty page, so it stays out of the index until it renders.
+ */
+export function headTags(route: PublicRoute, { rendered = true }: { rendered?: boolean } = {}): string {
   const url = canonicalFor(route.path);
-  const robots = route.index ? 'index, follow, max-image-preview:large' : 'noindex, follow';
+  const robots = route.index && rendered ? 'index, follow, max-image-preview:large' : 'noindex, follow';
   return [
     `<title>${esc(route.title)}</title>`,
     `<meta name="description" content="${esc(route.description)}" />`,
@@ -176,9 +182,9 @@ export function headTags(route: PublicRoute): string {
   ].join('\n    ');
 }
 
-/** sitemap.xml: public, indexable routes only. */
-export function sitemapXml(): string {
-  const urls = PUBLIC_ROUTES.filter((r) => r.sitemap).map(
+/** sitemap.xml: public, indexable routes only, minus any the prerender could not fill (`skip`). */
+export function sitemapXml(skip: readonly string[] = []): string {
+  const urls = PUBLIC_ROUTES.filter((r) => r.sitemap && !skip.includes(r.path)).map(
     (r) => `  <url>\n    <loc>${canonicalFor(r.path)}</loc>\n    <lastmod>${r.lastmod}</lastmod>\n  </url>`,
   );
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;

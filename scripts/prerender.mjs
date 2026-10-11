@@ -7,11 +7,13 @@
 //    tags (title, description, canonical, robots, Open Graph, Twitter, JSON-LD) and `data-prerendered` on #root, which
 //    tells main.tsx to hydrate it.
 // 3. Writes dist/sitemap.xml.
+// 4. Stamps dist/sw.js with a hash of the files it precaches, so changing one reaches installed users.
 //
 // A route whose render throws, times out or comes out without real page content (a heading and some text inside
-// <main>) still gets its own head tags, over an empty #root, so search tags and robots rules never fall back to the
-// shell's noindex. Set PRERENDER_STRICT=1 to fail the build instead.
+// <main>) still gets its own title, description and canonical over an empty #root, but `noindex` and no sitemap entry:
+// a crawler would only see an empty page. Set PRERENDER_STRICT=1 to fail the build instead.
 import { build } from 'vite';
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -34,6 +36,16 @@ function pageFile(routePath) {
   return routePath === '/' ? path.join(dist, 'index.html') : path.join(dist, routePath.slice(1), 'index.html');
 }
 
+async function stampServiceWorker(mod) {
+  const file = path.join(dist, 'sw.js');
+  const source = await readFile(file, 'utf8');
+  const hash = createHash('sha256');
+  for (const name of mod.precacheFiles(source)) hash.update(name).update('\0').update(await readFile(path.join(dist, name)));
+  const version = `fblc-shell-${hash.digest('hex').slice(0, 12)}`;
+  await writeFile(file, mod.stampServiceWorker(source, version));
+  console.log(`prerender: sw.js cache version ${version}`);
+}
+
 async function main() {
   const shell = await readFile(path.join(dist, 'index.html'), 'utf8');
   if (!EMPTY_ROOT.test(shell)) throw new Error('dist/index.html has no empty <div id="root"></div> to fill');
@@ -48,25 +60,25 @@ async function main() {
   });
   const mod = await import(pathToFileURL(path.join(ssrDir, 'entry-server.js')).href);
 
-  let full = 0;
-  for (const route of mod.PUBLIC_ROUTES) {
-    let head = shell;
-    for (const re of SHELL_HEAD) head = head.replace(re, '');
-    head = head.replace('</head>', () => `    ${mod.headTags(route)}\n  </head>`);
+  let bare = shell;
+  for (const re of SHELL_HEAD) bare = bare.replace(re, '');
+  const withHead = (tags) => bare.replace('</head>', () => `    ${tags}\n  </head>`);
 
+  const headOnly = [];
+  for (const route of mod.PUBLIC_ROUTES) {
     let html;
     try {
       const { hints, body } = mod.splitLeadingHints(await mod.renderRoute(route.path));
       const chars = mod.assertPageContent(body);
-      html = head
-        .replace('</head>', () => (hints ? `    ${hints}\n  </head>` : '</head>'))
-        .replace(EMPTY_ROOT, () => `<div id="root" data-prerendered>${body}</div>`);
-      full += 1;
+      const tags = hints ? `${mod.headTags(route)}\n    ${hints}` : mod.headTags(route);
+      html = withHead(tags).replace(EMPTY_ROOT, () => `<div id="root" data-prerendered>${body}</div>`);
       console.log(`prerender ${route.path}: ${chars} characters of page text`);
     } catch (err) {
       if (strict) throw err;
-      html = head;
-      console.warn(`prerender ${route.path}: head tags only, ${err instanceof Error ? err.message : String(err)}`);
+      html = withHead(mod.headTags(route, { rendered: false }));
+      headOnly.push(route.path);
+      const why = err instanceof Error ? err.message : String(err);
+      console.warn(`prerender ${route.path}: head tags only (${why}); noindex and left out of sitemap.xml`);
     }
 
     const file = pageFile(route.path);
@@ -74,8 +86,10 @@ async function main() {
     await writeFile(file, html);
   }
 
-  await writeFile(path.join(dist, 'sitemap.xml'), mod.sitemapXml());
+  await writeFile(path.join(dist, 'sitemap.xml'), mod.sitemapXml(headOnly));
+  await stampServiceWorker(mod);
   await rm(ssrDir, { recursive: true, force: true });
+  const full = mod.PUBLIC_ROUTES.length - headOnly.length;
   console.log(`prerender: ${full} of ${mod.PUBLIC_ROUTES.length} public routes with full HTML; sitemap.xml written`);
 }
 

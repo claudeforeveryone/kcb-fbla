@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router-dom';
 import { AppTree, ROUTER_BASENAME } from './AppTree';
 
 export { PUBLIC_ROUTES, headTags, sitemapXml } from './lib/seo';
-export { assertPageContent, splitLeadingHints } from './lib/prerender';
+export { assertPageContent, precacheFiles, splitLeadingHints, stampServiceWorker } from './lib/prerender';
 
 /**
  * Build time only (scripts/prerender.mjs). Renders one route of the real app, signed out, to static HTML.

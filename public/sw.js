@@ -1,15 +1,17 @@
 // FBLC service worker: a small offline shell, nothing more.
-// - Precaches the offline page and the few files it shows.
+// - Precaches the offline page (self-contained: its logo and icon are inline).
 // - Pages always come from the network; with no connection the offline page is shown instead of a browser error.
 // - Hashed build files (assets/) are cached after their first load: their names change whenever their content does.
+// - Everything else (icons, manifest, images) is left to the browser's normal HTTP cache, so updates always arrive.
 // - Never touches other origins (Supabase, Google Fonts) or Supabase API paths, so no account or practice data is
 //   ever stored here. No push notifications.
 // Paths are relative to this file, so the same worker works at / (Vercel) and under a sub-path (GitHub Pages).
-const VERSION = 'fblc-shell-v2';
+// The build (scripts/prerender.mjs) replaces VERSION with a hash of the precached files: no hand bumping.
+const VERSION = 'fblc-shell-dev';
+const PRECACHE_FILES = ['offline.html'];
 const at = (path) => new URL(path, self.location.href).href;
 const OFFLINE_URL = at('offline.html');
-const PRECACHE = [OFFLINE_URL, at('favicon.svg'), at('brand/fblc-logo-white.webp'), at('manifest.webmanifest')];
-const PRECACHED = new Set(PRECACHE);
+const PRECACHED = new Set(PRECACHE_FILES.map(at));
 const ASSETS = at('assets/');
 const API_PATHS = ['/rest/v1/', '/auth/v1/', '/storage/v1/', '/functions/v1/', '/realtime/v1/', '/graphql/v1/'];
 // Old builds' files pile up across deploys; keep the newest ones only.
@@ -27,7 +29,8 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
       .open(VERSION)
-      .then((cache) => cache.addAll(PRECACHE))
+      // `reload`: fetch past the HTTP cache, so a new version never precaches an old copy.
+      .then((cache) => cache.addAll([...PRECACHED].map((url) => new Request(url, { cache: 'reload' }))))
       .then(() => self.skipWaiting()),
   );
 });
@@ -51,11 +54,6 @@ self.addEventListener('fetch', (event) => {
 
   if (request.mode === 'navigate') {
     event.respondWith(fetch(request).catch(() => caches.match(OFFLINE_URL)));
-    return;
-  }
-
-  if (PRECACHED.has(url.href)) {
-    event.respondWith(caches.match(url.href).then((hit) => hit || fetch(request)));
     return;
   }
 

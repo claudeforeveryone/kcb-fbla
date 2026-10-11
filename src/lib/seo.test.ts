@@ -55,7 +55,9 @@ describe('paths', () => {
 describe('private page titles', () => {
   it('labels signed-in pages without matching look-alike paths', () => {
     expect(titleForPrivate('/play/accounting')).toBe('Play | FBLC');
-    expect(titleForPrivate('/me/settings')).toBe('Profile | FBLC');
+    expect(titleForPrivate('/me')).toBe('Profile | FBLC');
+    expect(titleForPrivate('/me/settings')).toBe('Settings | FBLC');
+    expect(titleForPrivate('/me/career')).toBe('Career | FBLC');
     expect(titleForPrivate('/u/ada')).toBe('Profile | FBLC');
     expect(titleForPrivate('/meow')).toBe('FBLC');
     expect(titleForPrivate('/dev/ui')).toBe('FBLC');
@@ -77,6 +79,14 @@ describe('head tags', () => {
 
   it('keeps sign-in pages out of the index but still follows their links', () => {
     expect(headTags(login)).toContain('<meta name="robots" content="noindex, follow" />');
+  });
+
+  it('keeps a page that prerendered with no content out of the index (it would be an empty shell to a crawler)', () => {
+    const home = PUBLIC_ROUTES[0];
+    const head = headTags(home, { rendered: false });
+    expect(head).toContain('<meta name="robots" content="noindex, follow" />');
+    expect(head).not.toContain('index, follow, max-image-preview');
+    expect(headTags(home, { rendered: true })).toContain('content="index, follow, max-image-preview:large"');
   });
 
   it('escapes attribute text', () => {
@@ -116,5 +126,12 @@ describe('structured data and sitemap', () => {
     expect(xml).toContain(`<loc>${SITE_URL}/privacy</loc>`);
     expect(xml).not.toContain('/login');
     expect(xml.match(/<url>/g)).toHaveLength(4);
+  });
+
+  it('leaves out routes that prerendered with no content', () => {
+    const xml = sitemapXml(['/']);
+    expect(xml).not.toContain(`<loc>${SITE_URL}/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_URL}/terms</loc>`);
+    expect(xml.match(/<url>/g)).toHaveLength(3);
   });
 });
