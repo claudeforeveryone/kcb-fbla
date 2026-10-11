@@ -83,7 +83,7 @@ export default function EventPage() {
       <PageHeader
         back={{ to: '/play', label: 'All events' }}
         leading={
-          <EventBlock slug={info.slug} watermark={false} className="size-16 shrink-0 rounded-[12px] sm:size-[88px]">
+          <EventBlock slug={info.slug} className="size-16 shrink-0 rounded-[12px] sm:size-[88px]">
             <span className="grid h-full place-items-center">
               <EventCrest slug={info.slug} size={54} className="max-sm:!size-10" />
             </span>
