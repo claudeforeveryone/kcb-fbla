@@ -18,7 +18,7 @@ export function Footer({ className }: { className?: string }) {
           <div className="flex items-center gap-3">
             <img src={LOGO_WHITE} {...LOGO_SIZE} alt="" loading="lazy" className="h-10 w-auto" />
             <div>
-              <div className="font-display text-lg font-extrabold text-white">FBLC</div>
+              <div className="font-display text-lg font-extrabold text-white">FBLA United</div>
               <div className="text-xs text-white/70">Practise. Compete. Lead.</div>
             </div>
           </div>

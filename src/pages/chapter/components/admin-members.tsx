@@ -511,7 +511,7 @@ function AddMemberModal({ open, onClose, chapterId, onAdded }: { open: boolean; 
   const exact = q.trim().replace(/^@/, '').toLowerCase();
 
   return (
-    <Modal open={open} onClose={onClose} title="Add a member" description="Search by username or name. Players must already have a FBLC account and not be in another chapter." size="md">
+    <Modal open={open} onClose={onClose} title="Add a member" description="Search by username or name. Players must already have an FBLA United account and not be in another chapter." size="md">
       <form
         onSubmit={(e) => {
           e.preventDefault();

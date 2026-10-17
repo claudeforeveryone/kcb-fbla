@@ -67,7 +67,7 @@ export default function DeckPage() {
   );
 
   useEffect(() => {
-    if (deck) document.title = `${deck.title} vocab | FBLC`;
+    if (deck) document.title = `${deck.title} vocab | FBLA United`;
   }, [deck]);
 
   const loading = s.status === 'idle' || s.status === 'loading';

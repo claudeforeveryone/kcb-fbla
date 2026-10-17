@@ -1,4 +1,4 @@
-// Shared helpers for the FBLC email edge functions (weekly-digest, send-newsletter, email-unsubscribe).
+// Shared helpers for the FBLA United email edge functions (weekly-digest, send-newsletter, email-unsubscribe).
 // Brand: FBLC palette (navy #001E60, red #BF0D3E, blue #3F6FB3), Work Sans headings, Open Sans body.
 
 export const NAVY = '#001E60';
@@ -254,7 +254,7 @@ export function layout(opts: {
 }): string {
   const { cfg } = opts;
   const site = cfg.site_url;
-  const logo = `${site}/brand/fblc-logo-white.webp`;
+  const logo = `${site}/brand/fbla-united-mark.png`;
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -282,7 +282,7 @@ export function layout(opts: {
 <tr><td class="pad" style="padding:22px 32px 0;">
   <a href="${esc(site)}" style="text-decoration:none;">
   <img src="${esc(logo)}" width="40" height="40" alt="" style="display:inline-block;vertical-align:middle;border:0;height:40px;width:auto;">
-  <span style="display:inline-block;vertical-align:middle;margin-left:10px;font-family:${FONT_HEAD};font-size:19px;font-weight:800;letter-spacing:0.4px;color:#FFFFFF;">FBLC</span>
+  <span style="display:inline-block;vertical-align:middle;margin-left:10px;font-family:${FONT_HEAD};font-size:19px;font-weight:800;letter-spacing:0.4px;color:#FFFFFF;">FBLA United</span>
   </a>
 </td></tr>
 <tr><td class="pad" style="padding:26px 32px 30px;">
@@ -308,8 +308,8 @@ ${opts.body}
   &nbsp;&middot;&nbsp;
   <a href="${esc(site)}/me/settings" style="color:${MUTED};text-decoration:underline;">Email settings</a>
   &nbsp;&middot;&nbsp;
-  <a href="${esc(site)}" style="color:${MUTED};text-decoration:underline;">Open FBLC</a>
-  <div style="margin-top:10px;font-family:${FONT_HEAD};font-weight:700;letter-spacing:0.4px;color:${NAVY};">FBLC &middot; Future Business Leaders</div>
+  <a href="${esc(site)}" style="color:${MUTED};text-decoration:underline;">Open FBLA United</a>
+  <div style="margin-top:10px;font-family:${FONT_HEAD};font-weight:700;letter-spacing:0.4px;color:${NAVY};">FBLA United &middot; Future Business Leaders</div>
 </td></tr>
 
 </table>
@@ -319,5 +319,5 @@ ${opts.body}
 
 /** Plain-text footer shared by every email. */
 export function textFooter(reason: string, unsub: string, site: string): string {
-  return `\n\n--\n${reason}\nUnsubscribe: ${unsub}\nEmail settings: ${site}/me/settings\nFBLC`;
+  return `\n\n--\n${reason}\nUnsubscribe: ${unsub}\nEmail settings: ${site}/me/settings\nFBLA United`;
 }

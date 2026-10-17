@@ -7,7 +7,7 @@ import { FacetArt } from '../../components/ui/PageHeader';
 import { Input, type InputProps } from '../../components/ui/Field';
 
 const features = [
-  { title: 'FBLA-style exams', body: 'Fifteen FBLC events, timed papers and Elo that moves with every answer.' },
+  { title: 'FBLA-style exams', body: 'Fifteen FBL Canada events, timed papers and Elo that moves with every answer.' },
   { title: 'Arena duels', body: 'Challenge a friend to ten questions. Fastest correct answers win.' },
   { title: 'Your chapter, organised', body: 'Assignments, newsletters, attendance and a coach view of every member.' },
 ];
@@ -44,7 +44,7 @@ export function AuthLayout({
     <div className="flex min-h-dvh flex-col bg-bg lg:flex-row">
       {/* Brand panel */}
       <aside className="relative isolate overflow-hidden bg-navy text-white lg:sticky lg:top-0 lg:flex lg:h-dvh lg:w-[44%] lg:max-w-[640px] lg:flex-col">
-        <FacetArt className="w-full opacity-70 lg:inset-y-auto lg:bottom-0 lg:h-[42%] lg:opacity-100" intensity={1.1} />
+        <FacetArt className="w-full opacity-30" />
         <div className="relative flex items-center justify-between px-5 pt-5 lg:px-12 lg:pt-10">
           <Brand size="md" />
           <button

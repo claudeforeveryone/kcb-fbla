@@ -362,3 +362,16 @@
 .text-warning {
   color: var(--warning-ink);
 }
+
+/* Banner chevrons (FacetArt): each rises a few pixels and brightens, one after another. */
+@keyframes united-rise {
+  0%, 100% { transform: translateY(6px); opacity: 0.55; }
+  50% { transform: translateY(-6px); opacity: 1; }
+}
+.united-rise {
+  transform-box: fill-box;
+  animation: united-rise 4.8s ease-in-out var(--rise-delay, 0s) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .united-rise { animation: none !important; }
+}

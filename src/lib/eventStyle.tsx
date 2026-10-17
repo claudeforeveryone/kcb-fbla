@@ -106,8 +106,9 @@ function driftDelay(seed: string): string {
 }
 
 /**
- * A block of the event colour with flat decoration so it isn't an empty slab: two angled facets
- * (a lighter and a darker tint, like the FBLC logo) and the icon repeated large and faint in the corner.
+ * A block of the event colour with flat decoration so it isn't an empty slab: two angled facets (a lighter and a
+ * darker tint), the sash's two white slivers along the darker one's edge, and the icon repeated large and faint in the
+ * corner.
  * The decoration drifts slowly (off under prefers-reduced-motion); children never move.
  * `seed` staggers the drift phase per instance (defaults to the colour).
  */
@@ -133,12 +134,15 @@ export function ColorBlock({
   // drifts. Points are remapped (v = (b + 10) / 1.2) so the resting shapes match the original layout.
   return (
     <div className={'relative overflow-hidden ' + (className ?? '')} style={{ ...style, ...vars, background: color }}>
-      <style href="kcb-color-block" precedence="default">{COLOR_BLOCK_CSS}</style>
+      <style href="united-color-block" precedence="default">{COLOR_BLOCK_CSS}</style>
       <svg className="cb-facet-a pointer-events-none absolute -inset-[10%] h-[120%] w-[120%]" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
         <polygon points="0,0 42,0 18,100 0,100" fill="#fff" fillOpacity={0.07} />
       </svg>
       <svg className="cb-facet-b pointer-events-none absolute -inset-[10%] h-[120%] w-[120%]" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
         <polygon points="70.17,0 100,0 100,100 48.17,100" fill="#000" fillOpacity={0.1} />
+        {/* the FBLA United sash: two white slivers riding the darker facet's edge */}
+        <polygon points="65.5,0 68,0 46,100 43.5,100" fill="#fff" fillOpacity={0.3} />
+        <polygon points="60.5,0 61.7,0 39.7,100 38.5,100" fill="#fff" fillOpacity={0.16} />
       </svg>
       {watermark && (
         <Icon
