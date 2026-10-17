@@ -194,6 +194,17 @@ function Landing() {
         <div className="obs-scrim" aria-hidden="true" />
         <div className="obs-wrap relative pb-14 pt-24 md:pb-20">
           <div className="obs-keep max-w-[44rem]">
+            <p
+              className="obs-up mb-6 flex items-center gap-3 font-display text-xs font-bold uppercase tracking-[0.24em] text-white/85"
+              style={{ ["--d" as string]: "0ms" }}
+            >
+              <span className="flex h-1 w-14" aria-hidden="true">
+                <span className="flex-[5] bg-white" />
+                <span className="flex-1 bg-red" />
+                <span className="flex-[3] bg-blue" />
+              </span>
+              FBLA United
+            </p>
             <h1 id="hero-title" className="obs-h1">
               <span className="obs-line">
                 <span style={{ ["--d" as string]: "0ms" }}>The Leadership</span>
@@ -213,7 +224,7 @@ function Landing() {
               className="obs-body obs-up mt-4 max-w-[44ch]"
               style={{ ["--d" as string]: "730ms" }}
             >
-              Timed FBLA-style papers for FBLC members: {EVENTS.length} events,
+              Timed FBLA-style papers for FBL Canada members: {EVENTS.length} events,
               a first-try Elo rating, vocab drills and 1v1 duels.
             </p>
             <div

@@ -51,7 +51,7 @@ export function ExamResults({ data, questions, actions, animate = true, previous
       <ExamStyles />
       {/* hero */}
       <section className="band relative isolate overflow-hidden text-white">
-        <FacetArt className="opacity-80 max-md:left-auto max-md:w-2/5 max-md:opacity-40" />
+        <FacetArt className="max-md:hidden" />
         <div className="relative mx-auto grid w-full max-w-[1440px] lg:px-10 items-center gap-6 px-4 pb-10 pt-8 sm:px-6 md:grid-cols-[auto_minmax(0,1fr)] md:pb-12 md:pt-10 lg:grid-cols-[auto_minmax(0,1fr)_320px]">
           <ScoreRing pct={pct} correct={data.correct} total={data.total} animate={animate} endless={endless} />
           <div className="min-w-0 exam-rise" style={{ animationDelay: '120ms' }}>

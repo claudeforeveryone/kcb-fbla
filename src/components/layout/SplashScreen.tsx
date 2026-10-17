@@ -3,7 +3,7 @@ import { LOGO_WHITE } from './Brand';
 /** Full-screen navy loader shown while the session is restored. */
 export function SplashScreen() {
   return (
-    <div className="fixed inset-0 bg-navy z-[100] grid place-items-center" role="status" aria-label="Loading FBLC">
+    <div className="fixed inset-0 bg-navy z-[100] grid place-items-center" role="status" aria-label="Loading FBLA United">
       <div className="flex flex-col items-center gap-5">
         <img src={LOGO_WHITE} alt="" className="h-16 w-auto animate-pulse" />
         <div className="h-1 w-28 overflow-hidden bg-white/15">

@@ -208,7 +208,7 @@ function buildNudge(r: Recipient, cfg: Config): OutEmail {
 
   const lead = fresh
     ? para(
-        `Hi ${esc(name)}, you joined FBLC but have not taken a practice set yet. ${event ? `A 10-question <strong>${esc(event)}</strong> set takes about five minutes` : 'A 10-question set takes about five minutes'}, and every answer starts building your Elo rating and your spot on the leaderboard.`,
+        `Hi ${esc(name)}, you joined FBLA United but have not taken a practice set yet. ${event ? `A 10-question <strong>${esc(event)}</strong> set takes about five minutes` : 'A 10-question set takes about five minutes'}, and every answer starts building your Elo rating and your spot on the leaderboard.`,
       )
     : para(
         `Hi ${esc(name)}, it has been ${r.days_idle ? `${r.days_idle} days` : 'a while'} since your last practice. Your rating is waiting right where you left it: <strong>${r.elo} Elo</strong>, rank <strong>#${r.rank}</strong>${r.best_streak > 1 ? `, with a best streak of <strong>${r.best_streak} days</strong> to beat` : ''}.`,
@@ -255,7 +255,7 @@ function buildNudge(r: Recipient, cfg: Config): OutEmail {
   const text =
     `Hi ${name},\n\n` +
     (fresh
-      ? `You joined FBLC but have not taken a practice set yet. A 10-question set takes about five minutes.`
+      ? `You joined FBLA United but have not taken a practice set yet. A 10-question set takes about five minutes.`
       : `It has been ${r.days_idle ?? 'a few'} days since your last practice. You are at ${r.elo} Elo, rank #${r.rank}.`) +
     (r.pending_duels ? `\n\n${plural(r.pending_duels, 'Arena challenge')} waiting: ${site}/arena` : '') +
     a.text +

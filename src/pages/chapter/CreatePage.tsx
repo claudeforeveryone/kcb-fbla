@@ -57,7 +57,7 @@ export default function CreatePage() {
       <PageHeader
         eyebrow="Chapter"
         title="Register your chapter"
-        subtitle="Set up a home for your FBLC chapter: one leaderboard, one classroom, every member's progress in one place."
+        subtitle="Set up a home for your chapter: one leaderboard, one classroom, every member's progress in one place."
         back={{ to: '/chapter', label: 'Chapter' }}
       />
       <Page>

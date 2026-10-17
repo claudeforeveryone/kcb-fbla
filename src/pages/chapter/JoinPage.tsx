@@ -22,7 +22,7 @@ export default function JoinPage() {
         <Card className="border-t-4 border-t-red text-center">
           <h2 className="text-2xl font-extrabold">You've been invited to a chapter</h2>
           <p className="mx-auto mt-2 max-w-md text-muted">
-            FBLC is where your chapter practises for competition: official-style exams, Elo rankings, vocab and 1v1
+            FBLA United is where your chapter practises for competition: official-style exams, Elo rankings, vocab and 1v1
             duels. Sign in or create a free account to see the chapter and join.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">

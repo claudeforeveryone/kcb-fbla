@@ -189,7 +189,7 @@ function CheckInbox({ email, next, onBack }: { email: string; next: string; onBa
           <strong className="font-semibold text-heading">{email}</strong>
         </p>
         <ol className="mx-auto mt-5 max-w-xs space-y-2 text-left text-sm text-muted">
-          {['Open the email from FBLC', 'Tap "Confirm your email"', 'Set up your player card'].map((s, i) => (
+          {['Open the email from FBLA United', 'Tap "Confirm your email"', 'Set up your player card'].map((s, i) => (
             <li key={s} className="flex items-center gap-2.5">
               <span className="tabular grid size-5 shrink-0 place-items-center rounded-[2px] bg-navy text-[11px] font-bold text-white dark:bg-blue">
                 {i + 1}

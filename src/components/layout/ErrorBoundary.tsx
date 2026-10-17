@@ -60,7 +60,7 @@ const COPY: Record<CrashKind, { title: string; body: string }> = {
     body: "This page needs a connection to open. It will load by itself once you're back online.",
   },
   reconnected: { title: "You're back online", body: 'Reload to open this page.' },
-  update: { title: 'A new version is available', body: 'FBLC was just updated. Reload to get the latest version.' },
+  update: { title: 'A new version is available', body: 'FBLA United was just updated. Reload to get the latest version.' },
   error: { title: 'This page hit a snag', body: 'Something went wrong while showing this page. Reloading usually fixes it.' },
 };
 

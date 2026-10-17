@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ContactEmail, LegalPage, LegalSection, PROSE_LINK, ShortVersion } from './LegalPage';
 
 const S = {
-  what: { id: 'what', title: 'What FBLC is' },
+  what: { id: 'what', title: 'What FBLA United is' },
   affiliation: { id: 'affiliation', title: 'Not affiliated with FBLA or FBL Canada' },
   account: { id: 'account', title: 'Your account' },
   fair: { id: 'fair', title: 'Playing fair' },
@@ -30,11 +30,11 @@ export default function Terms() {
   return (
     <LegalPage
       title="Terms of use"
-      intro="Effective October 11, 2026. The rules for using FBLC, in plain language. Not reviewed by a lawyer."
+      intro="Effective October 11, 2026. The rules for using FBLA United, in plain language. Not reviewed by a lawyer."
       sections={Object.values(S)}
     >
       <ShortVersion>
-        <li>FBLC is a free, independent practice site. FBLA and FBL Canada don't run it or endorse it.</li>
+        <li>FBLA United is a free, independent practice site. FBLA and FBL Canada don't run it or endorse it.</li>
         <li>The questions are written for practice. They are not official test items, and nothing here guarantees a result.</li>
         <li>Keep your account to yourself, play fair and be kind to other members.</li>
         <li>You can leave and ask us to delete your account at any time. The {privacy} explains what we keep.</li>
@@ -42,8 +42,8 @@ export default function Terms() {
 
       <LegalSection {...S.what}>
         <p>
-          FBLC is a study site with practice exams, vocab decks, 1v1 duels and chapter tools for FBL Canada members. It is
-          free, has no ads, and is built and run by two students, Joseph and Kaden. In these terms, &ldquo;FBLC&rdquo;
+          FBLA United is a study site with practice exams, vocab decks, 1v1 duels and chapter tools for FBL Canada members. It is
+          free, has no ads, and is built and run by two students, Joseph and Kaden. In these terms, &ldquo;FBLA United&rdquo;
           means this study site, never the organisation FBL Canada. By making an account or using the site, you agree to
           these terms and to the {privacy}.
         </p>
@@ -64,7 +64,7 @@ export default function Terms() {
 
       <LegalSection {...S.account}>
         <p>
-          FBLC is for FBL Canada members, mostly students in grades 7 to 12. If you are under 13, a parent or guardian
+          FBLA United is for FBL Canada members, mostly students in grades 7 to 12. If you are under 13, a parent or guardian
           needs to agree before you make an account. An account is for one person: give accurate details, keep your
           password private, and tell us straight away if someone else has used your account. Don't pretend to be someone
           else.
@@ -81,7 +81,7 @@ export default function Terms() {
 
       <LegalSection {...S.posts}>
         <p>
-          What you write and upload (your bio, photo, chapter posts, tests and decks) stays yours. You let FBLC store it
+          What you write and upload (your bio, photo, chapter posts, tests and decks) stays yours. You let FBLA United store it
           and show it to the members who are meant to see it. Don't post anything hateful, sexual, violent or illegal,
           anything you don't have the right to share, or anyone's private information. We can remove anything that breaks
           these rules.
@@ -115,14 +115,14 @@ export default function Terms() {
 
       <LegalSection {...S.deca}>
         <p>
-          DECA Masters, our sister practice site for DECA, is moving onto the same account system as FBLC. Once it has,
-          one account will work on both sites. These terms cover FBLC; DECA Masters will have its own.
+          DECA Masters, our sister practice site for DECA, is moving onto the same account system as FBLA United. Once it has,
+          one account will work on both sites. These terms cover FBLA United; DECA Masters will have its own.
         </p>
       </LegalSection>
 
       <LegalSection {...S.service}>
         <p>
-          We try to keep FBLC running, but it may be slow, offline or different from one day to the next. Answers you give
+          We try to keep FBLA United running, but it may be slow, offline or different from one day to the next. Answers you give
           while offline may not be saved. We may change, pause or close parts of the site, and for big changes we will try
           to tell members first.
         </p>
@@ -130,14 +130,14 @@ export default function Terms() {
 
       <LegalSection {...S.ending}>
         <p>
-          You can stop using FBLC at any time and ask us to delete your account by emailing <ContactEmail />. We can
+          You can stop using FBLA United at any time and ask us to delete your account by emailing <ContactEmail />. We can
           suspend or delete an account that breaks these terms, and we will tell the member why when we can.
         </p>
       </LegalSection>
 
       <LegalSection {...S.limits}>
         <p>
-          FBLC is provided as it is. We don't promise that it will always work, that every answer key is right, or that it
+          FBLA United is provided as it is. We don't promise that it will always work, that every answer key is right, or that it
           will help you win. As far as the law allows, we are not responsible for losses that come from using it. Nothing
           in these terms takes away rights you have under the law of Ontario or Canada.
         </p>
@@ -146,7 +146,7 @@ export default function Terms() {
       <LegalSection {...S.changes}>
         <p>
           We may update these terms. When we do, we will change the date at the top, and for important changes we will
-          tell members in the app before they take effect. If you keep using FBLC after that, the new terms apply.
+          tell members in the app before they take effect. If you keep using FBLA United after that, the new terms apply.
         </p>
       </LegalSection>
 
