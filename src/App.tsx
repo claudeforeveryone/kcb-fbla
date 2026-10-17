@@ -6,7 +6,7 @@ import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { RouteFallback, SplashScreen } from './components/layout/SplashScreen';
 // The signed-out front door's stylesheet is part of the app's own CSS: the prerendered "/" is styled before any script
 // runs. Its code is a lazy chunk (below), so members never download it.
-import './pages/landing/observatory.css';
+import './pages/landing/landing.css';
 import { indexView } from './pages/landing/indexView';
 import { loadLandingPage } from './pages/landing/loadLanding';
 import { mayHaveSession } from './lib/sessionHint';

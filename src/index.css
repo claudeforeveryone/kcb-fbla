@@ -205,15 +205,6 @@
   from { opacity: 0; transform: translateX(24px); }
   to { opacity: 1; transform: none; }
 }
-@keyframes facet-drift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(var(--facet-x, 10px), var(--facet-y, -6px)) rotate(var(--facet-r, 1.2deg)); }
-  100% { transform: translate(calc(var(--facet-x, 10px) * -0.6), calc(var(--facet-y, -6px) * -0.5)) rotate(calc(var(--facet-r, 1.2deg) * -0.5)); }
-}
-@keyframes facet-shimmer {
-  from { opacity: var(--facet-o1, 0.05); }
-  to { opacity: var(--facet-o2, 0.14); }
-}
 @keyframes shimmer {
   from { background-position: -200% 0; }
   to { background-position: 200% 0; }
@@ -278,15 +269,7 @@
   .scrollbar-none::-webkit-scrollbar { display: none; }
   .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 
-  /* Flat navy band; the angular shapes come from <FacetArt/>. */
-  .facets {
-    background-color: var(--navy);
-  }
-  .dark .facets {
-    background-color: #071848;
-  }
-
-  /* Page banners: white band with navy text and navy/blue/red shapes. Inside it, "white" utilities
+  /* Page banners: white band with navy text and the FBLA United rule along the bottom. Inside it, "white" utilities
      (text-white, bg-white/10, ring-white/15...) resolve to navy, so the same markup reads on white.
      Solid coloured blocks inside keep real white text. */
   .band {
@@ -294,7 +277,6 @@
     border-bottom: 1px solid var(--line);
     color: var(--navy);
     --color-white: var(--navy);
-    --facet-ink: var(--navy);
   }
   .band :is(.bg-navy, .bg-navy-2, .bg-navy-deep, .bg-red, .bg-red-2, .bg-blue, .bg-success, .bg-danger, .bg-warning) {
     --color-white: #fff;
@@ -318,22 +300,11 @@
     background-color: var(--surface);
     color: #fff;
     --color-white: #fff;
-    --facet-ink: #fff;
   }
 
-  /* Slow drift for the banner shapes (FacetArt). Each shape gets its own duration/delay inline. */
-  .facet-drift {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: facet-drift var(--facet-dur, 14s) ease-in-out var(--facet-delay, 0s) infinite alternate;
-  }
-  .facet-shimmer {
-    animation: facet-shimmer var(--facet-dur, 9s) ease-in-out var(--facet-delay, 0s) infinite alternate;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .facet-drift, .facet-shimmer { animation: none !important; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -363,15 +334,14 @@
   color: var(--warning-ink);
 }
 
-/* Banner chevrons (FacetArt): each rises a few pixels and brightens, one after another. */
-@keyframes united-rise {
-  0%, 100% { transform: translateY(6px); opacity: 0.55; }
-  50% { transform: translateY(-6px); opacity: 1; }
+
+/* The FBLA United rule under banners (UnitedRule) draws in once, left to right. */
+@keyframes united-rule {
+  from { transform: scaleX(0); }
 }
-.united-rise {
-  transform-box: fill-box;
-  animation: united-rise 4.8s ease-in-out var(--rise-delay, 0s) infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .united-rise { animation: none !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .united-rule {
+    transform-origin: left;
+    animation: united-rule 700ms var(--ease-out-quint) 120ms both;
+  }
 }

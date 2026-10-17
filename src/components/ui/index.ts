@@ -25,7 +25,7 @@ export { Table, THead, TBody, TR, TH, TD } from './Table';
 export { Tooltip } from './Tooltip';
 export { SegmentedControl, Pill } from './Segmented';
 export type { SegmentOption } from './Segmented';
-export { PageHeader, FacetArt } from './PageHeader';
+export { PageHeader, UnitedRule } from './PageHeader';
 export { useScrollFade } from './scrollFade';
 export { ScrollRow } from './ScrollRow';
 export { EloBadge } from './EloBadge';

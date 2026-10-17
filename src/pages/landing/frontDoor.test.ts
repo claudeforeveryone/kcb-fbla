@@ -12,7 +12,7 @@ describe('signed-out "/" (the prerendered front door)', () => {
     // a whole page: a <main> with its h1 and text, no Suspense boundary left for a script to fill in
     expect(() => assertPageContent(html)).not.toThrow();
     expect(html).toMatch(/<h1[^>]*id="hero-title"/);
-    expect(html).toContain("The Leadership");
+    expect(html).toContain("Practise for FBLA.");
     // the sections below the hero are in the HTML too (not left to the client)
     for (const id of ["platform", "events", "preview", "how", "join"])
       expect(html).toContain(`id="${id}"`);

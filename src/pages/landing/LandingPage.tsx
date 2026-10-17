@@ -1,25 +1,12 @@
-// The signed-out front door, "/" when no one is signed in (App.tsx IndexRoute). Every word is HTML in reading
-// order; the glass room behind the hero and the closing section is decoration that arrives after first paint.
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-  type MouseEvent,
-} from "react";
+// The signed-out front door, "/" when no one is signed in (App.tsx IndexRoute). Light, flat and quiet: every word is
+// HTML in reading order, the only motion is the headline settling in and each section rising once as it scrolls in.
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { buttonClasses } from "../../components/ui/Button";
-import { cn } from "../../components/ui/cn";
-import { EventNetwork, type EventsView } from "./EventNetwork";
-import type { PosterVariant } from "./ObservatoryPoster";
-import { ObservatoryStage } from "./ObservatoryStage";
 import { PracticePreview } from "./PracticePreview";
-import { shouldPlayIntro } from "./intro";
-import { RoomSlotContext, type RoomOwner } from "./roomSlot";
 import {
+  DISCIPLINES,
   DUEL_ACCEPT_HOURS,
   DUEL_QUESTIONS,
   EVENTS,
@@ -28,22 +15,11 @@ import {
   QUESTIONS_PER_EVENT,
   TERMS_PER_EVENT,
   TOTAL_TERMS,
+  eventsIn,
+  signupFor,
 } from "./observatoryEvents";
-// observatory.css is imported by App.tsx, not here: this module is a lazy chunk, and the prerendered HTML needs the
+// landing.css is imported by App.tsx, not here: this module is a lazy chunk, and the prerendered HTML needs the
 // styles before it loads.
-
-// Read once, when this chunk first runs: is this page's static HTML on screen? Hydration keeps the prerendered markup
-// in place until this chunk has loaded, so for a hydrated visit it is still there. A fresh render (someone who may be
-// signed in, whose prerendered copy stayed hidden behind the navy splash) has replaced it by then; whether the lead and
-// actions fade up is then intro.ts's first-paint rule (the splash painted first, so usually not). The headline's own
-// reveal is CSS and plays either way (observatory.css).
-const PRERENDERED =
-  typeof document !== "undefined" &&
-  !!document.querySelector("#root .observatory");
-
-// Runs before paint in the browser, and is skipped on the server (prerender).
-const useBeforePaint =
-  typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 const PLATFORM = [
   {
@@ -98,268 +74,166 @@ const STEPS = [
 ];
 
 export default function LandingPage() {
-  // the hero and the closing section share one WebGL room (see roomSlot.ts)
-  const [roomOwner, setRoomOwner] = useState<RoomOwner>(null);
-  const [declines, setDeclines] = useState(0);
-  const [unusable, setUnusable] = useState(false);
-  const claimRoom = useCallback((who: PosterVariant) => setRoomOwner(who), []);
-  const decline = useCallback(() => setDeclines((d) => d + 1), []);
-  const markUnusable = useCallback(() => setUnusable(true), []);
-  const roomSlot = useMemo(
-    () => ({
-      owner: roomOwner,
-      claim: claimRoom,
-      declines,
-      decline,
-      unusable,
-      markUnusable,
-    }),
-    [roomOwner, claimRoom, declines, decline, unusable, markUnusable],
-  );
-  return (
-    <RoomSlotContext.Provider value={roomSlot}>
-      <Landing />
-    </RoomSlotContext.Provider>
-  );
-}
-
-function Landing() {
   const root = useRef<HTMLDivElement>(null);
-  const [eventsView, setEventsView] = useState<EventsView>("map");
-  const [intro, setIntro] = useState(false);
-  const [js, setJs] = useState(false);
 
-  // Decide on the lead and actions fade (obs-intro) before the first browser paint, so the text never jumps.
-  useBeforePaint(() => {
-    const reducedMotion = !!window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const fcp =
-      performance.getEntriesByName?.("first-contentful-paint")[0]?.startTime ??
-      null;
-    setIntro(
-      shouldPlayIntro({
-        reducedMotion,
-        firstContentfulPaint: fcp,
-        now: performance.now(),
-        prerendered: PRERENDERED,
-      }),
-    );
-    setJs(true);
-  }, []);
-
-  // The how-it-works path draws once, when it first comes into view.
+  // Sections below the hero rise in once as they reach the viewport. Content is visible without JS: the hidden
+  // starting state only applies under .lp-js, which is set here, and never under reduced motion (landing.css).
   useEffect(() => {
-    const path = root.current?.querySelector<HTMLElement>(".obs-path");
-    if (!path) return;
-    if (!("IntersectionObserver" in window)) {
-      path.classList.add("is-in");
-      return;
-    }
+    const el = root.current;
+    if (!el) return;
+    const items = Array.from(el.querySelectorAll<HTMLElement>("[data-reveal]"));
+    if (!("IntersectionObserver" in window)) return;
     const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          path.classList.add("is-in");
-          io.disconnect();
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.add("is-in");
+          io.unobserve(e.target);
         }
       },
-      { threshold: 0.4 },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
     );
-    io.observe(path);
+    // anything already on screen shows at once; only what is still below the fold waits for its entrance
+    const fold = window.innerHeight;
+    for (const item of items) {
+      if (item.getBoundingClientRect().top < fold) item.classList.add("is-in");
+      else io.observe(item);
+    }
+    el.classList.add("lp-js");
     return () => io.disconnect();
   }, []);
 
-  const skip = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    setIntro(false);
-    const reduce = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    document.getElementById("platform")?.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
-      block: "start",
-    });
-    document.getElementById("platform-title")?.focus({ preventScroll: true });
-  };
-
   return (
-    <div ref={root} className={cn("observatory", js && "obs-js")}>
+    <div ref={root} className="lp">
       {/* hero */}
-      <section
-        id="top"
-        aria-labelledby="hero-title"
-        className={cn("obs-hero", intro && "obs-intro")}
-      >
-        <ObservatoryStage variant="hero" clearOf="hero-title" />
-        <div className="obs-scrim" aria-hidden="true" />
-        <div className="obs-wrap relative pb-14 pt-24 md:pb-20">
-          <div className="obs-keep max-w-[44rem]">
-            <p
-              className="obs-up mb-6 flex items-center gap-3 font-display text-xs font-bold uppercase tracking-[0.24em] text-white/85"
-              style={{ ["--d" as string]: "0ms" }}
-            >
-              <span className="flex h-1 w-14" aria-hidden="true">
-                <span className="flex-[5] bg-white" />
-                <span className="flex-1 bg-red" />
-                <span className="flex-[3] bg-blue" />
+      <section id="top" aria-labelledby="hero-title" className="lp-hero">
+        <div className="lp-wrap grid items-center gap-12 pb-20 pt-14 md:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,31rem)] lg:gap-16 lg:pb-28 lg:pt-24">
+          <div>
+            <p className="lp-kicker">
+              <span className="lp-tricolour" aria-hidden="true">
+                <span />
+                <span />
+                <span />
               </span>
               FBLA United
             </p>
-            <h1 id="hero-title" className="obs-h1">
-              <span className="obs-line">
-                <span style={{ ["--d" as string]: "0ms" }}>The Leadership</span>
+            <h1 id="hero-title" className="lp-h1">
+              <span className="lp-line">
+                <span style={{ ["--d" as string]: "0ms" }}>Practise for FBLA.</span>
               </span>
-              <span className="obs-line">
-                <span style={{ ["--d" as string]: "90ms" }}>Observatory</span>
+              <span className="lp-line">
+                <span style={{ ["--d" as string]: "80ms" }}>Compete together.</span>
               </span>
             </h1>
-            <span className="obs-rule mt-7" aria-hidden="true" />
-            <p
-              className="obs-lead obs-up mt-6 max-w-[24ch]"
-              style={{ ["--d" as string]: "650ms" }}
-            >
-              Where serious future business leaders prepare.
+            <p className="lp-lead mt-6 max-w-[40ch]">
+              Timed FBLA-style papers for FBL Canada members: {EVENTS.length} events, a first-try Elo rating, vocab
+              drills and 1v1 duels.
             </p>
-            <p
-              className="obs-body obs-up mt-4 max-w-[44ch]"
-              style={{ ["--d" as string]: "730ms" }}
-            >
-              Timed FBLA-style papers for FBL Canada members: {EVENTS.length} events,
-              a first-try Elo rating, vocab drills and 1v1 duels.
-            </p>
-            <div
-              className="obs-up mt-8 flex flex-wrap items-center gap-3"
-              style={{ ["--d" as string]: "810ms" }}
-            >
-              <Link to="/signup" className={buttonClasses("accent", "lg")}>
-                Join free <ArrowRight className="size-4" aria-hidden />
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Link to="/signup" className={buttonClasses("accent", "lg", "lp-cta")}>
+                Join free <ArrowRight className="lp-cta-arrow size-4" aria-hidden />
               </Link>
-              <Link to="/login" className="obs-btn-line">
+              <Link to="/login" className={buttonClasses("outline", "lg")}>
                 Sign in
               </Link>
-              {/* the skip path: moves focus to the first section's heading */}
-              <a href="#platform" className="obs-skip sm:ml-2" onClick={skip}>
-                See what’s inside
-                <ArrowDown className="ml-1.5 size-4" aria-hidden />
-              </a>
             </div>
+            <dl className="lp-stats mt-12">
+              <div>
+                <dt>Events</dt>
+                <dd>{EVENTS.length}</dd>
+              </div>
+              <div>
+                <dt>Questions</dt>
+                <dd>{(EVENTS.length * QUESTIONS_PER_EVENT).toLocaleString("en-CA")}</dd>
+              </div>
+              <div>
+                <dt>Vocab terms</dt>
+                <dd>{TOTAL_TERMS.toLocaleString("en-CA")}</dd>
+              </div>
+            </dl>
+          </div>
+
+          {/* a real sample question, not a picture of one */}
+          <div id="preview" aria-labelledby="preview-title" className="lp-preview">
+            <h2 id="preview-title" className="sr-only">
+              Try a sample question
+            </h2>
+            <PracticePreview />
           </div>
         </div>
       </section>
 
       {/* what the platform does */}
-      <section
-        id="platform"
-        aria-labelledby="platform-title"
-        className="obs-section"
-      >
-        <div className="obs-wrap grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <h2
-              id="platform-title"
-              tabIndex={-1}
-              className="obs-h2 outline-none"
-            >
+      <section id="platform" aria-labelledby="platform-title" className="lp-section">
+        <div className="lp-wrap">
+          <div data-reveal className="lp-head">
+            <h2 id="platform-title" className="lp-h2" tabIndex={-1}>
               Built like competition day.
             </h2>
-            <p className="obs-body mt-6">
-              Timed papers, first-try ratings and leaderboards. Every number on
-              your profile comes from your own answers, and your chapter sees
-              the same ones.
-            </p>
-            <p className="obs-small mt-6 max-w-[52ch]">
-              Questions are written for study from FBLA’s published competency
-              areas, or a standard course outline for a few events. They are
-              not official FBLA or FBLC test items.
+            <p className="lp-body mt-4">
+              Timed papers, first-try ratings and leaderboards. Every number on your profile comes from your own answers.
             </p>
           </div>
-          <div className="obs-ledger">
-            {PLATFORM.map((p) => (
-              <div key={p.title}>
-                <h3 className="obs-h3">{p.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-white/80">
-                  {p.body}
-                </p>
-                <p className="obs-fact mt-4">{p.fact}</p>
+          <ul className="lp-grid mt-14">
+            {PLATFORM.map((p, i) => (
+              <li key={p.title} data-reveal style={{ ["--d" as string]: `${(i % 3) * 60}ms` }}>
+                <h3 className="lp-h3">{p.title}</h3>
+                <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink">{p.body}</p>
+                <p className="lp-fact mt-4">{p.fact}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-10 max-w-[60ch] text-sm text-muted">
+            Questions are written for study from FBLA’s published competency areas, or a standard course outline for a
+            few events. They are not official FBLA or FBLC test items.
+          </p>
+        </div>
+      </section>
+
+      {/* the events */}
+      <section id="events" aria-labelledby="events-title" className="lp-section lp-tint">
+        <div className="lp-wrap">
+          <div data-reveal className="lp-head">
+            <h2 id="events-title" className="lp-h2">
+              Fifteen events.
+            </h2>
+            <p className="lp-body mt-4">
+              Every event has its own {QUESTIONS_PER_EVENT}-question bank and {TERMS_PER_EVENT}-term vocab deck.
+            </p>
+          </div>
+          <div className="lp-events mt-14">
+            {DISCIPLINES.map((d) => (
+              <div key={d.id} data-reveal>
+                <h3 className="lp-discipline">{d.name}</h3>
+                <ul>
+                  {eventsIn(d.id).map((e) => (
+                    <li key={e.slug}>
+                      <Link to={signupFor(e.slug)} className="lp-event">
+                        <span className="min-w-0 py-2.5 leading-snug">{e.name}</span>
+                        <span className="lp-format">{e.format === "case" ? "Case" : "Test"}</span>
+                        <ArrowUpRight className="lp-event-arrow size-4 shrink-0" aria-hidden />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* the event network */}
-      <section
-        id="events"
-        aria-labelledby="events-title"
-        className="obs-section bg-[#001a52]"
-      >
-        <div className="obs-wrap">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-            <div>
-              <h2 id="events-title" className="obs-h2 max-w-[18ch]">
-                Fifteen events. Five disciplines.
-                {/* the map is drawn from xl up (EventNetwork), and only while Map is chosen; otherwise the events are a
-                    list, so no map is promised */}
-                <span
-                  className={cn("hidden", eventsView === "map" && "xl:inline")}
-                >
-                  {" "}
-                  One map.
-                </span>
-              </h2>
-              <p className="obs-body mt-6">
-                Every event has its own {QUESTIONS_PER_EVENT}-question bank and{" "}
-                {TERMS_PER_EVENT}-term vocab deck. Pick one to see what it
-                covers.
-              </p>
-            </div>
-          </div>
-          <div className="mt-10">
-            <EventNetwork view={eventsView} onViewChange={setEventsView} />
-          </div>
-        </div>
-      </section>
-
-      {/* a sample paper */}
-      <section
-        id="preview"
-        aria-labelledby="preview-title"
-        className="obs-section"
-      >
-        <div className="obs-wrap grid items-start gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-20">
-          <div className="lg:pt-6">
-            <h2 id="preview-title" className="obs-h2">
-              Try a sample question.
-            </h2>
-            <p className="obs-body mt-6">
-              Three questions written in the style of the Accounting,
-              Entrepreneurship and Business Law banks, with the feedback the app
-              gives after every answer.
-            </p>
-            <p className="obs-small mt-4 max-w-[48ch]">
-              They are not in the banks, so you won’t meet them again in the
-              app. The rating here is a sample: it starts at 0, like a new
-              member’s, and moves by the same rule the app uses. Nothing you
-              click is saved.
-            </p>
-          </div>
-          <PracticePreview />
-        </div>
-      </section>
-
       {/* how it works */}
-      <section id="how" aria-labelledby="how-title" className="obs-section">
-        <div className="obs-wrap">
-          <h2 id="how-title" className="obs-h2">
+      <section id="how" aria-labelledby="how-title" className="lp-section">
+        <div className="lp-wrap">
+          <h2 id="how-title" data-reveal className="lp-h2">
             Pick. Practise. Review. Climb.
           </h2>
-          <ol className="obs-path mt-14">
-            {STEPS.map((s) => (
-              <li key={s.title} className="obs-step">
-                <h3 className="obs-h3 text-[1.45rem]">{s.title}</h3>
-                <p className="mt-3 max-w-[32ch] text-[15px] leading-relaxed text-white/80">
-                  {s.body}
-                </p>
+          <ol className="lp-steps mt-14">
+            {STEPS.map((s, i) => (
+              <li key={s.title} data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>
+                <span className="lp-step-no">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="lp-h3 mt-5">{s.title}</h3>
+                <p className="mt-2 max-w-[32ch] text-[0.9375rem] leading-relaxed text-ink">{s.body}</p>
               </li>
             ))}
           </ol>
@@ -367,27 +241,21 @@ function Landing() {
       </section>
 
       {/* close */}
-      <section
-        id="join"
-        aria-labelledby="join-title"
-        className="obs-section obs-close"
-      >
-        <ObservatoryStage variant="close" />
-        <div className="obs-scrim" aria-hidden="true" />
-        <div className="obs-wrap relative pb-2 pt-16 md:py-16">
-          <div className="max-w-[34rem]">
-            <h2 id="join-title" className="obs-h2">
+      <section id="join" aria-labelledby="join-title" className="lp-join">
+        <div className="lp-wrap py-20 md:py-28">
+          <div data-reveal className="max-w-[36rem]">
+            <h2 id="join-title" className="lp-h2 text-white">
               Your first Quick 10 takes about five minutes.
             </h2>
-            <p className="obs-body mt-6">
-              Make a free account, pick your main event and start. Your rating
-              begins at 0 and moves from your very first answer.
+            <p className="mt-5 text-[1.0625rem] leading-relaxed text-white/80">
+              Make a free account, pick your main event and start. Your rating begins at 0 and moves from your very first
+              answer.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link to="/signup" className={buttonClasses("accent", "lg")}>
-                Join free <ArrowRight className="size-4" aria-hidden />
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Link to="/signup" className={buttonClasses("accent", "lg", "lp-cta")}>
+                Join free <ArrowRight className="lp-cta-arrow size-4" aria-hidden />
               </Link>
-              <Link to="/login" className="obs-btn-line">
+              <Link to="/login" className={buttonClasses("inverse", "lg")}>
                 Sign in
               </Link>
             </div>
