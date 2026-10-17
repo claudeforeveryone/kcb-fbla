@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Eye, EyeOff, Heart, Lock, Moon, Sun } from 'lucide-react';
 import { Brand } from '../../components/layout/Brand';
 import { useTheme } from '../../components/layout/theme';
-import { FacetArt } from '../../components/ui/PageHeader';
+import { UnitedRule } from '../../components/ui/PageHeader';
 import { Input, type InputProps } from '../../components/ui/Field';
 
 const features = [
@@ -44,7 +44,7 @@ export function AuthLayout({
     <div className="flex min-h-dvh flex-col bg-bg lg:flex-row">
       {/* Brand panel */}
       <aside className="relative isolate overflow-hidden bg-navy text-white lg:sticky lg:top-0 lg:flex lg:h-dvh lg:w-[44%] lg:max-w-[640px] lg:flex-col">
-        <FacetArt className="w-full opacity-30" />
+        <UnitedRule onNavy />
         <div className="relative flex items-center justify-between px-5 pt-5 lg:px-12 lg:pt-10">
           <Brand size="md" />
           <button

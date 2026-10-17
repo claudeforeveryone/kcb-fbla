@@ -1,7 +1,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { ArrowDownRight, ArrowUpRight, Check, ChevronDown, Flag, MessageSquareWarning, Minus, X } from 'lucide-react';
 import { Badge, Card, CardHeader, ProgressBar, SegmentedControl, cn } from '../ui';
-import { FacetArt } from '../ui/PageHeader';
+import { UnitedRule } from '../ui/PageHeader';
 import { Sparkline } from '../charts';
 import { ATTEMPT_KIND_LABELS, DIFFICULTY_LABELS, NO_ELO_KINDS, eventName } from '../../lib/types';
 import { canReportQuestion } from '../../lib/feedback';
@@ -51,7 +51,7 @@ export function ExamResults({ data, questions, actions, animate = true, previous
       <ExamStyles />
       {/* hero */}
       <section className="band relative isolate overflow-hidden text-white">
-        <FacetArt className="max-md:hidden" />
+        <UnitedRule />
         <div className="relative mx-auto grid w-full max-w-[1440px] lg:px-10 items-center gap-6 px-4 pb-10 pt-8 sm:px-6 md:grid-cols-[auto_minmax(0,1fr)] md:pb-12 md:pt-10 lg:grid-cols-[auto_minmax(0,1fr)_320px]">
           <ScoreRing pct={pct} correct={data.correct} total={data.total} animate={animate} endless={endless} />
           <div className="min-w-0 exam-rise" style={{ animationDelay: '120ms' }}>

@@ -33,7 +33,7 @@ export function DeckCrest({ deck, size = 64, className }: { deck: DeckId; size?:
   return <Crest icon={deckIcon(deck)} color={deckColor(deck)} size={size} className={className} />;
 }
 
-/** The deck's colour as a decorated block (angled facets + faint oversized icon). */
+/** The deck's colour as a flat block with a faint oversized icon. */
 export function DeckBlock({
   deck,
   className,
@@ -48,7 +48,7 @@ export function DeckBlock({
   watermark?: boolean;
 }) {
   return (
-    <ColorBlock color={deckColor(deck)} icon={deckIcon(deck)} seed={deck.key} className={className} style={style} watermark={watermark}>
+    <ColorBlock color={deckColor(deck)} icon={deckIcon(deck)} className={className} style={style} watermark={watermark}>
       {children}
     </ColorBlock>
   );

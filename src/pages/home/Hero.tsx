@@ -1,5 +1,5 @@
 import { TrendingDown, TrendingUp } from 'lucide-react';
-import { Avatar, FacetArt, Skeleton, cn } from '../../components/ui';
+import { Avatar, Skeleton, cn } from '../../components/ui';
 import { Sparkline } from '../../components/charts';
 import type { ProfileStats } from '../../lib/types';
 import { greeting, torontoDay } from './homeData';
@@ -34,7 +34,6 @@ export function Hero({ profile, stats, statsLoading }: { profile: HeroProfile; s
 
   return (
     <header className="band relative isolate overflow-hidden text-white">
-      <FacetArt className="max-md:hidden" />
       <div className="relative mx-auto grid w-full max-w-[1440px] lg:px-10 gap-6 px-4 pb-24 pt-8 sm:px-6 md:pb-28 md:pt-10 lg:grid-cols-[1fr_auto] lg:items-end">
         <div className="flex min-w-0 items-center gap-4 md:gap-5">
           <Avatar src={profile.avatar_url} name={profile.display_name} size="xl" ring className="max-sm:size-16 max-sm:text-xl" />

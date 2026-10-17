@@ -61,10 +61,7 @@ export function QuickActions({
           tone="red"
           eyebrow={
             <span className="inline-flex items-center gap-1.5">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full rounded-full bg-red opacity-60 motion-safe:animate-ping" />
-                <span className="relative inline-flex size-2 rounded-full bg-red" />
-              </span>
+              <span className="inline-flex size-2 rounded-full bg-red" />
               Daily challenge
             </span>
           }

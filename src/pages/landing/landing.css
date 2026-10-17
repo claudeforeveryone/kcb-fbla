@@ -1,0 +1,403 @@
+/* The signed-out front door ("/"). Scoped to .lp so nothing reaches in-app pages. It uses the app's own tokens, so it
+   follows light and dark like every other page. Flat: no gradients, glows or decoration. Motion is short and only
+   says something: the headline settles in, sections rise once on first view, links and buttons answer the pointer. */
+
+.lp {
+  --lp-ease: var(--ease-out-quint, cubic-bezier(0.22, 1, 0.36, 1));
+  background: var(--bg);
+  color: var(--ink);
+  /* the shared footer sits 4rem below <main>; the closing band runs into it */
+  margin-bottom: -4rem;
+}
+
+.lp-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+@media (min-width: 640px) {
+  .lp-wrap {
+    padding-inline: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lp-wrap {
+    padding-inline: 40px;
+  }
+}
+
+/* ---------- type ---------------------------------------------------------------------------------------------- */
+
+.lp-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lp-tricolour {
+  display: flex;
+  width: 44px;
+  height: 4px;
+}
+.lp-tricolour > span:nth-child(1) {
+  flex: 5;
+  background: var(--heading);
+}
+.lp-tricolour > span:nth-child(2) {
+  flex: 1;
+  background: var(--red);
+}
+.lp-tricolour > span:nth-child(3) {
+  flex: 3;
+  background: var(--blue);
+}
+
+.lp-h1 {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.4vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--heading);
+}
+
+/* each line rises inside its own mask */
+.lp-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.lp-line > span {
+  display: block;
+}
+
+.lp-lead {
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.lp-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 3.6vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--heading);
+  outline: none;
+}
+
+.lp-h3 {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.lp-body {
+  max-width: 52ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.lp-fact {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---------- hero ---------------------------------------------------------------------------------------------- */
+
+.lp-hero {
+  border-bottom: 1px solid var(--line);
+}
+
+.lp-stats {
+  display: flex;
+  gap: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  max-width: 28rem;
+}
+.lp-stats dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.lp-stats dd {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--heading);
+}
+
+.lp-preview .obs-app {
+  box-shadow: 0 1px 2px rgb(var(--shadow-color) / 0.06), 0 24px 48px -28px rgb(var(--shadow-color) / 0.28);
+  border-color: var(--line);
+}
+
+.lp-cta-arrow {
+  transition: transform 180ms var(--lp-ease);
+}
+.lp-cta:hover .lp-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ---------- sections ------------------------------------------------------------------------------------------- */
+
+.lp-section {
+  padding-block: 88px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 72px;
+}
+
+@media (min-width: 768px) {
+  .lp-section {
+    padding-block: 120px;
+  }
+}
+
+.lp-tint {
+  background: var(--surface-2);
+}
+
+.lp-head {
+  max-width: 40rem;
+}
+
+.lp-grid {
+  display: grid;
+  gap: 40px 48px;
+}
+@media (min-width: 640px) {
+  .lp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .lp-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.lp-grid > li {
+  padding-top: 20px;
+  border-top: 2px solid var(--heading);
+}
+
+/* events: one column per discipline, a row per event */
+.lp-events {
+  display: grid;
+  gap: 40px 32px;
+}
+@media (min-width: 640px) {
+  .lp-events {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .lp-events {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.lp-discipline {
+  padding-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.lp-event {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+  color: var(--heading);
+  transition: color 160ms var(--lp-ease);
+}
+.lp-event > :first-child {
+  flex: 1;
+}
+.lp-format {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.lp-event-arrow {
+  color: var(--muted);
+  transition: transform 180ms var(--lp-ease), color 160ms var(--lp-ease);
+}
+.lp-event:hover {
+  color: var(--link);
+}
+.lp-event:hover .lp-event-arrow {
+  color: var(--link);
+  transform: translate(2px, -2px);
+}
+.lp-event:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* how it works: four steps on one rule */
+.lp-steps {
+  display: grid;
+  gap: 40px 32px;
+}
+@media (min-width: 640px) {
+  .lp-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .lp-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.lp-steps > li {
+  position: relative;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-strong);
+}
+/* the red segment on each step's rule draws when the step comes in */
+.lp-steps > li::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--red);
+  transform-origin: left;
+}
+.lp-step-no {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.lp-join {
+  background: var(--navy);
+  color: #fff;
+}
+.lp-join .lp-h2 {
+  color: #fff;
+}
+.dark .lp-join {
+  background: var(--bar);
+}
+
+/* ---------- sample question (PracticePreview) ----------------------------------------------------------------- */
+
+.obs-app {
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color-scheme: light;
+}
+.dark .obs-app {
+  color-scheme: dark;
+}
+.obs-app :focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Answers to the visitor: the next sample question and the answer feedback. These elements are keyed, so each change
+   remounts them and a short enter on mount is the whole animation. Under reduced motion only the fade remains. */
+.obs-swap {
+  animation: lp-swap-y 240ms var(--lp-ease) both;
+}
+.obs-swap-x {
+  animation: lp-swap-x 240ms var(--lp-ease) both;
+}
+@keyframes lp-swap-y {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes lp-swap-x {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+@keyframes lp-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------- motion -------------------------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The headline settles in: transform only, so its text is painted from the first frame. */
+  .lp-hero .lp-line > span {
+    animation: lp-rise 700ms var(--lp-ease) var(--d, 0ms) both;
+  }
+  .lp-hero .lp-tricolour {
+    transform-origin: left;
+    animation: lp-draw 600ms var(--lp-ease) 200ms both;
+  }
+
+  /* Sections below the fold rise once. Hidden only after JS has set .lp-js and only until .is-in. */
+  .lp-js [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .lp-js [data-reveal] {
+    transition:
+      opacity 520ms var(--lp-ease) var(--d, 0ms),
+      transform 620ms var(--lp-ease) var(--d, 0ms);
+  }
+  .lp-js .lp-steps > li:not(.is-in)::before {
+    transform: scaleX(0);
+  }
+  .lp-steps > li::before {
+    transition: transform 700ms var(--lp-ease) calc(var(--d, 0ms) + 200ms);
+  }
+}
+
+@keyframes lp-rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes lp-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obs-swap,
+  .obs-swap-x {
+    animation-name: lp-fade-in;
+    animation-duration: 160ms;
+  }
+}

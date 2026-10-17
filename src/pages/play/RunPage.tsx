@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, History, Keyboard, ListRestart, Play, RotateCcw } from 'lucide-react';
 import { Button, ButtonLink, ErrorState, Kbd, Skeleton, cn } from '../../components/ui';
-import { FacetArt } from '../../components/ui/PageHeader';
 import { ExamSession, type ExamResultData, type RunnerSnapshot } from '../../components/exam';
 import { useProfile } from '../../lib/auth';
 import { buildRun, RunBlocked, type BuiltRun } from './buildRun';
@@ -192,9 +191,6 @@ function ResultActions({ run, result }: { run: BuiltRun; result: ExamResultData 
 function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="relative">
-      <div className="band absolute inset-x-0 top-0 h-64 overflow-hidden" aria-hidden>
-        <FacetArt className="opacity-50" />
-      </div>
       <div className="relative px-4 pb-12 pt-10 sm:px-6 md:pt-16">{children}</div>
     </div>
   );

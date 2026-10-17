@@ -398,12 +398,12 @@ function ChapterDecks({
 }) {
   if (!s.chapterId) {
     return (
-      <Card className="mt-6 flex flex-col items-start gap-3 rounded-[12px] border-blue bg-blue text-white sm:flex-row sm:items-center">
+      <Card className="mt-6 flex flex-col items-start gap-3 rounded-[12px] sm:flex-row sm:items-center">
         <div className="min-w-0 flex-1">
-          <h3 className="font-bold text-white">Chapter decks</h3>
-          <p className="text-sm text-white/85">Join your chapter to study the decks your trainers and executives make for you.</p>
+          <h3 className="font-bold text-heading">Chapter decks</h3>
+          <p className="text-sm text-muted">Join your chapter to study the decks your trainers and executives make for you.</p>
         </div>
-        <ButtonLink to="/chapter" variant="inverse" className="rounded-[8px]">
+        <ButtonLink to="/chapter" variant="primary" className="rounded-[8px]">
           Find my chapter
         </ButtonLink>
       </Card>

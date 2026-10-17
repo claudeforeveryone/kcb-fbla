@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Pencil, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
-import { Avatar, Badge, Button, FacetArt } from '../../../components/ui';
+import { Avatar, Badge, Button, UnitedRule } from '../../../components/ui';
 import { ROLE_LABELS, type ChapterRole } from '../../../lib/types';
 import type { ClassPost } from '../../../api/classroom';
 import { Markdown, readingMinutes } from './classroom-markdown';
@@ -55,7 +55,7 @@ export function PostReader({
       <div className="animate-fade-in absolute inset-0 bg-[#00143f]/70" onClick={onClose} aria-hidden />
       <article className="animate-pop relative flex h-full w-full max-w-3xl flex-col overflow-hidden bg-surface shadow-pop sm:h-auto sm:max-h-[94dvh] sm:rounded-[2px] sm:border sm:border-line">
         <header className="band relative isolate shrink-0 overflow-hidden border-t-4 border-t-red px-5 pb-7 pt-5 text-white sm:px-10 sm:pb-9 sm:pt-7">
-          <FacetArt className="opacity-60" />
+          <UnitedRule />
           <div className="relative flex items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/75">
               <span className="h-[3px] w-5 bg-red" aria-hidden />
