@@ -17,6 +17,33 @@ export function UnitedRule({ className, onNavy = false }: { className?: string; 
   );
 }
 
+/** A header's numbers: a plain row of figures split by hairlines. No boxes; the numbers carry it. */
+export function HeaderFigures({
+  items,
+  className,
+}: {
+  items: { label: ReactNode; value: ReactNode; tone?: 'red' }[];
+  className?: string;
+}) {
+  return (
+    <dl className={cn('tabular flex flex-wrap gap-y-3', className)}>
+      {items.map((it, i) => (
+        <div key={i} className="min-w-0 border-l border-line pl-4 pr-5 first:border-l-0 first:pl-0 sm:pl-5 sm:pr-7">
+          <dt className="text-xs font-semibold text-muted">{it.label}</dt>
+          <dd
+            className={cn(
+              'mt-1 font-display text-xl font-extrabold leading-none sm:text-2xl',
+              it.tone === 'red' ? 'text-red dark:text-danger' : 'text-heading',
+            )}
+          >
+            {it.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 export function PageHeader({
   eyebrow,
   title,
@@ -62,10 +89,7 @@ export function PageHeader({
             {leading}
             <div className="min-w-0">
               {eyebrow && (
-                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
-                  <span className="h-[3px] w-5 bg-red" aria-hidden />
-                  {eyebrow}
-                </div>
+                <div className="mb-1.5 flex items-center gap-2 text-sm font-semibold text-white/60">{eyebrow}</div>
               )}
               <h1
                 className={cn(

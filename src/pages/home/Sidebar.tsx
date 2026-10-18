@@ -66,8 +66,8 @@ export function WeekCard({
               ) : (
                 <div
                   className={cn(
-                    'w-full rounded-md transition-[height] duration-500 ease-out',
-                    d.answered ? (today ? 'bg-red' : 'bg-blue') : 'bg-surface-3',
+                    'w-full rounded-[2px] transition-[height] duration-500 ease-out',
+                    d.answered ? (today ? 'bg-red' : 'bg-blue/35') : 'bg-surface-3',
                   )}
                   style={{ height: `${h}%` }}
                 />
@@ -90,7 +90,7 @@ function Mini({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <dd className="tabular font-display text-lg font-extrabold text-heading">{value}</dd>
-      <dt className="text-[0.7rem] font-semibold uppercase tracking-wider text-muted">{label}</dt>
+      <dt className="text-xs font-semibold text-muted">{label}</dt>
     </div>
   );
 }
@@ -136,7 +136,7 @@ export function MiniLeaderboard({
           ))}
         </div>
       ) : list.length === 0 ? (
-        <p className="py-4 text-center text-sm text-muted">No ranked players yet. Answer a set to be the first.</p>
+        <p className="text-sm text-muted">No ranked players yet. Answer a set to be the first.</p>
       ) : (
         <ol className="-mx-2">
           {list.map((r) => (
@@ -212,8 +212,8 @@ export function ChapterCard({
 }) {
   if (!hasChapter) {
     return (
-      <div className="relative overflow-hidden rounded-[4px] border border-line border-t-[3px] border-t-red bg-surface p-5">
-        <h3 className="text-lg font-extrabold text-heading">Practise with your chapter</h3>
+      <div className="rounded-[4px] border border-line bg-surface p-5">
+        <h3 className="text-base font-bold text-heading">Practise with your chapter</h3>
         <p className="mt-1 text-sm text-muted">
           Join your school's chapter for assignments, chapter tests and a spot on the chapter leaderboard.
         </p>
@@ -245,7 +245,7 @@ export function ChapterCard({
     <Link to="/chapter" className="block rounded-[4px] focus-visible:outline-offset-4">
       <Card interactive>
         <div className="flex items-start gap-3">
-          <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line-strong bg-surface font-display text-sm font-extrabold text-heading">
+          <span className="grid size-11 shrink-0 place-items-center rounded-[8px] border border-line-strong bg-surface font-display text-sm font-extrabold text-heading">
             {chapter.name
               .split(/\s+/)
               .filter(Boolean)
@@ -254,13 +254,13 @@ export function ChapterCard({
               .join('')}
           </span>
           <div className="min-w-0 flex-1">
-            <div className="text-xs font-bold uppercase tracking-wider text-muted">My chapter</div>
+            <div className="text-xs font-semibold text-muted">My chapter</div>
             <h3 className="truncate text-base font-extrabold">{chapter.name}</h3>
             {chapter.school && <div className="truncate text-sm text-muted">{chapter.school}</div>}
           </div>
           {role && <Badge tone={role === 'president' || role === 'executive' ? 'red' : 'navy'}>{ROLE_LABELS[role]}</Badge>}
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-surface-2 p-3 text-center">
+        <div className="mt-4 grid grid-cols-3 gap-2 border-t border-line pt-4 text-center">
           <Mini label="Members" value={String(memberCount)} />
           <Mini label={chapters && rank ? `Rank of ${chapters}` : 'Rank'} value={rank ? `#${rank}` : '–'} />
           <Mini label="Avg Elo" value={avgElo != null ? String(avgElo) : '–'} />
@@ -287,18 +287,17 @@ export function VocabCard({ data, mainEvent }: { data: { due: number; mastered: 
   if (!data) return null;
   const to = data.started === 0 && mainEvent ? `/vocab/${mainEvent}` : '/vocab';
   return (
-    <Link to={to} className="block rounded-[4px]">
+    <Link to={to} className="group block rounded-[4px]">
       <Card interactive className="flex items-center gap-4">
-        <span aria-hidden className={cn('h-10 w-[3px] shrink-0', data.due > 0 ? 'bg-red' : 'bg-blue')} />
         <div className="min-w-0 flex-1">
-          <div className="text-sm font-bold text-heading">
+          <div className={cn('text-sm font-bold', data.due > 0 ? 'text-red dark:text-danger' : 'text-heading')}>
             {data.started === 0 ? 'Start your vocab deck' : data.due > 0 ? `${data.due} term${data.due === 1 ? '' : 's'} due for review` : 'Vocab is up to date'}
           </div>
           <div className="text-xs text-muted">
             {data.started === 0 ? '60 key terms per event, spaced repetition' : `${data.mastered} mastered of ${data.started} started`}
           </div>
         </div>
-        <ChevronRight className="size-4 shrink-0 text-muted" />
+        <ChevronRight className="size-4 shrink-0 text-muted transition-transform duration-200 group-hover:translate-x-0.5" />
       </Card>
     </Link>
   );

@@ -6,7 +6,7 @@ import { Skeleton, cn, formatUntil } from '../../components/ui';
 import { eventInfo } from '../../lib/types';
 import { nextTorontoMidnight, runLink, type DailyStatus } from './homeData';
 
-/** The three big "do something now" tiles under the hero. */
+/** The three "do something now" links under the hero: one strip, split by hairlines. */
 export function QuickActions({
   continueEvent,
   continueReason,
@@ -22,7 +22,7 @@ export function QuickActions({
   const ev = eventInfo(continueEvent);
 
   return (
-    <div className="relative z-10 -mt-16 grid gap-3 sm:grid-cols-3 md:-mt-20 md:gap-4">
+    <div className="mt-6 grid overflow-hidden rounded-[4px] border border-line bg-surface sm:grid-cols-3 md:mt-8">
       {/* Continue */}
       <ActionTile
         to={ev ? runLink({ kind: 'practice', event: ev.slug }) : '/play'}
@@ -35,7 +35,7 @@ export function QuickActions({
 
       {/* Daily challenge */}
       {dailyLoading && !daily ? (
-        <div className="rounded-[12px] border-t-4 border-red bg-navy p-5 shadow-card">
+        <div className="border-t border-line p-5 sm:border-l sm:border-t-0 sm:p-6">
           <Skeleton className="h-3 w-24" />
           <Skeleton className="mt-4 h-5 w-2/3" />
           <Skeleton className="mt-2 h-4 w-full" />
@@ -59,12 +59,7 @@ export function QuickActions({
         <ActionTile
           to={runLink({ kind: 'daily' })}
           tone="red"
-          eyebrow={
-            <span className="inline-flex items-center gap-1.5">
-              <span className="inline-flex size-2 rounded-full bg-red" />
-              Daily challenge
-            </span>
-          }
+          eyebrow="Daily challenge"
           title="Today’s 10"
           body={`Same questions for every member. Resets in ${reset}.`}
           cta="Take the challenge"
@@ -88,7 +83,7 @@ function EloShift({ before, after }: { before: number; after: number }) {
   const d = after - before;
   if (d === 0) return null;
   return (
-    <span className={cn('ml-2 align-middle text-sm font-bold', d > 0 ? 'text-[#7FD6A8]' : 'text-white/75')}>
+    <span className={cn('ml-2 align-middle text-sm font-bold', d > 0 ? 'text-success' : 'text-muted')}>
       {d > 0 ? '+' : ''}
       {d} Elo
     </span>
@@ -104,18 +99,17 @@ function useResetCountdown() {
   return formatUntil(nextTorontoMidnight(now), now);
 }
 
-// Solid navy cards with white text; the tone only colours the 4px top bar.
+// The tone is a short rule above the eyebrow, the only colour in the strip.
 const TONES = {
-  navy: '#3F6FB3',
-  red: '#BF0D3E',
-  blue: 'rgba(255,255,255,0.4)',
-  done: '#1E8E5A',
+  navy: 'var(--heading)',
+  red: 'var(--red)',
+  blue: 'var(--blue)',
+  done: 'var(--success)',
 } as const;
 
 function ActionTile({
   to,
   tone,
-  color,
   eyebrow,
   title,
   body,
@@ -123,24 +117,23 @@ function ActionTile({
 }: {
   to: string;
   tone: keyof typeof TONES;
-  /** Overrides the tone colour, e.g. with the event's own colour. */
-  color?: string;
   eyebrow: ReactNode;
   title: ReactNode;
   body: ReactNode;
   cta: string;
 }) {
-  const c = color ?? TONES[tone];
   return (
     <Link
       to={to}
-      className="group relative flex flex-col overflow-hidden rounded-[12px] border-t-4 bg-navy p-5 text-white shadow-card transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 sm:p-6"
-      style={{ borderTopColor: c }}
+      className="group relative flex flex-col border-t border-line p-5 transition-colors duration-150 first:border-t-0 hover:bg-surface-2 focus-visible:bg-surface-2 sm:border-l sm:border-t-0 sm:p-6 sm:first:border-l-0"
     >
-      <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white/75">{eyebrow}</span>
-      <h2 className="mt-2 truncate font-display text-xl font-extrabold tracking-tight text-white sm:mt-3 md:text-2xl">{title}</h2>
-      <p className="mt-1 flex-1 text-sm text-white/80">{body}</p>
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-white sm:mt-5">
+      <span className="flex items-center gap-2 text-xs font-semibold text-muted">
+        <span className="h-[3px] w-4 transition-[width] duration-200 ease-out group-hover:w-6" style={{ background: TONES[tone] }} aria-hidden />
+        {eyebrow}
+      </span>
+      <h2 className="mt-3 truncate font-display text-xl font-extrabold tracking-tight md:text-2xl">{title}</h2>
+      <p className="mt-1 flex-1 text-sm text-muted">{body}</p>
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-link">
         {cta}
         <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
       </span>

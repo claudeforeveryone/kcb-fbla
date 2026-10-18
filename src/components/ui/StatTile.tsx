@@ -29,13 +29,13 @@ export function StatTile({
   return (
     <div
       className={cn(
-        'relative flex flex-col overflow-hidden rounded-[4px] border p-4',
-        navy ? 'border-line border-t-4 border-t-red bg-surface' : 'border-line bg-surface',
+        'relative flex flex-col border-t pt-3',
+        navy ? 'border-t-2 border-red' : 'border-line-strong',
         className,
       )}
     >
       <div className="flex items-center gap-2">
-        <span className={cn('text-xs font-semibold uppercase tracking-wider', 'text-muted')}>
+        <span className="text-xs font-semibold text-muted">
           {label}
         </span>
       </div>

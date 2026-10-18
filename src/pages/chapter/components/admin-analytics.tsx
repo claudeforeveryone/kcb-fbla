@@ -109,7 +109,7 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5 [&>*]:min-w-0">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 xl:grid-cols-5 [&>*]:min-w-0">
         <StatTile tone="navy" label="Members" value={fmt(summary.members)} sub={`${summary.active_7d} active this week`} />
         <StatTile label="Answered (7d)" value={fmt(summary.answered_7d)} sub={`${fmt(summary.questions_answered)} all time`} />
         <StatTile label="Accuracy (7d)" value={pct(weekAcc)} sub={`${pct(allAcc)} all time`} />

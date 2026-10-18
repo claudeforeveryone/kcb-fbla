@@ -132,10 +132,10 @@ export function ActivityHeatmap({ activity, weeks = 12 }: { activity: ProfileSta
           More
         </div>
       </div>
-      <dl className="grid flex-1 grid-cols-2 gap-2.5 md:grid-cols-2">
+      <dl className="grid flex-1 grid-cols-2 gap-x-6 gap-y-5 md:pl-4">
         {facts.map(([label, value]) => (
-          <div key={label} className="rounded-xl bg-surface-2 px-3.5 py-3">
-            <dt className="text-[11px] font-semibold uppercase tracking-wider text-muted">{label}</dt>
+          <div key={label} className="border-t border-line pt-3">
+            <dt className="text-xs font-semibold text-muted">{label}</dt>
             <dd className="tabular mt-0.5 font-display text-xl font-extrabold text-heading">{value}</dd>
           </div>
         ))}

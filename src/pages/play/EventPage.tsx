@@ -19,7 +19,7 @@ import { useProfile } from '../../lib/auth';
 import { loadIndex, type Topic } from '../../lib/content';
 import { readiness } from '../../lib/score';
 import { EVENT_GROUPS, eventInfo } from '../../lib/types';
-import { EventBlock, EventCrest } from '../../lib/eventStyle';
+import { EventMark } from '../../lib/eventStyle';
 import {
   bestEndless,
   loadPlayHistory,
@@ -87,11 +87,7 @@ export default function EventPage() {
       <PageHeader
         back={{ to: '/play', label: 'All events' }}
         leading={
-          <EventBlock slug={info.slug} className="size-16 shrink-0 rounded-[12px] sm:size-[88px]">
-            <span className="grid h-full place-items-center">
-              <EventCrest slug={info.slug} size={54} className="max-sm:!size-10" />
-            </span>
-          </EventBlock>
+          <EventMark slug={info.slug} size={64} className="max-sm:!size-12" />
         }
         eyebrow={`${group?.label ?? ''} / ${info.short}`}
         title={<EventTitle e={info} />}

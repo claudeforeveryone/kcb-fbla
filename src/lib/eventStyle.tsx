@@ -1,6 +1,5 @@
 // One colour and one icon per event, shared by Vocab, Play and anywhere an event needs an identity.
 // Colours are all dark enough for white text (WCAG AA at the sizes we use).
-import type { CSSProperties, ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import {
   BrainCircuit,
@@ -47,13 +46,13 @@ export function eventStyle(slug: string | null | undefined): EventStyle {
 }
 
 /**
- * A solid white disc holding the icon in `color`, with a flat translucent outer ring.
- * Meant to sit on a block of `color` (like a team crest). White is literal so dark mode can't flip it.
+ * The event's mark: its icon in white on a small square of its colour. The one place an event's colour shows at
+ * full strength; cards and headers around it stay white. White is literal so dark mode can't flip it.
  */
-export function Crest({
+export function Mark({
   icon: Icon,
   color,
-  size = 72,
+  size = 40,
   className,
 }: {
   icon: LucideIcon;
@@ -61,60 +60,19 @@ export function Crest({
   size?: number;
   className?: string;
 }) {
-  const ring = Math.max(3, Math.round(size * 0.07));
   return (
     <span
-      className={'relative grid shrink-0 place-items-center rounded-full ' + (className ?? '')}
-      style={{ width: size, height: size, background: '#fff', color, boxShadow: `0 0 0 ${ring}px rgb(255 255 255 / 0.24)` }}
+      className={'grid shrink-0 place-items-center ' + (className ?? '')}
+      style={{ width: size, height: size, background: color, color: '#fff', borderRadius: Math.round(size * 0.2) }}
       aria-hidden
     >
-      <Icon style={{ width: '56%', height: '56%' }} strokeWidth={2.25} />
+      <Icon style={{ width: '50%', height: '50%' }} strokeWidth={2} />
     </span>
   );
 }
 
-/** The event's crest: its icon in its colour on a white disc. Place on the event's colour. */
-export function EventCrest({ slug, size = 72, className }: { slug: string; size?: number; className?: string }) {
+/** Mark for an event slug. */
+export function EventMark({ slug, size = 40, className }: { slug: string; size?: number; className?: string }) {
   const { icon, color } = eventStyle(slug);
-  return <Crest icon={icon} color={color} size={size} className={className} />;
-}
-
-/**
- * A flat block of the event colour with its icon repeated large and faint in the corner. Nothing moves on its own: in
- * a card (a `group`), the faint icon eases over a few degrees while the card is hovered.
- */
-export function ColorBlock({
-  color,
-  icon: Icon,
-  className,
-  style,
-  children,
-  watermark = true,
-}: {
-  color: string;
-  icon: LucideIcon;
-  className?: string;
-  style?: CSSProperties;
-  children?: ReactNode;
-  watermark?: boolean;
-}) {
-  return (
-    <div className={'relative overflow-hidden ' + (className ?? '')} style={{ ...style, background: color }}>
-      {watermark && (
-        <Icon
-          className="pointer-events-none absolute -right-[6%] top-1/2 aspect-square h-[135%] w-auto -translate-y-1/2 -rotate-12 opacity-[0.1] transition-[rotate,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-[3%] group-hover:-rotate-6 motion-reduce:transition-none"
-          style={{ color: '#fff' }}
-          strokeWidth={1.75}
-          aria-hidden
-        />
-      )}
-      <div className="relative h-full">{children}</div>
-    </div>
-  );
-}
-
-/** ColorBlock for an event slug. */
-export function EventBlock({ slug, ...rest }: Omit<Parameters<typeof ColorBlock>[0], 'color' | 'icon'> & { slug: string }) {
-  const { icon, color } = eventStyle(slug);
-  return <ColorBlock color={color} icon={icon} {...rest} />;
+  return <Mark icon={icon} color={color} size={size} className={className} />;
 }

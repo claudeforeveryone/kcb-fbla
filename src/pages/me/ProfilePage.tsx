@@ -9,6 +9,7 @@ import {
   EloBadge,
   EmptyState,
   ErrorState,
+  HeaderFigures,
   PageHeader,
   SegmentedControl,
   Select,
@@ -131,29 +132,56 @@ function Profile({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
           )
         }
       >
-        <div className="flex flex-wrap items-center gap-2">
-          <EloBadge elo={p.elo} size="lg" onDark />
-          <HeaderChip label="Global" value={`#${stats.rank}`} sub={`of ${stats.players}`} />
-          {stats.chapter && (
-            <ChipLink to={isMe ? '/chapter' : null}>
-              <HeaderChip
-                label={stats.chapter.name}
-                value={chapRank.data ? `#${chapRank.data.rank}` : '...'}
-                sub={chapRank.data ? `of ${chapRank.data.of}` : ROLE_LABELS[stats.chapter.role]}
-              />
-            </ChipLink>
-          )}
-          {main && (
-            <Link to={`/play/${main.slug}`}>
-              <HeaderChip label="Main event" value={main.short} sub={main.name} />
-            </Link>
-          )}
-          {stats.chapter && stats.chapter.role !== 'member' && (
-            <span className="inline-flex h-10 items-center rounded-[2px] bg-red px-3.5 text-xs font-bold uppercase tracking-wider text-white">
-              {ROLE_LABELS[stats.chapter.role]}
-            </span>
-          )}
-        </div>
+        <HeaderFigures
+          items={[
+            { label: 'Elo', value: Math.round(p.elo) },
+            {
+              label: 'Global',
+              value: (
+                <>
+                  #{stats.rank}
+                  <span className="text-sm font-semibold text-muted"> of {stats.players}</span>
+                </>
+              ),
+            },
+            ...(stats.chapter
+              ? [
+                  {
+                    label: (
+                      <span className="block max-w-40 truncate">
+                        {stats.chapter.name}
+                        {stats.chapter.role !== 'member' && <span className="text-red dark:text-danger"> · {ROLE_LABELS[stats.chapter.role]}</span>}
+                      </span>
+                    ),
+                    value: (
+                      <ChipLink to={isMe ? '/chapter' : null}>
+                        {chapRank.data ? (
+                          <>
+                            #{chapRank.data.rank}
+                            <span className="text-sm font-semibold text-muted"> of {chapRank.data.of}</span>
+                          </>
+                        ) : (
+                          '...'
+                        )}
+                      </ChipLink>
+                    ),
+                  },
+                ]
+              : []),
+            ...(main
+              ? [
+                  {
+                    label: 'Main event',
+                    value: (
+                      <Link to={`/play/${main.slug}`} className="hover:text-link" title={main.name}>
+                        {main.short}
+                      </Link>
+                    ),
+                  },
+                ]
+              : []),
+          ]}
+        />
         {p.bio && <p className="mt-5 max-w-2xl whitespace-pre-line text-[0.9375rem] text-white/85">{p.bio}</p>}
       </PageHeader>
 
@@ -206,25 +234,11 @@ function ChipLink({ to, children }: { to: string | null; children: ReactNode }) 
   return to ? <Link to={to}>{children}</Link> : <span>{children}</span>;
 }
 
-function HeaderChip({ label, value, sub }: { label: string; value: string; sub?: string }) {
-  return (
-    <span className="inline-flex h-10 max-w-full items-center gap-2 rounded-[2px] border border-white/15 bg-white/10 px-3 transition-colors hover:bg-white/15">
-      <span className="min-w-0 leading-tight">
-        <span className="block max-w-40 truncate text-[10px] font-bold uppercase tracking-wider text-white/60">{label}</span>
-        <span className="flex items-baseline gap-1">
-          <span className="tabular font-display text-sm font-extrabold text-white">{value}</span>
-          {sub && <span className="max-w-36 truncate text-[11px] text-white/65">{sub}</span>}
-        </span>
-      </span>
-    </span>
-  );
-}
-
 function StatGrid({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   const p = stats.profile;
   const today = stats.current_streak > 0;
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+    <div className="grid grid-cols-2 gap-x-6 gap-y-7 md:grid-cols-4">
       <StatTile tone="navy" label="Global rank" value={`#${stats.rank}`} sub={`of ${stats.players} players`} />
       <StatTile
         label="Questions"
@@ -240,7 +254,7 @@ function StatGrid({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
       <StatTile
         label="Current streak"
         value={`${stats.current_streak}d`}
-        sub={today ? (isMe ? 'Keep it alive' : 'days in a row') : isMe ? 'Practise today to start' : 'Not active lately'}
+        sub={today ? ('days in a row') : isMe ? 'Practise today to start' : 'Not active lately'}
       />
       <StatTile label="Best streak" value={`${stats.best_streak}d`} sub="days in a row" />
       <StatTile label="Answer streak" value={stats.best_answer_streak} sub="best run of correct answers" />

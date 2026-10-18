@@ -7,6 +7,7 @@ import {
   Card,
   EmptyState,
   ErrorState,
+  HeaderFigures,
   PageHeader,
   SegmentedControl,
   Skeleton,
@@ -303,7 +304,7 @@ export function ArenaPage() {
   return (
     <>
       <PageHeader
-        eyebrow="1v1 Arena"
+        eyebrow="1v1 duels"
         title="Arena"
         subtitle="Challenge anyone to the same 10 questions. Most correct wins, the faster time breaks a tie."
         actions={
@@ -312,25 +313,17 @@ export function ArenaPage() {
           </Button>
         }
       >
-        <dl className="grid max-w-2xl grid-cols-2 gap-2 sm:grid-cols-4">
-          {[
-            { k: 'Wins', v: wins },
-            { k: 'Losses', v: losses },
-            { k: 'Draws', v: draws },
+        <HeaderFigures
+          items={[
+            { label: 'Wins', value: wins },
+            { label: 'Losses', value: losses },
+            { label: 'Draws', value: draws },
             {
-              k: record.streakKind === 'win' && record.streak >= 2 ? 'Win streak' : 'Win rate',
-              v: record.streakKind === 'win' && record.streak >= 2 ? record.streak : winRate == null ? '-' : `${winRate}%`,
-
+              label: record.streakKind === 'win' && record.streak >= 2 ? 'Win streak' : 'Win rate',
+              value: record.streakKind === 'win' && record.streak >= 2 ? record.streak : winRate == null ? '-' : `${winRate}%`,
             },
-          ].map((s) => (
-            <div key={s.k} className="flex flex-col-reverse rounded-[2px] border border-line bg-surface px-4 py-3">
-              <dt className="mt-1 text-[11px] font-bold uppercase tracking-[0.12em] text-heading">
-                {s.k}
-              </dt>
-              <dd className="tabular font-display text-3xl font-extrabold leading-none text-red">{s.v}</dd>
-            </div>
-          ))}
-        </dl>
+          ]}
+        />
       </PageHeader>
 
       <Page>

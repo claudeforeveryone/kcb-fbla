@@ -1,7 +1,7 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import { Layers, RotateCcw, type LucideIcon } from 'lucide-react';
 import { cn } from '../../components/ui';
-import { ColorBlock, Crest, eventStyle } from '../../lib/eventStyle';
+import { Mark, eventStyle } from '../../lib/eventStyle';
 import type { StudyDeck } from '../../api/vocab';
 import { STATUS_LABEL, type DeckStats, type TermStatus } from './leitner';
 
@@ -28,30 +28,9 @@ export function deckIcon(deck: DeckId): LucideIcon {
   return deck.event ? eventStyle(deck.event).icon : Layers;
 }
 
-/** The deck's icon in its colour on a white disc, for use on the deck's colour block. */
-export function DeckCrest({ deck, size = 64, className }: { deck: DeckId; size?: number; className?: string }) {
-  return <Crest icon={deckIcon(deck)} color={deckColor(deck)} size={size} className={className} />;
-}
-
-/** The deck's colour as a flat block with a faint oversized icon. */
-export function DeckBlock({
-  deck,
-  className,
-  style,
-  children,
-  watermark,
-}: {
-  deck: DeckId;
-  className?: string;
-  style?: CSSProperties;
-  children?: ReactNode;
-  watermark?: boolean;
-}) {
-  return (
-    <ColorBlock color={deckColor(deck)} icon={deckIcon(deck)} className={className} style={style} watermark={watermark}>
-      {children}
-    </ColorBlock>
-  );
+/** The deck's mark: its icon in white on a small square of its colour. */
+export function DeckMark({ deck, size = 40, className }: { deck: DeckId; size?: number; className?: string }) {
+  return <Mark icon={deckIcon(deck)} color={deckColor(deck)} size={size} className={className} />;
 }
 
 /** Slim progress bar in the deck's colour: solid for mastered, a light tint for studied but not yet mastered. */
