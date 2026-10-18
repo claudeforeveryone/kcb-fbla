@@ -1,11 +1,11 @@
-import { useCallback, useState, type ReactNode } from 'react';
+import { useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Info } from 'lucide-react';
 import { Page } from '../../components/layout/Page';
 import {
   Button,
   ButtonLink,
-  EloBadge,
+  HeaderFigures,
   Modal,
   PageHeader,
   Skeleton,
@@ -64,7 +64,7 @@ export default function LeaderboardPage() {
               How ranking works
             </Button>
             <ButtonLink to="/play" variant="accent">
-              Climb the board
+              Practise
             </ButtonLink>
           </>
         }
@@ -106,46 +106,36 @@ export default function LeaderboardPage() {
   );
 }
 
-/** "Your standing" strip inside the navy header. */
+/** Your standing, as the header's figures. */
 function Standing({ elo, peak, overall, inChapter }: { elo: number; peak: number; overall: MyStanding; inChapter: MyStanding | null }) {
   return (
-    <div className={inChapter ? 'grid grid-cols-2 gap-2 lg:max-w-4xl lg:grid-cols-[1fr_1fr_1.5fr]' : 'grid grid-cols-2 gap-2 lg:max-w-2xl lg:grid-cols-[1fr_1.5fr]'}>
-      <Chip label="Overall position">
-        <RankValue standing={overall} />
-      </Chip>
-      {inChapter && (
-        <Chip label="Chapter position">
-          <RankValue standing={inChapter} />
-        </Chip>
-      )}
-      <Chip label="Your Elo" wide={!!inChapter}>
-        <div className="flex items-baseline justify-between gap-3">
-          <EloBadge elo={elo} onDark size="md" />
-          <span className="tabular truncate text-[11px] text-white/70">Peak {fmt.format(Math.round(Math.max(peak, elo)))}</span>
-        </div>
-      </Chip>
-    </div>
-  );
-}
-
-function Chip({ label, children, wide }: { label: string; children: ReactNode; wide?: boolean }) {
-  return (
-    <div className={`rounded-[4px] border border-white/15 bg-white/10 px-3.5 py-2.5 ${wide ? 'col-span-2 lg:col-span-1' : ''}`}>
-      <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white/60">{label}</div>
-      {children}
-    </div>
+    <HeaderFigures
+      items={[
+        { label: 'Overall', value: <RankValue standing={overall} /> },
+        ...(inChapter ? [{ label: 'In your chapter', value: <RankValue standing={inChapter} /> }] : []),
+        {
+          label: 'Elo',
+          value: (
+            <>
+              {fmt.format(Math.round(elo))}
+              <span className="text-sm font-semibold text-muted"> peak {fmt.format(Math.round(Math.max(peak, elo)))}</span>
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }
 
 function RankValue({ standing }: { standing: MyStanding }) {
-  if (standing.status === 'loading') return <Skeleton className="h-7 w-24 opacity-30" />;
-  if (standing.status !== 'ranked') return <span className="font-display text-xl font-bold text-white/80">Unranked</span>;
+  if (standing.status === 'loading') return <Skeleton className="h-6 w-20" />;
+  if (standing.status !== 'ranked') return <span className="text-muted">Unranked</span>;
   const r = standing.row;
   return (
-    <span className="flex items-baseline gap-1.5">
-      <span className="tabular font-display text-2xl font-extrabold text-white">{ordinal(r.rank)}</span>
-      <span className="tabular text-sm text-white/65">of {fmt.format(r.total_count)}</span>
-    </span>
+    <>
+      {ordinal(r.rank)}
+      <span className="text-sm font-semibold text-muted"> of {fmt.format(r.total_count)}</span>
+    </>
   );
 }
 

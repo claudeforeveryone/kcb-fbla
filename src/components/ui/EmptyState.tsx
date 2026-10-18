@@ -4,7 +4,7 @@ import { cn } from './cn';
 import { Button } from './Button';
 
 export function EmptyState({
-  icon,
+  icon: _icon,
   title,
   description,
   action,
@@ -22,15 +22,14 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        'flex flex-col items-center rounded-[4px] bg-surface-2 text-center',
-        compact ? 'px-5 py-8' : 'px-6 py-14',
+        'flex flex-col items-start border-l-2 border-line-strong pl-4 text-left',
+        compact ? 'py-1' : 'py-2',
         className,
       )}
     >
-      {icon && <span className="mb-3 text-muted/70 [&>svg]:size-5" aria-hidden>{icon}</span>}
-      <h3 className="text-base font-bold">{title}</h3>
-      {description && <p className="mt-1.5 max-w-sm text-sm text-muted">{description}</p>}
-      {action && <div className="mt-5 flex flex-wrap justify-center gap-2">{action}</div>}
+      <h3 className="text-[0.9375rem] font-bold">{title}</h3>
+      {description && <p className="mt-1 max-w-md text-sm text-muted">{description}</p>}
+      {action && <div className="mt-4 flex flex-wrap gap-2">{action}</div>}
     </div>
   );
 }

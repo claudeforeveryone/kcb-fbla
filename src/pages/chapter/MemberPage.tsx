@@ -159,7 +159,7 @@ export default function MemberPage() {
       </PageHeader>
 
       <Page>
-        <div className={`grid grid-cols-2 gap-3 md:grid-cols-3 ${canSeeAttendance ? "xl:grid-cols-6" : "xl:grid-cols-5"}`}>
+        <div className={`grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 ${canSeeAttendance ? "xl:grid-cols-6" : "xl:grid-cols-5"}`}>
           <StatTile label="Accuracy" value={s.questions_answered ? pct(s.accuracy) : '–'} sub={`${fmt(s.questions_correct)}/${fmt(s.questions_answered)}`} />
           <StatTile label="Last 30 days" value={fmt(last30)} sub="questions" chart={<Sparkline values={weekly} title="Questions per week, last 26 weeks" />} />
           <StatTile label="Streak" value={`${s.current_streak}d`} sub={`best ${s.best_streak}d`} />

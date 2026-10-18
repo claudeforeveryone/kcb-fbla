@@ -86,37 +86,27 @@ function ScrollToTop({ pathname }: { pathname: string }) {
 function TopBar({ signedIn, pathname }: { signedIn: boolean; pathname: string }) {
   return (
     <header className="sticky top-0 z-50 border-b border-black/20 bg-bar text-white">
-      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center gap-3 px-4 sm:px-6 md:h-[76px] lg:px-10">
-        <Brand size="md" className="shrink-0 md:[&_img]:h-11" wordmarkClassName="md:hidden lg:flex" />
+      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center gap-3 px-4 sm:px-6 lg:px-10">
+        <Brand size="md" className="shrink-0" wordmarkClassName="md:hidden lg:flex" />
         {signedIn && (
-          <nav aria-label="Main" className="ml-2 hidden h-full flex-1 items-stretch md:flex lg:ml-6">
+          <nav aria-label="Main" className="ml-2 hidden h-full flex-1 items-stretch md:flex lg:ml-8">
             {NAV.map((n) => {
               const active = n.match(pathname);
-              const Icon = n.icon;
               return (
                 <NavLink
                   key={n.to}
                   to={n.to}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group relative flex items-center gap-2 px-2 font-display text-[0.9375rem] font-semibold transition-colors duration-150 lg:gap-2.5 lg:px-3 lg:text-[1.0625rem] xl:px-4',
-                    active ? 'text-white' : 'text-white/75 hover:text-white',
+                    'group relative flex items-center px-2.5 font-display text-[0.9375rem] font-semibold transition-colors duration-150 lg:px-3.5',
+                    active ? 'text-white' : 'text-white/65 hover:text-white',
                   )}
                 >
-                  <span
-                    className={cn(
-                      'hidden size-8 shrink-0 place-items-center rounded-[8px] transition-colors duration-150 lg:grid',
-                      active ? 'bg-red text-white' : 'bg-white/10 text-white group-hover:bg-white/20',
-                    )}
-                    aria-hidden
-                  >
-                    <Icon className="size-[18px]" strokeWidth={active ? 2.4 : 2} />
-                  </span>
                   {n.label}
                   <span
                     className={cn(
-                      'absolute inset-x-2 bottom-0 h-[3px] transition-all duration-200 ease-out',
-                      active ? 'bg-red' : 'scale-x-0 bg-white/40 group-hover:scale-x-50',
+                      'absolute inset-x-2.5 bottom-0 h-[3px] origin-left transition-[scale,background-color] duration-200 ease-out lg:inset-x-3.5',
+                      active ? 'bg-red' : 'scale-x-0 bg-white/50 group-hover:scale-x-100',
                     )}
                     aria-hidden
                   />
@@ -188,7 +178,7 @@ function SessionMenu() {
       danger: true,
       onSelect: async () => {
         await signOut();
-        toast.info('Signed out', 'See you next practice.');
+        toast.info('Signed out');
         navigate('/login', { replace: true });
       },
     },
@@ -301,7 +291,7 @@ function UserMenu() {
           danger: true,
           onSelect: async () => {
             await signOut();
-            toast.info('Signed out', 'See you next practice.');
+            toast.info('Signed out');
             navigate('/login', { replace: true });
           },
         },

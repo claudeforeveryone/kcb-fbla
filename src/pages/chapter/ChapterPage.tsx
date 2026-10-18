@@ -83,10 +83,10 @@ function NoChapter() {
       />
       <Page>
         <div className="grid gap-6 lg:grid-cols-2">
-          <section className="rounded-[12px] bg-blue p-5 text-white sm:p-6">
+          <section className="rounded-[4px] border border-line bg-surface p-5 sm:p-6">
             <div className="mb-4">
-              <h3 className="text-base font-bold leading-tight text-white">Join with a code</h3>
-              <p className="mt-0.5 text-sm text-white/85">Got a link instead? Just open it and you'll land on the invite page.</p>
+              <h3 className="text-base font-bold leading-tight">Join with a code</h3>
+              <p className="mt-0.5 text-sm text-muted">Got a link instead? Just open it and you'll land on the invite page.</p>
             </div>
             <JoinByCode autoFocus />
           </section>

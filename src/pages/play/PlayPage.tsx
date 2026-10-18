@@ -4,9 +4,9 @@ import { ArrowRight } from 'lucide-react';
 import {
   Badge,
   ButtonLink,
-  EloBadge,
   EmptyState,
   ErrorState,
+  HeaderFigures,
   PageHeader,
   Select,
   Skeleton,
@@ -14,7 +14,7 @@ import {
   cn,
 } from '../../components/ui';
 import { Page } from '../../components/layout/Page';
-import { EventBlock, EventCrest, eventStyle } from '../../lib/eventStyle';
+import { EventMark, eventStyle } from '../../lib/eventStyle';
 import { useProfile } from '../../lib/auth';
 import { loadIndex, type Topic } from '../../lib/content';
 import { EVENTS, EVENT_GROUPS, eventInfo, eventName, type EventInfo } from '../../lib/types';
@@ -109,13 +109,15 @@ export default function PlayPage() {
         eyebrow="Practice"
         title="Play"
         subtitle="Official-style questions for all 15 events. Every answer moves your Elo, harder questions move it more."
-        actions={<EloBadge elo={profile.elo} size="lg" onDark />}
       >
-        <div className="flex flex-wrap gap-2">
-          <HeaderChip label="Answered" value={answered.toLocaleString()} />
-          <HeaderChip label="Accuracy" value={answered ? pctText(acc) : '--'} />
-          <HeaderChip label="Day streak" value={String(profile.current_streak ?? 0)} />
-        </div>
+        <HeaderFigures
+          items={[
+            { label: 'Elo', value: Math.round(profile.elo) },
+            { label: 'Answered', value: answered.toLocaleString() },
+            { label: 'Accuracy', value: answered ? pctText(acc) : '--' },
+            { label: 'Day streak', value: profile.current_streak ?? 0 },
+          ]}
+        />
       </PageHeader>
 
       <Page className="md:py-12">
@@ -229,15 +231,6 @@ export default function PlayPage() {
   );
 }
 
-function HeaderChip({ label, value }: { label: string; value: string }) {
-  return (
-    <span className="inline-flex h-9 items-center gap-2 rounded-[2px] border border-white/20 px-3 text-sm text-white">
-      <span className="text-white/70">{label}</span>
-      <span className="tabular font-display font-bold">{value}</span>
-    </span>
-  );
-}
-
 function DailyCard({ history }: { history: PlayHistory }) {
   const done = todaysDaily(history);
   const streak = dailyStreak(history);
@@ -325,7 +318,7 @@ function ModeGrid({
       <ModeTile
         title="Quick 10"
         text="Ten questions, new ones first."
-        meta="10 Qs · ~5 min"
+        meta="About 5 min"
         to={runHref({ mode: 'quick', event: ev })}
         cta="Play"
       />
@@ -349,7 +342,7 @@ function ModeGrid({
       <ModeTile
         title="Mock exam"
         text="100 questions, 50 minutes, official format."
-        meta={ev ? `100 Qs · ${eventInfo(ev)?.short ?? ''}` : '100 Qs · 50 min'}
+        meta={ev ? `100 Qs · ${eventInfo(ev)?.short ?? ''}` : '50 min'}
         onClick={onMock}
         cta="Set it up"
       />
@@ -389,7 +382,7 @@ function ModeGrid({
   );
 }
 
-/** Compact mode tile: solid FBLC blue, white text. The whole tile is clickable (stretched link); `extra` sits above it. */
+/** Compact mode tile: white with a hairline, the title in navy. The whole tile is clickable (stretched link); `extra` sits above it. */
 function ModeTile({
   title,
   text,
@@ -410,17 +403,17 @@ function ModeTile({
   highlight?: boolean;
 }) {
   const stretch =
-    "text-left text-white outline-none after:absolute after:inset-0 after:rounded-[12px] after:content-[''] focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-blue";
+    "text-left outline-none after:absolute after:inset-0 after:rounded-[4px] after:content-[''] focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-blue";
   const label = (
     <>
       {title}
-      {highlight && <span className="size-2 rounded-full bg-red ring-2 ring-white" aria-label="Has work to do" />}
+      {highlight && <span className="size-2 rounded-full bg-red" aria-label="Has work to do" />}
     </>
   );
   return (
-    <div className="group relative flex h-full flex-col rounded-[12px] bg-blue px-4 py-3.5 text-white transition-colors duration-150 hover:bg-[#365f9b] md:px-5 md:py-4">
+    <div className="group relative flex h-full flex-col rounded-[4px] border border-line bg-surface px-4 py-3.5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-2 md:px-5 md:py-4">
       <div className="flex items-start justify-between gap-2">
-        <h3 className="font-display text-base font-extrabold leading-tight text-white md:text-lg">
+        <h3 className="font-display text-base font-extrabold leading-tight md:text-lg">
           {to ? (
             <Link to={to} className={cn('flex items-center gap-2', stretch)}>
               {label}
@@ -431,15 +424,15 @@ function ModeTile({
             </button>
           )}
         </h3>
-        <span className="tabular hidden shrink-0 truncate rounded-[6px] bg-white/15 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white sm:inline">
+        <span className="tabular hidden shrink-0 truncate pt-0.5 text-xs font-semibold text-muted sm:inline">
           {meta}
         </span>
       </div>
-      <p className="mt-1 text-[0.8125rem] leading-snug text-white/85 md:text-sm">{text}</p>
-      <span className="tabular mt-1.5 text-[11px] font-bold uppercase tracking-wide text-white sm:hidden">{meta}</span>
+      <p className="mt-1 text-[0.8125rem] leading-snug text-muted md:text-sm">{text}</p>
+      <span className="tabular mt-1.5 text-xs font-semibold text-muted sm:hidden">{meta}</span>
       <div className="mt-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1 pt-2.5">
-        <span className="inline-flex items-center gap-1 font-display text-sm font-bold text-white" aria-hidden>
-          {cta} <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+        <span className="inline-flex items-center gap-1 font-display text-sm font-bold text-link" aria-hidden>
+          {cta} <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
         </span>
         {extra && <span className="relative z-10">{extra}</span>}
       </div>
@@ -447,7 +440,7 @@ function ModeTile({
   );
 }
 
-/** Event card: decorated event-colour banner with its crest and code (same as Vocab deck tiles), white body with progress in the event colour. */
+/** Event card: white, with the event's mark and code on top and progress in the event colour (same as Vocab deck tiles). */
 function EventCard({
   e,
   s,
@@ -470,23 +463,14 @@ function EventCard({
           mine ? 'border-red/50' : 'border-line',
         )}
       >
-        <EventBlock slug={e.slug} className="h-[112px] shrink-0 sm:h-[128px]">
-          <div className="grid h-full place-items-center">
-            <EventCrest slug={e.slug} size={64} className="transition-transform duration-200 group-hover:scale-[1.05] max-sm:!size-14" />
-          </div>
-          {mine && (
-            <span
-              className="absolute left-3 top-3 inline-flex h-5 items-center rounded-[2px] bg-white px-1.5 text-[10px] font-bold uppercase tracking-[0.08em]"
-              style={{ color }}
-            >
-              Your event
-            </span>
-          )}
-          <span className="absolute right-3 top-3 inline-flex h-5 items-center rounded-[2px] border border-white/80 px-1.5 font-display text-[10px] font-bold tracking-[0.1em] text-white">
-            {e.short}
+        <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5">
+          <EventMark slug={e.slug} size={40} className="transition-transform duration-200 ease-out group-hover:-rotate-3" />
+          <span className="flex items-center gap-2 text-[11px] font-bold tracking-[0.08em]">
+            {mine && <span className="text-red dark:text-danger">Your event</span>}
+            <span className="tabular text-muted">{e.short}</span>
           </span>
-        </EventBlock>
-        <div className="flex flex-1 flex-col px-4 pb-4 pt-4 sm:p-5">
+        </div>
+        <div className="flex flex-1 flex-col px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
           <h3 className="text-[1.0625rem] font-bold leading-snug">
             <EventTitle e={e} />
           </h3>

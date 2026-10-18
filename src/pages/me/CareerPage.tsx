@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowDownWideNarrow, ArrowUpNarrowWide, CheckCircle2, ChevronDown, ChevronRight, Lightbulb, RotateCcw, Search, Target } from 'lucide-react';
 import {
@@ -8,6 +8,7 @@ import {
   EmptyState,
   ErrorState,
   Input,
+  HeaderFigures,
   PageHeader,
   SegmentedControl,
   Select,
@@ -71,16 +72,22 @@ export default function CareerPage() {
         subtitle="Every exam you have taken, and every question still waiting for a second try."
         back={{ to: '/me', label: 'Profile' }}
       >
-        <div className="flex flex-wrap gap-2.5">
-          <HeaderStat label="Exams" value={attempts.data ? summary.count.toLocaleString() : '...'} />
-          <HeaderStat
-            label="Accuracy"
-            value={attempts.data ? (summary.count ? pct(summary.acc) : '–') : '...'}
-            chart={summary.trend.length > 2 ? <Sparkline values={summary.trend} width={72} height={26} color="#fff" title="Accuracy of your last exams" /> : undefined}
-          />
-          <HeaderStat label="Time" value={attempts.data ? formatHours(summary.ms) : '...'} />
-          <HeaderStat label="To redo" value={wrong.data ? wrong.data.length.toLocaleString() : '...'} accent />
-        </div>
+        <HeaderFigures
+          items={[
+            { label: 'Exams', value: attempts.data ? summary.count.toLocaleString() : '...' },
+            {
+              label: 'Accuracy',
+              value: (
+                <span className="inline-flex items-center gap-3">
+                  {attempts.data ? (summary.count ? pct(summary.acc) : '–') : '...'}
+                  {summary.trend.length > 2 && <Sparkline values={summary.trend} width={56} height={20} area={false} title="Accuracy of your last exams" />}
+                </span>
+              ),
+            },
+            { label: 'Time', value: attempts.data ? formatHours(summary.ms) : '...' },
+            { label: 'To redo', value: wrong.data ? wrong.data.length.toLocaleString() : '...', tone: 'red' },
+          ]}
+        />
       </PageHeader>
       <Page>
         <Tabs
@@ -98,18 +105,6 @@ export default function CareerPage() {
         </div>
       </Page>
     </>
-  );
-}
-
-function HeaderStat({ label, value, chart, accent }: { label: string; value: string; chart?: ReactNode; accent?: boolean }) {
-  return (
-    <div className={cn('flex items-center gap-3 rounded-xl px-4 py-2.5 ring-1 ring-inset', accent ? 'bg-white/10 ring-white/15 shadow-[inset_0_3px_0_var(--red)]' : 'bg-white/10 ring-white/15')}>
-      <div>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-white/65">{label}</div>
-        <div className={cn('tabular font-display text-xl font-extrabold', accent ? 'text-red dark:text-danger' : 'text-white')}>{value}</div>
-      </div>
-      {chart}
-    </div>
   );
 }
 

@@ -99,7 +99,7 @@ export function JoinByCode({ autoFocus }: { autoFocus?: boolean }) {
 
   return (
     <form onSubmit={join} className="space-y-4">
-      <label htmlFor="join-code" className="text-sm font-semibold text-white">
+      <label htmlFor="join-code" className="text-sm font-semibold text-heading">
         Chapter join code
       </label>
       <div className="relative">
@@ -114,17 +114,16 @@ export function JoinByCode({ autoFocus }: { autoFocus?: boolean }) {
           maxLength={6}
           placeholder="ABC123"
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
-          className="tabular h-14 w-full rounded-[2px] border
- border-white bg-white px-4 text-center font-display text-2xl font-extrabold uppercase tracking-[0.5em] text-navy outline-none transition focus:ring-4 focus:ring-white/40 placeholder:text-navy/30"
+          className="tabular h-14 w-full rounded-[4px] border border-line-strong bg-surface px-4 text-center font-display text-2xl font-extrabold uppercase tracking-[0.5em] text-heading outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/20 placeholder:text-muted/40"
           aria-describedby="join-code-hint"
         />
-        {looking && <Spinner className="absolute right-4 top-1/2 size-5 -translate-y-1/2 text-navy" />}
+        {looking && <Spinner className="absolute right-4 top-1/2 size-5 -translate-y-1/2 text-muted" />}
       </div>
-      <p id="join-code-hint" className="text-[0.8125rem] text-white/85">
+      <p id="join-code-hint" className="text-[0.8125rem] text-muted">
         Six letters and numbers. Ask your chapter's president or an executive for it.
       </p>
       {preview === null && code.length === 6 && !looking && (
-        <p className="rounded-[4px] bg-white px-3 py-2 text-sm font-semibold text-red" role="alert">
+        <p className="text-sm font-semibold text-red dark:text-danger" role="alert">
           No chapter uses that code. Check it, or ask for a fresh one.
         </p>
       )}

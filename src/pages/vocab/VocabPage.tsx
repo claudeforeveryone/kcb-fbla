@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties, type ReactNode } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -14,6 +14,7 @@ import {
   Card,
   EmptyState,
   ErrorState,
+  HeaderFigures,
   Input,
   PageHeader,
   Skeleton,
@@ -26,7 +27,7 @@ import { EVENT_GROUPS, type Assignment, type Deck } from '../../lib/types';
 import { canManageDeck, isDeckStaff, type StudyDeck, type VocabTerm } from '../../api/vocab';
 import { deckStats, isDue, relativeDue, statusOf, type DeckStats, type ProgressLike } from './leitner';
 import { assignmentFor, reloadVocab, useVocab, type VocabState } from './store';
-import { DeckBlock, DeckCrest, EventBar, Highlight, StatusChip, deckColor, deckVars } from './parts';
+import { DeckMark, EventBar, Highlight, StatusChip, deckColor, deckVars } from './parts';
 import { DeckEditor } from './DeckEditor';
 
 export default function VocabPage() {
@@ -81,11 +82,23 @@ export default function VocabPage() {
           ) : undefined
         }
       >
-        <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-3">
-          <HeaderStat label="Due today" value={firstLoad ? null : totals.due} accent={totals.due > 0} />
-          <HeaderStat label="Mastered" value={firstLoad ? null : totals.mastered} blue />
-          <HeaderStat label="Studied" value={firstLoad ? null : `${totals.studied}`} suffix={firstLoad ? '' : ` / ${totals.terms}`} blue />
-        </div>
+        <HeaderFigures
+          items={[
+            { label: 'Due today', value: firstLoad ? <Skeleton className="h-6 w-10" /> : totals.due, tone: totals.due > 0 ? 'red' : undefined },
+            { label: 'Mastered', value: firstLoad ? <Skeleton className="h-6 w-10" /> : totals.mastered },
+            {
+              label: 'Studied',
+              value: firstLoad ? (
+                <Skeleton className="h-6 w-16" />
+              ) : (
+                <>
+                  {totals.studied}
+                  <span className="text-sm font-semibold text-muted"> / {totals.terms}</span>
+                </>
+              ),
+            },
+          ]}
+        />
       </PageHeader>
 
       <Page>
@@ -166,41 +179,6 @@ export default function VocabPage() {
   );
 }
 
-function HeaderStat({
-  label,
-  value,
-  suffix,
-  accent,
-  blue,
-}: {
-  label: string;
-  value: number | string | null;
-  suffix?: string;
-  accent?: boolean;
-  blue?: boolean;
-}) {
-  return (
-    <div
-      className={cn(
-        'flex min-w-0 items-center gap-3 overflow-hidden rounded-[12px] border px-3 py-2.5 sm:min-w-40 sm:px-4',
-        blue
-          ? 'border-blue bg-blue text-white'
-          : accent
-            ? 'border-line border-t-[3px] border-t-red bg-surface'
-            : 'border-line bg-surface',
-      )}
-    >
-      <div className="min-w-0">
-        <div className={cn('tabular font-display text-xl font-extrabold leading-none sm:text-2xl', accent ? 'text-red' : 'text-white')}>
-          {value === null ? <span className="inline-block h-6 w-10 animate-pulse rounded bg-white/20" /> : value}
-          {suffix && <span className={cn('text-sm font-semibold', blue ? 'text-white/85' : 'text-white/60')}>{suffix}</span>}
-        </div>
-        <div className={cn('mt-1 truncate text-[11px] font-semibold uppercase tracking-[0.1em]', blue ? 'text-white/90' : 'text-white/70')}>{label}</div>
-      </div>
-    </div>
-  );
-}
-
 function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
   const started = stats.total - stats.fresh > 0;
   const color = deckColor(deck);
@@ -210,12 +188,8 @@ function Featured({ deck, stats }: { deck: StudyDeck; stats: DeckStats }) {
       style={deckVars(color)}
       aria-label={`Your event: ${deck.title}`}
     >
-      <DeckBlock deck={deck} className="h-32 shrink-0 sm:h-auto sm:w-56">
-        <div className="grid h-full place-items-center">
-          <DeckCrest deck={deck} size={76} />
-        </div>
-      </DeckBlock>
-      <div className="flex min-w-0 flex-1 flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-center">
+      <div className="flex min-w-0 flex-1 flex-col gap-5 p-5 sm:flex-row sm:p-6 lg:items-center">
+        <DeckMark deck={deck} size={56} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-[0.14em]" style={{ color }}>
@@ -294,30 +268,16 @@ function DeckTile({
         to={`/vocab/${deck.key}`}
         className="flex h-full flex-col overflow-hidden rounded-[12px] border border-line bg-surface outline-none transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong focus-visible:ring-2 focus-visible:ring-blue"
       >
-        <DeckBlock deck={deck} className="h-[128px] shrink-0">
-          <div className="grid h-full place-items-center">
-            <DeckCrest deck={deck} size={68} className="transition-transform duration-200 group-hover:scale-[1.05]" />
-          </div>
-          {(main || deck.isNew) && (
-            <div className="absolute left-3 top-3 flex gap-1.5">
-              {main && (
-                <span className="inline-flex h-5 items-center rounded-[2px] bg-white px-1.5 text-[10px] font-bold uppercase tracking-[0.08em]" style={{ color }}>
-                  Your event
-                </span>
-              )}
-              {deck.isNew && (
-                <span className="inline-flex h-5 items-center rounded-[2px] border border-white/80 px-1.5 text-[10px] font-bold tracking-[0.08em] text-white">
-                  *NEW
-                </span>
-              )}
-            </div>
-          )}
-        </DeckBlock>
-        <div className="flex flex-1 flex-col p-5">
-          <div className="flex items-start justify-between gap-3">
-            <h3 className="font-bold leading-snug text-heading">{deck.title}</h3>
-            <CodeTag>{deck.short}</CodeTag>
-          </div>
+        <div className="flex items-center justify-between gap-3 px-5 pt-5">
+          <DeckMark deck={deck} size={40} className="transition-transform duration-200 ease-out group-hover:-rotate-3" />
+          <span className={cn('flex items-center gap-2 text-[11px] font-bold tracking-[0.08em]', onEdit && 'mr-9')}>
+            {main && <span style={{ color }}>Your event</span>}
+            {deck.isNew && <span className="uppercase text-red dark:text-danger">New</span>}
+            <span className="tabular text-muted">{deck.short}</span>
+          </span>
+        </div>
+        <div className="flex flex-1 flex-col px-5 pb-5 pt-3">
+          <h3 className="font-bold leading-snug text-heading">{deck.title}</h3>
           {deck.gradeNote && <p className="mt-1 text-xs font-semibold text-[#8a5f00] dark:text-warning">{deck.gradeNote}</p>}
           <p className="tabular mt-1.5 text-sm text-muted">
             {stats.total} {stats.total === 1 ? 'term' : 'terms'}
@@ -349,12 +309,12 @@ function DeckTile({
         </div>
       </Link>
       {onEdit && (
-        <span className="absolute right-2 top-2" style={{ '--color-white': '#fff' } as CSSProperties}>
+        <span className="absolute right-3 top-4">
           <Button
             variant="ghost"
             size="icon-sm"
             aria-label={`Edit ${deck.title}`}
-            className="text-white hover:bg-white/15"
+            className="text-muted hover:text-heading"
             onClick={onEdit}
           >
             <Pencil className="size-4" />

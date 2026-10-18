@@ -56,9 +56,7 @@ export function EventTitle({ e, className }: { e: EventInfo; className?: string 
     <span className={cn('inline-flex flex-wrap items-center gap-x-2 gap-y-1', className)}>
       <span>{e.name}</span>
       {e.isNew && (
-        <Badge tone="red" solid className="h-5 px-2 text-[10px] uppercase tracking-wider">
-          *New
-        </Badge>
+        <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-red dark:text-danger">New</span>
       )}
     </span>
   );

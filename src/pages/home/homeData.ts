@@ -35,15 +35,6 @@ export function nextTorontoMidnight(now = Date.now()): Date {
   return new Date(t);
 }
 
-/** Hour of day for the greeting, in the viewer's own clock. */
-export function greeting(now = new Date()): string {
-  const h = now.getHours();
-  if (h < 5) return 'Up late';
-  if (h < 12) return 'Good morning';
-  if (h < 17) return 'Good afternoon';
-  return 'Good evening';
-}
-
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 export function timeAgo(at: string | number | Date, now = Date.now()): string {
   const s = Math.round((new Date(at).getTime() - now) / 1000);
