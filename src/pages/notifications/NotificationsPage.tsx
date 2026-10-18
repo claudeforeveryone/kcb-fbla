@@ -530,7 +530,7 @@ function EmailBanner({
     >
       <div className="min-w-0 flex-1">
         <p className="font-display font-bold text-heading">
-          {ok ? 'You are unsubscribed from FBLA United emails' : 'That unsubscribe link did not work'}
+          {ok ? 'You are unsubscribed from FBLC United emails' : 'That unsubscribe link did not work'}
         </p>
         <p className="mt-0.5 text-sm text-muted">
           {ok

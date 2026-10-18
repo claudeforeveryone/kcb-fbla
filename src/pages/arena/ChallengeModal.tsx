@@ -223,7 +223,7 @@ export function ChallengeModal({
                     <ul className="space-y-0.5">{quick.map(({ p, tag }) => pickRow(p, tag))}</ul>
                   </>
                 ) : (
-                  <p className="px-2.5 py-3 text-sm text-muted">Type at least 2 letters to find anyone on FBLA United.</p>
+                  <p className="px-2.5 py-3 text-sm text-muted">Type at least 2 letters to find anyone on FBLC United.</p>
                 )}
               </div>
             </div>

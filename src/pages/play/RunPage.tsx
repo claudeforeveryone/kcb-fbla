@@ -234,16 +234,13 @@ function Intro({
         </ButtonLink>
         <div className="animate-rise overflow-hidden rounded-[4px] border border-line bg-surface">
           <div className="border-b border-line p-6 md:p-8">
-            <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
-              <span className="h-[3px] w-5 rounded-none bg-red" aria-hidden />
-              {run.subtitle}
-            </div>
+            <div className="mb-2 text-sm font-semibold text-muted">{run.subtitle}</div>
             <h1 className="text-[1.75rem] font-extrabold tracking-tight md:text-4xl">{run.title}</h1>
             <p className="mt-3 text-[0.975rem] leading-relaxed text-muted">{run.blurb}</p>
-            <dl className="mt-6 grid grid-cols-3 gap-2 sm:gap-3">
+            <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-line pt-4">
               {run.facts.map((f) => (
-                <div key={f.label} className="rounded-[4px] bg-surface-2 px-3 py-3">
-                  <dt className="text-[11px] font-bold uppercase tracking-wider text-muted">{f.label}</dt>
+                <div key={f.label}>
+                  <dt className="text-xs font-semibold text-muted">{f.label}</dt>
                   <dd className="mt-1 font-display text-[0.95rem] font-bold leading-tight text-heading [overflow-wrap:anywhere]">{f.value}</dd>
                 </div>
               ))}

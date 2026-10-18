@@ -101,9 +101,9 @@ function Rating({ elo, stats, loading }: { elo: number; stats: ProfileStats | un
           <span className="inline-flex items-center gap-2">
             <span className={delta > 0 ? 'text-success' : delta < 0 ? 'text-red dark:text-danger' : undefined}>
               {delta > 0 ? '+' : ''}
-              {delta} this week
+              {delta} this wk
             </span>
-            {recent.length >= 2 && <Sparkline values={recent} width={44} height={14} area={false} title="Elo, last 30 days" />}
+            {recent.length >= 2 && <Sparkline values={recent} width={44} height={14} area={false} title="Elo, last 30 days" className="max-sm:hidden" />}
           </span>
         )
       }

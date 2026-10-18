@@ -25,7 +25,7 @@ describe('service worker build stamp', () => {
 describe('offline page', () => {
   it('needs no other file: it is served for any URL, under any base path (Vercel or GitHub Pages)', () => {
     expect(offlineHtml).not.toMatch(/\s(?:src|href)="(?!data:|#)/);
-    expect(offlineHtml).toMatch(/<svg [^>]*aria-label="FBLA United"/);
+    expect(offlineHtml).toMatch(/<svg [^>]*aria-label="FBLC United"/);
   });
 
   /** Runs the offline page's script with a fake browser: connection state, the site's answer, timers. */

@@ -305,7 +305,7 @@ export default function MemberPage() {
                   ['Last seen', relativeDay(p.last_seen_at)],
                   ['Best answer streak', `${p.best_answer_streak} in a row`],
                   ['Arena', `${p.duel_wins}W ${p.duel_losses}L ${p.duel_draws}D`],
-                  ['Joined FBLA United', new Date(p.created_at).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })],
+                  ['Joined FBLC United', new Date(p.created_at).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })],
                 ].map(([k, v]) => (
                   <div key={k as string} className="flex items-center justify-between gap-3">
                     <dt className="text-muted">{k}</dt>

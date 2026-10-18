@@ -32,6 +32,6 @@ Deno.serve(async (req) => {
   } catch {
     // fall through to the plain response
   }
-  if (!site) return new Response(ok ? 'You have been unsubscribed from FBLA United emails.' : 'This link is not valid.', { status: ok ? 200 : 400 });
+  if (!site) return new Response(ok ? 'You have been unsubscribed from FBLC United emails.' : 'This link is not valid.', { status: ok ? 200 : 400 });
   return Response.redirect(`${site}/notifications?email=${ok ? 'unsubscribed' : 'invalid'}`, 303);
 });

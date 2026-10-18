@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import { cn } from '../ui/cn';
 
 /**
- * The FBLA United shield: white shield with navy, red and blue chevrons (public/brand/fbla-united-mark.svg). A flat
+ * The FBLC United shield: white shield with navy, red and blue chevrons (public/brand/fbla-united-mark.svg). A flat
  * SVG, so one file serves every size from the favicon to the splash. The PNG icons in public/icons are exported from it.
  */
 export const LOGO_WHITE = `${import.meta.env.BASE_URL}brand/fbla-united-mark.svg`;
 /** Intrinsic size of LOGO_WHITE, for width/height attributes: the browser reserves its box before it loads. */
 export const LOGO_SIZE = { width: 48, height: 56 } as const;
 
-/** FBLA United shield + wordmark. Always place on navy. */
+/** FBLC United shield + wordmark. Always place on navy. */
 export function Brand({
   to = '/',
   size = 'md',
@@ -30,13 +30,13 @@ export function Brand({
       <img
         src={LOGO_WHITE}
         {...LOGO_SIZE}
-        alt="FBLA United"
+        alt="FBLC United"
         className={cn(img, 'w-auto shrink-0 select-none')}
         draggable={false}
       />
       {showWordmark && (
         <span className={cn('flex flex-col leading-none', text, wordmarkClassName)}>
-          <span className="font-display font-extrabold tracking-tight text-white">FBLA</span>
+          <span className="font-display font-extrabold tracking-tight text-white">FBLC</span>
           <span className="mt-[3px] text-[0.58em] font-bold uppercase tracking-[0.32em] text-[#F2A7BB]">United</span>
           {size === 'lg' && (
             <span className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60">
@@ -49,7 +49,7 @@ export function Brand({
   );
   const cls = cn('inline-flex items-center gap-2.5 rounded-[2px]', className);
   return to ? (
-    <Link to={to} className={cls} aria-label="FBLA United home">
+    <Link to={to} className={cls} aria-label="FBLC United home">
       {inner}
     </Link>
   ) : (

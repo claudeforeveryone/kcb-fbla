@@ -69,7 +69,7 @@ export default function Login() {
       subtitle="Sign in to keep your streak alive."
       footer={
         <>
-          New to FBLA United?{' '}
+          New to FBLC United?{' '}
           <Link to={`/signup${nextQuery}`} className="link">
             Create an account
           </Link>

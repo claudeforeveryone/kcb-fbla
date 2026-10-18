@@ -644,7 +644,7 @@ function AccountSection() {
     }
   };
   return (
-    <SettingsCard id="account" title="Sign out" description="Sign out of FBLA United on this device. Your progress is saved to your account.">
+    <SettingsCard id="account" title="Sign out" description="Sign out of FBLC United on this device. Your progress is saved to your account.">
       <Button variant="danger" leftIcon={<LogOut className="size-4" />} loading={busy} onClick={out}>
         Sign out
       </Button>
