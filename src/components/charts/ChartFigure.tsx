@@ -42,7 +42,7 @@ export function ChartFigure({
       {children}
       {table && table.rows.length > 0 && (
         <details className="group mt-3 text-sm">
-          <summary className="inline-flex cursor-pointer select-none items-center gap-1 rounded-[2px] font-semibold text-link outline-none hover:underline focus-visible:ring-2 focus-visible:ring-blue/40">
+          <summary className="inline-flex cursor-pointer select-none items-center gap-1 rounded-none font-semibold text-link outline-none hover:underline focus-visible:ring-2 focus-visible:ring-blue/40">
             <span className="group-open:hidden">Show as table</span>
             <span className="hidden group-open:inline">Hide table</span>
           </summary>

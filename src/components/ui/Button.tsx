@@ -7,7 +7,7 @@ export type ButtonVariant = 'primary' | 'accent' | 'secondary' | 'ghost' | 'dang
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'icon' | 'icon-sm';
 
 const base =
-  'relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-[2px] font-display font-semibold tracking-[-0.005em] ' +
+  'relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-none font-display font-semibold tracking-[-0.005em] ' +
   'transition-[background-color,color,transform,border-color] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] ' +
   'active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50';
 

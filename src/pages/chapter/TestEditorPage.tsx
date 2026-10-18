@@ -319,9 +319,9 @@ export default function TestEditorPage() {
           <span className="flex items-center gap-2">
             Test editor
             {test.published ? (
-              <span className="rounded-[2px] bg-success px-2 py-0.5 text-[10px] tracking-wider text-white">Published</span>
+              <span className="rounded-none bg-success px-2 py-0.5 text-[10px] tracking-wider text-white">Published</span>
             ) : (
-              <span className="rounded-[2px] bg-warning px-2 py-0.5 text-[10px] tracking-wider text-white">Draft</span>
+              <span className="rounded-none bg-warning px-2 py-0.5 text-[10px] tracking-wider text-white">Draft</span>
             )}
           </span>
         }
@@ -377,12 +377,12 @@ export default function TestEditorPage() {
             </div>
 
             {showErrors && invalid.length > 0 && (
-              <div className="mb-4 rounded-[2px] border border-line border-l-4 border-l-red bg-surface px-4 py-3 text-sm" role="alert">
+              <div className="mb-4 rounded-none border border-line border-l-4 border-l-red bg-surface px-4 py-3 text-sm" role="alert">
                 <div>
                   <p className="font-semibold text-ink">{pluralize(invalid.length, 'question')} to finish before saving</p>
                   <div className="mt-1.5 flex flex-wrap gap-1.5">
                     {invalid.slice(0, 12).map((x) => (
-                      <button key={x.i} type="button" className="rounded-[2px] bg-surface px-2 py-0.5 text-xs font-semibold text-red ring-1 ring-red/30 hover:bg-surface-2 dark:text-danger" onClick={() => {
+                      <button key={x.i} type="button" className="rounded-none bg-surface px-2 py-0.5 text-xs font-semibold text-red ring-1 ring-red/30 hover:bg-surface-2 dark:text-danger" onClick={() => {
                         setOpen(qs[x.i].key);
                         document.getElementById(`q-${qs[x.i].key}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                       }}>
@@ -436,7 +436,7 @@ export default function TestEditorPage() {
                 <button
                   type="button"
                   onClick={addBlank}
-                  className="flex h-14 items-center justify-center gap-2 rounded-[2px] border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue hover:bg-surface-2 hover:text-blue"
+                  className="flex h-14 items-center justify-center gap-2 rounded-none border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue hover:bg-surface-2 hover:text-blue"
                 >
                   <Plus className="size-4" /> Add a question
                 </button>
@@ -444,7 +444,7 @@ export default function TestEditorPage() {
                   type="button"
                   onClick={() => setImporting(true)}
                   disabled={!meta.event}
-                  className="flex h-14 items-center justify-center gap-2 rounded-[2px] border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue hover:bg-surface-2 hover:text-blue disabled:pointer-events-none disabled:opacity-50"
+                  className="flex h-14 items-center justify-center gap-2 rounded-none border-2 border-dashed border-line-strong font-display text-sm font-semibold text-muted transition-colors hover:border-blue hover:bg-surface-2 hover:text-blue disabled:pointer-events-none disabled:opacity-50"
                 >
                   Import from the official bank
                 </button>
@@ -466,7 +466,7 @@ export default function TestEditorPage() {
                   options={eventOptions(ctx, { allowNone: admin ? 'No event (mixed)' : undefined, manageableOnly: !admin })}
                   hint={admin ? 'Trainers of this event can edit and assign it.' : undefined}
                 />
-                <div className="space-y-3 rounded-[4px] border border-line bg-surface-2/50 p-3">
+                <div className="space-y-3 rounded-none border border-line bg-surface-2/50 p-3">
                   <Switch checked={meta.timed} onChange={(v) => patchMeta({ timed: v })} label="Time limit" description="The run submits itself when time runs out." />
                   {meta.timed && (
                     <Input
@@ -616,7 +616,7 @@ function QuestionCard({
         <div className="flex items-start gap-3 p-3 sm:p-4">
           <span
             className={cn(
-              'tabular grid size-8 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold',
+              'tabular grid size-8 shrink-0 place-items-center rounded-none font-display text-sm font-bold',
               bad ? 'bg-red/10 text-red dark:text-danger' : 'bg-navy/8 text-navy dark:bg-blue/20 dark:text-link',
             )}
           >
@@ -634,7 +634,7 @@ function QuestionCard({
                     <span className="truncate">{q.choices[q.answer]}</span>
                   </span>
                 )}
-                {q.sub && <span className="rounded bg-surface-2 px-1.5 py-0.5">{q.sub}</span>}
+                {q.sub && <span className="rounded-none bg-surface-2 px-1.5 py-0.5">{q.sub}</span>}
                 {q.src && <Badge tone="blue" className="h-5 text-[10px]">From bank</Badge>}
                 {bad && <span className="font-semibold text-red dark:text-danger">Missing {issues.join(', ')}</span>}
               </span>
@@ -674,7 +674,7 @@ function QuestionCard({
                 {q.choices.map((c, ci) => {
                   const correct = q.answer === ci;
                   return (
-                    <div key={ci} className={cn('flex items-center gap-2 rounded-[4px] border p-1.5 pr-2 transition-colors', correct ? 'border-success/50 bg-success/[0.07]' : 'border-line-strong bg-surface')}>
+                    <div key={ci} className={cn('flex items-center gap-2 rounded-none border p-1.5 pr-2 transition-colors', correct ? 'border-success/50 bg-success/[0.07]' : 'border-line-strong bg-surface')}>
                       <button
                         type="button"
                         role="radio"
@@ -682,7 +682,7 @@ function QuestionCard({
                         aria-label={`Mark ${LETTERS[ci]} as correct`}
                         onClick={() => onPatch({ answer: ci })}
                         className={cn(
-                          'grid size-8 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold transition-colors',
+                          'grid size-8 shrink-0 place-items-center rounded-none font-display text-sm font-bold transition-colors',
                           correct ? 'bg-success text-white' : 'bg-surface-2 text-muted hover:bg-success/15 hover:text-success',
                         )}
                       >
@@ -743,7 +743,7 @@ function IconBtn({ label, onClick, disabled, children }: { label: string; onClic
       disabled={disabled}
       aria-label={label}
       title={label}
-      className="grid size-8 place-items-center rounded-md text-muted transition-colors hover:bg-surface-2 hover:text-heading disabled:pointer-events-none disabled:opacity-30 [&>svg]:size-4"
+      className="grid size-8 place-items-center rounded-none text-muted transition-colors hover:bg-surface-2 hover:text-heading disabled:pointer-events-none disabled:opacity-30 [&>svg]:size-4"
     >
       {children}
     </button>
@@ -776,7 +776,7 @@ function Stats({ qs }: { qs: EQ[] }) {
       <div className="mt-2 flex h-16 items-end gap-2" aria-label="How often each letter is the correct answer">
         {answers.map((n, i) => (
           <div key={i} className="flex flex-1 flex-col items-center gap-1">
-            <div className="w-full rounded-t-md bg-blue/70 transition-[height] duration-300 dark:bg-link/70" style={{ height: `${Math.max(4, (n / max) * 44)}px` }} />
+            <div className="w-full rounded-none bg-blue/70 transition-[height] duration-300 dark:bg-link/70" style={{ height: `${Math.max(4, (n / max) * 44)}px` }} />
             <span className="tabular text-xs text-muted">
               {LETTERS[i]} <span className="font-semibold text-ink">{n}</span>
             </span>
@@ -919,7 +919,7 @@ function ImportModal({
             )}
           </div>
 
-          <ul className="mt-3 max-h-[52dvh] divide-y divide-line overflow-y-auto rounded-[4px] border border-line">
+          <ul className="mt-3 max-h-[52dvh] divide-y divide-line overflow-y-auto rounded-none border border-line">
             {shown.map((x) => {
               const done = imported.has(x.id);
               const on = pickedSet.has(x.id);
@@ -939,7 +939,7 @@ function ImportModal({
                       {expanded && (
                         <ol className="mt-2 space-y-1 text-sm">
                           {x.choices.map((c, ci) => (
-                            <li key={ci} className={cn('flex gap-2 rounded-[2px] px-2 py-1', ci === x.answer ? 'bg-success/10 font-semibold text-success' : 'text-ink/80')}>
+                            <li key={ci} className={cn('flex gap-2 rounded-none px-2 py-1', ci === x.answer ? 'bg-success/10 font-semibold text-success' : 'text-ink/80')}>
                               <span className="w-4 shrink-0 font-display font-bold">{LETTERS[ci]}</span>
                               {c}
                             </li>

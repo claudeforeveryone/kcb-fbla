@@ -452,7 +452,7 @@ export function ExamRunner({
                     disabled={(instant && revealed) || submitting || checking}
                     onClick={() => pick(i)}
                     className={cn(
-                      'group flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left transition-[border-color,background-color,opacity] duration-150 ease-out md:px-4 md:py-3.5',
+                      'group flex w-full items-start gap-3 rounded-none border px-3.5 py-3 text-left transition-[border-color,background-color,opacity] duration-150 ease-out md:px-4 md:py-3.5',
                       'disabled:cursor-default',
                       state === 'idle' &&
                         'border-line bg-surface hover:border-blue/60 hover:bg-surface-2',
@@ -464,7 +464,7 @@ export function ExamRunner({
                   >
                     <span
                       className={cn(
-                        'mt-px grid size-7 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold transition-colors',
+                        'mt-px grid size-7 shrink-0 place-items-center rounded-none font-display text-sm font-bold transition-colors',
                         state === 'idle' && 'bg-surface-2 text-muted ring-1 ring-inset ring-line group-hover:bg-blue/10 group-hover:text-blue',
                         state === 'chosen' && 'bg-surface text-navy ring-2 ring-inset ring-navy dark:text-link dark:ring-link',
                         state === 'right' && 'exam-pop bg-success text-white',
@@ -494,7 +494,7 @@ export function ExamRunner({
             {instant && revealed && (
               <div
                 className={cn(
-                  'exam-rise mt-4 rounded-[4px] border p-4',
+                  'exam-rise mt-4 rounded-none border p-4',
                   chosen === q.answer ? 'border-success/30 bg-success/[0.06]' : 'border-red/25 bg-red/[0.04]',
                 )}
                 role="status"
@@ -529,7 +529,7 @@ export function ExamRunner({
           </div>
 
           {/* actions */}
-          <div className="sticky bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 -mx-4 mt-6 border-t border-line bg-bg px-4 py-3 sm:mx-0 sm:rounded-[2px] sm:border sm:bg-surface md:bottom-4">
+          <div className="sticky bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 -mx-4 mt-6 border-t border-line bg-bg px-4 py-3 sm:mx-0 sm:rounded-none sm:border sm:bg-surface md:bottom-4">
             {instant ? (
               <div className="flex items-center gap-2">
                 {!revealed ? (
@@ -615,7 +615,7 @@ export function ExamRunner({
 
         {showNav && (
           <aside className="hidden lg:block">
-            <div className="sticky top-[136px] rounded-[2px] border border-line bg-surface p-4">
+            <div className="sticky top-[136px] rounded-none border border-line bg-surface p-4">
               <Navigator s={s} n={n} onGo={go} />
               <Button block variant="accent" className="mt-4" onClick={() => setReviewOpen(true)} leftIcon={<Send className="size-4" />}>
                 Review & submit
@@ -736,7 +736,7 @@ export function ExamRunner({
 
 function SummaryTile({ label, value, tone }: { label: string; value: number; tone: 'navy' | 'red' | 'warning' | 'muted' }) {
   return (
-    <div className="rounded-[4px] border border-line bg-surface-2 px-2 py-2.5">
+    <div className="rounded-none border border-line bg-surface-2 px-2 py-2.5">
       <div
         className={cn(
           'tabular font-display text-2xl font-extrabold',
@@ -758,13 +758,13 @@ function Navigator({ s, n, onGo }: { s: RunnerSnapshot; n: number; onGo: (i: num
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
         <span className="inline-flex items-center gap-1.5">
-          <span className="size-2.5 rounded-[1px] border border-navy/40 bg-navy/10 dark:border-link/50 dark:bg-blue/25" /> Answered
+          <span className="size-2.5 rounded-none border border-navy/40 bg-navy/10 dark:border-link/50 dark:bg-blue/25" /> Answered
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="size-2.5 rounded-[1px] border border-line-strong bg-surface" /> Blank
+          <span className="size-2.5 rounded-none border border-line-strong bg-surface" /> Blank
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-red" /> Flagged
+          <span className="size-2.5 rounded-none bg-red" /> Flagged
         </span>
       </div>
       <div className="grid grid-cols-8 gap-1.5 sm:grid-cols-10 lg:grid-cols-6" role="list">
@@ -780,7 +780,7 @@ function Navigator({ s, n, onGo }: { s: RunnerSnapshot; n: number; onGo: (i: num
               aria-label={`Question ${i + 1}${done ? ', answered' : ', blank'}${s.flags[i] ? ', flagged' : ''}`}
               aria-current={cur ? 'step' : undefined}
               className={cn(
-                'tabular relative grid h-8 place-items-center rounded-[2px] text-xs font-bold transition-colors',
+                'tabular relative grid h-8 place-items-center rounded-none text-xs font-bold transition-colors',
                 done
                   ? 'border border-navy/40 bg-navy/10 text-navy hover:bg-navy/15 dark:border-link/50 dark:bg-blue/25 dark:text-link'
                   : 'border border-line-strong bg-surface text-muted hover:border-blue hover:text-heading',
@@ -788,7 +788,7 @@ function Navigator({ s, n, onGo }: { s: RunnerSnapshot; n: number; onGo: (i: num
               )}
             >
               {i + 1}
-              {s.flags[i] && <span className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full border-2 border-surface bg-red" />}
+              {s.flags[i] && <span className="absolute -right-0.5 -top-0.5 size-2.5 rounded-none border-2 border-surface bg-red" />}
             </button>
           );
         })}

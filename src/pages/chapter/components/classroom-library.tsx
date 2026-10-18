@@ -206,7 +206,7 @@ export function LibraryPanel({
                     )}
                   </div>
                   {d.cards[0] && (
-                    <p className="relative mt-3 line-clamp-2 rounded-[2px] border-l-2 border-line-strong bg-surface-2 px-3 py-2
+                    <p className="relative mt-3 line-clamp-2 rounded-none border-l-2 border-line-strong bg-surface-2 px-3 py-2
  text-[0.8125rem] text-muted">
                       <span className="font-semibold text-ink">{d.cards[0].term}</span> · {d.cards[0].def}
                     </p>

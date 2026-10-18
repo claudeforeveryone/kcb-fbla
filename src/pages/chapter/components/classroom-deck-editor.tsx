@@ -139,7 +139,7 @@ export function DeckEditor({
       {mode === 'cards' && (
         <div className="mt-3 space-y-2">
           {rows.map((r, i) => (
-            <div key={r.key} className="group grid grid-cols-[1.75rem_1fr_auto] items-start gap-2 rounded-[4px] border border-line bg-surface-2/40 p-2 sm:grid-cols-[1.75rem_minmax(0,2fr)_minmax(0,3fr)_auto]">
+            <div key={r.key} className="group grid grid-cols-[1.75rem_1fr_auto] items-start gap-2 rounded-none border border-line bg-surface-2/40 p-2 sm:grid-cols-[1.75rem_minmax(0,2fr)_minmax(0,3fr)_auto]">
               <span className="tabular pt-2.5 text-center text-xs font-bold text-muted">{i + 1}</span>
               <input
                 aria-label={`Card ${i + 1} term`}
@@ -147,13 +147,13 @@ export function DeckEditor({
                 maxLength={300}
                 placeholder="Term"
                 onChange={(e) => setRows((rs) => rs.map((x) => (x.key === r.key ? { ...x, term: e.target.value } : x)))}
-                className="h-10 w-full rounded-[2px] border border-line-strong bg-surface px-3 text-[0.9375rem] font-semibold text-ink outline-none focus:border-blue focus:ring-4 focus:ring-blue/15"
+                className="h-10 w-full rounded-none border border-line-strong bg-surface px-3 text-[0.9375rem] font-semibold text-ink outline-none focus:border-blue focus:ring-4 focus:ring-blue/15"
               />
               <button
                 type="button"
                 aria-label={`Remove card ${i + 1}`}
                 onClick={() => setRows((rs) => rs.filter((x) => x.key !== r.key))}
-                className="grid size-10 place-items-center rounded-[2px] text-muted transition-colors hover:bg-danger/10 hover:text-danger sm:order-last"
+                className="grid size-10 place-items-center rounded-none text-muted transition-colors hover:bg-danger/10 hover:text-danger sm:order-last"
               >
                 <Trash2 className="size-4" />
               </button>
@@ -164,7 +164,7 @@ export function DeckEditor({
                 rows={1}
                 placeholder="Definition"
                 onChange={(e) => setRows((rs) => rs.map((x) => (x.key === r.key ? { ...x, def: e.target.value } : x)))}
-                className="col-span-2 col-start-2 min-h-10 w-full resize-y rounded-[2px] border border-line-strong bg-surface px-3 py-2 text-[0.9375rem] text-ink outline-none focus:border-blue focus:ring-4 focus:ring-blue/15 sm:col-span-1 sm:col-start-auto"
+                className="col-span-2 col-start-2 min-h-10 w-full resize-y rounded-none border border-line-strong bg-surface px-3 py-2 text-[0.9375rem] text-ink outline-none focus:border-blue focus:ring-4 focus:ring-blue/15 sm:col-span-1 sm:col-start-auto"
               />
             </div>
           ))}
@@ -260,7 +260,7 @@ function VocabPicker({ event, existing, onAdd }: { event: string; existing: Set<
           {allShownPicked ? 'Clear' : 'Select'} all shown
         </Button>
       </div>
-      <ul className="mt-3 max-h-72 divide-y divide-line overflow-y-auto rounded-[4px] border border-line">
+      <ul className="mt-3 max-h-72 divide-y divide-line overflow-y-auto rounded-none border border-line">
         {shown.map((t) => {
           const dup = existing.has(t.term.trim().toLowerCase());
           return (

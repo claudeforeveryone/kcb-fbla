@@ -227,7 +227,7 @@ function TransferModal({
       }
     >
       {heir && (
-        <div className="flex items-center gap-3 rounded-[2px] border border-line p-3">
+        <div className="flex items-center gap-3 rounded-none border border-line p-3">
           <Avatar src={heir.profile.avatar_url} name={heir.profile.display_name} />
           <div>
             <div className="font-semibold">{heir.profile.display_name}</div>

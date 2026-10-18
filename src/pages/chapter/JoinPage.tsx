@@ -13,7 +13,7 @@ export default function JoinPage() {
   const { loading, session, profile } = useAuth();
   const here = `/chapter/join/${encodeURIComponent(token)}`;
 
-  if (loading) return <Shell><Skeleton className="h-80 w-full" rounded="rounded-[4px]" /></Shell>;
+  if (loading) return <Shell><Skeleton className="h-80 w-full" rounded="rounded-none" /></Shell>;
 
   if (!session) {
     const next = encodeURIComponent(here);
@@ -65,7 +65,7 @@ function JoinFlow({ token, currentChapterId }: { token: string; currentChapterId
   const navigate = useNavigate();
   const [joining, setJoining] = useState(false);
 
-  if (pv.loading) return <Skeleton className="h-80 w-full" rounded="rounded-[4px]" />;
+  if (pv.loading) return <Skeleton className="h-80 w-full" rounded="rounded-none" />;
   if (pv.error) return <ErrorState error={pv.error} onRetry={() => void pv.reload()} />;
   const p = pv.data;
   if (!p)
@@ -106,7 +106,7 @@ function JoinFlow({ token, currentChapterId }: { token: string; currentChapterId
           </ButtonLink>
         ) : inOther ? (
           <div className="space-y-3">
-            <div className="rounded-[2px] border border-line border-l-4 border-l-warning bg-surface-2 p-3 text-sm text-ink" role="status">
+            <div className="rounded-none border border-line border-l-4 border-l-warning bg-surface-2 p-3 text-sm text-ink" role="status">
               <span>
 You're in another chapter. Leave it first (from your Chapter page), then come back to this link.</span>
             </div>

@@ -78,12 +78,12 @@ function NoChapter() {
       <PageHeader
         eyebrow="Chapter"
         title="Find your team"
-        subtitle="Join your school's chapter to compete on its leaderboard, get assignments from your trainers and see how you stack up."
+        subtitle="Join your school's chapter with a code or invite link."
         size="lg"
       />
       <Page>
         <div className="grid gap-6 lg:grid-cols-2">
-          <section className="rounded-[4px] border border-line bg-surface p-5 sm:p-6">
+          <section className="rounded-none border border-line bg-surface p-5 sm:p-6">
             <div className="mb-4">
               <h3 className="text-base font-bold leading-tight">Join with a code</h3>
               <p className="mt-0.5 text-sm text-muted">Got a link instead? Just open it and you'll land on the invite page.</p>
@@ -93,7 +93,7 @@ function NoChapter() {
           <Card as="section" className="flex flex-col p-5 sm:p-6">
             <CardHeader
               title="Starting a chapter?"
-              subtitle="Register it in a minute. You'll be president and can invite members right away."
+              subtitle="You'll be president and can invite members."
             />
             <ul className="flex-1 space-y-3 text-[0.9375rem]">
               {[
@@ -264,7 +264,7 @@ function HeroChip({ label, value, sub, accent }: { label: string; value: string;
   return (
     <div
       className={cn(
-        'min-w-[104px] rounded-[2px] border border-t-[3px] border-line border-t-red px-3.5 py-2.5',
+        'min-w-[104px] rounded-none border border-t-[3px] border-line border-t-red px-3.5 py-2.5',
         accent ? 'bg-red/[0.06]' : 'bg-surface',
       )}
     >
@@ -329,7 +329,7 @@ function Leaderboard({
                     key={r.user_id}
                     to={linkFor(r)}
                     className={cn(
-                      'group flex flex-col items-center rounded-[2px] p-2 text-center transition-colors hover:bg-surface',
+                      'group flex flex-col items-center rounded-none p-2 text-center transition-colors hover:bg-surface',
                       i === 1 && '-mt-3',
                     )}
                   >
@@ -337,7 +337,7 @@ function Leaderboard({
                       <Avatar src={r.avatar_url} name={r.display_name} size={i === 1 ? 'xl' : 'lg'} className={cn(r.is_me && 'ring-2 ring-red')} />
                       <span
                         className={cn(
-                          'absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-[2px] font-display text-xs font-extrabold text-white ring-2 ring-surface',
+                          'absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-none font-display text-xs font-extrabold text-white ring-2 ring-surface',
                           r.rank === 1 ? 'bg-red' : 'bg-blue',
                         )}
                       >
@@ -356,7 +356,7 @@ function Leaderboard({
             </div>
           )}
           {allZero && (
-            <div className="mx-4 mb-3 rounded-[2px] border-l-4 border-blue bg-surface-2 px-3 py-2.5 text-sm text-ink sm:mx-5">
+            <div className="mx-4 mb-3 rounded-none border-l-4 border-blue bg-surface-2 px-3 py-2.5 text-sm text-ink sm:mx-5">
               {fresh
                 ? 'Fresh board: everyone is at 0. The first member to finish a practice set takes the top spot.'
                 : 'Everyone is tied at 0 Elo so far. Rated practice with more right answers moves you up the board.'}
@@ -456,7 +456,7 @@ function Roster({
                   <li key={m.user_id}>
                     <Link
                       to={linkFor({ user_id: m.user_id, username: m.profile.username })}
-                      className="flex items-center gap-3 rounded-[2px] border border-line p-2.5 transition-colors hover:border-blue hover:bg-surface-2"
+                      className="flex items-center gap-3 rounded-none border border-line p-2.5 transition-colors hover:border-blue hover:bg-surface-2"
                     >
                       <Avatar src={m.profile.avatar_url} name={m.profile.display_name} size="sm" />
                       <span className="min-w-0 flex-1">
@@ -487,7 +487,7 @@ function ClassroomCard({ staff }: { staff: boolean }) {
   return (
     <Link
       to="/chapter/classroom"
-      className="group relative block overflow-hidden rounded-[2px] border border-l-4 border-line border-l-red bg-surface p-5 transition-colors hover:bg-surface-2"
+      className="group relative block overflow-hidden rounded-none border border-l-4 border-line border-l-red bg-surface p-5 transition-colors hover:bg-surface-2"
     >
       <div className="flex items-center gap-3">
         <div className="min-w-0 flex-1">
@@ -550,7 +550,7 @@ function TrainersCard({
         <ul className="divide-y divide-line">
           {covered.map((e) => (
             <li key={e.slug} className="flex items-center gap-3 py-2.5">
-              <span className="w-12 shrink-0 rounded-[2px] bg-surface-2 py-1 text-center font-display text-[0.6875rem] font-bold text-muted">
+              <span className="w-12 shrink-0 rounded-none bg-surface-2 py-1 text-center font-display text-[0.6875rem] font-bold text-muted">
                 {e.short}
               </span>
               <span className="min-w-0 flex-1 truncate text-sm font-medium" title={e.name}>
@@ -578,7 +578,7 @@ function MyAttendance({
   rows: { session: { id: string; title: string; held_on: string }; status: keyof typeof ATTENDANCE_LABELS | null }[] | undefined;
   loading: boolean;
 }) {
-  if (loading && !rows) return <Skeleton className="h-40 w-full" rounded="rounded-[2px]" />;
+  if (loading && !rows) return <Skeleton className="h-40 w-full" rounded="rounded-none" />;
   if (!rows || rows.length === 0) return null;
   const { rate, attended, counted } = attendanceRate(rows.map((r) => r.status));
   const recent = rows.slice(0, 5);
@@ -599,7 +599,7 @@ function MyAttendance({
       <ul className="space-y-2">
         {recent.map((r) => (
           <li key={r.session.id} className="flex items-center gap-3 text-sm">
-            <span className={cn('size-2.5 shrink-0 rounded-full', r.status ? tone[r.status] : 'bg-line-strong')} aria-hidden />
+            <span className={cn('size-2.5 shrink-0 rounded-none', r.status ? tone[r.status] : 'bg-line-strong')} aria-hidden />
             <span className="min-w-0 flex-1 truncate">{r.session.title}</span>
             <span className="shrink-0 text-xs text-muted">
               {new Date(`${r.session.held_on}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}

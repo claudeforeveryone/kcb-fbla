@@ -50,7 +50,7 @@ export function AppShell({ children }: { children?: ReactNode }) {
       <ScrollToTop pathname={pathname} />
       <a
         href="#main"
-        className="sr-only z-[200] rounded-[2px] bg-white px-3 py-2 font-semibold text-navy focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
+        className="sr-only z-[200] rounded-none bg-white px-3 py-2 font-semibold text-navy focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
       >
         Skip to content
       </a>
@@ -193,7 +193,7 @@ function SessionMenu() {
           {...props}
           aria-label="Account menu"
           className={cn(
-            'flex h-9 items-center gap-1 rounded-[2px] px-1.5 text-white/85 transition-colors hover:bg-white/10 hover:text-white',
+            'flex h-9 items-center gap-1 rounded-none px-1.5 text-white/85 transition-colors hover:bg-white/10 hover:text-white',
             open && 'bg-white/10 text-white',
           )}
         >
@@ -233,7 +233,7 @@ function UserMenu() {
       header={
         <Link
           to="/me"
-          className="mb-1 flex items-center gap-3 rounded-[2px] p-2.5 transition-colors hover:bg-surface-2"
+          className="mb-1 flex items-center gap-3 rounded-none p-2.5 transition-colors hover:bg-surface-2"
         >
           <Avatar src={profile.avatar_url} name={profile.display_name} size="md" />
           <div className="min-w-0 flex-1">
@@ -259,7 +259,7 @@ function UserMenu() {
           render: (
             <div className="px-2.5 py-1.5">
               <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wider text-muted">Theme</div>
-              <div className="grid grid-cols-3 gap-0 rounded-[2px] bg-surface-2 p-0.5 ring-1 ring-inset ring-line" role="radiogroup" aria-label="Theme">
+              <div className="grid grid-cols-3 gap-0 rounded-none bg-surface-2 p-0.5 ring-1 ring-inset ring-line" role="radiogroup" aria-label="Theme">
                 {themeOptions.map((o) => {
                   const Icon = o.icon;
                   const active = theme === o.value;
@@ -271,7 +271,7 @@ function UserMenu() {
                       aria-checked={active}
                       onClick={() => setTheme(o.value)}
                       className={cn(
-                        'flex h-8 items-center justify-center gap-1.5 rounded-[2px] text-xs font-semibold transition-colors',
+                        'flex h-8 items-center justify-center gap-1.5 rounded-none text-xs font-semibold transition-colors',
                         active ? 'bg-navy text-white dark:bg-blue' : 'text-muted hover:text-ink',
                       )}
                     >
@@ -302,7 +302,7 @@ function UserMenu() {
           {...props}
           aria-label="Account menu"
           className={cn(
-            'flex items-center gap-1 rounded-[2px] p-0.5 pr-1.5 transition-colors hover:bg-white/10',
+            'flex items-center gap-1 rounded-none p-0.5 pr-1.5 transition-colors hover:bg-white/10',
             open && 'bg-white/10',
           )}
         >

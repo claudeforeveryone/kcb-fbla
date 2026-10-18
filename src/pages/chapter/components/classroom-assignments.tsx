@@ -146,7 +146,7 @@ function MyList({ ctx, assignments, attempts, tests, decks, onStudyDeck }: Commo
 
 function Count({ n, danger }: { n: number; danger?: boolean }) {
   return (
-    <span className={cn('tabular ml-1 rounded-[2px] px-1.5 text-[11px]', danger && n ? 'bg-red text-white' : 'bg-surface-3 text-muted')}>{n}</span>
+    <span className={cn('tabular ml-1 rounded-none px-1.5 text-[11px]', danger && n ? 'bg-red text-white' : 'bg-surface-3 text-muted')}>{n}</span>
   );
 }
 
@@ -413,7 +413,7 @@ function AssignmentDetail({ ctx, assignments, attempts, tests, decks, focusId, o
         </>
       }
     >
-      {a.instructions && <p className="mb-4 whitespace-pre-line rounded-[2px] border-l-4 border-navy bg-surface-2 px-4 py-3 text-sm text-ink/90">{a.instructions}</p>}
+      {a.instructions && <p className="mb-4 whitespace-pre-line rounded-none border-l-4 border-navy bg-surface-2 px-4 py-3 text-sm text-ink/90">{a.instructions}</p>}
       {staffView ? (
         <>
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -492,7 +492,7 @@ function AssignmentDetail({ ctx, assignments, attempts, tests, decks, focusId, o
 function MemberSummary({ attempts, kind }: { attempts: AttemptLite[]; kind: ClassAssignment['kind'] }) {
   if (!attempts.length) return <p className="text-sm text-muted">You haven&apos;t started this one yet.</p>;
   return (
-    <ul className="divide-y divide-line rounded-[4px] border border-line">
+    <ul className="divide-y divide-line rounded-none border border-line">
       {attempts.map((t) => (
         <li key={t.id} className="flex items-center justify-between px-4 py-2.5 text-sm">
           <span className="text-muted">{formatDate(t.created_at, true)}</span>
@@ -507,7 +507,7 @@ function MemberSummary({ attempts, kind }: { attempts: AttemptLite[]; kind: Clas
 
 function Stat({ label, value, tone }: { label: string; value: string; tone?: string }) {
   return (
-    <div className="rounded-[2px] border border-line bg-surface-2 px-3 py-2.5">
+    <div className="rounded-none border border-line bg-surface-2 px-3 py-2.5">
 
       <div className="text-[11px] font-bold uppercase tracking-wider text-muted">{label}</div>
       <div className={cn('tabular mt-0.5 font-display text-xl font-extrabold text-heading sm:text-2xl', tone)}>{value}</div>

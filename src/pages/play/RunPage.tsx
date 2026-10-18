@@ -100,7 +100,7 @@ function Run() {
   if (state.s === 'blocked')
     return (
       <Shell>
-        <div className="animate-rise mx-auto max-w-lg rounded-[4px] border border-line bg-surface p-6 text-center md:p-8">
+        <div className="animate-rise mx-auto max-w-lg rounded-none border border-line bg-surface p-6 text-center md:p-8">
           <h1 className="text-2xl font-extrabold">{state.title}</h1>
           <p className="mt-2 text-muted">{state.detail}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -232,7 +232,7 @@ function Intro({
         >
           {run.back.label}
         </ButtonLink>
-        <div className="animate-rise overflow-hidden rounded-[4px] border border-line bg-surface">
+        <div className="animate-rise overflow-hidden rounded-none border border-line bg-surface">
           <div className="border-b border-line p-6 md:p-8">
             <div className="mb-2 text-sm font-semibold text-muted">{run.subtitle}</div>
             <h1 className="text-[1.75rem] font-extrabold tracking-tight md:text-4xl">{run.title}</h1>
@@ -248,7 +248,7 @@ function Intro({
           </div>
           <div className="bg-surface-2/50 p-6 md:p-8">
             {resume && answered > 0 && onResume && (
-              <div className="mb-4 flex items-center gap-3 rounded-[2px] border border-blue/30 border-l-[3px] border-l-blue bg-surface p-3 text-sm">
+              <div className="mb-4 flex items-center gap-3 rounded-none border border-blue/30 border-l-[3px] border-l-blue bg-surface p-3 text-sm">
                 <span className="flex-1">
                   You have a run in progress with <b>{answered}</b> answered. Pick up where you left off?
                 </span>
@@ -304,17 +304,17 @@ function IntroSkeleton() {
     <Shell>
       <div className="mx-auto max-w-2xl" role="status" aria-label="Building your question set">
         <Skeleton className="mb-4 h-8 w-28 opacity-40" />
-        <div className="rounded-[4px] border border-line bg-surface p-6 md:p-8">
+        <div className="rounded-none border border-line bg-surface p-6 md:p-8">
           <Skeleton className="h-3 w-40" />
           <Skeleton className="mt-3 h-9 w-3/4" />
           <Skeleton className="mt-4 h-4 w-full" />
           <Skeleton className="mt-2 h-4 w-2/3" />
           <div className="mt-6 grid grid-cols-3 gap-3">
-            <Skeleton className="h-16" rounded="rounded-[4px]" />
-            <Skeleton className="h-16" rounded="rounded-[4px]" />
-            <Skeleton className="h-16" rounded="rounded-[4px]" />
+            <Skeleton className="h-16" rounded="rounded-none" />
+            <Skeleton className="h-16" rounded="rounded-none" />
+            <Skeleton className="h-16" rounded="rounded-none" />
           </div>
-          <Skeleton className="mt-8 h-12 w-full" rounded="rounded-[4px]" />
+          <Skeleton className="mt-8 h-12 w-full" rounded="rounded-none" />
         </div>
       </div>
     </Shell>

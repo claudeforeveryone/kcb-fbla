@@ -62,11 +62,11 @@ export function WeekCard({
           return (
             <div key={d.date} className="flex h-full flex-1 flex-col items-center justify-end gap-1.5" title={`${d.date}: ${d.answered}`}>
               {loading && !stats ? (
-                <Skeleton className="w-full" rounded="rounded-md" />
+                <Skeleton className="w-full" rounded="rounded-none" />
               ) : (
                 <div
                   className={cn(
-                    'w-full rounded-[2px] transition-[height] duration-500 ease-out',
+                    'w-full rounded-none transition-[height] duration-500 ease-out',
                     d.answered ? (today ? 'bg-red' : 'bg-blue/35') : 'bg-surface-3',
                   )}
                   style={{ height: `${h}%` }}
@@ -130,7 +130,7 @@ export function MiniLeaderboard({
           {[0, 1, 2, 3, 4].map((i) => (
             <div key={i} className="flex items-center gap-3">
               <Skeleton className="h-4 w-5" />
-              <Skeleton className="size-8 rounded-full" />
+              <Skeleton className="size-8 rounded-none" />
               <Skeleton className="h-4 flex-1" />
             </div>
           ))}
@@ -172,13 +172,13 @@ function Row({ rank, name, username, avatar, elo, isMe }: { rank: number; name: 
       <Link
         to={`/u/${username}`}
         className={cn(
-          'flex items-center gap-3 rounded-xl px-2 py-2 transition-colors',
+          'flex items-center gap-3 rounded-none px-2 py-2 transition-colors',
           isMe ? 'bg-red/[0.07] ring-1 ring-inset ring-red/25 hover:bg-red/10' : 'hover:bg-surface-2',
         )}
       >
         <span
           className={cn(
-            'tabular grid size-6 shrink-0 place-items-center rounded-[2px] text-xs font-extrabold',
+            'tabular grid size-6 shrink-0 place-items-center rounded-none text-xs font-extrabold',
             rank <= 3 ? PODIUM[rank - 1] : 'text-muted',
           )}
         >
@@ -212,7 +212,7 @@ export function ChapterCard({
 }) {
   if (!hasChapter) {
     return (
-      <div className="rounded-[4px] border border-line bg-surface p-5">
+      <div className="rounded-none border border-line bg-surface p-5">
         <h3 className="text-base font-bold text-heading">Practise with your chapter</h3>
         <p className="mt-1 text-sm text-muted">
           Join your school's chapter for assignments, chapter tests and a spot on the chapter leaderboard.
@@ -242,10 +242,10 @@ export function ChapterCard({
 
   const { chapter, role, memberCount, rank, chapters, avgElo, faces } = summary;
   return (
-    <Link to="/chapter" className="block rounded-[4px] focus-visible:outline-offset-4">
+    <Link to="/chapter" className="block rounded-none focus-visible:outline-offset-4">
       <Card interactive>
         <div className="flex items-start gap-3">
-          <span className="grid size-11 shrink-0 place-items-center rounded-[8px] border border-line-strong bg-surface font-display text-sm font-extrabold text-heading">
+          <span className="grid size-11 shrink-0 place-items-center rounded-none border border-line-strong bg-surface font-display text-sm font-extrabold text-heading">
             {chapter.name
               .split(/\s+/)
               .filter(Boolean)
@@ -287,7 +287,7 @@ export function VocabCard({ data, mainEvent }: { data: { due: number; mastered: 
   if (!data) return null;
   const to = data.started === 0 && mainEvent ? `/vocab/${mainEvent}` : '/vocab';
   return (
-    <Link to={to} className="group block rounded-[4px]">
+    <Link to={to} className="group block rounded-none">
       <Card interactive className="flex items-center gap-4">
         <div className="min-w-0 flex-1">
           <div className={cn('text-sm font-bold', data.due > 0 ? 'text-red dark:text-danger' : 'text-heading')}>

@@ -296,7 +296,7 @@ function AddFriend({
           {rows.map((p) => {
             const st = statusOf(p.id);
             return (
-              <li key={p.id} className="flex items-center gap-2.5 rounded-[2px] px-1.5 py-1.5">
+              <li key={p.id} className="flex items-center gap-2.5 rounded-none px-1.5 py-1.5">
                 <Avatar src={p.avatar_url} name={p.display_name || p.username} size="sm" />
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-sm font-semibold text-heading">{displayName(p)}</div>

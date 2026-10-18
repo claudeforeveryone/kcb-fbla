@@ -69,7 +69,7 @@ export default function CareerPage() {
       <PageHeader
         eyebrow="Me"
         title="Career"
-        subtitle="Every exam you have taken, and every question still waiting for a second try."
+        subtitle="Every exam you have taken, and what to redo."
         back={{ to: '/me', label: 'Profile' }}
       >
         <HeaderFigures
@@ -251,11 +251,11 @@ function ExamRow({ a }: { a: Attempt }) {
     <li>
       <Link
         to={`/play/review/${a.id}`}
-        className="group flex items-center gap-3 rounded-[4px] border border-line bg-surface p-3 transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-lift sm:gap-4 sm:p-4"
+        className="group flex items-center gap-3 rounded-none border border-line bg-surface p-3 transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-lift sm:gap-4 sm:p-4"
       >
         <div
           className={cn(
-            'tabular grid size-12 shrink-0 place-items-center rounded-xl font-display text-sm font-extrabold sm:size-14 sm:text-base',
+            'tabular grid size-12 shrink-0 place-items-center rounded-none font-display text-sm font-extrabold sm:size-14 sm:text-base',
             tone === 'success' && 'bg-success/12 text-success',
             tone === 'warning' && 'bg-warning/15 text-[#8a5f00] dark:text-warning',
             tone === 'red' && 'bg-red/10 text-red dark:text-danger',
@@ -283,7 +283,7 @@ function ExamRow({ a }: { a: Attempt }) {
           {!NO_ELO_KINDS.includes(a.kind) && (
             <span
               className={cn(
-                'tabular hidden rounded-[2px] px-2.5 py-1 text-xs font-bold sm:inline-block',
+                'tabular hidden rounded-none px-2.5 py-1 text-xs font-bold sm:inline-block',
                 delta > 0 ? 'bg-success/10 text-success' : delta < 0 ? 'bg-red/10 text-red dark:text-danger' : 'bg-surface-2 text-muted',
               )}
             >
@@ -354,7 +354,7 @@ function WrongTab({ q }: { q: Async<WrongQuestion[]> }) {
 
   return (
     <div>
-      <div className="rounded-[4px] border border-line bg-surface p-4">
+      <div className="rounded-none border border-line bg-surface p-4">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.2fr]">
           <Select
             label="Event"
@@ -453,7 +453,7 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
   const qq = r.question;
   const panelId = `wq-${r.id}`;
   return (
-    <li className={cn('overflow-hidden rounded-[4px] border bg-surface transition-colors', open ? 'border-line-strong shadow-lift' : 'border-line')}>
+    <li className={cn('overflow-hidden rounded-none border bg-surface transition-colors', open ? 'border-line-strong shadow-lift' : 'border-line')}>
       <div className="flex items-start gap-3 p-4">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5 text-xs">
@@ -502,7 +502,7 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
                 <li
                   key={i}
                   className={cn(
-                    'flex items-start gap-2.5 rounded-lg border px-3 py-2 text-sm',
+                    'flex items-start gap-2.5 rounded-none border px-3 py-2 text-sm',
                     right
                       ? 'border-success/40 bg-success/8 text-ink'
                       : mine
@@ -512,7 +512,7 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
                 >
                   <span
                     className={cn(
-                      'grid size-5 shrink-0 place-items-center rounded-[2px] text-[11px] font-bold',
+                      'grid size-5 shrink-0 place-items-center rounded-none text-[11px] font-bold',
                       right ? 'bg-success text-white' : mine ? 'bg-red text-white' : 'bg-surface-3 text-muted',
                     )}
                   >
@@ -527,7 +527,7 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
           </ol>
           {r.chosen == null && <p className="mt-2 text-xs text-muted">You ran out of time on this one last time.</p>}
           {qq.explain && (
-            <div className="mt-3 flex gap-2.5 rounded-lg bg-blue/8 p-3 text-sm text-ink dark:bg-blue/15">
+            <div className="mt-3 flex gap-2.5 rounded-none bg-blue/8 p-3 text-sm text-ink dark:bg-blue/15">
               <Target className="mt-0.5 size-4 shrink-0 text-blue dark:text-link" />
               <p className="leading-relaxed">{qq.explain}</p>
             </div>
@@ -541,9 +541,9 @@ function WrongCard({ r, open, onToggle }: { r: WrongQuestion; open: boolean; onT
 function ListSkeleton() {
   return (
     <div className="space-y-2" role="status" aria-label="Loading">
-      <Skeleton className="h-20" rounded="rounded-[4px]" />
+      <Skeleton className="h-20" rounded="rounded-none" />
       {Array.from({ length: 6 }, (_, i) => (
-        <Skeleton key={i} className="h-[74px]" rounded="rounded-[4px]" />
+        <Skeleton key={i} className="h-[74px]" rounded="rounded-none" />
       ))}
     </div>
   );

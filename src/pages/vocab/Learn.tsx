@@ -75,7 +75,7 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
     }
     return (
       <div className="mx-auto grid max-w-2xl gap-4">
-        <div className="relative overflow-hidden rounded-[12px] border border-line bg-surface p-6 sm:p-8">
+        <div className="relative overflow-hidden rounded-none border border-line bg-surface p-6 sm:p-8">
           <div className="absolute inset-y-0 left-0 w-[3px] bg-[var(--ev,var(--red))]" aria-hidden />
           <div className="flex items-start gap-4">
             <div className="min-w-0 flex-1">
@@ -94,7 +94,7 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
             <MiniStat label="New" value={newN} tone="blue" />
             <MiniStat label="Mastered" value={stats.mastered} tone="success" />
           </div>
-          <Button size="lg" block variant="accent" className="mt-6 rounded-[8px]" rightIcon={<ArrowRight className="size-5" />} onClick={() => setMode('srs')}>
+          <Button size="lg" block variant="accent" className="mt-6 rounded-none" rightIcon={<ArrowRight className="size-5" />} onClick={() => setMode('srs')}>
             Start learning
           </Button>
         </div>
@@ -124,7 +124,7 @@ export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyM
 function HowItWorks() {
   const steps = BOX_DAYS.slice(1).map((d, i) => ({ box: i + 1, d }));
   return (
-    <div className="rounded-[12px] border border-line bg-surface-2/60 p-4 text-sm text-muted">
+    <div className="rounded-none border border-line bg-surface-2/60 p-4 text-sm text-muted">
       <div className="mb-3 flex items-center gap-2 font-display font-semibold text-heading">
         How the schedule works
       </div>
@@ -133,7 +133,7 @@ function HowItWorks() {
           <span key={s.box} className="flex items-center gap-1.5">
             <span
               className={cn(
-                'tabular rounded-[2px] px-2 py-1 text-xs font-semibold',
+                'tabular rounded-none px-2 py-1 text-xs font-semibold',
                 s.box >= MASTERED_BOX ? 'bg-success/12 text-success' : 'bg-surface text-ink ring-1 ring-line',
               )}
             >
@@ -287,7 +287,7 @@ function Session({
         </Button>
       </div>
 
-      <div key={pos} className="animate-slide-in rounded-[12px] border border-line bg-surface p-5 sm:p-7">
+      <div key={pos} className="animate-slide-in rounded-none border border-line bg-surface p-5 sm:p-7">
         <div className="mb-4 flex items-center justify-between gap-2">
           <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
             {card.mc ? 'Pick the definition' : 'Do you remember?'}
@@ -314,7 +314,7 @@ function Session({
                   disabled={picked !== null}
                   onClick={() => choose(idx)}
                   className={cn(
-                    'group flex w-full items-start gap-3 rounded-[8px] border px-3.5 py-3 text-left text-[0.9375rem] leading-snug transition-[border-color,background-color,opacity] duration-150',
+                    'group flex w-full items-start gap-3 rounded-none border px-3.5 py-3 text-left text-[0.9375rem] leading-snug transition-[border-color,background-color,opacity] duration-150',
                     state === 'idle' && 'border-line-strong bg-surface hover:border-blue/60 hover:bg-surface-2',
                     state === 'right' && 'border-success bg-success/10 text-ink',
                     state === 'wrong' && 'animate-[vocab-shake_320ms_ease-in-out] border-red bg-red/8 text-ink',
@@ -323,7 +323,7 @@ function Session({
                 >
                   <span
                     className={cn(
-                      'tabular mt-px grid size-6 shrink-0 place-items-center rounded-[2px] text-xs font-bold',
+                      'tabular mt-px grid size-6 shrink-0 place-items-center rounded-none text-xs font-bold',
                       state === 'right' ? 'bg-success text-white' : state === 'wrong' ? 'bg-red text-white' : 'bg-surface-2 text-muted',
                     )}
                   >
@@ -335,11 +335,11 @@ function Session({
             })}
           </div>
         ) : revealed ? (
-          <div className="animate-fade-in mt-6 rounded-[8px] bg-surface-2 p-4 text-center text-[1.0625rem] leading-relaxed text-ink">
+          <div className="animate-fade-in mt-6 rounded-none bg-surface-2 p-4 text-center text-[1.0625rem] leading-relaxed text-ink">
             {item.term.def}
           </div>
         ) : (
-          <div className="mt-6 grid place-items-center rounded-[12px] border border-dashed border-line-strong px-4 py-8 text-sm text-muted">
+          <div className="mt-6 grid place-items-center rounded-none border border-dashed border-line-strong px-4 py-8 text-sm text-muted">
             Say the definition in your head, then check.
           </div>
         )}

@@ -63,7 +63,7 @@ export function Mark({
   return (
     <span
       className={'grid shrink-0 place-items-center ' + (className ?? '')}
-      style={{ width: size, height: size, background: color, color: '#fff', borderRadius: Math.round(size * 0.2) }}
+      style={{ width: size, height: size, background: color, color: '#fff' }}
       aria-hidden
     >
       <Icon style={{ width: '50%', height: '50%' }} strokeWidth={2} />

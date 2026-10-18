@@ -155,12 +155,12 @@ export function StatusChip({ status, className }: { status: TermStatus; classNam
   return (
     <span
       className={cn(
-        'inline-flex h-5 shrink-0 items-center gap-1 rounded-[2px] px-2 text-[11px] font-semibold ring-1 ring-inset',
+        'inline-flex h-5 shrink-0 items-center gap-1 rounded-none px-2 text-[11px] font-semibold ring-1 ring-inset',
         STATUS_STYLE[status],
         className,
       )}
     >
-      <span className="size-1.5 rounded-full bg-current" aria-hidden />
+      <span className="size-1.5 rounded-none bg-current" aria-hidden />
       {STATUS_LABEL[status]}
     </span>
   );
@@ -183,7 +183,7 @@ export function Highlight({ text, query }: { text: string; query: string }) {
     }
     if (at > i) parts.push(text.slice(i, at));
     parts.push(
-      <mark key={k++} className="rounded-[3px] bg-warning/25 px-0.5 text-inherit dark:bg-warning/30">
+      <mark key={k++} className="rounded-none bg-warning/25 px-0.5 text-inherit dark:bg-warning/30">
         {text.slice(at, at + q.length)}
       </mark>,
     );
@@ -234,7 +234,7 @@ export function SessionPanel({
     red: 'bg-red',
   }[tone];
   return (
-    <div className="animate-pop relative mx-auto flex max-w-xl flex-col items-center overflow-hidden rounded-[12px] border border-line bg-surface px-5 py-9 text-center sm:px-10">
+    <div className="animate-pop relative mx-auto flex max-w-xl flex-col items-center overflow-hidden rounded-none border border-line bg-surface px-5 py-9 text-center sm:px-10">
       <span className={cn('absolute inset-x-0 top-0 h-[3px]', bar)} aria-hidden />
       {eyebrow && <div className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">{eyebrow}</div>}
       <h2 className="text-2xl font-extrabold md:text-3xl">{title}</h2>
@@ -246,7 +246,7 @@ export function SessionPanel({
 
 export function MiniStat({ label, value, tone }: { label: ReactNode; value: ReactNode; tone?: 'success' | 'red' | 'blue' }) {
   return (
-    <div className="rounded-[8px] bg-surface-2 px-3 py-2.5 text-center">
+    <div className="rounded-none bg-surface-2 px-3 py-2.5 text-center">
       <div
         className={cn(
           'tabular font-display text-2xl font-extrabold leading-none',

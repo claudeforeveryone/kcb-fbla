@@ -304,7 +304,7 @@ export default function ClassroomPage() {
       <PageHeader
         eyebrow={ctx.chapter.name}
         title="Classroom"
-        subtitle={staff ? 'Keep your chapter informed, assign practice, and see who has done it.' : 'Everything your chapter leaders share, in one place.'}
+        subtitle={staff ? 'Post, assign practice and track who did it.' : 'Posts and assignments from your chapter.'}
         actions={
           staff ? (
             <>
@@ -355,7 +355,7 @@ export default function ClassroomPage() {
                   <button
                     type="button"
                     onClick={() => setComposer({ kind: 'announcement', editing: null })}
-                    className="mb-5 flex w-full items-center gap-3 rounded-[2px] border border-line bg-surface px-4 py-3 text-left transition-colors hover:border-blue"
+                    className="mb-5 flex w-full items-center gap-3 rounded-none border border-line bg-surface px-4 py-3 text-left transition-colors hover:border-blue"
                   >
                     <Avatar src={ctx.members.find((m) => m.user_id === ctx.me.id)?.profile.avatar_url} name={ctx.members.find((m) => m.user_id === ctx.me.id)?.profile.display_name} size="sm" />
                     <span className="flex-1 text-[0.9375rem] text-muted">Share something with your chapter…</span>
@@ -536,11 +536,11 @@ export default function ClassroomPage() {
 
 function HeaderChip({ label, alert, onClick }: { label: string; alert?: string; onClick?: () => void }) {
   const cls =
-    'inline-flex h-9 max-w-full items-center gap-2 rounded-[2px] border border-navy/40 bg-surface px-3.5 text-sm font-semibold text-heading transition-colors dark:border-line-strong';
+    'inline-flex h-9 max-w-full items-center gap-2 rounded-none border border-navy/40 bg-surface px-3.5 text-sm font-semibold text-heading transition-colors dark:border-line-strong';
   const inner = (
     <>
       <span className="truncate">{label}</span>
-      {alert && <span className="rounded-[2px] bg-red px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">{alert}</span>}
+      {alert && <span className="rounded-none bg-red px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">{alert}</span>}
     </>
   );
   return onClick ? (
@@ -696,7 +696,7 @@ function LatestNewsletter({ post, issue, onOpen }: { post: ClassPost; issue: num
   return (
     <section>
       <SectionLabel>Latest newsletter</SectionLabel>
-      <button type="button" onClick={onOpen} className="group relative block w-full overflow-hidden rounded-[2px] border border-l-4 border-line border-l-red bg-surface p-5 text-left transition-colors hover:bg-surface-2">
+      <button type="button" onClick={onOpen} className="group relative block w-full overflow-hidden rounded-none border border-l-4 border-line border-l-red bg-surface p-5 text-left transition-colors hover:bg-surface-2">
         <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-red">
           Issue {issue} · {formatDate(post.created_at)}
         </div>
@@ -750,7 +750,7 @@ function NewsletterShelf({ items, canWrite, onOpen, onWrite }: { items: ClassPos
           </Button>
         </div>
       )}
-      <button type="button" onClick={() => onOpen(latest)} className="group relative block w-full overflow-hidden rounded-[2px] border border-t-4 border-line border-t-red bg-surface p-6 text-left transition-colors hover:bg-surface-2 sm:p-9">
+      <button type="button" onClick={() => onOpen(latest)} className="group relative block w-full overflow-hidden rounded-none border border-t-4 border-line border-t-red bg-surface p-6 text-left transition-colors hover:bg-surface-2 sm:p-9">
         <div className="relative max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-red">
             <span className="h-[3px] w-5 bg-red" aria-hidden />
@@ -764,7 +764,7 @@ function NewsletterShelf({ items, canWrite, onOpen, onWrite }: { items: ClassPos
             <span>{formatDate(latest.created_at)}</span>
             <span>{readingMinutes(latest.body)} min read</span>
           </div>
-          <span className="mt-6 inline-flex h-10 items-center gap-1.5 rounded-[2px] border border-navy bg-surface
+          <span className="mt-6 inline-flex h-10 items-center gap-1.5 rounded-none border border-navy bg-surface
  px-4 font-display text-sm font-semibold text-navy transition-transform dark:border-link dark:text-link group-hover:translate-x-0.5">
             Read the issue <ChevronRight className="size-4" />
           </span>

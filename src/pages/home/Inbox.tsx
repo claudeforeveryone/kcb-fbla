@@ -49,8 +49,8 @@ export function Inbox({
       ) : loading && !duels ? (
         <div className="space-y-2">
           {[0, 1, 2].map((i) => (
-            <div key={i} className="flex items-center gap-3 rounded-xl p-2">
-              <Skeleton className="size-10 rounded-full" />
+            <div key={i} className="flex items-center gap-3 rounded-none p-2">
+              <Skeleton className="size-10 rounded-none" />
               <div className="flex-1 space-y-1.5">
                 <Skeleton className="h-4 w-1/2" />
                 <Skeleton className="h-3 w-1/3" />
@@ -116,7 +116,7 @@ function DuelRow({ item }: { item: DuelItem }) {
     <li>
       <Link
         to={`/arena/${duel.id}`}
-        className="group flex items-center gap-3 rounded-xl px-2 py-3 transition-colors hover:bg-surface-2"
+        className="group flex items-center gap-3 rounded-none px-2 py-3 transition-colors hover:bg-surface-2"
       >
         <Avatar src={opponent?.avatar_url} name={name} size="md" />
         <div className="min-w-0 flex-1">
@@ -132,7 +132,7 @@ function DuelRow({ item }: { item: DuelItem }) {
         ) : (
           <span
             className={cn(
-              'inline-flex h-8 shrink-0 items-center rounded-[2px] px-3 text-sm font-bold transition-colors',
+              'inline-flex h-8 shrink-0 items-center rounded-none px-3 text-sm font-bold transition-colors',
               state === 'incoming' ? 'bg-red text-white group-hover:bg-red-2' : 'border border-heading bg-surface text-heading group-hover:bg-surface-2',
             )}
           >
@@ -152,7 +152,7 @@ function AssignmentRow({ item }: { item: AssignmentItem }) {
     <li>
       <Link
         to={`/chapter/classroom?assignment=${item.id}`}
-        className={cn('group flex items-center gap-3 rounded-xl px-2 py-3 transition-colors hover:bg-surface-2', item.done && 'opacity-70')}
+        className={cn('group flex items-center gap-3 rounded-none px-2 py-3 transition-colors hover:bg-surface-2', item.done && 'opacity-70')}
       >
         <span aria-hidden className={cn('h-10 w-[3px] shrink-0', item.done ? 'bg-success' : 'bg-blue')} />
         <div className="min-w-0 flex-1">

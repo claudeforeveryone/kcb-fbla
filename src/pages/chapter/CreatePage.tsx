@@ -57,14 +57,14 @@ export default function CreatePage() {
       <PageHeader
         eyebrow="Chapter"
         title="Register your chapter"
-        subtitle="Set up a home for your chapter: one leaderboard, one classroom, every member's progress in one place."
+        subtitle="One leaderboard and one classroom for your school."
         back={{ to: '/chapter', label: 'Chapter' }}
       />
       <Page>
         {mine.loading ? (
           <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-            <Skeleton className="h-[420px] w-full" rounded="rounded-[4px]" />
-            <Skeleton className="h-[260px] w-full" rounded="rounded-[4px]" />
+            <Skeleton className="h-[420px] w-full" rounded="rounded-none" />
+            <Skeleton className="h-[260px] w-full" rounded="rounded-none" />
           </div>
         ) : mine.data ? (
           <EmptyState
@@ -124,7 +124,7 @@ export default function CreatePage() {
 
             <aside className="space-y-4">
               <div className="text-xs font-bold uppercase tracking-wider text-muted">Preview</div>
-              <div className="relative overflow-hidden rounded-[2px] border border-t-4 border-line border-t-red bg-surface p-5">
+              <div className="relative overflow-hidden rounded-none border border-t-4 border-line border-t-red bg-surface p-5">
                 <div className="relative">
                   <div className="text-xs font-bold uppercase tracking-[0.14em] text-red">{region}</div>
                   <div className="mt-2 break-words font-display text-2xl font-extrabold leading-tight text-heading">

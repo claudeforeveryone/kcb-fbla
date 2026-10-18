@@ -5,7 +5,7 @@ import { cn } from './cn';
 /** Scroll wrapper + table. Compose with THead/TBody/TR/TH/TD. */
 export function Table({ className, wrapClassName, ...rest }: HTMLAttributes<HTMLTableElement> & { wrapClassName?: string }) {
   return (
-    <div className={cn('w-full overflow-x-auto rounded-[4px] border border-line bg-surface', wrapClassName)}>
+    <div className={cn('w-full overflow-x-auto rounded-none border border-line bg-surface', wrapClassName)}>
       <table className={cn('w-full border-collapse text-sm', className)} {...rest} />
     </div>
   );

@@ -34,7 +34,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-3 rounded-[12px] border border-line bg-surface p-3 sm:flex-row sm:items-end sm:p-4">
+      <div className="flex flex-col gap-3 rounded-none border border-line bg-surface p-3 sm:flex-row sm:items-end sm:p-4">
         <Input
           className="sm:flex-1"
           label="Search chapters"
@@ -49,7 +49,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
               <button
                 type="button"
                 onClick={() => setQuery('')}
-                className="grid size-8 place-items-center rounded-md text-muted hover:bg-surface-2 hover:text-ink"
+                className="grid size-8 place-items-center rounded-none text-muted hover:bg-surface-2 hover:text-ink"
                 aria-label="Clear search"
               >
                 <X className="size-4" />
@@ -86,7 +86,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
       {board.error ? (
         <ErrorState title="Could not load chapters" error={board.error} onRetry={board.reload} />
       ) : board.loading ? (
-        <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
+        <div className="overflow-hidden rounded-none border border-line bg-surface">
           <RowsSkeleton rows={8} />
         </div>
       ) : board.rows.length === 0 ? (
@@ -111,7 +111,7 @@ export function ChaptersBoard({ myChapterId }: { myChapterId: string | null }) {
               }
             />
           ) : list.length > 0 ? (
-            <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
+            <div className="overflow-hidden rounded-none border border-line bg-surface">
               <div
                 className={cn(
                   GRID,

@@ -54,7 +54,7 @@ export function ErrorState({
   return (
     <div
       role="alert"
-      className={cn('flex flex-col items-center rounded-[4px] border border-red/20 bg-red/[0.04] px-6 py-10 text-center', className)}
+      className={cn('flex flex-col items-center rounded-none border border-red/20 bg-red/[0.04] px-6 py-10 text-center', className)}
     >
       <AlertTriangle className="mb-3 size-5 text-red dark:text-danger" aria-hidden />
       <h3 className="text-base font-bold">{title}</h3>

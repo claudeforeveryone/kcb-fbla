@@ -10,7 +10,7 @@ import { AlertCircle, ChevronDown } from 'lucide-react';
 import { cn } from './cn';
 
 const control =
-  'w-full rounded-[2px] border bg-surface text-ink placeholder:text-muted/70 ' +
+  'w-full rounded-none border bg-surface text-ink placeholder:text-muted/70 ' +
   'transition-[border-color,box-shadow] duration-150 ease-out outline-none ' +
   'focus:border-blue focus:ring-2 focus:ring-blue/20 disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted';
 
@@ -200,13 +200,13 @@ export function Switch({
       disabled={disabled}
       onClick={() => onChange(!checked)}
       className={cn(
-        'relative inline-flex h-6 w-11 shrink-0 items-center rounded-[2px] transition-colors duration-200 ease-out disabled:opacity-50',
+        'relative inline-flex h-6 w-11 shrink-0 items-center rounded-none transition-colors duration-200 ease-out disabled:opacity-50',
         checked ? 'bg-blue' : 'bg-line-strong',
       )}
     >
       <span
         className={cn(
-          'inline-block size-5 rounded-[1px] bg-white transition-transform duration-200 ease-out',
+          'inline-block size-5 rounded-none bg-white transition-transform duration-200 ease-out',
           checked ? 'translate-x-[22px]' : 'translate-x-0.5',
         )}
       />
@@ -250,7 +250,7 @@ export function Checkbox({
         checked={checked}
         disabled={disabled}
         onChange={(e) => onChange(e.target.checked)}
-        className="size-4 rounded-[2px] border-line-strong accent-[var(--blue)]"
+        className="size-4 rounded-none border-line-strong accent-[var(--blue)]"
       />
       {label}
     </label>

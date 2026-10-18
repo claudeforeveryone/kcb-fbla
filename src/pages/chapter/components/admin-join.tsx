@@ -9,7 +9,7 @@ import { joinChapter, previewChapter } from '../../../api/chapter';
 
 export function ChapterPreviewCard({ preview, footer, className }: { preview: ChapterPreview; footer?: ReactNode; className?: string }) {
   return (
-    <div className={cn('overflow-hidden rounded-[2px] border border-t-4 border-line border-t-red bg-surface', className)}>
+    <div className={cn('overflow-hidden rounded-none border border-t-4 border-line border-t-red bg-surface', className)}>
       <div className="border-b border-line px-5 pb-5 pt-5">
         <div>
           {preview.region && (
@@ -46,7 +46,7 @@ export function ChapterPreviewCard({ preview, footer, className }: { preview: Ch
 
 export function BannedNotice() {
   return (
-    <div className="rounded-[2px] border border-line border-l-4 border-l-danger bg-surface-2 p-3 text-sm text-ink" role="alert">
+    <div className="rounded-none border border-line border-l-4 border-l-danger bg-surface-2 p-3 text-sm text-ink" role="alert">
       <span>
         You've been banned from this chapter, so you can't join it. If you think this is a mistake, talk to the chapter's
         president or an executive.
@@ -114,7 +114,7 @@ export function JoinByCode({ autoFocus }: { autoFocus?: boolean }) {
           maxLength={6}
           placeholder="ABC123"
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
-          className="tabular h-14 w-full rounded-[4px] border border-line-strong bg-surface px-4 text-center font-display text-2xl font-extrabold uppercase tracking-[0.5em] text-heading outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/20 placeholder:text-muted/40"
+          className="tabular h-14 w-full rounded-none border border-line-strong bg-surface px-4 text-center font-display text-2xl font-extrabold uppercase tracking-[0.5em] text-heading outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/20 placeholder:text-muted/40"
           aria-describedby="join-code-hint"
         />
         {looking && <Spinner className="absolute right-4 top-1/2 size-5 -translate-y-1/2 text-muted" />}

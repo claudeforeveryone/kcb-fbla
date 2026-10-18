@@ -88,7 +88,7 @@ export function TermList({
           }
         />
       ) : (
-        <ul className="divide-y divide-line overflow-hidden rounded-[12px] border border-line bg-surface">
+        <ul className="divide-y divide-line overflow-hidden rounded-none border border-line bg-surface">
           {rows.map((t) => {
             const p = progress.get(t.id);
             const st = statusOf(p);

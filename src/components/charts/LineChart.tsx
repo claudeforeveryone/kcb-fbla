@@ -86,7 +86,7 @@ export function LineChart({
   if (!all.length) {
     return (
       <div ref={ref} className={className} style={{ height }} role="img" aria-label={`${title}: no data`}>
-        <div className="grid h-full place-items-center rounded-[4px] border border-dashed border-line text-sm text-muted">
+        <div className="grid h-full place-items-center rounded-none border border-dashed border-line text-sm text-muted">
           {emptyLabel}
         </div>
       </div>
@@ -225,7 +225,7 @@ export function LineChart({
       {hp && (
         <div className="pointer-events-none relative h-0">
           <div
-            className="absolute bottom-[calc(100%+var(--h))] z-10 -translate-x-1/2 whitespace-nowrap rounded-[2px] border border-line-strong bg-surface px-2.5 py-1.5 text-xs text-ink shadow-pop"
+            className="absolute bottom-[calc(100%+var(--h))] z-10 -translate-x-1/2 whitespace-nowrap rounded-none border border-line-strong bg-surface px-2.5 py-1.5 text-xs text-ink shadow-pop"
             style={{ left: Math.min(W - 60, Math.max(60, sx(hp.x))), ['--h' as string]: `${H - sy(hp.y) + 12}px` }}
           >
             <div className="text-muted">{fx(hp.x)}</div>

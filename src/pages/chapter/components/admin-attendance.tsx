@@ -197,8 +197,8 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
 
       {sessions.loading && !sessions.data ? (
         <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-          <Skeleton className="h-72 w-full" rounded="rounded-[4px]" />
-          <Skeleton className="h-72 w-full" rounded="rounded-[4px]" />
+          <Skeleton className="h-72 w-full" rounded="rounded-none" />
+          <Skeleton className="h-72 w-full" rounded="rounded-none" />
         </div>
       ) : !sessions.data?.length ? (
         <EmptyState
@@ -227,7 +227,7 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                           active ? 'border-red bg-surface-2' : 'border-transparent hover:bg-surface-2',
                         )}
                       >
-                        <span className="grid size-10 shrink-0 place-items-center rounded-[2px] border border-line bg-surface text-center leading-none">
+                        <span className="grid size-10 shrink-0 place-items-center rounded-none border border-line bg-surface text-center leading-none">
                           <span>
                             <span className="block text-[0.625rem] font-bold uppercase text-muted">
                               {new Date(`${s.held_on}T12:00:00`).toLocaleDateString(undefined, { month: 'short' })}
@@ -269,7 +269,7 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line bg-surface-2 px-4 py-3 text-sm sm:px-5">
                   {ATTENDANCE_STATUSES.map((s) => (
                     <span key={s} className="inline-flex items-center gap-1.5">
-                      <span className={cn('size-2.5 rounded-full', STATUS_STYLE[s].dot)} aria-hidden />
+                      <span className={cn('size-2.5 rounded-none', STATUS_STYLE[s].dot)} aria-hidden />
                       <span className="tabular font-semibold">{counts[s]}</span>
                       <span className="text-muted">{ATTENDANCE_LABELS[s]}</span>
                     </span>
@@ -312,7 +312,7 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                                   title={on ? `${ATTENDANCE_LABELS[s]} (click to clear)` : ATTENDANCE_LABELS[s]}
                                   onClick={() => void set(session.id, m.user_id, on ? null : s)}
                                   className={cn(
-                                    'inline-flex h-8 items-center justify-center rounded-[2px] px-2.5 text-xs font-semibold ring-1 ring-inset transition-colors',
+                                    'inline-flex h-8 items-center justify-center rounded-none px-2.5 text-xs font-semibold ring-1 ring-inset transition-colors',
                                     on ? STATUS_STYLE[s].on : 'bg-surface text-muted ring-line hover:bg-surface-2 hover:text-ink',
                                   )}
                                 >
@@ -381,7 +381,7 @@ export function AttendancePanel({ chapterId, members }: { chapterId: string; mem
                           <span
                             key={i}
                             title={s ? ATTENDANCE_LABELS[s] : 'Not marked'}
-                            className={cn('size-2.5 rounded-full', s ? STATUS_STYLE[s].dot : 'bg-line-strong')}
+                            className={cn('size-2.5 rounded-none', s ? STATUS_STYLE[s].dot : 'bg-line-strong')}
                           />
                         ))}
                       </span>

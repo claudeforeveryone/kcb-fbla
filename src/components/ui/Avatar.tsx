@@ -46,7 +46,7 @@ export function Avatar({
   return (
     <span
       className={cn(
-        'avatar relative inline-grid shrink-0 select-none place-items-center overflow-hidden rounded-full font-display font-bold text-white',
+        'avatar relative inline-grid shrink-0 select-none place-items-center overflow-hidden rounded-none font-display font-bold text-white',
         sizes[size],
         ring && 'ring-2 ring-white dark:ring-surface',
         className,

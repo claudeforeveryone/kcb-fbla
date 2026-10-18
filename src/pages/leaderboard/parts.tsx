@@ -15,7 +15,7 @@ export function RankMark({ rank, me, className }: { rank: number; me?: boolean; 
   return (
     <span
       className={cn(
-        'tabular grid h-8 min-w-8 shrink-0 place-items-center rounded-[6px] px-1.5 font-display text-sm',
+        'tabular grid h-8 min-w-8 shrink-0 place-items-center rounded-none px-1.5 font-display text-sm',
         top ? cn(top, 'font-extrabold') : me ? 'bg-red font-extrabold text-white' : 'font-bold text-heading',
         className,
       )}
@@ -33,7 +33,7 @@ export function AccuracyMeter({ value, answered, className }: { value: number; a
   const tone = p >= 80 ? 'bg-success' : p >= 60 ? 'bg-blue' : p >= 40 ? 'bg-warning' : 'bg-red';
   return (
     <span className={cn('inline-flex items-center gap-2', className)} title={`${p}% correct`}>
-      <span className="h-1.5 w-12 overflow-hidden rounded-full bg-surface-3" aria-hidden>
+      <span className="h-1.5 w-12 overflow-hidden rounded-none bg-surface-3" aria-hidden>
         <span className={cn('block h-full', tone)} style={{ width: `${Math.max(4, p)}%` }} />
       </span>
       <span className="tabular w-9 text-right text-sm font-semibold text-ink">{p}%</span>
@@ -55,8 +55,8 @@ export function RowsSkeleton({ rows = 8 }: { rows?: number }) {
     <div className="divide-y divide-line" role="status" aria-label="Loading">
       {Array.from({ length: rows }, (_, i) => (
         <div key={i} className="flex min-h-[68px] items-center gap-3 px-4 py-3.5">
-          <Skeleton className="size-8" rounded="rounded-[6px]" />
-          <Skeleton className="size-10" rounded="rounded-full" />
+          <Skeleton className="size-8" rounded="rounded-none" />
+          <Skeleton className="size-10" rounded="rounded-none" />
           <div className="flex-1 space-y-2">
             <Skeleton className="h-3.5 w-40 max-w-full" />
             <Skeleton className="h-3 w-24" />
@@ -81,7 +81,7 @@ export function ChapterCrest({ name, size = 'md', className }: { name: string; s
       .map((w) => w[0])
       .join('')
       .toUpperCase() || name.slice(0, 2).toUpperCase();
-  const s = { sm: 'size-8 text-[11px] rounded-[6px]', md: 'size-10 text-sm rounded-[8px]', lg: 'size-14 text-lg rounded-[10px]', xl: 'size-20 text-2xl rounded-[12px]' }[size];
+  const s = { sm: 'size-8 text-[11px] rounded-none', md: 'size-10 text-sm rounded-none', lg: 'size-14 text-lg rounded-none', xl: 'size-20 text-2xl rounded-none' }[size];
   return (
     <span
       className={cn('relative grid shrink-0 place-items-center overflow-hidden border border-line-strong bg-surface font-display font-extrabold text-heading', s, className)}
@@ -96,7 +96,7 @@ export function ChapterCrest({ name, size = 'md', className }: { name: string; s
 /** Small solid red "You" / "Yours" tag. */
 export function YouTag({ children = 'You' }: { children?: ReactNode }) {
   return (
-    <span className="inline-flex h-5 shrink-0 items-center rounded-[4px] bg-red px-2 text-[10px] font-bold uppercase tracking-wider text-white">
+    <span className="inline-flex h-5 shrink-0 items-center rounded-none bg-red px-2 text-[10px] font-bold uppercase tracking-wider text-white">
       {children}
     </span>
   );

@@ -12,7 +12,7 @@ export function Card({ interactive, padded = true, as: Tag = 'div', className, .
   return (
     <Tag
       className={cn(
-        'rounded-[4px] border border-line bg-surface',
+        'rounded-none border border-line bg-surface',
         padded && 'p-5',
         interactive &&
           'transition-[transform,border-color] duration-200 ease-out hover:-translate-y-px hover:border-line-strong',

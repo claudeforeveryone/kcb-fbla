@@ -85,13 +85,13 @@ export function ChapterDrawer({ chapter, onClose }: { chapter: ChapterLeaderboar
             {error ? (
               <ErrorState title="Could not load members" error={error} onRetry={() => setNonce((n) => n + 1)} />
             ) : !members ? (
-              <div className="overflow-hidden rounded-[4px] border border-line">
+              <div className="overflow-hidden rounded-none border border-line">
                 <RowsSkeleton rows={5} />
               </div>
             ) : members.length === 0 ? (
               <EmptyState compact title="No members yet" description="This chapter has not signed anyone up." />
             ) : (
-              <ol className="divide-y divide-line overflow-hidden rounded-[4px] border border-line">
+              <ol className="divide-y divide-line overflow-hidden rounded-none border border-line">
                 {members.map((m, i) => (
                   <li key={m.user_id}>
                     <Link
@@ -135,7 +135,7 @@ export function ChapterDrawer({ chapter, onClose }: { chapter: ChapterLeaderboar
 
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <div className={cn('rounded-[4px] border border-line bg-surface px-3 py-2.5', accent && 'border-t-[3px] border-t-red')}>
+    <div className={cn('rounded-none border border-line bg-surface px-3 py-2.5', accent && 'border-t-[3px] border-t-red')}>
       <dt className="text-[11px] font-bold uppercase tracking-wider text-muted">{label}</dt>
       <dd className={cn('tabular mt-0.5 font-display text-xl font-extrabold', accent ? 'text-red' : 'text-heading')}>{value}</dd>
     </div>
@@ -161,7 +161,7 @@ function EloSpread({
     { label: 'Lowest Elo', value: fmt.format(Math.round(elos[0])) },
   ];
   return (
-    <div className="rounded-[4px] border border-line p-3 sm:p-4">
+    <div className="rounded-none border border-line p-3 sm:p-4">
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
         <h3 className="text-sm font-bold uppercase tracking-wider text-muted">Elo spread</h3>
         <p className="text-xs text-muted">

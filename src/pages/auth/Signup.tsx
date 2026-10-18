@@ -64,7 +64,7 @@ export default function Signup() {
   return (
     <AuthLayout
       title="Create your account"
-      subtitle="Free for FBL Canada members. Takes about a minute."
+      subtitle="Free for FBL Canada members."
       footer={
         <>
           Already have an account?{' '}
@@ -76,7 +76,7 @@ export default function Signup() {
     >
       <form onSubmit={submit} noValidate className="space-y-4">
         {error && (
-          <div role="alert" className="animate-rise rounded-[4px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
+          <div role="alert" className="animate-rise rounded-none border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
             {error}{' '}
             {errorKind === 'exists' && (
               <Link to="/login" className="link">
@@ -181,7 +181,7 @@ function CheckInbox({ email, next, onBack }: { email: string; next: string; onBa
 
   return (
     <AuthLayout title="Check your inbox" subtitle="One quick step to confirm it is really you.">
-      <div className="rounded-[4px] border border-line bg-surface p-6 text-center">
+      <div className="rounded-none border border-line bg-surface p-6 text-center">
         <MailCheck className="mx-auto mb-4 size-6 text-muted" aria-hidden />
         <p className="text-[0.9375rem] text-ink">
           We sent a confirmation link to
@@ -191,7 +191,7 @@ function CheckInbox({ email, next, onBack }: { email: string; next: string; onBa
         <ol className="mx-auto mt-5 max-w-xs space-y-2 text-left text-sm text-muted">
           {['Open the email from FBLC United', 'Tap "Confirm your email"', 'Set up your player card'].map((s, i) => (
             <li key={s} className="flex items-center gap-2.5">
-              <span className="tabular grid size-5 shrink-0 place-items-center rounded-[2px] bg-navy text-[11px] font-bold text-white dark:bg-blue">
+              <span className="tabular grid size-5 shrink-0 place-items-center rounded-none bg-navy text-[11px] font-bold text-white dark:bg-blue">
                 {i + 1}
               </span>
               {s}
