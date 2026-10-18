@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import { ContactEmail, Item, Items, LegalPage, LegalSection, PROSE_LINK, ShortVersion } from './LegalPage';
 
 const S = {
-  who: { id: 'who', title: 'Who runs FBLA United' },
+  who: { id: 'who', title: 'Who runs FBLC United' },
   collect: { id: 'collect', title: 'What we collect and why' },
   notCollected: { id: 'not-collected', title: "What we don't collect" },
   sees: { id: 'who-sees', title: 'Who can see your information' },
   email: { id: 'email', title: 'Email' },
   providers: { id: 'providers', title: 'Services that help run the site' },
-  deca: { id: 'deca', title: 'One account for FBLA United and DECA Masters' },
+  deca: { id: 'deca', title: 'One account for FBLC United and DECA Masters' },
   keep: { id: 'keep', title: 'How long we keep it' },
   safety: { id: 'safety', title: 'Keeping it safe' },
   choices: { id: 'choices', title: 'See, fix or delete your information' },
@@ -37,9 +37,9 @@ export default function Privacy() {
 
       <LegalSection {...S.who}>
         <p>
-          FBLA United is a free, independent practice site built and run by two students, Joseph and Kaden. It is not a company,
+          FBLC United is a free, independent practice site built and run by two students, Joseph and Kaden. It is not a company,
           and it is not run by Future Business Leaders of America (FBLA-PBL), FBL Canada or any school. In this policy,
-          &ldquo;FBLA United&rdquo; means this study site and club, never FBLA-PBL or FBL Canada. Joseph is responsible for this
+          &ldquo;FBLC United&rdquo; means this study site and club, never FBLA-PBL or FBL Canada. Joseph is responsible for this
           policy. Send questions, requests and complaints to <ContactEmail />.
         </p>
       </LegalSection>
@@ -164,7 +164,7 @@ export default function Privacy() {
       <LegalSection {...S.deca}>
         <p>
           DECA Masters, a sister practice site for DECA, is moving onto the same account system and the same database
-          project as FBLA United. Once it has, the email and password you use here will also sign you in there, and an account
+          project as FBLC United. Once it has, the email and password you use here will also sign you in there, and an account
           made there will work here too. Each site keeps its own practice records in its own tables. Because it is one
           account, deleting it removes it from both sites. DECA Masters will explain what it collects in its own policy.
         </p>
@@ -211,7 +211,7 @@ export default function Privacy() {
             within 30 days and tell you when it's done.
           </Item>
           <Item term="Withdraw consent">
-            You can stop using FBLA United and ask for deletion at any time. Without an account the site can't save your
+            You can stop using FBLC United and ask for deletion at any time. Without an account the site can't save your
             practice.
           </Item>
           <Item term="Proving it's you">
@@ -222,7 +222,7 @@ export default function Privacy() {
 
       <LegalSection {...S.minors}>
         <p>
-          FBLA United is for FBL Canada members, mostly students in grades 7 to 12, so many members are under 18. If you are under
+          FBLC United is for FBL Canada members, mostly students in grades 7 to 12, so many members are under 18. If you are under
           18, please go through this policy with a parent or guardian. If you are under 13, a parent or guardian needs to
           agree before you make an account.
         </p>

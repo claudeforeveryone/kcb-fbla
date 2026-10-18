@@ -4,7 +4,7 @@ import { ChevronLeft } from 'lucide-react';
 import { cn } from './cn';
 
 /**
- * The FBLA United rule: the shield's navy, red and blue as one thin bar along the bottom edge of a banner or panel.
+ * The FBLC United rule: the shield's navy, red and blue as one thin bar along the bottom edge of a banner or panel.
  * The only decoration banners carry. Place inside a `relative` container. The bar draws in once, left to right.
  */
 export function UnitedRule({ className, onNavy = false }: { className?: string; onNavy?: boolean }) {

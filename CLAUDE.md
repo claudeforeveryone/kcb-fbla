@@ -1,4 +1,4 @@
-# FBLA United (repo: kcb-fbla)
+# FBLC United (repo: kcb-fbla)
 
 FBLA chapter testing platform. **`docs/SPEC.md` is the contract for the 2026-10 rebuild**: look and feel, routes,
 file ownership, data model, RPCs and roles. It overrides anything older (README, PRODUCT.md, the old HOSA-style look).

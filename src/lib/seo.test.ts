@@ -81,19 +81,19 @@ describe('where sign-in and sign-up send a visitor back to', () => {
 
 describe('private page titles', () => {
   it('labels signed-in pages without matching look-alike paths', () => {
-    expect(titleForPrivate('/play/accounting')).toBe('Play | FBLA United');
-    expect(titleForPrivate('/me')).toBe('Profile | FBLA United');
-    expect(titleForPrivate('/me/settings')).toBe('Settings | FBLA United');
-    expect(titleForPrivate('/me/career')).toBe('Career | FBLA United');
-    expect(titleForPrivate('/u/ada')).toBe('Profile | FBLA United');
-    expect(titleForPrivate('/meow')).toBe('FBLA United');
-    expect(titleForPrivate('/dev/ui')).toBe('FBLA United');
+    expect(titleForPrivate('/play/accounting')).toBe('Play | FBLC United');
+    expect(titleForPrivate('/me')).toBe('Profile | FBLC United');
+    expect(titleForPrivate('/me/settings')).toBe('Settings | FBLC United');
+    expect(titleForPrivate('/me/career')).toBe('Career | FBLC United');
+    expect(titleForPrivate('/u/ada')).toBe('Profile | FBLC United');
+    expect(titleForPrivate('/meow')).toBe('FBLC United');
+    expect(titleForPrivate('/dev/ui')).toBe('FBLC United');
   });
 });
 
 describe('document meta in the browser', () => {
   it("gives a member's home page (their dashboard) a private title and keeps it out of the index", () => {
-    expect(documentMetaFor('/', { member: true })).toEqual({ title: 'Home | FBLA United', robots: 'noindex, nofollow', canonical: null });
+    expect(documentMetaFor('/', { member: true })).toEqual({ title: 'Home | FBLC United', robots: 'noindex, nofollow', canonical: null });
   });
 
   it('gives a signed-out visitor the public home page', () => {
@@ -105,12 +105,12 @@ describe('document meta in the browser', () => {
   });
 
   it('shows the legal pages to members as the same public pages', () => {
-    expect(documentMetaFor('/terms', { member: true })).toMatchObject({ title: 'Terms of use | FBLA United', canonical: `${SITE_URL}/terms` });
+    expect(documentMetaFor('/terms', { member: true })).toMatchObject({ title: 'Terms of use | FBLC United', canonical: `${SITE_URL}/terms` });
   });
 
   it('labels signed-in pages for anyone', () => {
     for (const member of [true, false]) {
-      expect(documentMetaFor('/play/accounting', { member })).toEqual({ title: 'Play | FBLA United', robots: 'noindex, nofollow', canonical: null });
+      expect(documentMetaFor('/play/accounting', { member })).toEqual({ title: 'Play | FBLC United', robots: 'noindex, nofollow', canonical: null });
     }
   });
 });
@@ -121,7 +121,7 @@ describe('head tags', () => {
 
   it('sets the title, canonical and social images for a content page', () => {
     const head = headTags(terms);
-    expect(head).toContain('<title>Terms of use | FBLA United</title>');
+    expect(head).toContain('<title>Terms of use | FBLC United</title>');
     expect(head).toContain(`<link rel="canonical" href="${SITE_URL}/terms" />`);
     expect(head).toContain('<meta name="robots" content="index, follow, max-image-preview:large" />');
     expect(head).toContain('<meta name="twitter:card" content="summary_large_image" />');
@@ -164,7 +164,7 @@ describe('structured data and sitemap', () => {
   it('describes the student project, not FBLA-PBL or FBL Canada, and claims no logo', () => {
     const parsed = JSON.parse(jsonLd()) as { '@graph': Array<Record<string, unknown>> };
     const org = parsed['@graph'].find((n) => n['@type'] === 'Organization')!;
-    expect(org.name).toBe('FBLA United');
+    expect(org.name).toBe('FBLC United');
     expect(org.logo).toBeUndefined();
     expect(String(org.description)).toMatch(/Not affiliated with or endorsed by FBLA-PBL or FBL Canada/);
   });

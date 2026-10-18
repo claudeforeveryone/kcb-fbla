@@ -43,7 +43,7 @@ const live: OwnerSource = {
 export function OwnerPage() {
   const state = useIsOwner();
   useEffect(() => {
-    document.title = state === 'owner' ? 'Owner console · FBLA United' : 'Not available · FBLA United';
+    document.title = state === 'owner' ? 'Owner console · FBLC United' : 'Not available · FBLC United';
   }, [state]);
   if (state === 'loading') return <RouteFallback />;
   if (state === 'denied') return <NotAuthorized />;

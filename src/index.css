@@ -269,7 +269,7 @@
   .scrollbar-none::-webkit-scrollbar { display: none; }
   .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 
-  /* Page banners: white band with navy text and the FBLA United rule along the bottom. Inside it, "white" utilities
+  /* Page banners: white band with navy text and the FBLC United rule along the bottom. Inside it, "white" utilities
      (text-white, bg-white/10, ring-white/15...) resolve to navy, so the same markup reads on white.
      Solid coloured blocks inside keep real white text. */
   .band {
@@ -335,7 +335,7 @@
 }
 
 
-/* The FBLA United rule under banners (UnitedRule) draws in once, left to right. */
+/* The FBLC United rule under banners (UnitedRule) draws in once, left to right. */
 @keyframes united-rule {
   from { transform: scaleX(0); }
 }

@@ -1,4 +1,4 @@
-// FBLA United service worker: a small offline shell, nothing more.
+// FBLC United service worker: a small offline shell, nothing more.
 // - Precaches the offline page (self-contained: its logo and icon are inline).
 // - Pages always come from the network; with no connection the offline page is shown instead of a browser error.
 // - Hashed build files (assets/) are cached after their first load: their names change whenever their content does.

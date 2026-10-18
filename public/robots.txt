@@ -1,4 +1,4 @@
-# FBLA United. Public pages: home, sign-up, Terms and Privacy (see the sitemap). Every signed-in page carries its
+# FBLC United. Public pages: home, sign-up, Terms and Privacy (see the sitemap). Every signed-in page carries its
 # own noindex tag, so nothing is blocked here: a crawler has to be able to fetch a page to see that tag.
 User-agent: *
 Allow: /

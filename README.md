@@ -1,4 +1,4 @@
-# FBLA United
+# FBLC United
 
 Official-style practice exams, vocab, 1v1 duels and chapter tools for FBL Canada (FBLC) members.
 `docs/SPEC.md` is the product and engineering contract; `docs/EMAIL.md` covers notifications and email.

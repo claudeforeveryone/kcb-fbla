@@ -4,7 +4,7 @@
  */
 
 export const SITE_URL = 'https://kcb-fbla.vercel.app';
-export const SITE_NAME = 'FBLA United';
+export const SITE_NAME = 'FBLC United';
 export const CONTACT_EMAIL = 'josephislockedin@gmail.com';
 export const OG_IMAGE = `${SITE_URL}/og-image.png`;
 /** Effective date of the current Terms and Privacy policy. */
@@ -30,7 +30,7 @@ export type PublicRoute = {
 export const PUBLIC_ROUTES: PublicRoute[] = [
   {
     path: '/',
-    title: 'FBLA United: FBLA-style practice exams, vocab and duels',
+    title: 'FBLC United: FBLA-style practice exams, vocab and duels',
     description:
       'Practise FBLA-style exams, vocab decks and 1v1 duels, and watch your Elo climb. A free study tool for FBL Canada members.',
     index: true,
@@ -40,8 +40,8 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
   },
   {
     path: '/login',
-    title: 'Sign in | FBLA United',
-    description: 'Sign in to your FBLA United practice account to pick up your exams, vocab and duels.',
+    title: 'Sign in | FBLC United',
+    description: 'Sign in to your FBLC United practice account to pick up your exams, vocab and duels.',
     index: false,
     sitemap: false,
     required: true,
@@ -49,8 +49,8 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
   },
   {
     path: '/signup',
-    title: 'Create a free account | FBLA United',
-    description: 'Make a free FBLA United account for FBLA-style exams, vocab decks and 1v1 duels. Takes about a minute.',
+    title: 'Create a free account | FBLC United',
+    description: 'Make a free FBLC United account for FBLA-style exams, vocab decks and 1v1 duels. Takes about a minute.',
     index: true,
     sitemap: true,
     required: true,
@@ -58,9 +58,9 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
   },
   {
     path: '/terms',
-    title: 'Terms of use | FBLA United',
+    title: 'Terms of use | FBLC United',
     description:
-      'The rules for using FBLA United, a free and independent FBLA-style study site: accounts, fair play, content and what we do not promise.',
+      'The rules for using FBLC United, a free and independent FBLA-style study site: accounts, fair play, content and what we do not promise.',
     index: true,
     sitemap: true,
     required: true,
@@ -68,9 +68,9 @@ export const PUBLIC_ROUTES: PublicRoute[] = [
   },
   {
     path: '/privacy',
-    title: 'Privacy policy | FBLA United',
+    title: 'Privacy policy | FBLC United',
     description:
-      'What FBLA United collects from members, why, who can see it, how long we keep it, and how to ask us to change or delete it.',
+      'What FBLC United collects from members, why, who can see it, how long we keep it, and how to ask us to change or delete it.',
     index: true,
     sitemap: true,
     required: true,
@@ -149,7 +149,7 @@ export function jsonLd(): string {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
         name: SITE_NAME,
-        alternateName: 'FBLA United',
+        alternateName: 'FBLC United',
         url: `${SITE_URL}/`,
         description: PUBLIC_ROUTES[0].description,
         inLanguage: 'en-CA',
@@ -158,7 +158,7 @@ export function jsonLd(): string {
       {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#organization`,
-        name: 'FBLA United',
+        name: 'FBLC United',
         url: `${SITE_URL}/`,
         email: CONTACT_EMAIL,
         founder: [
@@ -201,7 +201,7 @@ export function headTags(route: PublicRoute, { rendered = true }: { rendered?: b
     `<meta property="og:image" content="${OG_IMAGE}" />`,
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
-    `<meta property="og:image:alt" content="FBLA United: FBLA-style practice for FBL Canada members" />`,
+    `<meta property="og:image:alt" content="FBLC United: FBLA-style practice for FBL Canada members" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${esc(route.title)}" />`,
     `<meta name="twitter:description" content="${esc(route.description)}" />`,

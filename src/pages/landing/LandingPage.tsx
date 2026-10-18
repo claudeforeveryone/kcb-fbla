@@ -115,7 +115,7 @@ export default function LandingPage() {
                 <span />
                 <span />
               </span>
-              FBLA United
+              FBLC United
             </p>
             <h1 id="hero-title" className="lp-h1">
               <span className="lp-line">

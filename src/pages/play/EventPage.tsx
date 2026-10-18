@@ -8,6 +8,7 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
+  HeaderFigures,
   PageHeader,
   ProgressBar,
   Skeleton,
@@ -110,15 +111,22 @@ export default function EventPage() {
         }
       >
         {stats && (
-          <div className="flex flex-wrap gap-2">
-            <Chip label="Accuracy" value={stats.ev?.answered ? pctText(stats.ev.accuracy) : '--'} />
-            <Chip label="Answered" value={String(stats.ev?.answered ?? 0)} />
-            <Chip label="Seen" value={`${stats.seen}/${total}`} />
-            <Chip
-              label="Elo from this event"
-              value={`${(stats.ev?.eloDelta ?? 0) > 0 ? '+' : ''}${stats.ev?.eloDelta ?? 0}`}
-            />
-          </div>
+          <HeaderFigures
+            items={[
+              { label: 'Accuracy', value: stats.ev?.answered ? pctText(stats.ev.accuracy) : '--' },
+              { label: 'Answered', value: stats.ev?.answered ?? 0 },
+              {
+                label: 'Seen',
+                value: (
+                  <>
+                    {stats.seen}
+                    <span className="text-sm font-semibold text-muted"> / {total}</span>
+                  </>
+                ),
+              },
+              { label: 'Elo from this event', value: `${(stats.ev?.eloDelta ?? 0) > 0 ? '+' : ''}${stats.ev?.eloDelta ?? 0}` },
+            ]}
+          />
         )}
       </PageHeader>
 
@@ -296,15 +304,6 @@ export default function EventPage() {
         )}
       </Page>
     </>
-  );
-}
-
-function Chip({ label, value }: { label: string; value: string }) {
-  return (
-    <span className="inline-flex h-9 items-center gap-2 rounded-[2px] border border-white/20 px-3 text-sm text-white">
-      <span className="text-white/70">{label}</span>
-      <span className="tabular font-display font-bold">{value}</span>
-    </span>
   );
 }
 

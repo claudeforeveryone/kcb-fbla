@@ -50,7 +50,7 @@ export function OwnerConsole({ source }: { source: OwnerSource }) {
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <div className="min-w-0">
           <h1 className="text-[1.75rem] font-extrabold leading-tight tracking-tight sm:text-3xl">Owner console</h1>
-          <p className="mt-1 text-sm text-muted">FBLA United site health. Metrics are totals, with small groups hidden. Times are Toronto.</p>
+          <p className="mt-1 text-sm text-muted">FBLC United site health. Metrics are totals, with small groups hidden. Times are Toronto.</p>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-xs text-muted" aria-live="polite">
