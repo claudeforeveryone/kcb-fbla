@@ -26,7 +26,7 @@ export function SegmentedControl<T extends string | number>({
       role="radiogroup"
       aria-label={ariaLabel}
       className={cn(
-        'inline-flex gap-0 rounded-[2px] bg-surface-2 p-0.5 ring-1 ring-inset ring-line',
+        'inline-flex gap-0 rounded-none bg-surface-2 p-0.5 ring-1 ring-inset ring-line',
         block && 'flex w-full',
         className,
       )}
@@ -42,7 +42,7 @@ export function SegmentedControl<T extends string | number>({
             disabled={o.disabled}
             onClick={() => onChange(o.value)}
             className={cn(
-              'inline-flex items-center justify-center gap-1.5 rounded-[2px] font-display font-semibold transition-colors duration-150 ease-out disabled:opacity-40 [&>svg]:size-4',
+              'inline-flex items-center justify-center gap-1.5 rounded-none font-display font-semibold transition-colors duration-150 ease-out disabled:opacity-40 [&>svg]:size-4',
               size === 'sm' ? 'h-7 px-2.5 text-xs' : 'h-8 px-3.5 text-sm',
               block && 'flex-1',
               active
@@ -81,7 +81,7 @@ export function Pill({
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        'inline-flex h-8 shrink-0 items-center gap-1.5 rounded-[2px] border px-3 text-sm font-semibold transition-colors duration-150 [&>svg]:size-3.5',
+        'inline-flex h-8 shrink-0 items-center gap-1.5 rounded-none border px-3 text-sm font-semibold transition-colors duration-150 [&>svg]:size-3.5',
         active
           ? 'border-red bg-red/[0.07] text-red dark:text-danger'
           : 'border-line-strong bg-surface text-ink hover:border-blue/60 hover:text-heading',

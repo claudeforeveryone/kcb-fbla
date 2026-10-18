@@ -104,7 +104,7 @@ export function CountdownTimer({
       role="timer"
       aria-label={`${text} remaining`}
       className={cn(
-        'tabular inline-flex h-9 items-center gap-1.5 rounded-[2px] px-3 font-display text-[0.9375rem] font-bold transition-colors duration-200',
+        'tabular inline-flex h-9 items-center gap-1.5 rounded-none px-3 font-display text-[0.9375rem] font-bold transition-colors duration-200',
         variant === 'onDark'
           ? state === 'danger'
             ? 'bg-red text-white'

@@ -78,7 +78,7 @@ export function PageHeader({
         {back && (
           <Link
             to={back.to}
-            className="mb-3 inline-flex items-center gap-1 rounded-[2px] text-sm font-semibold text-white/75 transition-colors hover:text-white"
+            className="mb-3 inline-flex items-center gap-1 rounded-none text-sm font-semibold text-white/75 transition-colors hover:text-white"
           >
             <ChevronLeft className="size-4" />
             {back.label}

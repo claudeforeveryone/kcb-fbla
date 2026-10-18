@@ -91,7 +91,7 @@ function Dashboard({ ctx, reloadCtx, setCtx }: { ctx: MyChapter; reloadCtx: () =
       <PageHeader
         eyebrow={membership.role === 'president' ? 'President dashboard' : 'Executive dashboard'}
         title={chapter.name}
-        subtitle="Members, roles, trainers, attendance and how everyone is doing."
+        subtitle="Members, roles, trainers and attendance."
         back={{ to: '/chapter', label: 'Chapter' }}
         actions={
           <ButtonLink to="/chapter/classroom" variant="inverse">

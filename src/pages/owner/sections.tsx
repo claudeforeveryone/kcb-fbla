@@ -615,7 +615,7 @@ export function ContentView({ data: d }: { data: OwnerContent }) {
           <Link
             key={s}
             to={{ search: triageLink(params, { status: s }) }}
-            className="group relative rounded-[2px] after:absolute after:-inset-y-2 after:inset-x-0"
+            className="group relative rounded-none after:absolute after:-inset-y-2 after:inset-x-0"
           >
             <Badge tone={STATUS_TONE[s]} className="group-hover:underline group-hover:underline-offset-2">
               {STATUS_LABELS[s]} <span className="tabular">{d.feedback_status[s] ?? 0}</span>

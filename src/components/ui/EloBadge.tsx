@@ -16,7 +16,7 @@ export function EloBadge({
   return (
     <span
       className={cn(
-        'inline-flex items-baseline gap-1 whitespace-nowrap rounded-[2px] font-display font-bold',
+        'inline-flex items-baseline gap-1 whitespace-nowrap rounded-none font-display font-bold',
         size === 'sm' && 'h-6 items-center px-2 text-xs',
         size === 'md' && 'h-7 items-center px-2.5 text-sm',
         size === 'lg' && 'h-10 items-center px-3.5 text-lg',

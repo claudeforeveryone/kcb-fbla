@@ -50,7 +50,7 @@ export function BarChart({
   if (!data.length)
     return (
       <div className={className} role="img" aria-label={`${title}: no data`}>
-        <div className="grid h-28 place-items-center rounded-[4px] border border-dashed border-line text-sm text-muted">{emptyLabel}</div>
+        <div className="grid h-28 place-items-center rounded-none border border-dashed border-line text-sm text-muted">{emptyLabel}</div>
       </div>
     );
   return orientation === 'horizontal' ? (

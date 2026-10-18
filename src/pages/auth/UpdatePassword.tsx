@@ -23,7 +23,7 @@ export default function UpdatePassword() {
   if (!session)
     return (
       <AuthLayout title="This link has expired" subtitle="Reset links work once and only for an hour.">
-        <div className="rounded-[4px] border border-line bg-surface p-6 text-center">
+        <div className="rounded-none border border-line bg-surface p-6 text-center">
           <LinkIcon className="mx-auto mb-4 size-6 text-red dark:text-danger" aria-hidden />
           <p className="text-[0.9375rem] text-muted">Request a fresh link and open it on this device.</p>
           <ButtonLink to="/reset" className="mt-5" block>
@@ -61,7 +61,7 @@ export default function UpdatePassword() {
     <AuthLayout title="Choose a new password" subtitle={`For ${session.user.email ?? 'your account'}.`}>
       <form onSubmit={submit} noValidate className="space-y-4">
         {error && (
-          <div role="alert" className="rounded-[4px] border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
+          <div role="alert" className="rounded-none border border-red/25 bg-red/[0.06] px-3.5 py-3 text-sm font-medium text-danger">
             {error}
           </div>
         )}

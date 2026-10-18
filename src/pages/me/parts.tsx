@@ -127,7 +127,7 @@ export function ActivityHeatmap({ activity, weeks = 12 }: { activity: ProfileSta
         <div className="mt-2 flex items-center justify-end gap-1.5 text-[11px] text-muted">
           Less
           {LEVELS.map((c, i) => (
-            <span key={i} className={cn('size-3 rounded-[3px]', c)} aria-hidden />
+            <span key={i} className={cn('size-3 rounded-none', c)} aria-hidden />
           ))}
           More
         </div>
@@ -165,7 +165,7 @@ function Row({
             title={c.future ? undefined : label}
             aria-label={c.future ? undefined : label}
             className={cn(
-              'aspect-square rounded-[3px] transition-transform duration-150 hover:scale-125',
+              'aspect-square rounded-none transition-transform duration-150 hover:scale-125',
               c.future ? 'bg-transparent' : LEVELS[level(c.n)],
             )}
           />
@@ -188,7 +188,7 @@ export function MiniLeaderboard({ board, userId }: { board: MiniBoard; userId: s
         <Link
           to={`/u/${r.username}`}
           className={cn(
-            'flex items-center gap-3 rounded-lg px-2.5 py-2 transition-colors hover:bg-surface-2',
+            'flex items-center gap-3 rounded-none px-2.5 py-2 transition-colors hover:bg-surface-2',
             me && 'bg-red/[0.06] shadow-[inset_3px_0_0_var(--red)] hover:bg-red/[0.09]',
           )}
         >
@@ -346,7 +346,7 @@ export function Panel({
   icon?: ReactNode;
 }) {
   return (
-    <section className={cn('rounded-[4px] border border-line bg-surface p-4 sm:p-5', className)}>
+    <section className={cn('rounded-none border border-line bg-surface p-4 sm:p-5', className)}>
       <div className="mb-3 flex items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-base font-bold [&>svg]:size-4 [&>svg]:text-muted">
           {icon}

@@ -108,7 +108,7 @@ export default function PlayPage() {
       <PageHeader
         eyebrow="Practice"
         title="Play"
-        subtitle="Official-style questions for all 15 events. Every answer moves your Elo, harder questions move it more."
+        subtitle="15 events. First tries move your Elo."
       >
         <HeaderFigures
           items={[
@@ -236,7 +236,7 @@ function DailyCard({ history }: { history: PlayHistory }) {
   const streak = dailyStreak(history);
   const until = useUntilReset();
   return (
-    <div className="relative overflow-hidden rounded-[12px] bg-navy text-white">
+    <div className="relative overflow-hidden rounded-none bg-navy text-white">
       <div className="absolute inset-x-0 top-0 h-1 bg-red" aria-hidden />
       <div className="flex flex-col gap-6 px-6 pb-7 pt-8 md:flex-row md:items-center md:gap-10 md:px-10 md:pb-9 md:pt-10">
         <div className="min-w-0 flex-1">
@@ -403,15 +403,15 @@ function ModeTile({
   highlight?: boolean;
 }) {
   const stretch =
-    "text-left outline-none after:absolute after:inset-0 after:rounded-[4px] after:content-[''] focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-blue";
+    "text-left outline-none after:absolute after:inset-0 after:rounded-none after:content-[''] focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-blue";
   const label = (
     <>
       {title}
-      {highlight && <span className="size-2 rounded-full bg-red" aria-label="Has work to do" />}
+      {highlight && <span className="size-2 rounded-none bg-red" aria-label="Has work to do" />}
     </>
   );
   return (
-    <div className="group relative flex h-full flex-col rounded-[4px] border border-line bg-surface px-4 py-3.5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-2 md:px-5 md:py-4">
+    <div className="group relative flex h-full flex-col rounded-none border border-line bg-surface px-4 py-3.5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-2 md:px-5 md:py-4">
       <div className="flex items-start justify-between gap-2">
         <h3 className="font-display text-base font-extrabold leading-tight md:text-lg">
           {to ? (
@@ -456,10 +456,10 @@ function EventCard({
 }) {
   const { color } = eventStyle(e.slug);
   return (
-    <Link to={`/play/${e.slug}`} className="group block rounded-[12px] focus-visible:outline-offset-4">
+    <Link to={`/play/${e.slug}`} className="group block rounded-none focus-visible:outline-offset-4">
       <div
         className={cn(
-          'flex h-full flex-col overflow-hidden rounded-[12px] border bg-surface transition-[transform,border-color] duration-200 ease-out hover:-translate-y-px hover:border-line-strong',
+          'flex h-full flex-col overflow-hidden rounded-none border bg-surface transition-[transform,border-color] duration-200 ease-out hover:-translate-y-px hover:border-line-strong',
           mine ? 'border-red/50' : 'border-line',
         )}
       >
@@ -557,7 +557,7 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
   return (
     <li
       className={cn(
-        'relative flex flex-col gap-4 overflow-hidden rounded-[4px] border bg-surface px-6 py-5 sm:flex-row sm:items-center',
+        'relative flex flex-col gap-4 overflow-hidden rounded-none border bg-surface px-6 py-5 sm:flex-row sm:items-center',
         a.overdue ? 'border-red/40' : 'border-line',
       )}
     >
@@ -593,7 +593,7 @@ function AssignmentRow({ a }: { a: MyAssignment }) {
 function LoadingPlay() {
   return (
     <div role="status" aria-label="Loading" className="space-y-14 md:space-y-20">
-      <Skeleton className="h-40 w-full" rounded="rounded-[12px]" />
+      <Skeleton className="h-40 w-full" rounded="rounded-none" />
       <div>
         <Skeleton className="mb-7 h-8 w-48" />
         <SkeletonCards count={3} />

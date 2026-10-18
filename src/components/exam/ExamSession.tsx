@@ -104,7 +104,7 @@ export function ExamSession({ submit, resultActions, onSubmitted, previousBest, 
       <ExamRunner {...runner} onCheck={runner.onCheck ?? serverCheck} onFinish={onFinish} submitting={phase === 'submitting'} />
       {phase !== 'running' && (
         <div className="fixed inset-0 z-[60] grid place-items-center bg-navy-deep/60 p-4" role="dialog" aria-modal="true" aria-live="polite">
-          <div className="animate-pop w-full max-w-sm rounded-[2px] border border-line border-t-[3px] border-t-red bg-surface p-6 text-center">
+          <div className="animate-pop w-full max-w-sm rounded-none border border-line border-t-[3px] border-t-red bg-surface p-6 text-center">
             {phase === 'submitting' ? (
               <>
                 <Spinner className="mx-auto size-8 text-blue" />

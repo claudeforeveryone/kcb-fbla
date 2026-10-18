@@ -150,12 +150,12 @@ export function DeckStudy({
                 flipped && '[transform:rotateY(180deg)]',
               )}
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[2px] border border-t-4 border-line border-t-red bg-surface p-6 text-center [backface-visibility:hidden]">
+              <div className="absolute inset-0 flex flex-col items-center justify-center rounded-none border border-t-4 border-line border-t-red bg-surface p-6 text-center [backface-visibility:hidden]">
                 <span className="absolute left-5 top-4 text-[11px] font-bold uppercase tracking-[0.16em] text-red">Term</span>
                 <span className="font-display text-2xl font-bold leading-tight text-heading sm:text-3xl">{card.term}</span>
                 <span className="absolute bottom-4 text-xs text-muted">Tap or press Space to flip</span>
               </div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-[2px] border border-t-4 border-line border-t-navy bg-surface-2 p-6 text-center [backface-visibility:hidden] [transform:rotateY(180deg)] dark:border-t-link">
+              <div className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-none border border-t-4 border-line border-t-navy bg-surface-2 p-6 text-center [backface-visibility:hidden] [transform:rotateY(180deg)] dark:border-t-link">
                 <span className="absolute left-5 top-4 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">Definition</span>
                 <span className="text-lg leading-relaxed text-ink sm:text-xl">{card.def}</span>
               </div>

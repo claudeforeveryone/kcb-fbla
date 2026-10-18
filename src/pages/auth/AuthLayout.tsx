@@ -50,7 +50,7 @@ export function AuthLayout({
           <button
             type="button"
             onClick={toggle}
-            className="grid size-9 place-items-center rounded-[2px] text-white/75 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
+            className="grid size-9 place-items-center rounded-none text-white/75 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? <Sun className="size-4.5" /> : <Moon className="size-4.5" />}
@@ -93,7 +93,7 @@ export function AuthLayout({
           <button
             type="button"
             onClick={toggle}
-            className="grid size-9 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+            className="grid size-9 place-items-center rounded-none text-muted transition-colors hover:bg-surface-2 hover:text-ink"
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? <Sun className="size-4.5" /> : <Moon className="size-4.5" />}
@@ -147,7 +147,7 @@ export function PasswordInput(props: Omit<InputProps, 'type' | 'right'> & { ref?
         <button
           type="button"
           onClick={() => setShow((s) => !s)}
-          className="grid size-8 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+          className="grid size-8 place-items-center rounded-none text-muted transition-colors hover:bg-surface-2 hover:text-ink"
           aria-label={show ? 'Hide password' : 'Show password'}
           aria-pressed={show}
         >

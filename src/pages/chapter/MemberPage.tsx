@@ -77,7 +77,7 @@ export default function MemberPage() {
       <>
         <PageHeader
           back={{ to: '/chapter/admin', label: 'Admin' }}
-          leading={<Skeleton className="size-20 bg-white/15" rounded="rounded-full" />
+          leading={<Skeleton className="size-20 bg-white/15" rounded="rounded-none" />
 }
           title={<Skeleton className="h-10 w-56 bg-white/15" />}
         />
@@ -330,7 +330,7 @@ export default function MemberPage() {
                   <ul className="max-h-80 space-y-2 overflow-y-auto pr-1">
                     {att.map((r) => (
                       <li key={r.session.id} className="flex items-center gap-3 text-sm">
-                        <span className={cn('size-2.5 shrink-0 rounded-full', r.status ? STATUS_DOT[r.status] : 'bg-line-strong')} aria-hidden />
+                        <span className={cn('size-2.5 shrink-0 rounded-none', r.status ? STATUS_DOT[r.status] : 'bg-line-strong')} aria-hidden />
                         <span className="min-w-0 flex-1 truncate">{r.session.title}</span>
                         <span className="shrink-0 text-xs text-muted">
                           {new Date(`${r.session.held_on}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}

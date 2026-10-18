@@ -123,14 +123,14 @@ export function NotificationBell() {
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
         className={cn(
-          'relative grid size-10 place-items-center rounded-[2px] text-white/85 transition-colors duration-150 hover:bg-white/10 hover:text-white',
+          'relative grid size-10 place-items-center rounded-none text-white/85 transition-colors duration-150 hover:bg-white/10 hover:text-white',
           open && 'bg-white/12 text-white',
         )}
       >
         <Bell ref={bellIconRef} className="size-5 origin-top" />
         {s.unread > 0 && (
           <span
-            className="animate-pop absolute right-0.5 top-0.5 grid h-[18px] min-w-[18px] place-items-center rounded-[2px] bg-red px-1 text-[10px] font-bold leading-none text-white tabular-nums ring-2 ring-bar"
+            className="animate-pop absolute right-0.5 top-0.5 grid h-[18px] min-w-[18px] place-items-center rounded-none bg-red px-1 text-[10px] font-bold leading-none text-white tabular-nums ring-2 ring-bar"
             aria-hidden
           >
             {badge}
@@ -146,7 +146,7 @@ export function NotificationBell() {
           aria-label="Notifications"
           tabIndex={-1}
           className={cn(
-            'animate-pop z-[70] flex flex-col overflow-hidden rounded-[4px] border border-line bg-surface text-ink shadow-lift outline-none',
+            'animate-pop z-[70] flex flex-col overflow-hidden rounded-none border border-line bg-surface text-ink shadow-lift outline-none',
             'fixed inset-x-2 top-[68px] max-h-[calc(100dvh-140px)]',
             'sm:absolute sm:inset-x-auto sm:right-0 sm:top-[calc(100%+10px)] sm:w-[400px] sm:max-h-[min(600px,calc(100dvh-96px))] sm:origin-top-right',
           )}
@@ -155,7 +155,7 @@ export function NotificationBell() {
             <div className="flex min-w-0 items-center gap-2">
               <h2 className="text-base font-bold text-heading">Notifications</h2>
               {s.unread > 0 && (
-                <span className="rounded-[2px] bg-red/10 px-1.5 py-0.5 text-xs font-bold text-red tabular-nums dark:text-danger">
+                <span className="rounded-none bg-red/10 px-1.5 py-0.5 text-xs font-bold text-red tabular-nums dark:text-danger">
                   {s.unread} new
                 </span>
               )}
@@ -164,7 +164,7 @@ export function NotificationBell() {
               type="button"
               onClick={markAll}
               disabled={s.unread === 0}
-              className="inline-flex items-center gap-1.5 rounded-[2px] px-2 py-1.5 text-xs font-semibold text-link transition-colors hover:bg-surface-2 disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex items-center gap-1.5 rounded-none px-2 py-1.5 text-xs font-semibold text-link transition-colors hover:bg-surface-2 disabled:pointer-events-none disabled:opacity-40"
             >
               <CheckCheck className="size-4" />
               Mark all read
@@ -225,11 +225,11 @@ function BellItem({ n, fresh, onOpen }: { n: Notification; fresh: boolean; onOpe
   const toast = useToast();
   const unread = !n.read_at;
   return (
-    <li className={cn('group relative rounded-[2px] transition-colors', fresh && 'animate-rise', unread ? 'bg-blue/[0.05] dark:bg-blue/10' : '')}>
+    <li className={cn('group relative rounded-none transition-colors', fresh && 'animate-rise', unread ? 'bg-blue/[0.05] dark:bg-blue/10' : '')}>
       <button
         type="button"
         onClick={() => onOpen(n)}
-        className="flex w-full items-stretch gap-3 rounded-[2px] px-2.5 py-2.5 pr-10 text-left transition-colors hover:bg-surface-2 focus-visible:bg-surface-2"
+        className="flex w-full items-stretch gap-3 rounded-none px-2.5 py-2.5 pr-10 text-left transition-colors hover:bg-surface-2 focus-visible:bg-surface-2"
       >
         <NotificationIcon n={n} size="sm" />
         <span className="min-w-0 flex-1">
@@ -252,7 +252,7 @@ function BellItem({ n, fresh, onOpen }: { n: Notification; fresh: boolean; onOpe
             type="button"
             onClick={() => feed.markRead([n.id]).catch((e) => toast.error('Could not mark read', errorMessage(e)))}
             aria-label={`Mark "${n.title}" as read`}
-            className="absolute right-1.5 top-1.5 grid size-8 place-items-center rounded-[2px] text-muted opacity-0 transition-opacity hover:bg-surface-3 hover:text-heading focus-visible:opacity-100 group-hover:opacity-100 max-sm:opacity-100"
+            className="absolute right-1.5 top-1.5 grid size-8 place-items-center rounded-none text-muted opacity-0 transition-opacity hover:bg-surface-3 hover:text-heading focus-visible:opacity-100 group-hover:opacity-100 max-sm:opacity-100"
           >
             <Check className="size-4" />
           </button>

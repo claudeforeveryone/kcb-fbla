@@ -96,7 +96,7 @@ export function Dropdown({
 
   const itemCls = (danger?: boolean) =>
     cn(
-      'flex w-full items-center gap-3 rounded-[2px] px-2.5 py-2 text-left text-sm font-medium outline-none transition-colors',
+      'flex w-full items-center gap-3 rounded-none px-2.5 py-2 text-left text-sm font-medium outline-none transition-colors',
       'focus-visible:outline-none [&>svg]:size-4 [&>svg]:shrink-0',
       danger
         ? 'text-danger hover:bg-danger/10 focus:bg-danger/10'
@@ -132,7 +132,7 @@ export function Dropdown({
             if ((e.target as HTMLElement).closest("a")) setOpen(false);
           }}
           className={cn(
-            'animate-pop absolute top-[calc(100%+8px)] z-[70] origin-top rounded-[4px] border border-line bg-surface p-1 text-ink shadow-lift',
+            'animate-pop absolute top-[calc(100%+8px)] z-[70] origin-top rounded-none border border-line bg-surface p-1 text-ink shadow-lift',
             align === 'end' ? 'right-0' : 'left-0',
             width,
           )}

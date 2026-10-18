@@ -1,6 +1,6 @@
 import { cn } from './cn';
 
-export function Skeleton({ className, rounded = 'rounded-[2px]' }: { className?: string; rounded?: string }) {
+export function Skeleton({ className, rounded = 'rounded-none' }: { className?: string; rounded?: string }) {
   return (
     <span
       aria-hidden
@@ -29,7 +29,7 @@ export function SkeletonCards({ count = 3, className }: { count?: number; classN
   return (
     <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-3', className)} role="status" aria-label="Loading">
       {Array.from({ length: count }, (_, i) => (
-        <div key={i} className="rounded-[4px] border border-line bg-surface p-5">
+        <div key={i} className="rounded-none border border-line bg-surface p-5">
           <div className="flex items-center gap-3">
             <Skeleton className="size-10" />
             <div className="flex-1 space-y-2">

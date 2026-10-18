@@ -57,7 +57,7 @@ export default function LeaderboardPage() {
       <PageHeader
         eyebrow="Rankings"
         title="Leaderboard"
-        subtitle="Every official question you answer moves your Elo. See where you stand against every FBLC United member and chapter."
+        subtitle="Every member and chapter, ranked by Elo."
         actions={
           <>
             <Button variant="inverse" onClick={() => setHowOpen(true)} leftIcon={<Info className="size-4" />}>

@@ -132,7 +132,7 @@ export default function EventPage() {
 
       <Page className="md:py-12">
         {ineligible && (
-          <div className="mb-10 flex items-start gap-3 rounded-[4px] border border-warning/40 bg-warning/10 p-4 text-sm">
+          <div className="mb-10 flex items-start gap-3 rounded-none border border-warning/40 bg-warning/10 p-4 text-sm">
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" />
             <span>
               Introduction to Business Concepts is for grades 9 and 10 only. You can still practise it, but you
@@ -325,7 +325,7 @@ function EventSkeleton() {
   return (
     <div className="grid gap-10 lg:grid-cols-3 lg:gap-8" role="status" aria-label="Loading">
       <div className="space-y-6 lg:col-span-2">
-        <div className="rounded-[4px] border border-line bg-surface p-5">
+        <div className="rounded-none border border-line bg-surface p-5">
           <Skeleton className="h-5 w-48" />
           <div className="mt-5 space-y-5">
             {Array.from({ length: 6 }, (_, i) => (
@@ -338,10 +338,10 @@ function EventSkeleton() {
         </div>
       </div>
       <div className="space-y-6">
-        <div className="rounded-[4px] border border-line bg-surface p-5">
+        <div className="rounded-none border border-line bg-surface p-5">
           <SkeletonText lines={3} />
         </div>
-        <div className="rounded-[4px] border border-line bg-surface p-5">
+        <div className="rounded-none border border-line bg-surface p-5">
           <SkeletonText lines={6} />
         </div>
       </div>

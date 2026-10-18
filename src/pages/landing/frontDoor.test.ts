@@ -14,7 +14,7 @@ describe('signed-out "/" (the prerendered front door)', () => {
     expect(html).toMatch(/<h1[^>]*id="hero-title"/);
     expect(html).toContain("Practise for FBLA.");
     // the sections below the hero are in the HTML too (not left to the client)
-    for (const id of ["platform", "events", "preview", "how", "join"])
+    for (const id of ["platform", "events", "preview", "join"])
       expect(html).toContain(`id="${id}"`);
 
     const footer = html.match(/<footer[\s\S]*<\/footer>/)?.[0] ?? "";

@@ -146,7 +146,7 @@ export function ExamResults({ data, questions, actions, animate = true, previous
             />
           </div>
           {shown.length === 0 ? (
-            <div className="rounded-[4px] border border-dashed border-line-strong px-6 py-10 text-center text-sm text-muted">
+            <div className="rounded-none border border-dashed border-line-strong px-6 py-10 text-center text-sm text-muted">
               Nothing here.
             </div>
           ) : (
@@ -171,7 +171,7 @@ export function ExamResults({ data, questions, actions, animate = true, previous
 
 function HeroChip({ children }: { children: ReactNode }) {
   return (
-    <span className="tabular inline-flex h-7 items-center gap-1.5 rounded-[2px] border border-white/20 px-2.5 text-xs font-semibold text-white">
+    <span className="tabular inline-flex h-7 items-center gap-1.5 rounded-none border border-white/20 px-2.5 text-xs font-semibold text-white">
       {children}
     </span>
   );
@@ -244,7 +244,7 @@ function EloPanel({ data, animate }: { data: ExamResultData; animate: boolean })
   }, [data]);
   return (
     <div
-      className="exam-rise rounded-[2px] border border-line border-t-[3px] border-t-navy bg-surface p-4 dark:border-t-link md:col-span-2 lg:col-span-1"
+      className="exam-rise rounded-none border border-line border-t-[3px] border-t-navy bg-surface p-4 dark:border-t-link md:col-span-2 lg:col-span-1"
       style={{ animationDelay: '260ms' }}
     >
       <div className="flex items-center justify-between">
@@ -252,7 +252,7 @@ function EloPanel({ data, animate }: { data: ExamResultData; animate: boolean })
         {!noElo && (
           <span
             className={cn(
-              'tabular inline-flex h-7 items-center gap-1 rounded-[2px] px-2 font-display text-sm font-bold',
+              'tabular inline-flex h-7 items-center gap-1 rounded-none px-2 font-display text-sm font-bold',
               delta > 0 ? 'bg-success text-white' : delta < 0 ? 'bg-red text-white' : 'bg-white/10 text-white/80',
               animate && 'exam-pop',
             )}
@@ -313,7 +313,7 @@ function ReviewItem({
   const [open, setOpen] = useState(!a.correct);
   const correctIdx = a.correct_choice ?? q?.answer ?? null;
   return (
-    <li className={cn('overflow-hidden rounded-[4px] border bg-surface', a.correct ? 'border-line' : 'border-red/25')}>
+    <li className={cn('overflow-hidden rounded-none border bg-surface', a.correct ? 'border-line' : 'border-red/25')}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -322,7 +322,7 @@ function ReviewItem({
       >
         <span
           className={cn(
-            'mt-0.5 grid size-7 shrink-0 place-items-center rounded-[2px] text-white',
+            'mt-0.5 grid size-7 shrink-0 place-items-center rounded-none text-white',
             a.correct ? 'bg-success' : 'bg-red',
           )}
           aria-label={a.correct ? 'Correct' : 'Incorrect'}
@@ -349,7 +349,7 @@ function ReviewItem({
           {showElo && a.elo_delta !== 0 && (
             <span
               className={cn(
-                'tabular rounded-[2px] px-2 py-0.5 text-xs font-bold',
+                'tabular rounded-none px-2 py-0.5 text-xs font-bold',
                 a.elo_delta > 0 ? 'bg-success/10 text-success' : 'bg-red/10 text-red dark:text-danger',
               )}
             >
@@ -370,13 +370,13 @@ function ReviewItem({
                 <li
                   key={i}
                   className={cn(
-                    'flex items-start gap-2.5 rounded-[2px] border px-3 py-2 text-sm',
+                    'flex items-start gap-2.5 rounded-none border px-3 py-2 text-sm',
                     right ? 'border-success/40 bg-success/[0.07]' : mine ? 'border-red/35 bg-red/[0.05]' : 'border-transparent',
                   )}
                 >
                   <span
                     className={cn(
-                      'grid size-5 shrink-0 place-items-center rounded-[2px] text-[11px] font-bold',
+                      'grid size-5 shrink-0 place-items-center rounded-none text-[11px] font-bold',
                       right ? 'bg-success text-white' : mine ? 'bg-red text-white' : 'bg-surface-2 text-muted',
                     )}
                   >
@@ -391,7 +391,7 @@ function ReviewItem({
           </ul>
           {a.chosen == null && <p className="mt-2 text-sm font-semibold text-red dark:text-danger">Left blank.</p>}
           {(a.explain ?? q.explain) && (
-            <p className="mt-3 rounded-[2px] border-l-[3px] border-blue bg-surface-2 px-3 py-2.5 text-sm leading-relaxed text-ink">
+            <p className="mt-3 rounded-none border-l-[3px] border-blue bg-surface-2 px-3 py-2.5 text-sm leading-relaxed text-ink">
               <span>{a.explain ?? q.explain}</span>
             </p>
           )}
@@ -400,7 +400,7 @@ function ReviewItem({
               <button
                 type="button"
                 onClick={onReport}
-                className="relative inline-flex h-10 items-center gap-1.5 rounded-[2px] px-3 text-xs font-semibold text-muted transition-colors after:absolute after:inset-x-0 after:-inset-y-1 hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
+                className="relative inline-flex h-10 items-center gap-1.5 rounded-none px-3 text-xs font-semibold text-muted transition-colors after:absolute after:inset-x-0 after:-inset-y-1 hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
               >
                 <MessageSquareWarning className="size-3.5" aria-hidden />
                 Report this question

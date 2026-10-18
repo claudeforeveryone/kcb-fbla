@@ -32,7 +32,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-[2px] px-2 text-xs font-semibold ring-1 ring-inset',
+        'inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-none px-2 text-xs font-semibold ring-1 ring-inset',
         isSolid ? solid[tone] : soft[tone],
         className,
       )}

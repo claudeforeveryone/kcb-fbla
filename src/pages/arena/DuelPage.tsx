@@ -275,7 +275,7 @@ export function DuelPage() {
     body = (
       <>
         <Card className="flex flex-col items-center gap-2 text-center">
-          <span className="inline-flex size-2 rounded-full bg-blue" aria-hidden />
+          <span className="inline-flex size-2 rounded-none bg-blue" aria-hidden />
           <h2 className="text-lg font-bold">Waiting for {displayName(opp)} to play</h2>
           <p className="max-w-md text-sm text-muted">
             You scored <b className="tabular text-heading">{side.myScore}/{DUEL_QUESTIONS}</b> in{' '}
@@ -324,7 +324,7 @@ export function DuelPage() {
           rightMs={duel.status === 'accepted' ? (side.theyPlayed ? 'finished, score hidden' : 'not played') : undefined}
         />
         {duel.message && (
-          <p className="mx-auto mt-6 max-w-md rounded-[2px] border border-line bg-surface px-4 py-2.5 text-center text-sm italic text-white/85">
+          <p className="mx-auto mt-6 max-w-md rounded-none border border-line bg-surface px-4 py-2.5 text-center text-sm italic text-white/85">
             "{duel.message}"
             <span className="ml-1 not-italic text-white/55">- {displayName(players[duel.challenger_id])}</span>
           </p>
@@ -661,7 +661,7 @@ function PaceStrip({ snap, perSec, total }: { snap: RunnerSnapshot; perSec: numb
   const ahead = answered - expected;
   return (
     <div className="fixed inset-x-0 bottom-[calc(env(safe-area-inset-bottom)+4.5rem)] z-30 px-4 md:bottom-4">
-      <div className="mx-auto flex max-w-md items-center gap-3 rounded-[2px] border border-line bg-surface px-4 py-2 shadow-lift">
+      <div className="mx-auto flex max-w-md items-center gap-3 rounded-none border border-line bg-surface px-4 py-2 shadow-lift">
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline justify-between gap-2 text-xs">
             <span className="font-semibold text-heading">
@@ -714,7 +714,7 @@ function ResultExplainer({ duel, uid, opp }: { duel: DuelRow; uid: string; opp?:
   return (
     <div
       className={cn(
-        'rounded-[2px] border border-l-4 border-line bg-surface px-4 py-3 text-sm',
+        'rounded-none border border-l-4 border-line bg-surface px-4 py-3 text-sm',
         o === 'win' ? 'border-l-success' : o === 'loss' ? 'border-l-red' : 'border-l-blue',
       )}
     >
@@ -760,7 +760,7 @@ function Comparison({
     return (
       <div className="mt-8 space-y-3">
         {Array.from({ length: 4 }, (_, i) => (
-          <Skeleton key={i} className="h-24 w-full" rounded="rounded-[2px]" />
+          <Skeleton key={i} className="h-24 w-full" rounded="rounded-none" />
         ))}
       </div>
     );
@@ -830,7 +830,7 @@ function Comparison({
                     }
                     className="flex w-full items-start gap-3 px-4 py-3.5 text-left transition-colors hover:bg-surface-2"
                   >
-                    <span className="tabular grid size-7 shrink-0 place-items-center rounded-[2px] bg-surface-2 font-display text-xs font-bold text-muted ring-1 ring-inset ring-line">
+                    <span className="tabular grid size-7 shrink-0 place-items-center rounded-none bg-surface-2 font-display text-xs font-bold text-muted ring-1 ring-inset ring-line">
                       {i + 1}
                     </span>
                     <span className="min-w-0 flex-1">
@@ -857,13 +857,13 @@ function Comparison({
                             <li
                               key={ci}
                               className={cn(
-                                'flex items-start gap-2.5 rounded-[2px] border px-3 py-2 text-sm',
+                                'flex items-start gap-2.5 rounded-none border px-3 py-2 text-sm',
                                 right ? 'border-success/40 bg-success/[0.07]' : myPick || theirPick ? 'border-red/25 bg-red/[0.04]' : 'border-line bg-surface',
                               )}
                             >
                               <span
                                 className={cn(
-                                  'grid size-6 shrink-0 place-items-center rounded-[2px] font-display text-xs font-bold',
+                                  'grid size-6 shrink-0 place-items-center rounded-none font-display text-xs font-bold',
                                   right ? 'bg-success text-white' : 'bg-surface-2 text-muted ring-1 ring-inset ring-line',
                                 )}
                               >
@@ -901,7 +901,7 @@ function AnswerCell({ label, a, faster }: { label: string; a?: DuelRunAnswer; fa
   return (
     <div className="flex min-w-0 items-center gap-2 px-4 py-2.5">
       {skipped ? (
-        <span className="grid size-5 shrink-0 place-items-center rounded-[2px] bg-surface-3 text-muted">
+        <span className="grid size-5 shrink-0 place-items-center rounded-none bg-surface-3 text-muted">
           <X className="size-3" aria-hidden />
         </span>
       ) : a.correct ? (
@@ -919,7 +919,7 @@ function AnswerCell({ label, a, faster }: { label: string; a?: DuelRunAnswer; fa
       {a && a.ms > 0 && (
         <span
           className={cn(
-            'tabular inline-flex shrink-0 items-center rounded-[2px] px-1.5 py-0.5 text-[11px] font-semibold',
+            'tabular inline-flex shrink-0 items-center rounded-none px-1.5 py-0.5 text-[11px] font-semibold',
             faster ? 'bg-blue text-white' : 'text-muted',
           )}
           title={faster ? 'Faster correct answer' : 'Time on this question'}
@@ -934,7 +934,7 @@ function AnswerCell({ label, a, faster }: { label: string; a?: DuelRunAnswer; fa
 
 function MiniStat({ label, me, them }: { label: string; me: string; them: string | null }) {
   return (
-    <div className="rounded-[2px] border border-line bg-surface px-4 py-3">
+    <div className="rounded-none border border-line bg-surface px-4 py-3">
       <div className="text-[11px] font-bold uppercase tracking-wider text-muted">{label}</div>
       <div className="mt-1 flex items-baseline gap-3">
         <span className="tabular font-display text-xl font-extrabold text-heading">{me}</span>
@@ -970,7 +970,7 @@ function Confetti() {
       {bits.map((b, i) => (
         <span
           key={i}
-          className="absolute top-1/2 block rounded-[2px]"
+          className="absolute top-1/2 block rounded-none"
           style={
             {
               left: `${b.left}%`,
@@ -995,8 +995,8 @@ function DuelSkeleton() {
       <div className="band h-72 w-full" aria-hidden />
       <Page width="narrow">
         <div className="space-y-3" role="status" aria-label="Loading duel">
-          <Skeleton className="h-28 w-full" rounded="rounded-[2px]" />
-          <Skeleton className="h-20 w-full" rounded="rounded-[2px]" />
+          <Skeleton className="h-28 w-full" rounded="rounded-none" />
+          <Skeleton className="h-20 w-full" rounded="rounded-none" />
         </div>
       </Page>
     </>

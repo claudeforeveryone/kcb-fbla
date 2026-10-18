@@ -22,7 +22,7 @@ export function LinkPreview({ url, compact }: { url: string; compact?: boolean }
       rel="noopener noreferrer"
       onClick={() => void track('resource_opened', null, { kind: 'link', source: 'classroom' })}
       className={cn(
-        'group/link flex min-w-0 items-center gap-3 rounded-[2px] border border-line border-l-4 border-l-blue bg-surface-2 transition-colors hover:border-blue',
+        'group/link flex min-w-0 items-center gap-3 rounded-none border border-line border-l-4 border-l-blue bg-surface-2 transition-colors hover:border-blue',
         compact ? 'px-3 py-2' : 'px-3.5 py-3',
       )}
     >

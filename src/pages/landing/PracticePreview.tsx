@@ -199,7 +199,7 @@ export function PracticePreview() {
                     aria-disabled={revealed || undefined}
                     onClick={() => pick(i)}
                     className={cn(
-                      "group flex w-full items-start gap-3 rounded-[4px] border px-3.5 py-3 text-left transition-[border-color,background-color,opacity] duration-150 ease-out md:px-4",
+                      "group flex w-full items-start gap-3 rounded-none border px-3.5 py-3 text-left transition-[border-color,background-color,opacity] duration-150 ease-out md:px-4",
                       "aria-disabled:cursor-default",
                       state === "idle" &&
                         "border-line bg-surface hover:border-blue/60 hover:bg-surface-2",
@@ -212,7 +212,7 @@ export function PracticePreview() {
                   >
                     <span
                       className={cn(
-                        "mt-px grid size-7 shrink-0 place-items-center rounded-[2px] font-display text-sm font-bold transition-colors",
+                        "mt-px grid size-7 shrink-0 place-items-center rounded-none font-display text-sm font-bold transition-colors",
                         state === "idle" &&
                           "bg-surface-2 text-muted ring-1 ring-inset ring-line group-hover:bg-blue/10 group-hover:text-blue",
                         state === "right" && "bg-success text-white",
@@ -249,7 +249,7 @@ export function PracticePreview() {
               {revealed && (
                 <div
                   className={cn(
-                    "obs-swap mt-4 rounded-[4px] border p-4",
+                    "obs-swap mt-4 rounded-none border p-4",
                     chosen === q.answer
                       ? "border-success/30 bg-success/[0.06]"
                       : "border-red/25 bg-red/[0.04]",

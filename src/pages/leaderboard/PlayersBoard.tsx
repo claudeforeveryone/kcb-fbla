@@ -134,7 +134,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
   return (
     <div className="space-y-5">
       {/* Filters */}
-      <div ref={attachFilters} className="flex flex-col gap-3 rounded-[12px] border border-line bg-surface p-3 sm:p-4 lg:flex-row lg:items-end">
+      <div ref={attachFilters} className="flex flex-col gap-3 rounded-none border border-line bg-surface p-3 sm:p-4 lg:flex-row lg:items-end">
         <Input
           className="lg:flex-1"
           label="Search players"
@@ -149,7 +149,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
               <button
                 type="button"
                 onClick={() => onQuery('')}
-                className="grid size-8 place-items-center rounded-md text-muted hover:bg-surface-2 hover:text-ink"
+                className="grid size-8 place-items-center rounded-none text-muted hover:bg-surface-2 hover:text-ink"
                 aria-label="Clear search"
               >
                 <X className="size-4" />
@@ -193,7 +193,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
           ) : (
             <Link
               to="/chapter"
-              className="inline-flex h-10 items-center gap-2 rounded-[4px] border border-dashed border-line-strong px-3 text-sm font-semibold text-link hover:border-blue hover:bg-blue/5"
+              className="inline-flex h-10 items-center gap-2 rounded-none border border-dashed border-line-strong px-3 text-sm font-semibold text-link hover:border-blue hover:bg-blue/5"
             >
               Join a chapter to compare
             </Link>
@@ -235,7 +235,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
       {board.error ? (
         <ErrorState title="Could not load the leaderboard" error={board.error} onRetry={board.reload} />
       ) : board.loading ? (
-        <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
+        <div className="overflow-hidden rounded-none border border-line bg-surface">
           <RowsSkeleton rows={10} />
         </div>
       ) : board.rows.length === 0 ? (
@@ -253,7 +253,7 @@ export function PlayersBoard({ me, event, onEvent, scope, onScope, query, onQuer
               }
             />
           ) : list.length > 0 || board.loadingMore ? (
-            <div className="overflow-hidden rounded-[12px] border border-line bg-surface">
+            <div className="overflow-hidden rounded-none border border-line bg-surface">
               <div
                 className={cn(
                   GRID,
@@ -400,7 +400,7 @@ function PinnedMe({
 }) {
   if (hidden || standing.status === 'loading' || standing.status === 'unknown') return null;
   const shell =
-    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-[12px] border border-red/30 border-l-[3px] border-l-red bg-surface shadow-card md:bottom-4';
+    'animate-rise sticky bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 rounded-none border border-red/30 border-l-[3px] border-l-red bg-surface shadow-card md:bottom-4';
 
   if (standing.status === 'unranked') {
     return (
@@ -422,7 +422,7 @@ function PinnedMe({
   const gap = above ? above.elo - r.elo : null;
   return (
     <div className={cn(shell, 'flex items-center gap-3 px-3 py-2.5 sm:px-4')} aria-label="Your position">
-      <span className="tabular grid h-10 min-w-10 shrink-0 place-items-center rounded-[6px] bg-red px-2 font-display text-sm font-extrabold text-white">
+      <span className="tabular grid h-10 min-w-10 shrink-0 place-items-center rounded-none bg-red px-2 font-display text-sm font-extrabold text-white">
         {r.rank}
       </span>
       <Avatar src={r.avatar_url} name={r.display_name} size="md" className="max-sm:hidden" />

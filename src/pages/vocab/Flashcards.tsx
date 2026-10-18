@@ -240,7 +240,7 @@ function Session({
         {/* the next card peeking underneath */}
         {queue[i + 1] && (
           <div
-            className="absolute inset-0 translate-y-2 scale-[0.97] rounded-[12px] border border-line bg-surface opacity-70"
+            className="absolute inset-0 translate-y-2 scale-[0.97] rounded-none border border-line bg-surface opacity-70"
             aria-hidden
           />
         )}
@@ -257,7 +257,7 @@ function Session({
             setDragging(false);
             setDx(0);
           }}
-          className="relative h-[min(58vh,360px)] cursor-grab touch-pan-y select-none rounded-[12px] active:cursor-grabbing"
+          className="relative h-[min(58vh,360px)] cursor-grab touch-pan-y select-none rounded-none active:cursor-grabbing"
           style={{
             transform: `translateX(${tilt}px) rotate(${tilt / 22}deg)`,
             transition: dragging ? 'none' : 'transform 230ms cubic-bezier(0.22,1,0.36,1), opacity 230ms ease-out',
@@ -277,20 +277,20 @@ function Session({
           </div>
           {/* swipe verdict overlays */}
           <div
-            className="pointer-events-none absolute inset-0 grid place-items-center rounded-[12px] border-2 border-success bg-success/10"
+            className="pointer-events-none absolute inset-0 grid place-items-center rounded-none border-2 border-success bg-success/10"
             style={{ opacity: dx > 0 ? hint : leaving === 'right' ? 1 : 0 }}
             aria-hidden
           >
-            <span className="rounded-[2px] border-2 border-success px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-success">
+            <span className="rounded-none border-2 border-success px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-success">
               Know it
             </span>
           </div>
           <div
-            className="pointer-events-none absolute inset-0 grid place-items-center rounded-[12px] border-2 border-red bg-red/10"
+            className="pointer-events-none absolute inset-0 grid place-items-center rounded-none border-2 border-red bg-red/10"
             style={{ opacity: dx < 0 ? hint : leaving === 'left' ? 1 : 0 }}
             aria-hidden
           >
-            <span className="rounded-[2px] border-2 border-red px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-red dark:text-danger">
+            <span className="rounded-none border-2 border-red px-3 py-1 font-display text-xl font-extrabold uppercase tracking-wider text-red dark:text-danger">
               Again
             </span>
           </div>
@@ -350,7 +350,7 @@ function Face({
   return (
     <div
       className={cn(
-        'absolute inset-0 flex flex-col overflow-hidden rounded-[12px] border p-5 [backface-visibility:hidden] sm:p-7',
+        'absolute inset-0 flex flex-col overflow-hidden rounded-none border p-5 [backface-visibility:hidden] sm:p-7',
         side === 'front' ? 'border-line bg-surface' : 'border-navy/20 bg-surface dark:border-blue/30',
       )}
       style={side === 'back' ? { transform: 'rotateY(180deg)' } : undefined}

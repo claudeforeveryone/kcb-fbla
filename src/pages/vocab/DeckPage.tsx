@@ -118,7 +118,7 @@ export default function DeckPage() {
   if (n === 0) {
     body = (
       <EmptyState
-        className="rounded-[12px]"
+        className="rounded-none"
         title={key === REVIEW_KEY ? 'Nothing is due' : 'This deck has no cards yet'}
         description={key === REVIEW_KEY ? 'You are all caught up. Pick a deck to learn something new.' : 'Cards added by your chapter staff will show up here.'}
         action={<ButtonLink to="/vocab">Browse decks</ButtonLink>}
@@ -143,7 +143,7 @@ export default function DeckPage() {
               {eyebrow}
               {deck.key !== REVIEW_KEY && (
                 <span
-                  className="inline-flex h-5 items-center rounded-[2px] px-1.5 text-[10px] font-bold tracking-[0.1em]"
+                  className="inline-flex h-5 items-center rounded-none px-1.5 text-[10px] font-bold tracking-[0.1em]"
                   style={{ background: color, color: '#fff' }}
                 >
                   {deck.short}
@@ -237,7 +237,7 @@ export default function DeckPage() {
 function HeaderCount({ label, value, dot }: { label: string; value: number; dot: string }) {
   return (
     <span className="flex items-center gap-1.5">
-      <span className={`size-2 rounded-full ${dot}`} aria-hidden />
+      <span className={`size-2 rounded-none ${dot}`} aria-hidden />
       <span className="tabular font-semibold text-white">{value}</span> {label}
     </span>
   );
@@ -246,10 +246,10 @@ function HeaderCount({ label, value, dot }: { label: string; value: number; dot:
 function LoadingDeck() {
   return (
     <>
-      <PageHeader title={<span className="inline-block h-9 w-56 animate-pulse rounded-[2px] bg-white/15" />} back={{ to: '/vocab', label: 'All decks' }} />
+      <PageHeader title={<span className="inline-block h-9 w-56 animate-pulse rounded-none bg-white/15" />} back={{ to: '/vocab', label: 'All decks' }} />
       <Page>
         <Skeleton className="mb-6 h-11 w-full max-w-lg" />
-        <Skeleton className="mx-auto h-80 w-full max-w-2xl" rounded="rounded-[12px]" />
+        <Skeleton className="mx-auto h-80 w-full max-w-2xl" rounded="rounded-none" />
       </Page>
     </>
   );

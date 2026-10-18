@@ -71,7 +71,7 @@ const ROLE_TONE: Record<ChapterRole, BadgeTone> = { president: 'red', executive:
 export function RoleBadge({ role, className, iconOnlyMember }: { role: ChapterRole; className?: string; iconOnlyMember?: boolean }) {
   if (iconOnlyMember && role === 'member') return null;
   return (
-    <Badge tone={ROLE_TONE[role]} className={cn('rounded-[2px] uppercase tracking-wide', className)}>
+    <Badge tone={ROLE_TONE[role]} className={cn('rounded-none uppercase tracking-wide', className)}>
       {ROLE_LABELS[role]}
     </Badge>
   );
@@ -139,7 +139,7 @@ export function InviteCard({ chapterId, className }: { chapterId: string; classN
   };
 
   return (
-    <div className={cn('@container rounded-[2px] border border-line bg-surface p-4 sm:p-5', className)}>
+    <div className={cn('@container rounded-none border border-line bg-surface p-4 sm:p-5', className)}>
       <div className="text-xs font-bold uppercase tracking-wider text-muted">Invite members</div>
       {inv.loading && !inv.data ? (
         <div className="mt-3 space-y-3">
@@ -159,7 +159,7 @@ export function InviteCard({ chapterId, className }: { chapterId: string; classN
             <div className="text-xs text-muted">Join code</div>
             <div className="mt-1 flex items-center gap-2">
               <span
-                className="tabular rounded-[2px] border border-line-strong bg-surface px-3 py-1.5 font-display text-2xl font-extrabold tracking-[0.25em] text-red"
+                className="tabular rounded-none border border-line-strong bg-surface px-3 py-1.5 font-display text-2xl font-extrabold tracking-[0.25em] text-red"
                 aria-label={`Join code ${inv.data.join_code.split('').join(' ')}`}
               >
                 {inv.data.join_code}
@@ -173,7 +173,7 @@ export function InviteCard({ chapterId, className }: { chapterId: string; classN
           <div className="min-w-0">
             <div className="text-xs text-muted">Invite link</div>
             <div className="mt-1 flex items-center gap-2">
-              <code className="min-w-0 flex-1 truncate rounded-[2px] border
+              <code className="min-w-0 flex-1 truncate rounded-none border
  border-line bg-surface-2 px-3 py-1.5 text-sm text-ink">
                 {inviteUrl(inv.data.invite_token)}
               </code>

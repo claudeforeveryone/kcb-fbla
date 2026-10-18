@@ -76,8 +76,8 @@ export function PlayerLine({
   if (!player)
     return (
       <div className={cn('flex min-w-0 items-center gap-3', className)}>
-        <span className={cn('shrink-0 animate-pulse rounded-full bg-surface-3', size === 'sm' ? 'size-8' : 'size-10')} />
-        <span className="h-3.5 w-28 animate-pulse rounded-[2px] bg-surface-3" />
+        <span className={cn('shrink-0 animate-pulse rounded-none bg-surface-3', size === 'sm' ? 'size-8' : 'size-10')} />
+        <span className="h-3.5 w-28 animate-pulse rounded-none bg-surface-3" />
       </div>
     );
   const name = (
@@ -120,7 +120,7 @@ export function OutcomeBadge({ outcome, className }: { outcome: DuelOutcome; cla
 
 export function EventChip({ event }: { event: string }) {
   return (
-    <span className="inline-flex h-6 items-center rounded-[2px] bg-surface-2 px-2 text-[11px] font-bold uppercase tracking-wide text-muted ring-1 ring-inset ring-line">
+    <span className="inline-flex h-6 items-center rounded-none bg-surface-2 px-2 text-[11px] font-bold uppercase tracking-wide text-muted ring-1 ring-inset ring-line">
       {arenaEventShort(event)}
     </span>
   );
@@ -320,7 +320,7 @@ export function DuelCard({
   return (
     <div
       className={cn(
-        'rounded-[2px] border bg-surface p-4 transition-colors duration-200 hover:border-navy/40',
+        'rounded-none border bg-surface p-4 transition-colors duration-200 hover:border-navy/40',
         accent,
         fresh && 'animate-pop',
       )}
@@ -371,7 +371,7 @@ export function VersusBanner({
         <div className="relative">
           <Avatar src={p?.avatar_url} name={p?.display_name || p?.username} size="xl" ring className="max-sm:size-14 max-sm:text-lg" />
           {won && (
-            <span className="exam-pop absolute -top-3 left-1/2 -translate-x-1/2 rounded-[2px] bg-red px-1.5 py-0.5 font-display text-[10px] font-black uppercase tracking-widest text-white">
+            <span className="exam-pop absolute -top-3 left-1/2 -translate-x-1/2 rounded-none bg-red px-1.5 py-0.5 font-display text-[10px] font-black uppercase tracking-widest text-white">
               Winner
             </span>
           )}

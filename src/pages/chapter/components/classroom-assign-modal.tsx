@@ -242,5 +242,5 @@ export function AssignModal({
 }
 
 function Empty({ text }: { text: string }) {
-  return <p className="rounded-[2px] border border-dashed border-line-strong bg-surface-2 px-4 py-3 text-sm text-muted">{text}</p>;
+  return <p className="rounded-none border border-dashed border-line-strong bg-surface-2 px-4 py-3 text-sm text-muted">{text}</p>;
 }

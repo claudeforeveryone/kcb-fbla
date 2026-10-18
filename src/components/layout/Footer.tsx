@@ -19,12 +19,10 @@ export function Footer({ className }: { className?: string }) {
             <img src={LOGO_WHITE} {...LOGO_SIZE} alt="" loading="lazy" className="h-10 w-auto" />
             <div>
               <div className="font-display text-lg font-extrabold text-white">FBLC United</div>
-              <div className="text-xs text-white/70">Practise. Compete. Lead.</div>
             </div>
           </div>
           <p className="mt-4 max-w-sm text-sm text-white/80">
-            FBLA-style practice exams, vocab and 1v1 duels for FBL Canada members, plus the tools our chapter
-            executives use to run the club.
+            FBLA-style practice for FBL Canada members.
           </p>
           {/* The {' '} keep real spaces in the text (copy, search snippets, screen readers); the gap does the visual
               spacing. The heart is brand red lightened for navy: the dark-mode red tone (--danger), 5.2:1 here. */}

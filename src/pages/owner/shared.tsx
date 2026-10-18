@@ -307,7 +307,7 @@ export function PrivacyNote({ className }: { className?: string }) {
 
 /** A bordered panel for a block of the console. */
 export function Panel({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('min-w-0 rounded-[4px] border border-line bg-surface p-4 sm:p-5', className)}>{children}</div>;
+  return <div className={cn('min-w-0 rounded-none border border-line bg-surface p-4 sm:p-5', className)}>{children}</div>;
 }
 
 const whenFmt = new Intl.DateTimeFormat('en-CA', {

@@ -81,7 +81,7 @@ function CrashNotice({ message, offlineAtCrash }: { message: string; offlineAtCr
   const Icon = kind === 'offline' ? WifiOff : AlertTriangle;
   return (
     <div className="mx-auto grid min-h-[50vh] w-full max-w-lg place-items-center px-4 py-12" role="alert">
-      <div className="w-full rounded-[4px] border border-line bg-surface p-8 text-center">
+      <div className="w-full rounded-none border border-line bg-surface p-8 text-center">
         <Icon className="mx-auto mb-4 size-6 text-red dark:text-danger" aria-hidden />
         <h1 className="text-xl font-bold">{title}</h1>
         <p className="mt-2 text-sm text-muted">{body}</p>
@@ -90,7 +90,7 @@ function CrashNotice({ message, offlineAtCrash }: { message: string; offlineAtCr
         <button
           type="button"
           onClick={() => window.location.reload()}
-          className="mt-6 inline-flex h-10 items-center gap-2 rounded-[2px] border border-navy bg-surface px-4 font-display text-sm font-semibold text-navy transition-colors hover:bg-surface-2 dark:border-link dark:text-link"
+          className="mt-6 inline-flex h-10 items-center gap-2 rounded-none border border-navy bg-surface px-4 font-display text-sm font-semibold text-navy transition-colors hover:bg-surface-2 dark:border-link dark:text-link"
         >
           <RefreshCw className="size-4" aria-hidden /> {kind === 'offline' ? 'Try again' : 'Reload'}
         </button>

@@ -47,7 +47,7 @@ export function Brand({
       )}
     </>
   );
-  const cls = cn('inline-flex items-center gap-2.5 rounded-[2px]', className);
+  const cls = cn('inline-flex items-center gap-2.5 rounded-none', className);
   return to ? (
     <Link to={to} className={cls} aria-label="FBLC United home">
       {inner}

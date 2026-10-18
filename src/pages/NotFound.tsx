@@ -7,7 +7,7 @@ export default function NotFound() {
   const { pathname } = useLocation();
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 md:py-20">
-      <div className="relative isolate overflow-hidden band rounded-[4px] border border-t-4 border-line border-t-red px-6 py-14 text-center text-white sm:px-12">
+      <div className="relative isolate overflow-hidden band rounded-none border border-t-4 border-line border-t-red px-6 py-14 text-center text-white sm:px-12">
         <UnitedRule />
         <div className="relative">
           <p className="tabular font-display text-7xl font-extrabold tracking-tight text-white sm:text-8xl">
@@ -15,7 +15,7 @@ export default function NotFound() {
           </p>
           <h1 className="mt-3 text-2xl font-bold text-white sm:text-3xl">This page is off the board</h1>
           <p className="mx-auto mt-3 max-w-md text-white/75">
-            We could not find <code className="rounded-[2px] bg-white/10 px-1.5 py-0.5 text-sm">{pathname}</code>. It may have
+            We could not find <code className="rounded-none bg-white/10 px-1.5 py-0.5 text-sm">{pathname}</code>. It may have
             moved, or the link is out of date.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-2">

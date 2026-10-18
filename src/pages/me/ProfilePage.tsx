@@ -481,7 +481,7 @@ function DuelCard({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
             ).map(([l, v, c]) => (
               <div key={l} className="flex items-center justify-between gap-2">
                 <dt className="flex items-center gap-2 text-muted">
-                  <span className={cn('size-2.5 rounded-full', c)} />
+                  <span className={cn('size-2.5 rounded-none', c)} />
                   {l}
                 </dt>
                 <dd className="tabular font-bold text-heading">{v}</dd>
@@ -498,7 +498,7 @@ function BestPaper({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   const b = stats.best_paper!;
   const body = (
     <div className="flex items-center gap-4">
-      <div className="grid size-16 shrink-0 place-items-center rounded-[4px] border border-line border-t-[3px] border-t-red bg-surface">
+      <div className="grid size-16 shrink-0 place-items-center rounded-none border border-line border-t-[3px] border-t-red bg-surface">
         <span className="tabular font-display text-lg font-extrabold text-red dark:text-danger">{Math.round(Number(b.accuracy) * 100)}%</span>
       </div>
       <div className="min-w-0">
@@ -515,7 +515,7 @@ function BestPaper({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
   return (
     <Panel title="Best paper">
       {isMe ? (
-        <Link to={`/play/review/${b.attempt_id}`} className="-m-2 block rounded-lg p-2 transition-colors hover:bg-surface-2">
+        <Link to={`/play/review/${b.attempt_id}`} className="-m-2 block rounded-none p-2 transition-colors hover:bg-surface-2">
           {body}
         </Link>
       ) : (
@@ -549,7 +549,7 @@ function RecentCard({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
               <>
                 <span
                   className={cn(
-                    'tabular grid size-10 shrink-0 place-items-center rounded-lg text-xs font-extrabold',
+                    'tabular grid size-10 shrink-0 place-items-center rounded-none text-xs font-extrabold',
                     acc >= 0.8 ? 'bg-success/12 text-success' : acc >= 0.6 ? 'bg-warning/15 text-[#8a5f00] dark:text-warning' : 'bg-red/10 text-red dark:text-danger',
                   )}
                 >
@@ -572,7 +572,7 @@ function RecentCard({ stats, isMe }: { stats: ProfileStats; isMe: boolean }) {
             return (
               <li key={a.id}>
                 {isMe ? (
-                  <Link to={`/play/review/${a.id}`} className="flex items-center gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-surface-2">
+                  <Link to={`/play/review/${a.id}`} className="flex items-center gap-3 rounded-none px-2 py-2.5 transition-colors hover:bg-surface-2">
                     {inner}
                   </Link>
                 ) : (
@@ -636,7 +636,7 @@ function FriendsCard() {
               <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wider text-red dark:text-danger">Requests</div>
               <ul className="space-y-1">
                 {incoming.map((f) => (
-                  <li key={f.profile.id} className="flex items-center gap-2.5 rounded-lg bg-red/[0.04] px-2 py-1.5">
+                  <li key={f.profile.id} className="flex items-center gap-2.5 rounded-none bg-red/[0.04] px-2 py-1.5">
                     <Link to={`/u/${f.profile.username}`} className="flex min-w-0 flex-1 items-center gap-2.5">
                       <Avatar src={f.profile.avatar_url} name={f.profile.display_name} size="sm" />
                       <span className="truncate text-sm font-semibold text-heading">{f.profile.display_name}</span>
@@ -656,7 +656,7 @@ function FriendsCard() {
             <ul className="space-y-0.5">
               {friends.slice(0, 8).map((f) => (
                 <li key={f.profile.id}>
-                  <Link to={`/u/${f.profile.username}`} className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 transition-colors hover:bg-surface-2">
+                  <Link to={`/u/${f.profile.username}`} className="flex items-center gap-2.5 rounded-none px-2 py-1.5 transition-colors hover:bg-surface-2">
                     <Avatar src={f.profile.avatar_url} name={f.profile.display_name} size="sm" />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm font-semibold text-heading">{f.profile.display_name}</span>
@@ -689,7 +689,7 @@ function ProfileSkeleton() {
     <>
       <header className="band relative overflow-hidden">
         <div className="mx-auto flex max-w-[1440px] lg:px-10 items-center gap-4 px-4 pb-14 pt-12 sm:px-6">
-          <Skeleton className="size-24 opacity-30" rounded="rounded-full" />
+          <Skeleton className="size-24 opacity-30" rounded="rounded-none" />
           <div className="flex-1 space-y-3">
             <Skeleton className="h-8 w-56 opacity-30" />
             <Skeleton className="h-4 w-40 opacity-30" />
@@ -699,12 +699,12 @@ function ProfileSkeleton() {
       <Page width="wide">
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4" role="status" aria-label="Loading profile">
           {Array.from({ length: 8 }, (_, i) => (
-            <Skeleton key={i} className="h-24" rounded="rounded-[4px]" />
+            <Skeleton key={i} className="h-24" rounded="rounded-none" />
           ))}
         </div>
         <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <Skeleton className="h-72" rounded="rounded-[4px]" />
-          <Skeleton className="h-72" rounded="rounded-[4px]" />
+          <Skeleton className="h-72" rounded="rounded-none" />
+          <Skeleton className="h-72" rounded="rounded-none" />
         </div>
       </Page>
     </>

@@ -197,7 +197,7 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
             <ol className="space-y-2.5">
               {mostActive.map((m, i) => (
                 <li key={m.user_id}>
-                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-[2px] p-1 hover:bg-surface-2">
+                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-none p-1 hover:bg-surface-2">
                     <span className="tabular w-4 text-center font-display text-sm font-bold text-muted">{i + 1}</span>
                     <Avatar src={m.avatar_url} name={m.display_name} size="sm" />
                     <span className="min-w-0 flex-1">
@@ -226,7 +226,7 @@ export function AnalyticsPanel({ chapterId }: { chapterId: string }) {
             <ul className="max-h-72 space-y-2 overflow-y-auto pr-1">
               {inactive.map(({ m, days }) => (
                 <li key={m.user_id}>
-                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-[2px] p-1 hover:bg-surface-2">
+                  <Link to={`/chapter/member/${m.user_id}`} className="flex items-center gap-3 rounded-none p-1 hover:bg-surface-2">
                     <Avatar src={m.avatar_url} name={m.display_name} size="sm" />
                     <span className="min-w-0 flex-1 truncate text-sm font-semibold text-heading">{m.display_name}</span>
                     <span className="shrink-0 text-xs font-semibold text-muted">{days == null ? 'Never practised' : `${days} days`}</span>

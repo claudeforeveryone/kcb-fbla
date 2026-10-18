@@ -105,13 +105,6 @@
   color: var(--heading);
 }
 
-.lp-body {
-  max-width: 52ch;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--ink);
-}
-
 .lp-fact {
   font-size: 0.8125rem;
   font-weight: 600;
@@ -259,45 +252,6 @@
   outline-offset: 2px;
 }
 
-/* how it works: four steps on one rule */
-.lp-steps {
-  display: grid;
-  gap: 40px 32px;
-}
-@media (min-width: 640px) {
-  .lp-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1024px) {
-  .lp-steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-.lp-steps > li {
-  position: relative;
-  padding-top: 24px;
-  border-top: 1px solid var(--line-strong);
-}
-/* the red segment on each step's rule draws when the step comes in */
-.lp-steps > li::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--red);
-  transform-origin: left;
-}
-.lp-step-no {
-  font-family: var(--font-display);
-  font-size: 0.875rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--muted);
-}
-
 .lp-join {
   background: var(--navy);
   color: #fff;
@@ -315,7 +269,7 @@
   color: var(--ink);
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 0;
   color-scheme: light;
 }
 .dark .obs-app {
@@ -373,12 +327,6 @@
     transition:
       opacity 520ms var(--lp-ease) var(--d, 0ms),
       transform 620ms var(--lp-ease) var(--d, 0ms);
-  }
-  .lp-js .lp-steps > li:not(.is-in)::before {
-    transform: scaleX(0);
-  }
-  .lp-steps > li::before {
-    transition: transform 700ms var(--lp-ease) calc(var(--d, 0ms) + 200ms);
   }
 }
 

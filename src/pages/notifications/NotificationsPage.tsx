@@ -399,7 +399,7 @@ function Row({
               type="button"
               aria-label={`Options for "${n.title}"`}
               className={cn(
-                'grid size-9 place-items-center rounded-[2px] text-muted transition-[opacity,background-color,color] hover:bg-surface-3 hover:text-heading',
+                'grid size-9 place-items-center rounded-none text-muted transition-[opacity,background-color,color] hover:bg-surface-3 hover:text-heading',
                 'sm:opacity-0 sm:focus-visible:opacity-100 sm:group-hover:opacity-100',
                 p.open && 'bg-surface-3 text-heading sm:opacity-100',
               )}
@@ -428,12 +428,12 @@ function Row({
 function LiveDot({ live }: { live: boolean }) {
   return (
     <span
-      className="mr-1 inline-flex items-center gap-1.5 rounded-[2px] px-2 py-1 text-xs font-semibold text-muted"
+      className="mr-1 inline-flex items-center gap-1.5 rounded-none px-2 py-1 text-xs font-semibold text-muted"
       title={live ? 'New notifications appear instantly' : 'Reconnecting. New notifications will appear when the connection returns.'}
     >
       <span className="relative flex size-2">
-        {live && <span className="absolute inline-flex size-full animate-ping rounded-full bg-success/60 motion-reduce:hidden" />}
-        <span className={cn('relative inline-flex size-2 rounded-full', live ? 'bg-success' : 'bg-line-strong')} />
+        {live && <span className="absolute inline-flex size-full animate-ping rounded-none bg-success/60 motion-reduce:hidden" />}
+        <span className={cn('relative inline-flex size-2 rounded-none', live ? 'bg-success' : 'bg-line-strong')} />
       </span>
       {live ? 'Live' : 'Offline'}
     </span>
@@ -524,7 +524,7 @@ function EmailBanner({
     <div
       role="status"
       className={cn(
-        'animate-rise relative mb-6 flex flex-col gap-3 rounded-[4px] border p-4 pr-12 sm:flex-row sm:items-center',
+        'animate-rise relative mb-6 flex flex-col gap-3 rounded-none border p-4 pr-12 sm:flex-row sm:items-center',
         ok ? 'border-blue/25 border-l-[3px] border-l-blue bg-surface' : 'border-warning/30 border-l-[3px] border-l-warning bg-surface',
       )}
     >
@@ -556,7 +556,7 @@ function EmailBanner({
         type="button"
         onClick={onDismiss}
         aria-label="Dismiss"
-        className="absolute right-2 top-2 grid size-8 place-items-center rounded-[2px] text-muted hover:bg-surface-2 hover:text-ink"
+        className="absolute right-2 top-2 grid size-8 place-items-center rounded-none text-muted hover:bg-surface-2 hover:text-ink"
       >
         <X className="size-4" />
       </button>

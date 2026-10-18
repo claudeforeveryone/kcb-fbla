@@ -165,16 +165,16 @@
   --font-sans: "Open Sans", "Open Sans Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Work Sans", "Work Sans Fallback", "Open Sans", ui-sans-serif, system-ui, sans-serif;
 
-  /* Mostly square: small radii only. */
-  --radius-card: 4px;
-  --radius-control: 3px;
-  --radius-xs: 1px;
-  --radius-sm: 2px;
-  --radius-md: 3px;
-  --radius-lg: 4px;
-  --radius-xl: 4px;
-  --radius-2xl: 4px;
-  --radius-3xl: 4px;
+  /* Square everywhere: the members asked for no rounded corners. */
+  --radius-card: 0;
+  --radius-control: 0;
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
 
   --shadow-card: 0 1px 2px rgb(var(--shadow-color) / 0.05);
   --shadow-lift: 0 1px 2px rgb(var(--shadow-color) / 0.06), 0 8px 24px -6px rgb(var(--shadow-color) / 0.16);
@@ -249,7 +249,7 @@
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
-    border-radius: 2px;
+    border-radius: 0;
   }
   input, textarea, select { font: inherit; }
   img { max-width: 100%; }

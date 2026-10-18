@@ -47,7 +47,7 @@ export default function SettingsPage() {
                       e.preventDefault();
                       document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }}
-                    className="flex h-9 items-center gap-2 whitespace-nowrap rounded-[2px] px-3 text-sm font-semibold text-muted transition-colors hover:bg-surface-2 hover:text-ink [&>svg]:size-4"
+                    className="flex h-9 items-center gap-2 whitespace-nowrap rounded-none px-3 text-sm font-semibold text-muted transition-colors hover:bg-surface-2 hover:text-ink [&>svg]:size-4"
                   >
                     {s.label}
                   </a>
@@ -82,7 +82,7 @@ function SettingsCard({
   footer?: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 overflow-hidden rounded-[12px] border border-line bg-surface">
+    <section id={id} className="scroll-mt-24 overflow-hidden rounded-none border border-line bg-surface">
       <div className="px-5 pt-5 sm:px-6">
         <h2 className="text-lg font-bold">{title}</h2>
         {description && <p className="mt-0.5 text-sm text-muted">{description}</p>}
@@ -248,7 +248,7 @@ function ProfileSection() {
               type="button"
               onClick={() => fileRef.current?.click()}
               disabled={preparing || saving}
-              className="absolute inset-0 flex flex-col items-center justify-center gap-1 rounded-full bg-navy/0 text-xs font-bold text-white opacity-0 transition-[opacity,background-color] duration-200 hover:bg-navy/65 hover:opacity-100 focus-visible:bg-navy/65 focus-visible:opacity-100 disabled:bg-navy/65 disabled:opacity-100"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-1 rounded-none bg-navy/0 text-xs font-bold text-white opacity-0 transition-[opacity,background-color] duration-200 hover:bg-navy/65 hover:opacity-100 focus-visible:bg-navy/65 focus-visible:opacity-100 disabled:bg-navy/65 disabled:opacity-100"
               aria-label="Change photo"
             >
               {preparing ? <Loader2 className="size-7 animate-spin" /> : <Camera className="size-7" />}
@@ -437,9 +437,9 @@ function EmailSection() {
         onChange={toggle}
         disabled={busy}
         label="Weekly overview and reminders"
-        description="A Monday summary of your week (questions, accuracy, Elo change, streak), your open chapter assignments, the latest newsletter, and a nudge if you have been away for a week."
+        description="A Monday summary of your week and your open assignments."
       />
-      <p className="mt-4 rounded-lg bg-surface-2 px-3 py-2.5 text-xs text-muted">
+      <p className="mt-4 rounded-none bg-surface-2 px-3 py-2.5 text-xs text-muted">
         Account emails (password resets and sign-in links) are always sent, whatever you choose here.
       </p>
     </SettingsCard>
@@ -467,11 +467,11 @@ function AppearanceSection() {
               aria-checked={active}
               onClick={() => setTheme(o.value)}
               className={cn(
-                'group rounded-xl border-2 p-2 text-left transition-colors duration-150',
+                'group rounded-none border-2 p-2 text-left transition-colors duration-150',
                 active ? 'border-blue' : 'border-line hover:border-line-strong',
               )}
             >
-              <span className={cn('relative block h-16 overflow-hidden rounded-lg ring-1 ring-inset ring-line sm:h-20', o.preview)}>
+              <span className={cn('relative block h-16 overflow-hidden rounded-none ring-1 ring-inset ring-line sm:h-20', o.preview)}>
                 <span className="absolute inset-x-0 top-0 h-3 bg-[#001E60]" />
                 <span className="absolute left-2 top-5 h-2 w-1/2 bg-[#3F6FB3]/70" />
                 <span className="absolute left-2 top-9 h-2 w-1/3 bg-[#BF0D3E]/70" />
@@ -560,7 +560,7 @@ function PasswordSection() {
       <SettingsCard
         id="security"
         title="Password"
-        description="Use at least 8 characters. A longer phrase is easier to remember and harder to guess."
+        description="At least 8 characters."
         footer={
           <Button type="submit" loading={busy} disabled={!ready}>
             Change password
@@ -616,7 +616,7 @@ function PasswordSection() {
             error={confirmErr}
           />
           {err && (
-            <p role="alert" className="rounded-lg bg-red/[0.06] px-3 py-2.5 text-sm font-medium text-danger">
+            <p role="alert" className="rounded-none bg-red/[0.06] px-3 py-2.5 text-sm font-medium text-danger">
               {err}
             </p>
           )}
@@ -644,7 +644,7 @@ function AccountSection() {
     }
   };
   return (
-    <SettingsCard id="account" title="Sign out" description="Sign out of FBLC United on this device. Your progress is saved to your account.">
+    <SettingsCard id="account" title="Sign out" description="Your progress stays saved to your account.">
       <Button variant="danger" leftIcon={<LogOut className="size-4" />} loading={busy} onClick={out}>
         Sign out
       </Button>

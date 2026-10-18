@@ -13,7 +13,6 @@ import {
   MOCK_MINUTES,
   MOCK_QUESTIONS,
   QUESTIONS_PER_EVENT,
-  TERMS_PER_EVENT,
   TOTAL_TERMS,
   eventsIn,
   signupFor,
@@ -24,52 +23,33 @@ import {
 const PLATFORM = [
   {
     title: "Practice papers",
-    body: `Full mocks run ${MOCK_QUESTIONS} questions in ${MOCK_MINUTES} minutes, like the real objective test. Quick 10s, a daily challenge, area drills and endless mode fill the days between.`,
+    body: `Full ${MOCK_QUESTIONS}-question mocks on a ${MOCK_MINUTES}-minute clock, plus Quick 10s and area drills.`,
     fact: `${EVENTS.length} events, ${QUESTIONS_PER_EVENT} questions each`,
   },
   {
     title: "Elo and leaderboards",
-    body: "Your rating moves on your first try at each question, weighted by difficulty, so repeats can’t farm points. Player and chapter boards show where you stand.",
-    fact: "Starts at 0. First tries only.",
+    body: "Only your first try at a question counts, weighted by difficulty.",
+    fact: "Starts at 0",
   },
   {
-    title: "Vocab with spaced repetition",
-    body: "Learn, Flashcards, Match and Quiz over each event’s deck. Terms you miss come back sooner; the ones you know spread out.",
-    fact: `${TERMS_PER_EVENT} terms per event, ${TOTAL_TERMS} in all`,
+    title: "Vocab",
+    body: "Flashcards, Match and Quiz. Terms you miss come back sooner.",
+    fact: `${TOTAL_TERMS} terms`,
   },
   {
-    title: "1v1 Arena duels",
-    body: `Challenge anyone to the same ${DUEL_QUESTIONS} questions on a server clock. Most correct wins, and time breaks a tie.`,
+    title: "1v1 duels",
+    body: `Same ${DUEL_QUESTIONS} questions for both players. Most correct wins.`,
     fact: `Accept within ${DUEL_ACCEPT_HOURS} hours`,
   },
   {
-    title: "Chapters and classroom",
-    body: "Join with a code or an invite link. Executives run the roster, roles, attendance and trainers; the classroom holds posts, newsletters, assignments, custom tests and decks.",
+    title: "Chapters",
+    body: "Join with a code. Executives post, assign tests and take attendance.",
     fact: "Join by code or link",
   },
   {
     title: "Career stats",
-    body: "Every paper you sit is kept with a question-by-question review. Missed questions go into a redo run, and your weak spots show up on Home.",
+    body: "Every paper is kept with a full review. Misses go into a redo run.",
     fact: "Every paper kept",
-  },
-];
-
-const STEPS = [
-  {
-    title: "Pick",
-    body: `Choose your event from ${EVENTS.length}. Each has its own question bank, vocab deck and competency areas.`,
-  },
-  {
-    title: "Practise",
-    body: `Sit a full mock on the ${MOCK_MINUTES}-minute clock, or run a Quick 10 between classes.`,
-  },
-  {
-    title: "Review",
-    body: "Every answer comes with an explanation. Missed questions wait for you in a redo run.",
-  },
-  {
-    title: "Climb",
-    body: "First tries move your Elo. Player and chapter leaderboards show where you stand.",
   },
 ];
 
@@ -126,8 +106,7 @@ export default function LandingPage() {
               </span>
             </h1>
             <p className="lp-lead mt-6 max-w-[40ch]">
-              Timed FBLA-style papers for FBL Canada members: {EVENTS.length} events, a first-try Elo rating, vocab
-              drills and 1v1 duels.
+              Timed papers, Elo, vocab and 1v1 duels for FBL Canada members.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Link to="/signup" className={buttonClasses("accent", "lg", "lp-cta")}>
@@ -168,11 +147,8 @@ export default function LandingPage() {
         <div className="lp-wrap">
           <div data-reveal className="lp-head">
             <h2 id="platform-title" className="lp-h2" tabIndex={-1}>
-              Built like competition day.
+              What you get
             </h2>
-            <p className="lp-body mt-4">
-              Timed papers, first-try ratings and leaderboards. Every number on your profile comes from your own answers.
-            </p>
           </div>
           <ul className="lp-grid mt-14">
             {PLATFORM.map((p, i) => (
@@ -197,9 +173,6 @@ export default function LandingPage() {
             <h2 id="events-title" className="lp-h2">
               Fifteen events.
             </h2>
-            <p className="lp-body mt-4">
-              Every event has its own {QUESTIONS_PER_EVENT}-question bank and {TERMS_PER_EVENT}-term vocab deck.
-            </p>
           </div>
           <div className="lp-events mt-14">
             {DISCIPLINES.map((d) => (
@@ -222,34 +195,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* how it works */}
-      <section id="how" aria-labelledby="how-title" className="lp-section">
-        <div className="lp-wrap">
-          <h2 id="how-title" data-reveal className="lp-h2">
-            Pick. Practise. Review. Climb.
-          </h2>
-          <ol className="lp-steps mt-14">
-            {STEPS.map((s, i) => (
-              <li key={s.title} data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>
-                <span className="lp-step-no">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="lp-h3 mt-5">{s.title}</h3>
-                <p className="mt-2 max-w-[32ch] text-[0.9375rem] leading-relaxed text-ink">{s.body}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       {/* close */}
       <section id="join" aria-labelledby="join-title" className="lp-join">
         <div className="lp-wrap py-20 md:py-28">
           <div data-reveal className="max-w-[36rem]">
             <h2 id="join-title" className="lp-h2 text-white">
-              Your first Quick 10 takes about five minutes.
+              Start with ten questions.
             </h2>
             <p className="mt-5 text-[1.0625rem] leading-relaxed text-white/80">
-              Make a free account, pick your main event and start. Your rating begins at 0 and moves from your very first
-              answer.
+              Free account. Pick your event and go.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Link to="/signup" className={buttonClasses("accent", "lg", "lp-cta")}>

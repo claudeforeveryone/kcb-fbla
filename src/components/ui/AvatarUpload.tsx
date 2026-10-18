@@ -47,7 +47,7 @@ export function AvatarUpload({
   };
 
   return (
-    <span className="group relative inline-flex shrink-0 rounded-full">
+    <span className="group relative inline-flex shrink-0 rounded-none">
       {/* key forces a fresh <img> (and resets its broken state) whenever the URL changes */}
       <Avatar key={src ?? 'none'} src={src} name={name} size={size} ring={ring} className={className} />
       <button
@@ -57,7 +57,7 @@ export function AvatarUpload({
         aria-label="Change photo"
         title="Change photo"
         className={cn(
-          'absolute inset-0 flex flex-col items-center justify-center gap-1 rounded-full bg-[#001E60]/0 text-xs font-bold text-white opacity-0 transition-[opacity,background-color] duration-150',
+          'absolute inset-0 flex flex-col items-center justify-center gap-1 rounded-none bg-[#001E60]/0 text-xs font-bold text-white opacity-0 transition-[opacity,background-color] duration-150',
           'hover:bg-[#001E60]/65 hover:opacity-100 focus-visible:bg-[#001E60]/65 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white',
           busy && 'bg-[#001E60]/65 opacity-100',
         )}
@@ -68,7 +68,7 @@ export function AvatarUpload({
       {/* always-visible badge so touch users can see the photo is editable */}
       <span
         aria-hidden
-        className="pointer-events-none absolute bottom-0.5 right-0.5 grid size-8 place-items-center rounded-full border-2 border-white bg-[#BF0D3E] text-white transition-opacity group-hover:opacity-0"
+        className="pointer-events-none absolute bottom-0.5 right-0.5 grid size-8 place-items-center rounded-none border-2 border-white bg-[#BF0D3E] text-white transition-opacity group-hover:opacity-0"
       >
         <Camera className="size-4" />
       </span>

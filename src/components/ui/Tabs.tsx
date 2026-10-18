@@ -72,7 +72,7 @@ export function Tabs<T extends string>({
       aria-label={ariaLabel}
       className={cn(
         'scroll-fade scrollbar-none flex max-w-full overflow-x-auto',
-        variant === 'underline' ? 'gap-1 border-b border-line' : 'gap-0 rounded-[2px] border border-line bg-surface-2',
+        variant === 'underline' ? 'gap-1 border-b border-line' : 'gap-0 rounded-none border border-line bg-surface-2',
         className,
       )}
     >
@@ -112,7 +112,7 @@ export function Tabs<T extends string>({
             {t.count != null && (
               <span
                 className={cn(
-                  'tabular min-w-5 rounded-[2px] px-1.5 text-center text-[11px] leading-5',
+                  'tabular min-w-5 rounded-none px-1.5 text-center text-[11px] leading-5',
                   active ? 'bg-red text-white' : 'bg-surface-3 text-muted',
                 )}
               >

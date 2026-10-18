@@ -306,7 +306,7 @@ export function ArenaPage() {
       <PageHeader
         eyebrow="1v1 duels"
         title="Arena"
-        subtitle="Challenge anyone to the same 10 questions. Most correct wins, the faster time breaks a tie."
+        subtitle="Same 10 questions. Most correct wins, time breaks ties."
         actions={
           <Button variant="accent" size="lg" onClick={() => openNew()}>
             New challenge
@@ -436,7 +436,7 @@ export function ArenaPage() {
                     <Section
                       title={
                         <span className="flex items-center gap-2">
-                          <span className="inline-flex size-2 rounded-full bg-red" />
+                          <span className="inline-flex size-2 rounded-none bg-red" />
                           Incoming challenges
                         </span>
                       }
@@ -632,21 +632,21 @@ function LobbySkeleton() {
       <div className="space-y-3">
         <Skeleton className="mb-2 h-6 w-48" />
         {Array.from({ length: 4 }, (_, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-[4px] border border-line bg-surface p-4">
-            <Skeleton className="size-10" rounded="rounded-full" />
+          <div key={i} className="flex items-center gap-3 rounded-none border border-line bg-surface p-4">
+            <Skeleton className="size-10" rounded="rounded-none" />
             <div className="flex-1 space-y-2">
               <Skeleton className="h-3.5 w-1/3" />
               <Skeleton className="h-3 w-1/4" />
             </div>
-            <Skeleton className="h-8 w-20" rounded="rounded-[2px]"
+            <Skeleton className="h-8 w-20" rounded="rounded-none"
  />
           </div>
         ))}
       </div>
       <div className="space-y-4">
-        <Skeleton className="h-48 w-full" rounded="rounded-[2px]"
+        <Skeleton className="h-48 w-full" rounded="rounded-none"
  />
-        <Skeleton className="h-40 w-full" rounded="rounded-[2px]"
+        <Skeleton className="h-40 w-full" rounded="rounded-none"
  />
       </div>
     </div>

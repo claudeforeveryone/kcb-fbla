@@ -58,7 +58,7 @@ export function EventTag({ event, className, onClick }: { event: string | null |
   const info = eventInfo(event);
   if (!info) return null;
   const cls = cn(
-    'inline-flex h-6 items-center gap-1.5 rounded-[2px] border border-line bg-surface-2 px-2 text-[11px] font-bold uppercase tracking-wider text-muted',
+    'inline-flex h-6 items-center gap-1.5 rounded-none border border-line bg-surface-2 px-2 text-[11px] font-bold uppercase tracking-wider text-muted',
     onClick && 'transition-colors hover:border-blue/50 hover:text-heading',
     className,
   );
@@ -130,7 +130,7 @@ export function KindLabel({ label, accent, className }: { label: string; accent:
   return (
     <span
       className={cn(
-        'inline-flex h-5 shrink-0 items-center rounded-[2px] px-1.5 text-[10px] font-bold uppercase tracking-wider',
+        'inline-flex h-5 shrink-0 items-center rounded-none px-1.5 text-[10px] font-bold uppercase tracking-wider',
         accent,
         className,
       )}

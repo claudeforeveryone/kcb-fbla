@@ -97,7 +97,7 @@ export function Modal({
         aria-describedby={description ? descId : undefined}
         tabIndex={-1}
         className={cn(
-          'animate-pop relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-[4px] border border-line bg-surface shadow-lift outline-none sm:rounded-[4px]',
+          'animate-pop relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-none border border-line bg-surface shadow-lift outline-none sm:rounded-none',
           widths[size],
         )}
       >
@@ -119,7 +119,7 @@ export function Modal({
               <button
                 type="button"
                 onClick={onClose}
-                className="-mr-1.5 -mt-1 grid size-9 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+                className="-mr-1.5 -mt-1 grid size-9 place-items-center rounded-none text-muted transition-colors hover:bg-surface-2 hover:text-ink"
                 aria-label="Close"
               >
                 <X className="size-5" />

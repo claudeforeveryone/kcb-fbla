@@ -169,7 +169,7 @@ export function MembersPanel({ chapterId, chapterName, myId, myRole, members, ba
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search name or @username"
                 aria-label="Search members"
-                className="h-10 w-full rounded-[4px] border border-line-strong bg-surface pl-9 pr-3 text-[0.9375rem] outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/15"
+                className="h-10 w-full rounded-none border border-line-strong bg-surface pl-9 pr-3 text-[0.9375rem] outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/15"
               />
             </div>
             <ScrollRow className="-mx-1 gap-1.5 px-1 pb-1 md:pb-0">
@@ -342,7 +342,7 @@ function RolePicker({ m, myRole, onPick }: { m: RosterMember; myRole: ChapterRol
       trigger={({ open: _open, ...p }) => (
         <button
           {...p}
-          className="inline-flex items-center gap-1 rounded-[2px] transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+          className="inline-flex items-center gap-1 rounded-none transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
           aria-label={`Change role for ${m.profile.display_name}, currently ${ROLE_LABELS[m.role]}`}
         >
           <RoleBadge role={m.role} />
@@ -535,7 +535,7 @@ function AddMemberModal({ open, onClose, chapterId, onAdded }: { open: boolean; 
             <Skeleton className="h-12 w-full" />
           </div>
         ) : results.length > 0 ? (
-          <ul className="divide-y divide-line rounded-[2px] border border-line">
+          <ul className="divide-y divide-line rounded-none border border-line">
             {results.map((p) => {
               const taken = p.chapter_id != null;
               return (

@@ -254,7 +254,7 @@ export function PostComposer({
           {tab === 'write' ? (
             <div
               className={cn(
-                'overflow-hidden rounded-[2px] border bg-surface transition-[border-color,box-shadow] focus-within:border-blue focus-within:ring-4 focus-within:ring-blue/15',
+                'overflow-hidden rounded-none border bg-surface transition-[border-color,box-shadow] focus-within:border-blue focus-within:ring-4 focus-within:ring-blue/15',
                 errors.body ? 'border-danger' : 'border-line-strong',
               )}
             >
@@ -274,7 +274,7 @@ export function PostComposer({
                     onClick={b.run}
                     title={b.label}
                     aria-label={b.label}
-                    className="grid size-8 place-items-center rounded-[2px] text-muted transition-colors hover:bg-surface hover:text-heading"
+                    className="grid size-8 place-items-center rounded-none text-muted transition-colors hover:bg-surface hover:text-heading"
                   >
                     <b.icon className="size-4" />
                   </button>
@@ -293,7 +293,7 @@ export function PostComposer({
               />
             </div>
           ) : (
-            <div className="min-h-40 rounded-[2px] border border-line bg-surface-2 px-4 py-3">
+            <div className="min-h-40 rounded-none border border-line bg-surface-2 px-4 py-3">
               {body.trim() ? <Markdown text={body} size={kind === 'newsletter' ? 'md' : 'sm'} /> : <p className="text-sm text-muted">Nothing to preview yet.</p>}
             </div>
           )}
@@ -316,7 +316,7 @@ export function PostComposer({
         />
 
         {kind === 'newsletter' && !editing && (
-          <div className="rounded-[2px] border border-line border-l-4 border-l-blue bg-surface-2 px-3.5 py-3 text-sm">
+          <div className="rounded-none border border-line border-l-4 border-l-blue bg-surface-2 px-3.5 py-3 text-sm">
             <p
  className="text-ink/90">
               Every member gets a notification, and members who allow email receive the newsletter in their inbox.

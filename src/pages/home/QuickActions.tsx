@@ -22,7 +22,7 @@ export function QuickActions({
   const ev = eventInfo(continueEvent);
 
   return (
-    <div className="mt-6 grid overflow-hidden rounded-[4px] border border-line bg-surface sm:grid-cols-3 md:mt-8">
+    <div className="mt-6 grid overflow-hidden rounded-none border border-line bg-surface sm:grid-cols-3 md:mt-8">
       {/* Continue */}
       <ActionTile
         to={ev ? runLink({ kind: 'practice', event: ev.slug }) : '/play'}

@@ -72,7 +72,7 @@ export default function ReviewPage() {
           <Skeleton className="mb-6 h-10 w-80" />
           <div className="space-y-3">
             {Array.from({ length: 4 }, (_, i) => (
-              <div key={i} className="rounded-[4px] border border-line bg-surface p-4">
+              <div key={i} className="rounded-none border border-line bg-surface p-4">
                 <SkeletonText lines={2} />
               </div>
             ))}

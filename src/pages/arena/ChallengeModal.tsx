@@ -128,7 +128,7 @@ export function ChallengeModal({
       <button
         type="button"
         onClick={() => setOpponent(p)}
-        className="flex w-full items-center gap-3 rounded-[2px] px-2.5 py-2 text-left transition-colors hover:bg-surface-2 focus-visible:bg-surface-2"
+        className="flex w-full items-center gap-3 rounded-none px-2.5 py-2 text-left transition-colors hover:bg-surface-2 focus-visible:bg-surface-2"
       >
         <Avatar src={p.avatar_url} name={p.display_name || p.username} size="sm" />
         <span className="min-w-0 flex-1">
@@ -172,7 +172,7 @@ export function ChallengeModal({
             Opponent
           </h3>
           {opponent ? (
-            <div className="flex items-center gap-3 rounded-[2px] border border-line border-l-4 border-l-blue bg-surface-2 p-3">
+            <div className="flex items-center gap-3 rounded-none border border-line border-l-4 border-l-blue bg-surface-2 p-3">
               <Avatar src={opponent.avatar_url} name={opponent.display_name || opponent.username} size="md" />
               <div className="min-w-0 flex-1">
                 <div className="truncate font-display font-bold text-heading">{displayName(opponent)}</div>
@@ -282,7 +282,7 @@ export function ChallengeModal({
         />
 
         {opponent && (
-          <p className="rounded-[2px] border-l-2 border-red bg-surface-2 px-3 py-2.5 text-xs text-muted">
+          <p className="rounded-none border-l-2 border-red bg-surface-2 px-3 py-2.5 text-xs text-muted">
             {displayName
 (opponent)} gets a notification and has 24 hours to accept. Once accepted, you each have 48
             hours to play.

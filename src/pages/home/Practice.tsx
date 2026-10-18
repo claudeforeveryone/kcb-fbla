@@ -79,7 +79,7 @@ export function WeakSpots({
               <li key={`${s.event}|${s.sub}`}>
                 <Link
                   to={runLink({ kind: 'area', event: s.event, sub: s.sub, n: 10 })}
-                  className="group block rounded-xl px-2 py-2.5 transition-colors hover:bg-surface-2"
+                  className="group block rounded-none px-2 py-2.5 transition-colors hover:bg-surface-2"
                 >
                   <div className="flex items-center gap-2">
                     <Badge tone="navy" className="h-5 shrink-0 px-1.5 text-[0.65rem] tracking-wide">
@@ -138,7 +138,7 @@ export function RecentAttempts({
         <div className="space-y-3">
           {[0, 1, 2, 3].map((i) => (
             <div key={i} className="flex items-center gap-3">
-              <Skeleton className="size-11 rounded-xl" />
+              <Skeleton className="size-11 rounded-none" />
               <div className="flex-1 space-y-1.5">
                 <Skeleton className="h-4 w-1/2" />
                 <Skeleton className="h-3 w-1/4" />
@@ -167,7 +167,7 @@ export function RecentAttempts({
               <li key={a.id}>
                 <Link
                   to={`/play/review/${a.id}`}
-                  className="group flex items-center gap-3 rounded-xl px-2 py-2.5 transition-colors hover:bg-surface-2"
+                  className="group flex items-center gap-3 rounded-none px-2 py-2.5 transition-colors hover:bg-surface-2"
                 >
                   <ScoreChip pct={pct} className={tone.text} />
                   <div className="min-w-0 flex-1">
@@ -187,7 +187,7 @@ export function RecentAttempts({
                   {delta !== 0 && (
                     <span
                       className={cn(
-                        'tabular shrink-0 rounded-[2px] px-1.5 py-0.5 text-xs font-bold',
+                        'tabular shrink-0 rounded-none px-1.5 py-0.5 text-xs font-bold',
                         delta > 0 ? 'bg-success/10 text-success' : 'bg-red/10 text-red dark:text-danger',
                       )}
                     >

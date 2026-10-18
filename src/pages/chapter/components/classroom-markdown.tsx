@@ -157,7 +157,7 @@ function inline(text: string): ReactNode[] {
     if (part.startsWith('**')) return <strong key={i} className="font-semibold text-heading">{part.slice(2, -2)}</strong>;
     if (part.startsWith('`'))
       return (
-        <code key={i} className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em]">
+        <code key={i} className="rounded-none bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em]">
           {part.slice(1, -1)}
         </code>
       );

@@ -175,7 +175,7 @@ function MyReports({ refreshKey, onCount }: { refreshKey: number; onCount: (n: n
           </div>
           <p className="mt-1.5 line-clamp-3 text-sm text-ink">{r.message}</p>
           {r.resolution_note && (
-            <div className="mt-2 rounded-[2px] border border-line bg-surface-2 px-3 py-2 text-sm">
+            <div className="mt-2 rounded-none border border-line bg-surface-2 px-3 py-2 text-sm">
               <div className="text-xs font-semibold text-heading">From the team</div>
               <p className="mt-0.5 text-ink">{r.resolution_note}</p>
             </div>
