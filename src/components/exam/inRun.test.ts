@@ -1,15 +1,11 @@
-import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-
-const read = (p: string) => readFileSync(new URL(p, import.meta.url), 'utf8');
+import runner from './ExamRunner.tsx?raw';
+import shell from '../layout/AppShell.tsx?raw';
+import css from '../../index.css?raw';
 
 // While a member is answering, the phone tab bar is hidden. Three files have to agree for that to work: the runner
 // marks <html>, the shell names the bar, and the stylesheet hides it and moves the action bar to the bottom edge.
 describe('phone tab bar while answering', () => {
-  const runner = read('./ExamRunner.tsx');
-  const shell = read('../layout/AppShell.tsx');
-  const css = read('../../index.css');
-
   it('the runner marks the page for as long as it is mounted', () => {
     expect(runner).toContain("setAttribute('data-in-run', '')");
     expect(runner).toContain("removeAttribute('data-in-run')");
