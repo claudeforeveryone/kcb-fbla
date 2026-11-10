@@ -6,7 +6,7 @@ import { ExamSession, type ExamResultData, type RunnerSnapshot } from '../../com
 import { useProfile } from '../../lib/auth';
 import { buildRun, RunBlocked, type BuiltRun } from './buildRun';
 import { track } from '../../api/track';
-import { parseRunSpec, runHref } from './runLogic';
+import { canAutoStart, parseRunSpec, runHref } from './runLogic';
 
 type Saved = { run: BuiltRun; snap: RunnerSnapshot | null; savedAt: number };
 const STORE = 'kcbfbla:run:';
@@ -61,7 +61,14 @@ function Run() {
     const saved = readSaved(storeKey);
     setState({ s: 'loading' });
     buildRun(spec, profile)
-      .then((run) => live && setState({ s: 'intro', run, resume: saved }))
+      .then((run) => {
+        if (!live) return;
+        // go=1 links (Home, the end of onboarding) open on question 1; a saved run still offers Resume first
+        if (canAutoStart(spec, !!saved)) {
+          setState({ s: 'running', run, snap: null });
+          void track('practice_started', run.submit.event, { mode: run.submit.kind });
+        } else setState({ s: 'intro', run, resume: saved });
+      })
       .catch((e) => {
         if (!live) return;
         if (saved) setState({ s: 'intro', run: saved.run, resume: saved });

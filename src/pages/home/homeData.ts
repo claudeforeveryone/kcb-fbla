@@ -221,7 +221,7 @@ export async function getVocabDue(uid: string): Promise<{ due: number; mastered:
  * Links into the exam runner, in Play's /play/run vocabulary (mode, event, area, n). `kind` is the Home-side name
  * for the run: practice without an event is a mixed Quick 10, practice with one is a focused practice set.
  */
-export function runLink(p: { kind: string; event?: string | null; n?: number; sub?: string | null }): string {
+export function runLink(p: { kind: string; event?: string | null; n?: number; sub?: string | null; go?: boolean }): string {
   const mode = p.kind === 'practice' ? (p.event ? 'practice' : 'quick') : p.kind;
-  return runHref({ mode, event: p.event ?? null, n: mode === 'quick' ? null : (p.n ?? null), area: p.sub ?? null });
+  return runHref({ mode, event: p.event ?? null, n: mode === 'quick' ? null : (p.n ?? null), area: p.sub ?? null, go: p.go ? 1 : null });
 }

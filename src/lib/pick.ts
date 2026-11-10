@@ -31,6 +31,17 @@ export function practiceSet<T extends Q>(
   return [...unseen, ...shaky, ...rest].slice(0, n);
 }
 
+/**
+ * Easiest first (stable within a difficulty), so a set warms up before it gets hard. Used for a member's very first
+ * set: opening on a Hard question is a rough welcome. Questions without a difficulty count as medium.
+ */
+export function rampUp<T extends { diff?: number | null }>(qs: T[]): T[] {
+  return qs
+    .map((q, i) => ({ q, i }))
+    .sort((a, b) => (a.q.diff ?? 2) - (b.q.diff ?? 2) || a.i - b.i)
+    .map((x) => x.q);
+}
+
 export type AreaReport = {
   topic: string;
   sub: string;

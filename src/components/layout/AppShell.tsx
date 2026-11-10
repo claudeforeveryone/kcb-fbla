@@ -44,6 +44,8 @@ export function AppShell({ children }: { children?: ReactNode }) {
   const { session, profile } = useAuth();
   const { pathname } = useLocation();
   const signedIn = !!session && !!profile;
+  // Answering questions is the one place the site footer is only in the way (a practice run, a duel).
+  const inRun = pathname === '/play/run' || /^\/arena\/[^/]+\/?$/.test(pathname);
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -59,7 +61,7 @@ export function AppShell({ children }: { children?: ReactNode }) {
       <main id="main" className={cn('flex-1', signedIn && 'pb-[calc(64px+env(safe-area-inset-bottom))] md:pb-0')}>
         {children ?? <Outlet />}
       </main>
-      <Footer className={signedIn ? 'mb-[calc(64px+env(safe-area-inset-bottom))] md:mb-0' : undefined} />
+      {!inRun && <Footer className={signedIn ? 'mb-[calc(64px+env(safe-area-inset-bottom))] md:mb-0' : undefined} />}
       {signedIn && <BottomTabs pathname={pathname} />}
     </div>
   );

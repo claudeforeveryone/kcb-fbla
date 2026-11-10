@@ -31,7 +31,7 @@ import {
   type PlayHistory,
 } from '../../api/play';
 import { AreaPickerModal, AttemptList, EventPickerModal, EventTitle, MockPickerModal, PlaySection, pctText, useUntilReset } from './parts';
-import { DAILY_SIZE, runHref } from './runLogic';
+import { DAILY_SIZE, MIXED_EVENT, runHref } from './runLogic';
 
 const FOCUS_KEY = 'kcbfbla:play:focus';
 
@@ -196,7 +196,7 @@ export default function PlayPage() {
                   title="No attempts yet"
                   description="Your first Quick 10 takes about five minutes. Every answer moves your Elo."
                   action={
-                    <ButtonLink to={runHref({ mode: 'quick', event: focus || null })} variant="accent">
+                    <ButtonLink to={runHref({ mode: 'quick', event: focus || MIXED_EVENT })} variant="accent">
                       Start a Quick 10
                     </ButtonLink>
                   }
@@ -319,7 +319,7 @@ function ModeGrid({
         title="Quick 10"
         text="Ten questions, new ones first."
         meta="About 5 min"
-        to={runHref({ mode: 'quick', event: ev })}
+        to={runHref({ mode: 'quick', event: ev ?? MIXED_EVENT })}
         cta="Play"
       />
       <ModeTile
