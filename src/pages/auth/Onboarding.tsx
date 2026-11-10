@@ -14,6 +14,7 @@ import { useToast } from '../../components/ui/Toast';
 import { cn } from '../../components/ui/cn';
 import { SplashScreen } from '../../components/layout/SplashScreen';
 import { AuthLayout } from './AuthLayout';
+import { firstRunHref } from '../play/runLogic';
 
 const USERNAME_RE = /^[a-z0-9_]{3,20}$/;
 const GRADES = [7, 8, 9, 10, 11, 12] as const;
@@ -72,6 +73,9 @@ export default function Onboarding() {
   const [topics, setTopics] = useState<Topic[] | null>(null);
   const [topicsErr, setTopicsErr] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  // Where a member who just finished goes. Set before the profile is created, because the guard below redirects
+  // the moment the new profile lands in auth state (before finish() gets to navigate).
+  const doneTo = useRef<string | null>(null);
 
   // Prefill a username from the email.
   useEffect(() => {
@@ -120,7 +124,7 @@ export default function Onboarding() {
 
   if (loading) return <SplashScreen />;
   if (!user) return <Navigate to="/login" replace />;
-  if (profile) return <Navigate to={next} replace />;
+  if (profile) return <Navigate to={doneTo.current ?? next} replace />;
 
   const nameErr = !displayName.trim()
     ? 'Tell us what to call you.'
@@ -169,6 +173,8 @@ export default function Onboarding() {
         if (up.error) toast.warning('Avatar not uploaded', 'Your profile was saved; you can add a photo later in Settings.');
         else avatar_url = `${avatarPublicUrl(path)}?v=${Date.now()}`;
       }
+      // Straight into a first Quick 10 (their event, or mixed) unless they were on their way somewhere, e.g. an invite.
+      doneTo.current = next === '/' ? firstRunHref(event) : next;
       await createProfile({
         username: username.trim().toLowerCase(),
         display_name: displayName.trim(),
@@ -177,9 +183,10 @@ export default function Onboarding() {
         main_event: event,
         avatar_url,
       });
-      toast.success(`Welcome, ${displayName.trim().split(' ')[0]}`, 'Your player card is ready. Time to play.');
-      navigate(next, { replace: true });
+      toast.success(`Welcome, ${displayName.trim().split(' ')[0]}`, 'Your player card is ready. Here are your first ten.');
+      navigate(doneTo.current, { replace: true });
     } catch (err) {
+      doneTo.current = null;
       const msg = err instanceof Error ? err.message : 'Could not create your profile.';
       setError(msg);
       if (msg.toLowerCase().includes('username')) {

@@ -1,6 +1,6 @@
 // Turns a RunSpec (the /play/run query string) into the questions and settings for one run.
 import { loadMany, loadQuestions, type Question } from '../../lib/content';
-import { practiceSet, nextEndless } from '../../lib/pick';
+import { practiceSet, nextEndless, rampUp } from '../../lib/pick';
 import { mastery } from '../../lib/score';
 import { shuffle, seeded } from '../../lib/srs';
 import {
@@ -312,10 +312,13 @@ export async function buildRun(spec: RunSpec, profile: { main_event: string | nu
     case 'quick':
     case 'practice':
     default: {
+      // No event means "my main event"; event=mixed means every event, whatever the main event is.
       const info = eventInfo(spec.event) ?? (spec.event ? null : eventInfo(profile.main_event));
       const all = info ? await loadQuestions(info.slug) : await loadMany(ALL_SLUGS);
       const n = spec.n ?? 10;
-      const qs = practiceSet(all, history.log, n, undefined, rand);
+      const picked = practiceSet(all, history.log, n, undefined, rand);
+      // A member's first ever set runs easiest first.
+      const qs = history.log.length === 0 ? rampUp(picked) : picked;
       const quick = n === 10;
       return {
         questions: qs.map(fromContent),

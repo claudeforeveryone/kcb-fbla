@@ -65,7 +65,7 @@ export function WeakSpots({
                 : 'You are scoring 80% or better in every area you have practised. Try a new event or a mock exam.'
           }
           action={
-            <ButtonLink to={answered === 0 ? runLink({ kind: 'practice', n: 10 }) : '/play'} size="sm">
+            <ButtonLink to={answered === 0 ? runLink({ kind: 'practice', n: 10, go: true }) : '/play'} size="sm">
               {answered === 0 ? 'Answer 10 questions' : 'Browse events'}
             </ButtonLink>
           }
@@ -152,7 +152,7 @@ export function RecentAttempts({
           title="No runs yet"
           description="Your practice sets, daily challenges and duels will show up here."
           action={
-            <ButtonLink to={runLink({ kind: 'practice', n: 10 })} size="sm">
+            <ButtonLink to={runLink({ kind: 'practice', n: 10, go: true })} size="sm">
               Quick 10
             </ButtonLink>
           }

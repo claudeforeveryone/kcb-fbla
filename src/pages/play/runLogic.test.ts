@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { seeded } from '../../lib/srs';
-import { dailyPlan, mockSet, parseRunSpec, resolveDaily, runHref, weakMix } from './runLogic';
+import { MIXED_EVENT, canAutoStart, dailyPlan, firstRunHref, mockSet, parseRunSpec, resolveDaily, runHref, weakMix } from './runLogic';
 
 const SLUGS = ['accounting', 'business-law', 'economics', 'marketing', 'personal-finance'];
 const bank = (prefix: string, subs: string[], per: number) =>
@@ -83,5 +83,30 @@ describe('weakMix', () => {
     expect(ids).toContain('acc-013');
     expect(ids).not.toContain('acc-001');
     expect(set.filter((q) => q.sub === 'tax').length).toBe(4);
+  });
+});
+
+describe('opening on question 1 (go=1)', () => {
+  const spec = (q: string) => parseRunSpec(new URLSearchParams(q));
+  it('reads the flag and leaves it off by default', () => {
+    expect(spec('mode=quick&go=1').go).toBe(true);
+    expect(spec('mode=quick').go).toBe(false);
+    expect(spec('mode=quick&go=yes').go).toBe(false);
+  });
+  it('skips the intro only for untimed practice sets', () => {
+    expect(canAutoStart(spec('mode=quick&go=1'), false)).toBe(true);
+    expect(canAutoStart(spec('mode=practice&event=accounting&go=1'), false)).toBe(true);
+    expect(canAutoStart(spec('mode=area&event=accounting&area=Tax&go=1'), false)).toBe(true);
+    // one try, a clock, lives, or chapter work: these keep their Start button
+    for (const q of ['mode=daily&go=1', 'mode=mock&event=accounting&go=1', 'mode=endless&go=1', 'assignment=x&go=1', 'test=x&go=1', 'redo=wrong&go=1'])
+      expect(canAutoStart(spec(q), false)).toBe(false);
+  });
+  it('never skips past a saved run, and never without the flag', () => {
+    expect(canAutoStart(spec('mode=quick&go=1'), true)).toBe(false);
+    expect(canAutoStart(spec('mode=quick'), false)).toBe(false);
+  });
+  it("a new member's first set is their main event, or mixed without one", () => {
+    expect(spec(firstRunHref('accounting').split('?')[1])).toMatchObject({ mode: 'quick', event: 'accounting', go: true });
+    expect(spec(firstRunHref(null).split('?')[1])).toMatchObject({ mode: 'quick', event: MIXED_EVENT, go: true });
   });
 });

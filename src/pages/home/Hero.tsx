@@ -1,13 +1,16 @@
 import type { ReactNode } from 'react';
-import { Avatar, Skeleton, cn } from '../../components/ui';
+import { ArrowRight } from 'lucide-react';
+import { Avatar, ButtonLink, Skeleton, cn } from '../../components/ui';
 import { Sparkline } from '../../components/charts';
 import type { ProfileStats } from '../../lib/types';
 import { torontoDay } from './homeData';
+import { firstRunHref } from '../play/runLogic';
 
 type HeroProfile = {
   display_name: string;
   username: string;
   avatar_url: string | null;
+  main_event?: string | null;
   elo: number;
   peak_elo: number;
   questions_answered: number;
@@ -50,6 +53,17 @@ export function Hero({ profile, stats, statsLoading }: { profile: HeroProfile; s
             <p className="text-sm font-semibold text-white/65">{dateLine}</p>
             <h1 className="mt-1 text-[1.75rem] font-extrabold tracking-tight text-white sm:truncate md:text-4xl">{title}</h1>
             <p className="mt-1 text-[0.9375rem] text-white/75 md:text-base">{line}</p>
+            {profile.questions_answered === 0 && (
+              <ButtonLink
+                to={firstRunHref(profile.main_event ?? null)}
+                variant="accent"
+                size="lg"
+                className="mt-4"
+                rightIcon={<ArrowRight className="size-4" />}
+              >
+                Start your first 10
+              </ButtonLink>
+            )}
           </div>
         </div>
 

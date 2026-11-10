@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { practiceSet, weakReport, weakSet, nextEndless } from "./pick";
+import { practiceSet, rampUp, weakReport, weakSet, nextEndless } from "./pick";
 import type { Answer } from "./score";
 
 const qs = ["a", "b", "c", "d", "e", "f"].map((id, i) => ({
@@ -33,6 +33,21 @@ describe("practiceSet", () => {
     expect(
       practiceSet(qs, [], 10, "Journals").every((q) => q.sub === "Journals"),
     ).toBe(true);
+  });
+});
+
+describe("rampUp", () => {
+  it("puts the easiest questions first and keeps the order inside a difficulty", () => {
+    const set = [
+      { id: "h1", diff: 3 },
+      { id: "m1", diff: 2 },
+      { id: "e1", diff: 1 },
+      { id: "m2", diff: 2 },
+      { id: "x", diff: null },
+      { id: "e2", diff: 1 },
+    ];
+    expect(rampUp(set).map((q) => q.id)).toEqual(["e1", "e2", "m1", "m2", "x", "h1"]);
+    expect(set[0].id).toBe("h1");
   });
 });
 

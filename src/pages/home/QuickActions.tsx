@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { Skeleton, cn, formatUntil } from '../../components/ui';
 import { eventInfo } from '../../lib/types';
 import { nextTorontoMidnight, runLink, type DailyStatus } from './homeData';
+import { MIXED_EVENT, runHref } from '../play/runLogic';
 
 /** The three "do something now" links under the hero: one strip, split by hairlines. */
 export function QuickActions({
@@ -25,12 +26,12 @@ export function QuickActions({
     <div className="mt-6 grid overflow-hidden rounded-none border border-line bg-surface sm:grid-cols-3 md:mt-8">
       {/* Continue */}
       <ActionTile
-        to={ev ? runLink({ kind: 'practice', event: ev.slug }) : '/play'}
+        to={ev ? runHref({ mode: 'practice', event: ev.slug, go: 1 }) : '/play'}
         tone="navy"
         eyebrow={ev ? (continueReason === 'last' ? 'Continue' : 'Your main event') : 'Get started'}
         title={ev ? ev.name : 'Pick your first event'}
         body={ev ? 'A fresh practice set, weighted to questions you haven’t mastered.' : '15 events, 1,500 official-style questions.'}
-        cta={ev ? 'Resume practice' : 'Browse events'}
+        cta={ev ? (continueReason === 'last' ? 'Keep practising' : 'Start practice') : 'Browse events'}
       />
 
       {/* Daily challenge */}
@@ -68,7 +69,7 @@ export function QuickActions({
 
       {/* Quick 10 */}
       <ActionTile
-        to={runLink({ kind: 'practice', n: 10 })}
+        to={runHref({ mode: 'quick', event: MIXED_EVENT, go: 1 })}
         tone="blue"
         eyebrow="Mixed events"
         title="Quick 10"

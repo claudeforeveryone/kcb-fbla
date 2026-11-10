@@ -30,7 +30,12 @@ export type RunSpec = {
   ids: string[];
   /** optional run label (used with ids) */
   label: string | null;
+  /** go=1: skip the intro card and open on question 1 (untimed practice only, see canAutoStart) */
+  go: boolean;
 };
+
+/** `event=mixed` asks for every event, even when the member has a main event (no event at all means "my main event"). */
+export const MIXED_EVENT = 'mixed';
 
 const MODES: RunMode[] = ['quick', 'practice', 'daily', 'endless', 'weak', 'mock', 'area', 'assignment', 'custom', 'redo'];
 
@@ -62,7 +67,17 @@ export function parseRunSpec(p: URLSearchParams): RunSpec {
     onlyWrong: p.get('only') === 'wrong',
     ids,
     label: p.get('label')?.slice(0, 120) || null,
+    go: p.get('go') === '1',
   };
+}
+
+/**
+ * Whether a go=1 link may skip the intro card. Only sets where a mis-tap costs nothing: untimed, instant feedback,
+ * repeatable. The daily challenge (one try), mock exams (a clock), endless and chapter work keep their Start button.
+ */
+export function canAutoStart(spec: Pick<RunSpec, 'go' | 'mode'>, hasSavedRun: boolean): boolean {
+  if (!spec.go || hasSavedRun) return false;
+  return spec.mode === 'quick' || spec.mode === 'practice' || spec.mode === 'area';
 }
 
 /** The attempt kind the server records for a mode. */
@@ -80,10 +95,15 @@ export const KIND_FOR_MODE: Record<RunMode, AttemptKind> = {
 };
 
 /** Build a /play/run link. */
-export function runHref(params: Partial<Record<'mode' | 'event' | 'area' | 'n' | 'assignment' | 'test' | 'redo' | 'only' | 'ids' | 'label', string | number | null | undefined>>): string {
+export function runHref(params: Partial<Record<'mode' | 'event' | 'area' | 'n' | 'assignment' | 'test' | 'redo' | 'only' | 'ids' | 'label' | 'go', string | number | null | undefined>>): string {
   const sp = new URLSearchParams();
   for (const [k, v] of Object.entries(params)) if (v != null && v !== '') sp.set(k, String(v));
   return `/play/run?${sp.toString()}`;
+}
+
+/** A new member's first set: a Quick 10 in their main event (mixed if they have none), opening on question 1. */
+export function firstRunHref(mainEvent: string | null | undefined): string {
+  return runHref({ mode: 'quick', event: mainEvent || MIXED_EVENT, go: 1 });
 }
 
 export const DAILY_SIZE = 10;
