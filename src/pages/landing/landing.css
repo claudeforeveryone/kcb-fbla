@@ -1,6 +1,6 @@
 /* The signed-out front door ("/"). Scoped to .lp so nothing reaches in-app pages. It uses the app's own tokens, so it
-   follows light and dark like every other page. Flat: no gradients, glows or decoration. Motion is short and only
-   says something: the headline settles in, sections rise once on first view, links and buttons answer the pointer. */
+   follows light and dark like every other page. Flat: no gradients, glows or decoration. Nothing moves on its own:
+   the only motion is the sample question answering the visitor, and links and buttons answering the pointer. */
 
 .lp {
   --lp-ease: var(--ease-out-quint, cubic-bezier(0.22, 1, 0.36, 1));
@@ -31,55 +31,15 @@
 
 /* ---------- type ---------------------------------------------------------------------------------------------- */
 
-.lp-kicker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.lp-tricolour {
-  display: flex;
-  width: 44px;
-  height: 4px;
-}
-.lp-tricolour > span:nth-child(1) {
-  flex: 5;
-  background: var(--heading);
-}
-.lp-tricolour > span:nth-child(2) {
-  flex: 1;
-  background: var(--red);
-}
-.lp-tricolour > span:nth-child(3) {
-  flex: 3;
-  background: var(--blue);
-}
-
 .lp-h1 {
-  margin-top: 20px;
+  max-width: 18ch;
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 4.4vw, 3.75rem);
+  font-size: clamp(2rem, 3.6vw, 3rem);
   font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   color: var(--heading);
-}
-
-/* each line rises inside its own mask */
-.lp-line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
-}
-.lp-line > span {
-  display: block;
+  text-wrap: balance;
 }
 
 .lp-lead {
@@ -105,37 +65,10 @@
   color: var(--heading);
 }
 
-.lp-fact {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--muted);
-}
-
 /* ---------- hero ---------------------------------------------------------------------------------------------- */
 
 .lp-hero {
   border-bottom: 1px solid var(--line);
-}
-
-.lp-stats {
-  display: flex;
-  gap: 40px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-  max-width: 28rem;
-}
-.lp-stats dt {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--muted);
-}
-.lp-stats dd {
-  margin-top: 4px;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  color: var(--heading);
 }
 
 .lp-preview .obs-app {
@@ -153,14 +86,14 @@
 /* ---------- sections ------------------------------------------------------------------------------------------- */
 
 .lp-section {
-  padding-block: 88px;
+  padding-block: 64px;
   border-bottom: 1px solid var(--line);
   scroll-margin-top: 72px;
 }
 
 @media (min-width: 768px) {
   .lp-section {
-    padding-block: 120px;
+    padding-block: 88px;
   }
 }
 
@@ -172,23 +105,16 @@
   max-width: 40rem;
 }
 
-.lp-grid {
+/* what you get: a plain two-column list, no boxes or rules */
+.lp-list {
   display: grid;
-  gap: 40px 48px;
+  gap: 28px 64px;
+  max-width: 56rem;
 }
 @media (min-width: 640px) {
-  .lp-grid {
+  .lp-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
-@media (min-width: 1024px) {
-  .lp-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-.lp-grid > li {
-  padding-top: 20px;
-  border-top: 2px solid var(--heading);
 }
 
 /* events: one column per discipline, a row per event */
@@ -210,10 +136,8 @@
 .lp-discipline {
   padding-bottom: 12px;
   font-family: var(--font-display);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
   color: var(--muted);
   border-bottom: 1px solid var(--line-strong);
 }
@@ -307,40 +231,6 @@
 }
 
 /* ---------- motion -------------------------------------------------------------------------------------------- */
-
-@media (prefers-reduced-motion: no-preference) {
-  /* The headline settles in: transform only, so its text is painted from the first frame. */
-  .lp-hero .lp-line > span {
-    animation: lp-rise 700ms var(--lp-ease) var(--d, 0ms) both;
-  }
-  .lp-hero .lp-tricolour {
-    transform-origin: left;
-    animation: lp-draw 600ms var(--lp-ease) 200ms both;
-  }
-
-  /* Sections below the fold rise once. Hidden only after JS has set .lp-js and only until .is-in. */
-  .lp-js [data-reveal]:not(.is-in) {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  .lp-js [data-reveal] {
-    transition:
-      opacity 520ms var(--lp-ease) var(--d, 0ms),
-      transform 620ms var(--lp-ease) var(--d, 0ms);
-  }
-}
-
-@keyframes lp-rise {
-  from {
-    transform: translateY(105%);
-  }
-}
-
-@keyframes lp-draw {
-  from {
-    transform: scaleX(0);
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .obs-swap,
