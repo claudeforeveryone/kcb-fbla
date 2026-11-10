@@ -58,10 +58,11 @@ export function AppShell({ children }: { children?: ReactNode }) {
       </a>
       <TopBar signedIn={signedIn} pathname={pathname} />
       <OfflineBanner />
-      <main id="main" className={cn('flex-1', signedIn && 'pb-[calc(64px+env(safe-area-inset-bottom))] md:pb-0')}>
+      {/* The tab bar's room is reserved once: under the footer, or under the page where there is no footer. */}
+      <main id="main" className={cn('flex-1', signedIn && inRun && 'pb-[calc(var(--tabs-h)+env(safe-area-inset-bottom))] md:pb-0')}>
         {children ?? <Outlet />}
       </main>
-      {!inRun && <Footer className={signedIn ? 'mb-[calc(64px+env(safe-area-inset-bottom))] md:mb-0' : undefined} />}
+      {!inRun && <Footer member={signedIn} className={signedIn ? 'mb-[calc(64px+env(safe-area-inset-bottom))] md:mb-0' : undefined} />}
       {signedIn && <BottomTabs pathname={pathname} />}
     </div>
   );
@@ -321,7 +322,7 @@ function BottomTabs({ pathname }: { pathname: string }) {
   return (
     <nav
       aria-label="Main"
-      className="pb-safe fixed inset-x-0 bottom-0 z-50 border-t border-line bg-surface md:hidden"
+      className="bottom-tabs pb-safe fixed inset-x-0 bottom-0 z-50 border-t border-line bg-surface md:hidden"
     >
       <ul className="mx-auto grid h-16 max-w-lg grid-cols-7">
         {NAV.map((n) => {

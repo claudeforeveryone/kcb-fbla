@@ -278,3 +278,19 @@ export function VocabStyles() {
   );
 }
 
+
+/**
+ * A session that starts below the deck header (most of a phone screen) is brought up under the top bar, so the
+ * question and its choices are on screen together. Does nothing when the panel is already near the top.
+ */
+export function useSessionInView(active: boolean) {
+  useEffect(() => {
+    if (!active) return;
+    const el = document.querySelector<HTMLElement>('[id^="vocab-mode-panel-"]');
+    if (!el) return;
+    const top = el.getBoundingClientRect().top;
+    if (top < 200) return;
+    const calm = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: window.scrollY + top - 80, behavior: calm ? 'auto' : 'smooth' });
+  }, [active]);
+}

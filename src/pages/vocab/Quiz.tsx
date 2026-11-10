@@ -4,7 +4,7 @@ import { Button, Kbd, ProgressRing, SegmentedControl, cn } from '../../component
 import type { StudyDeck, VocabTerm } from '../../api/vocab';
 import { distractors, shuffled } from './leitner';
 import { recordReview } from './store';
-import { SessionPanel, useHotkeys } from './parts';
+import { SessionPanel, useHotkeys, useSessionInView } from './parts';
 
 type Direction = 'term' | 'def';
 type Q = { term: VocabTerm; options: VocabTerm[] };
@@ -16,6 +16,7 @@ export function Quiz({ deck }: { deck: StudyDeck }) {
   const [subset, setSubset] = useState<VocabTerm[] | null>(null);
   const [run, setRun] = useState(0);
   const [started, setStarted] = useState(false);
+  useSessionInView(started);
 
   if (!started) {
     const sizes = [10, 20, 30].filter((n) => n <= deck.terms.length);

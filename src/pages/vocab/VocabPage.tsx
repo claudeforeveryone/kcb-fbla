@@ -152,7 +152,7 @@ export default function VocabPage() {
                   if (!decks.length) return null;
                   return (
                     <Section key={g.id} title={g.label} description={`${decks.length} events, ${decks.reduce((n, d) => n + d.terms.length, 0)} terms`}>
-                      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+                      <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
                         {decks.map((d) => (
                           <DeckTile key={d.key} deck={d} stats={stats.get(d.key)!} main={d.key === mainEvent} />
                         ))}
@@ -268,7 +268,29 @@ function DeckTile({
         to={`/vocab/${deck.key}`}
         className="flex h-full flex-col overflow-hidden rounded-none border border-line bg-surface outline-none transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-line-strong focus-visible:ring-2 focus-visible:ring-blue"
       >
-        <div className="flex items-center justify-between gap-3 px-5 pt-5">
+        {/* Phones: one compact row per deck, so the list is short enough to scan. */}
+        <div className={cn('flex items-center gap-3 p-3 sm:hidden', onEdit && 'pr-12')}>
+          <DeckMark deck={deck} size={36} />
+          <div className="min-w-0 flex-1">
+            <div className="flex items-baseline justify-between gap-2">
+              <h3 className="text-[0.9375rem] font-bold leading-snug text-heading">
+                {deck.title}
+                {deck.isNew && <span className="ml-2 text-[11px] font-bold uppercase tracking-[0.08em] text-red dark:text-danger">New</span>}
+              </h3>
+              <span className="tabular shrink-0 text-[11px] font-bold tracking-[0.08em] text-muted">{deck.short}</span>
+            </div>
+            <p className="tabular mt-0.5 text-xs text-muted">
+              {main && <span className="font-semibold" style={{ color }}>Your event · </span>}
+              {stats.total} {stats.total === 1 ? 'term' : 'terms'}
+              {started && ` · ${stats.mastered} mastered`}
+              {stats.due > 0 && <span className="font-semibold text-red dark:text-danger"> · {stats.due} due</span>}
+              {deck.gradeNote && <span className="font-semibold text-[#8a5f00] dark:text-warning"> · {deck.gradeNote}</span>}
+            </p>
+            {assignment && <AssignmentLine a={assignment} />}
+            <EventBar stats={stats} color={color} className="mt-2 !h-1" />
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-3 px-5 pt-5 max-sm:hidden">
           <DeckMark deck={deck} size={40} className="transition-transform duration-200 ease-out group-hover:-rotate-3" />
           <span className={cn('flex items-center gap-2 text-[11px] font-bold tracking-[0.08em]', onEdit && 'mr-9')}>
             {main && <span style={{ color }}>Your event</span>}
@@ -276,7 +298,7 @@ function DeckTile({
             <span className="tabular text-muted">{deck.short}</span>
           </span>
         </div>
-        <div className="flex flex-1 flex-col px-5 pb-5 pt-3">
+        <div className="flex flex-1 flex-col px-5 pb-5 pt-3 max-sm:hidden">
           <h3 className="font-bold leading-snug text-heading">{deck.title}</h3>
           {deck.gradeNote && <p className="mt-1 text-xs font-semibold text-[#8a5f00] dark:text-warning">{deck.gradeNote}</p>}
           <p className="tabular mt-1.5 text-sm text-muted">
@@ -309,7 +331,7 @@ function DeckTile({
         </div>
       </Link>
       {onEdit && (
-        <span className="absolute right-3 top-4">
+        <span className="absolute right-2 top-1/2 max-sm:-translate-y-1/2 sm:right-3 sm:top-4">
           <Button
             variant="ghost"
             size="icon-sm"
@@ -413,7 +435,7 @@ function ChapterDecks({
           }
         />
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
           {sorted.map((d) => (
             <DeckTile
               key={d.key}
