@@ -353,7 +353,7 @@ function Session({
               {isRight ? 'Correct' : 'Not quite. It will come back in a moment.'}
             </p>
             <Button onClick={next} rightIcon={<ArrowRight className="size-4" />}>
-              Continue <Kbd className="ml-1 hidden border-white/30 bg-white/10 text-white/80 md:inline-grid">Enter</Kbd>
+              Continue <Kbd className="ml-1 border-white/30 bg-white/10 text-white/80 max-md:hidden">Enter</Kbd>
             </Button>
           </div>
         )
