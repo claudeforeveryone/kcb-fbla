@@ -590,7 +590,7 @@ export function ExamRunner({
                 </span>
                 <div className="ml-auto flex items-center gap-2">
                   {!isLast && (
-                    <Button variant="ghost" className="hidden sm:inline-flex" onClick={() => setReviewOpen(true)}>
+                    <Button variant="ghost" className="max-sm:hidden" onClick={() => setReviewOpen(true)}>
                       Submit
                     </Button>
                   )}
@@ -641,6 +641,19 @@ export function ExamRunner({
               setNavOpen(false);
             }}
           />
+          {/* Phones have no Submit in the action bar (no room), so this is how an exam is handed in early there. */}
+          <Button
+            block
+            variant="accent"
+            className="mt-4"
+            onClick={() => {
+              setNavOpen(false);
+              setReviewOpen(true);
+            }}
+            leftIcon={<Send className="size-4" />}
+          >
+            Review & submit
+          </Button>
         </Modal>
       )}
 

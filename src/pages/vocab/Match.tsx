@@ -207,7 +207,7 @@ function Board({
             {matched.size} / {pairs}
           </Badge>
           {best != null && (
-            <Badge tone="warning" className="tabular hidden sm:inline-flex">
+            <Badge tone="warning" className="tabular max-sm:hidden">
               Best {formatMs(best)}
             </Badge>
           )}
