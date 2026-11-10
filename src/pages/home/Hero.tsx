@@ -30,12 +30,15 @@ export function Hero({ profile, stats, statsLoading }: { profile: HeroProfile; s
   // The headline is today's state, said plainly: what you did, or the one thing worth doing next.
   let title: string;
   let line: string;
+  let cta = 'Start a Quick 10';
   if (profile.questions_answered === 0) {
     title = 'Start with ten questions';
     line = 'Your first set places you on the ladder.';
+    cta = 'Start your first 10';
   } else if (practisedToday && answeredToday > 0) {
     title = `${answeredToday} question${answeredToday === 1 ? '' : 's'} today`;
     line = streak > 1 ? `Streak safe. Day ${streak}.` : 'Practise tomorrow to start a streak.';
+    cta = 'Another Quick 10';
   } else if (streak > 0) {
     title = `Keep your ${streak}-day streak`;
     line = 'It ends at midnight. One Quick 10 keeps it.';
@@ -53,17 +56,16 @@ export function Hero({ profile, stats, statsLoading }: { profile: HeroProfile; s
             <p className="text-sm font-semibold text-white/65">{dateLine}</p>
             <h1 className="mt-1 text-[1.75rem] font-extrabold tracking-tight text-white sm:truncate md:text-4xl">{title}</h1>
             <p className="mt-1 text-[0.9375rem] text-white/75 md:text-base">{line}</p>
-            {profile.questions_answered === 0 && (
-              <ButtonLink
-                to={firstRunHref(profile.main_event ?? null)}
-                variant="accent"
-                size="lg"
-                className="mt-4"
-                rightIcon={<ArrowRight className="size-4" />}
-              >
-                Start your first 10
-              </ButtonLink>
-            )}
+            {/* One obvious action on the first screen of a phone, whatever today's state is. */}
+            <ButtonLink
+              to={firstRunHref(profile.main_event ?? null)}
+              variant="accent"
+              size="lg"
+              className="mt-4"
+              rightIcon={<ArrowRight className="size-4" />}
+            >
+              {cta}
+            </ButtonLink>
           </div>
         </div>
 

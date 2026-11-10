@@ -150,6 +150,12 @@ export function ExamRunner({
   const livesLeft = Math.max(0, lives - wrongCount);
   const outOfLives = mode === 'endless' && livesLeft === 0;
 
+  // Answering hides the phone tab bar (index.css): more room for the question, no stray tap that leaves the run.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-in-run', '');
+    return () => document.documentElement.removeAttribute('data-in-run');
+  }, []);
+
   useEffect(() => {
     onSnapshot?.(Object.keys(keys).length ? { ...s, keys } : s);
   }, [s, keys, onSnapshot]);
@@ -529,7 +535,7 @@ export function ExamRunner({
           </div>
 
           {/* actions */}
-          <div className="sticky bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 -mx-4 mt-6 border-t border-line bg-bg px-4 py-3 sm:mx-0 sm:rounded-none sm:border sm:bg-surface md:bottom-4">
+          <div className="exam-actions sticky z-20 -mx-4 mt-6 border-t border-line bg-bg px-4 py-3 sm:mx-0 sm:rounded-none sm:border sm:bg-surface md:bottom-4">
             {instant ? (
               <div className="flex items-center gap-2">
                 {!revealed ? (

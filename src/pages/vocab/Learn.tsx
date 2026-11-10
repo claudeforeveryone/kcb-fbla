@@ -15,7 +15,7 @@ import {
   type ProgressLike,
 } from './leitner';
 import { recordReview } from './store';
-import { MiniStat, SessionPanel, StatusChip, useHotkeys } from './parts';
+import { MiniStat, SessionPanel, StatusChip, useHotkeys, useSessionInView } from './parts';
 
 type Item = { term: VocabTerm; attempt: number };
 type Outcome = { promoted: number; missed: Set<string>; mastered: number; answered: number };
@@ -27,6 +27,7 @@ type Outcome = { promoted: number; missed: Set<string>; mastered: number; answer
 export function Learn({ deck, progress }: { deck: StudyDeck; progress: ReadonlyMap<string, ProgressLike> }) {
   const [run, setRun] = useState(0);
   const [mode, setMode] = useState<'srs' | 'drill' | null>(null);
+  useSessionInView(mode !== null);
   const stats = deckStats(
     deck.terms.map((t) => t.id),
     progress,

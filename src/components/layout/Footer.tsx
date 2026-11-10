@@ -8,11 +8,12 @@ const LINK = 'text-white/85 underline-offset-4 hover:text-white hover:underline'
 /** Footer list links: a 44 px row on phones (thumb-sized), plain text rows from md up. */
 const ROW = cn('inline-flex min-h-11 items-center gap-1 md:min-h-0', LINK);
 
-export function Footer({ className }: { className?: string }) {
+/** `member`: signed in, so the phone tab bar already has the practice links and the footer drops its copy of them. */
+export function Footer({ className, member }: { className?: string; member?: boolean }) {
   // Prerendered with the build year; the visitor's own year replaces it right after hydration.
   const year = useCurrentYear();
   return (
-    <footer className={cn('mt-16 bg-[#001E60] text-white', className)}>
+    <footer className={cn('mt-12 bg-[#001E60] text-white md:mt-16', className)}>
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-2 gap-x-6 gap-y-8 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8 lg:px-10">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-3">
@@ -32,7 +33,7 @@ export function Footer({ className }: { className?: string }) {
             by Joseph &amp; Kaden
           </p>
         </div>
-        <nav aria-label="Practice" className="text-sm">
+        <nav aria-label="Practice" className={cn('text-sm', member && 'max-md:hidden')}>
           <div className="mb-1 text-xs font-bold uppercase tracking-wider text-white/60 md:mb-3">Practice</div>
           <ul className="md:space-y-2">
             <li><Link className={ROW} to="/play">Exams by event</Link></li>
@@ -41,7 +42,7 @@ export function Footer({ className }: { className?: string }) {
             <li><Link className={ROW} to="/leaderboard">Leaderboard</Link></li>
           </ul>
         </nav>
-        <nav aria-label="Resources" className="text-sm">
+        <nav aria-label="Resources" className={cn('text-sm', member && 'max-md:col-span-2')}>
           <div className="mb-1 text-xs font-bold uppercase tracking-wider text-white/60 md:mb-3">Resources</div>
           <ul className="md:space-y-2">
             <li><Link className={ROW} to="/chapter">Your chapter</Link></li>

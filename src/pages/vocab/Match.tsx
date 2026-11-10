@@ -4,7 +4,7 @@ import { Badge, Button, SegmentedControl, cn } from '../../components/ui';
 import type { StudyDeck } from '../../api/vocab';
 import { shuffled } from './leitner';
 import { getMatchBest, setMatchBest } from './store';
-import { MiniStat, SessionPanel, formatMs } from './parts';
+import { MiniStat, SessionPanel, formatMs, useSessionInView } from './parts';
 
 type Tile = { key: string; pair: string; text: string; kind: 'term' | 'def' };
 const PENALTY = 1000;
@@ -15,6 +15,7 @@ export function Match({ deck }: { deck: StudyDeck }) {
   const [pairs, setPairs] = useState(Math.min(6, maxPairs));
   const [round, setRound] = useState(0);
   const [phase, setPhase] = useState<'ready' | 'play'>('ready');
+  useSessionInView(phase === 'play');
   const bestKey = `${deck.key}:${pairs}`;
   const [best, setBest] = useState<number | null>(() => getMatchBest(bestKey));
   useEffect(() => setBest(getMatchBest(bestKey)), [bestKey]);

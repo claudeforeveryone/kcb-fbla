@@ -345,3 +345,14 @@
     animation: united-rule 700ms var(--ease-out-quint) 120ms both;
   }
 }
+
+/* Phone tab bar. --tabs-h is its height, used for the page's bottom padding and the exam action bar's offset.
+   While a member is answering, the exam runner sets data-in-run on <html> and the bar is hidden: more room for the
+   question, and no stray tap that leaves the run. Unlayered so it wins over the utilities on the same elements. */
+:root { --tabs-h: 64px; }
+:root[data-in-run] { --tabs-h: 0px; }
+:root[data-in-run] .bottom-tabs { display: none; }
+@media (max-width: 767.98px) {
+  .exam-actions { bottom: calc(var(--tabs-h) + env(safe-area-inset-bottom)); }
+  :root[data-in-run] .exam-actions { bottom: 0; padding-bottom: calc(0.75rem + env(safe-area-inset-bottom)); }
+}

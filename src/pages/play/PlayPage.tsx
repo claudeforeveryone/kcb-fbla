@@ -162,7 +162,7 @@ export default function PlayPage() {
 
             {EVENT_GROUPS.map((g) => (
               <PlaySection key={g.id} title={g.label} description={g.blurb}>
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+                <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
                   {EVENTS.filter((e) => e.group === g.id).map((e) => (
                     <EventCard
                       key={e.slug}
@@ -455,27 +455,49 @@ function EventCard({
   mine: boolean;
 }) {
   const { color } = eventStyle(e.slug);
+  const width = `${Math.min(100, (seen / total) * 100)}%`;
   return (
     <Link to={`/play/${e.slug}`} className="group block rounded-none focus-visible:outline-offset-4">
+      {/* Phones: one compact row per event, so 15 events are a short list instead of 15 tall cards. */}
+      <div className={cn('flex items-center gap-3 border bg-surface p-3 sm:hidden', mine ? 'border-red/50' : 'border-line')}>
+        <EventMark slug={e.slug} size={36} />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-baseline justify-between gap-2">
+            <h3 className="text-[0.9375rem] font-bold leading-snug">
+              <EventTitle e={e} />
+            </h3>
+            <span className="tabular shrink-0 text-[11px] font-bold tracking-[0.08em] text-muted">{e.short}</span>
+          </div>
+          <p className="tabular mt-0.5 text-xs text-muted">
+            {mine && <span className="font-semibold text-red dark:text-danger">Your event · </span>}
+            {s?.answered ? `${pctText(s.accuracy)} accuracy · ` : ''}
+            {seen}/{total} seen
+            {e.gradeNote && <span className="font-semibold text-warning"> · {e.gradeNote}</span>}
+          </p>
+          <div className="mt-2 h-1 overflow-hidden bg-surface-3">
+            <div className="h-full" style={{ width, backgroundColor: color }} />
+          </div>
+        </div>
+      </div>
       <div
         className={cn(
-          'flex h-full flex-col overflow-hidden rounded-none border bg-surface transition-[transform,border-color] duration-200 ease-out hover:-translate-y-px hover:border-line-strong',
+          'hidden h-full flex-col overflow-hidden rounded-none border bg-surface transition-[transform,border-color] duration-200 ease-out hover:-translate-y-px hover:border-line-strong sm:flex',
           mine ? 'border-red/50' : 'border-line',
         )}
       >
-        <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5">
+        <div className="flex items-center justify-between gap-3 px-5 pt-5">
           <EventMark slug={e.slug} size={40} className="transition-transform duration-200 ease-out group-hover:-rotate-3" />
           <span className="flex items-center gap-2 text-[11px] font-bold tracking-[0.08em]">
             {mine && <span className="text-red dark:text-danger">Your event</span>}
             <span className="tabular text-muted">{e.short}</span>
           </span>
         </div>
-        <div className="flex flex-1 flex-col px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
+        <div className="flex flex-1 flex-col px-5 pb-5 pt-3">
           <h3 className="text-[1.0625rem] font-bold leading-snug">
             <EventTitle e={e} />
           </h3>
           {e.gradeNote && <p className="mt-1 text-xs font-semibold text-warning">{e.gradeNote}</p>}
-          <div className="mt-auto pt-4 sm:pt-6">
+          <div className="mt-auto pt-6">
             <div className="mb-2 flex items-baseline justify-between gap-3">
               <span className="tabular text-sm font-semibold text-heading">
                 {s?.answered ? `${pctText(s.accuracy)} accuracy` : 'Not started'}
@@ -485,10 +507,7 @@ function EventCard({
               </span>
             </div>
             <div className="h-1.5 overflow-hidden bg-surface-3">
-              <div
-                className="h-full transition-[width] duration-500"
-                style={{ width: `${Math.min(100, (seen / total) * 100)}%`, backgroundColor: color }}
-              />
+              <div className="h-full transition-[width] duration-500" style={{ width, backgroundColor: color }} />
             </div>
             <div className="tabular mt-2 text-xs text-muted">
               {seen}/{total} questions seen
