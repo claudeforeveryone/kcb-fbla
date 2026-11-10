@@ -90,8 +90,17 @@ export type AuthAction = 'signin' | 'signup' | 'resend' | 'reset' | 'update';
  * - email_cooldown: the per-address "wait N seconds before another email" guard.
  * - request_limit: too many requests from this network (`over_request_rate_limit`).
  * - not_confirmed: the account exists but the email was never confirmed.
+ * - email_blocked: the project's mailer refused this address (Supabase `email_address_not_authorized`: without custom
+ *   SMTP it only delivers to the project's own team).
  */
-export type AuthErrorKind = 'email_limit' | 'email_cooldown' | 'request_limit' | 'not_confirmed' | 'exists' | 'other';
+export type AuthErrorKind =
+  | 'email_limit'
+  | 'email_cooldown'
+  | 'request_limit'
+  | 'not_confirmed'
+  | 'exists'
+  | 'email_blocked'
+  | 'other';
 
 export class AuthFlowError extends Error {
   readonly kind: AuthErrorKind;
@@ -109,6 +118,8 @@ function classify(e: unknown): { kind: AuthErrorKind; msg: string; wait: number 
   const m = msg.toLowerCase();
   const waitMatch = /after (\d+) seconds?/.exec(m);
   const wait = waitMatch ? Number(waitMatch[1]) : null;
+  if (code === 'email_address_not_authorized' || (m.includes('email address') && m.includes('not authorized')))
+    return { kind: 'email_blocked', msg, wait };
   if (code === 'over_email_send_rate_limit' || m.includes('email rate limit'))
     return { kind: wait != null ? 'email_cooldown' : 'email_limit', msg, wait };
   if (wait != null && m.includes('for security purposes')) return { kind: 'email_cooldown', msg, wait };
@@ -138,6 +149,10 @@ export function authErrorMessage(e: unknown, action: AuthAction = 'signin'): str
       return 'Please confirm your email first. Check your inbox (and spam) for the link, or send a new one below.';
     case 'exists':
       return 'An account with this email already exists. Try signing in instead.';
+    case 'email_blocked':
+      return action === 'signup'
+        ? 'We could not send a confirmation email to this address, so your account was not created. This is a problem on our side, not with your email. Please tell your chapter executive.'
+        : 'We could not send an email to this address. This is a problem on our side, not with your email. Please tell your chapter executive.';
   }
   if (m.includes('invalid login credentials')) return 'That email and password do not match. Try again or reset your password.';
   if (m.includes('password should be') || m.includes('weak password')) return 'Choose a stronger password: at least 8 characters.';

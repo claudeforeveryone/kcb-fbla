@@ -3,39 +3,24 @@ import { describe, expect, it } from "vitest";
 import css from "./landing.css?raw";
 import { renderRoute } from "../../entry-server";
 
-/** The body of the first block that starts with `head` (balanced braces). */
-function block(src: string, head: string): string {
-  const at = src.indexOf(head);
-  if (at < 0) return "";
-  let depth = 0;
-  for (let i = src.indexOf("{", at); i < src.length; i++) {
-    if (src[i] === "{") depth++;
-    else if (src[i] === "}" && --depth === 0)
-      return src.slice(src.indexOf("{", at) + 1, i);
-  }
-  return "";
-}
-
-const motionOk = block(css, "@media (prefers-reduced-motion: no-preference)");
-
+// House rule (design guide): nothing on the landing animates on its own. No headline entrance, no sections rising
+// in on scroll. The only keyframes left belong to the sample question, which moves when the visitor answers it.
 describe("the landing's motion", () => {
-  it("plays the headline reveal only for visitors who allow motion: the lines rise and the tricolour draws", () => {
-    expect(block(motionOk, ".lp-hero .lp-line > span")).toMatch(/animation:\s*lp-rise\b/);
-    expect(block(motionOk, ".lp-hero .lp-tricolour")).toMatch(/animation:\s*lp-draw\b/);
+  it("has no entrance animations: the only keyframes are the sample question's", () => {
+    const names = [...css.matchAll(/@keyframes\s+([\w-]+)/g)].map((m) => m[1]).sort();
+    expect(names).toEqual(["lp-fade-in", "lp-swap-x", "lp-swap-y"]);
+    expect(css).not.toMatch(/data-reveal|lp-js/);
   });
 
-  it("moves the headline with transform only, so its text is painted from the first frame", () => {
-    for (const name of ["lp-rise", "lp-draw"]) {
-      const frames = block(css, `@keyframes ${name}`);
-      expect(frames, name).toMatch(/transform/);
-      expect(frames, name).not.toMatch(/opacity|visibility|clip/);
-    }
-  });
-
-  it("hides a section for its entrance only once JS has run, so the prerendered page is fully readable", async () => {
-    expect(motionOk).toMatch(/\.lp-js \[data-reveal\]:not\(\.is-in\)/);
-    expect(css.replace(motionOk, "")).not.toMatch(/\[data-reveal\][^{]*\{[^}]*opacity:\s*0/);
+  it("never hides content waiting for a scroll or a script, so the prerendered page is fully readable", async () => {
     const html = await renderRoute("/");
-    expect(html).not.toContain("lp-js");
+    expect(html).not.toMatch(/data-reveal|lp-js/);
+    // every opacity: 0 in the stylesheet sits inside a keyframe's starting state, never on a resting element
+    const withoutKeyframes = css.replace(/@keyframes[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, "");
+    expect(withoutKeyframes).not.toMatch(/opacity:\s*0\b/);
   }, 60_000);
+
+  it("keeps the sample question's swap to a fade under reduced motion", () => {
+    expect(css).toMatch(/prefers-reduced-motion: reduce[\s\S]*animation-name:\s*lp-fade-in/);
+  });
 });
